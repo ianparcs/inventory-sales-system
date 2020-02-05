@@ -18,7 +18,6 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     public Integer getId() {
-        System.out.println("ID");
         return id.get();
     }
 

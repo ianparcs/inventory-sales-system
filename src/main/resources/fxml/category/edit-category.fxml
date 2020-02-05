@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import com.jfoenix.validation.RequiredFieldValidator?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.GlyphsStack?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.HBox?>
+<JFXDialog xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/save-dialog.css" fx:id="saveDialog"
+           maxHeight="1.7976931348623157E308"
+           maxWidth="1.7976931348623157E308"
+           fx:controller="ph.parcs.rmhometiles.dialog.EditProductController">
+
+    <JFXDialogLayout alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+        <heading>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <GlyphsStack>
+                    <FontAwesomeIconView size="2.5em" styleClass="pencil-icon"/>
+                </GlyphsStack>
+
+                <Label maxWidth="1.7976931348623157E308" maxHeight="1.7976931348623157E308" text="Edit Category"
+                       styleClass="dialog-title"/>
+            </HBox>
+        </heading>
+
+        <body>
+            <JFXTextField fx:id="tfName" maxWidth="1.7976931348623157E308" maxHeight="1.7976931348623157E308"
+                          labelFloat="true" promptText="Description">
+                <tooltip>
+                    <Tooltip wrapText="true" text="Item properties (color,size, etc..)"/>
+                </tooltip>
+                <validators>
+                    <RequiredFieldValidator message="Please fill out this field"/>
+                </validators>
+            </JFXTextField>
+        </body>
+
+        <actions>
+            <JFXButton onAction="#closeDialog" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                       prefWidth="100.0" styleClass="button-cancel" text="Cancel"/>
+            <JFXButton fx:id="btnSave" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                       prefWidth="100.0" styleClass="button-save" text="Save"
+                       disable="${tfName.text.empty}"/>
+        </actions>
+
+
+    </JFXDialogLayout>
+
+</JFXDialog>
+

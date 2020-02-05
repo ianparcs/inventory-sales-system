@@ -1,37 +1,21 @@
 package ph.parcs.rmhometiles.category;
 
+import ph.parcs.rmhometiles.item.Item;
 import ph.parcs.rmhometiles.product.Product;
 
-import javax.persistence.*;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
-public class Category {
+@Access(AccessType.PROPERTY)
+public class Category extends Item {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    private String name;
-
-    @OneToMany(mappedBy = "category")
     private List<Product> products;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
+    @OneToMany(mappedBy = "category")
     public List<Product> getProducts() {
         return products;
     }

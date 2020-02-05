@@ -13,7 +13,7 @@
 <StackPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
            styleClass="background" stylesheets="@../../css/product.css"
            xmlns="http://javafx.com/javafx/10.0.2-internal"
-           fx:controller="ph.parcs.rmhometiles.product.ProductController">
+           fx:controller="ph.parcs.rmhometiles.product.ProductTableController">
 
     <fx:include source="edit-product.fxml" visible="false"/>
     <Pane fx:id="test" maxHeight="100.0" maxWidth="1.7976931348623157E308" prefHeight="100.0"/>
@@ -36,7 +36,7 @@
         <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0"
               styleClass="content-options" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
             <JFXButton alignment="BASELINE_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                       onAction="#showAddProductDialog" styleClass="add-button" text="Add Product"
+                       onAction="#showAddItemDialog" styleClass="add-button" text="Add Product"
                        textAlignment="CENTER" HBox.hgrow="ALWAYS">
                 <graphic>
                     <FontAwesomeIconView glyphName="PLUS" size="1.25em" styleClass="add-button-icon"
@@ -71,7 +71,7 @@
             </GridPane.margin>
         </HBox>
 
-        <TableView fx:id="tvProduct" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+        <TableView fx:id="tvItem" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
                    GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2"
                    GridPane.vgrow="ALWAYS">
             <columnResizePolicy>

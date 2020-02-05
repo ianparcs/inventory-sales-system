@@ -6,16 +6,15 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.*?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
            styleClass="background" stylesheets="@../../css/product.css"
-           xmlns="http://javafx.com/javafx/10.0.2-internal" fx:controller="ph.parcs.rmhometiles.category.Category">
+           xmlns="http://javafx.com/javafx/10.0.2-internal"
+           fx:controller="ph.parcs.rmhometiles.category.CategoryTableController">
 
-    <fx:include source="edit-product.fxml" visible="false"/>
-    <Pane fx:id="test" maxHeight="100.0" maxWidth="1.7976931348623157E308" prefHeight="100.0"/>
     <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
         <columnConstraints>
             <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308"/>
@@ -29,13 +28,13 @@
         </rowConstraints>
 
         <HBox styleClass="content-header" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0">
-            <Label contentDisplay="CENTER" text="Product Details"/>
+            <Label contentDisplay="CENTER" text="Category Details"/>
         </HBox>
 
         <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0"
               styleClass="content-options" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
             <JFXButton alignment="BASELINE_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                       onAction="#showAddProductDialog" styleClass="add-button" text="Add Product"
+                       styleClass="add-button" text="Add Category"
                        textAlignment="CENTER" HBox.hgrow="ALWAYS">
                 <graphic>
                     <FontAwesomeIconView glyphName="PLUS" size="1.25em" styleClass="add-button-icon"
@@ -43,14 +42,13 @@
                 </graphic>
             </JFXButton>
 
-            <JFXTextField fx:id="tfSearchProduct" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                          promptText="Search" HBox.hgrow="ALWAYS">
-            </JFXTextField>
+            <JFXTextField fx:id="tfSearchItem" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                          promptText="Search" HBox.hgrow="ALWAYS"/>
         </HBox>
 
         <HBox GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="1" alignment="CENTER_LEFT">
             <Label text="Show "/>
-            <JFXComboBox fx:id="cbRowCount" onAction="#onPageRowChanged" prefWidth="60">
+            <JFXComboBox fx:id="cbRowCount" prefWidth="60">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <Integer fx:value="5"/>
@@ -70,7 +68,7 @@
             </GridPane.margin>
         </HBox>
 
-        <TableView fx:id="tvProduct" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+        <TableView fx:id="tvItem" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
                    GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2"
                    GridPane.vgrow="ALWAYS">
             <columnResizePolicy>
@@ -83,59 +81,15 @@
                     </cellValueFactory>
                 </TableColumn>
 
-                <TableColumn reorderable="false" text="Code">
+                <TableColumn reorderable="false" text="Name">
                     <cellValueFactory>
-                        <PropertyValueFactory property="code"/>
-                    </cellValueFactory>
-                </TableColumn>
-
-                <TableColumn reorderable="false" text="Description">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="description"/>
-                    </cellValueFactory>
-                </TableColumn>
-
-                <TableColumn fx:id="tcCategory" reorderable="false" text="Category">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="category"/>
-                    </cellValueFactory>
-                </TableColumn>
-
-                <TableColumn fx:id="tcSupplier" reorderable="false" text="Supplier">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="supplier"/>
-                    </cellValueFactory>
-                </TableColumn>
-
-                <TableColumn fx:id="tcStock" reorderable="false" text="Stock">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="quantity"/>
-                    </cellValueFactory>
-                </TableColumn>
-
-                <TableColumn reorderable="false" text="Unit Sold">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="unitSold"/>
-                    </cellValueFactory>
-                </TableColumn>
-
-                <TableColumn fx:id="tcDiscount" reorderable="false" text="Discount">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="discount"/>
-                    </cellValueFactory>
-                </TableColumn>
-
-                <TableColumn fx:id="tcPrice" reorderable="false" text="Price">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="price"/>
+                        <PropertyValueFactory property="name"/>
                     </cellValueFactory>
                 </TableColumn>
 
                 <TableColumn fx:id="tcAction" reorderable="false" sortable="false" styleClass="action-column"
                              text="Action"/>
-
             </columns>
-
         </TableView>
 
         <StackPane alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
@@ -146,7 +100,7 @@
                         minHeight="35.0" prefHeight="35.0"/>
         </StackPane>
 
-        <Label fx:id="lblPageEntries" GridPane.halignment="LEFT" text="Showing" GridPane.valignment="TOP"
+        <Label fx:id="lblPageEntries" GridPane.halignment="LEFT" GridPane.valignment="TOP"
                GridPane.rowIndex="3" GridPane.columnIndex="0">
             <GridPane.margin>
                 <Insets left="20" right="20"/>

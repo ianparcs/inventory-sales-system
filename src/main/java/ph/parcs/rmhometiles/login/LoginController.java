@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.State;
 import ph.parcs.rmhometiles.dialog.UserNotFoundDialogController;
 import ph.parcs.rmhometiles.scene.SceneManager;
-import ph.parcs.rmhometiles.user.User;
 import ph.parcs.rmhometiles.user.UserService;
 
 import java.net.URL;
@@ -46,11 +45,11 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        User fakeUser = new User();
+  /*      User fakeUser = new User();
         fakeUser.setPassword("ian");
         fakeUser.setUsername("ian");
         fakeUser.setRole("admin");
-        userService.saveUser(fakeUser);
+        userService.saveUser(fakeUser);*/
 
         tfUserName.focusedProperty().addListener((observableValue, oldValue, newValue) -> {
             if (!newValue) {

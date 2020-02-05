@@ -1,24 +1,20 @@
 package ph.parcs.rmhometiles.dialog;
 
-
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
-import javafx.scene.layout.StackPane;
 import javafx.util.StringConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import ph.parcs.rmhometiles.SaveListener;
 import ph.parcs.rmhometiles.category.Category;
 import ph.parcs.rmhometiles.category.CategoryService;
+import ph.parcs.rmhometiles.item.EditItemController;
 import ph.parcs.rmhometiles.product.Product;
 import ph.parcs.rmhometiles.supplier.Supplier;
 import ph.parcs.rmhometiles.supplier.SupplierService;
 
 @Controller
-public class EditProductController {
+public class EditProductController extends EditItemController<Product> {
 
     @FXML
     private JFXComboBox<Supplier> cbSupplier;
@@ -33,13 +29,9 @@ public class EditProductController {
     @FXML
     private JFXTextField tfQuantity;
     @FXML
-    private JFXDialog saveDialog;
-    @FXML
     private JFXTextField tfPrice;
     @FXML
     private JFXTextField tfCode;
-    @FXML
-    private JFXButton btnSave;
 
     private CategoryService categoryService;
     private SupplierService supplierService;
@@ -86,18 +78,8 @@ public class EditProductController {
         });
     }
 
-    private void validateField(JFXTextField tf) {
-        tf.focusedProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (!newValue) {
-                tf.validate();
-                if (tf.getActiveValidator() != null && tf.getActiveValidator().getHasErrors()) {
-                    tf.requestFocus();
-                }
-            }
-        });
-    }
-
-    private void clearFieldsText() {
+    @Override
+    protected void clearFields() {
         tfDescription.clear();
         tfDiscount.clear();
         tfUnitSold.clear();
@@ -106,33 +88,8 @@ public class EditProductController {
         tfPrice.clear();
     }
 
-    public void showDialog(StackPane stackPane) {
-        saveDialog.show(stackPane);
-    }
-
-    @FXML
-    private void closeDialog() {
-        saveDialog.close();
-    }
-
-    public void onEditProduct(SaveListener saveListener, final Product product) {
-        bindFields(product);
-        btnSave.setOnAction(actionEvent -> {
-            closeDialog();
-            unbindFields(product);
-            saveListener.onSaveData(product);
-        });
-    }
-
-    public void onSaveProduct(SaveListener saveListener) {
-        btnSave.setOnAction(actionEvent -> {
-            Product product = unbindFields(new Product());
-            saveListener.onSaveData(product);
-            closeDialog();
-        });
-    }
-
-    private void bindFields(Product product) {
+    @Override
+    protected void bindFields(Product product) {
         tfCode.setText(product.getName());
         tfDescription.setText(product.getDescription());
         tfPrice.setText(product.getPrice().toString());
@@ -159,7 +116,8 @@ public class EditProductController {
         });
     }
 
-    private Product unbindFields(Product product) {
+    @Override
+    protected Product unbindFields(Product product) {
         product.setName(tfCode.getText());
         product.setCategory(cbCategory.getValue());
         product.setSupplier(cbSupplier.getValue());
@@ -168,7 +126,7 @@ public class EditProductController {
         product.setUnitSold(Integer.valueOf(!tfUnitSold.getText().isEmpty() ? tfUnitSold.getText() : "0"));
         product.setQuantity(Integer.valueOf(!tfQuantity.getText().isEmpty() ? tfQuantity.getText() : "0"));
         product.setDiscount(Integer.valueOf(!tfDiscount.getText().isEmpty() ? tfDiscount.getText() : "0"));
-        clearFieldsText();
+        clearFields();
         return product;
     }
 
