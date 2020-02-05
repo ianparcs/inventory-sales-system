@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXSpinner?>
+<?import javafx.scene.layout.*?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1"
+           stylesheets="@../../css/home.css" fx:controller="ph.parcs.rmhometiles.home.HomeController">
+
+    <BorderPane>
+        <center>
+            <StackPane fx:id="apContent" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                       styleClass="background" stylesheets="@../../css/content.css"/>
+        </center>
+
+        <left>
+            <fx:include source="navigation.fxml"/>
+        </left>
+
+        <top>
+            <fx:include maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" source="title-menu.fxml"/>
+        </top>
+
+    </BorderPane>
+</StackPane>

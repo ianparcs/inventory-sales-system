@@ -1,0 +1,27 @@
+
+.login-background {
+    -fx-background-image: url('/image/road-tree.jpg');
+    -fx-background-size: cover;
+}
+
+.logo {
+    -fx-background-image: url('/image/mainlogo.png');
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+
+}
+
+.button-signin {
+    -fx-padding: 0.7em 0.57em;
+    -jfx-button-type: RAISED;
+    -fx-background-color: rgb(77, 102, 204);
+    -fx-text-fill: WHITE;
+    -fx-font-weight: bold;
+}
+
+.button-signin .graphics {
+    -fx-fill: nav-text-color;
+}
+
+

@@ -1,0 +1,31 @@
+.button-confirm {
+    -fx-background-color: strawberry;
+    -fx-text-fill: WHITE;
+}
+
+.button-cancel {
+    -jfx-button-type: FLAT;
+    -fx-background-color: WHITE;
+    -fx-border-color: strawberry;
+}
+
+.symbol-icon {
+    -glyph-name: "EXCLAMATION";
+    -icons-color: strawberry;
+    -fx-fill: strawberry;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: CENTER;
+}
+
+.circle-icon {
+    -glyph-name: "CIRCLE";
+    -fx-fill: transparent;
+    -fx-stroke: strawberry;
+    -fx-stroke-width: 5px;
+}
+
+.jfx-dialog-layout {
+    -fx-border-width: 5px 0 0 0;
+    -fx-border-color: strawberry;
+    -fx-border-style: SOLID;
+}

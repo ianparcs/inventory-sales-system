@@ -1,0 +1,17 @@
+.button-remove {
+    -fx-padding: 0.7em 0.57em;
+    -jfx-button-type: FLAT;
+    -fx-background-color: rgb(246, 86, 86);
+    -fx-text-fill: WHITE;
+    -fx-font-weight: BOLD;
+}
+
+.warning-icon {
+    -glyph-name: "WARNING";
+    -icons-color: rgb(246, 86, 86);
+    -fx-fill: rgb(246, 86, 86);
+    -fx-alignment: CENTER;
+    -fx-text-alignment: CENTER;
+}
+
+

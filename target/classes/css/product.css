@@ -1,0 +1,89 @@
+#delete-icon {
+    -fx-fill: strawberry;
+}
+
+#edit-icon {
+    -fx-fill: banana;
+}
+
+.background {
+    -fx-background-color: WHITE;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 10, 0, 0, 0);
+    -fx-border-insets: 20;
+    -fx-background-insets: 20;
+    -fx-padding: 20;
+}
+
+.add-button {
+    -fx-padding: 0.433333em 1em 0.433333em 1em;
+    -jfx-button-type: FLAT;
+    -fx-background-color: blueberries;
+    -fx-text-fill: WHITE;
+    -fx-font-weight: BOLD;
+    -fx-border-radius: 15pt;
+    -fx-background-radius: 15pt;
+}
+
+.add-button:hover {
+    -fx-background-color: blueberries;
+}
+
+.add-button-icon {
+    -fx-fill: WHITE;
+}
+
+.jfx-text-field {
+    -fx-padding: 0.433333em 1em 0.433333em 1em;
+    -fx-border-radius: 15px;
+    -fx-border-color: greysquash;
+}
+
+
+.jfx-text-field > .input-line,
+.combo-box > .input-line {
+    -fx-background-color: transparent;
+    -fx-pref-height: 0px;
+    -fx-translate-y: 0px;
+}
+
+.jfx-text-field > .input-focused-line,
+.combo-box > .input-focused-line {
+    -fx-background-color: transparent;
+    -fx-pref-height: 0px;
+}
+
+.pagination {
+    -fx-page-information-visible: false;
+    -fx-font-size: 10;
+}
+
+.pagination > .pagination-control > .control-box > .number-button {
+    -fx-background-color: TRANSPARENT;
+    -fx-border-radius: 2px;
+}
+
+.pagination > .pagination-control > .control-box > .number-button:hover {
+    -fx-background-color: greysquash;
+}
+
+.pagination > .pagination-control > .control-box > .number-button:selected {
+    -fx-background-color: blueberries;
+    -fx-text-fill: WHITE;
+}
+
+.pagination > .pagination-control > .control-box > .left-arrow-button,
+.pagination > .pagination-control > .control-box > .right-arrow-button {
+    -fx-background-color: TRANSPARENT;
+}
+
+.pagination .pagination-control .toggle-button:selected {
+    -fx-background-color: strawberry;
+}
+
+.pagination-container {
+    -fx-border-insets: 0px 20px 0px 20px;
+    -fx-background-insets: 0px 20px 0px 20px;
+    -fx-padding: 0px 10px 0px 10px;
+}
