@@ -1,27 +1,28 @@
-.button-save {
-    -fx-padding: 0.55em 0.6em;
+.jfx-button {
+    -fx-padding: 0.6em 1.5em;
     -jfx-button-type: FLAT;
-    -fx-background-color: #4e73df;
-    -fx-text-fill: WHITE;
-    -fx-font-weight: BOLD;
     -fx-border-radius: 5pt;
     -fx-background-radius: 5pt;
+    -fx-font-weight: BOLD;
+    -fx-font-size: 13;
+}
+
+.button-save {
+    -jfx-button-type: FLAT;
+    -fx-background-color: primary;
+    -fx-text-fill: WHITE;
 }
 
 .button-cancel {
-    -fx-padding: 0.55em 0.6em;
     -jfx-button-type: FLAT;
     -fx-background-color: WHITE;
-    -fx-border-color: GREYSQUASH;
-    -fx-font-weight: BOLD;
-    -fx-border-radius: 5pt;
-    -fx-background-radius: 5pt;
+    -fx-border-color: primary;
 }
 
 .jfx-dialog-layout > .jfx-layout-heading, .dialog-title {
     -fx-text-fill: WHITE;
     -fx-font-weight: BOLD;
-    -fx-font-size: 25;
+    -fx-font-size: 22;
     -fx-background-color: BLUEBERRIES;
 }
 

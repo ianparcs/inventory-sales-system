@@ -10,12 +10,12 @@
 }
 
 .jfx-dialog-layout > .jfx-layout-actions .jfx-button {
-    -fx-padding: 0.6em 1em;
+    -fx-padding: 0.6em 1.5em;
     -jfx-button-type: FLAT;
     -fx-border-radius: 5pt;
     -fx-background-radius: 5pt;
     -fx-font-weight: BOLD;
-    -fx-font-size: 12;
+    -fx-font-size: 13;
 }
 
 .jfx-dialog-layout > .jfx-layout-body .label {

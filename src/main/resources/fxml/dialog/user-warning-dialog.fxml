@@ -10,7 +10,7 @@
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="stackpane" stylesheets="@../../css/dialog.css"
            maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
            xmlns="http://javafx.com/javafx/10.0.2-internal"
-           fx:controller="ph.parcs.rmhometiles.dialog.UserNotFoundDialogController">
+           fx:controller="ph.parcs.rmhometiles.ui.UserNotFoundDialogController">
 
     <JFXDialog fx:id="warningDialog" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
 
@@ -26,7 +26,7 @@
                        maxWidth="1.7976931348623157E308" textAlignment="CENTER">User not found.
                 </Label>
             </body>
-            <JFXButton fx:id="btnClose" onAction="#close" alignment="CENTER" contentDisplay="CENTER"
+            <JFXButton onAction="#close" alignment="CENTER" contentDisplay="CENTER"
                        maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="button-remove"
                        text="Dismiss" textAlignment="CENTER"/>
         </JFXDialogLayout>

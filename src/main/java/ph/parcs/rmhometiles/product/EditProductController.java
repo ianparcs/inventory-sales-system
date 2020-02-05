@@ -1,4 +1,4 @@
-package ph.parcs.rmhometiles.dialog;
+package ph.parcs.rmhometiles.product;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.category.Category;
 import ph.parcs.rmhometiles.category.CategoryService;
 import ph.parcs.rmhometiles.item.EditItemController;
-import ph.parcs.rmhometiles.product.Product;
 import ph.parcs.rmhometiles.supplier.Supplier;
 import ph.parcs.rmhometiles.supplier.SupplierService;
 

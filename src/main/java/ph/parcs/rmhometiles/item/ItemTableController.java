@@ -9,16 +9,18 @@ import javafx.scene.layout.StackPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
-import ph.parcs.rmhometiles.custom.ActionTableCell;
-import ph.parcs.rmhometiles.dialog.alert.SweetAlert;
-import ph.parcs.rmhometiles.dialog.alert.SweetAlertFactory;
-import ph.parcs.rmhometiles.util.Constant;
+import ph.parcs.rmhometiles.ui.ActionTableCell;
+import ph.parcs.rmhometiles.ui.alert.SweetAlert;
+import ph.parcs.rmhometiles.ui.alert.SweetAlertFactory;
+import ph.parcs.rmhometiles.util.Global;
 
 @Controller
 public abstract class ItemTableController<T extends Item> {
 
     @FXML
     protected ComboBox<Integer> cbRowCount;
+    @FXML
+    protected TableColumn<T, HBox> tcAction;
     @FXML
     protected JFXTextField tfSearchItem;
     @FXML
@@ -27,14 +29,19 @@ public abstract class ItemTableController<T extends Item> {
     protected Label lblPageEntries;
     @FXML
     protected TableView<T> tvItem;
+
     protected EditItemController<T> editItemController;
     protected ItemService<T> itemService;
     protected String searchValue = "";
-    @FXML
-    private TableColumn<T, HBox> tcAction;
+
+    private SweetAlert deleteAlert;
+    private SweetAlert successAlert;
 
     @FXML
-    public void initialize() {
+    protected void initialize() {
+        deleteAlert = SweetAlertFactory.create(SweetAlert.Type.WARNING);
+        successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
+
         updateItems();
         initItemPagination();
         initActionColumn();
@@ -42,9 +49,7 @@ public abstract class ItemTableController<T extends Item> {
     }
 
     private void initItemPagination() {
-        pagination.currentPageIndexProperty().addListener((observable) -> {
-            updateItems();
-        });
+        pagination.currentPageIndexProperty().addListener((observable) -> updateItems());
     }
 
     private void initSearchItem() {
@@ -65,53 +70,40 @@ public abstract class ItemTableController<T extends Item> {
         tvItem.setItems(FXCollections.observableArrayList(items.toList()));
         tvItem.refresh();
         updatePageEntries(items);
-        pagination.setPageCount(items.getTotalPages());
     }
 
     final protected void onSaveItem(T item) {
         StackPane root = (StackPane) tvItem.getScene().getRoot();
         T savedItem = itemService.saveItem(item);
         if (savedItem != null) {
+            String successMsg = itemService.isItemEmpty(item) ? Global.MSG.ADD : Global.MSG.EDIT;
+            successAlert.setMessage(successMsg).show(root);
             updateItems();
-            String message = itemService.isItemEmpty(item) ? Constant.MSG.ADD : Constant.MSG.EDIT;
-            SweetAlertFactory.successDialog(message).show(root);
         }
     }
 
     final protected T showDeleteItemDialog(T item) {
-        final StackPane root = (StackPane) tvItem.getScene().getRoot();
-
-        SweetAlert alert = SweetAlertFactory.deleteDialog();
-        alert.setMessage("Are you sure you want to delete " + item.getName() + "?");
-        alert.setConfirmListener(() -> {
+        StackPane root = (StackPane) tvItem.getScene().getRoot();
+        deleteAlert.setMessage("Are you sure you want to delete " + item.getName() + "?");
+        deleteAlert.setConfirmListener(() -> {
             if (itemService.deleteItem(item)) {
+                successAlert.setMessage(Global.MSG.DELETE).show(root);
                 updateItems();
-                SweetAlertFactory.successDialog(Constant.MSG.DELETE).show(root);
             }
         }).show(root);
         return item;
     }
 
-    protected T showEditItemDialog(T item) {
+    final protected T showEditItemDialog(T item) {
         editItemController.onEditItem(this::onSaveItem, item);
         editItemController.showDialog((StackPane) tvItem.getScene().getRoot());
         return item;
     }
 
-    protected void updatePageEntries(Page<T> items) {
-        long toEntry = items.getNumberOfElements() * (getCurrentPage() + 1);
-        long fromEntry = (toEntry - getRowsPerPage()) + 1;
-
-        if (items.isLast()) {
-            toEntry = items.getTotalElements();
-            fromEntry = toEntry - items.getNumberOfElements() + 1;
-        }
-        if (items.isFirst()) {
-            fromEntry = 1;
-            if (items.getTotalElements() == 0) fromEntry = 0;
-        }
-        lblPageEntries.setText("Showing " + fromEntry + " to "
-                + toEntry + " of " + items.getTotalElements() + " entries");
+    final protected void updatePageEntries(Page<T> items) {
+        ItemPageEntry itemPageEntry = itemService.getPageEntries(items);
+        lblPageEntries.setText("Showing " + itemPageEntry.getFromEntry() + " to " + itemPageEntry.getToEntry() + " of " + items.getTotalElements() + " entries");
+        pagination.setPageCount(items.getTotalPages());
     }
 
     @FXML

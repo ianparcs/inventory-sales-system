@@ -10,16 +10,16 @@
 <JFXDialog xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/save-dialog.css" fx:id="saveDialog"
            maxHeight="1.7976931348623157E308"
            maxWidth="1.7976931348623157E308"
-           fx:controller="ph.parcs.rmhometiles.dialog.EditProductController">
+           fx:controller="ph.parcs.rmhometiles.product.EditProductController">
 
     <JFXDialogLayout alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
         <heading>
             <HBox alignment="CENTER_LEFT" spacing="10">
                 <GlyphsStack>
-                    <FontAwesomeIconView size="2.5em" styleClass="pencil-icon"/>
+                    <FontAwesomeIconView size="2.3em" styleClass="pencil-icon"/>
                 </GlyphsStack>
 
-                <Label maxWidth="1.7976931348623157E308" maxHeight="1.7976931348623157E308" text="Edit Product"
+                <Label fx:id="lblTitle" maxWidth="1.7976931348623157E308" maxHeight="1.7976931348623157E308"
                        styleClass="dialog-title"/>
             </HBox>
         </heading>

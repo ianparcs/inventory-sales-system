@@ -1,4 +1,4 @@
-package ph.parcs.rmhometiles.dialog.alert;
+package ph.parcs.rmhometiles.ui.alert;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
@@ -7,7 +7,7 @@ import de.jensd.fx.glyphs.GlyphsStack;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
-import ph.parcs.rmhometiles.util.Constant;
+import ph.parcs.rmhometiles.util.Global;
 
 public class SweetAlert {
 
@@ -23,8 +23,8 @@ public class SweetAlert {
 
         FontAwesomeIconView circleIcon = new FontAwesomeIconView();
         FontAwesomeIconView symbolIcon = new FontAwesomeIconView();
-        circleIcon.getStyleClass().add(Constant.CSS.CIRCLE);
-        symbolIcon.getStyleClass().add(Constant.CSS.SYMBOL);
+        circleIcon.getStyleClass().add(Global.CSS.CIRCLE);
+        symbolIcon.getStyleClass().add(Global.CSS.SYMBOL);
         circleIcon.setSize("6em");
         symbolIcon.setSize("3em");
 

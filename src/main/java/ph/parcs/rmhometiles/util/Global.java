@@ -1,6 +1,6 @@
 package ph.parcs.rmhometiles.util;
 
-public interface Constant {
+public interface Global {
 
     interface UNIT {
         String PCS = "pcs";

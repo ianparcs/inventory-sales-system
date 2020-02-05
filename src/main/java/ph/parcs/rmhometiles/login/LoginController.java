@@ -8,8 +8,8 @@ import javafx.fxml.Initializable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.State;
-import ph.parcs.rmhometiles.dialog.UserNotFoundDialogController;
 import ph.parcs.rmhometiles.scene.SceneManager;
+import ph.parcs.rmhometiles.ui.UserNotFoundDialogController;
 import ph.parcs.rmhometiles.user.UserService;
 
 import java.net.URL;

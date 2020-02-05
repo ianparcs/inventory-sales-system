@@ -1,4 +1,4 @@
-package ph.parcs.rmhometiles.dialog;
+package ph.parcs.rmhometiles.ui;
 
 import com.jfoenix.controls.JFXDialog;
 import javafx.fxml.FXML;

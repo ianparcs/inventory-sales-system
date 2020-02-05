@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.SaveListener;
@@ -15,6 +16,8 @@ public abstract class EditItemController<T extends Item> {
     protected JFXDialog saveDialog;
     @FXML
     protected JFXButton btnSave;
+    @FXML
+    protected Label lblTitle;
 
     protected void validateField(JFXTextField tf) {
         tf.focusedProperty().addListener((observableValue, oldValue, newValue) -> {
@@ -28,6 +31,7 @@ public abstract class EditItemController<T extends Item> {
     }
 
     final public void onEditItem(SaveListener<T> saveListener, final T item) {
+        setTitle("Edit " + item.getClass().getSimpleName());
         bindFields(item);
         btnSave.setOnAction(actionEvent -> {
             closeDialog();
@@ -36,7 +40,12 @@ public abstract class EditItemController<T extends Item> {
         });
     }
 
+    private void setTitle(String title) {
+        lblTitle.setText(title);
+    }
+
     final public void onSaveItem(SaveListener<T> saveListener, T newItem) {
+        setTitle("New " + newItem.getClass().getSimpleName());
         btnSave.setOnAction(actionEvent -> {
             T unbindItem = unbindFields(newItem);
             saveListener.onSaveData(unbindItem);

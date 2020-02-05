@@ -1,4 +1,4 @@
-package ph.parcs.rmhometiles.custom;
+package ph.parcs.rmhometiles.ui;
 
 import com.jfoenix.controls.JFXButton;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;

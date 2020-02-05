@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.category.Category;
 import ph.parcs.rmhometiles.item.ItemTableController;
 import ph.parcs.rmhometiles.supplier.Supplier;
-import ph.parcs.rmhometiles.util.Constant;
+import ph.parcs.rmhometiles.util.Global;
 
 
 @Controller
@@ -49,21 +49,21 @@ public class ProductTableController extends ItemTableController<Product> {
         tcStock.setCellFactory(param -> new TableCell<>() {
             @Override
             public void updateItem(Integer stock, boolean empty) {
-                if (!empty) setText(stock + " " + Constant.UNIT.PCS);
+                if (!empty) setText(stock + " " + Global.UNIT.PCS);
             }
         });
 
         tcPrice.setCellFactory(param -> new TableCell<>() {
             @Override
             public void updateItem(Float price, boolean empty) {
-                if (!empty) setText(Constant.UNIT.PESO + String.format("%,.2f", price));
+                if (!empty) setText(Global.UNIT.PESO + String.format("%,.2f", price));
             }
         });
 
         tcDiscount.setCellFactory(param -> new TableCell<>() {
             @Override
             public void updateItem(Integer discount, boolean empty) {
-                if (!empty) setText(discount + Constant.UNIT.PERCENT);
+                if (!empty) setText(discount + Global.UNIT.PERCENT);
             }
         });
     }
