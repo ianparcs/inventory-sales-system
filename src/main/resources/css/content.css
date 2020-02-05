@@ -82,6 +82,7 @@ TableView *.decrement-arrow {
     -fx-text-fill: WHITE;
     -fx-background-color: blueberries;
 }
+
 .combo-box-popup .list-view {
     -fx-border-color: greysquash;
     -fx-border-radius: 4px;

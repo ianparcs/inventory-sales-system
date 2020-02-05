@@ -1,4 +1,4 @@
-package ph.parcs.rmhometiles;
+package ph.parcs.rmhometiles.item;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -20,6 +20,7 @@ public class Item {
     public Integer getId() {
         return id.get();
     }
+
     public void setId(Integer id) {
         this.id.set(id);
     }

@@ -64,8 +64,8 @@ public class UserService implements UserDetailsService {
 
     //TODO
     public void saveUser(User user) {
-            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            userRepository.save(user);
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
     }
 
     @Autowired

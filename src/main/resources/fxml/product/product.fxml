@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import de.jensd.fx.glyphs.fontawesome.*?>
-<?import java.lang.*?>
-<?import javafx.collections.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.cell.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
+<?import java.lang.*?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
            styleClass="background" stylesheets="@../../css/product.css"
-           xmlns="http://javafx.com/javafx/10.0.2-internal" fx:controller="ph.parcs.rmhometiles.product.ProductController">
+           xmlns="http://javafx.com/javafx/10.0.2-internal"
+           fx:controller="ph.parcs.rmhometiles.product.ProductController">
 
     <fx:include source="edit-product.fxml" visible="false"/>
     <Pane fx:id="test" maxHeight="100.0" maxWidth="1.7976931348623157E308" prefHeight="100.0"/>
@@ -63,7 +65,7 @@
                     <Integer fx:value="5"/>
                 </value>
             </JFXComboBox>
-        <Label text=" entries"/>
+            <Label text=" entries"/>
             <GridPane.margin>
                 <Insets left="20" right="20"/>
             </GridPane.margin>

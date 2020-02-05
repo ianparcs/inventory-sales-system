@@ -4,5 +4,5 @@ import org.springframework.stereotype.Repository;
 import ph.parcs.rmhometiles.item.ItemRepository;
 
 @Repository
-public interface ProductRepository extends ItemRepository<Product,Integer> {
+public interface ProductRepository extends ItemRepository<Product, Integer> {
 }

@@ -18,7 +18,7 @@ public class ActionTableCell<S> extends TableCell<S, HBox> {
 
     private HBox hBox;
 
-    public ActionTableCell(Function<S,S> delFunction, Function<S,S> editFunction) {
+    public ActionTableCell(Function<S, S> delFunction, Function<S, S> editFunction) {
         Text deleteIcon = FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.TRASH, "1.5em");
         Text editIcon = FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.PENCIL, "1.5em");
 

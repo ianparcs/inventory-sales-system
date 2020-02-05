@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import com.jfoenix.validation.*?>
-<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.validation.RequiredFieldValidator?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0"
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+            prefHeight="400.0"
             prefWidth="600.0" styleClass="split-pane-divider"
             stylesheets="@../../css/login.css" xmlns="http://javafx.com/javafx/10.0.2-internal"
             fx:controller="ph.parcs.rmhometiles.login.LoginController">
@@ -76,7 +78,8 @@
                     <FontAwesomeIconView glyphName="KEY" size="1.5em" textOrigin="CENTER" GridPane.columnIndex="1"
                                          GridPane.halignment="LEFT" GridPane.rowIndex="1"/>
 
-                    <JFXPasswordField text="ian" fx:id="pfUserPassword" labelFloat="true" maxHeight="1.7976931348623157E308"
+                    <JFXPasswordField text="ian" fx:id="pfUserPassword" labelFloat="true"
+                                      maxHeight="1.7976931348623157E308"
                                       maxWidth="1.7976931348623157E308" promptText="Password" GridPane.columnIndex="1"
                                       GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
                         <validators>

@@ -1,7 +1,7 @@
 .button-save {
     -fx-padding: 0.55em 0.6em;
     -jfx-button-type: FLAT;
-    -fx-background-color:  #4e73df;
+    -fx-background-color: #4e73df;
     -fx-text-fill: WHITE;
     -fx-font-weight: BOLD;
     -fx-border-radius: 5pt;
@@ -68,6 +68,7 @@
     -fx-text-fill: WHITE;
     -fx-background-color: blueberries;
 }
+
 .combo-box-popup .list-view {
     -fx-border-color: greysquash;
     -fx-border-radius: 4px;

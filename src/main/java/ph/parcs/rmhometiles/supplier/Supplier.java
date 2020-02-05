@@ -1,7 +1,8 @@
 package ph.parcs.rmhometiles.supplier;
 
-import javafx.beans.property.*;
-import ph.parcs.rmhometiles.Item;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import ph.parcs.rmhometiles.item.Item;
 import ph.parcs.rmhometiles.product.Product;
 
 import javax.persistence.*;

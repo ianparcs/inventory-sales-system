@@ -2,11 +2,11 @@
 
 <?import com.jfoenix.controls.*?>
 <?import de.jensd.fx.glyphs.fontawesome.*?>
-<?import de.jensd.fx.glyphs.icons525.*?>
+<?import de.jensd.fx.glyphs.icons525.Icons525View?>
 <?import javafx.geometry.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
 <JFXDrawer xmlns:fx="http://javafx.com/fxml/1" fx:id="drawer" defaultDrawerSize="250" maxHeight="1.7976931348623157E308"
            maxWidth="1.7976931348623157E308" miniDrawerSize="20" prefWidth="250"
            stylesheets="@../../css/navigation.css" xmlns="http://javafx.com/javafx/10.0.2-internal"
