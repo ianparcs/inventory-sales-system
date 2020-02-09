@@ -3,15 +3,17 @@ package ph.parcs.rmhometiles.item;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public abstract class ItemService<T extends Item> {
 
     public PageRequest requestPage(int page, int itemPerPage) {
         return PageRequest.of(page, itemPerPage);
     }
 
-    public boolean isItemEmpty(T item) {
+    public boolean isEmpty(T item) {
         return item == null;
     }
 
@@ -35,4 +37,5 @@ public abstract class ItemService<T extends Item> {
 
     public abstract T saveItem(T item);
 
+    public abstract boolean isNew(T item);
 }

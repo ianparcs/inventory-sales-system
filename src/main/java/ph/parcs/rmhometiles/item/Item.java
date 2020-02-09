@@ -6,24 +6,14 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
-public class Item {
+public abstract class Item implements Serializable {
 
-    private IntegerProperty id = new SimpleIntegerProperty();
-    private StringProperty name = new SimpleStringProperty();
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    public Integer getId() {
-        return id.get();
-    }
-
-    public void setId(Integer id) {
-        this.id.set(id);
-    }
+    protected IntegerProperty id = new SimpleIntegerProperty();
+    protected StringProperty name = new SimpleStringProperty();
 
     @Column(name = "name")
     public String getName() {
@@ -33,4 +23,15 @@ public class Item {
     public void setName(String name) {
         this.name.set(name);
     }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Integer getId() {
+        return id.get();
+    }
+
+    public void setId(Integer id) {
+        this.id.set(id);
+    }
+
 }

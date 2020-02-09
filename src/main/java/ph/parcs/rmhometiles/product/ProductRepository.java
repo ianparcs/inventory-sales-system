@@ -5,4 +5,5 @@ import ph.parcs.rmhometiles.item.ItemRepository;
 
 @Repository
 public interface ProductRepository extends ItemRepository<Product, Integer> {
+
 }

@@ -69,7 +69,7 @@ public class Product extends Item {
     }
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     public Category getCategory() {
         return category;
     }
@@ -87,4 +87,5 @@ public class Product extends Item {
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
     }
+
 }

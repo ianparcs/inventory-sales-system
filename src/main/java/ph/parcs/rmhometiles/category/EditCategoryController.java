@@ -2,8 +2,8 @@ package ph.parcs.rmhometiles.category;
 
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import ph.parcs.rmhometiles.SaveListener;
 import ph.parcs.rmhometiles.item.EditItemController;
 
 @Controller
@@ -13,26 +13,26 @@ public class EditCategoryController extends EditItemController<Category> {
     private JFXTextField tfName;
 
     @Override
-    protected Category unbindFields(Category category) {
-        return null;
+    protected Category createItem(Integer id) {
+        Category category = new Category();
+        category.setName(tfName.getText());
+        category.setId(id);
+        return category;
     }
 
     @Override
     protected void bindFields(Category category) {
-
-    }
-
-    public void onSaveItem(SaveListener<Category> saveListener) {
-        btnSave.setOnAction(actionEvent -> {
-            Category category = unbindFields(new Category());
-            saveListener.onSaveData(category);
-            closeDialog();
-        });
+        tfName.setText(category.getName());
     }
 
     @Override
     protected void clearFields() {
         tfName.clear();
+    }
+
+    @Autowired
+    public void setCategoryService(CategoryService categoryService) {
+        this.itemService = categoryService;
     }
 
 }

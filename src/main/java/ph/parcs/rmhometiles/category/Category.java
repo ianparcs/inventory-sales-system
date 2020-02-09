@@ -3,14 +3,12 @@ package ph.parcs.rmhometiles.category;
 import ph.parcs.rmhometiles.item.Item;
 import ph.parcs.rmhometiles.product.Product;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@AttributeOverride(name = "id", column = @Column(name = "category_id"))
 public class Category extends Item {
 
     private List<Product> products;

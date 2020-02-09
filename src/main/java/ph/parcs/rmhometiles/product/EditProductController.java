@@ -2,6 +2,7 @@ package ph.parcs.rmhometiles.product;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.util.StringConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import ph.parcs.rmhometiles.category.CategoryService;
 import ph.parcs.rmhometiles.item.EditItemController;
 import ph.parcs.rmhometiles.supplier.Supplier;
 import ph.parcs.rmhometiles.supplier.SupplierService;
+
+import java.util.Optional;
 
 @Controller
 public class EditProductController extends EditItemController<Product> {
@@ -30,26 +33,25 @@ public class EditProductController extends EditItemController<Product> {
     @FXML
     private JFXTextField tfPrice;
     @FXML
-    private JFXTextField tfCode;
+    private JFXTextField tfName;
 
     private CategoryService categoryService;
     private SupplierService supplierService;
 
     @FXML
-    private void initialize() {
+    public void initialize() {
+        super.initialize();
         validateField(tfDescription);
         validateField(tfDiscount);
         validateField(tfUnitSold);
         validateField(tfQuantity);
         validateField(tfPrice);
-        validateField(tfCode);
+        validateField(tfName);
 
         initComboBoxValues();
     }
 
     private void initComboBoxValues() {
-        cbCategory.setItems(categoryService.getCategories());
-        cbCategory.getSelectionModel().selectFirst();
         cbCategory.setConverter(new StringConverter<>() {
             @Override
             public String toString(Category category) {
@@ -61,9 +63,6 @@ public class EditProductController extends EditItemController<Product> {
                 return null;
             }
         });
-
-        cbSupplier.setItems(supplierService.getSuppliers());
-        cbSupplier.getSelectionModel().selectFirst();
         cbSupplier.setConverter(new StringConverter<>() {
             @Override
             public String toString(Supplier supplier) {
@@ -79,53 +78,65 @@ public class EditProductController extends EditItemController<Product> {
 
     @Override
     protected void clearFields() {
+        clearValidators();
         tfDescription.clear();
         tfDiscount.clear();
         tfUnitSold.clear();
         tfQuantity.clear();
-        tfCode.clear();
+        tfName.clear();
         tfPrice.clear();
+        cbCategory.getSelectionModel().clearSelection();
+    }
+
+    protected void clearValidators() {
+        tfDescription.resetValidation();
+        tfDiscount.resetValidation();
+        tfUnitSold.resetValidation();
+        tfQuantity.resetValidation();
+        tfName.resetValidation();
+        tfPrice.resetValidation();
     }
 
     @Override
     protected void bindFields(Product product) {
-        tfCode.setText(product.getName());
-        tfDescription.setText(product.getDescription());
-        tfPrice.setText(product.getPrice().toString());
-        tfUnitSold.setText(product.getUnitSold().toString());
-        tfQuantity.setText(product.getQuantity().toString());
-        tfDiscount.setText(product.getDiscount().toString());
+        if (!itemService.isNew(product)) {
+            tfName.setText(product.getName());
+            tfDescription.setText(product.getDescription());
+            tfPrice.setText(product.getPrice().toString());
+            tfUnitSold.setText(product.getUnitSold().toString());
+            tfQuantity.setText(product.getQuantity().toString());
+            tfDiscount.setText(product.getDiscount().toString());
+        }
+        setCategoryValue(product);
+    }
 
-        cbSupplier.getItems().forEach(supplier -> {
-            Supplier prodSupplier = product.getSupplier();
-            if (prodSupplier != null) {
-                if (prodSupplier.getId().equals(supplier.getId())) {
-                    cbSupplier.getSelectionModel().select(supplier);
-                }
-            }
-        });
+    private void setCategoryValue(Product product) {
+        cbCategory.getItems().setAll(categoryService.getCategories());
+        Optional<Category> search = categoryService.findCategoryByProduct(cbCategory.getItems(), product);
+        search.ifPresent(category -> cbCategory.getSelectionModel().select(search.get()));
+    }
 
-        cbCategory.getItems().forEach(category -> {
-            Category prodCategory = product.getCategory();
-            if (prodCategory != null) {
-                if (prodCategory.getId().equals(category.getId())) {
-                    cbCategory.getSelectionModel().select(category);
-                }
+    @FXML
+    public void onCategorySelect() {
+        if (cbCategory.getValue() != null) {
+            if (cbCategory.getValue().getName().isEmpty()) {
+                Platform.runLater(() -> cbCategory.getSelectionModel().clearSelection());
             }
-        });
+        }
     }
 
     @Override
-    protected Product unbindFields(Product product) {
-        product.setName(tfCode.getText());
-        product.setCategory(cbCategory.getValue());
-        product.setSupplier(cbSupplier.getValue());
-        product.setDescription(tfDescription.getText());
-        product.setPrice(Float.valueOf(!tfPrice.getText().isEmpty() ? tfPrice.getText() : "0.00"));
+    protected Product createItem(Integer id) {
+        Product product = new Product();
         product.setUnitSold(Integer.valueOf(!tfUnitSold.getText().isEmpty() ? tfUnitSold.getText() : "0"));
         product.setQuantity(Integer.valueOf(!tfQuantity.getText().isEmpty() ? tfQuantity.getText() : "0"));
         product.setDiscount(Integer.valueOf(!tfDiscount.getText().isEmpty() ? tfDiscount.getText() : "0"));
-        clearFields();
+        product.setPrice(Float.valueOf(!tfPrice.getText().isEmpty() ? tfPrice.getText() : "0.00"));
+        product.setDescription(tfDescription.getText());
+        product.setCategory(cbCategory.getValue());
+        product.setSupplier(cbSupplier.getValue());
+        product.setName(tfName.getText());
+        product.setId(id);
         return product;
     }
 
@@ -138,4 +149,10 @@ public class EditProductController extends EditItemController<Product> {
     public void setSupplierService(SupplierService supplierService) {
         this.supplierService = supplierService;
     }
+
+    @Autowired
+    public void setProductService(ProductService productService) {
+        this.itemService = productService;
+    }
+
 }

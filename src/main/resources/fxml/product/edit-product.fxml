@@ -7,7 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.*?>
-<JFXDialog xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/save-dialog.css" fx:id="saveDialog"
+<JFXDialog xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/edit-dialog.css" fx:id="editDialog"
            maxHeight="1.7976931348623157E308"
            maxWidth="1.7976931348623157E308"
            fx:controller="ph.parcs.rmhometiles.product.EditProductController">
@@ -25,23 +25,20 @@
         </heading>
 
         <body>
-            <GridPane alignment="TOP_CENTER" hgap="40.0 " vgap="45"
-                      AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                      AnchorPane.topAnchor="0.0">
-
+            <GridPane alignment="TOP_CENTER" hgap="40.0 " vgap="40" maxWidth="1.7976931348623157E308"
+                      maxHeight="1.7976931348623157E308">
                 <columnConstraints>
-                    <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308"/>
-                    <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308"/>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                    <ColumnConstraints hgrow="ALWAYS"/>
                 </columnConstraints>
-
                 <rowConstraints>
-                    <RowConstraints maxHeight="1.7976931348623157E308" vgrow="NEVER"/>
-                    <RowConstraints maxHeight="1.7976931348623157E308" vgrow="NEVER"/>
-                    <RowConstraints maxHeight="1.7976931348623157E308" vgrow="NEVER"/>
-                    <RowConstraints maxHeight="1.7976931348623157E308" vgrow="NEVER"/>
+                    <RowConstraints vgrow="NEVER"/>
+                    <RowConstraints vgrow="NEVER"/>
+                    <RowConstraints vgrow="NEVER"/>
+                    <RowConstraints vgrow="NEVER"/>
                 </rowConstraints>
 
-                <JFXTextField fx:id="tfCode" maxWidth="1.7976931348623157E308" maxHeight="1.7976931348623157E308"
+                <JFXTextField fx:id="tfName"
                               labelFloat="true" promptText="Code" GridPane.columnIndex="0" GridPane.rowIndex="0">
                     <tooltip>
                         <Tooltip text="Product name"/>
@@ -93,10 +90,10 @@
                     </font>
                 </JFXTextField>
 
-                <JFXComboBox fx:id="cbCategory" maxWidth="1.7976931348623157E308" maxHeight="1.7976931348623157E308"
+                <JFXComboBox fx:id="cbCategory" maxWidth="1.7976931348623157E308" onAction="#onCategorySelect"
                              labelFloat="true" promptText="Category" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
 
-                <JFXComboBox fx:id="cbSupplier" maxWidth="1.7976931348623157E308" maxHeight="1.7976931348623157E308"
+                <JFXComboBox fx:id="cbSupplier" maxWidth="1.7976931348623157E308"
                              labelFloat="true" promptText="Supplier" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
             </GridPane>
         </body>
@@ -106,7 +103,7 @@
                        prefWidth="100.0" styleClass="button-cancel" text="Cancel"/>
             <JFXButton fx:id="btnSave" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
                        prefWidth="100.0" styleClass="button-save" text="Save"
-                       disable="${tfPrice.text.empty || tfCode.text.empty || tfDescription.text.empty}"/>
+                       disable="${tfPrice.text.empty || tfName.text.empty || tfDescription.text.empty}"/>
         </actions>
 
 

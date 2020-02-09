@@ -15,6 +15,8 @@
            xmlns="http://javafx.com/javafx/10.0.2-internal"
            fx:controller="ph.parcs.rmhometiles.category.CategoryTableController">
 
+    <fx:include source="edit-category.fxml" visible="false"/>
+
     <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
         <columnConstraints>
             <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308"/>
@@ -31,11 +33,11 @@
             <Label contentDisplay="CENTER" text="Category Details"/>
         </HBox>
 
-        <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0"
+        <HBox maxHeight="1.7976931348623157E308 " maxWidth="1.7976931348623157E308" spacing="10.0"
               styleClass="content-options" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
             <JFXButton alignment="BASELINE_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
                        styleClass="add-button" text="Add Category"
-                       textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                       textAlignment="CENTER" HBox.hgrow="ALWAYS" onAction="#showAddItemDialog">
                 <graphic>
                     <FontAwesomeIconView glyphName="PLUS" size="1.25em" styleClass="add-button-icon"
                                          textAlignment="CENTER"/>
@@ -75,7 +77,8 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
             </columnResizePolicy>
             <columns>
-                <TableColumn text="#">
+                <TableColumn styleClass="id-column" resizable="false" text="#" minWidth="70" prefWidth="70"
+                             maxWidth="70">
                     <cellValueFactory>
                         <PropertyValueFactory property="id"/>
                     </cellValueFactory>
@@ -87,7 +90,9 @@
                     </cellValueFactory>
                 </TableColumn>
 
-                <TableColumn fx:id="tcAction" reorderable="false" sortable="false" styleClass="action-column"
+                <TableColumn fx:id="tcAction" reorderable="false" resizable="false" minWidth="120" maxWidth="120"
+                             sortable="false"
+                             styleClass="action-column"
                              text="Action"/>
             </columns>
         </TableView>

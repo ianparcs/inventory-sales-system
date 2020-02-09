@@ -16,7 +16,6 @@
            fx:controller="ph.parcs.rmhometiles.product.ProductTableController">
 
     <fx:include source="edit-product.fxml" visible="false"/>
-    <Pane fx:id="test" maxHeight="100.0" maxWidth="1.7976931348623157E308" prefHeight="100.0"/>
     <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
         <columnConstraints>
             <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308"/>
@@ -36,8 +35,8 @@
         <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0"
               styleClass="content-options" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
             <JFXButton alignment="BASELINE_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                       onAction="#showAddItemDialog" styleClass="add-button" text="Add Product"
-                       textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                       onAction="#showAddItemDialog" styleClass="add-button" text="Add Product" textAlignment="CENTER"
+                       HBox.hgrow="ALWAYS">
                 <graphic>
                     <FontAwesomeIconView glyphName="PLUS" size="1.25em" styleClass="add-button-icon"
                                          textAlignment="CENTER"/>
@@ -49,7 +48,7 @@
             </JFXTextField>
         </HBox>
 
-        <HBox GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="1" alignment="CENTER_LEFT">
+        <HBox alignment="CENTER_LEFT" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="1">
             <Label text="Show "/>
             <JFXComboBox fx:id="cbRowCount" onAction="#onPageRowChanged" prefWidth="60">
                 <items>
@@ -78,7 +77,8 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
             </columnResizePolicy>
             <columns>
-                <TableColumn text="#">
+                <TableColumn styleClass="id-column" resizable="false" text="#" minWidth="70" prefWidth="70"
+                             maxWidth="70">
                     <cellValueFactory>
                         <PropertyValueFactory property="id"/>
                     </cellValueFactory>
@@ -132,9 +132,10 @@
                     </cellValueFactory>
                 </TableColumn>
 
-                <TableColumn fx:id="tcAction" reorderable="false" sortable="false" styleClass="action-column"
+                <TableColumn fx:id="tcAction" reorderable="false" resizable="false" minWidth="120" maxWidth="120"
+                             sortable="false"
+                             styleClass="action-column"
                              text="Action"/>
-
             </columns>
 
         </TableView>
@@ -147,8 +148,8 @@
                         minHeight="35.0" prefHeight="35.0"/>
         </StackPane>
 
-        <Label fx:id="lblPageEntries" GridPane.halignment="LEFT" text="Showing" GridPane.valignment="TOP"
-               GridPane.rowIndex="3" GridPane.columnIndex="0">
+        <Label fx:id="lblPageEntries" text="Showing" GridPane.columnIndex="0" GridPane.halignment="LEFT"
+               GridPane.rowIndex="3" GridPane.valignment="TOP">
             <GridPane.margin>
                 <Insets left="20" right="20"/>
             </GridPane.margin>

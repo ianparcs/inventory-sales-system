@@ -7,17 +7,24 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import org.springframework.stereotype.Controller;
-import ph.parcs.rmhometiles.SaveListener;
+import ph.parcs.rmhometiles.ItemListener;
 
 @Controller
 public abstract class EditItemController<T extends Item> {
 
     @FXML
-    protected JFXDialog saveDialog;
+    protected JFXDialog editDialog;
     @FXML
     protected JFXButton btnSave;
     @FXML
     protected Label lblTitle;
+
+    protected ItemService<T> itemService;
+
+    @FXML
+    public void initialize() {
+        editDialog.setOnDialogClosed(event -> clearFields());
+    }
 
     protected void validateField(JFXTextField tf) {
         tf.focusedProperty().addListener((observableValue, oldValue, newValue) -> {
@@ -30,39 +37,36 @@ public abstract class EditItemController<T extends Item> {
         });
     }
 
-    final public void onEditItem(SaveListener<T> saveListener, final T item) {
-        setTitle("Edit " + item.getClass().getSimpleName());
+    final public void onEditItem(ItemListener<T> itemListener, final T item) {
+        setTitle(item);
         bindFields(item);
+
         btnSave.setOnAction(actionEvent -> {
             closeDialog();
-            unbindFields(item);
-            saveListener.onSaveData(item);
+            T savedItem = itemService.saveItem(createItem(item.getId()));
+            if (!itemService.isEmpty(savedItem)) {
+                itemListener.onSavedSuccess(savedItem);
+            } else {
+                itemListener.onSaveFailed(savedItem);
+            }
         });
     }
 
-    private void setTitle(String title) {
-        lblTitle.setText(title);
-    }
-
-    final public void onSaveItem(SaveListener<T> saveListener, T newItem) {
-        setTitle("New " + newItem.getClass().getSimpleName());
-        btnSave.setOnAction(actionEvent -> {
-            T unbindItem = unbindFields(newItem);
-            saveListener.onSaveData(unbindItem);
-            closeDialog();
-        });
+    public void showDialog(StackPane stackPane) {
+        editDialog.show(stackPane);
     }
 
     @FXML
     protected void closeDialog() {
-        saveDialog.close();
+        editDialog.close();
     }
 
-    public void showDialog(StackPane stackPane) {
-        saveDialog.show(stackPane);
+    private void setTitle(T item) {
+        String title = item.getId() > 0 ? "Edit" : "Add";
+        lblTitle.setText(title + " " + item.getClass().getSimpleName());
     }
 
-    protected abstract T unbindFields(T item);
+    protected abstract T createItem(Integer id);
 
     protected abstract void bindFields(T item);
 

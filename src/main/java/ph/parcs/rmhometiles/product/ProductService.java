@@ -31,6 +31,11 @@ public class ProductService extends ItemService<Product> {
         return productRepository.save(item);
     }
 
+    @Override
+    public boolean isNew(Product item) {
+        return productRepository.findById(item.getId()).isEmpty();
+    }
+
     @Autowired
     public void setProductRepository(ProductRepository productRepository) {
         this.productRepository = productRepository;

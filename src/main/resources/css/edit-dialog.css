@@ -28,13 +28,12 @@
 
 .jfx-dialog-layout > .jfx-layout-actions {
     -fx-background-color: #e9ebee;
-    -fx-padding: 20px;
+    -fx-padding: 20 30 20 30;
 }
 
 .jfx-dialog-layout > .jfx-layout-body {
     -fx-alignment: center;
     -fx-pref-width: 800px;
-    -fx-pref-height: 350px;
     -fx-padding: 35px;
 }
 
@@ -45,6 +44,7 @@
 }
 
 .jfx-text-field {
+    -fx-pref-width: 800px;
     -jfx-focus-color: BLUEBERRIES;
 }
 
@@ -64,15 +64,17 @@
     -jfx-focus-color: BLUEBERRIES;
 }
 
-.combo-box .cell:selected,
 .combo-box-popup .list-view .list-cell:hover {
     -fx-text-fill: WHITE;
     -fx-background-color: blueberries;
 }
 
+.combo-box .cell:selected {
+    -fx-background-color: transparent;
+}
+
 .combo-box-popup .list-view {
     -fx-border-color: greysquash;
-    -fx-border-radius: 4px;
     -fx-border-width: 0;
 }
 

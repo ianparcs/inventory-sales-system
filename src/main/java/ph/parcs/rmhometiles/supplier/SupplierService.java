@@ -19,7 +19,6 @@ public class SupplierService {
         return FXCollections.observableArrayList(Objects.requireNonNullElseGet(suppliers, ArrayList::new));
     }
 
-
     @Autowired
     public void setSupplierRepository(SupplierRepository supplierRepository) {
         this.supplierRepository = supplierRepository;

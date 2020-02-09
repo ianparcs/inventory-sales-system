@@ -35,13 +35,18 @@ TableView .column-header, .column-header .label {
     -fx-padding: 5px;
 }
 
+TableView .table-cell {
+    -fx-alignment: CENTER-LEFT;
+    -fx-padding: 3px 10px 3px 10px;
+}
+
+TableView .column-header.id-column > .label,
 TableView .column-header.action-column > .label {
     -fx-alignment: CENTER;
 }
 
-TableView .table-cell {
-    -fx-alignment: CENTER-LEFT;
-    -fx-padding: 3px;
+TableView .id-column {
+    -fx-alignment: CENTER;
 }
 
 TableView .table-row-cell:selected, .table-row-cell:hover {

@@ -9,6 +9,7 @@ import javafx.scene.layout.StackPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
+import ph.parcs.rmhometiles.ItemListener;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.ui.alert.SweetAlert;
 import ph.parcs.rmhometiles.ui.alert.SweetAlertFactory;
@@ -61,8 +62,7 @@ public abstract class ItemTableController<T extends Item> {
 
     private void initActionColumn() {
         tcAction.setCellFactory(ActionTableCell.forColumn(
-                this::showDeleteItemDialog,
-                this::showEditItemDialog));
+                this::onItemDeleteAction, this::onItemEditAction));
     }
 
     final protected void updateItems() {
@@ -72,17 +72,7 @@ public abstract class ItemTableController<T extends Item> {
         updatePageEntries(items);
     }
 
-    final protected void onSaveItem(T item) {
-        StackPane root = (StackPane) tvItem.getScene().getRoot();
-        T savedItem = itemService.saveItem(item);
-        if (savedItem != null) {
-            String successMsg = itemService.isItemEmpty(item) ? Global.MSG.ADD : Global.MSG.EDIT;
-            successAlert.setMessage(successMsg).show(root);
-            updateItems();
-        }
-    }
-
-    final protected T showDeleteItemDialog(T item) {
+    protected T onItemDeleteAction(T item) {
         StackPane root = (StackPane) tvItem.getScene().getRoot();
         deleteAlert.setMessage("Are you sure you want to delete " + item.getName() + "?");
         deleteAlert.setConfirmListener(() -> {
@@ -91,13 +81,24 @@ public abstract class ItemTableController<T extends Item> {
                 updateItems();
             }
         }).show(root);
+
         return item;
     }
 
-    final protected T showEditItemDialog(T item) {
-        editItemController.onEditItem(this::onSaveItem, item);
+    final protected T onItemEditAction(T editItem) {
         editItemController.showDialog((StackPane) tvItem.getScene().getRoot());
-        return item;
+        editItemController.onEditItem(new ItemListener<>() {
+            @Override
+            public void onSavedSuccess(T entity) {
+                successAlert.setMessage("Item saved!").show((StackPane) tvItem.getScene().getRoot());
+                updateItems();
+            }
+
+            @Override
+            public void onSaveFailed(T savedItem) {
+            }
+        }, editItem);
+        return editItem;
     }
 
     final protected void updatePageEntries(Page<T> items) {

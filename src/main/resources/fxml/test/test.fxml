@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
             prefHeight="600.0"
-            prefWidth="800.0" stylesheets="@../../css/save-dialog.css"
+            prefWidth="800.0" stylesheets="@../../css/edit-dialog.css"
             xmlns="http://javafx.com/javafx/10.0.2-internal">
     <GridPane alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="15.0"
               StackPane.alignment="CENTER">

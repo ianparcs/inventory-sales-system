@@ -70,17 +70,12 @@ public class ProductTableController extends ItemTableController<Product> {
 
     @FXML
     private void showAddItemDialog() {
-        editItemController.onSaveItem(this::onSaveItem, new Product());
+        onItemEditAction(new Product());
         editItemController.showDialog((StackPane) tvItem.getScene().getRoot());
     }
 
     @Autowired
     public void setProductService(ProductService productService) {
-        this.itemService = productService;
-    }
-
-    @Autowired
-    public void setCategoryService(ProductService productService) {
         this.itemService = productService;
     }
 
