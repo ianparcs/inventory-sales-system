@@ -14,5 +14,4 @@ public class HomeController {
     public void setContent(Parent content) {
         apContent.getChildren().setAll(content);
     }
-
 }

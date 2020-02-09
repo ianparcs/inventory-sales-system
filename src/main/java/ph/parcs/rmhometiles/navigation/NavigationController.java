@@ -1,7 +1,6 @@
 package ph.parcs.rmhometiles.navigation;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDrawer;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.ContentDisplay;
@@ -33,8 +32,6 @@ public class NavigationController {
     private JFXButton btnTitle;
     @FXML
     private JFXButton btnLog;
-    @FXML
-    private JFXDrawer drawer;
 
     private SceneManager sceneManager;
     private HomeController homeController;
@@ -57,10 +54,6 @@ public class NavigationController {
         }));
     }
 
-    public boolean isDrawerOpened() {
-        return drawer.isOpened();
-    }
-
     public void hideText() {
         states.forEach((key, value) -> value.setContentDisplay(ContentDisplay.GRAPHIC_ONLY));
         btnTitle.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
@@ -69,16 +62,6 @@ public class NavigationController {
     public void showText() {
         btnTitle.setContentDisplay(ContentDisplay.LEFT);
         states.forEach((key, value) -> value.setContentDisplay(ContentDisplay.LEFT));
-    }
-
-    public void closeDrawer() {
-        drawer.close();
-        hideText();
-    }
-
-    public void openDrawer() {
-        drawer.open();
-        showText();
     }
 
     @Autowired
@@ -90,5 +73,4 @@ public class NavigationController {
     public void setHomeController(HomeController homeController) {
         this.homeController = homeController;
     }
-
 }

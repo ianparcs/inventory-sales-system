@@ -30,7 +30,7 @@ public class SceneManager {
     }
 
     @SneakyThrows
-    private Parent loadUI(State view) {
+    public Parent loadUI(State view) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(view.getPath()));
         loader.setControllerFactory(aClass -> stageInitializer.getApplicationContext().getBean(aClass));
         return loader.load();

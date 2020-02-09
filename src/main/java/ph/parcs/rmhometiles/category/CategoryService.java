@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ph.parcs.rmhometiles.item.ItemService;
 import ph.parcs.rmhometiles.product.Product;
 
@@ -32,10 +33,11 @@ public class CategoryService extends ItemService<Category> {
     }
 
     @Override
+    @Transactional
     public boolean deleteItem(Category category) {
         Optional<Category> search = categoryRepository.findById(category.getId());
         if (search.isPresent()) {
-            categoryRepository.deleteById(search.get().getId());
+            categoryRepository.delete(search.get());
             return true;
         }
         return false;

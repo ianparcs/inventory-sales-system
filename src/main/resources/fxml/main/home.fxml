@@ -7,16 +7,15 @@
 
     <BorderPane>
         <center>
-            <StackPane fx:id="apContent" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                       styleClass="background" stylesheets="@../../css/content.css"/>
+            <StackPane fx:id="apContent" stylesheets="@../../css/content.css" styleClass="background"/>
         </center>
 
         <left>
-            <fx:include source="navigation.fxml"/>
+            <fx:include source="drawer.fxml" stylesheets="@../../css/navigation.css"/>
         </left>
 
         <top>
-            <fx:include maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" source="title-menu.fxml"/>
+            <fx:include source="titlebar.fxml" stylesheets="@../../css/titlebar.css"/>
         </top>
 
     </BorderPane>

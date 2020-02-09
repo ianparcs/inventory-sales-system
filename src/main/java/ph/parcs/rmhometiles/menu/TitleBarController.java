@@ -1,46 +1,44 @@
 package ph.parcs.rmhometiles.menu;
 
 import com.jfoenix.controls.JFXHamburger;
-import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
+import com.jfoenix.transitions.hamburger.HamburgerNextArrowBasicTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import ph.parcs.rmhometiles.navigation.NavigationController;
+import ph.parcs.rmhometiles.navigation.DrawerController;
 import ph.parcs.rmhometiles.util.WindowHelper;
 
 @Controller
-public class MenuTitleController {
+public class TitleBarController {
 
     @FXML
     private Parent apTitleBar;
-
     @FXML
     private JFXHamburger hbgNavigation;
 
-    private NavigationController navigationController;
+    private DrawerController drawerController;
 
     @FXML
     public void initialize() {
-        HamburgerBackArrowBasicTransition burgerTask = new HamburgerBackArrowBasicTransition(hbgNavigation);
+        HamburgerNextArrowBasicTransition burgerTask = new HamburgerNextArrowBasicTransition(hbgNavigation);
         burgerTask.setRate(-1);
 
         hbgNavigation.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> {
             burgerTask.setRate(burgerTask.getRate() * -1);
             burgerTask.play();
 
-            if (navigationController.isDrawerOpened()) {
-                navigationController.closeDrawer();
+            if (drawerController.isDrawerOpened()) {
+                drawerController.closeDrawer();
             } else {
-                navigationController.openDrawer();
+                drawerController.openDrawer();
             }
         });
 
         WindowHelper.setDraggable(apTitleBar);
     }
-
 
     @FXML
     public void closeWindow() {
@@ -62,7 +60,7 @@ public class MenuTitleController {
     }
 
     @Autowired
-    public void setNavigationController(NavigationController navigationController) {
-        this.navigationController = navigationController;
+    public void setDrawerController(DrawerController drawerController) {
+        this.drawerController = drawerController;
     }
 }

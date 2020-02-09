@@ -5,7 +5,8 @@ public enum State {
     PRODUCT("/fxml/product/product.fxml"), SALE_REPORT("/fxml/report/report.fxml"),
     CATEGORY("/fxml/category/category.fxml"), DASHBOARD("/fxml/dashboard/dashboard.fxml"),
     SUPPLIER("/fxml/supplier/supplier.fxml"), INVOICE("/fxml/invoice/invoice.fxml"),
-    LOG("/fxml/log/log.fxml"), ERROR("/fxml/main/error.fxml");
+    LOG("/fxml/log/log.fxml"), ERROR("/fxml/main/error.fxml"),
+    NAVIGATION("/fxml/main/navigation.fxml");
 
     public final String path;
 

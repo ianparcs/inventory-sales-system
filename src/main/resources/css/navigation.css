@@ -1,40 +1,43 @@
-
-.nav-background {
+.background {
     -fx-background-color: rgb(43, 51, 62);
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 0);
 }
 
-.nav-button {
-    -fx-text-fill: GREYSQUASH;
-    -fx-border-width: 0 0 0 5px;
-    -fx-border-color: Transparent;
+.glyph-icon {
+    -glyph-size: 19px;
+    -fx-fill: greysquash;
 }
 
-.nav-button:focused {
+VBox > .jfx-button {
+    -fx-text-fill: greysquash;
+    -fx-border-width: 0 0 0 5px;
+    -fx-border-color: transparent;
+    -fx-padding: 20 15 20 45;
+    -fx-graphic-text-gap: 30;
+    -fx-ellipsis-string: "";
+    -fx-alignment: center-left;
+}
+
+VBox > .jfx-button:focused {
     -fx-background-color: #252c35;
     -fx-text-fill: WHITE;
-    -fx-border-color: BLUEBERRIES;
+    -fx-border-color: blueberries;
 }
 
-.nav-button:hover {
+VBox > .jfx-button:hover {
     -fx-text-fill: WHITE;
 }
 
-.nav-icon {
-    -fx-fill: GREYSQUASH;
-}
-
-.nav-button:focused .nav-icon {
-    -fx-fill: BLUEBERRIES;
-}
-
-.nav-button:hover .nav-icon {
-    -fx-fill: BLUEBERRIES;
+VBox > .jfx-button:hover .glyph-icon,
+VBox > .jfx-button:focused .glyph-icon {
+    -fx-fill: blueberries;
 }
 
 .nav-title {
-    -fx-text-fill: WHITE;
-    -fx-padding: 10px;
-    -fx-font-weight: BOLD;
+    -fx-text-fill: white;
+    -fx-padding: 20 15 20 15;
+    -fx-font-weight: bold;
+    -fx-focus-traversable: false;
+    -fx-graphic-text-gap: 20;
 }
 

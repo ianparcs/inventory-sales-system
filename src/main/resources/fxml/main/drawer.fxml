@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXDrawer?>
+<JFXDrawer xmlns:fx="http://javafx.com/fxml/1" fx:id="drawer"
+           miniDrawerSize="5" minWidth="5" defaultDrawerSize="250" resizeContent="true"
+           xmlns="http://javafx.com/javafx/10.0.2-internal"
+           fx:controller="ph.parcs.rmhometiles.navigation.DrawerController">
+</JFXDrawer>
