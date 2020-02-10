@@ -30,6 +30,8 @@ public abstract class ItemTableController<T extends Item> {
     protected Label lblPageEntries;
     @FXML
     protected TableView<T> tvItem;
+    @FXML
+    protected StackPane spMain;
 
     protected EditItemController<T> editItemController;
     protected ItemService<T> itemService;
@@ -43,10 +45,13 @@ public abstract class ItemTableController<T extends Item> {
         deleteAlert = SweetAlertFactory.create(SweetAlert.Type.WARNING);
         successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
 
-        updateItems();
         initItemPagination();
         initActionColumn();
         initSearchItem();
+
+        spMain.sceneProperty().addListener((observableValue, scene, newScene) -> {
+            if (newScene != null) updateItems();
+        });
     }
 
     private void initItemPagination() {
