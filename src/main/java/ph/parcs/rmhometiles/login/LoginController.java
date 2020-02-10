@@ -42,14 +42,11 @@ public class LoginController {
     }
 
     public void login() {
-        String username = tfUserName.getText();
-        String password = pfUserPassword.getText();
+        final String username = tfUserName.getText();
+        final String password = pfUserPassword.getText();
 
         new Thread(() -> {
-            UserDetails userDetails = userService.loadUserByUsername(username);
-            if (userService.isExist(userDetails)) {
-                userService.login(userDetails, password);
-            }
+            userService.login(username, password);
 
             Platform.runLater(() -> {
                 if (userService.isAuthenticated()) {
@@ -63,6 +60,8 @@ public class LoginController {
 
     private void showErrorDialog() {
         SweetAlert errorLogin = SweetAlertFactory.create(SweetAlert.Type.DANGER);
+        errorLogin.setHeaderMessage("Bad Credentials!");
+        errorLogin.setContentMessage("Account " + tfUserName.getText() + " doesn't exist. Try another account");
         errorLogin.show((StackPane) tfUserName.getScene().getRoot());
     }
 

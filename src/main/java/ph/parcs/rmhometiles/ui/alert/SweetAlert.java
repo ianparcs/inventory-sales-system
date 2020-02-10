@@ -42,6 +42,7 @@ public class SweetAlert {
         headerContainer.getChildren().add(icons);
         headerContainer.getChildren().add(lblHeader);
         headerContainer.setAlignment(Pos.CENTER);
+        headerContainer.setSpacing(10);
 
         content = new JFXDialogLayout();
         content.setHeading(headerContainer);

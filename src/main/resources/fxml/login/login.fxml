@@ -6,8 +6,7 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.*?>
-<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="ph.parcs.rmhometiles.login.LoginController"
-           stylesheets="@../../css/login.css">
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="ph.parcs.rmhometiles.login.LoginController" stylesheets="@../../css/login.css">
 
     <SplitPane dividerPositions="0.7">
 

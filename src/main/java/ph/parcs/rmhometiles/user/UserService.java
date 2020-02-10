@@ -19,11 +19,10 @@ import java.util.Set;
 @Service
 public class UserService implements UserDetailsService {
 
-    private UserRepository userRepository;
-
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     private AuthenticationManager authenticationManager;
     private Authentication authenticationToken;
+    private UserRepository userRepository;
 
     @Override
     @Transactional(readOnly = true)
@@ -39,21 +38,29 @@ public class UserService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
     }
 
-    public void login(UserDetails userDetails, String password) {
+    public void login(String username, String password) {
+        UserDetails userDetails = loadUserByUsername(username);
+        if (userDetails != null) {
+            if (isPasswordMatch(password, userDetails.getPassword())) {
+                authenticate(userDetails, password);
+            }
+        }
+    }
+
+    private void authenticate(UserDetails userDetails, String password) {
         authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
         authenticationManager.authenticate(authenticationToken);
-
-        if (isAuthenticated()) {
+        if (authenticationToken.isAuthenticated()) {
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         }
     }
 
-    public boolean isAuthenticated() {
-        return authenticationToken != null && authenticationToken.isAuthenticated();
+    private boolean isPasswordMatch(String plainPass, String encodedPass) {
+        return bCryptPasswordEncoder.matches(plainPass, encodedPass);
     }
 
-    public boolean isExist(UserDetails user) {
-        return user != null;
+    public boolean isAuthenticated() {
+        return authenticationToken != null && authenticationToken.isAuthenticated();
     }
 
     //TODO

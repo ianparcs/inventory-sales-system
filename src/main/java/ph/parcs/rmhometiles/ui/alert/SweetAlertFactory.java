@@ -34,8 +34,8 @@ public class SweetAlertFactory {
 
     private static SweetAlert dangerDialog(String message) {
         SweetAlert alert = new SweetAlert()
-                .setHeaderMessage("Error")
                 .setType(SweetAlert.Type.DANGER)
+                .setHeaderMessage("Error")
                 .setConfirmButton("Okay")
                 .setContentMessage(message);
         alert.setConfirmListener(alert::close);
