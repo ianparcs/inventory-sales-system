@@ -4,58 +4,31 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.scene.layout.StackPane;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.State;
 import ph.parcs.rmhometiles.scene.SceneManager;
-import ph.parcs.rmhometiles.ui.UserNotFoundDialogController;
+import ph.parcs.rmhometiles.ui.alert.SweetAlert;
+import ph.parcs.rmhometiles.ui.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.user.User;
 import ph.parcs.rmhometiles.user.UserService;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 
 @Controller
-public class LoginController implements Initializable {
+public class LoginController {
 
     @FXML
     private JFXPasswordField pfUserPassword;
     @FXML
     private JFXTextField tfUserName;
 
-    private UserNotFoundDialogController userNotFoundDialogController;
     private UserService userService;
     private SceneManager sceneManager;
 
-    public void login() {
-        String username = tfUserName.getText();
-        String password = pfUserPassword.getText();
-
-        new Thread(() -> {
-            userService.login(username, password);
-            Platform.runLater(() -> {
-                if (userService.isAuthenticated()) {
-                    sceneManager.changeScene(State.HOME);
-                }
-
-            });
-        }).start();
-    }
-
-    private User createUser() {
-        User fakeUser = new User();
-        fakeUser.setPassword("ian");
-        fakeUser.setUsername("ian");
-        fakeUser.setRole("admin");
-        return fakeUser;
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        // userService.saveUser(createUser());
-
+    @FXML
+    private void initialize() {
         tfUserName.focusedProperty().addListener((observableValue, oldValue, newValue) -> {
             if (!newValue) {
                 tfUserName.validate();
@@ -68,15 +41,37 @@ public class LoginController implements Initializable {
         });
     }
 
-    public void showUserNotFoundDialog(String username) {
-        String message = "User " + username + " not found! \n Please try another username";
-        userNotFoundDialogController.setMessage(message);
-        userNotFoundDialogController.showDialog();
+    public void login() {
+        String username = tfUserName.getText();
+        String password = pfUserPassword.getText();
+
+        new Thread(() -> {
+            UserDetails userDetails = userService.loadUserByUsername(username);
+            if (userService.isExist(userDetails)) {
+                userService.login(userDetails, password);
+            }
+
+            Platform.runLater(() -> {
+                if (userService.isAuthenticated()) {
+                    sceneManager.changeScene(State.HOME);
+                } else {
+                    showErrorDialog();
+                }
+            });
+        }).start();
     }
 
-    @Autowired
-    public void setUserNotFoundDialogController(UserNotFoundDialogController userNotFoundDialogController) {
-        this.userNotFoundDialogController = userNotFoundDialogController;
+    private void showErrorDialog() {
+        SweetAlert errorLogin = SweetAlertFactory.create(SweetAlert.Type.DANGER);
+        errorLogin.show((StackPane) tfUserName.getScene().getRoot());
+    }
+
+    private User createUser() {
+        User fakeUser = new User();
+        fakeUser.setPassword("ian");
+        fakeUser.setUsername("ian");
+        fakeUser.setRole("admin");
+        return fakeUser;
     }
 
     @Autowired

@@ -1,4 +1,3 @@
-
 .jfx-dialog-layout > .jfx-layout-body {
     -fx-alignment: center;
 }
@@ -18,7 +17,17 @@
     -fx-font-size: 13;
 }
 
-.jfx-dialog-layout > .jfx-layout-body .label {
-    -fx-font-size: 16.0;
+.jfx-dialog-layout > .jfx-layout-heading {
+    -fx-alignment: center;
+    -fx-font-weight: BOLD;
+    -fx-padding: 24 24 20 24;
+    -fx-font-size: 25;
     -fx-wrap-text: true;
+}
+
+.jfx-dialog-layout > .jfx-layout-body .label {
+    -fx-font-size: 15;
+    -fx-wrap-text: true;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
 }

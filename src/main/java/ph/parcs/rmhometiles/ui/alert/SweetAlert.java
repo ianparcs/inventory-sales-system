@@ -3,10 +3,14 @@ package ph.parcs.rmhometiles.ui.alert;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
+import com.jfoenix.controls.events.JFXDialogEvent;
 import de.jensd.fx.glyphs.GlyphsStack;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import ph.parcs.rmhometiles.util.Global;
 
 public class SweetAlert {
@@ -15,12 +19,11 @@ public class SweetAlert {
 
     private JFXDialogLayout content;
     private JFXButton btnRemove;
-    private JFXButton btnCancel;
     private JFXDialog dialog;
     private Label lblMessage;
+    private Label lblHeader;
 
     public SweetAlert() {
-
         FontAwesomeIconView circleIcon = new FontAwesomeIconView();
         FontAwesomeIconView symbolIcon = new FontAwesomeIconView();
         circleIcon.getStyleClass().add(Global.CSS.CIRCLE);
@@ -33,9 +36,15 @@ public class SweetAlert {
         icons.add(circleIcon);
 
         lblMessage = new Label();
+        lblHeader = new Label();
+
+        VBox headerContainer = new VBox();
+        headerContainer.getChildren().add(icons);
+        headerContainer.getChildren().add(lblHeader);
+        headerContainer.setAlignment(Pos.CENTER);
 
         content = new JFXDialogLayout();
-        content.setHeading(icons);
+        content.setHeading(headerContainer);
         content.setBody(lblMessage);
 
         dialog = new JFXDialog();
@@ -55,8 +64,13 @@ public class SweetAlert {
         return this;
     }
 
-    public SweetAlert setMessage(String value) {
+    public SweetAlert setContentMessage(String value) {
         lblMessage.setText(value);
+        return this;
+    }
+
+    public SweetAlert setHeaderMessage(String value) {
+        lblHeader.setText(value);
         return this;
     }
 
@@ -81,11 +95,16 @@ public class SweetAlert {
     }
 
     public SweetAlert setCancelButton(String text) {
-        btnCancel = new JFXButton();
+        JFXButton btnCancel = new JFXButton();
         btnCancel.setText(text);
         btnCancel.getStyleClass().add("button-cancel");
         btnCancel.setOnAction(actionEvent -> close());
         content.getActions().add(btnCancel);
+        return this;
+    }
+
+    public SweetAlert setOnDialogOpened(EventHandler<JFXDialogEvent> eventEventHandler) {
+        dialog.setOnDialogOpened(eventEventHandler);
         return this;
     }
 

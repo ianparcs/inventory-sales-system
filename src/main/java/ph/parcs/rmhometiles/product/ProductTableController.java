@@ -30,6 +30,8 @@ public class ProductTableController extends ItemTableController<Product> {
     public void initialize() {
         super.initialize();
         initTableColumnValue();
+
+        deleteAlert.setOnDialogOpened(event -> deleteAlert.setContentMessage("Do you want to delete " + itemName + " eternally?"));
     }
 
     private void initTableColumnValue() {

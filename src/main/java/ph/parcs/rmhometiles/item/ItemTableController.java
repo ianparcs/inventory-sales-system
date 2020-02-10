@@ -35,10 +35,11 @@ public abstract class ItemTableController<T extends Item> {
 
     protected EditItemController<T> editItemController;
     protected ItemService<T> itemService;
-    protected String searchValue = "";
+    protected String searchValue;
+    protected String itemName;
 
-    private SweetAlert deleteAlert;
-    private SweetAlert successAlert;
+    protected SweetAlert deleteAlert;
+    protected SweetAlert successAlert;
 
     @FXML
     protected void initialize() {
@@ -59,6 +60,7 @@ public abstract class ItemTableController<T extends Item> {
     }
 
     private void initSearchItem() {
+        searchValue = "";
         tfSearchItem.textProperty().addListener((observable, oldValue, newValue) -> {
             searchValue = newValue;
             updateItems();
@@ -79,10 +81,11 @@ public abstract class ItemTableController<T extends Item> {
 
     protected T onItemDeleteAction(T item) {
         StackPane root = (StackPane) tvItem.getScene().getRoot();
-        deleteAlert.setMessage("Are you sure you want to delete " + item.getName() + "?");
+
+        itemName = item.getName();
         deleteAlert.setConfirmListener(() -> {
             if (itemService.deleteItem(item)) {
-                successAlert.setMessage(Global.MSG.DELETE).show(root);
+                successAlert.setContentMessage(Global.MSG.DELETE).show(root);
                 updateItems();
             }
         }).show(root);
@@ -91,16 +94,19 @@ public abstract class ItemTableController<T extends Item> {
     }
 
     final protected T onItemEditAction(T editItem) {
-        editItemController.showDialog((StackPane) tvItem.getScene().getRoot());
+        StackPane root = (StackPane) tvItem.getScene().getRoot();
+
+        editItemController.showDialog(root);
         editItemController.onEditItem(new ItemListener<>() {
             @Override
             public void onSavedSuccess(T entity) {
-                successAlert.setMessage("Item saved!").show((StackPane) tvItem.getScene().getRoot());
+                successAlert.setContentMessage(Global.MSG.SAVED).show(root);
                 updateItems();
             }
 
             @Override
             public void onSaveFailed(T savedItem) {
+
             }
         }, editItem);
         return editItem;

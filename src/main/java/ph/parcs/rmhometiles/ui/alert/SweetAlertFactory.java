@@ -1,6 +1,8 @@
 package ph.parcs.rmhometiles.ui.alert;
 
 
+import ph.parcs.rmhometiles.util.Global;
+
 public class SweetAlertFactory {
 
     public static SweetAlert create(SweetAlert.Type type, String msg) {
@@ -8,7 +10,10 @@ public class SweetAlertFactory {
             case SUCCESS:
                 return successDialog(msg);
             case WARNING:
-                return deleteDialog();
+                return deleteDialog(msg);
+            case DANGER:
+                return dangerDialog(msg);
+
         }
         return null;
     }
@@ -19,15 +24,28 @@ public class SweetAlertFactory {
 
     private static SweetAlert successDialog(String message) {
         SweetAlert alert = new SweetAlert()
+                .setHeaderMessage("Success!")
                 .setType(SweetAlert.Type.SUCCESS)
                 .setConfirmButton("Okay")
-                .setMessage(message);
+                .setContentMessage(message);
         alert.setConfirmListener(alert::close);
         return alert;
     }
 
-    private static SweetAlert deleteDialog() {
+    private static SweetAlert dangerDialog(String message) {
+        SweetAlert alert = new SweetAlert()
+                .setHeaderMessage("Error")
+                .setType(SweetAlert.Type.DANGER)
+                .setConfirmButton("Okay")
+                .setContentMessage(message);
+        alert.setConfirmListener(alert::close);
+        return alert;
+    }
+
+    private static SweetAlert deleteDialog(String message) {
         return new SweetAlert()
+                .setHeaderMessage(Global.MSG.ASK)
+                .setContentMessage(message)
                 .setType(SweetAlert.Type.WARNING)
                 .setCancelButton("Cancel")
                 .setConfirmButton("Remove");

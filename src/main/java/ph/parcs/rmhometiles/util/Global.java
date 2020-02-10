@@ -15,7 +15,8 @@ public interface Global {
 
     interface MSG {
         String ADD = "Item successfully added!";
-        String EDIT = "Item successfully edited!";
-        String DELETE = "Item successfully removed!";
+        String SAVED = "Item has been successfully saved";
+        String DELETE = "Item successfully removed";
+        String ASK = "Are you sure?";
     }
 }

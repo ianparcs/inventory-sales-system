@@ -3,6 +3,7 @@ package ph.parcs.rmhometiles;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lombok.SneakyThrows;
@@ -45,10 +46,13 @@ public class StageInitializer implements ApplicationListener<JavaFxApplication.S
     @SneakyThrows
     private Stage createStage() {
         Parent content = sceneManager.getContent(State.LOGIN);
+        Scene scene = new Scene(content, appWidth, appHeight);
+        scene.setFill(Color.TRANSPARENT);
+
         Stage stage = new Stage();
         stage.getIcons().add(new Image(getClass().getResource("/logo.png").toURI().toString()));
-        stage.setScene(new Scene(content, appWidth, appHeight));
-        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.TRANSPARENT);
         stage.setTitle(appTitle);
         return stage;
     }
