@@ -18,6 +18,15 @@ GridPane {
 }
 
 .background {
+    -fx-background-radius: 0 5pt 5pt 0pt;
+    -fx-border-radius: 0 5pt 5pt 0pt;
+}
+
+GridPane > .glyph-icon {
+    -glyph-size: 20px;
+}
+
+.image {
     -fx-background-image: url('/image/road-tree.jpg');
     -fx-background-size: cover;
 }
@@ -30,10 +39,6 @@ GridPane {
     -fx-padding: 100px;
 }
 
-GridPane  > .glyph-icon {
-    -glyph-size: 20px;
-}
-
 .jfx-button {
     -fx-font-weight: bold;
     -fx-text-fill: white;
@@ -44,12 +49,9 @@ GridPane  > .glyph-icon {
 }
 
 .split-pane {
-    -fx-background-radius: 0 5pt 5pt 0pt;
-    -fx-border-radius: 0 5pt 5pt 0pt;
-    -fx-background-color: white;
+    -fx-background-color: transparent;
     -fx-border-width: 0;
     -fx-padding: 0;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 0);
 }
 
 .split-pane *.split-pane-divider {
