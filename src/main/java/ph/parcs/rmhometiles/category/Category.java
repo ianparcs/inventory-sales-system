@@ -1,6 +1,5 @@
 package ph.parcs.rmhometiles.category;
 
-import org.hibernate.annotations.Cascade;
 import ph.parcs.rmhometiles.item.Item;
 import ph.parcs.rmhometiles.product.Product;
 
@@ -15,7 +14,6 @@ public class Category extends Item {
     private Set<Product> products;
 
     @OneToMany(mappedBy = "category")
-    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     public Set<Product> getProducts() {
         return products;
     }

@@ -6,19 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ph.parcs.rmhometiles.item.ItemService;
 import ph.parcs.rmhometiles.product.Product;
+import ph.parcs.rmhometiles.product.ProductRepository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
+@Transactional(propagation = Propagation.REQUIRED)
 public class CategoryService extends ItemService<Category> {
 
     private CategoryRepository categoryRepository;
+    private ProductRepository productRepository;
 
     public ObservableList<Category> getCategories() {
         List<Category> categoryList = categoryRepository.findAll();
@@ -33,14 +34,22 @@ public class CategoryService extends ItemService<Category> {
     }
 
     @Override
-    @Transactional
     public boolean deleteItem(Category category) {
+        removeProductsOfCategory(category);
+        categoryRepository.delete(category);
+
         Optional<Category> search = categoryRepository.findById(category.getId());
-        if (search.isPresent()) {
-            categoryRepository.delete(search.get());
-            return true;
+        return search.isEmpty();
+    }
+
+    private void removeProductsOfCategory(Category category) {
+        Set<Product> productSet = productRepository.findProductsByCategory(category);
+        if (productSet != null) {
+            for (Product product : productSet) {
+                product.setCategory(null);
+            }
         }
-        return false;
+        category.setProducts(null);
     }
 
     @Override
@@ -68,6 +77,11 @@ public class CategoryService extends ItemService<Category> {
                     .findAny();
         }
         return search;
+    }
+
+    @Autowired
+    public void setProductRepository(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
     @Autowired
