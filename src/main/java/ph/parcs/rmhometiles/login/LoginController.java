@@ -2,11 +2,12 @@ package ph.parcs.rmhometiles.login;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.State;
 import ph.parcs.rmhometiles.scene.SceneManager;
@@ -22,21 +23,29 @@ public class LoginController {
     @FXML
     private JFXPasswordField pfUserPassword;
     @FXML
+    private FontAwesomeIconView icoKey;
+    @FXML
+    private FontAwesomeIconView icoUser;
+    @FXML
     private JFXTextField tfUserName;
+    @FXML
+    private StackPane spRoot;
 
     private UserService userService;
     private SceneManager sceneManager;
 
     @FXML
     private void initialize() {
-        tfUserName.focusedProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (!newValue) {
-                tfUserName.validate();
-            }
-        });
-        pfUserPassword.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
-            if (!t1) {
-                pfUserPassword.validate();
+        setUserFieldStyle(pfUserPassword, icoKey);
+        setUserFieldStyle(tfUserName, icoUser);
+    }
+
+    private void setUserFieldStyle(TextField textField, FontAwesomeIconView icon) {
+        textField.focusedProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (newValue) {
+                icon.setGlyphStyle("-fx-fill: primary; -glyph-size: 20px;");
+            } else {
+                icon.setGlyphStyle("-fx-fill: #5a5c69; -glyph-size: 20px;");
             }
         });
     }
@@ -50,7 +59,7 @@ public class LoginController {
 
             Platform.runLater(() -> {
                 if (userService.isAuthenticated()) {
-                    sceneManager.changeScene(State.HOME);
+                    gotoHomeScene();
                 } else {
                     showErrorDialog();
                 }
@@ -58,11 +67,15 @@ public class LoginController {
         }).start();
     }
 
+    private void gotoHomeScene() {
+        sceneManager.changeScene(State.HOME);
+    }
+
     private void showErrorDialog() {
         SweetAlert errorLogin = SweetAlertFactory.create(SweetAlert.Type.DANGER);
         errorLogin.setHeaderMessage("Bad Credentials!");
-        errorLogin.setContentMessage("Account " + tfUserName.getText() + " doesn't exist. Try another account");
-        errorLogin.show((StackPane) tfUserName.getScene().getRoot());
+        errorLogin.setContentMessage("Account " + tfUserName.getText() + " doesn't exist. Password or username doesn't match");
+        errorLogin.show(spRoot);
     }
 
     private User createUser() {

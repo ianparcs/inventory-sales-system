@@ -18,17 +18,19 @@ GridPane {
 }
 
 .background {
-    -fx-background-radius: 0 5pt 5pt 0pt;
-    -fx-border-radius: 0 5pt 5pt 0pt;
+    -fx-background-radius: 0 4pt 4pt 0pt;
+    -fx-border-radius: 0 4pt 4pt 0pt;
 }
 
 GridPane > .glyph-icon {
     -glyph-size: 20px;
+    -fx-text-fill: primary;
 }
 
 .image {
     -fx-background-image: url('/image/road-tree.jpg');
     -fx-background-size: cover;
+
 }
 
 .logo {
@@ -39,10 +41,15 @@ GridPane > .glyph-icon {
     -fx-padding: 100px;
 }
 
+.jfx-password-field,
+.jfx-text-field {
+    -jfx-focus-color: primary;
+}
+
 .jfx-button {
     -fx-font-weight: bold;
     -fx-text-fill: white;
-    -fx-background-color: #4e73df;
+    -fx-background-color: primary;
     -fx-background-radius: 4pt;
     -fx-padding: 0.6em 1.5em;
     -fx-border-radius: 4pt;

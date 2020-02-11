@@ -6,28 +6,35 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.*?>
-<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spRoot" fx:controller="ph.parcs.rmhometiles.login.LoginController"
-           stylesheets="@../../css/login.css" styleClass="background">
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spRoot" styleClass="background" stylesheets="@../../css/login.css"
+           xmlns="http://javafx.com/javafx/10.0.2-internal" fx:controller="ph.parcs.rmhometiles.login.LoginController">
 
     <SplitPane dividerPositions="0.7">
 
         <Pane styleClass="image"/>
 
         <GridPane>
-            <Pane styleClass="logo" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0"/>
+            <Pane styleClass="logo" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
 
-            <FontAwesomeIconView glyphName="USER" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <FontAwesomeIconView fx:id="icoUser" glyphName="USER" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
 
             <JFXTextField fx:id="tfUserName" labelFloat="true" promptText="Username" text="ian" GridPane.columnIndex="1"
                           GridPane.rowIndex="1"/>
 
-            <FontAwesomeIconView glyphName="KEY" size="1.5em" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <FontAwesomeIconView fx:id="icoKey" glyphName="KEY" size="1.5em" GridPane.columnIndex="0"
+                                 GridPane.rowIndex="2"/>
 
             <JFXPasswordField fx:id="pfUserPassword" labelFloat="true" promptText="Password" text="ian"
                               GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
-            <JFXButton maxWidth="1.7976931348623157E308" buttonType="FLAT" onAction="#login" text="SIGN IN"
+            <JFXButton buttonType="FLAT" maxWidth="1.7976931348623157E308" onAction="#login" text="SIGN IN"
                        GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+            <rowConstraints>
+                <RowConstraints valignment="BOTTOM"/>
+                <RowConstraints valignment="BOTTOM"/>
+                <RowConstraints valignment="BOTTOM"/>
+                <RowConstraints valignment="BOTTOM"/>
+            </rowConstraints>
         </GridPane>
 
     </SplitPane>

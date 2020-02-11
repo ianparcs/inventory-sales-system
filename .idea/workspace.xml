@@ -2,111 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5f946820-2b90-4643-9237-2d41a464616e" name="Default Changelist" comment="commit">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/login/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/login/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/ui/alert/SweetAlert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/ui/alert/SweetAlert.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/ui/alert/SweetAlertFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/ui/alert/SweetAlertFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/user/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/user/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/login.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/login/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/login/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/RMHomeTiles.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/additional-spring-configuration-metadata.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/spring-configuration-metadata.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/css/content.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/css/dialog.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/css/home.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/css/login.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/css/navigation.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/css/product.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/css/save-dialog.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/css/splitpane.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/css/sweetalert/danger.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/css/sweetalert/info.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/css/sweetalert/success.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/css/sweetalert/sweetalert.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/css/sweetalert/warning.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/css/titlebar.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/category/category.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/dashboard/dashboard.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/dialog/sweetalert.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/dialog/user-warning-dialog.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/invoice/invoice.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/log/log.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/login/login.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/main/error.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/main/home.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/main/navigation.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/main/title-menu.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/product/edit-product.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/product/product.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/report/report.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/supplier/supplier.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/test/test.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/image/logo-white.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/image/logo-white.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/image/mainlogo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/image/plant-tile.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/image/road-tree.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/image/tiles.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/Item.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/JavaFxApplication$StageReadyEvent.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/JavaFxApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/RmHomeTilesApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/SaveListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/StageInitializer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/State.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/category/Category.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/category/CategoryController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/category/CategoryRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/category/CategoryService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/custom/ActionTableCell.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/custom/CustomTextField.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/dashboard/DashboardController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/dialog/EditProductController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/dialog/EditProductController$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/dialog/EditProductController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/dialog/UserNotFoundDialogController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/dialog/alert/SweetAlert$ConfirmListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/dialog/alert/SweetAlert$Type.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/dialog/alert/SweetAlert.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/dialog/alert/SweetAlertFactory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/home/HomeController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/home/HomeService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/item/ItemController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/item/ItemRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/item/ItemService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/login/LoginController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/menu/MenuTitleController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/navigation/NavigationController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/product/Product.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/product/ProductController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/product/ProductController$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/product/ProductController$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/product/ProductController$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/product/ProductController$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/product/ProductController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/product/ProductRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/product/ProductService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/scene/SceneManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/security/AppSecurityConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/supplier/Supplier.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/supplier/SupplierRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/supplier/SupplierService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/user/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/user/UserRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/user/UserService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/user/UserValidator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/util/Constant$CSS.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/util/Constant$MSG.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/util/Constant$UNIT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/util/Constant.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/util/MathHelper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/util/WindowHelper$ResizeListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ph/parcs/rmhometiles/util/WindowHelper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/ph/parcs/rmhometiles/RmHomeTilesApplicationTests.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -233,7 +132,8 @@
       <workItem from="1581210040988" duration="34305000" />
       <workItem from="1581299630205" duration="19179000" />
       <workItem from="1581336890446" duration="12274000" />
-      <workItem from="1581358335395" duration="531000" />
+      <workItem from="1581358335395" duration="835000" />
+      <workItem from="1581383258066" duration="15402000" />
     </task>
     <task id="LOCAL-00001" summary="code cleanup">
       <created>1580876855750</created>
@@ -291,7 +191,35 @@
       <option name="project" value="LOCAL" />
       <updated>1581343582790</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="change alert message content">
+      <created>1581384583112</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1581384583112</updated>
+    </task>
+    <task id="LOCAL-00010" summary="remove unused method">
+      <created>1581384666147</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1581384666147</updated>
+    </task>
+    <task id="LOCAL-00011" summary="add login a round corner">
+      <created>1581392308138</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1581392308138</updated>
+    </task>
+    <task id="LOCAL-00012" summary="add a round corner">
+      <created>1581392334975</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1581392334975</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -315,7 +243,11 @@
     <MESSAGE value="commit" />
     <MESSAGE value="refresh items of table when scene is shown" />
     <MESSAGE value="redesign login interface" />
-    <option name="LAST_COMMIT_MESSAGE" value="redesign login interface" />
+    <MESSAGE value="change alert message content" />
+    <MESSAGE value="remove unused method" />
+    <MESSAGE value="add login a round corner" />
+    <MESSAGE value="add a round corner" />
+    <option name="LAST_COMMIT_MESSAGE" value="add a round corner" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -337,10 +269,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="499" y="180" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.864@0.0.1536.864" timestamp="1581330711645" />
-    <state x="375" y="28" key="CommitChangelistDialog2" timestamp="1581343581813">
+    <state x="375" y="28" key="CommitChangelistDialog2" timestamp="1581392332884">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="375" y="28" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1581343581813" />
+    <state x="375" y="28" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1581392332884" />
     <state x="93" y="93" width="1350" height="678" key="DiffContextDialog" timestamp="1580977076254">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -349,38 +281,38 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="603" y="332" width="354" height="199" key="Github.CreateGistDialog/0.0.1536.864@0.0.1536.864" timestamp="1580990142757" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1581358835182">
+    <state width="1493" height="239" key="GridCell.Tab.0.bottom" timestamp="1581400604210">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581358835182" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1581358835182">
+    <state width="1493" height="239" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581400604210" />
+    <state width="1493" height="239" key="GridCell.Tab.0.center" timestamp="1581400604210">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1581358835182" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1581358835182">
+    <state width="1493" height="239" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1581400604210" />
+    <state width="1493" height="239" key="GridCell.Tab.0.left" timestamp="1581400604210">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1581358835182" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1581358835182">
+    <state width="1493" height="239" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1581400604210" />
+    <state width="1493" height="239" key="GridCell.Tab.0.right" timestamp="1581400604210">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1581358835182" />
-    <state width="1493" height="210" key="GridCell.Tab.1.bottom" timestamp="1581358835183">
+    <state width="1493" height="239" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1581400604210" />
+    <state width="1493" height="239" key="GridCell.Tab.1.bottom" timestamp="1581400604210">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581358835183" />
-    <state width="1493" height="210" key="GridCell.Tab.1.center" timestamp="1581358835182">
+    <state width="1493" height="239" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581400604210" />
+    <state width="1493" height="239" key="GridCell.Tab.1.center" timestamp="1581400604210">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1581358835182" />
-    <state width="1493" height="210" key="GridCell.Tab.1.left" timestamp="1581358835182">
+    <state width="1493" height="239" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1581400604210" />
+    <state width="1493" height="239" key="GridCell.Tab.1.left" timestamp="1581400604210">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1581358835182" />
-    <state width="1493" height="210" key="GridCell.Tab.1.right" timestamp="1581358835182">
+    <state width="1493" height="239" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1581400604210" />
+    <state width="1493" height="239" key="GridCell.Tab.1.right" timestamp="1581400604210">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1581358835182" />
+    <state width="1493" height="239" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1581400604210" />
     <state width="1493" height="162" key="GridCell.Tab.2.bottom" timestamp="1581358554376">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -405,26 +337,26 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="93" y="93" width="1350" height="678" key="VCS.FileHistoryDialog/0.0.1536.864@0.0.1536.864" timestamp="1580977076254" />
-    <state x="361" y="166" key="Vcs.Push.Dialog.v2" timestamp="1581343588646">
+    <state x="361" y="166" key="Vcs.Push.Dialog.v2" timestamp="1581392338641">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="361" y="166" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1581343588646" />
-    <state x="93" y="93" width="1350" height="678" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1581358206180">
+    <state x="361" y="166" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1581392338641" />
+    <state x="93" y="93" width="1350" height="678" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1581395582548">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="93" y="93" width="1350" height="678" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.864@0.0.1536.864" timestamp="1581358206180" />
-    <state x="465" y="258" key="com.intellij.ide.util.TipDialog" timestamp="1581358339453">
+    <state x="93" y="93" width="1350" height="678" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.864@0.0.1536.864" timestamp="1581395582548" />
+    <state x="465" y="258" key="com.intellij.ide.util.TipDialog" timestamp="1581383383988">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="465" y="258" key="com.intellij.ide.util.TipDialog/0.0.1536.864@0.0.1536.864" timestamp="1581358339453" />
+    <state x="465" y="258" key="com.intellij.ide.util.TipDialog/0.0.1536.864@0.0.1536.864" timestamp="1581383383988" />
     <state x="401" y="48" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1581336692753">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="401" y="48" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.864@0.0.1536.864" timestamp="1581336692752" />
-    <state x="463" y="164" width="611" height="536" key="find.popup" timestamp="1581358688718">
+    <state x="463" y="164" width="611" height="536" key="find.popup" timestamp="1581400400853">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="463" y="164" width="611" height="536" key="find.popup/0.0.1536.864@0.0.1536.864" timestamp="1581358688718" />
+    <state x="463" y="164" width="611" height="536" key="find.popup/0.0.1536.864@0.0.1536.864" timestamp="1581400400853" />
     <state x="543" y="225" key="git4idea.merge.GitMergeDialog" timestamp="1581302774496">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -437,13 +369,13 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="475" y="62" key="refactoring.ChangeSignatureDialog/0.0.1536.864@0.0.1536.864" timestamp="1581127231278" />
-    <state x="425" y="197" key="run.anything.popup" timestamp="1581343269150">
+    <state x="425" y="197" key="run.anything.popup" timestamp="1581386411005">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="425" y="197" key="run.anything.popup/0.0.1536.864@0.0.1536.864" timestamp="1581343269150" />
-    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1581358760849">
+    <state x="425" y="197" key="run.anything.popup/0.0.1536.864@0.0.1536.864" timestamp="1581386411005" />
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1581400588024">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1581358760849" />
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1581400588024" />
   </component>
 </project>
