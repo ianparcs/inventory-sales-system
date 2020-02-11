@@ -36,7 +36,6 @@ public abstract class ItemTableController<T extends Item> {
     protected EditItemController<T> editItemController;
     protected ItemService<T> itemService;
     protected String searchValue;
-    protected String itemName;
 
     protected SweetAlert deleteAlert;
     protected SweetAlert successAlert;
@@ -82,7 +81,6 @@ public abstract class ItemTableController<T extends Item> {
     protected T onItemDeleteAction(T item) {
         StackPane root = (StackPane) tvItem.getScene().getRoot();
 
-        itemName = item.getName();
         deleteAlert.setConfirmListener(() -> {
             if (itemService.deleteItem(item)) {
                 successAlert.setContentMessage(Global.MSG.DELETE).show(root);
@@ -103,7 +101,6 @@ public abstract class ItemTableController<T extends Item> {
                 successAlert.setContentMessage(Global.MSG.SAVED).show(root);
                 updateItems();
             }
-
             @Override
             public void onSaveFailed(T savedItem) {
 

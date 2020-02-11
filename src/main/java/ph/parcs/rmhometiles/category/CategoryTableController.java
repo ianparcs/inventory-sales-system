@@ -13,9 +13,7 @@ public class CategoryTableController extends ItemTableController<Category> {
     public void initialize() {
         super.initialize();
 
-        deleteAlert.setOnDialogOpened(event -> deleteAlert.setContentMessage(
-                "Deleting category " + itemName +
-                        " will also remove the products that is currently using this"));
+        deleteAlert.setContentMessage("Deleting a category will also remove the products that is currently using this");
     }
 
     @FXML
