@@ -6,11 +6,12 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.*?>
-<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="ph.parcs.rmhometiles.login.LoginController" stylesheets="@../../css/login.css">
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spRoot" fx:controller="ph.parcs.rmhometiles.login.LoginController"
+           stylesheets="@../../css/login.css" styleClass="background">
 
     <SplitPane dividerPositions="0.7">
 
-        <Pane styleClass="background"/>
+        <Pane styleClass="image"/>
 
         <GridPane>
             <Pane styleClass="logo" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0"/>
