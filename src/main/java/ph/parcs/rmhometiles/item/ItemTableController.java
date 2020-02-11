@@ -80,7 +80,8 @@ public abstract class ItemTableController<T extends Item> {
 
     protected T onItemDeleteAction(T item) {
         StackPane root = (StackPane) tvItem.getScene().getRoot();
-
+        deleteAlert.setHeaderMessage("Delete " + item.getClass().getSimpleName());
+        deleteAlert.setContentMessage("Are you sure you want to delete " + item.getName() + "?");
         deleteAlert.setConfirmListener(() -> {
             if (itemService.deleteItem(item)) {
                 successAlert.setContentMessage(Global.MSG.DELETE).show(root);
@@ -101,6 +102,7 @@ public abstract class ItemTableController<T extends Item> {
                 successAlert.setContentMessage(Global.MSG.SAVED).show(root);
                 updateItems();
             }
+
             @Override
             public void onSaveFailed(T savedItem) {
 

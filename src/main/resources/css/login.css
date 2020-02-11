@@ -1,6 +1,6 @@
 * {
     -fx-text-fill: #5a5c69;
-    -fx-font-size: 1em;
+    -fx-font-size: 1.1em;
     blueberries: #00AAFF;
     greysquash: #dddd;
     strawberry: #e74a3b;
@@ -13,8 +13,8 @@
 GridPane {
     -fx-alignment: top-center;
     -fx-padding: 15px;
-    -fx-vgap: 25px;
     -fx-hgap: 8px;
+    -fx-vgap: 15px;
 }
 
 .background {
@@ -53,6 +53,7 @@ GridPane > .glyph-icon {
     -fx-background-radius: 4pt;
     -fx-padding: 0.6em 1.5em;
     -fx-border-radius: 4pt;
+    -fx-font-size: 12;
 }
 
 .split-pane {

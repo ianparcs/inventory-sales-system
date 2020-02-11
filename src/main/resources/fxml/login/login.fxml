@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.*?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spRoot" styleClass="background" stylesheets="@../../css/login.css"
@@ -16,10 +17,18 @@
         <GridPane>
             <Pane styleClass="logo" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
 
-            <FontAwesomeIconView fx:id="icoUser" glyphName="USER" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <FontAwesomeIconView fx:id="icoUser" glyphName="USER" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <GridPane.margin>
+                    <Insets bottom="10"/>
+                </GridPane.margin>
+            </FontAwesomeIconView>
 
             <JFXTextField fx:id="tfUserName" labelFloat="true" promptText="Username" text="ian" GridPane.columnIndex="1"
-                          GridPane.rowIndex="1"/>
+                          GridPane.rowIndex="1">
+                <GridPane.margin>
+                    <Insets bottom="10"/>
+                </GridPane.margin>
+            </JFXTextField>
 
             <FontAwesomeIconView fx:id="icoKey" glyphName="KEY" size="1.5em" GridPane.columnIndex="0"
                                  GridPane.rowIndex="2"/>

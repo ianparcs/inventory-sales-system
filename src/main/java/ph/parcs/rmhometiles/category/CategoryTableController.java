@@ -10,13 +10,6 @@ import ph.parcs.rmhometiles.item.ItemTableController;
 public class CategoryTableController extends ItemTableController<Category> {
 
     @FXML
-    public void initialize() {
-        super.initialize();
-
-        deleteAlert.setContentMessage("Deleting a category will also remove the products that is currently using this");
-    }
-
-    @FXML
     private void showAddItemDialog() {
         onItemEditAction(new Category());
         editItemController.showDialog((StackPane) tvItem.getScene().getRoot());

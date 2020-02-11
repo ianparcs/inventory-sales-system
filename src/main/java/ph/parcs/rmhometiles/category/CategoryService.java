@@ -35,14 +35,13 @@ public class CategoryService extends ItemService<Category> {
 
     @Override
     public boolean deleteItem(Category category) {
-        removeProductsOfCategory(category);
-        categoryRepository.delete(category);
-
+        Category clearProd = removeProductsOfCategory(category);
+        categoryRepository.delete(clearProd);
         Optional<Category> search = categoryRepository.findById(category.getId());
         return search.isEmpty();
     }
 
-    private void removeProductsOfCategory(Category category) {
+    private Category removeProductsOfCategory(Category category) {
         Set<Product> productSet = productRepository.findProductsByCategory(category);
         if (productSet != null) {
             for (Product product : productSet) {
@@ -50,6 +49,7 @@ public class CategoryService extends ItemService<Category> {
             }
         }
         category.setProducts(null);
+        return category;
     }
 
     @Override
