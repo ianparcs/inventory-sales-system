@@ -1,6 +1,6 @@
 * {
     -fx-text-fill: #5a5c69;
-    -fx-font-size: 1.1em;
+    -fx-font-size: 1.3em;
     blueberries: #00AAFF;
     greysquash: #dddd;
     strawberry: #e74a3b;
@@ -30,7 +30,6 @@ GridPane > .glyph-icon {
 .image {
     -fx-background-image: url('/image/road-tree.jpg');
     -fx-background-size: cover;
-
 }
 
 .logo {
