@@ -3,10 +3,8 @@ package ph.parcs.rmhometiles.ui.alert;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
-import com.jfoenix.controls.events.JFXDialogEvent;
 import de.jensd.fx.glyphs.GlyphsStack;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -101,11 +99,6 @@ public class SweetAlert {
         btnCancel.getStyleClass().add("button-cancel");
         btnCancel.setOnAction(actionEvent -> close());
         content.getActions().add(btnCancel);
-        return this;
-    }
-
-    public SweetAlert setOnDialogOpened(EventHandler<JFXDialogEvent> eventEventHandler) {
-        dialog.setOnDialogOpened(eventEventHandler);
         return this;
     }
 
