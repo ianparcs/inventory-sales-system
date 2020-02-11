@@ -35,7 +35,7 @@ public abstract class ItemTableController<T extends Item> {
 
     protected EditItemController<T> editItemController;
     protected ItemService<T> itemService;
-    protected String searchValue;
+    protected String searchValue = "";
 
     protected SweetAlert deleteAlert;
     protected SweetAlert successAlert;
@@ -47,7 +47,6 @@ public abstract class ItemTableController<T extends Item> {
 
         initItemPagination();
         initActionColumn();
-        initSearchItem();
 
         spMain.sceneProperty().addListener((observableValue, scene, newScene) -> {
             if (newScene != null) updateItems();
@@ -58,13 +57,6 @@ public abstract class ItemTableController<T extends Item> {
         pagination.currentPageIndexProperty().addListener((observable) -> updateItems());
     }
 
-    private void initSearchItem() {
-        searchValue = "";
-        tfSearchItem.textProperty().addListener((observable, oldValue, newValue) -> {
-            searchValue = newValue;
-            updateItems();
-        });
-    }
 
     private void initActionColumn() {
         tcAction.setCellFactory(ActionTableCell.forColumn(
@@ -119,6 +111,12 @@ public abstract class ItemTableController<T extends Item> {
 
     @FXML
     private void onPageRowChanged() {
+        updateItems();
+    }
+
+    @FXML
+    private void searchItem() {
+        searchValue = tfSearchItem.getText();
         updateItems();
     }
 

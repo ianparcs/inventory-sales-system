@@ -8,14 +8,7 @@
     avocado: #4cbd9b;
     water: #2a96a5;
     primary: #4e73df;
-}
-
-.jfx-snackbar {
-    -fx-background-color: BLUE;
-}
-
-.jfx-snackbar-content {
-    -fx-background-color: RED;
+    gray-light: #e9ebee;
 }
 
 .tooltip {

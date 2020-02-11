@@ -1,52 +1,31 @@
-.background {
-    -fx-background-color: #e9ebee;
-}
-
-.content-header {
-    -fx-font-weight: BOLD;
-    -fx-font-size: 20;
-    -fx-border-color: BLACK;
-    -fx-border-width: 0px 0px 1px 0px;
-    -fx-padding: 15px;
-}
-
-.content-options {
-    -fx-padding: 0px 20px 0 20px;
-}
-
-GridPane {
-    -fx-vgap: 10px;
-}
-
+TableView:focused,
 TableView {
-    -fx-faint-focus-color: TRANSPARENT;
-    -fx-focus-color: TRANSPARENT;
-    -fx-border-color: GREYSQUASH;
-    -fx-border-insets: 0px 20px 0px 20px;
-    -fx-background-insets: 0px 20px 0px 20px;
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: transparent;
+    -fx-border-color: greysquash;
+    -fx-background-radius: 4px;
     -fx-border-radius: 4px;
+    -fx-padding: 0;
 }
 
 TableView .column-header, .column-header .label {
-    -fx-background-color: WHITE;
-    -fx-alignment: CENTER-LEFT;
+    -fx-background-color: white;
+    -fx-alignment: center-left;
     -fx-border-width: 0 0 1.5 0;
-    -fx-border-color: GREYSQUASH;
-    -fx-padding: 5px;
+    -fx-border-color: greysquash;
+    -fx-padding: 4px;
 }
 
 TableView .table-cell {
-    -fx-alignment: CENTER-LEFT;
+    -fx-alignment: center-left;
     -fx-padding: 3px 10px 3px 10px;
 }
 
+TableView .id-column,
+TableView .action-column,
 TableView .column-header.id-column > .label,
 TableView .column-header.action-column > .label {
-    -fx-alignment: CENTER;
-}
-
-TableView .id-column {
-    -fx-alignment: CENTER;
+    -fx-alignment: center;
 }
 
 TableView .table-row-cell:selected, .table-row-cell:hover {
@@ -69,6 +48,7 @@ TableView *.increment-arrow,
 TableView *.decrement-arrow {
     -fx-padding: 0;
     -fx-shape: "";
+    -fx-alignment: right;
 }
 
 .combo-box {
@@ -78,17 +58,35 @@ TableView *.decrement-arrow {
 }
 
 .combo-box > .list-cell {
-    -fx-alignment: CENTER;
-    -fx-text-alignment: CENTER;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
 }
 
 .combo-box .cell:selected,
 .combo-box-popup .list-view .list-cell:hover {
-    -fx-text-fill: WHITE;
+    -fx-text-fill: white;
     -fx-background-color: blueberries;
 }
 
 .combo-box-popup .list-view {
     -fx-border-color: greysquash;
     -fx-border-radius: 4px;
+}
+
+.content-container {
+    -fx-background-color: gray-light;
+    -fx-padding: 25px;
+}
+
+.item-header {
+    -fx-font-weight: bold;
+    -fx-font-size: 20;
+    -fx-border-color: black;
+    -fx-border-width: 0px 0px 1px 0px;
+    -fx-padding: 15px;
+}
+
+.item-options {
+    -fx-spacing: 10;
+    -fx-alignment: center-right;
 }

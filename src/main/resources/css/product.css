@@ -1,3 +1,10 @@
+.background {
+    -fx-background-color: white;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 10, 0, 0, 0);
+}
+
 #delete-icon {
     -fx-fill: strawberry;
 }
@@ -6,20 +13,10 @@
     -fx-fill: banana;
 }
 
-.background {
-    -fx-background-color: WHITE;
-    -fx-border-radius: 3px;
-    -fx-background-radius: 3px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 10, 0, 0, 0);
-    -fx-border-insets: 20;
-    -fx-background-insets: 20;
-    -fx-padding: 20;
-}
-
 .add-button {
-    -fx-padding: 0.433333em 1em 0.433333em 1em;
-    -jfx-button-type: FLAT;
+    -fx-padding: 0.533333em 1em 0.533333em 1em;
     -fx-background-color: blueberries;
+    -jfx-button-type: FLAT;
     -fx-text-fill: WHITE;
     -fx-font-weight: BOLD;
     -fx-border-radius: 15pt;
@@ -30,8 +27,11 @@
     -fx-background-color: blueberries;
 }
 
-.add-button-icon {
+.plus-icon {
     -fx-fill: WHITE;
+    -fx-alignment: center;
+    -glyph-name: "PLUS";
+    -glyph-size: 18px;
 }
 
 .jfx-text-field {
@@ -80,10 +80,4 @@
 
 .pagination .pagination-control .toggle-button:selected {
     -fx-background-color: strawberry;
-}
-
-.pagination-container {
-    -fx-border-insets: 0px 20px 0px 20px;
-    -fx-background-insets: 0px 20px 0px 20px;
-    -fx-padding: 0px 10px 0px 10px;
 }

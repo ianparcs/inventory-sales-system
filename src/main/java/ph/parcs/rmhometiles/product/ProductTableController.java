@@ -69,7 +69,7 @@ public class ProductTableController extends ItemTableController<Product> {
     }
 
     @FXML
-    private void showAddItemDialog() {
+    private void showEditItemDialog() {
         onItemEditAction(new Product());
         editItemController.showDialog((StackPane) tvItem.getScene().getRoot());
     }

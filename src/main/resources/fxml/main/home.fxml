@@ -7,7 +7,7 @@
 
     <BorderPane>
         <center>
-            <StackPane fx:id="apContent" stylesheets="@../../css/content.css" styleClass="background"/>
+            <StackPane fx:id="apContent" stylesheets="@../../css/content.css" styleClass="content-container"/>
         </center>
 
         <left>
