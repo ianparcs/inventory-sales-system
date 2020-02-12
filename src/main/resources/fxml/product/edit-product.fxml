@@ -3,43 +3,30 @@
 <?import com.jfoenix.controls.*?>
 <?import com.jfoenix.validation.*?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import de.jensd.fx.glyphs.GlyphsStack?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.*?>
+
 <JFXDialog xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/edit-dialog.css" fx:id="editDialog"
-           maxHeight="1.7976931348623157E308"
-           maxWidth="1.7976931348623157E308"
            fx:controller="ph.parcs.rmhometiles.product.EditProductController">
 
-    <JFXDialogLayout alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+    <JFXDialogLayout>
         <heading>
-            <HBox alignment="CENTER_LEFT" spacing="10">
-                <GlyphsStack>
-                    <FontAwesomeIconView size="2.3em" styleClass="pencil-icon"/>
-                </GlyphsStack>
-
-                <Label fx:id="lblTitle" maxWidth="1.7976931348623157E308" maxHeight="1.7976931348623157E308"
-                       styleClass="dialog-title"/>
+            <HBox>
+                <FontAwesomeIconView/>
+                <Label fx:id="lblTitle"/>
             </HBox>
         </heading>
 
         <body>
-            <GridPane alignment="TOP_CENTER" hgap="40.0 " vgap="40" maxWidth="1.7976931348623157E308"
-                      maxHeight="1.7976931348623157E308">
+            <GridPane>
                 <columnConstraints>
                     <ColumnConstraints hgrow="ALWAYS"/>
                     <ColumnConstraints hgrow="ALWAYS"/>
                 </columnConstraints>
-                <rowConstraints>
-                    <RowConstraints vgrow="NEVER"/>
-                    <RowConstraints vgrow="NEVER"/>
-                    <RowConstraints vgrow="NEVER"/>
-                    <RowConstraints vgrow="NEVER"/>
-                </rowConstraints>
 
-                <JFXTextField fx:id="tfName"
-                              labelFloat="true" promptText="Code" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <JFXTextField fx:id="tfName" labelFloat="true" promptText="Code"
+                              GridPane.columnIndex="0" GridPane.rowIndex="0">
                     <tooltip>
                         <Tooltip text="Product name"/>
                     </tooltip>
@@ -48,61 +35,55 @@
                     </validators>
                 </JFXTextField>
 
-                <JFXTextField fx:id="tfDescription" maxWidth="1.7976931348623157E308" maxHeight="1.7976931348623157E308"
-                              labelFloat="true" promptText="Description" GridPane.columnIndex="1"
-                              GridPane.rowIndex="0">
+                <JFXTextField fx:id="tfDescription" labelFloat="true" promptText="Description"
+                              GridPane.columnIndex="1" GridPane.rowIndex="0">
                     <tooltip>
-                        <Tooltip wrapText="true" text="Item properties (color,size, etc..)"/>
+                        <Tooltip wrapText="true" text="Properties (color,size, etc..)"/>
                     </tooltip>
                     <validators>
                         <RequiredFieldValidator message="Please fill out this field"/>
                     </validators>
                 </JFXTextField>
 
-                <JFXTextField fx:id="tfQuantity" maxWidth="1.7976931348623157E308" maxHeight="1.7976931348623157E308"
-                              promptText="Quantity" labelFloat="true" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <JFXTextField fx:id="tfQuantity" promptText="Quantity" labelFloat="true"
+                              GridPane.columnIndex="0" GridPane.rowIndex="1">
                     <validators>
                         <NumberValidator message="Please enter number only"/>
                     </validators>
                 </JFXTextField>
 
-                <JFXTextField fx:id="tfUnitSold" maxWidth="1.7976931348623157E308" maxHeight="1.7976931348623157E308"
-                              labelFloat="true" promptText="Unit Sold" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <JFXTextField fx:id="tfUnitSold" labelFloat="true" promptText="Unit Sold"
+                              GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <validators>
                         <NumberValidator message="Please enter number only"/>
                     </validators>
                 </JFXTextField>
 
-                <JFXTextField fx:id="tfDiscount" maxWidth="1.7976931348623157E308" maxHeight="1.7976931348623157E308"
-                              promptText="Discount" labelFloat="true" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                <JFXTextField fx:id="tfDiscount" promptText="Discount" labelFloat="true"
+                              GridPane.columnIndex="0" GridPane.rowIndex="2">
                     <validators>
                         <NumberValidator message="Please enter number only"/>
                     </validators>
                 </JFXTextField>
 
-                <JFXTextField fx:id="tfPrice" maxWidth="1.7976931348623157E308" maxHeight="1.7976931348623157E308"
-                              labelFloat="true" promptText="Price" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <JFXTextField fx:id="tfPrice" labelFloat="true" promptText="Price"
+                              GridPane.columnIndex="1" GridPane.rowIndex="2">
                     <validators>
                         <NumberValidator message="Please enter number only"/>
                     </validators>
-                    <font>
-
-                    </font>
                 </JFXTextField>
 
-                <JFXComboBox fx:id="cbCategory" maxWidth="1.7976931348623157E308" onAction="#onCategorySelect"
-                             labelFloat="true" promptText="Category" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                <JFXComboBox fx:id="cbCategory" onAction="#onCategorySelect" labelFloat="true" promptText="Category"
+                             GridPane.columnIndex="0" GridPane.rowIndex="3"/>
 
-                <JFXComboBox fx:id="cbSupplier" maxWidth="1.7976931348623157E308"
-                             labelFloat="true" promptText="Supplier" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                <JFXComboBox fx:id="cbSupplier" onAction="#onSupplierSelect" labelFloat="true" promptText="Supplier"
+                             GridPane.columnIndex="1" GridPane.rowIndex="3"/>
             </GridPane>
         </body>
 
         <actions>
-            <JFXButton onAction="#closeDialog" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                       prefWidth="100.0" styleClass="button-cancel" text="Cancel"/>
-            <JFXButton fx:id="btnSave" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                       prefWidth="100.0" styleClass="button-save" text="Save"
+            <JFXButton onAction="#closeDialog" styleClass="button-cancel" text="Cancel"/>
+            <JFXButton fx:id="btnSave" styleClass="button-save" text="Save"
                        disable="${tfPrice.text.empty || tfName.text.empty || tfDescription.text.empty}"/>
         </actions>
 

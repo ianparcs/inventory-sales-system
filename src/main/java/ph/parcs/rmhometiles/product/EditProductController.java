@@ -4,12 +4,14 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.util.StringConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.category.Category;
 import ph.parcs.rmhometiles.category.CategoryService;
 import ph.parcs.rmhometiles.item.EditItemController;
+import ph.parcs.rmhometiles.item.Item;
 import ph.parcs.rmhometiles.supplier.Supplier;
 import ph.parcs.rmhometiles.supplier.SupplierService;
 
@@ -78,14 +80,15 @@ public class EditProductController extends EditItemController<Product> {
 
     @Override
     protected void clearFields() {
-        clearValidators();
+        cbCategory.getSelectionModel().clearSelection();
+        cbSupplier.getSelectionModel().clearSelection();
         tfDescription.clear();
         tfDiscount.clear();
         tfUnitSold.clear();
         tfQuantity.clear();
-        tfName.clear();
         tfPrice.clear();
-        cbCategory.getSelectionModel().clearSelection();
+        tfName.clear();
+        clearValidators();
     }
 
     protected void clearValidators() {
@@ -108,6 +111,7 @@ public class EditProductController extends EditItemController<Product> {
             tfDiscount.setText(product.getDiscount().toString());
         }
         setCategoryValue(product);
+        setSupplierValue(product);
     }
 
     private void setCategoryValue(Product product) {
@@ -116,11 +120,27 @@ public class EditProductController extends EditItemController<Product> {
         search.ifPresent(category -> cbCategory.getSelectionModel().select(search.get()));
     }
 
+    private void setSupplierValue(Product product) {
+        cbSupplier.getItems().setAll(supplierService.getSuppliers());
+        Optional<Supplier> search = supplierService.findSupplierByProduct(cbSupplier.getItems(), product);
+        search.ifPresent(supplier -> cbSupplier.getSelectionModel().select(search.get()));
+    }
+
+    @FXML
+    public void onSupplierSelect() {
+        clearComboboxSelection(cbSupplier);
+    }
+
     @FXML
     public void onCategorySelect() {
-        if (cbCategory.getValue() != null) {
-            if (cbCategory.getValue().getName().isEmpty()) {
-                Platform.runLater(() -> cbCategory.getSelectionModel().clearSelection());
+        clearComboboxSelection(cbCategory);
+    }
+
+    private void clearComboboxSelection(JFXComboBox comboBox) {
+        Item item = (Item) comboBox.getValue();
+        if (item != null) {
+            if (item.getName().isEmpty()){
+                Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
             }
         }
     }

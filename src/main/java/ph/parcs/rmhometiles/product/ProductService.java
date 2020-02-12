@@ -36,6 +36,11 @@ public class ProductService extends ItemService<Product> {
         return productRepository.findById(item.getId()).isEmpty();
     }
 
+    @Override
+    public Product createDefault() {
+        return new Product();
+    }
+
     @Autowired
     public void setProductRepository(ProductRepository productRepository) {
         this.productRepository = productRepository;

@@ -1,8 +1,13 @@
 package ph.parcs.rmhometiles.item;
 
+import javafx.collections.ObservableList;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import ph.parcs.rmhometiles.product.Product;
+import ph.parcs.rmhometiles.supplier.Supplier;
+
+import java.util.Optional;
 
 @Service
 public abstract class ItemService<T extends Item> {
@@ -36,4 +41,7 @@ public abstract class ItemService<T extends Item> {
     public abstract T saveItem(T item);
 
     public abstract boolean isNew(T item);
+
+    public abstract T createDefault();
+
 }

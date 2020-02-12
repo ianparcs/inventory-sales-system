@@ -79,7 +79,7 @@ public class Product extends Item {
     }
 
     @ManyToOne
-    @JoinColumn(name = "supplier_id")
+    @JoinColumn(name = "supplier_id", referencedColumnName = "supplier_id")
     public Supplier getSupplier() {
         return supplier;
     }

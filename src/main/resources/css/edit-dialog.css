@@ -1,10 +1,10 @@
 .jfx-button {
-    -fx-padding: 0.6em 1.5em;
+    -fx-padding: 0.55em 1.5em;
     -jfx-button-type: flat;
     -fx-border-radius: 5pt;
     -fx-background-radius: 5pt;
-    -fx-font-weight: BOLD;
-    -fx-font-size: 13;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
     -fx-pref-width: 100px;
 }
 
@@ -18,16 +18,26 @@
     -fx-border-color: primary;
 }
 
-.jfx-dialog-layout > .jfx-layout-heading, .dialog-title {
+.jfx-dialog-layout > .jfx-layout-heading HBox {
+    -fx-spacing: 10;
+    -fx-alignment: center-left;
+}
+
+.jfx-dialog-layout > .jfx-layout-heading,
+.jfx-dialog-layout > .jfx-layout-heading .label {
     -fx-text-fill: WHITE;
     -fx-font-weight: BOLD;
     -fx-font-size: 22;
     -fx-background-color: BLUEBERRIES;
 }
 
-.jfx-dialog-layout > .jfx-layout-actions {
-    -fx-background-color: #e9ebee;
-    -fx-padding: 20 30 20 30;
+.jfx-dialog-layout > .jfx-layout-heading .glyph-icon {
+    -glyph-name: "PENCIL";
+    -icons-color: WHITE;
+    -fx-fill: WHITE;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: CENTER;
+    -glyph-size: 30px;
 }
 
 .jfx-dialog-layout > .jfx-layout-body {
@@ -35,6 +45,17 @@
     -fx-pref-width: 500px;
     -fx-padding: 35px;
 }
+
+.jfx-dialog-layout > .jfx-layout-body GridPane {
+    -fx-vgap: 40;
+    -fx-hgap: 40;
+}
+
+.jfx-dialog-layout > .jfx-layout-actions {
+    -fx-background-color: #e9ebee;
+    -fx-padding: 20 30 20 30;
+}
+
 
 /*-->texfield*/
 
@@ -59,6 +80,7 @@
 /*combobox*/
 
 .jfx-combo-box {
+    -fx-max-width: infinity;
     -jfx-focus-color: BLUEBERRIES;
 }
 
@@ -74,13 +96,4 @@
 .combo-box-popup .list-view {
     -fx-border-color: greysquash;
     -fx-border-width: 0;
-}
-
-/*icon*/
-.pencil-icon {
-    -glyph-name: "PENCIL";
-    -icons-color: WHITE;
-    -fx-fill: WHITE;
-    -fx-alignment: CENTER;
-    -fx-text-alignment: CENTER;
 }

@@ -1,36 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
+<?import com.jfoenix.validation.*?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import de.jensd.fx.glyphs.GlyphsStack?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.*?>
+
 <JFXDialog xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/edit-dialog.css" fx:id="editDialog"
            fx:controller="ph.parcs.rmhometiles.category.EditCategoryController">
 
     <JFXDialogLayout>
         <heading>
-            <HBox alignment="CENTER_LEFT" spacing="10">
-                <GlyphsStack>
-                    <FontAwesomeIconView size="2.5em" styleClass="pencil-icon"/>
-                </GlyphsStack>
-
-                <Label fx:id="lblTitle" text="Edit Category" styleClass="dialog-title"/>
+            <HBox>
+                <FontAwesomeIconView/>
+                <Label fx:id="lblTitle"/>
             </HBox>
         </heading>
 
         <body>
-            <JFXTextField fx:id="tfName" labelFloat="true" promptText="Name">
-                <tooltip>
-                    <Tooltip text="Category name"/>
-                </tooltip>
-            </JFXTextField>
+            <GridPane>
+                <columnConstraints>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                </columnConstraints>
+
+                <JFXTextField fx:id="tfName" labelFloat="true" promptText="Name"
+                              GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <tooltip>
+                        <Tooltip text="Category name"/>
+                    </tooltip>
+                    <validators>
+                        <RequiredFieldValidator message="Please fill out this field"/>
+                    </validators>
+                </JFXTextField>
+            </GridPane>
         </body>
 
         <actions>
             <JFXButton onAction="#closeDialog" styleClass="button-cancel" text="Cancel"/>
-            <JFXButton fx:id="btnSave" styleClass="button-save" text="Save" disable="${tfName.text.empty}"/>
+            <JFXButton fx:id="btnSave" styleClass="button-save" text="Save"
+                       disable="${tfName.text.empty}"/>
         </actions>
 
     </JFXDialogLayout>
