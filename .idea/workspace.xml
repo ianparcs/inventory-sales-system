@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5f946820-2b90-4643-9237-2d41a464616e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/cssdialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cssdialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/item/ItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/item/ItemService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/category/EditCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/category/EditCategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/item/EditItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/item/EditItemController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/product/EditProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/product/EditProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/product/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/product/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/product/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/product/ProductRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/product/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/product/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/edit-dialog.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/edit-dialog.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/category/edit-category.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/category/edit-category.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/product/edit-product.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/product/edit-product.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +136,9 @@
       <workItem from="1581358335395" duration="835000" />
       <workItem from="1581383258066" duration="23065000" />
       <workItem from="1581466314642" duration="447000" />
-      <workItem from="1581466784520" duration="8901000" />
+      <workItem from="1581466784520" duration="13220000" />
+      <workItem from="1581496646097" duration="600000" />
+      <workItem from="1581511283351" duration="1328000" />
     </task>
     <task id="LOCAL-00001" summary="code cleanup">
       <created>1580876855750</created>
@@ -330,38 +326,38 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="603" y="332" width="354" height="199" key="Github.CreateGistDialog/0.0.1536.864@0.0.1536.864" timestamp="1580990142757" />
-    <state width="1493" height="64" key="GridCell.Tab.0.bottom" timestamp="1581480793080">
+    <state width="1493" height="64" key="GridCell.Tab.0.bottom" timestamp="1581512659302">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="64" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581480793080" />
-    <state width="1493" height="64" key="GridCell.Tab.0.center" timestamp="1581480793080">
+    <state width="1493" height="64" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581512659302" />
+    <state width="1493" height="64" key="GridCell.Tab.0.center" timestamp="1581512659302">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="64" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1581480793080" />
-    <state width="1493" height="64" key="GridCell.Tab.0.left" timestamp="1581480793080">
+    <state width="1493" height="64" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1581512659302" />
+    <state width="1493" height="64" key="GridCell.Tab.0.left" timestamp="1581512659302">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="64" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1581480793080" />
-    <state width="1493" height="64" key="GridCell.Tab.0.right" timestamp="1581480793080">
+    <state width="1493" height="64" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1581512659302" />
+    <state width="1493" height="64" key="GridCell.Tab.0.right" timestamp="1581512659302">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="64" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1581480793080" />
-    <state width="1493" height="64" key="GridCell.Tab.1.bottom" timestamp="1581480793080">
+    <state width="1493" height="64" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1581512659302" />
+    <state width="1493" height="64" key="GridCell.Tab.1.bottom" timestamp="1581512659302">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="64" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581480793080" />
-    <state width="1493" height="64" key="GridCell.Tab.1.center" timestamp="1581480793080">
+    <state width="1493" height="64" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581512659302" />
+    <state width="1493" height="64" key="GridCell.Tab.1.center" timestamp="1581512659302">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="64" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1581480793080" />
-    <state width="1493" height="64" key="GridCell.Tab.1.left" timestamp="1581480793080">
+    <state width="1493" height="64" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1581512659302" />
+    <state width="1493" height="64" key="GridCell.Tab.1.left" timestamp="1581512659302">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="64" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1581480793080" />
-    <state width="1493" height="64" key="GridCell.Tab.1.right" timestamp="1581480793080">
+    <state width="1493" height="64" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1581512659302" />
+    <state width="1493" height="64" key="GridCell.Tab.1.right" timestamp="1581512659302">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="64" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1581480793080" />
+    <state width="1493" height="64" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1581512659302" />
     <state width="1493" height="162" key="GridCell.Tab.2.bottom" timestamp="1581479754428">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -394,10 +390,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="93" y="93" width="1350" height="678" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.864@0.0.1536.864" timestamp="1581395582548" />
-    <state x="465" y="258" key="com.intellij.ide.util.TipDialog" timestamp="1581466784319">
+    <state x="465" y="258" key="com.intellij.ide.util.TipDialog" timestamp="1581511301243">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="465" y="258" key="com.intellij.ide.util.TipDialog/0.0.1536.864@0.0.1536.864" timestamp="1581466784319" />
+    <state x="465" y="258" key="com.intellij.ide.util.TipDialog/0.0.1536.864@0.0.1536.864" timestamp="1581511301243" />
     <state x="401" y="48" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1581336692753">
       <screen x="0" y="0" width="1536" height="864" />
     </state>

@@ -13,7 +13,7 @@ public class EditCategoryController extends EditItemController<Category> {
     private JFXTextField tfName;
 
     @Override
-    protected Category createItem(Integer id) {
+    protected Category unbindFields(Integer id) {
         Category category = new Category();
         category.setName(tfName.getText());
         category.setId(id);

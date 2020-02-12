@@ -43,7 +43,7 @@ public abstract class EditItemController<T extends Item> {
 
         btnSave.setOnAction(actionEvent -> {
             closeDialog();
-            T savedItem = itemService.saveItem(createItem(item.getId()));
+            T savedItem = itemService.saveItem(unbindFields(item.getId()));
             if (!itemService.isEmpty(savedItem)) {
                 itemListener.onSavedSuccess(savedItem);
             } else {
@@ -66,7 +66,7 @@ public abstract class EditItemController<T extends Item> {
         lblTitle.setText(title + " " + item.getClass().getSimpleName());
     }
 
-    protected abstract T createItem(Integer id);
+    protected abstract T unbindFields(Integer id);
 
     protected abstract void bindFields(T item);
 
