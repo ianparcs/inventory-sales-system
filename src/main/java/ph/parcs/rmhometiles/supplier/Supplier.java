@@ -10,6 +10,7 @@ import java.util.List;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@AttributeOverride(name = "id", column = @Column(name = "supplier_id"))
 public class Supplier extends Item {
 
     private StringProperty contact = new SimpleStringProperty();
