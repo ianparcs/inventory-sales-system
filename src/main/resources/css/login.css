@@ -28,12 +28,12 @@ GridPane > .glyph-icon {
 }
 
 .image {
-    -fx-background-image: url('/image/road-tree.jpg');
+    -fx-background-image: url('/image/tiles.jpg');
     -fx-background-size: cover;
 }
 
 .logo {
-    -fx-background-image: url('/image/mainlogo.png');
+    -fx-background-image: url('/image/logo.png');
     -fx-background-size: contain;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;

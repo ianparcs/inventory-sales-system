@@ -50,7 +50,7 @@ public class StageInitializer implements ApplicationListener<JavaFxApplication.S
         scene.setFill(Color.TRANSPARENT);
 
         Stage stage = new Stage();
-        stage.getIcons().add(new Image(getClass().getResource("/logo.png").toURI().toString()));
+        stage.getIcons().add(new Image(getClass().getResource("/image/logo.png").toURI().toString()));
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setTitle(appTitle);

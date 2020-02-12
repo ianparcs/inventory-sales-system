@@ -10,8 +10,8 @@
     </parent>
     <groupId>ph.parcs</groupId>
     <artifactId>rmhometiles</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>RMHomeTiles</name>
+    <version>0.0.2</version>
+    <name>RM HomeTiles</name>
     <description>Sales and Inventory System</description>
 
     <properties>
@@ -100,4 +100,12 @@
             </plugin>
         </plugins>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>internal.repo</id>
+            <name>Internal repo</name>
+            <url>file://C:\Users\Ian\My Projects\inventory-sales-system\deployment</url>
+        </repository>
+    </distributionManagement>
 </project>

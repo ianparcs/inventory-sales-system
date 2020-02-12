@@ -8,7 +8,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import ph.parcs.rmhometiles.category.Category;
 import ph.parcs.rmhometiles.item.ItemService;
 import ph.parcs.rmhometiles.product.Product;
 import ph.parcs.rmhometiles.product.ProductRepository;
@@ -46,7 +45,7 @@ public class SupplierService extends ItemService<Supplier> {
         Set<Product> productSet = productRepository.findProductsBySupplier(supplier);
         if (productSet != null) {
             for (Product product : productSet) {
-                product.setCategory(null);
+                product.setSupplier(null);
             }
         }
         supplier.setProducts(null);

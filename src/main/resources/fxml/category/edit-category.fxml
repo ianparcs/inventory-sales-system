@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
-<?import com.jfoenix.validation.*?>
+<?import com.jfoenix.validation.RequiredFieldValidator?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.*?>
-
 <JFXDialog xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/edit-dialog.css" fx:id="editDialog"
-           fx:controller="ph.parcs.rmhometiles.category.EditCategoryController">
+           fx:controller="ph.parcs.rmhometiles.category.CategoryEditController">
 
     <JFXDialogLayout>
         <heading>

@@ -1,11 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="RMHomeTiles" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="5f946820-2b90-4643-9237-2d41a464616e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/category/EditCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/category/EditCategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/item/EditItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/item/EditItemController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/product/EditProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/product/EditProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/StageInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/StageInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/category/EditCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/category/CategoryEditController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/item/ItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/item/ItemService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/login/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/login/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/navigation/NavigationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/navigation/NavigationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/product/EditProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/product/ProductEditController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/scene/SceneManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/scene/SceneManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/supplier/EditSupplierController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/supplier/SupplierEditController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/supplier/SupplierRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/supplier/SupplierRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/supplier/SupplierService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/supplier/SupplierService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/supplier/SupplierTableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/supplier/SupplierTableController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/edit-dialog.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/edit-dialog.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/category/edit-category.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/category/edit-category.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/product/edit-product.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/product/edit-product.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/supplier/supplier.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/supplier/supplier.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/logo-white.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/mainlogo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/plant-tile.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/road-tree.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/tiles.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/image/logo.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +78,13 @@
         <item name="rmhometiles: schema" type="76f4a085:MysqlImplModel$Schema" />
         <item name="product: table" type="285a2a93:MysqlImplModel$Table" />
       </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - rmhometiles@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="rmhometiles: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="supplier: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
     </expand>
     <select />
   </component>
@@ -73,6 +105,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
@@ -80,18 +113,31 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/supplier" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/fxml/supplier" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.44367817" />
     <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\resources\image" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="ph.parcs.rmhometiles.supplier" />
       <recent name="ph.parcs.rmhometiles.category" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\resources\fxml\supplier" />
       <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\java\ph\parcs\rmhometiles\supplier" />
       <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\resources\fxml\main" />
       <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\resources\fxml\category" />
     </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn dependency:analyze-only" />
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="RmHomeTilesApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
@@ -138,7 +184,7 @@
       <workItem from="1581466314642" duration="447000" />
       <workItem from="1581466784520" duration="13220000" />
       <workItem from="1581496646097" duration="600000" />
-      <workItem from="1581511283351" duration="1328000" />
+      <workItem from="1581511283351" duration="8526000" />
     </task>
     <task id="LOCAL-00001" summary="code cleanup">
       <created>1580876855750</created>
@@ -259,7 +305,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581475204216</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="commit">
+      <created>1581512765430</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1581512765430</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -280,7 +333,6 @@
     <MESSAGE value="code cleanup" />
     <MESSAGE value="add system description" />
     <MESSAGE value="implemented inheritance for entities" />
-    <MESSAGE value="commit" />
     <MESSAGE value="refresh items of table when scene is shown" />
     <MESSAGE value="redesign login interface" />
     <MESSAGE value="change alert message content" />
@@ -292,72 +344,85 @@
     <MESSAGE value="redesigned user login interface" />
     <MESSAGE value="reformat design of product table" />
     <MESSAGE value="reformat design of category.fxml table" />
-    <option name="LAST_COMMIT_MESSAGE" value="reformat design of category.fxml table" />
+    <MESSAGE value="commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="373" y="107" key="#Assign_Data_Sources" timestamp="1581236881307">
+    <state x="373" y="107" key="#Assign_Data_Sources" timestamp="1581513993942">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="373" y="107" key="#Assign_Data_Sources/0.0.1536.864@0.0.1536.864" timestamp="1581236881307" />
-    <state x="574" y="143" key="#com.intellij.ide.util.MemberChooser" timestamp="1581478725862">
+    <state x="373" y="107" key="#Assign_Data_Sources/0.0.1536.864@0.0.1536.864" timestamp="1581513993942" />
+    <state x="361" y="92" key="#Web_Browsers" timestamp="1581519808380">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="574" y="143" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1581478725862" />
+    <state x="361" y="92" key="#Web_Browsers/0.0.1536.864@0.0.1536.864" timestamp="1581519808380" />
+    <state x="574" y="143" key="#com.intellij.ide.util.MemberChooser" timestamp="1581518932960">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="574" y="143" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1581518932960" />
+    <state x="498" y="217" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1581519013626">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="498" y="217" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1536.864@0.0.1536.864" timestamp="1581519013626" />
     <state x="190" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1581128968738">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="190" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.864@0.0.1536.864" timestamp="1581128968738" />
-    <state x="499" y="180" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1581330711645">
+    <state x="499" y="180" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1581521155762">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="499" y="180" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.864@0.0.1536.864" timestamp="1581330711645" />
-    <state x="375" y="28" key="CommitChangelistDialog2" timestamp="1581475203683">
+    <state x="499" y="180" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.864@0.0.1536.864" timestamp="1581521155762" />
+    <state x="375" y="28" key="CommitChangelistDialog2" timestamp="1581512764674">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="375" y="28" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1581475203683" />
+    <state x="375" y="28" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1581512764674" />
     <state x="93" y="93" width="1350" height="678" key="DiffContextDialog" timestamp="1581479984198">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="93" y="93" width="1350" height="678" key="DiffContextDialog/0.0.1536.864@0.0.1536.864" timestamp="1581479984198" />
+    <state x="549" y="188" key="FileChooserDialogImpl" timestamp="1581518600775">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="549" y="188" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1581518600775" />
     <state x="603" y="332" width="354" height="199" key="Github.CreateGistDialog" timestamp="1580990142757">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="603" y="332" width="354" height="199" key="Github.CreateGistDialog/0.0.1536.864@0.0.1536.864" timestamp="1580990142757" />
-    <state width="1493" height="64" key="GridCell.Tab.0.bottom" timestamp="1581512659302">
+    <state width="1493" height="234" key="GridCell.Tab.0.bottom" timestamp="1581521881683">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="64" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581512659302" />
-    <state width="1493" height="64" key="GridCell.Tab.0.center" timestamp="1581512659302">
+    <state width="1493" height="234" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581521881683" />
+    <state width="1493" height="234" key="GridCell.Tab.0.center" timestamp="1581521881683">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="64" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1581512659302" />
-    <state width="1493" height="64" key="GridCell.Tab.0.left" timestamp="1581512659302">
+    <state width="1493" height="234" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1581521881683" />
+    <state width="1493" height="234" key="GridCell.Tab.0.left" timestamp="1581521881683">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="64" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1581512659302" />
-    <state width="1493" height="64" key="GridCell.Tab.0.right" timestamp="1581512659302">
+    <state width="1493" height="234" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1581521881683" />
+    <state width="1493" height="234" key="GridCell.Tab.0.right" timestamp="1581521881683">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="64" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1581512659302" />
-    <state width="1493" height="64" key="GridCell.Tab.1.bottom" timestamp="1581512659302">
+    <state width="1493" height="234" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1581521881683" />
+    <state width="1493" height="234" key="GridCell.Tab.1.bottom" timestamp="1581521404038">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="64" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581512659302" />
-    <state width="1493" height="64" key="GridCell.Tab.1.center" timestamp="1581512659302">
+    <state width="1493" height="234" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581521404038" />
+    <state width="1493" height="234" key="GridCell.Tab.1.center" timestamp="1581521404038">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="64" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1581512659302" />
-    <state width="1493" height="64" key="GridCell.Tab.1.left" timestamp="1581512659302">
+    <state width="1493" height="234" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1581521404038" />
+    <state width="1493" height="234" key="GridCell.Tab.1.left" timestamp="1581521404038">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="64" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1581512659302" />
-    <state width="1493" height="64" key="GridCell.Tab.1.right" timestamp="1581512659302">
+    <state width="1493" height="234" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1581521404038" />
+    <state width="1493" height="234" key="GridCell.Tab.1.right" timestamp="1581521404038">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="64" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1581512659302" />
+    <state width="1493" height="234" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1581521404038" />
     <state width="1493" height="162" key="GridCell.Tab.2.bottom" timestamp="1581479754428">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -378,14 +443,18 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="493" y="144" key="RollbackChangesDialog/0.0.1536.864@0.0.1536.864" timestamp="1581247957604" />
+    <state x="249" y="8" key="SettingsEditor" timestamp="1581521670057">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="249" y="8" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1581521670057" />
     <state x="93" y="93" width="1350" height="678" key="VCS.FileHistoryDialog" timestamp="1580977076254">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="93" y="93" width="1350" height="678" key="VCS.FileHistoryDialog/0.0.1536.864@0.0.1536.864" timestamp="1580977076254" />
-    <state x="361" y="166" key="Vcs.Push.Dialog.v2" timestamp="1581475206657">
+    <state x="361" y="166" key="Vcs.Push.Dialog.v2" timestamp="1581512767411">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="361" y="166" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1581475206657" />
+    <state x="361" y="166" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1581512767411" />
     <state x="93" y="93" width="1350" height="678" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1581395582548">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -422,13 +491,13 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="475" y="62" key="refactoring.ChangeSignatureDialog/0.0.1536.864@0.0.1536.864" timestamp="1581478593859" />
-    <state x="425" y="197" key="run.anything.popup" timestamp="1581477912450">
+    <state x="425" y="197" width="672" height="677" key="run.anything.popup" timestamp="1581521672972">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="425" y="197" key="run.anything.popup/0.0.1536.864@0.0.1536.864" timestamp="1581477912450" />
-    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1581480566999">
+    <state x="425" y="197" width="672" height="677" key="run.anything.popup/0.0.1536.864@0.0.1536.864" timestamp="1581521672972" />
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1581519925144">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1581480566999" />
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1581519925144" />
   </component>
 </project>

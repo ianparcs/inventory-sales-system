@@ -1,6 +1,6 @@
 .jfx-button {
     -fx-padding: 0.55em 1.5em;
-    -jfx-button-type: flat;
+    -jfx-button-type: FLAT;
     -fx-border-radius: 5pt;
     -fx-background-radius: 5pt;
     -fx-font-weight: bold;
