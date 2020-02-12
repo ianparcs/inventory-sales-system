@@ -1,20 +1,19 @@
 .jfx-button {
     -fx-padding: 0.6em 1.5em;
-    -jfx-button-type: FLAT;
+    -jfx-button-type: flat;
     -fx-border-radius: 5pt;
     -fx-background-radius: 5pt;
     -fx-font-weight: BOLD;
     -fx-font-size: 13;
+    -fx-pref-width: 100px;
 }
 
 .button-save {
-    -jfx-button-type: FLAT;
     -fx-background-color: primary;
-    -fx-text-fill: WHITE;
+    -fx-text-fill: white;
 }
 
 .button-cancel {
-    -jfx-button-type: FLAT;
     -fx-background-color: WHITE;
     -fx-border-color: primary;
 }
@@ -33,7 +32,7 @@
 
 .jfx-dialog-layout > .jfx-layout-body {
     -fx-alignment: center;
-    -fx-pref-width: 800px;
+    -fx-pref-width: 500px;
     -fx-padding: 35px;
 }
 
@@ -44,8 +43,7 @@
 }
 
 .jfx-text-field {
-    -fx-pref-width: 800px;
-    -jfx-focus-color: BLUEBERRIES;
+    -jfx-focus-color: blueberries;
 }
 
 

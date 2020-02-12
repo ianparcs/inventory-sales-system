@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.*?>
-<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain" stylesheets="@../../css/product.css"
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain" stylesheets="@../../css/item.css"
            xmlns="http://javafx.com/javafx/10.0.2-internal"
            fx:controller="ph.parcs.rmhometiles.product.ProductTableController">
 
