@@ -5,7 +5,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
-public abstract class ItemService<T extends Item> {
+public abstract class ItemService<T extends BaseEntity> {
 
     public ItemPageEntry getPageEntries(Page<T> items) {
         long toEntry = items.getNumberOfElements() * (items.getNumber() + 1);

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.ItemListener;
 
 @Controller
-public abstract class EditItemController<T extends Item> {
+public abstract class EditItemController<T extends BaseEntity> {
 
     @FXML
     protected JFXDialog editDialog;

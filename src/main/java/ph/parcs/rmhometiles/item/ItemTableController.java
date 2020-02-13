@@ -16,7 +16,7 @@ import ph.parcs.rmhometiles.ui.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.util.Global;
 
 @Controller
-public abstract class ItemTableController<T extends Item> {
+public abstract class ItemTableController<T extends BaseEntity> {
 
     @FXML
     protected ComboBox<Integer> cbRowCount;

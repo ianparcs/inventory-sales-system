@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
-public abstract class Item implements Serializable {
+public abstract class BaseEntity {
 
     protected IntegerProperty id = new SimpleIntegerProperty();
     protected StringProperty name = new SimpleStringProperty();

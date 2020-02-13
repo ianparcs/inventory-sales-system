@@ -2,14 +2,13 @@
 
 <?import com.jfoenix.controls.*?>
 <?import de.jensd.fx.glyphs.fontawesome.*?>
-<?import de.jensd.fx.glyphs.icons525.Icons525View?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 <VBox xmlns:fx="http://javafx.com/fxml/1" styleClass="background" stylesheets="@../../css/navigation.css"
       fx:controller="ph.parcs.rmhometiles.navigation.NavigationController">
 
-    <JFXButton fx:id="btnTitle" styleClass="nav-title" focusTraversable="false" maxWidth="1.7976931348623157E308"
+    <JFXButton styleClass="nav-title" focusTraversable="false" maxWidth="1.7976931348623157E308"
                text="RM HOME TILES">
         <graphic>
             <ImageView fitHeight="64.0" fitWidth="64.0" preserveRatio="true">
@@ -20,7 +19,7 @@
 
     <JFXButton fx:id="btnDashboard" maxWidth="1.7976931348623157E308" text="Dashboard">
         <graphic>
-            <FontAwesomeIconView glyphName="TH_LARGE"/>
+            <FontAwesomeIconView glyphName="TACHOMETER"/>
         </graphic>
     </JFXButton>
 
@@ -32,7 +31,7 @@
 
     <JFXButton fx:id="btnInventory" maxWidth="1.7976931348623157E308" text="Manage Product">
         <graphic>
-            <Icons525View glyphName="ARCHIVE_BOX"/>
+            <FontAwesomeIconView glyphName="SUITCASE"/>
         </graphic>
     </JFXButton>
 
