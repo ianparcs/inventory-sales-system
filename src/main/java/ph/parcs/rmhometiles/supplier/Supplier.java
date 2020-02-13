@@ -2,7 +2,7 @@ package ph.parcs.rmhometiles.supplier;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import ph.parcs.rmhometiles.item.Item;
+import ph.parcs.rmhometiles.item.BaseEntity;
 import ph.parcs.rmhometiles.product.Product;
 
 import javax.persistence.*;
@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Access(AccessType.PROPERTY)
 @AttributeOverride(name = "id", column = @Column(name = "supplier_id"))
-public class Supplier extends Item {
+public class Supplier extends BaseEntity {
 
     private StringProperty contact = new SimpleStringProperty();
     private List<Product> products;

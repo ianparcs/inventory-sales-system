@@ -2,14 +2,14 @@ package ph.parcs.rmhometiles.product;
 
 import javafx.beans.property.*;
 import ph.parcs.rmhometiles.category.Category;
-import ph.parcs.rmhometiles.item.Item;
+import ph.parcs.rmhometiles.item.BaseEntity;
 import ph.parcs.rmhometiles.supplier.Supplier;
 
 import javax.persistence.*;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Product extends Item {
+public class Product extends BaseEntity {
 
     private IntegerProperty quantity = new SimpleIntegerProperty();
     private IntegerProperty unitSold = new SimpleIntegerProperty();

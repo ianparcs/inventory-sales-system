@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.category.Category;
 import ph.parcs.rmhometiles.category.CategoryService;
+import ph.parcs.rmhometiles.item.BaseEntity;
 import ph.parcs.rmhometiles.item.EditItemController;
-import ph.parcs.rmhometiles.item.Item;
 import ph.parcs.rmhometiles.supplier.Supplier;
 import ph.parcs.rmhometiles.supplier.SupplierService;
 
@@ -136,9 +136,9 @@ public class ProductEditController extends EditItemController<Product> {
     }
 
     private void clearComboboxSelection(JFXComboBox<?> comboBox) {
-        Item item = (Item) comboBox.getValue();
-        if (item != null) {
-            if (item.getName().isEmpty()) {
+        BaseEntity entity = (BaseEntity) comboBox.getValue();
+        if (entity != null) {
+            if (entity.getName().isEmpty()) {
                 Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
             }
         }

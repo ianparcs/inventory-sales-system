@@ -6,31 +6,12 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f946820-2b90-4643-9237-2d41a464616e" name="Default Changelist" comment="">
+    <list default="true" id="5f946820-2b90-4643-9237-2d41a464616e" name="Default Changelist" comment="rem">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/StageInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/StageInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/category/EditCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/category/CategoryEditController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/item/ItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/item/ItemService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/login/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/login/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/navigation/NavigationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/navigation/NavigationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/product/EditProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/product/ProductEditController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/scene/SceneManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/scene/SceneManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/supplier/EditSupplierController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/supplier/SupplierEditController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/supplier/SupplierRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/supplier/SupplierRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/supplier/SupplierService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/supplier/SupplierService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/supplier/SupplierTableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/supplier/SupplierTableController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/edit-dialog.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/edit-dialog.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/category/edit-category.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/category/edit-category.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/product/edit-product.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/product/edit-product.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/supplier/supplier.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/supplier/supplier.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/image/logo-white.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/image/mainlogo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/image/plant-tile.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/image/road-tree.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/image/tiles.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/image/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/category/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/category/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/product/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/product/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/product/ProductEditController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/product/ProductEditController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/supplier/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/supplier/Supplier.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,18 +101,18 @@
     <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\resources\image" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="ph.parcs.rmhometiles.supplier" />
-      <recent name="ph.parcs.rmhometiles.category" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\resources\fxml\supplier" />
       <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\java\ph\parcs\rmhometiles\supplier" />
       <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\resources\fxml\main" />
       <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\resources\fxml\category" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="ph.parcs.rmhometiles.supplier" />
+      <recent name="ph.parcs.rmhometiles.category" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\resources\image" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -391,38 +372,38 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="603" y="332" width="354" height="199" key="Github.CreateGistDialog/0.0.1536.864@0.0.1536.864" timestamp="1580990142757" />
-    <state width="1493" height="234" key="GridCell.Tab.0.bottom" timestamp="1581521881683">
+    <state width="1493" height="190" key="GridCell.Tab.0.bottom" timestamp="1581578016264">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="234" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581521881683" />
-    <state width="1493" height="234" key="GridCell.Tab.0.center" timestamp="1581521881683">
+    <state width="1493" height="190" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581578016264" />
+    <state width="1493" height="190" key="GridCell.Tab.0.center" timestamp="1581578016264">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="234" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1581521881683" />
-    <state width="1493" height="234" key="GridCell.Tab.0.left" timestamp="1581521881683">
+    <state width="1493" height="190" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1581578016264" />
+    <state width="1493" height="190" key="GridCell.Tab.0.left" timestamp="1581578016264">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="234" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1581521881683" />
-    <state width="1493" height="234" key="GridCell.Tab.0.right" timestamp="1581521881683">
+    <state width="1493" height="190" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1581578016264" />
+    <state width="1493" height="190" key="GridCell.Tab.0.right" timestamp="1581578016264">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="234" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1581521881683" />
-    <state width="1493" height="234" key="GridCell.Tab.1.bottom" timestamp="1581521404038">
+    <state width="1493" height="190" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1581578016264" />
+    <state width="1493" height="190" key="GridCell.Tab.1.bottom" timestamp="1581578016264">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="234" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581521404038" />
-    <state width="1493" height="234" key="GridCell.Tab.1.center" timestamp="1581521404038">
+    <state width="1493" height="190" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581578016264" />
+    <state width="1493" height="190" key="GridCell.Tab.1.center" timestamp="1581578016264">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="234" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1581521404038" />
-    <state width="1493" height="234" key="GridCell.Tab.1.left" timestamp="1581521404038">
+    <state width="1493" height="190" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1581578016264" />
+    <state width="1493" height="190" key="GridCell.Tab.1.left" timestamp="1581578016264">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="234" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1581521404038" />
-    <state width="1493" height="234" key="GridCell.Tab.1.right" timestamp="1581521404038">
+    <state width="1493" height="190" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1581578016264" />
+    <state width="1493" height="190" key="GridCell.Tab.1.right" timestamp="1581578016264">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="234" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1581521404038" />
+    <state width="1493" height="190" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1581578016264" />
     <state width="1493" height="162" key="GridCell.Tab.2.bottom" timestamp="1581479754428">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
