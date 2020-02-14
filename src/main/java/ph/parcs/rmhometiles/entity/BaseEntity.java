@@ -1,4 +1,4 @@
-package ph.parcs.rmhometiles.item;
+package ph.parcs.rmhometiles.entity;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -6,7 +6,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @MappedSuperclass
 @Access(AccessType.PROPERTY)

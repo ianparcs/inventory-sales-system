@@ -72,11 +72,16 @@
                     </validators>
                 </JFXTextField>
 
-                <JFXComboBox fx:id="cbCategory" onAction="#onCategorySelect" labelFloat="true" promptText="Category"
+                <JFXComboBox fx:id="cbCategory" onAction="#clearCategory" labelFloat="true" promptText="Category"
                              GridPane.columnIndex="0" GridPane.rowIndex="3"/>
 
-                <JFXComboBox fx:id="cbSupplier" onAction="#onSupplierSelect" labelFloat="true" promptText="Supplier"
+                <JFXComboBox fx:id="cbSupplier" onAction="#clearSupplier" labelFloat="true" promptText="Supplier"
                              GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                <JFXTextField fx:id="tfImage" labelFloat="true" promptText="Choose Image" onMouseClicked="#selectImage"
+                              GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2"
+                              GridPane.hgrow="ALWAYS" editable="false">
+                </JFXTextField>
             </GridPane>
         </body>
 

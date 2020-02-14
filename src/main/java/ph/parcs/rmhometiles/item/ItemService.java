@@ -3,6 +3,7 @@ package ph.parcs.rmhometiles.item;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import ph.parcs.rmhometiles.entity.BaseEntity;
 
 @Service
 public abstract class ItemService<T extends BaseEntity> {

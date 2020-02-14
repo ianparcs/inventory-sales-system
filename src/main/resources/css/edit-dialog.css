@@ -5,15 +5,16 @@
     -fx-background-radius: 5pt;
     -fx-font-weight: bold;
     -fx-font-size: 14;
-    -fx-pref-width: 100px;
 }
 
 .button-save {
+    -fx-pref-width: 100px;
     -fx-background-color: primary;
     -fx-text-fill: white;
 }
 
 .button-cancel {
+    -fx-pref-width: 100px;
     -fx-background-color: WHITE;
     -fx-border-color: primary;
 }

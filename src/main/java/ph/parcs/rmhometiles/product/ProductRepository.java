@@ -1,9 +1,10 @@
 package ph.parcs.rmhometiles.product;
 
 import org.springframework.stereotype.Repository;
-import ph.parcs.rmhometiles.category.Category;
+import ph.parcs.rmhometiles.entity.Category;
+import ph.parcs.rmhometiles.entity.Product;
+import ph.parcs.rmhometiles.entity.Supplier;
 import ph.parcs.rmhometiles.item.ItemRepository;
-import ph.parcs.rmhometiles.supplier.Supplier;
 
 import java.util.Set;
 

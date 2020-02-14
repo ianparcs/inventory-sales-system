@@ -18,7 +18,7 @@
 
     <VBox styleClass="background">
 
-        <Label maxWidth="1.7976931348623157E308" styleClass="item-header" text="Product Details"/>
+        <Label maxWidth="1.7976931348623157E308" styleClass="item-header" text="Manage Products"/>
 
         <GridPane vgap="15" VBox.vgrow="ALWAYS">
             <columnConstraints>

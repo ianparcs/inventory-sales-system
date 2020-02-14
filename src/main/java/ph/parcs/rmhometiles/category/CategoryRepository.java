@@ -1,6 +1,7 @@
 package ph.parcs.rmhometiles.category;
 
 import org.springframework.stereotype.Repository;
+import ph.parcs.rmhometiles.entity.Category;
 import ph.parcs.rmhometiles.item.ItemRepository;
 
 import java.util.List;

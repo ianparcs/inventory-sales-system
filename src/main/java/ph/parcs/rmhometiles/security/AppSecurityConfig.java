@@ -17,8 +17,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Qualifier("userService")
-    @Autowired
     private UserDetailsService userDetailsService;
 
     @Override
@@ -37,6 +35,11 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Autowired
+    public void setUserDetailsService(@Qualifier("userService") UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
     }
 
     @Bean(name = BeanIds.AUTHENTICATION_MANAGER)

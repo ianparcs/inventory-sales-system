@@ -1,7 +1,4 @@
-package ph.parcs.rmhometiles.category;
-
-import ph.parcs.rmhometiles.item.BaseEntity;
-import ph.parcs.rmhometiles.product.Product;
+package ph.parcs.rmhometiles.entity;
 
 import javax.persistence.*;
 import java.util.Set;

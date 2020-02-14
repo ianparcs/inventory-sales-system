@@ -4,16 +4,20 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.stage.FileChooser;
 import javafx.util.StringConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import ph.parcs.rmhometiles.category.Category;
 import ph.parcs.rmhometiles.category.CategoryService;
-import ph.parcs.rmhometiles.item.BaseEntity;
+import ph.parcs.rmhometiles.entity.BaseEntity;
+import ph.parcs.rmhometiles.entity.Category;
+import ph.parcs.rmhometiles.entity.Product;
+import ph.parcs.rmhometiles.entity.Supplier;
+import ph.parcs.rmhometiles.file.FileService;
 import ph.parcs.rmhometiles.item.EditItemController;
-import ph.parcs.rmhometiles.supplier.Supplier;
 import ph.parcs.rmhometiles.supplier.SupplierService;
 
+import java.io.File;
 import java.util.Optional;
 
 @Controller
@@ -32,12 +36,15 @@ public class ProductEditController extends EditItemController<Product> {
     @FXML
     private JFXTextField tfQuantity;
     @FXML
+    private JFXTextField tfImage;
+    @FXML
     private JFXTextField tfPrice;
     @FXML
     private JFXTextField tfName;
 
     private CategoryService categoryService;
     private SupplierService supplierService;
+    private FileService fileService;
 
     @FXML
     public void initialize() {
@@ -85,6 +92,7 @@ public class ProductEditController extends EditItemController<Product> {
         tfDiscount.clear();
         tfUnitSold.clear();
         tfQuantity.clear();
+        tfImage.clear();
         tfPrice.clear();
         tfName.clear();
         clearValidators();
@@ -113,6 +121,22 @@ public class ProductEditController extends EditItemController<Product> {
         setSupplierValue(product);
     }
 
+    @Override
+    protected Product unbindFields(Integer id) {
+        Product product = new Product();
+        product.setUnitSold(Integer.valueOf(!tfUnitSold.getText().isEmpty() ? tfUnitSold.getText() : "0"));
+        product.setQuantity(Integer.valueOf(!tfQuantity.getText().isEmpty() ? tfQuantity.getText() : "0"));
+        product.setDiscount(Integer.valueOf(!tfDiscount.getText().isEmpty() ? tfDiscount.getText() : "0"));
+        product.setPrice(Float.valueOf(!tfPrice.getText().isEmpty() ? tfPrice.getText() : "0.00"));
+        product.setDescription(tfDescription.getText());
+        product.setCategory(cbCategory.getValue());
+        product.setSupplier(cbSupplier.getValue());
+        product.setImagePath(tfImage.getText());
+        product.setName(tfName.getText());
+        product.setId(id);
+        return product;
+    }
+
     private void setCategoryValue(Product product) {
         cbCategory.getItems().setAll(categoryService.getCategories());
         Optional<Category> search = categoryService.findCategoryByProduct(cbCategory.getItems(), product);
@@ -126,12 +150,19 @@ public class ProductEditController extends EditItemController<Product> {
     }
 
     @FXML
-    public void onSupplierSelect() {
+    private void selectImage() {
+        FileChooser fileChooser = fileService.getImageChooser();
+        File selectedFile = fileChooser.showOpenDialog(editDialog.getScene().getWindow());
+        if (selectedFile != null) tfImage.setText(selectedFile.getAbsolutePath());
+    }
+
+    @FXML
+    private void clearSupplier() {
         clearComboboxSelection(cbSupplier);
     }
 
     @FXML
-    public void onCategorySelect() {
+    private void clearCategory() {
         clearComboboxSelection(cbCategory);
     }
 
@@ -142,21 +173,6 @@ public class ProductEditController extends EditItemController<Product> {
                 Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
             }
         }
-    }
-
-    @Override
-    protected Product unbindFields(Integer id) {
-        Product product = new Product();
-        product.setUnitSold(Integer.valueOf(!tfUnitSold.getText().isEmpty() ? tfUnitSold.getText() : "0"));
-        product.setQuantity(Integer.valueOf(!tfQuantity.getText().isEmpty() ? tfQuantity.getText() : "0"));
-        product.setDiscount(Integer.valueOf(!tfDiscount.getText().isEmpty() ? tfDiscount.getText() : "0"));
-        product.setPrice(Float.valueOf(!tfPrice.getText().isEmpty() ? tfPrice.getText() : "0.00"));
-        product.setDescription(tfDescription.getText());
-        product.setCategory(cbCategory.getValue());
-        product.setSupplier(cbSupplier.getValue());
-        product.setName(tfName.getText());
-        product.setId(id);
-        return product;
     }
 
     @Autowired
@@ -174,4 +190,8 @@ public class ProductEditController extends EditItemController<Product> {
         this.itemService = productService;
     }
 
+    @Autowired
+    public void setFileService(FileService fileService) {
+        this.fileService = fileService;
+    }
 }

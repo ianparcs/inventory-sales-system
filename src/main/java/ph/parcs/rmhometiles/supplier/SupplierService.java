@@ -8,8 +8,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import ph.parcs.rmhometiles.entity.Product;
+import ph.parcs.rmhometiles.entity.Supplier;
 import ph.parcs.rmhometiles.item.ItemService;
-import ph.parcs.rmhometiles.product.Product;
 import ph.parcs.rmhometiles.product.ProductRepository;
 
 import java.util.*;

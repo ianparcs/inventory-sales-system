@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.ItemListener;
+import ph.parcs.rmhometiles.entity.BaseEntity;
 
 @Controller
 public abstract class EditItemController<T extends BaseEntity> {
@@ -38,7 +39,7 @@ public abstract class EditItemController<T extends BaseEntity> {
     }
 
     final public void onEditItem(ItemListener<T> itemListener, final T item) {
-        setTitle(item);
+        setDialogTitle(item);
         bindFields(item);
 
         btnSave.setOnAction(actionEvent -> {
@@ -61,7 +62,7 @@ public abstract class EditItemController<T extends BaseEntity> {
         editDialog.close();
     }
 
-    private void setTitle(T item) {
+    private void setDialogTitle(T item) {
         String title = item.getId() > 0 ? "Edit" : "Add";
         lblTitle.setText(title + " " + item.getClass().getSimpleName());
     }

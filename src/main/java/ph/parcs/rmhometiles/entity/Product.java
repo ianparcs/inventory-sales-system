@@ -1,9 +1,6 @@
-package ph.parcs.rmhometiles.product;
+package ph.parcs.rmhometiles.entity;
 
 import javafx.beans.property.*;
-import ph.parcs.rmhometiles.category.Category;
-import ph.parcs.rmhometiles.item.BaseEntity;
-import ph.parcs.rmhometiles.supplier.Supplier;
 
 import javax.persistence.*;
 
@@ -18,6 +15,7 @@ public class Product extends BaseEntity {
     private FloatProperty price = new SimpleFloatProperty();
 
     private StringProperty description = new SimpleStringProperty();
+    private StringProperty imagePath = new SimpleStringProperty();
 
     private Supplier supplier;
     private Category category;
@@ -30,6 +28,15 @@ public class Product extends BaseEntity {
 
     public void setQuantity(Integer quantity) {
         this.quantity.set(quantity);
+    }
+
+    @Column(name = "imagePath")
+    public String getImagePath() {
+        return imagePath.get();
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath.set(imagePath);
     }
 
     @Column(name = "unit_sold")
