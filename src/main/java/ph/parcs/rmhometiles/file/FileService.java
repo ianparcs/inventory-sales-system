@@ -32,6 +32,13 @@ public class FileService {
         Files.copy(from, to, StandardCopyOption.REPLACE_EXISTING);
     }
 
+    @SneakyThrows
+    public void deleteFile(String filename) {
+        Path source = Paths.get(getFullTargetPath(filename));
+        Files.delete(source);
+    }
+
+
     public String getFullTargetPath(String filename) {
         String fullPath = getResourcePath() + File.separator + filename;
         return fullPath.trim();
@@ -58,4 +65,5 @@ public class FileService {
     public URL getResourcePath(String fileName) {
         return getClass().getClassLoader().getResource(BASE_PATH + fileName);
     }
+
 }

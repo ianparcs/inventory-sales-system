@@ -10,7 +10,6 @@ public class Supplier extends Person {
 
     private List<Product> products;
 
-
     @OneToMany(mappedBy = "supplier")
     public List<Product> getProducts() {
         return products;

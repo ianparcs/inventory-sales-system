@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import ph.parcs.rmhometiles.entity.Product;
 import ph.parcs.rmhometiles.file.FileService;
 import ph.parcs.rmhometiles.item.ItemService;
@@ -24,10 +25,14 @@ public class ProductService extends ItemService<Product> {
     }
 
     @Override
-    public boolean deleteItem(Product item) {
-        productRepository.delete(item);
-        Optional<Product> product = productRepository.findById(item.getId());
-        return product.isEmpty();
+    public boolean deleteItem(Product product) {
+        productRepository.delete(product);
+        String filename = product.getFileName();
+        if (!StringUtils.isEmpty(filename)) {
+            fileService.deleteFile(filename);
+        }
+        Optional<Product> productOptional = productRepository.findById(product.getId());
+        return productOptional.isEmpty();
     }
 
     @Override

@@ -11,15 +11,18 @@ import ph.parcs.rmhometiles.item.EditItemController;
 public class SupplierEditController extends EditItemController<Supplier> {
 
     @FXML
-    private JFXTextField tfName;
-    @FXML
     private JFXTextField tfContact;
+    @FXML
+    private JFXTextField tfAddress;
+    @FXML
+    private JFXTextField tfName;
 
     @Override
     protected Supplier unbindFields(Integer id) {
         Supplier supplier = new Supplier();
-        supplier.setName(tfName.getText());
+        supplier.setAddress(tfAddress.getText());
         supplier.setContact(tfContact.getText());
+        supplier.setName(tfName.getText());
         supplier.setId(id);
         return supplier;
     }
@@ -27,6 +30,8 @@ public class SupplierEditController extends EditItemController<Supplier> {
     @Override
     protected void bindFields(Supplier supplier) {
         tfName.setText(supplier.getName());
+        tfContact.setText(supplier.getContact());
+        tfAddress.setText(supplier.getAddress());
     }
 
     @Override

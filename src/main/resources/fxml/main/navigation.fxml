@@ -41,15 +41,21 @@
         </graphic>
     </JFXButton>
 
-    <JFXButton fx:id="btnSales" maxWidth="1.7976931348623157E308" text="Sales Report">
+    <JFXButton fx:id="btnCustomer" maxWidth="1.7976931348623157E308" text="Customer">
         <graphic>
-            <FontAwesomeIconView glyphName="BAR_CHART_ALT"/>
+            <FontAwesomeIconView glyphName="HANDSHAKE_ALT"/>
         </graphic>
     </JFXButton>
 
     <JFXButton fx:id="btnSupplier" maxWidth="1.7976931348623157E308" text="Supplier">
         <graphic>
             <FontAwesomeIconView glyphName="GROUP"/>
+        </graphic>
+    </JFXButton>
+
+    <JFXButton fx:id="btnSales" maxWidth="1.7976931348623157E308" text="Sales Report">
+        <graphic>
+            <FontAwesomeIconView glyphName="BAR_CHART_ALT"/>
         </graphic>
     </JFXButton>
 

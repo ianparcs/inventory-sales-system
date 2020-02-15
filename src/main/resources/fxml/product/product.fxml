@@ -121,7 +121,7 @@
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn fx:id="tcAction" reorderable="false" prefWidth="80" maxWidth="80" minWidth="35"
+                    <TableColumn fx:id="tcAction" reorderable="false" maxWidth="80" minWidth="35"
                                  resizable="false" sortable="false"
                                  styleClass="action-column" text="Action"/>
                 </columns>

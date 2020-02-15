@@ -72,6 +72,18 @@
                         </cellValueFactory>
                     </TableColumn>
 
+                    <TableColumn reorderable="false" minWidth="200" prefWidth="600" text="Address">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="address"/>
+                        </cellValueFactory>
+                    </TableColumn>
+
+                    <TableColumn reorderable="false" text="Contact">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="contact"/>
+                        </cellValueFactory>
+                    </TableColumn>
+
                     <TableColumn fx:id="tcAction" maxWidth="120" minWidth="120" reorderable="false" resizable="false"
                                  sortable="false" styleClass="action-column" text="Action"/>
                 </columns>

@@ -33,10 +33,17 @@
                     </validators>
                 </JFXTextField>
 
-                <JFXTextField fx:id="tfContact" labelFloat="true" promptText="Name"
-                              GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <JFXTextField fx:id="tfContact" labelFloat="true" promptText="Contact"
+                              GridPane.columnIndex="0" GridPane.rowIndex="1">
                     <tooltip>
                         <Tooltip text="Supplier contact number"/>
+                    </tooltip>
+                </JFXTextField>
+
+                <JFXTextField fx:id="tfAddress" labelFloat="true" promptText="Address"
+                              GridPane.columnIndex="0" GridPane.rowIndex="2">
+                    <tooltip>
+                        <Tooltip text="Supplier Address"/>
                     </tooltip>
                 </JFXTextField>
             </GridPane>

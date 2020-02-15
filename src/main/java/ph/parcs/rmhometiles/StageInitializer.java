@@ -57,6 +57,7 @@ public class StageInitializer implements ApplicationListener<JavaFxApplication.S
         return stage;
     }
 
+
     @Autowired
     public void setSceneManager(SceneManager sceneManager) {
         this.sceneManager = sceneManager;

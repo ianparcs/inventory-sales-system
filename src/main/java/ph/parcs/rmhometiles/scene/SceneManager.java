@@ -27,6 +27,7 @@ public class SceneManager {
         states.put(State.PRODUCT, loadUI(State.PRODUCT));
         states.put(State.CATEGORY, loadUI(State.CATEGORY));
         states.put(State.SUPPLIER, loadUI(State.SUPPLIER));
+        states.put(State.CUSTOMER, loadUI(State.CUSTOMER));
         states.put(State.DASHBOARD, loadUI(State.DASHBOARD));
     }
 

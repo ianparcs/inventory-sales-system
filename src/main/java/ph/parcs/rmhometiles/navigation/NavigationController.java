@@ -16,22 +16,24 @@ import java.util.Map;
 public class NavigationController {
 
     @FXML
-    private JFXButton btnInvoice;
-    @FXML
-    private JFXButton btnCategory;
+    private JFXButton btnDashboard;
     @FXML
     private JFXButton btnInventory;
     @FXML
-    private JFXButton btnDashboard;
-    @FXML
     private JFXButton btnSupplier;
+    @FXML
+    private JFXButton btnCategory;
+    @FXML
+    private JFXButton btnCustomer;
+    @FXML
+    private JFXButton btnInvoice;
     @FXML
     private JFXButton btnSales;
     @FXML
     private JFXButton btnLog;
 
-    private SceneManager sceneManager;
     private HomeController homeController;
+    private SceneManager sceneManager;
 
     @FXML
     private void initialize() {
@@ -41,6 +43,7 @@ public class NavigationController {
         states.put(State.CATEGORY, btnCategory);
         states.put(State.SUPPLIER, btnSupplier);
         states.put(State.SALE_REPORT, btnSales);
+        states.put(State.CUSTOMER, btnCustomer);
         states.put(State.INVOICE, btnInvoice);
         states.put(State.LOG, btnLog);
 
