@@ -3,14 +3,20 @@ package ph.parcs.rmhometiles.product;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.entity.Category;
 import ph.parcs.rmhometiles.entity.Product;
 import ph.parcs.rmhometiles.entity.Supplier;
+import ph.parcs.rmhometiles.file.FileService;
 import ph.parcs.rmhometiles.item.ItemTableController;
 import ph.parcs.rmhometiles.util.Global;
+
+import java.net.URL;
 
 
 @Controller
@@ -26,6 +32,10 @@ public class ProductTableController extends ItemTableController<Product> {
     private TableColumn<Product, Integer> tcStock;
     @FXML
     private TableColumn<Product, Float> tcPrice;
+    @FXML
+    private TableColumn<Product, String> tcImage;
+
+    private FileService fileService;
 
     @FXML
     public void initialize() {
@@ -67,6 +77,22 @@ public class ProductTableController extends ItemTableController<Product> {
                 if (!empty) setText(discount + Global.UNIT.PERCENT);
             }
         });
+
+        tcImage.setCellFactory(param -> new TableCell<>() {
+            @Override
+            @SneakyThrows
+            protected void updateItem(String fileName, boolean empty) {
+                if (!empty && fileName != null) {
+                    URL url = fileService.getResourcePath(fileName);
+                    if (url != null) {
+                        ImageView image = new ImageView(new Image(url.toURI().toString()));
+                        image.setFitHeight(64);
+                        image.setFitWidth(64);
+                        setGraphic(image);
+                    }
+                }
+            }
+        });
     }
 
     @FXML
@@ -80,4 +106,8 @@ public class ProductTableController extends ItemTableController<Product> {
         this.itemService = productService;
     }
 
+    @Autowired
+    public void setFileService(FileService fileService) {
+        this.fileService = fileService;
+    }
 }

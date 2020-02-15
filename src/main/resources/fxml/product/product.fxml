@@ -60,7 +60,7 @@
                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
                 </columnResizePolicy>
                 <columns>
-                    <TableColumn maxWidth="70" minWidth="70" resizable="false" styleClass="id-column" text="#">
+                    <TableColumn maxWidth="50" minWidth="50" resizable="false" styleClass="id-column" text="#">
                         <cellValueFactory>
                             <PropertyValueFactory property="id"/>
                         </cellValueFactory>
@@ -114,8 +114,16 @@
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn fx:id="tcAction" maxWidth="120" minWidth="120" reorderable="false" resizable="false"
-                                 sortable="false" styleClass="action-column" text="Action"/>
+                    <TableColumn fx:id="tcImage" styleClass="action-column" reorderable="false" resizable="false"
+                                 sortable="false" text="Image">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="fileName"/>
+                        </cellValueFactory>
+                    </TableColumn>
+
+                    <TableColumn fx:id="tcAction" reorderable="false" prefWidth="80" maxWidth="80" minWidth="35"
+                                 resizable="false" sortable="false"
+                                 styleClass="action-column" text="Action"/>
                 </columns>
             </TableView>
 
@@ -125,6 +133,11 @@
             <padding>
                 <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
             </padding>
+            <rowConstraints>
+                <RowConstraints/>
+                <RowConstraints/>
+                <RowConstraints/>
+            </rowConstraints>
 
         </GridPane>
     </VBox>

@@ -131,7 +131,7 @@ public class ProductEditController extends EditItemController<Product> {
         product.setDescription(tfDescription.getText());
         product.setCategory(cbCategory.getValue());
         product.setSupplier(cbSupplier.getValue());
-        product.setImagePath(tfImage.getText());
+        product.setFilePath(tfImage.getText());
         product.setName(tfName.getText());
         product.setId(id);
         return product;

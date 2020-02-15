@@ -58,7 +58,6 @@ public abstract class ItemTableController<T extends BaseEntity> {
         pagination.currentPageIndexProperty().addListener((observable) -> updateItems());
     }
 
-
     private void initActionColumn() {
         tcAction.setCellFactory(ActionTableCell.forColumn(
                 this::onItemDeleteAction, this::onItemEditAction));

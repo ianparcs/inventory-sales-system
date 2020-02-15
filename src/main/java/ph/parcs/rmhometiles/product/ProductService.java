@@ -33,17 +33,21 @@ public class ProductService extends ItemService<Product> {
     @Override
     @SneakyThrows
     public Product saveItem(Product product) {
-        Product saveProduct = productRepository.save(product);
+        product.setId(productRepository.save(product).getId());
 
-        String imagePath = product.getImagePath();
-        String imageName = saveProduct.getId().toString();
-
-        if (!imagePath.isEmpty()) {
-            String imageDes = fileService.generateNewFilePath(imagePath, imageName);
-            saveProduct.setImagePath(imageDes);
-            productRepository.save(saveProduct);
+        if (!product.getFilePath().isEmpty()) {
+            saveProductImage(product);
         }
-        return saveProduct;
+
+        return productRepository.save(product);
+    }
+
+    private void saveProductImage(Product product) {
+        String fileName = fileService.getNewName(product.getId().toString(), product.getFilePath());
+        String des = fileService.getFullTargetPath(fileName);
+        String src = product.getFilePath();
+        product.setFileName(fileName);
+        fileService.saveImage(src, des);
     }
 
     @Override

@@ -15,11 +15,11 @@ public class Product extends BaseEntity {
     private FloatProperty price = new SimpleFloatProperty();
 
     private StringProperty description = new SimpleStringProperty();
-    private StringProperty imagePath = new SimpleStringProperty();
+    private StringProperty fileName = new SimpleStringProperty();
+    private StringProperty filePath = new SimpleStringProperty();
 
     private Supplier supplier;
     private Category category;
-
 
     @Column(name = "quantity")
     public Integer getQuantity() {
@@ -30,13 +30,13 @@ public class Product extends BaseEntity {
         this.quantity.set(quantity);
     }
 
-    @Column(name = "imagePath")
-    public String getImagePath() {
-        return imagePath.get();
+    @Column(name = "file_name")
+    public String getFileName() {
+        return fileName.get();
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath.set(imagePath);
+    public void setFileName(String fileName) {
+        this.fileName.set(fileName);
     }
 
     @Column(name = "unit_sold")
@@ -95,4 +95,11 @@ public class Product extends BaseEntity {
         this.supplier = supplier;
     }
 
+    public String getFilePath() {
+        return filePath.get();
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath.set(filePath);
+    }
 }
