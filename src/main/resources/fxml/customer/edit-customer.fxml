@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
+<?import com.jfoenix.validation.RequiredFieldValidator?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.*?>
 <JFXDialog xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/edit-dialog.css" fx:id="editDialog"
-           fx:controller="ph.parcs.rmhometiles.supplier.SupplierEditController">
+           fx:controller="ph.parcs.rmhometiles.customer.CustomerEditController">
 
     <JFXDialogLayout>
         <heading>
@@ -25,21 +26,24 @@
                 <JFXTextField fx:id="tfName" labelFloat="true" promptText="Name"
                               GridPane.columnIndex="0" GridPane.rowIndex="0">
                     <tooltip>
-                        <Tooltip text="Supplier name"/>
+                        <Tooltip text="Custumer name"/>
                     </tooltip>
+                    <validators>
+                        <RequiredFieldValidator message="Please fill out this field"/>
+                    </validators>
                 </JFXTextField>
 
                 <JFXTextField fx:id="tfContact" labelFloat="true" promptText="Contact"
                               GridPane.columnIndex="0" GridPane.rowIndex="1">
                     <tooltip>
-                        <Tooltip text="Supplier contact number"/>
+                        <Tooltip text="Custumer contact number"/>
                     </tooltip>
                 </JFXTextField>
 
                 <JFXTextField fx:id="tfAddress" labelFloat="true" promptText="Address"
                               GridPane.columnIndex="0" GridPane.rowIndex="2">
                     <tooltip>
-                        <Tooltip text="Supplier Address"/>
+                        <Tooltip text="Custumer Address"/>
                     </tooltip>
                 </JFXTextField>
             </GridPane>

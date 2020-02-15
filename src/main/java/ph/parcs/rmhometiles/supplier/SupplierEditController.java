@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import ph.parcs.rmhometiles.entity.Supplier;
 import ph.parcs.rmhometiles.item.EditItemController;
 
@@ -20,23 +21,27 @@ public class SupplierEditController extends EditItemController<Supplier> {
     @Override
     protected Supplier unbindFields(Integer id) {
         Supplier supplier = new Supplier();
-        supplier.setAddress(tfAddress.getText());
-        supplier.setContact(tfContact.getText());
-        supplier.setName(tfName.getText());
         supplier.setId(id);
+
+        if (!StringUtils.isEmpty(tfName.getText())) supplier.setName(tfName.getText());
+        if (!StringUtils.isEmpty(tfContact.getText())) supplier.setContact(tfContact.getText());
+        if (!StringUtils.isEmpty(tfAddress.getText())) supplier.setAddress(tfAddress.getText());
+
         return supplier;
     }
 
     @Override
     protected void bindFields(Supplier supplier) {
-        tfName.setText(supplier.getName());
-        tfContact.setText(supplier.getContact());
-        tfAddress.setText(supplier.getAddress());
+        if (!StringUtils.isEmpty(supplier.getName())) tfName.setText(supplier.getName());
+        if (!StringUtils.isEmpty(supplier.getContact())) tfContact.setText(supplier.getContact());
+        if (!StringUtils.isEmpty(supplier.getAddress())) tfAddress.setText(supplier.getAddress());
     }
 
     @Override
     protected void clearFields() {
         tfName.clear();
+        tfContact.clear();
+        tfAddress.clear();
     }
 
     @Autowired

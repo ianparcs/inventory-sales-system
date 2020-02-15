@@ -40,7 +40,9 @@ public abstract class EditItemController<T extends BaseEntity> {
 
     final public void onEditItem(ItemListener<T> itemListener, final T item) {
         setDialogTitle(item);
-        bindFields(item);
+        if (!itemService.isNew(item)) {
+            bindFields(item);
+        }
 
         btnSave.setOnAction(actionEvent -> {
             closeDialog();

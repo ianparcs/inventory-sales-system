@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import ph.parcs.rmhometiles.entity.Category;
 import ph.parcs.rmhometiles.item.EditItemController;
 
@@ -23,7 +24,8 @@ public class CategoryEditController extends EditItemController<Category> {
 
     @Override
     protected void bindFields(Category category) {
-        tfName.setText(category.getName());
+        if (!StringUtils.isEmpty(category.getName()))
+            tfName.setText(category.getName());
     }
 
     @Override

@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Access(AccessType.PROPERTY)
-@AttributeOverride(name = "id", column = @Column(name = "costumer_id"))
+@AttributeOverride(name = "id", column = @Column(name = "customer_id"))
 public class Customer extends Person {
 
 }
