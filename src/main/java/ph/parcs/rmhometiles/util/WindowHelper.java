@@ -10,7 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-//created by Alexander Berg
+// created by Alexander Berg
 public class WindowHelper {
 
     private static double xOffset;

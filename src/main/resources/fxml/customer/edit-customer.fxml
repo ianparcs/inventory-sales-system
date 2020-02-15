@@ -26,7 +26,7 @@
                 <JFXTextField fx:id="tfName" labelFloat="true" promptText="Name"
                               GridPane.columnIndex="0" GridPane.rowIndex="0">
                     <tooltip>
-                        <Tooltip text="Custumer name"/>
+                        <Tooltip text="Customer name"/>
                     </tooltip>
                     <validators>
                         <RequiredFieldValidator message="Please fill out this field"/>
@@ -36,14 +36,14 @@
                 <JFXTextField fx:id="tfContact" labelFloat="true" promptText="Contact"
                               GridPane.columnIndex="0" GridPane.rowIndex="1">
                     <tooltip>
-                        <Tooltip text="Custumer contact number"/>
+                        <Tooltip text="Customer contact number"/>
                     </tooltip>
                 </JFXTextField>
 
                 <JFXTextField fx:id="tfAddress" labelFloat="true" promptText="Address"
                               GridPane.columnIndex="0" GridPane.rowIndex="2">
                     <tooltip>
-                        <Tooltip text="Custumer Address"/>
+                        <Tooltip text="Customer Address"/>
                     </tooltip>
                 </JFXTextField>
             </GridPane>

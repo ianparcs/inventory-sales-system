@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import ph.parcs.rmhometiles.entity.Customer;
 import ph.parcs.rmhometiles.item.EditItemController;
 
@@ -20,23 +21,26 @@ public class CustomerEditController extends EditItemController<Customer> {
     @Override
     protected Customer unbindFields(Integer id) {
         Customer customer = new Customer();
-        customer.setAddress(tfAddress.getText());
-        customer.setContact(tfContact.getText());
-        customer.setName(tfName.getText());
         customer.setId(id);
+
+        if (!StringUtils.isEmpty(tfName.getText())) customer.setName(tfName.getText());
+        if (!StringUtils.isEmpty(tfContact.getText())) customer.setContact(tfContact.getText());
+        if (!StringUtils.isEmpty(tfAddress.getText())) customer.setAddress(tfAddress.getText());
         return customer;
     }
 
     @Override
     protected void bindFields(Customer customer) {
-        tfName.setText(customer.getName());
-        tfContact.setText(customer.getContact());
-        tfAddress.setText(customer.getAddress());
+        if (!StringUtils.isEmpty(customer.getName())) tfName.setText(customer.getName());
+        if (!StringUtils.isEmpty(customer.getContact())) tfContact.setText(customer.getContact());
+        if (!StringUtils.isEmpty(customer.getAddress())) tfAddress.setText(customer.getAddress());
     }
 
     @Override
     protected void clearFields() {
         tfName.clear();
+        tfContact.clear();
+        tfAddress.clear();
     }
 
     @Autowired
