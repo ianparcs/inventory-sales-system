@@ -7,20 +7,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f946820-2b90-4643-9237-2d41a464616e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/product/inventory.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/StageInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/StageInitializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/State.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/Costumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/file/FileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/file/FileService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/navigation/NavigationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/navigation/NavigationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/product/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/product/ProductService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/scene/SceneManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/scene/SceneManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/supplier/SupplierEditController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/supplier/SupplierEditController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/item.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/item.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/main/navigation.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/main/navigation.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/product/product.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/product/product.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/supplier/edit-supplier.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/supplier/edit-supplier.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/supplier/supplier.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/supplier/supplier.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/product/product.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,38 +38,6 @@
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
         <item name="MySQL - rmhometiles@localhost" type="feb32156:DbDataSourceImpl" />
       </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="MySQL - rmhometiles@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="MySQL - rmhometiles@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="rmhometiles: schema" type="76f4a085:MysqlImplModel$Schema" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="MySQL - rmhometiles@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="rmhometiles: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="category: table" type="285a2a93:MysqlImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="MySQL - rmhometiles@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="rmhometiles: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="product: table" type="285a2a93:MysqlImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="MySQL - rmhometiles@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="rmhometiles: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="supplier: table" type="285a2a93:MysqlImplModel$Table" />
-      </path>
     </expand>
     <select />
   </component>
@@ -82,6 +45,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -103,7 +67,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/fxml" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.44367817" />
@@ -126,6 +90,8 @@
       <recent name="ph.parcs.rmhometiles.category" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\resources\fxml\product" />
+      <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\resources\fxml" />
       <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\resources\image" />
     </key>
   </component>
@@ -142,18 +108,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -183,7 +137,23 @@
       <workItem from="1581671754626" duration="14657000" />
       <workItem from="1581724374602" duration="888000" />
       <workItem from="1581736506393" duration="23000" />
-      <workItem from="1581736542640" duration="10221000" />
+      <workItem from="1581736542640" duration="12582000" />
+      <workItem from="1581762521397" duration="8674000" />
+      <workItem from="1581807953098" duration="991000" />
+      <workItem from="1581811052801" duration="92000" />
+      <workItem from="1581811156158" duration="48000" />
+      <workItem from="1581811279256" duration="262000" />
+      <workItem from="1581811553162" duration="216000" />
+      <workItem from="1581812785069" duration="229000" />
+      <workItem from="1581813568599" duration="68000" />
+      <workItem from="1581813684640" duration="95000" />
+      <workItem from="1581813836297" duration="364000" />
+      <workItem from="1581814398113" duration="198000" />
+      <workItem from="1581814608597" duration="182000" />
+      <workItem from="1581814802769" duration="3112000" />
+      <workItem from="1581826733656" duration="8297000" />
+      <workItem from="1581860150995" duration="749000" />
+      <workItem from="1581902018547" duration="1126000" />
     </task>
     <task id="LOCAL-00001" summary="code cleanup">
       <created>1580876855750</created>
@@ -332,7 +302,28 @@
       <option name="project" value="LOCAL" />
       <updated>1581739367949</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="add customer module">
+      <created>1581757791069</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1581757791069</updated>
+    </task>
+    <task id="LOCAL-00023" summary="add customer module">
+      <created>1581763141336</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1581763141336</updated>
+    </task>
+    <task id="LOCAL-00024" summary="fix bug">
+      <created>1581763665637</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1581763665637</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -346,6 +337,19 @@
         <option value="3" />
         <option value="1" />
       </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
@@ -367,7 +371,9 @@
     <MESSAGE value="rename Item class to BaseEntity" />
     <MESSAGE value="commit" />
     <MESSAGE value="add product image" />
-    <option name="LAST_COMMIT_MESSAGE" value="add product image" />
+    <MESSAGE value="add customer module" />
+    <MESSAGE value="fix bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix bug" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -381,10 +387,14 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="361" y="92" key="#Web_Browsers/0.0.1536.864@0.0.1536.864" timestamp="1581519808380" />
-    <state x="574" y="143" key="#com.intellij.ide.util.MemberChooser" timestamp="1581686434548">
+    <state x="596" y="275" key="#com.intellij.ide.actions.DebugLogConfigureAction" timestamp="1581811397655">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="574" y="143" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1581686434548" />
+    <state x="596" y="275" key="#com.intellij.ide.actions.DebugLogConfigureAction/0.0.1536.864@0.0.1536.864" timestamp="1581811397655" />
+    <state x="574" y="143" key="#com.intellij.ide.util.MemberChooser" timestamp="1581758401795">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="574" y="143" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1581758401795" />
     <state x="498" y="217" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1581519013626">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -401,10 +411,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="524" y="136" key="#xdebugger.evaluate/0.0.1536.864@0.0.1536.864" timestamp="1581687426647" />
-    <state x="375" y="28" key="CommitChangelistDialog2" timestamp="1581739427152">
+    <state x="375" y="28" key="CommitChangelistDialog2" timestamp="1581763665087">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="375" y="28" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1581739427152" />
+    <state x="375" y="28" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1581763665087" />
     <state x="93" y="93" width="1350" height="678" key="DiffContextDialog" timestamp="1581479984198">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -417,62 +427,62 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="603" y="332" width="354" height="199" key="Github.CreateGistDialog/0.0.1536.864@0.0.1536.864" timestamp="1580990142757" />
-    <state x="629" y="367" key="Github.Dialog.Accounts.Choose" timestamp="1581739389368">
+    <state x="629" y="367" key="Github.Dialog.Accounts.Choose" timestamp="1581763148636">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="629" y="367" key="Github.Dialog.Accounts.Choose/0.0.1536.864@0.0.1536.864" timestamp="1581739389368" />
-    <state width="1493" height="177" key="GridCell.Tab.0.bottom" timestamp="1581757719333">
+    <state x="629" y="367" key="Github.Dialog.Accounts.Choose/0.0.1536.864@0.0.1536.864" timestamp="1581763148636" />
+    <state width="1493" height="290" key="GridCell.Tab.0.bottom" timestamp="1581904315870">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="177" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581757719333" />
-    <state width="1493" height="177" key="GridCell.Tab.0.center" timestamp="1581757719333">
+    <state width="1493" height="290" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581904315870" />
+    <state width="1493" height="290" key="GridCell.Tab.0.center" timestamp="1581904315870">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="177" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1581757719333" />
-    <state width="1493" height="177" key="GridCell.Tab.0.left" timestamp="1581757719333">
+    <state width="1493" height="290" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1581904315870" />
+    <state width="1493" height="290" key="GridCell.Tab.0.left" timestamp="1581904315870">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="177" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1581757719333" />
-    <state width="1493" height="177" key="GridCell.Tab.0.right" timestamp="1581757719333">
+    <state width="1493" height="290" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1581904315870" />
+    <state width="1493" height="290" key="GridCell.Tab.0.right" timestamp="1581904315870">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="177" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1581757719333" />
-    <state width="1493" height="177" key="GridCell.Tab.1.bottom" timestamp="1581757719333">
+    <state width="1493" height="290" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1581904315870" />
+    <state width="1493" height="290" key="GridCell.Tab.1.bottom" timestamp="1581904315870">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="177" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581757719333" />
-    <state width="1493" height="177" key="GridCell.Tab.1.center" timestamp="1581757719333">
+    <state width="1493" height="290" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581904315870" />
+    <state width="1493" height="290" key="GridCell.Tab.1.center" timestamp="1581904315870">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="177" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1581757719333" />
-    <state width="1493" height="177" key="GridCell.Tab.1.left" timestamp="1581757719333">
+    <state width="1493" height="290" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1581904315870" />
+    <state width="1493" height="290" key="GridCell.Tab.1.left" timestamp="1581904315870">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="177" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1581757719333" />
-    <state width="1493" height="177" key="GridCell.Tab.1.right" timestamp="1581757719333">
+    <state width="1493" height="290" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1581904315870" />
+    <state width="1493" height="290" key="GridCell.Tab.1.right" timestamp="1581904315870">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="177" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1581757719333" />
-    <state width="1493" height="183" key="GridCell.Tab.2.bottom" timestamp="1581741233861">
+    <state width="1493" height="290" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1581904315870" />
+    <state width="1493" height="277" key="GridCell.Tab.2.bottom" timestamp="1581845201460">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="183" key="GridCell.Tab.2.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581741233861" />
-    <state width="1493" height="183" key="GridCell.Tab.2.center" timestamp="1581741233861">
+    <state width="1493" height="277" key="GridCell.Tab.2.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581845201460" />
+    <state width="1493" height="277" key="GridCell.Tab.2.center" timestamp="1581845201460">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="183" key="GridCell.Tab.2.center/0.0.1536.864@0.0.1536.864" timestamp="1581741233861" />
-    <state width="1493" height="183" key="GridCell.Tab.2.left" timestamp="1581741233861">
+    <state width="1493" height="277" key="GridCell.Tab.2.center/0.0.1536.864@0.0.1536.864" timestamp="1581845201460" />
+    <state width="1493" height="277" key="GridCell.Tab.2.left" timestamp="1581845201460">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="183" key="GridCell.Tab.2.left/0.0.1536.864@0.0.1536.864" timestamp="1581741233861" />
-    <state width="1493" height="183" key="GridCell.Tab.2.right" timestamp="1581741233861">
+    <state width="1493" height="277" key="GridCell.Tab.2.left/0.0.1536.864@0.0.1536.864" timestamp="1581845201460" />
+    <state width="1493" height="277" key="GridCell.Tab.2.right" timestamp="1581845201460">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="183" key="GridCell.Tab.2.right/0.0.1536.864@0.0.1536.864" timestamp="1581741233861" />
-    <state x="493" y="144" key="RollbackChangesDialog" timestamp="1581247957604">
+    <state width="1493" height="277" key="GridCell.Tab.2.right/0.0.1536.864@0.0.1536.864" timestamp="1581845201460" />
+    <state x="493" y="144" key="RollbackChangesDialog" timestamp="1581841542236">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="493" y="144" key="RollbackChangesDialog/0.0.1536.864@0.0.1536.864" timestamp="1581247957604" />
+    <state x="493" y="144" key="RollbackChangesDialog/0.0.1536.864@0.0.1536.864" timestamp="1581841542236" />
     <state x="249" y="8" key="SettingsEditor" timestamp="1581659985115">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -481,18 +491,18 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="93" y="93" width="1350" height="678" key="VCS.FileHistoryDialog/0.0.1536.864@0.0.1536.864" timestamp="1580977076254" />
-    <state x="361" y="166" key="Vcs.Push.Dialog.v2" timestamp="1581739369415">
+    <state x="361" y="166" key="Vcs.Push.Dialog.v2" timestamp="1581763666757">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="361" y="166" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1581739369415" />
+    <state x="361" y="166" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1581763666757" />
     <state x="93" y="93" width="1350" height="678" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1581661845965">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="93" y="93" width="1350" height="678" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.864@0.0.1536.864" timestamp="1581661845965" />
-    <state x="465" y="258" key="com.intellij.ide.util.TipDialog" timestamp="1581736918626">
+    <state x="465" y="258" key="com.intellij.ide.util.TipDialog" timestamp="1581902026481">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="465" y="258" key="com.intellij.ide.util.TipDialog/0.0.1536.864@0.0.1536.864" timestamp="1581736918626" />
+    <state x="465" y="258" key="com.intellij.ide.util.TipDialog/0.0.1536.864@0.0.1536.864" timestamp="1581902026481" />
     <state x="401" y="48" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1581336692753">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -505,10 +515,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="499" y="199" key="extract.method.dialog/0.0.1536.864@0.0.1536.864" timestamp="1581477958743" />
-    <state x="463" y="164" width="611" height="536" key="find.popup" timestamp="1581755092365">
+    <state x="463" y="164" width="611" height="536" key="find.popup" timestamp="1581763475121">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="463" y="164" width="611" height="536" key="find.popup/0.0.1536.864@0.0.1536.864" timestamp="1581755092365" />
+    <state x="463" y="164" width="611" height="536" key="find.popup/0.0.1536.864@0.0.1536.864" timestamp="1581763475121" />
     <state x="543" y="225" key="git4idea.merge.GitMergeDialog" timestamp="1581302774496">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -525,9 +535,9 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="425" y="197" width="672" height="677" key="run.anything.popup/0.0.1536.864@0.0.1536.864" timestamp="1581687576714" />
-    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1581757766566">
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1581904298227">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1581757766566" />
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1581904298227" />
   </component>
 </project>

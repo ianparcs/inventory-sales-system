@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<JFXTabPane stylesheets="@../../css/item.css" xmlns:fx="http://javafx.com/fxml/1">
+    <Tab text="Item">
+        <graphic>
+            <HBox>
+                <FontAwesomeIconView glyphName="GROUP"/>
+                <padding>
+                    <Insets left="10" right="10"/>
+                </padding>
+            </HBox>
+        </graphic>
+        <fx:include source="product.fxml"/>
+    </Tab>
+    <Tab text="Category">
+        <graphic>
+            <VBox>
+                <FontAwesomeIconView glyphName="TAG"/>
+                <padding>
+                    <Insets left="10" right="10"/>
+                </padding>
+            </VBox>
+        </graphic>
+    </Tab>
+    <Tab text="Unit">
+        <graphic>
+            <VBox>
+                <FontAwesomeIconView glyphName="COGS"/>
+                <padding>
+                    <Insets left="10" right="10"/>
+                </padding>
+            </VBox>
+        </graphic>
+    </Tab>
+</JFXTabPane>

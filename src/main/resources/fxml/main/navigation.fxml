@@ -35,12 +35,6 @@
         </graphic>
     </JFXButton>
 
-    <JFXButton fx:id="btnCategory" maxWidth="1.7976931348623157E308" text="Category">
-        <graphic>
-            <FontAwesomeIconView glyphName="TAGS"/>
-        </graphic>
-    </JFXButton>
-
     <JFXButton fx:id="btnCustomer" maxWidth="1.7976931348623157E308" text="Customer">
         <graphic>
             <FontAwesomeIconView glyphName="HANDSHAKE_ALT"/>

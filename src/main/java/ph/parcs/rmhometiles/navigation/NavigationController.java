@@ -22,8 +22,6 @@ public class NavigationController {
     @FXML
     private JFXButton btnSupplier;
     @FXML
-    private JFXButton btnCategory;
-    @FXML
     private JFXButton btnCustomer;
     @FXML
     private JFXButton btnInvoice;
@@ -38,9 +36,8 @@ public class NavigationController {
     @FXML
     private void initialize() {
         Map<State, JFXButton> states = new HashMap<>();
-        states.put(State.PRODUCT, btnInventory);
+        states.put(State.INVENTORY, btnInventory);
         states.put(State.DASHBOARD, btnDashboard);
-        states.put(State.CATEGORY, btnCategory);
         states.put(State.SUPPLIER, btnSupplier);
         states.put(State.SALE_REPORT, btnSales);
         states.put(State.CUSTOMER, btnCustomer);

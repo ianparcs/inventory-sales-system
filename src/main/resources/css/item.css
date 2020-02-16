@@ -81,3 +81,50 @@
 .pagination .pagination-control .toggle-button:selected {
     -fx-background-color: strawberry;
 }
+
+
+.jfx-tab-pane .tab-header-background {
+    -fx-background-color: primary;
+}
+
+.jfx-tab-pane .tab-header-area .tab-down-button {
+    -fx-background-color: WHITE;
+    -fx-pref-width: 55;
+}
+
+.jfx-tab-pane .headers-region > .tab > .jfx-rippler {
+    -jfx-rippler-fill: greysquash;
+}
+
+.jfx-tab-pane .headers-region .tab-selected-line {
+    -fx-background-color: greysquash;
+}
+
+.jfx-tab-pane .headers-region .tab:closable {
+    -fx-border-color: rgba(255, 255, 255, .87);
+    -fx-border-width: 0 2 0 0;
+    -fx-border-style: dotted;
+    -fx-border-insets: 8 0 8 0;
+    -fx-padding: 0 8 0 8;
+}
+
+.jfx-tab-pane .headers-region .tab .tab-container .tab-label {
+    -fx-text-fill: rgba(255, 255, 255, .87);
+    -fx-font-weight: BOLD;
+    -fx-padding: 15;
+    -fx-font-size: 16;
+}
+
+.jfx-tab-pane .headers-region .tab:closable .tab-container .tab-label {
+    -fx-padding: 0 8 0 6;
+}
+
+.jfx-tab-pane .headers-region .tab:selected .tab-container {
+    -fx-text-fill: white;
+    -fx-background-color: blueberries;
+}
+
+.jfx-tab-pane .tab-selected-line {
+    -fx-background-color: white;
+
+}
