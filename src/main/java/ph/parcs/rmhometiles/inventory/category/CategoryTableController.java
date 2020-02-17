@@ -1,4 +1,4 @@
-package ph.parcs.rmhometiles.category;
+package ph.parcs.rmhometiles.inventory.category;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;

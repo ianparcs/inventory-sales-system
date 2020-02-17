@@ -1,4 +1,4 @@
-package ph.parcs.rmhometiles.category;
+package ph.parcs.rmhometiles.inventory.category;
 
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;

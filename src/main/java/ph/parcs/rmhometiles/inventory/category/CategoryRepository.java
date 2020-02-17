@@ -1,4 +1,4 @@
-package ph.parcs.rmhometiles.category;
+package ph.parcs.rmhometiles.inventory.category;
 
 import org.springframework.stereotype.Repository;
 import ph.parcs.rmhometiles.entity.Category;

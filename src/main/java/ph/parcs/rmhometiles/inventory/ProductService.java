@@ -1,4 +1,4 @@
-package ph.parcs.rmhometiles.product;
+package ph.parcs.rmhometiles.inventory;
 
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,5 +1,6 @@
-package ph.parcs.rmhometiles.product;
+package ph.parcs.rmhometiles.inventory;
 
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -29,7 +30,7 @@ public class ProductTableController extends ItemTableController<Product> {
     @FXML
     private TableColumn<Product, Integer> tcDiscount;
     @FXML
-    private TableColumn<Product, Integer> tcStock;
+    private TableColumn<Product, String> tcQuantity;
     @FXML
     private TableColumn<Product, Float> tcPrice;
     @FXML
@@ -57,11 +58,17 @@ public class ProductTableController extends ItemTableController<Product> {
                 if (!empty) setText((category != null) ? category.getName() : "n/a");
             }
         });
-        tcStock.setCellFactory(param -> new TableCell<>() {
-            @Override
-            public void updateItem(Integer stock, boolean empty) {
-                if (!empty) setText(stock + " " + Global.UNIT.PCS);
-            }
+
+        tcQuantity.setCellValueFactory(cellData -> {
+            Product data = cellData.getValue();
+            return Bindings.createStringBinding(
+                    () -> {
+                        if (data.getQuantityUnit() != null && data.getQuantityUnit().getName() != null) {
+                            return data.getQuantity().toString() + data.getQuantityUnit().getName();
+                        }
+                        return data.getQuantity().toString();
+                    }, data.quantityProperty()
+            );
         });
 
         tcPrice.setCellFactory(param -> new TableCell<>() {

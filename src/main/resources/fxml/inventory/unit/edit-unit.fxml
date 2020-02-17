@@ -6,8 +6,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.*?>
-<JFXDialog xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/edit-dialog.css" fx:id="editDialog"
-           fx:controller="ph.parcs.rmhometiles.category.CategoryEditController">
+<JFXDialog xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../../css/edit-dialog.css" fx:id="editDialog"
+           fx:controller="ph.parcs.rmhometiles.inventory.unit.QuantityUnitEditController">
 
     <JFXDialogLayout>
         <heading>
@@ -26,7 +26,7 @@
                 <JFXTextField fx:id="tfName" labelFloat="true" promptText="Name"
                               GridPane.columnIndex="0" GridPane.rowIndex="0">
                     <tooltip>
-                        <Tooltip text="Category name"/>
+                        <Tooltip text="Quantity unit name"/>
                     </tooltip>
                     <validators>
                         <RequiredFieldValidator message="Please fill out this field"/>

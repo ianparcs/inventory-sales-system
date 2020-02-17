@@ -50,7 +50,9 @@ public abstract class ItemTableController<T extends BaseEntity> {
         initActionColumn();
 
         spMain.sceneProperty().addListener((observableValue, scene, newScene) -> {
-            if (newScene != null) updateItems();
+            if (newScene != null) {
+                updateItems();
+            }
         });
     }
 
@@ -63,7 +65,7 @@ public abstract class ItemTableController<T extends BaseEntity> {
                 this::onItemDeleteAction, this::onItemEditAction));
     }
 
-    final protected void updateItems() {
+    public void updateItems() {
         Page<T> items = itemService.findPages(getCurrentPage(), getRowsPerPage(), searchValue);
         tvItem.setItems(FXCollections.observableArrayList(items.toList()));
         tvItem.refresh();

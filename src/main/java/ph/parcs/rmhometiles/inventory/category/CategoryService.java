@@ -1,4 +1,4 @@
-package ph.parcs.rmhometiles.category;
+package ph.parcs.rmhometiles.inventory.category;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ph.parcs.rmhometiles.entity.Category;
 import ph.parcs.rmhometiles.entity.Product;
+import ph.parcs.rmhometiles.inventory.ProductRepository;
 import ph.parcs.rmhometiles.item.ItemService;
-import ph.parcs.rmhometiles.product.ProductRepository;
 
 import java.util.*;
 

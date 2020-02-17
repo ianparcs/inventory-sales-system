@@ -1,4 +1,4 @@
-package ph.parcs.rmhometiles.product;
+package ph.parcs.rmhometiles.inventory;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
@@ -8,12 +8,12 @@ import javafx.stage.FileChooser;
 import javafx.util.StringConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import ph.parcs.rmhometiles.category.CategoryService;
 import ph.parcs.rmhometiles.entity.BaseEntity;
 import ph.parcs.rmhometiles.entity.Category;
 import ph.parcs.rmhometiles.entity.Product;
 import ph.parcs.rmhometiles.entity.Supplier;
 import ph.parcs.rmhometiles.file.FileService;
+import ph.parcs.rmhometiles.inventory.category.CategoryService;
 import ph.parcs.rmhometiles.item.EditItemController;
 import ph.parcs.rmhometiles.supplier.SupplierService;
 
@@ -23,6 +23,8 @@ import java.util.Optional;
 @Controller
 public class ProductEditController extends EditItemController<Product> {
 
+    @FXML
+    private JFXTextField tfCost;
     @FXML
     private JFXComboBox<Supplier> cbSupplier;
     @FXML

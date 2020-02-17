@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import de.jensd.fx.glyphs.fontawesome.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<JFXTabPane stylesheets="@../../css/item.css" xmlns:fx="http://javafx.com/fxml/1">
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<JFXTabPane xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/inventory.css">
     <Tab text="Item">
         <graphic>
             <HBox>
-                <FontAwesomeIconView glyphName="GROUP"/>
+                <FontAwesomeIconView glyphName="SUITCASE"/>
                 <padding>
                     <Insets left="10" right="10"/>
                 </padding>
             </HBox>
         </graphic>
-        <fx:include source="product.fxml"/>
+        <fx:include source="item/product.fxml"/>
     </Tab>
     <Tab text="Category">
         <graphic>
             <VBox>
-                <FontAwesomeIconView glyphName="TAG"/>
+                <FontAwesomeIconView glyphName="TAGS"/>
                 <padding>
                     <Insets left="10" right="10"/>
                 </padding>
             </VBox>
         </graphic>
+        <fx:include source="category/category.fxml"/>
     </Tab>
-    <Tab text="Unit">
+    <Tab text="Quantity Unit">
         <graphic>
             <VBox>
                 <FontAwesomeIconView glyphName="COGS"/>
@@ -37,5 +38,6 @@
                 </padding>
             </VBox>
         </graphic>
+        <fx:include source="unit/unit.fxml"/>
     </Tab>
 </JFXTabPane>

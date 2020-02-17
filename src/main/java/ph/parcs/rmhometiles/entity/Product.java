@@ -13,6 +13,7 @@ public class Product extends BaseEntity {
 
     private IntegerProperty discount = new SimpleIntegerProperty();
     private FloatProperty price = new SimpleFloatProperty();
+    private FloatProperty cost = new SimpleFloatProperty();
 
     private StringProperty description = new SimpleStringProperty();
     private StringProperty fileName = new SimpleStringProperty();
@@ -20,10 +21,19 @@ public class Product extends BaseEntity {
 
     private Supplier supplier;
     private Category category;
+    private QuantityUnit quantityUnit;
 
     @Column(name = "quantity")
     public Integer getQuantity() {
         return quantity.get();
+    }
+
+    public IntegerProperty quantityProperty() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity.set(quantity);
     }
 
     public void setQuantity(Integer quantity) {
@@ -46,6 +56,15 @@ public class Product extends BaseEntity {
 
     public void setUnitSold(Integer unitSold) {
         this.unitSold.set(unitSold);
+    }
+
+    public Float getCost() {
+        return cost.get();
+    }
+
+    @Column(name = "cost")
+    public void setCost(Float cost) {
+        this.cost.set(cost);
     }
 
     @Column(name = "discount")
@@ -89,6 +108,16 @@ public class Product extends BaseEntity {
     @JoinColumn(name = "supplier_id", referencedColumnName = "supplier_id")
     public Supplier getSupplier() {
         return supplier;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "quantity_unit_id", referencedColumnName = "quantity_unit_id")
+    public QuantityUnit getQuantityUnit() {
+        return quantityUnit;
+    }
+
+    public void setQuantityUnit(QuantityUnit quantityUnit) {
+        this.quantityUnit = quantityUnit;
     }
 
     public void setSupplier(Supplier supplier) {

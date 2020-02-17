@@ -78,18 +78,14 @@
     -fx-background-color: TRANSPARENT;
 }
 
-.pagination .pagination-control .toggle-button:selected {
-    -fx-background-color: strawberry;
-}
-
-
 .jfx-tab-pane .tab-header-background {
-    -fx-background-color: primary;
+    -fx-background-color: primary-dark;
+    -fx-border-radius: 3px 3px 0 0;
+    -fx-background-radius: 3px 3px 0 0;
 }
 
-.jfx-tab-pane .tab-header-area .tab-down-button {
-    -fx-background-color: WHITE;
-    -fx-pref-width: 55;
+.jfx-tab-pane .headers-region .tab .glyph-icon {
+    -fx-fill: greysquash;
 }
 
 .jfx-tab-pane .headers-region > .tab > .jfx-rippler {
@@ -97,34 +93,23 @@
 }
 
 .jfx-tab-pane .headers-region .tab-selected-line {
-    -fx-background-color: greysquash;
-}
-
-.jfx-tab-pane .headers-region .tab:closable {
-    -fx-border-color: rgba(255, 255, 255, .87);
-    -fx-border-width: 0 2 0 0;
-    -fx-border-style: dotted;
-    -fx-border-insets: 8 0 8 0;
-    -fx-padding: 0 8 0 8;
-}
-
-.jfx-tab-pane .headers-region .tab .tab-container .tab-label {
-    -fx-text-fill: rgba(255, 255, 255, .87);
-    -fx-font-weight: BOLD;
-    -fx-padding: 15;
-    -fx-font-size: 16;
-}
-
-.jfx-tab-pane .headers-region .tab:closable .tab-container .tab-label {
-    -fx-padding: 0 8 0 6;
-}
-
-.jfx-tab-pane .headers-region .tab:selected .tab-container {
-    -fx-text-fill: white;
     -fx-background-color: blueberries;
 }
 
-.jfx-tab-pane .tab-selected-line {
-    -fx-background-color: white;
-
+.jfx-tab-pane .headers-region .tab .tab-container .tab-label {
+    -fx-text-fill: greysquash;
+    -fx-font-weight: BOLD;
+    -fx-font-size: 16;
+    -fx-padding: 12;
 }
+
+.jfx-tab-pane .headers-region .tab:selected .tab-label {
+    -fx-text-fill: red;
+}
+
+.jfx-tab-pane .headers-region .tab:selected .glyph-icon,
+.jfx-tab-pane .headers-region .tab:hover .glyph-icon {
+    -fx-fill: blueberries;
+}
+
+

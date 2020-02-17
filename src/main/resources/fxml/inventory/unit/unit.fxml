@@ -10,15 +10,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.*?>
-<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain" stylesheets="@../../css/item.css"
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain" stylesheets="@../../../css/inventory.css"
            xmlns="http://javafx.com/javafx/10.0.2-internal"
-           fx:controller="ph.parcs.rmhometiles.category.CategoryTableController">
+           fx:controller="ph.parcs.rmhometiles.inventory.unit.QuantityUnitTableController">
 
-    <fx:include source="edit-category.fxml" visible="false"/>
+    <fx:include source="edit-unit.fxml" visible="false"/>
 
     <VBox styleClass="background">
 
-        <Label maxWidth="1.7976931348623157E308" styleClass="item-header" text="Manage Category"/>
+        <Label maxWidth="1.7976931348623157E308" styleClass="item-header" text="Manage Quantity Units"/>
 
         <GridPane vgap="15" VBox.vgrow="ALWAYS">
             <columnConstraints>
@@ -46,7 +46,7 @@
             </HBox>
 
             <HBox alignment="CENTER_RIGHT" spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                <JFXButton onAction="#showAddItemDialog" styleClass="add-button" text="Add Category">
+                <JFXButton onAction="#showAddItemDialog" styleClass="add-button" text="Add Unit">
                     <graphic>
                         <FontAwesomeIconView styleClass="plus-icon"/>
                     </graphic>

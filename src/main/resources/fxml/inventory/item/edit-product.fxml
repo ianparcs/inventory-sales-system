@@ -6,8 +6,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.*?>
-<JFXDialog xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/edit-dialog.css" fx:id="editDialog"
-           fx:controller="ph.parcs.rmhometiles.product.ProductEditController">
+<JFXDialog xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../../css/edit-dialog.css" fx:id="editDialog"
+           fx:controller="ph.parcs.rmhometiles.inventory.ProductEditController">
 
     <JFXDialogLayout>
         <heading>
@@ -20,6 +20,7 @@
         <body>
             <GridPane>
                 <columnConstraints>
+                    <ColumnConstraints hgrow="ALWAYS"/>
                     <ColumnConstraints hgrow="ALWAYS"/>
                     <ColumnConstraints hgrow="ALWAYS"/>
                 </columnConstraints>
@@ -44,6 +45,9 @@
                     </validators>
                 </JFXTextField>
 
+                <JFXComboBox fx:id="cbCategory" onAction="#clearCategory" labelFloat="true" promptText="Category"
+                             GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+
                 <JFXTextField fx:id="tfQuantity" promptText="Quantity" labelFloat="true"
                               GridPane.columnIndex="0" GridPane.rowIndex="1">
                     <validators>
@@ -58,7 +62,11 @@
                     </validators>
                 </JFXTextField>
 
-                <JFXTextField fx:id="tfDiscount" promptText="Discount" labelFloat="true"
+                <JFXComboBox fx:id="cbUnit" onAction="#clearSupplier" labelFloat="true" promptText="Quantity Unit"
+                             GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+
+
+                <JFXTextField fx:id="tfCost" labelFloat="true" promptText="Cost"
                               GridPane.columnIndex="0" GridPane.rowIndex="2">
                     <validators>
                         <NumberValidator message="Please enter number only"/>
@@ -72,14 +80,19 @@
                     </validators>
                 </JFXTextField>
 
-                <JFXComboBox fx:id="cbCategory" onAction="#clearCategory" labelFloat="true" promptText="Category"
-                             GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                <JFXTextField fx:id="tfDiscount" promptText="Discount" labelFloat="true"
+                              GridPane.columnIndex="2" GridPane.rowIndex="2">
+                    <validators>
+                        <NumberValidator message="Please enter number only"/>
+                    </validators>
+                </JFXTextField>
+
 
                 <JFXComboBox fx:id="cbSupplier" onAction="#clearSupplier" labelFloat="true" promptText="Supplier"
-                             GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                             GridPane.columnIndex="0" GridPane.rowIndex="3"/>
 
                 <JFXTextField fx:id="tfImage" labelFloat="true" promptText="Choose Image" onMouseClicked="#selectImage"
-                              GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2"
+                              GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.columnSpan="2"
                               GridPane.hgrow="ALWAYS" editable="false">
                 </JFXTextField>
             </GridPane>

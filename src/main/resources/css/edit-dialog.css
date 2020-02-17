@@ -43,7 +43,7 @@
 
 .jfx-dialog-layout > .jfx-layout-body {
     -fx-alignment: center;
-    -fx-pref-width: 500px;
+    -fx-pref-width: 700px;
     -fx-padding: 35px;
 }
 
