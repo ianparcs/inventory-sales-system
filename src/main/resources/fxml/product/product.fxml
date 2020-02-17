@@ -11,9 +11,10 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import com.jfoenix.controls.JFXTextField?>
-<StackPane stylesheets="@../../css/item.css"
+<StackPane fx:id="spMain" stylesheets="@../../css/item.css"
            xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="ph.parcs.rmhometiles.product.ProductTableController">
+
     <fx:include source="edit-product.fxml" visible="false"/>
 
     <VBox styleClass="background">
