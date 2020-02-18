@@ -8,7 +8,8 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.*?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spRoot" styleClass="background" stylesheets="@../../css/login.css"
-           xmlns="http://javafx.com/javafx/10.0.2-internal" fx:controller="ph.parcs.rmhometiles.login.LoginController">
+           xmlns="http://javafx.com/javafx/10.0.2-internal"
+           fx:controller="ph.parcs.rmhometiles.ui.login.LoginController">
 
     <SplitPane dividerPositions="0.7">
 

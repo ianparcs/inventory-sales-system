@@ -3,6 +3,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.StackPane?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="1.7976931348623157E308"
-           maxWidth="1.7976931348623157E308" fx:controller="ph.parcs.rmhometiles.dashboard.DashboardController">
+           maxWidth="1.7976931348623157E308" fx:controller="ph.parcs.rmhometiles.ui.dashboard.DashboardController">
     <Label text="DASHBOARD"/>
 </StackPane>

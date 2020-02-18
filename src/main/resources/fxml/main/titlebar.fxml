@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <HBox xmlns:fx="http://javafx.com/fxml/1" fx:id="apTitleBar" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308"
       maxWidth="1.7976931348623157E308" styleClass="title-bar"
-      xmlns="http://javafx.com/javafx/10.0.2-internal" fx:controller="ph.parcs.rmhometiles.menu.TitleBarController">
+      xmlns="http://javafx.com/javafx/10.0.2-internal" fx:controller="ph.parcs.rmhometiles.ui.menu.TitleBarController">
 
     <JFXHamburger fx:id="hbgNavigation" alignment="CENTER" maxHeight="1.7976931348623157E308"
                   maxWidth="1.7976931348623157E308" styleClass="hamburger">

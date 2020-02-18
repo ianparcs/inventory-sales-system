@@ -12,7 +12,7 @@
 <?import java.lang.*?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain" stylesheets="@../../../css/inventory.css"
            xmlns="http://javafx.com/javafx/10.0.2-internal"
-           fx:controller="ph.parcs.rmhometiles.inventory.unit.QuantityUnitTableController">
+           fx:controller="ph.parcs.rmhometiles.entity.inventory.unit.QuantityUnitTableController">
 
     <fx:include source="edit-unit.fxml" visible="false"/>
 

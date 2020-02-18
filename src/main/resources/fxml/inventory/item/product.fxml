@@ -10,9 +10,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.*?>
-<StackPane fx:id="spMain" stylesheets="@../../../css/inventory.css"
-           xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="ph.parcs.rmhometiles.inventory.ProductTableController">
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain"
+           stylesheets="@../../../css/inventory.css" xmlns="http://javafx.com/javafx/10.0.2-internal"
+           fx:controller="ph.parcs.rmhometiles.entity.inventory.product.ProductTableController">
 
     <fx:include source="edit-product.fxml" visible="false"/>
 

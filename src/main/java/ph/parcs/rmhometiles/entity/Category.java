@@ -1,5 +1,7 @@
 package ph.parcs.rmhometiles.entity;
 
+import ph.parcs.rmhometiles.entity.inventory.product.Product;
+
 import javax.persistence.*;
 import java.util.Set;
 

@@ -13,7 +13,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import ph.parcs.rmhometiles.scene.SceneManager;
+import ph.parcs.rmhometiles.ui.scene.SceneManager;
 
 @Component
 public class StageInitializer implements ApplicationListener<JavaFxApplication.StageReadyEvent> {

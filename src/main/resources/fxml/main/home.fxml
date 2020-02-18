@@ -3,7 +3,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1"
-           stylesheets="@../../css/home.css" fx:controller="ph.parcs.rmhometiles.home.HomeController">
+           stylesheets="@../../css/home.css" fx:controller="ph.parcs.rmhometiles.ui.home.HomeController">
 
     <BorderPane>
         <center>

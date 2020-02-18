@@ -66,6 +66,7 @@
 
 .jfx-text-field {
     -jfx-focus-color: blueberries;
+    -fx-pref-width: 700px;
 }
 
 
