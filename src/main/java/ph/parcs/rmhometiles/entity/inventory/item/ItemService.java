@@ -3,7 +3,6 @@ package ph.parcs.rmhometiles.entity.inventory.item;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import ph.parcs.rmhometiles.entity.BaseEntity;
 
 @Service
 public abstract class ItemService<T extends BaseEntity> {
@@ -21,6 +20,7 @@ public abstract class ItemService<T extends BaseEntity> {
         }
         return new ItemPageEntry(toEntry, fromEntry);
     }
+
 
     public PageRequest requestPage(int page, int itemPerPage) {
         return PageRequest.of(page, itemPerPage);

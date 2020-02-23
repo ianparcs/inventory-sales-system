@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain"
+           stylesheets="@../../../css/inventory.css" xmlns="http://javafx.com/javafx/10.0.2-internal">
+    <VBox styleClass="background">
+        <Label maxWidth="1.7976931348623157E308" styleClass="item-header" text="New Sell"/>
+        <JFXComboBox promptText="Customer Name" editable="true"/>
+    
+    </VBox>
+
+</StackPane>

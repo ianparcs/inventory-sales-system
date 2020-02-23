@@ -8,7 +8,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import ph.parcs.rmhometiles.entity.Customer;
 import ph.parcs.rmhometiles.entity.inventory.item.ItemService;
 
 import java.util.ArrayList;

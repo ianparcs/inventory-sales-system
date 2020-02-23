@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.ItemListener;
-import ph.parcs.rmhometiles.entity.BaseEntity;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.ui.alert.SweetAlert;
 import ph.parcs.rmhometiles.ui.alert.SweetAlertFactory;
@@ -50,9 +49,7 @@ public abstract class ItemTableController<T extends BaseEntity> {
         initActionColumn();
 
         spMain.sceneProperty().addListener((observableValue, scene, newScene) -> {
-            if (newScene != null) {
-                updateItems();
-            }
+            if (newScene != null) updateItems();
         });
     }
 
@@ -105,7 +102,7 @@ public abstract class ItemTableController<T extends BaseEntity> {
         return editItem;
     }
 
-    final protected void updatePageEntries(Page<T> items) {
+    private void updatePageEntries(Page<T> items) {
         ItemPageEntry itemPageEntry = itemService.getPageEntries(items);
         lblPageEntries.setText("Showing " + itemPageEntry.getFromEntry() + " to " + itemPageEntry.getToEntry() + " of " + items.getTotalElements() + " entries");
         pagination.setPageCount(items.getTotalPages());

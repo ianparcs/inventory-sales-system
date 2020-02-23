@@ -1,4 +1,4 @@
-package ph.parcs.rmhometiles.entity;
+package ph.parcs.rmhometiles.entity.inventory.item;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;

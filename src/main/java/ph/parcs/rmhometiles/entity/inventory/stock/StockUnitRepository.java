@@ -1,4 +1,4 @@
-package ph.parcs.rmhometiles.entity.customer;
+package ph.parcs.rmhometiles.entity.inventory.stock;
 
 import org.springframework.stereotype.Repository;
 import ph.parcs.rmhometiles.entity.inventory.item.ItemRepository;
@@ -6,8 +6,10 @@ import ph.parcs.rmhometiles.entity.inventory.item.ItemRepository;
 import java.util.List;
 
 @Repository
-public interface CustomerRepository extends ItemRepository<Customer, Integer> {
+public interface StockUnitRepository extends ItemRepository<StockUnit, Integer> {
 
     @Override
-    List<Customer> findAll();
+    List<StockUnit> findAll();
+
+
 }

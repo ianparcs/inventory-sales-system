@@ -1,5 +1,6 @@
-package ph.parcs.rmhometiles.entity;
+package ph.parcs.rmhometiles.entity.inventory.category;
 
+import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 
 import javax.persistence.*;

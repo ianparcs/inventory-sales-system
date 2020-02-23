@@ -12,13 +12,11 @@
 <?import java.lang.*?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain"
            stylesheets="@../../../css/inventory.css" xmlns="http://javafx.com/javafx/10.0.2-internal"
-           fx:controller="ph.parcs.rmhometiles.entity.inventory.product.ProductTableController">
-
-    <fx:include source="edit-product.fxml" visible="false"/>
+       >
 
     <VBox styleClass="background">
 
-        <Label maxWidth="1.7976931348623157E308" styleClass="item-header" text="Manage Products"/>
+        <Label maxWidth="1.7976931348623157E308" styleClass="item-header" text="Manage Invoice"/>
 
         <GridPane vgap="15" VBox.vgrow="ALWAYS">
             <columnConstraints>
@@ -28,7 +26,7 @@
 
             <HBox alignment="CENTER_LEFT" spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0">
                 <Label text="Show"/>
-                <JFXComboBox fx:id="cbRowCount" onAction="#onPageRowChanged" prefWidth="75">
+                <JFXComboBox fx:id="cbRowCount"  prefWidth="75">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <Integer fx:value="5"/>
@@ -46,12 +44,12 @@
             </HBox>
 
             <HBox alignment="CENTER_RIGHT" spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                <JFXButton onAction="#showEditItemDialog" styleClass="add-button" text="Add Product">
+                <JFXButton  styleClass="add-button" text="Add Product">
                     <graphic>
                         <FontAwesomeIconView styleClass="plus-icon"/>
                     </graphic>
                 </JFXButton>
-                <JFXTextField fx:id="tfSearchItem" onKeyTyped="#searchItem" promptText="Search"/>
+                <JFXTextField fx:id="tfSearchItem"  promptText="Search"/>
             </HBox>
 
             <TableView fx:id="tvItem" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS"
@@ -60,14 +58,13 @@
                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
                 </columnResizePolicy>
                 <columns>
-
-                    <TableColumn reorderable="false" text="Code">
+                    <TableColumn maxWidth="50" minWidth="50" resizable="false" styleClass="id-column" text="#">
                         <cellValueFactory>
-                            <PropertyValueFactory property="code"/>
+                            <PropertyValueFactory property="id"/>
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn reorderable="false" text="Name">
+                    <TableColumn reorderable="false" text="Code">
                         <cellValueFactory>
                             <PropertyValueFactory property="name"/>
                         </cellValueFactory>
@@ -122,7 +119,7 @@
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn fx:id="tcAction"  maxWidth="100" minWidth="40" reorderable="false"
+                    <TableColumn fx:id="tcAction" maxWidth="80" minWidth="35" reorderable="false"
                                  resizable="false" sortable="false" styleClass="action-column" text="Action"/>
                 </columns>
             </TableView>

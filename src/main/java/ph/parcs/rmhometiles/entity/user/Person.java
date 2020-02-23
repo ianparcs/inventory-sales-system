@@ -1,7 +1,8 @@
-package ph.parcs.rmhometiles.entity;
+package ph.parcs.rmhometiles.entity.user;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;

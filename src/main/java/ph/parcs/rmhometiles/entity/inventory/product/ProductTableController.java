@@ -10,9 +10,9 @@ import javafx.scene.layout.StackPane;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import ph.parcs.rmhometiles.entity.Category;
-import ph.parcs.rmhometiles.entity.Supplier;
+import ph.parcs.rmhometiles.entity.inventory.category.Category;
 import ph.parcs.rmhometiles.entity.inventory.item.ItemTableController;
+import ph.parcs.rmhometiles.entity.supplier.Supplier;
 import ph.parcs.rmhometiles.file.FileService;
 import ph.parcs.rmhometiles.util.Global;
 
@@ -29,7 +29,7 @@ public class ProductTableController extends ItemTableController<Product> {
     @FXML
     private TableColumn<Product, Integer> tcDiscount;
     @FXML
-    private TableColumn<Product, String> tcQuantity;
+    private TableColumn<Product, String> tcStock;
     @FXML
     private TableColumn<Product, Float> tcPrice;
     @FXML
@@ -56,18 +56,6 @@ public class ProductTableController extends ItemTableController<Product> {
             public void updateItem(Category category, boolean empty) {
                 if (!empty) setText((category != null) ? category.getName() : "n/a");
             }
-        });
-
-        tcQuantity.setCellValueFactory(cellData -> {
-            Product data = cellData.getValue();
-            return Bindings.createStringBinding(
-                    () -> {
-                        if (data.getQuantityUnit() != null && data.getQuantityUnit().getName() != null) {
-                            return data.getQuantity().toString() + data.getQuantityUnit().getName();
-                        }
-                        return data.getQuantity().toString();
-                    }, data.quantityProperty()
-            );
         });
 
         tcPrice.setCellFactory(param -> new TableCell<>() {
@@ -98,6 +86,18 @@ public class ProductTableController extends ItemTableController<Product> {
                     }
                 }
             }
+        });
+
+        tcStock.setCellValueFactory(cellData -> {
+            Product data = cellData.getValue();
+            return Bindings.createStringBinding(
+                    () -> {
+                        if (data.getStockUnit() != null && data.getStockUnit().getName() != null) {
+                            return data.getStock().toString() + " " + data.getStockUnit().getName();
+                        }
+                        return data.getStock().toString();
+                    }, data.stockProperty()
+            );
         });
     }
 

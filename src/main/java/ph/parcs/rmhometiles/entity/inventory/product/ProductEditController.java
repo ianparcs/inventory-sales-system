@@ -8,11 +8,13 @@ import javafx.stage.FileChooser;
 import javafx.util.StringConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import ph.parcs.rmhometiles.entity.BaseEntity;
-import ph.parcs.rmhometiles.entity.Category;
-import ph.parcs.rmhometiles.entity.Supplier;
+import ph.parcs.rmhometiles.entity.inventory.category.Category;
 import ph.parcs.rmhometiles.entity.inventory.category.CategoryService;
+import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.entity.inventory.item.EditItemController;
+import ph.parcs.rmhometiles.entity.inventory.stock.StockUnit;
+import ph.parcs.rmhometiles.entity.inventory.stock.StockUnitService;
+import ph.parcs.rmhometiles.entity.supplier.Supplier;
 import ph.parcs.rmhometiles.entity.supplier.SupplierService;
 import ph.parcs.rmhometiles.file.FileService;
 
@@ -22,6 +24,8 @@ import java.util.Optional;
 @Controller
 public class ProductEditController extends EditItemController<Product> {
 
+    @FXML
+    private JFXComboBox<StockUnit> cbStockUnit;
     @FXML
     private JFXComboBox<Supplier> cbSupplier;
     @FXML
@@ -33,7 +37,7 @@ public class ProductEditController extends EditItemController<Product> {
     @FXML
     private JFXTextField tfUnitSold;
     @FXML
-    private JFXTextField tfQuantity;
+    private JFXTextField tfStock;
     @FXML
     private JFXTextField tfImage;
     @FXML
@@ -42,7 +46,10 @@ public class ProductEditController extends EditItemController<Product> {
     private JFXTextField tfName;
     @FXML
     private JFXTextField tfCost;
+    @FXML
+    private JFXTextField tfCode;
 
+    private StockUnitService stockUnitService;
     private CategoryService categoryService;
     private SupplierService supplierService;
     private FileService fileService;
@@ -53,9 +60,10 @@ public class ProductEditController extends EditItemController<Product> {
         validateField(tfDescription);
         validateField(tfDiscount);
         validateField(tfUnitSold);
-        validateField(tfQuantity);
+        validateField(tfStock);
         validateField(tfPrice);
         validateField(tfName);
+        validateField(tfCode);
 
         initComboBoxValues();
     }
@@ -83,57 +91,76 @@ public class ProductEditController extends EditItemController<Product> {
                 return null;
             }
         });
+        cbStockUnit.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(StockUnit stockUnit) {
+                return stockUnit.getName();
+            }
+
+            @Override
+            public StockUnit fromString(String s) {
+                return null;
+            }
+        });
     }
 
     @Override
     protected void clearFields() {
+        cbStockUnit.getSelectionModel().clearSelection();
         cbCategory.getSelectionModel().clearSelection();
         cbSupplier.getSelectionModel().clearSelection();
         tfDescription.clear();
         tfDiscount.clear();
         tfUnitSold.clear();
-        tfQuantity.clear();
+        tfStock.clear();
         tfImage.clear();
         tfPrice.clear();
         tfName.clear();
+        tfCode.clear();
         clearValidators();
     }
 
-    protected void clearValidators() {
+    private void clearValidators() {
         tfDescription.resetValidation();
         tfDiscount.resetValidation();
         tfUnitSold.resetValidation();
-        tfQuantity.resetValidation();
+        tfStock.resetValidation();
         tfName.resetValidation();
         tfPrice.resetValidation();
+        tfCode.resetValidation();
     }
 
     @Override
     protected void bindFields(Product product) {
         if (!itemService.isNew(product)) {
+            tfCode.setText(product.getCode());
             tfName.setText(product.getName());
             tfDescription.setText(product.getDescription());
             tfPrice.setText(product.getPrice().toString());
             tfUnitSold.setText(product.getUnitSold().toString());
-            tfQuantity.setText(product.getQuantity().toString());
+            tfStock.setText(product.getStock().toString());
             tfDiscount.setText(product.getDiscount().toString());
         }
+        setStockUnitValue(product);
         setCategoryValue(product);
         setSupplierValue(product);
+
     }
 
     @Override
     protected Product unbindFields(Integer id) {
         Product product = new Product();
         product.setUnitSold(Integer.valueOf(!tfUnitSold.getText().isEmpty() ? tfUnitSold.getText() : "0"));
-        product.setQuantity(Integer.valueOf(!tfQuantity.getText().isEmpty() ? tfQuantity.getText() : "0"));
+        product.setStock(Integer.valueOf(!tfStock.getText().isEmpty() ? tfStock.getText() : "0"));
         product.setDiscount(Integer.valueOf(!tfDiscount.getText().isEmpty() ? tfDiscount.getText() : "0"));
         product.setPrice(Float.valueOf(!tfPrice.getText().isEmpty() ? tfPrice.getText() : "0.00"));
+        product.setStockUnit(cbStockUnit.getValue());
         product.setDescription(tfDescription.getText());
         product.setCategory(cbCategory.getValue());
         product.setSupplier(cbSupplier.getValue());
         product.setFilePath(tfImage.getText());
         product.setName(tfName.getText());
+        product.setCode(tfCode.getText());
         product.setId(id);
         return product;
     }
@@ -148,6 +175,12 @@ public class ProductEditController extends EditItemController<Product> {
         cbSupplier.getItems().setAll(supplierService.getSuppliers());
         Optional<Supplier> search = supplierService.findSupplierByProduct(cbSupplier.getItems(), product);
         search.ifPresent(supplier -> cbSupplier.getSelectionModel().select(search.get()));
+    }
+
+    private void setStockUnitValue(Product product) {
+        cbStockUnit.getItems().setAll(stockUnitService.getStockUnits());
+        Optional<StockUnit> search = stockUnitService.findStockUnitByProduct(cbStockUnit.getItems(), product);
+        search.ifPresent(supplier -> cbStockUnit.getSelectionModel().select(search.get()));
     }
 
     @FXML
@@ -167,6 +200,11 @@ public class ProductEditController extends EditItemController<Product> {
         clearComboboxSelection(cbCategory);
     }
 
+    @FXML
+    private void clearStockUnit() {
+        clearComboboxSelection(cbStockUnit);
+    }
+
     private void clearComboboxSelection(JFXComboBox<?> comboBox) {
         BaseEntity entity = (BaseEntity) comboBox.getValue();
         if (entity != null) {
@@ -174,6 +212,11 @@ public class ProductEditController extends EditItemController<Product> {
                 Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
             }
         }
+    }
+
+    @Autowired
+    public void setStockUnitService(StockUnitService stockUnitService) {
+        this.stockUnitService = stockUnitService;
     }
 
     @Autowired
@@ -195,4 +238,5 @@ public class ProductEditController extends EditItemController<Product> {
     public void setFileService(FileService fileService) {
         this.fileService = fileService;
     }
+
 }

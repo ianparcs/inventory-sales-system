@@ -1,4 +1,6 @@
-package ph.parcs.rmhometiles.entity;
+package ph.parcs.rmhometiles.entity.customer;
+
+import ph.parcs.rmhometiles.entity.user.Person;
 
 import javax.persistence.*;
 

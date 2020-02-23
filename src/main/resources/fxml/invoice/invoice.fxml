@@ -1,8 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml"
-            xmlns="http://javafx.com/javafx"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<JFXTabPane fx:id="tpRoot" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/inventory.css"
+            fx:controller="ph.parcs.rmhometiles.entity.invoice.InvoiceController">
+    <Tab fx:id="tabNewSell" text="New Sell">
+        <graphic>
+            <HBox>
+                <FontAwesomeIconView glyphName="SHOPPING_BASKET"/>
+                <padding>
+                    <Insets left="10" right="10"/>
+                </padding>
+            </HBox>
+        </graphic>
+        <fx:include source="new-sell.fxml"/>
+    </Tab>
+    <Tab fx:id="tabManageSell" text="Invoice">
+        <graphic>
+            <VBox>
+                <FontAwesomeIconView glyphName="LIST_ALT"/>
+                <padding>
+                    <Insets left="10" right="10"/>
+                </padding>
+            </VBox>
+        </graphic>
+        <fx:include source="sell.fxml"/>
+    </Tab>
+</JFXTabPane>

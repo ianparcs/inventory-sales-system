@@ -1,10 +1,10 @@
 package ph.parcs.rmhometiles.entity.inventory.product;
 
 import javafx.beans.property.*;
-import ph.parcs.rmhometiles.entity.BaseEntity;
-import ph.parcs.rmhometiles.entity.Category;
-import ph.parcs.rmhometiles.entity.Supplier;
-import ph.parcs.rmhometiles.entity.inventory.unit.QuantityUnit;
+import ph.parcs.rmhometiles.entity.inventory.category.Category;
+import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
+import ph.parcs.rmhometiles.entity.inventory.stock.StockUnit;
+import ph.parcs.rmhometiles.entity.supplier.Supplier;
 
 import javax.persistence.*;
 
@@ -12,36 +12,34 @@ import javax.persistence.*;
 @Access(AccessType.PROPERTY)
 public class Product extends BaseEntity {
 
-    private IntegerProperty quantity = new SimpleIntegerProperty();
+    private IntegerProperty stock = new SimpleIntegerProperty();
     private IntegerProperty unitSold = new SimpleIntegerProperty();
 
     private IntegerProperty discount = new SimpleIntegerProperty();
     private FloatProperty price = new SimpleFloatProperty();
     private FloatProperty cost = new SimpleFloatProperty();
 
+
     private StringProperty description = new SimpleStringProperty();
     private StringProperty fileName = new SimpleStringProperty();
     private StringProperty filePath = new SimpleStringProperty();
+    private StringProperty code = new SimpleStringProperty();
 
     private Supplier supplier;
     private Category category;
-    private QuantityUnit quantityUnit;
+    private StockUnit stockUnit;
 
-    @Column(name = "quantity")
-    public Integer getQuantity() {
-        return quantity.get();
+    @Column(name = "stock")
+    public Integer getStock() {
+        return stock.get();
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity.set(quantity);
+    public void setStock(Integer stock) {
+        this.stock.set(stock);
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity.set(quantity);
-    }
-
-    public IntegerProperty quantityProperty() {
-        return quantity;
+    public IntegerProperty stockProperty() {
+        return stock;
     }
 
     @Column(name = "file_name")
@@ -119,13 +117,13 @@ public class Product extends BaseEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "quantity_unit_id", referencedColumnName = "quantity_unit_id")
-    public QuantityUnit getQuantityUnit() {
-        return quantityUnit;
+    @JoinColumn(name = "stock_unit_id", referencedColumnName = "stock_unit_id")
+    public StockUnit getStockUnit() {
+        return stockUnit;
     }
 
-    public void setQuantityUnit(QuantityUnit quantityUnit) {
-        this.quantityUnit = quantityUnit;
+    public void setStockUnit(StockUnit stockUnit) {
+        this.stockUnit = stockUnit;
     }
 
     public String getFilePath() {
@@ -134,5 +132,14 @@ public class Product extends BaseEntity {
 
     public void setFilePath(String filePath) {
         this.filePath.set(filePath);
+    }
+
+    @Column(name = "code")
+    public String getCode() {
+        return code.get();
+    }
+
+    public void setCode(String code) {
+        this.code.set(code);
     }
 }

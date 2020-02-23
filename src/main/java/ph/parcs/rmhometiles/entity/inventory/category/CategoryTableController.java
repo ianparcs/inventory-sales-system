@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import ph.parcs.rmhometiles.entity.Category;
 import ph.parcs.rmhometiles.entity.inventory.item.ItemTableController;
 
 @Controller

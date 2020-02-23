@@ -12,13 +12,13 @@
 <?import java.lang.*?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain" stylesheets="@../../../css/inventory.css"
            xmlns="http://javafx.com/javafx/10.0.2-internal"
-           fx:controller="ph.parcs.rmhometiles.entity.inventory.stock.StockUnitTableController">
+           fx:controller="ph.parcs.rmhometiles.entity.inventory.category.CategoryTableController">
 
-    <fx:include source="edit-unit.fxml" visible="false"/>
+    <fx:include source="edit-category.fxml" visible="false"/>
 
     <VBox styleClass="background">
 
-        <Label maxWidth="1.7976931348623157E308" styleClass="item-header" text="Manage Stock Units"/>
+        <Label maxWidth="1.7976931348623157E308" styleClass="item-header" text="Manage Categories"/>
 
         <GridPane vgap="15" VBox.vgrow="ALWAYS">
             <columnConstraints>
@@ -46,7 +46,7 @@
             </HBox>
 
             <HBox alignment="CENTER_RIGHT" spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                <JFXButton onAction="#showAddItemDialog" styleClass="add-button" text="Add Unit">
+                <JFXButton onAction="#showAddItemDialog" styleClass="add-button" text="Add Category">
                     <graphic>
                         <FontAwesomeIconView styleClass="plus-icon"/>
                     </graphic>

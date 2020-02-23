@@ -19,7 +19,6 @@
     <VBox styleClass="background">
 
         <Label maxWidth="1.7976931348623157E308" styleClass="item-header" text="Manage Customer"/>
-
         <GridPane vgap="15" VBox.vgrow="ALWAYS">
             <columnConstraints>
                 <ColumnConstraints halignment="LEFT" hgrow="ALWAYS"/>
