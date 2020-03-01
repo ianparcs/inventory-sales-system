@@ -6,7 +6,7 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<JFXTabPane fx:id="tpRoot" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/inventory.css"
+<JFXTabPane fx:id="tpRoot" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/tabpane.css"
             fx:controller="ph.parcs.rmhometiles.entity.inventory.InventoryController">
     <Tab fx:id="tabProduct" text="Item">
         <graphic>

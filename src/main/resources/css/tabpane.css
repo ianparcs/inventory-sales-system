@@ -1,0 +1,40 @@
+.background {
+    -fx-background-color: white;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 10, 0, 0, 0);
+}
+
+.jfx-tab-pane .tab-header-background {
+    -fx-background-color: primary-dark;
+    -fx-border-radius: 3px 3px 0 0;
+    -fx-background-radius: 3px 3px 0 0;
+}
+
+.jfx-tab-pane .headers-region .tab .glyph-icon {
+    -fx-fill: greysquash;
+}
+
+.jfx-tab-pane .headers-region > .tab > .jfx-rippler {
+    -jfx-rippler-fill: greysquash;
+}
+
+.jfx-tab-pane .headers-region .tab-selected-line {
+    -fx-background-color: blueberries;
+}
+
+.jfx-tab-pane .headers-region .tab .tab-container .tab-label {
+    -fx-text-fill: greysquash;
+    -fx-font-weight: BOLD;
+    -fx-font-size: 16;
+    -fx-padding: 12;
+}
+
+.jfx-tab-pane .headers-region .tab:selected .tab-label {
+    -fx-text-fill: red;
+}
+
+.jfx-tab-pane .headers-region .tab:selected .glyph-icon,
+.jfx-tab-pane .headers-region .tab:hover .glyph-icon {
+    -fx-fill: blueberries;
+}

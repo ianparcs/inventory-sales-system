@@ -34,22 +34,21 @@
     -glyph-size: 18px;
 }
 
-.jfx-text-field {
+GridPane HBox .jfx-text-field {
     -fx-padding: 0.433333em 1em 0.433333em 1em;
     -fx-border-radius: 15px;
     -fx-border-color: greysquash;
 }
 
-
-.jfx-text-field > .input-line,
-.combo-box > .input-line {
+GridPane HBox .jfx-text-field > .input-line,
+GridPane HBox .combo-box > .input-line {
     -fx-background-color: transparent;
     -fx-pref-height: 0px;
     -fx-translate-y: 0px;
 }
 
-.jfx-text-field > .input-focused-line,
-.combo-box > .input-focused-line {
+GridPane HBox .jfx-text-field > .input-focused-line,
+GridPane HBox .combo-box > .input-focused-line {
     -fx-background-color: transparent;
     -fx-pref-height: 0px;
 }

@@ -1,16 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
-<?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain"
-           stylesheets="@../../../css/inventory.css" xmlns="http://javafx.com/javafx/10.0.2-internal">
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<StackPane fx:id="spMain" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="ph.parcs.rmhometiles.entity.invoice.SellController">
+
     <VBox styleClass="background">
         <Label maxWidth="1.7976931348623157E308" styleClass="item-header" text="New Sell"/>
-        <JFXComboBox promptText="Customer Name" editable="true"/>
-    
-    </VBox>
 
+        <GridPane vgap="15" hgap="20">
+
+            <JFXComboBox  editable="true" promptText="Name" GridPane.columnIndex="0"
+                         GridPane.rowIndex="0"/>
+            <JFXTextField labelFloat="true" promptText="Contact" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+            <JFXTextField labelFloat="true" promptText="Address" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+
+            <TableView fx:id="tvItem" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="1">
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
+                <columns>
+                    <TableColumn reorderable="false" text="Code">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="code"/>
+                        </cellValueFactory>
+                    </TableColumn>
+
+                    <TableColumn fx:id="tcAction" maxWidth="100" minWidth="40" reorderable="false" resizable="false"
+                                 sortable="false" styleClass="action-column" text="Action"/>
+                </columns>
+            </TableView>
+            <rowConstraints>
+                <RowConstraints/>
+                <RowConstraints/>
+            </rowConstraints>
+
+        </GridPane>
+
+
+    </VBox>
 </StackPane>
