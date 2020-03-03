@@ -8,10 +8,19 @@
   <component name="ChangeListManager">
     <list default="true" id="5f946820-2b90-4643-9237-2d41a464616e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/customer/CustomerEditController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/customer/CustomerEditController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/customer/CustomerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/customer/CustomerRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/customer/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/customer/CustomerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/item/EditItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/item/EditItemController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/item/ItemTableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/item/ItemTableController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/SellController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/SellController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/user/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/user/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/content.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/content.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/css/inventory.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/inventory.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/inventory/inventory.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/inventory/inventory.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/invoice.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/invoice.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/inventory/item/product.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/inventory/item/product.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/invoice/invoice.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/invoice/invoice.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/invoice/new-sell.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/invoice/new-sell.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/invoice/sell.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/invoice/sell.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -166,7 +175,8 @@
       <workItem from="1582593722587" duration="3367000" />
       <workItem from="1582687769183" duration="28237000" />
       <workItem from="1582989013789" duration="634000" />
-      <workItem from="1583021937242" duration="11750000" />
+      <workItem from="1583021937242" duration="25411000" />
+      <workItem from="1583201341313" duration="21114000" />
     </task>
     <task id="LOCAL-00001" summary="code cleanup">
       <created>1580876855750</created>

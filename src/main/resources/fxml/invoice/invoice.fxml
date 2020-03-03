@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <JFXTabPane fx:id="tpRoot" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/inventory.css"
             fx:controller="ph.parcs.rmhometiles.entity.invoice.InvoiceController">
-    <Tab fx:id="tabNewSell" text="New Sell">
+    <Tab fx:id="tabNewSell" text="Invoice">
         <graphic>
             <HBox>
                 <FontAwesomeIconView glyphName="SHOPPING_BASKET"/>
@@ -19,7 +19,7 @@
         </graphic>
         <fx:include source="new-sell.fxml"/>
     </Tab>
-    <Tab fx:id="tabManageSell" text="Invoice">
+    <Tab fx:id="tabManageSell" text="Manage Invoice">
         <graphic>
             <VBox>
                 <FontAwesomeIconView glyphName="LIST_ALT"/>

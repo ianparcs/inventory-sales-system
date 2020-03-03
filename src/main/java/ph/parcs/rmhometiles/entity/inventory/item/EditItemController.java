@@ -37,7 +37,7 @@ public abstract class EditItemController<T extends BaseEntity> {
         });
     }
 
-    final void onEditItem(ItemListener<T> itemListener, final T item) {
+    public void onEditItem(ItemListener<T> itemListener, final T item) {
         setDialogTitle(item);
         bindFields(item);
 

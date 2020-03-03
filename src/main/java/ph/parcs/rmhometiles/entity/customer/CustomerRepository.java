@@ -10,4 +10,6 @@ public interface CustomerRepository extends ItemRepository<Customer, Integer> {
 
     @Override
     List<Customer> findAll();
+
+    List<Customer> findCustomerByNameContains(String name);
 }

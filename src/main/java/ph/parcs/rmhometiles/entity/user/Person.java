@@ -13,8 +13,8 @@ import javax.persistence.MappedSuperclass;
 @Access(AccessType.PROPERTY)
 public class Person extends BaseEntity {
 
-    protected StringProperty contact = new SimpleStringProperty();
-    protected StringProperty address = new SimpleStringProperty();
+    public StringProperty contact = new SimpleStringProperty();
+    public StringProperty address = new SimpleStringProperty();
 
     @Column(name = "contact")
     public String getContact() {

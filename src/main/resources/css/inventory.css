@@ -34,20 +34,20 @@
     -glyph-size: 18px;
 }
 
-GridPane HBox .jfx-text-field {
+GridPane HBox .search {
     -fx-padding: 0.433333em 1em 0.433333em 1em;
     -fx-border-radius: 15px;
     -fx-border-color: greysquash;
 }
 
-GridPane HBox .jfx-text-field > .input-line,
+GridPane HBox .search > .input-line,
 GridPane HBox .combo-box > .input-line {
     -fx-background-color: transparent;
     -fx-pref-height: 0px;
     -fx-translate-y: 0px;
 }
 
-GridPane HBox .jfx-text-field > .input-focused-line,
+GridPane HBox .search > .input-focused-line,
 GridPane HBox .combo-box > .input-focused-line {
     -fx-background-color: transparent;
     -fx-pref-height: 0px;

@@ -78,7 +78,7 @@ TableView *.decrement-arrow {
     -fx-padding: 25px;
 }
 
-.item-header {
+VBox .item-header {
     -fx-font-weight: bold;
     -fx-font-size: 20;
     -fx-border-color: black;
