@@ -81,7 +81,7 @@
             <Pagination fx:id="pagination" maxPageIndicatorCount="5" minHeight="35.0" maxHeight="35.0" prefHeight="35.0"
                         GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="TOP"/>
             <padding>
-                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+                <Insets bottom="15.0" left="25.0" right="25.0" top="15.0"/>
             </padding>
 
         </GridPane>

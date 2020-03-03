@@ -26,7 +26,7 @@
                               styleClass="detail-customer"/>
                 <JFXButton styleClass="add-button" onAction="#showAddCustomer" text="New Costumer"/>
                 <GridPane.margin>
-                    <Insets top="15" bottom="5" left="15" right="15"/>
+                    <Insets top="15" bottom="5"/>
                 </GridPane.margin>
             </HBox>
 
@@ -59,6 +59,10 @@
                 <RowConstraints/>
                 <RowConstraints/>
             </rowConstraints>
+
+            <padding>
+                <Insets left="25.0" right="25.0"/>
+            </padding>
 
         </GridPane>
 

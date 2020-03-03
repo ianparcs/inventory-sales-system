@@ -13,7 +13,7 @@
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain"
            stylesheets="@../../../css/inventory.css" xmlns="http://javafx.com/javafx/10.0.2-internal">
 
-    <VBox  styleClass="background" >
+    <VBox styleClass="background">
 
         <Label maxWidth="1.7976931348623157E308" styleClass="item-header" text="Manage Invoice"/>
 
@@ -136,7 +136,9 @@
                 <RowConstraints/>
                 <RowConstraints/>
             </rowConstraints>
-
+            <padding>
+                <Insets bottom="15.0" left="25.0" right="25.0" top="15.0"/>
+            </padding>
         </GridPane>
     </VBox>
 </StackPane>

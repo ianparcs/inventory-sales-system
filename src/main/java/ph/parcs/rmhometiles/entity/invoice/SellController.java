@@ -64,21 +64,24 @@ public class SellController {
             Platform.runLater(() -> {
                 List<Customer> customers = customerService.findCustomer(newValue);
                 cbCustomer.getItems().setAll(FXCollections.observableArrayList(customers));
-                if (newValue.isEmpty()) {
-                    cbCustomer.getSelectionModel().clearSelection();
-                }
             });
         });
+
         cbCustomer.focusedProperty().addListener((observableValue, aBoolean, showing) -> {
             Platform.runLater(() -> {
                 if (showing) {
-                    if(cbCustomer.getEditor().getText().isEmpty()){
+                    if (cbCustomer.getEditor().getText().isEmpty()) {
                         List<Customer> customers = customerService.findCustomer("");
                         cbCustomer.getItems().setAll(FXCollections.observableArrayList(customers));
+                        clearFields();
                     }
                     cbCustomer.hide();
-                    cbCustomer.setVisibleRowCount(10);
+                    cbCustomer.setVisibleRowCount(5);
                     cbCustomer.show();
+                }
+                if (cbCustomer.getEditor().getText().isEmpty()) {
+                    tfContact.clear();
+                    tfAddress.clear();
                 }
             });
         });
@@ -90,19 +93,19 @@ public class SellController {
         if (customer != null) {
             tfAddress.setText(StringUtils.isEmpty(customer.getAddress()) ? "n/a" : customer.getAddress());
             tfContact.setText(StringUtils.isEmpty(customer.getContact()) ? "n/a" : customer.getContact());
-        }else{
+        } else {
             clearFields();
         }
 
         cbCustomer.getEditor().setText("");
         spMain.requestFocus();
-        cbCustomer.hide();
     }
 
-    private void clearFields(){
+    private void clearFields() {
+        cbCustomer.getSelectionModel().clearSelection();
+        cbCustomer.hide();
         tfContact.clear();
         tfAddress.clear();
-        cbCustomer.getSelectionModel().clearSelection();
     }
 
     @FXML
