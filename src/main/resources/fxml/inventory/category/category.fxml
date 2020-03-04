@@ -28,7 +28,7 @@
 
             <HBox alignment="CENTER_LEFT" spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0">
                 <Label text="Show"/>
-                <JFXComboBox fx:id="cbRowCount" onAction="#onPageRowChanged" prefWidth="75">
+                <JFXComboBox fx:id="cbRowCount" styleClass="rowcount" onAction="#onPageRowChanged" prefWidth="75">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <Integer fx:value="5"/>
@@ -51,7 +51,8 @@
                         <FontAwesomeIconView styleClass="plus-icon"/>
                     </graphic>
                 </JFXButton>
-                <JFXTextField fx:id="tfSearchItem" onKeyTyped="#searchItem" promptText="Search"/>
+                <JFXTextField fx:id="tfSearchItem" styleClass="search-input" onKeyTyped="#searchItem"
+                              promptText="Search"/>
             </HBox>
 
             <TableView fx:id="tvItem" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS"

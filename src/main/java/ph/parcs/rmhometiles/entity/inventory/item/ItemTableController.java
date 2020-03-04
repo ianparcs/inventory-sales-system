@@ -83,7 +83,7 @@ public abstract class ItemTableController<T extends BaseEntity> {
         return item;
     }
 
-    public  T onItemEditAction(T editItem) {
+    public T onItemEditAction(T editItem) {
         StackPane root = (StackPane) tvItem.getScene().getRoot();
 
         editItemController.showDialog(root);

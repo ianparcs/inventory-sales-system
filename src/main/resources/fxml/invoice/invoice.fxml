@@ -6,7 +6,7 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<JFXTabPane fx:id="tpRoot" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/inventory.css"
+<JFXTabPane xmlns:fx="http://javafx.com/fxml/1" fx:id="tpRoot" stylesheets="@../../css/tabpane.css"
             fx:controller="ph.parcs.rmhometiles.entity.invoice.InvoiceController">
     <Tab fx:id="tabNewSell" text="Invoice">
         <graphic>
@@ -28,6 +28,6 @@
                 </padding>
             </VBox>
         </graphic>
-        <fx:include source="sell.fxml"/>
+        <fx:include source="manage-sell.fxml"/>
     </Tab>
 </JFXTabPane>

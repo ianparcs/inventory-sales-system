@@ -34,21 +34,21 @@
     -glyph-size: 18px;
 }
 
-GridPane HBox .search {
+GridPane HBox .search-input {
     -fx-padding: 0.433333em 1em 0.433333em 1em;
     -fx-border-radius: 15px;
     -fx-border-color: greysquash;
 }
 
-GridPane HBox .search > .input-line,
-GridPane HBox .combo-box > .input-line {
+GridPane HBox .search-input > .input-line,
+GridPane HBox .rowcount > .input-line {
     -fx-background-color: transparent;
     -fx-pref-height: 0px;
     -fx-translate-y: 0px;
 }
 
-GridPane HBox .search > .input-focused-line,
-GridPane HBox .combo-box > .input-focused-line {
+GridPane HBox .search-input > .input-focused-line,
+GridPane HBox .rowcount > .input-focused-line {
     -fx-background-color: transparent;
     -fx-pref-height: 0px;
 }

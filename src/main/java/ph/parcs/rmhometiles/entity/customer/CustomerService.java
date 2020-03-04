@@ -33,7 +33,7 @@ public class CustomerService extends ItemService<Customer> {
         return customerRepository.findAllByNameContains(pageRequest, name);
     }
 
-    public List<Customer> findCustomer(String name){
+    public List<Customer> findCustomer(String name) {
         return customerRepository.findCustomerByNameContains(name);
     }
 

@@ -51,7 +51,8 @@
                         <FontAwesomeIconView styleClass="plus-icon"/>
                     </graphic>
                 </JFXButton>
-                <JFXTextField fx:id="tfSearchItem" styleClass="search" onKeyTyped="#searchItem" promptText="Search"/>
+                <JFXTextField fx:id="tfSearchItem" styleClass="search-input" onKeyTyped="#searchItem"
+                              promptText="Search"/>
             </HBox>
 
             <TableView fx:id="tvItem" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS"
@@ -122,7 +123,7 @@
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn fx:id="tcAction"  maxWidth="100" minWidth="40" reorderable="false"
+                    <TableColumn fx:id="tcAction" maxWidth="100" minWidth="40" reorderable="false"
                                  resizable="false" sortable="false" styleClass="action-column" text="Action"/>
                 </columns>
             </TableView>

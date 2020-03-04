@@ -7,6 +7,7 @@
     -fx-border-radius: 15pt;
     -fx-background-radius: 15pt;
 }
+
 .item-headers {
     -fx-border-color: black;
     -fx-border-width: 0px 0px 1px 0px;
@@ -19,10 +20,15 @@
 }
 
 .detail-customer {
+    -fx-pref-width: 150px;
     -jfx-focus-color: primary;
     -fx-border-radius: 0px;
     -fx-border-color: transparent;
     -fx-background-color: transparent;
+}
+
+.detail-customer .combo-box-popup > .list-view {
+    -fx-pref-height: 200;
 }
 
 .detail-customer > .input-line {
@@ -36,4 +42,6 @@
     -fx-pref-height: 300px;
 
 }
+
+
 

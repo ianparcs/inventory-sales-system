@@ -5,33 +5,37 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<StackPane fx:id="spMain" stylesheets="@../../css/invoice.css" xmlns="http://javafx.com/javafx/10.0.2-internal"
-           xmlns:fx="http://javafx.com/fxml/1" fx:controller="ph.parcs.rmhometiles.entity.invoice.SellController">
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain" stylesheets="@../../css/invoice.css"
+           xmlns="http://javafx.com/javafx/10.0.2-internal"
+           fx:controller="ph.parcs.rmhometiles.entity.invoice.SellController">
 
-    <fx:include source="../customer/edit-customer.fxml" visible="false"/>
+    <fx:include source="../customer/edit-customer.fxml"/>
 
     <VBox styleClass="background">
-        <HBox styleClass="item-headers">
-            <Label maxWidth="1.7976931348623157E308" text="New Invoice" HBox.hgrow="ALWAYS"/>
-            <JFXDatePicker fx:id="dpDate" promptText="Invoice Date"/>
-        </HBox>
 
-        <GridPane hgap="20" vgap="15">
-            <HBox spacing="20.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                <JFXComboBox fx:id="cbCustomer" onAction="#selectCustomer" editable="true" labelFloat="true"
-                             promptText="Name" styleClass="detail-customer"/>
-                <JFXTextField fx:id="tfContact" editable="false" labelFloat="true" promptText="Contact"
-                              styleClass="detail-customer"/>
-                <JFXTextField fx:id="tfAddress" editable="false" labelFloat="true" promptText="Address"
-                              styleClass="detail-customer"/>
-                <JFXButton styleClass="add-button" onAction="#showAddCustomer" text="New Costumer"/>
+        <Label maxWidth="1.7976931348623157E308" styleClass="item-header" text="New Invoice"/>
+
+        <GridPane>
+            <HBox GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <HBox spacing="20.0" HBox.hgrow="ALWAYS">
+                    
+                    <JFXComboBox fx:id="cbCustomer" editable="true" labelFloat="true" onAction="#selectCustomer"
+                                 promptText="Name" styleClass="detail-customer"/>
+                    <JFXTextField fx:id="tfContact" editable="false" labelFloat="true" promptText="Contact"
+                                  styleClass="detail-customer"/>
+                    <JFXTextField fx:id="tfAddress" editable="false" labelFloat="true" promptText="Address"
+                                  styleClass="detail-customer"/>
+                    <JFXButton onAction="#showAddCustomer" styleClass="add-button" text="New Costumer"/>
+                </HBox>
+
+                <JFXDatePicker fx:id="dpDate" promptText="Invoice Date" HBox.hgrow="ALWAYS"/>
+
                 <GridPane.margin>
-                    <Insets top="15" bottom="5"/>
+                    <Insets top="20" bottom="20"/>
                 </GridPane.margin>
             </HBox>
 
-            <TableView fx:id="tvItem" maxWidth="1.7976931348623157E308" GridPane.columnIndex="0" GridPane.columnSpan="4"
-                       GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+            <TableView fx:id="tvItem" GridPane.columnIndex="0" GridPane.rowIndex="1">
                 <columnResizePolicy>
                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
                 </columnResizePolicy>
@@ -51,9 +55,6 @@
             </TableView>
             <columnConstraints>
                 <ColumnConstraints hgrow="ALWAYS"/>
-                <ColumnConstraints/>
-                <ColumnConstraints/>
-                <ColumnConstraints/>
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints/>

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.*?>
 <?import java.lang.*?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain"
-           stylesheets="@../../../css/inventory.css" xmlns="http://javafx.com/javafx/10.0.2-internal">
+           stylesheets="@../../css/inventory.css" xmlns="http://javafx.com/javafx/10.0.2-internal">
 
     <VBox styleClass="background">
 
@@ -25,7 +25,7 @@
 
             <HBox alignment="CENTER_LEFT" spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0">
                 <Label text="Show"/>
-                <JFXComboBox fx:id="cbRowCount" prefWidth="75">
+                <JFXComboBox fx:id="cbRowCount" styleClass="rowcount" prefWidth="75">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <Integer fx:value="5"/>
@@ -48,7 +48,7 @@
                         <FontAwesomeIconView styleClass="plus-icon"/>
                     </graphic>
                 </JFXButton>
-                <JFXTextField fx:id="tfSearchItem" promptText="Search"/>
+                <JFXTextField fx:id="tfSearchItem" styleClass="search-input" promptText="Search"/>
             </HBox>
 
             <TableView fx:id="tvItem" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS"

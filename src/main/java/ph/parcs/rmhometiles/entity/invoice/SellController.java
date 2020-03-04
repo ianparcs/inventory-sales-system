@@ -76,7 +76,6 @@ public class SellController {
                         clearFields();
                     }
                     cbCustomer.hide();
-                    cbCustomer.setVisibleRowCount(5);
                     cbCustomer.show();
                 }
                 if (cbCustomer.getEditor().getText().isEmpty()) {
@@ -96,7 +95,6 @@ public class SellController {
         } else {
             clearFields();
         }
-
         cbCustomer.getEditor().setText("");
         spMain.requestFocus();
     }
