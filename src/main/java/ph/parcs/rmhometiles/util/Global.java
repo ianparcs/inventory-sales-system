@@ -2,6 +2,8 @@ package ph.parcs.rmhometiles.util;
 
 public interface Global {
 
+    String STRING_EMPTY =  "";
+
     interface UNIT {
         String PCS = "pcs";
         String PERCENT = "%";
@@ -19,4 +21,5 @@ public interface Global {
         String DELETE = "Item successfully removed";
         String ASK = "Are you sure?";
     }
+
 }

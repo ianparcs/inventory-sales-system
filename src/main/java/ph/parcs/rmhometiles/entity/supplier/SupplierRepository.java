@@ -2,6 +2,7 @@ package ph.parcs.rmhometiles.entity.supplier;
 
 import org.springframework.stereotype.Repository;
 import ph.parcs.rmhometiles.entity.inventory.item.ItemRepository;
+import ph.parcs.rmhometiles.entity.inventory.product.Product;
 
 import java.util.List;
 
@@ -10,4 +11,5 @@ public interface SupplierRepository extends ItemRepository<Supplier, Integer> {
 
     @Override
     List<Supplier> findAll();
+
 }

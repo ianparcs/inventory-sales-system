@@ -4,17 +4,17 @@
     -jfx-button-type: FLAT;
     -fx-text-fill: WHITE;
     -fx-font-weight: BOLD;
-    -fx-border-radius: 15pt;
-    -fx-background-radius: 15pt;
+    -fx-border-radius: 5pt;
+    -fx-background-radius: 5pt;
 }
 
-.item-headers {
+VBox .item-headers {
     -fx-border-color: black;
     -fx-border-width: 0px 0px 1px 0px;
     -fx-padding: 15px;
 }
 
-.item-headers .label {
+VBox .item-headers .label {
     -fx-font-weight: bold;
     -fx-font-size: 20;
 }

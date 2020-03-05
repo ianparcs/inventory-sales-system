@@ -66,7 +66,7 @@
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn reorderable="false" text="Name">
+                    <TableColumn fx:id="tcName" reorderable="false" text="Name">
                         <cellValueFactory>
                             <PropertyValueFactory property="name"/>
                         </cellValueFactory>
