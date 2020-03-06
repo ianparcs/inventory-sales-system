@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain" stylesheets="@../../css/invoice.css"
            xmlns="http://javafx.com/javafx/10.0.2-internal"
-           fx:controller="ph.parcs.rmhometiles.entity.invoice.SellController">
+           fx:controller="ph.parcs.rmhometiles.entity.invoice.InvoiceController">
 
     <fx:include source="../customer/edit-customer.fxml"/>
 
@@ -40,7 +40,7 @@
                 </GridPane.margin>
             </HBox>
 
-            <TableView fx:id="tvItem" prefHeight="100" GridPane.columnIndex="0" GridPane.rowIndex="1">
+            <TableView fx:id="tvInvoice" prefHeight="100" GridPane.columnIndex="0" GridPane.rowIndex="1">
                 <columnResizePolicy>
                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
                 </columnResizePolicy>

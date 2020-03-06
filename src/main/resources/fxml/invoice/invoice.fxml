@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <JFXTabPane xmlns:fx="http://javafx.com/fxml/1" fx:id="tpRoot" stylesheets="@../../css/tabpane.css"
-            fx:controller="ph.parcs.rmhometiles.entity.invoice.InvoiceController">
+            fx:controller="ph.parcs.rmhometiles.entity.invoice.InvoiceTabController">
     <Tab fx:id="tabNewSell" text="Invoice">
         <graphic>
             <HBox>

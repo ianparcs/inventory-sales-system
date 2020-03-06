@@ -5,6 +5,8 @@ import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -13,7 +15,9 @@ import java.util.Set;
 public class Invoice extends BaseEntity {
 
     private Set<Product> products;
+    private BigDecimal totalPrice;
     private Customer customer;
+    private Date createdAt;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "product_id")
@@ -25,6 +29,15 @@ public class Invoice extends BaseEntity {
         this.products = products;
     }
 
+    @Column(name = "total_price", precision = 8, scale = 2)
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
     @OneToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
     public Customer getCustomer() {
@@ -33,5 +46,15 @@ public class Invoice extends BaseEntity {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    @Column(name = "created_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }
