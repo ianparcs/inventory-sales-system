@@ -17,4 +17,6 @@ public interface ProductRepository extends ItemRepository<Product, Integer> {
 
     Set<Product> findProductsByStockUnit(StockUnit stockUnit);
 
+    Set<Product> findProductByNameContains(String name);
+
 }

@@ -33,6 +33,10 @@ public class CategoryService extends ItemService<Category> {
         return categoryRepository.findAllByNameContains(pageRequest, name);
     }
 
+    public Set<Category> findItems(String query) {
+        return categoryRepository.findCategoriesByNameContains(query);
+    }
+
     @Override
     public boolean deleteItem(Category category) {
         Category clearProd = removeProductsOfCategory(category);

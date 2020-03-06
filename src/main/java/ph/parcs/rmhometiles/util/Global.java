@@ -2,7 +2,7 @@ package ph.parcs.rmhometiles.util;
 
 public interface Global {
 
-    String STRING_EMPTY =  "";
+    String STRING_EMPTY = "";
 
     interface UNIT {
         String PCS = "pcs";

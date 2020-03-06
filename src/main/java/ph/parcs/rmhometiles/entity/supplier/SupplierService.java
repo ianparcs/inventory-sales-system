@@ -34,6 +34,11 @@ public class SupplierService extends ItemService<Supplier> {
     }
 
     @Override
+    public Set<Supplier> findItems(String query) {
+        return supplierRepository.findSupplierByNameContains(query);
+    }
+
+    @Override
     public boolean deleteItem(Supplier supplier) {
         Supplier clearProd = removeProductsOfSupplier(supplier);
         supplierRepository.delete(clearProd);

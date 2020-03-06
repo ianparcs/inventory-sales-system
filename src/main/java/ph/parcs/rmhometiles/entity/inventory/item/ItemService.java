@@ -4,6 +4,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service
 public abstract class ItemService<T extends BaseEntity> {
 
@@ -31,6 +33,8 @@ public abstract class ItemService<T extends BaseEntity> {
     }
 
     public abstract Page<T> findPages(int page, int itemPerPage, String name);
+
+    public abstract Set<T> findItems(String query);
 
     public abstract boolean deleteItem(T item);
 

@@ -10,6 +10,7 @@ import ph.parcs.rmhometiles.entity.inventory.item.ItemService;
 import ph.parcs.rmhometiles.file.FileService;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ProductService extends ItemService<Product> {
@@ -21,6 +22,10 @@ public class ProductService extends ItemService<Product> {
     public Page<Product> findPages(int page, int itemPerPage, String name) {
         PageRequest pageRequest = super.requestPage(page, itemPerPage);
         return productRepository.findAllByNameContains(pageRequest, name);
+    }
+
+    public Set<Product> findItems(String query) {
+        return productRepository.findProductByNameContains(query);
     }
 
     @Override
@@ -73,4 +78,5 @@ public class ProductService extends ItemService<Product> {
     public void setFileService(FileService fileService) {
         this.fileService = fileService;
     }
+
 }

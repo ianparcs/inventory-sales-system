@@ -33,6 +33,11 @@ public class StockUnitService extends ItemService<StockUnit> {
         return stockUnitRepository.findAllByNameContains(pageRequest, name);
     }
 
+    @Override
+    public Set<StockUnit> findItems(String query) {
+        return stockUnitRepository.findStockUnitByNameContains(query);
+    }
+
     public Optional<StockUnit> findStockUnitByProduct(ObservableList<StockUnit> items, Product product) {
         Optional<StockUnit> search = Optional.empty();
         if (product.getStockUnit() != null) {

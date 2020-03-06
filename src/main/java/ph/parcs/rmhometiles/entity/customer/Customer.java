@@ -1,6 +1,5 @@
 package ph.parcs.rmhometiles.entity.customer;
 
-import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.invoice.Invoice;
 import ph.parcs.rmhometiles.entity.user.Person;
 

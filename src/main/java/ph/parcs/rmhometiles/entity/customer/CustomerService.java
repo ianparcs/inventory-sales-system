@@ -1,7 +1,5 @@
 package ph.parcs.rmhometiles.entity.customer;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,10 +8,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ph.parcs.rmhometiles.entity.inventory.item.ItemService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
@@ -21,20 +17,15 @@ public class CustomerService extends ItemService<Customer> {
 
     private CustomerRepository customerRepository;
 
-    public ObservableList<Customer> getCustomers() {
-        List<Customer> customers = customerRepository.findAll();
-        customers.add(0, createDefault());
-        return FXCollections.observableArrayList(Objects.requireNonNullElseGet(customers, ArrayList::new));
-    }
-
     @Override
     public Page<Customer> findPages(int page, int itemPerPage, String name) {
         PageRequest pageRequest = super.requestPage(page, itemPerPage);
         return customerRepository.findAllByNameContains(pageRequest, name);
     }
 
-    public List<Customer> findCustomer(String name) {
-        return customerRepository.findCustomerByNameContains(name);
+    @Override
+    public Set<Customer> findItems(String query) {
+        return customerRepository.findCustomerByNameContains(query);
     }
 
     @Override

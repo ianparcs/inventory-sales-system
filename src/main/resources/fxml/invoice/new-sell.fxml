@@ -20,7 +20,7 @@
 
         <GridPane>
             <HBox GridPane.columnIndex="0" GridPane.rowIndex="0">
-                <HBox spacing="15" HBox.hgrow="ALWAYS">
+                <HBox spacing="20" HBox.hgrow="ALWAYS">
 
                     <JFXComboBox fx:id="cbCustomer" editable="true" labelFloat="true" onAction="#selectCustomer"
                                  promptText="Customer Name" styleClass="detail-customer"/>

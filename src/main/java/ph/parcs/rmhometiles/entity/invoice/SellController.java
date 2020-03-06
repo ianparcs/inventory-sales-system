@@ -16,21 +16,24 @@ import ph.parcs.rmhometiles.ItemListener;
 import ph.parcs.rmhometiles.entity.customer.Customer;
 import ph.parcs.rmhometiles.entity.customer.CustomerEditController;
 import ph.parcs.rmhometiles.entity.customer.CustomerService;
+import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.entity.inventory.item.EditItemController;
+import ph.parcs.rmhometiles.entity.inventory.item.ItemService;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
+import ph.parcs.rmhometiles.entity.inventory.product.ProductService;
 import ph.parcs.rmhometiles.ui.alert.SweetAlert;
 import ph.parcs.rmhometiles.ui.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.util.Global;
 
-import java.util.List;
+import java.util.Set;
 
 @Controller
 public class SellController {
 
     @FXML
-    private JFXComboBox<Customer> cbCustomer;
+    private JFXComboBox<BaseEntity> cbCustomer;
     @FXML
-    private JFXComboBox<Product> cbProducts;
+    private JFXComboBox<BaseEntity> cbProducts;
     @FXML
     private TableView<Customer> tvItem;
     @FXML
@@ -43,30 +46,20 @@ public class SellController {
     private StackPane spMain;
 
     private EditItemController<Customer> customerEditController;
+    private ItemService<BaseEntity> itemService;
     private CustomerService customerService;
+    private ProductService productService;
     private SweetAlert successAlert;
 
     @FXML
     public void initialize() {
         successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
         configureCustomerCombobox();
-
+        configureProductCombobox();
     }
 
     private void configureCustomerCombobox() {
-        cbCustomer.setConverter(new StringConverter<>() {
-            @Override
-            public String toString(Customer customer) {
-                if (customer == null) return "";
-                return customer.getName();
-            }
-
-            @Override
-            public Customer fromString(String s) {
-                return cbCustomer.getValue();
-            }
-        });
-
+        setComboboxConverter(cbCustomer);
         cbCustomer.getEditor().textProperty().addListener((observable, oldVal, newVal) -> Platform.runLater(() -> {
             cbCustomer.show();
             searchCustomer(newVal);
@@ -80,7 +73,7 @@ public class SellController {
                 }
             }
             if (outOfFocus) {
-                Customer customer = cbCustomer.getValue();
+                Customer customer = (Customer) cbCustomer.getValue();
                 if (customer != null && !customer.getName().equals(editorTxt)) {
                     cbCustomer.getEditor().setText(customer.getName());
                 } else if (customer == null) {
@@ -90,14 +83,54 @@ public class SellController {
         }));
     }
 
-    private void searchCustomer(String searchValue) {
-        List<Customer> customers = customerService.findCustomer(searchValue);
+    private void configureProductCombobox() {
+        setComboboxConverter(cbProducts);
+
+        cbProducts.getEditor().textProperty().addListener((observable, oldVal, keyTyped) -> Platform.runLater(() -> {
+            cbProducts.show();
+            searchProduct(keyTyped);
+        }));
+
+        cbProducts.focusedProperty().addListener((observableValue, outOfFocus, focus) -> Platform.runLater(() -> {
+            String editorTxt = cbCustomer.getEditor().getText();
+            if (focus) {
+                if (editorTxt.isEmpty()) {
+                }
+            }
+            if (outOfFocus) {
+
+            }
+        }));
+    }
+
+    private void setComboboxConverter(JFXComboBox<BaseEntity> cb) {
+        cb.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(BaseEntity baseEntity) {
+                if (baseEntity == null) return Global.STRING_EMPTY;
+                return baseEntity.getName();
+            }
+
+            @Override
+            public BaseEntity fromString(String s) {
+                return cb.getValue();
+            }
+        });
+    }
+
+    private void searchCustomer(String query) {
+        Set<Customer> customers = customerService.findItems(query);
         cbCustomer.getItems().setAll(FXCollections.observableArrayList(customers));
+    }
+
+    private void searchProduct(String query) {
+        Set<Product> products = productService.findItems(query);
+        cbProducts.getItems().setAll(FXCollections.observableArrayList(products));
     }
 
     @FXML
     private void selectCustomer() {
-        Customer customer = cbCustomer.getValue();
+        Customer customer = (Customer) cbCustomer.getValue();
         if (customer != null) {
             tfAddress.setText(StringUtils.isEmpty(customer.getAddress()) ? "n/a" : customer.getAddress());
             tfContact.setText(StringUtils.isEmpty(customer.getContact()) ? "n/a" : customer.getContact());
@@ -143,4 +176,8 @@ public class SellController {
         this.customerService = customerService;
     }
 
+    @Autowired
+    public void setProductService(ProductService productService) {
+        this.productService = productService;
+    }
 }
