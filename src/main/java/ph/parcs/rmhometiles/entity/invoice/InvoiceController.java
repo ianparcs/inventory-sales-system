@@ -62,7 +62,7 @@ public class InvoiceController {
         product.setId(0);
         product.setName("Test");
 
-        Set<Product> products =new HashSet<>();
+        Set<Product> products = new HashSet<>();
         products.add(product);
 
         Invoice invoice = new Invoice();

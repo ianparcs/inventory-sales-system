@@ -5,11 +5,13 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain" stylesheets="@../../css/invoice.css"
            xmlns="http://javafx.com/javafx/10.0.2-internal"
            fx:controller="ph.parcs.rmhometiles.entity.invoice.InvoiceController">
 
     <fx:include source="../customer/edit-customer.fxml"/>
+    <fx:include source="invoice-add-product.fxml" visible="false"/>
 
     <VBox styleClass="background">
 
@@ -35,6 +37,13 @@
 
                 <JFXComboBox fx:id="cbProducts" editable="true" labelFloat="true" onAction="#selectProducts"
                              promptText="Add Products" styleClass="detail-customer" HBox.hgrow="ALWAYS"/>
+
+                <JFXButton onAction="#selectProducts" styleClass="add-button" text="Add Product">
+                    <graphic>
+                        <FontAwesomeIconView styleClass="plus-icon"/>
+                    </graphic>
+                </JFXButton>
+
                 <GridPane.margin>
                     <Insets top="20" bottom="20"/>
                 </GridPane.margin>

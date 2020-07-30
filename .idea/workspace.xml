@@ -1,21 +1,131 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ArtifactsWorkspaceSettings">
-    <artifacts-to-build>
-      <artifact name="RMHomeTiles" />
-    </artifacts-to-build>
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f946820-2b90-4643-9237-2d41a464616e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/InvoiceTabController.java" afterDir="false" />
+    <list default="true" id="e42c86d9-149f-4635-a8fc-a8339e3dcdbe" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/cssdialects.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Ian.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__antlr_antlr_2_7_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_5_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_10_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_10_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_10_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_10_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_10_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_10_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_jayway_jsonpath_json_path_2_4_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_jfoenix_jfoenix_9_0_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_istack_istack_commons_runtime_3_0_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_xml_fastinfoset_FastInfoset_1_2_16.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_external_google_android_json_0_0_20131108_vaadin1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_zaxxer_HikariCP_3_4_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__de_jensd_fontawesomefx_commons_9_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__de_jensd_fontawesomefx_fontawesome_4_7_0_9_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_activation_jakarta_activation_api_1_2_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_annotation_jakarta_annotation_api_1_3_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_persistence_jakarta_persistence_api_2_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_transaction_jakarta_transaction_api_1_3_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_validation_jakarta_validation_api_2_0_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_xml_bind_jakarta_xml_bind_api_2_3_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_8_0_18.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_10_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_agent_1_10_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_minidev_accessors_smart_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_minidev_json_smart_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_12_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_to_slf4j_2_12_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_9_0_29.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_9_0_29.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_9_0_29.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_9_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_assertj_assertj_core_3_13_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_dom4j_dom4j_2_1_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_jaxb_jaxb_runtime_2_3_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_jaxb_txw2_2_3_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_2_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_5_1_0_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_core_5_4_9_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_validator_hibernate_validator_6_0_18_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_24_0_GA.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_jandex_2_1_1_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_4_1_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_5_5_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_5_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_5_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_params_5_5_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_5_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_5_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jvnet_staxex_stax_ex_1_8_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_core_3_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_junit_jupiter_3_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_objenesis_objenesis_2_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_14_ea_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_win_14_ea_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_14_ea_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_win_14_ea_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_14_ea_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_win_14_ea_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_14_ea_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_win_14_ea_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_5_0_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_10.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_skyscreamer_jsonassert_1_5_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_29.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_29.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_aop_2_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_jpa_2_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_jdbc_2_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_security_2_2_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_test_2_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_validation_2_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_2_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_autoconfigure_2_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_commons_2_2_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_jpa_2_2_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_config_5_2_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_core_5_2_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_web_5_2_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_5_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aspects_5_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_5_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_5_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_5_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_5_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_5_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_5_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_orm_5_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_5_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_5_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_5_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_5_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_xmlunit_xmlunit_core_2_6_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_25.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/Invoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/Invoice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMHomeTiles.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/StageInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/StageInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/product/ProductTableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/product/ProductTableController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/InvoiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/InvoiceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/InvoiceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/InvoiceRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/SellController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/ui/login/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/ui/login/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/invoice/invoice.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/invoice/invoice.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/ui/navigation/DrawerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/ui/navigation/DrawerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/ui/scene/SceneManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/ui/scene/SceneManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/invoice/new-sell.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/invoice/new-sell.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,29 +134,10 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DatabaseView">
-    <option name="SHOW_INTERMEDIATE" value="true" />
-    <option name="GROUP_DATA_SOURCES" value="true" />
-    <option name="GROUP_SCHEMA" value="true" />
-    <option name="GROUP_CONTENTS" value="false" />
-    <option name="SORT_POSITIONED" value="false" />
-    <option name="SHOW_EMPTY_GROUPS" value="false" />
-    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
-    <option name="HIDDEN_KINDS">
-      <set />
-    </option>
-    <expand>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="MySQL - rmhometiles@localhost" type="feb32156:DbDataSourceImpl" />
-      </path>
-    </expand>
-    <select />
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -54,58 +145,16 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1XNB85mlVGIlOxuoAeAQvQJvliC" />
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
+  <component name="ProjectId" id="1fOomn0aYr8bP2WVkJhFWFnvRKe" />
   <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/fxml/invoice" />
-    <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.44367817" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.folding" />
-  </component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\resources\fxml\inventory\unit" />
-      <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\resources\fxml\inventory\item" />
-      <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\resources\fxml\product" />
-      <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\resources\image" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\resources\fxml\invoice" />
-      <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\resources\fxml\inventory\category" />
-      <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\java\ph\parcs\rmhometiles\inventory\unit" />
-      <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\resources\fxml" />
-      <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\java\ph\parcs\rmhometiles\costumer" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="ph.parcs.rmhometiles.entity.invoice" />
-      <recent name="ph.parcs.rmhometiles.supplier" />
-      <recent name="ph.parcs.rmhometiles.category" />
-    </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="ph.parcs.rmhometiles.image" />
-    </key>
-  </component>
-  <component name="RunAnythingCache">
-    <option name="myCommands">
-      <command value="mvn dependency:analyze-only" />
-    </option>
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -121,7 +170,7 @@
   </component>
   <component name="RunManager">
     <configuration name="RmHomeTilesApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="RMHomeTiles" />
+      <module name="rmhometiles" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="ph.parcs.rmhometiles.RmHomeTilesApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -133,433 +182,27 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="5f946820-2b90-4643-9237-2d41a464616e" name="Default Changelist" comment="" />
-      <created>1580876730197</created>
+      <changelist id="e42c86d9-149f-4635-a8fc-a8339e3dcdbe" name="Default Changelist" comment="" />
+      <created>1596098660910</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1580876730197</updated>
-      <workItem from="1580876732293" duration="22006000" />
-      <workItem from="1580910947109" duration="9187000" />
-      <workItem from="1580950343002" duration="23558000" />
-      <workItem from="1581034521590" duration="13099000" />
-      <workItem from="1581122665471" duration="41654000" />
-      <workItem from="1581209884724" duration="143000" />
-      <workItem from="1581210040988" duration="34305000" />
-      <workItem from="1581299630205" duration="19179000" />
-      <workItem from="1581336890446" duration="12274000" />
-      <workItem from="1581358335395" duration="835000" />
-      <workItem from="1581383258066" duration="23065000" />
-      <workItem from="1581466314642" duration="447000" />
-      <workItem from="1581466784520" duration="13220000" />
-      <workItem from="1581496646097" duration="600000" />
-      <workItem from="1581511283351" duration="8526000" />
-      <workItem from="1581671754626" duration="14657000" />
-      <workItem from="1581724374602" duration="888000" />
-      <workItem from="1581736506393" duration="23000" />
-      <workItem from="1581736542640" duration="12582000" />
-      <workItem from="1581762521397" duration="1041000" />
-      <workItem from="1581908979394" duration="85000" />
-      <workItem from="1581909076272" duration="100000" />
-      <workItem from="1581909255088" duration="689000" />
-      <workItem from="1581910151803" duration="194000" />
-      <workItem from="1581910354820" duration="749000" />
-      <workItem from="1581911406226" duration="37000" />
-      <workItem from="1581911460435" duration="4654000" />
-      <workItem from="1581917841830" duration="8848000" />
-      <workItem from="1581987312570" duration="6281000" />
-      <workItem from="1582249409004" duration="3597000" />
-      <workItem from="1582473902404" duration="2456000" />
-      <workItem from="1582593722587" duration="3367000" />
-      <workItem from="1582687769183" duration="28237000" />
-      <workItem from="1582989013789" duration="634000" />
-      <workItem from="1583021937242" duration="25411000" />
-      <workItem from="1583201341313" duration="23329000" />
-      <workItem from="1583322709089" duration="8316000" />
-      <workItem from="1583367837554" duration="3462000" />
-      <workItem from="1583377962113" duration="18510000" />
-      <workItem from="1583418730066" duration="2584000" />
-      <workItem from="1583458496564" duration="5517000" />
-      <workItem from="1583477272088" duration="6648000" />
+      <updated>1596098660910</updated>
+      <workItem from="1596098662128" duration="5731000" />
     </task>
-    <task id="LOCAL-00001" summary="code cleanup">
-      <created>1580876855750</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1580876855750</updated>
-    </task>
-    <task id="LOCAL-00002" summary="add system description">
-      <created>1580876959063</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1580876959063</updated>
-    </task>
-    <task id="LOCAL-00003" summary="implemented inheritance for entities">
-      <created>1580897538563</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1580897538563</updated>
-    </task>
-    <task id="LOCAL-00004" summary="commit">
-      <created>1580916064403</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1580916064403</updated>
-    </task>
-    <task id="LOCAL-00005" summary="commit">
-      <created>1581245753282</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1581245753282</updated>
-    </task>
-    <task id="LOCAL-00006" summary="commit">
-      <created>1581268077638</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1581268077638</updated>
-    </task>
-    <task id="LOCAL-00007" summary="refresh items of table when scene is shown">
-      <created>1581302726856</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1581302726856</updated>
-    </task>
-    <task id="LOCAL-00008" summary="redesign login interface">
-      <created>1581343582790</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1581343582790</updated>
-    </task>
-    <task id="LOCAL-00009" summary="change alert message content">
-      <created>1581384583112</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1581384583112</updated>
-    </task>
-    <task id="LOCAL-00010" summary="remove unused method">
-      <created>1581384666147</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1581384666147</updated>
-    </task>
-    <task id="LOCAL-00011" summary="add login a round corner">
-      <created>1581392308138</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1581392308138</updated>
-    </task>
-    <task id="LOCAL-00012" summary="add a round corner">
-      <created>1581392334975</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1581392334975</updated>
-    </task>
-    <task id="LOCAL-00013" summary="clean code">
-      <created>1581400638919</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1581400638919</updated>
-    </task>
-    <task id="LOCAL-00014" summary="fix deleting Category">
-      <created>1581405851572</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1581405851572</updated>
-    </task>
-    <task id="LOCAL-00015" summary="redesigned user login interface">
-      <created>1581409204798</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1581409204798</updated>
-    </task>
-    <task id="LOCAL-00016" summary="reformat design of product table">
-      <created>1581442103536</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1581442103536</updated>
-    </task>
-    <task id="LOCAL-00017" summary="reformat design of category.fxml table">
-      <created>1581475204216</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1581475204216</updated>
-    </task>
-    <task id="LOCAL-00018" summary="commit">
-      <created>1581512765430</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1581512765430</updated>
-    </task>
-    <task id="LOCAL-00019" summary="rename Item class to BaseEntity">
-      <created>1581578330413</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1581578330413</updated>
-    </task>
-    <task id="LOCAL-00020" summary="commit">
-      <created>1581682583618</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1581682583618</updated>
-    </task>
-    <task id="LOCAL-00021" summary="add product image">
-      <created>1581739367949</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1581739367949</updated>
-    </task>
-    <task id="LOCAL-00022" summary="add customer module">
-      <created>1581757791069</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1581757791069</updated>
-    </task>
-    <task id="LOCAL-00023" summary="add customer module">
-      <created>1581763141336</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1581763141336</updated>
-    </task>
-    <task id="LOCAL-00024" summary="arrange package structure">
-      <created>1582027125715</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1582027125715</updated>
-    </task>
-    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-  </component>
-  <component name="Vcs.Log.History.Properties">
-    <option name="COLUMN_ORDER">
-      <list>
-        <option value="0" />
-        <option value="2" />
-        <option value="3" />
-        <option value="1" />
-      </list>
-    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
-    <MESSAGE value="code cleanup" />
-    <MESSAGE value="add system description" />
-    <MESSAGE value="implemented inheritance for entities" />
-    <MESSAGE value="refresh items of table when scene is shown" />
-    <MESSAGE value="redesign login interface" />
-    <MESSAGE value="change alert message content" />
-    <MESSAGE value="remove unused method" />
-    <MESSAGE value="add login a round corner" />
-    <MESSAGE value="add a round corner" />
-    <MESSAGE value="clean code" />
-    <MESSAGE value="fix deleting Category" />
-    <MESSAGE value="redesigned user login interface" />
-    <MESSAGE value="reformat design of product table" />
-    <MESSAGE value="reformat design of category.fxml table" />
-    <MESSAGE value="rename Item class to BaseEntity" />
-    <MESSAGE value="commit" />
-    <MESSAGE value="add product image" />
-    <MESSAGE value="add customer module" />
-    <MESSAGE value="arrange package structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="arrange package structure" />
-    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
-    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
-    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="373" y="107" key="#Assign_Data_Sources" timestamp="1581684311486">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="373" y="107" key="#Assign_Data_Sources/0.0.1536.864@0.0.1536.864" timestamp="1581684311486" />
-    <state x="361" y="92" key="#Web_Browsers" timestamp="1581519808380">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="361" y="92" key="#Web_Browsers/0.0.1536.864@0.0.1536.864" timestamp="1581519808380" />
-    <state x="574" y="143" key="#com.intellij.ide.util.MemberChooser" timestamp="1581758401795">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="574" y="143" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1581758401795" />
-    <state x="498" y="217" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1581519013626">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="498" y="217" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1536.864@0.0.1536.864" timestamp="1581519013626" />
-    <state x="190" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1581755041877">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="190" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.864@0.0.1536.864" timestamp="1581755041877" />
-    <state x="499" y="180" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1581521155762">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="499" y="180" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.864@0.0.1536.864" timestamp="1581521155762" />
-    <state x="524" y="136" key="#xdebugger.evaluate" timestamp="1581687426647">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="524" y="136" key="#xdebugger.evaluate/0.0.1536.864@0.0.1536.864" timestamp="1581687426647" />
-    <state x="375" y="28" key="CommitChangelistDialog2" timestamp="1581763193203">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="375" y="28" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1581763193203" />
-    <state x="93" y="93" width="1350" height="678" key="DiffContextDialog" timestamp="1581479984198">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="93" y="93" width="1350" height="678" key="DiffContextDialog/0.0.1536.864@0.0.1536.864" timestamp="1581479984198" />
-    <state x="549" y="188" key="FileChooserDialogImpl" timestamp="1581518600775">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="549" y="188" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1581518600775" />
-    <state x="603" y="332" width="354" height="199" key="Github.CreateGistDialog" timestamp="1580990142757">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="603" y="332" width="354" height="199" key="Github.CreateGistDialog/0.0.1536.864@0.0.1536.864" timestamp="1580990142757" />
-    <state x="629" y="367" key="Github.Dialog.Accounts.Choose" timestamp="1581763148636">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="629" y="367" key="Github.Dialog.Accounts.Choose/0.0.1536.864@0.0.1536.864" timestamp="1581763148636" />
-    <state width="1493" height="142" key="GridCell.Tab.0.bottom" timestamp="1581907428966">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="142" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581907428966" />
-    <state width="1493" height="142" key="GridCell.Tab.0.center" timestamp="1581907428966">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="142" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1581907428966" />
-    <state width="1493" height="142" key="GridCell.Tab.0.left" timestamp="1581907428966">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="142" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1581907428966" />
-    <state width="1493" height="142" key="GridCell.Tab.0.right" timestamp="1581907428966">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="142" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1581907428966" />
-    <state width="1493" height="142" key="GridCell.Tab.1.bottom" timestamp="1581907428966">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="142" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581907428966" />
-    <state width="1493" height="142" key="GridCell.Tab.1.center" timestamp="1581907428966">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="142" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1581907428966" />
-    <state width="1493" height="142" key="GridCell.Tab.1.left" timestamp="1581907428966">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="142" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1581907428966" />
-    <state width="1493" height="142" key="GridCell.Tab.1.right" timestamp="1581907428966">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="142" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1581907428966" />
-    <state width="1493" height="183" key="GridCell.Tab.2.bottom" timestamp="1581762972237">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="183" key="GridCell.Tab.2.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581762972237" />
-    <state width="1493" height="183" key="GridCell.Tab.2.center" timestamp="1581762972237">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="183" key="GridCell.Tab.2.center/0.0.1536.864@0.0.1536.864" timestamp="1581762972237" />
-    <state width="1493" height="183" key="GridCell.Tab.2.left" timestamp="1581762972237">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="183" key="GridCell.Tab.2.left/0.0.1536.864@0.0.1536.864" timestamp="1581762972237" />
-    <state width="1493" height="183" key="GridCell.Tab.2.right" timestamp="1581762972237">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="183" key="GridCell.Tab.2.right/0.0.1536.864@0.0.1536.864" timestamp="1581762972237" />
-    <state x="493" y="144" key="RollbackChangesDialog" timestamp="1581247957604">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="493" y="144" key="RollbackChangesDialog/0.0.1536.864@0.0.1536.864" timestamp="1581247957604" />
-    <state x="249" y="8" key="SettingsEditor" timestamp="1581659985115">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="249" y="8" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1581659985115" />
-    <state x="93" y="93" width="1350" height="678" key="VCS.FileHistoryDialog" timestamp="1580977076254">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="93" y="93" width="1350" height="678" key="VCS.FileHistoryDialog/0.0.1536.864@0.0.1536.864" timestamp="1580977076254" />
-    <state x="361" y="166" key="Vcs.Push.Dialog.v2" timestamp="1581763142616">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="361" y="166" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1581763142616" />
-    <state x="93" y="93" width="1350" height="678" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1581661845965">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="93" y="93" width="1350" height="678" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.864@0.0.1536.864" timestamp="1581661845965" />
-    <state x="465" y="258" key="com.intellij.ide.util.TipDialog" timestamp="1581910359765">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="465" y="258" key="com.intellij.ide.util.TipDialog/0.0.1536.864@0.0.1536.864" timestamp="1581910359765" />
-    <state x="401" y="48" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1581336692753">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="401" y="48" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.864@0.0.1536.864" timestamp="1581336692752" />
-    <state x="578" y="350" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1581480818902">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="578" y="350" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.864@0.0.1536.864" timestamp="1581480818902" />
-    <state x="499" y="199" key="extract.method.dialog" timestamp="1581477958743">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="499" y="199" key="extract.method.dialog/0.0.1536.864@0.0.1536.864" timestamp="1581477958743" />
-    <state x="463" y="164" width="611" height="536" key="find.popup" timestamp="1581907320034">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="463" y="164" width="611" height="536" key="find.popup/0.0.1536.864@0.0.1536.864" timestamp="1581907320034" />
-    <state x="543" y="225" key="git4idea.merge.GitMergeDialog" timestamp="1581302774496">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="543" y="225" key="git4idea.merge.GitMergeDialog/0.0.1536.864@0.0.1536.864" timestamp="1581302774496" />
-    <state x="465" y="225" key="git4idea.merge.GitPullDialog" timestamp="1580894579130">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="465" y="225" key="git4idea.merge.GitPullDialog/0.0.1536.864@0.0.1536.864" timestamp="1580894579130" />
-    <state x="475" y="62" key="refactoring.ChangeSignatureDialog" timestamp="1581478593859">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="475" y="62" key="refactoring.ChangeSignatureDialog/0.0.1536.864@0.0.1536.864" timestamp="1581478593859" />
-    <state x="425" y="197" width="672" height="677" key="run.anything.popup" timestamp="1581687576714">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="425" y="197" width="672" height="677" key="run.anything.popup/0.0.1536.864@0.0.1536.864" timestamp="1581687576714" />
-    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1581907389176">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1581907389176" />
   </component>
 </project>

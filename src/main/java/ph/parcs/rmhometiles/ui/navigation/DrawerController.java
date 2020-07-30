@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.State;
 import ph.parcs.rmhometiles.ui.scene.SceneManager;
 
+import java.io.IOException;
+
 @Controller
 public class DrawerController {
 
@@ -16,7 +18,7 @@ public class DrawerController {
     private SceneManager sceneManager;
 
     @FXML
-    private void initialize() {
+    private void initialize() throws IOException {
         VBox drawerContent = (VBox) sceneManager.loadUI(State.NAVIGATION);
         drawer.setSidePane(drawerContent);
         drawer.open();

@@ -16,6 +16,7 @@ import ph.parcs.rmhometiles.entity.supplier.Supplier;
 import ph.parcs.rmhometiles.file.FileService;
 import ph.parcs.rmhometiles.util.Global;
 
+import java.net.URISyntaxException;
 import java.net.URL;
 
 
@@ -79,10 +80,15 @@ public class ProductTableController extends ItemTableController<Product> {
                 if (!empty && fileName != null) {
                     URL url = fileService.getResourcePath(fileName);
                     if (url != null) {
-                        ImageView image = new ImageView(new Image(url.toURI().toString()));
-                        image.setFitHeight(64);
-                        image.setFitWidth(64);
-                        setGraphic(image);
+                        try {
+                            ImageView image = new ImageView(new Image(url.toURI().toString()));
+                            image.setFitHeight(64);
+                            image.setFitWidth(64);
+                            setGraphic(image);
+                        } catch (URISyntaxException e) {
+                            e.printStackTrace();
+                        }
+
                     }
                 }
             }

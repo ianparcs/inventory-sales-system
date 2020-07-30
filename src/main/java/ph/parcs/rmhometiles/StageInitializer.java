@@ -15,6 +15,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import ph.parcs.rmhometiles.ui.scene.SceneManager;
 
+import java.net.URISyntaxException;
+
 @Component
 public class StageInitializer implements ApplicationListener<JavaFxApplication.StageReadyEvent> {
 
@@ -44,7 +46,7 @@ public class StageInitializer implements ApplicationListener<JavaFxApplication.S
     }
 
     @SneakyThrows
-    private Stage createStage() {
+    private Stage createStage() throws URISyntaxException {
         Parent content = sceneManager.getContent(State.LOGIN);
         Scene scene = new Scene(content, appWidth, appHeight);
         scene.setFill(Color.TRANSPARENT);

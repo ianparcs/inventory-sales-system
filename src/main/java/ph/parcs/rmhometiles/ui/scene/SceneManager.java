@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import ph.parcs.rmhometiles.StageInitializer;
 import ph.parcs.rmhometiles.State;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +20,7 @@ public class SceneManager {
     private StageInitializer stageInitializer;
 
     @SneakyThrows
-    public void load() {
+    public void load() throws IOException {
         states = new HashMap<>();
         states.put(State.HOME, loadUI(State.HOME));
         states.put(State.LOGIN, loadUI(State.LOGIN));
@@ -32,7 +33,7 @@ public class SceneManager {
     }
 
     @SneakyThrows
-    public Parent loadUI(State view) {
+    public Parent loadUI(State view) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(view.getPath()));
         loader.setControllerFactory(aClass -> stageInitializer.getApplicationContext().getBean(aClass));
         return loader.load();
