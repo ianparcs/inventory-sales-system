@@ -36,7 +36,7 @@
                 </HBox>
 
                 <JFXComboBox fx:id="cbProducts" editable="true" labelFloat="true" onAction="#selectProducts"
-                             promptText="Add Products" styleClass="detail-customer" HBox.hgrow="ALWAYS"/>
+                             promptText="Add Item" styleClass="detail-customer" HBox.hgrow="ALWAYS"/>
 
                 <JFXButton onAction="#selectProducts" styleClass="add-button" text="Add Product">
                     <graphic>

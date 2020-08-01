@@ -47,6 +47,7 @@ public class InvoiceController {
     private StackPane spMain;
 
     private EditItemController<Customer> customerEditController;
+    private InvoiceProductController invoiceProductController;
     private CustomerService customerService;
     private ProductService productService;
     private InvoiceService invoiceService;
@@ -150,7 +151,7 @@ public class InvoiceController {
 
     @FXML
     private void selectProducts() {
-
+        invoiceProductController.show(spMain);
     }
 
     @FXML
@@ -179,6 +180,11 @@ public class InvoiceController {
     @Autowired
     public void setCustomerEditController(CustomerEditController customerEditController) {
         this.customerEditController = customerEditController;
+    }
+
+    @Autowired
+    public void setInvoiceProductController(InvoiceProductController invoiceProductController) {
+        this.invoiceProductController = invoiceProductController;
     }
 
     @Autowired

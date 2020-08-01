@@ -1,116 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import com.jfoenix.validation.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDialog?>
+<?import com.jfoenix.controls.JFXDialogLayout?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.layout.*?>
-<JFXDialog xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../../css/edit-dialog.css" fx:id="editDialog"
-           fx:controller="ph.parcs.rmhometiles.entity.inventory.product.ProductEditController">
+<?import javafx.scene.layout.HBox?>
+<JFXDialog xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/edit-dialog.css" fx:id="editDialog"
+           fx:controller="ph.parcs.rmhometiles.entity.invoice.InvoiceProductController" visible="false">
 
     <JFXDialogLayout>
         <heading>
             <HBox>
                 <FontAwesomeIconView/>
-                <Label fx:id="lblTitle"/>
+                <Label fx:id="lblTitle" text="Add Items"/>
             </HBox>
         </heading>
 
         <body>
-            <GridPane>
-                <columnConstraints>
-                    <ColumnConstraints hgrow="ALWAYS"/>
-                    <ColumnConstraints hgrow="ALWAYS"/>
-                    <ColumnConstraints hgrow="ALWAYS"/>
-                </columnConstraints>
 
-                <JFXTextField fx:id="tfCode" labelFloat="true" promptText="Code"
-                              GridPane.columnIndex="0" GridPane.rowIndex="0">
-                    <tooltip>
-                        <Tooltip text="Product name"/>
-                    </tooltip>
-                    <validators>
-                        <RequiredFieldValidator message="Please fill out this field"/>
-                    </validators>
-                </JFXTextField>
-
-                <JFXTextField fx:id="tfName" labelFloat="true" promptText="Name"
-                              GridPane.columnIndex="1" GridPane.rowIndex="0">
-                    <tooltip>
-                        <Tooltip text="Product name"/>
-                    </tooltip>
-                    <validators>
-                        <RequiredFieldValidator message="Please fill out this field"/>
-                    </validators>
-                </JFXTextField>
-
-                <JFXTextField fx:id="tfDescription" labelFloat="true" promptText="Description"
-                              GridPane.columnIndex="2" GridPane.rowIndex="0">
-                    <tooltip>
-                        <Tooltip wrapText="true" text="Properties (color,size, etc..)"/>
-                    </tooltip>
-                    <validators>
-                        <RequiredFieldValidator message="Please fill out this field"/>
-                    </validators>
-                </JFXTextField>
-
-                <JFXTextField fx:id="tfStock" promptText="Stock" labelFloat="true"
-                              GridPane.columnIndex="0" GridPane.rowIndex="1">
-                    <validators>
-                        <NumberValidator message="Please enter number only"/>
-                    </validators>
-                </JFXTextField>
-
-                <JFXComboBox fx:id="cbStockUnit" onAction="#clearStockUnit" labelFloat="true"
-                             promptText="Stock Unit" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-
-
-                <JFXComboBox fx:id="cbCategory" onAction="#clearCategory" labelFloat="true" promptText="Category"
-                             GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-
-
-                <JFXTextField fx:id="tfUnitSold" labelFloat="true" promptText="Unit Sold"
-                              GridPane.columnIndex="0" GridPane.rowIndex="2">
-                    <validators>
-                        <NumberValidator message="Please enter number only"/>
-                    </validators>
-                </JFXTextField>
-
-                <JFXTextField fx:id="tfCost" labelFloat="true" promptText="Cost"
-                              GridPane.columnIndex="1" GridPane.rowIndex="2">
-                    <validators>
-                        <NumberValidator message="Please enter number only"/>
-                    </validators>
-                </JFXTextField>
-
-                <JFXTextField fx:id="tfPrice" labelFloat="true" promptText="Price"
-                              GridPane.columnIndex="2" GridPane.rowIndex="2">
-                    <validators>
-                        <NumberValidator message="Please enter number only"/>
-                    </validators>
-                </JFXTextField>
-
-                <JFXTextField fx:id="tfDiscount" promptText="Discount" labelFloat="true"
-                              GridPane.columnIndex="0" GridPane.rowIndex="3">
-                    <validators>
-                        <NumberValidator message="Please enter number only"/>
-                    </validators>
-                </JFXTextField>
-
-
-                <JFXComboBox fx:id="cbSupplier" onAction="#clearSupplier" labelFloat="true" promptText="Supplier"
-                             GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-
-                <JFXTextField fx:id="tfImage" labelFloat="true" promptText="Choose Image" onMouseClicked="#selectImage"
-                              GridPane.columnIndex="2" GridPane.rowIndex="3" editable="false"/>
-            </GridPane>
         </body>
 
         <actions>
             <JFXButton onAction="#closeDialog" styleClass="button-cancel" text="Cancel"/>
-            <JFXButton fx:id="btnSave" styleClass="button-save" text="Save"
-                       disable="${tfPrice.text.empty || tfName.text.empty || tfDescription.text.empty || tfCode.text.empty}"/>
+            <JFXButton fx:id="btnAddItem" styleClass="button-save" text="Add"/>
         </actions>
 
     </JFXDialogLayout>
