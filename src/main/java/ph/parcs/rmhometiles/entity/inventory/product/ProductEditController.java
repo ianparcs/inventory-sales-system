@@ -135,12 +135,14 @@ public class ProductEditController extends EditItemController<Product> {
         if (!itemService.isNew(product)) {
             tfCode.setText(product.getCode());
             tfName.setText(product.getName());
+            tfImage.setText(product.getFilePath());
             tfDescription.setText(product.getDescription());
             tfPrice.setText(product.getPrice().toString());
-            tfUnitSold.setText(product.getUnitSold().toString());
             tfStock.setText(product.getStock().toString());
             tfDiscount.setText(product.getDiscount().toString());
+            tfUnitSold.setText(product.getUnitSold().toString());
         }
+
         setStockUnitValue(product);
         setCategoryValue(product);
         setSupplierValue(product);
