@@ -119,7 +119,7 @@ public class Product extends BaseEntity {
         this.stockUnit = stockUnit;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "file_id")
     public FileImage getFileImage() {
         return fileImage;

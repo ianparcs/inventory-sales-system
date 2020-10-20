@@ -13,6 +13,8 @@ public class SweetAlertFactory {
                 return deleteDialog(msg);
             case DANGER:
                 return dangerDialog(msg);
+            case INFO:
+                return infoDialog(msg);
 
         }
         return null;
@@ -49,5 +51,13 @@ public class SweetAlertFactory {
                 .setType(SweetAlert.Type.WARNING)
                 .setCancelButton("Cancel")
                 .setConfirmButton("Remove");
+    }
+
+    private static SweetAlert infoDialog(String message) {
+        return new SweetAlert()
+                .setHeaderMessage(Global.MSG.ASK)
+                .setContentMessage(message)
+                .setType(SweetAlert.Type.INFO)
+                .setCancelButton("Close");
     }
 }

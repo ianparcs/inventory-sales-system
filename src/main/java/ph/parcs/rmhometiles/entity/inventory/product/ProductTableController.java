@@ -18,9 +18,13 @@ import ph.parcs.rmhometiles.entity.supplier.Supplier;
 import ph.parcs.rmhometiles.file.FileImage;
 import ph.parcs.rmhometiles.file.FileService;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
+import ph.parcs.rmhometiles.ui.alert.SweetAlert;
+import ph.parcs.rmhometiles.ui.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.util.FileUtils;
 import ph.parcs.rmhometiles.util.Global;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 
@@ -41,12 +45,13 @@ public class ProductTableController extends ItemTableController<Product> {
     @FXML
     private TableColumn<Product, FileImage> tcImage;
 
-    private FileService fileService;
+    private SweetAlert sweetAlert;
 
     @FXML
     public void initialize() {
         super.initialize();
         initTableColumnValue();
+        sweetAlert = SweetAlertFactory.create(SweetAlert.Type.INFO);
     }
 
     private void initTableColumnValue() {
@@ -89,18 +94,30 @@ public class ProductTableController extends ItemTableController<Product> {
                         URL url = FileUtils.getResourcePath(fileImage.getName());
                         if (url != null) {
                             ImageView image = new ImageView(new Image(url.toURI().toString()));
-                            image.setFitHeight(64);
-                            image.setFitWidth(64);
+                            image.setPreserveRatio(true);
+                            image.setFitHeight(128);
+                            image.setFitWidth(128);
                             setGraphic(image);
+                            setUserData(fileImage);
                         }
                     }
                 }
             };
 
             cell.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-                if (event.getClickCount() > 1) {
-                    TableCell c = (TableCell) event.getSource();
-                    System.out.println("Cell text: " + c.getText());
+                if (event.getClickCount() >= 1) {
+                    try {
+                        FileImage fileImage = (FileImage) cell.getUserData();
+                        URL url = FileUtils.getResourcePath(fileImage.getName());
+                        ImageView image = new ImageView(new Image(url.toURI().toString()));
+                        image.setFitWidth(612);
+                        image.setFitHeight(450);
+                        sweetAlert.setHeaderMessage(fileImage.getName());
+                        sweetAlert.setBody(image);
+                        sweetAlert.show(spMain);
+                    } catch (URISyntaxException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
             return cell;
@@ -130,8 +147,4 @@ public class ProductTableController extends ItemTableController<Product> {
         this.itemService = productService;
     }
 
-    @Autowired
-    public void setFileService(FileService fileService) {
-        this.fileService = fileService;
-    }
 }

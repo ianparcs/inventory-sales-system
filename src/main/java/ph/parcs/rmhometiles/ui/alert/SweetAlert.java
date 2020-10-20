@@ -7,6 +7,7 @@ import de.jensd.fx.glyphs.GlyphsStack;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import ph.parcs.rmhometiles.util.Global;
@@ -99,6 +100,10 @@ public class SweetAlert {
         btnCancel.setOnAction(actionEvent -> close());
         content.getActions().add(btnCancel);
         return this;
+    }
+
+    public void setBody(ImageView image) {
+        content.setBody(image);
     }
 
     public enum Type {
