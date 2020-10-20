@@ -53,7 +53,7 @@ public class ProductService extends ItemService<Product> {
     }
 
     private void saveFile(FileImage fileImage) {
-        String fileName = FileUtils.getFileName(fileImage);
+        String fileName = FileUtils.getFileName(fileImage.getPath());
         String des = FileUtils.getTargetPath(fileName);
         String src = fileImage.getPath();
         fileImage.setName(fileName);

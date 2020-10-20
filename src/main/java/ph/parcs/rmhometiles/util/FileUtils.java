@@ -20,8 +20,8 @@ public class FileUtils {
         return fileChooser;
     }
 
-    public static String getFileName(FileImage fileImage) {
-        return new File(fileImage.getPath()).getName();
+    public static String getFileName(String path) {
+        return new File(path).getName();
     }
 
     public static String getTargetPath(String filename) {

@@ -8,6 +8,8 @@ import javafx.stage.FileChooser;
 import javafx.util.StringConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
+import ph.parcs.rmhometiles.ItemListener;
 import ph.parcs.rmhometiles.entity.inventory.category.Category;
 import ph.parcs.rmhometiles.entity.inventory.category.CategoryService;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
@@ -204,6 +206,32 @@ public class ProductEditController extends EditItemController<Product> {
         if (selectedFile != null) tfImage.setText(selectedFile.getAbsolutePath());
     }
 
+    @Override
+    public void onEditItem(ItemListener<Product> itemListener, Product item) {
+        setDialogTitle(item);
+        bindFields(item);
+
+        btnSave.setOnAction(actionEvent -> {
+            closeDialog();
+            String path = tfImage.getText();
+            if (!path.isEmpty() && item.getFileImage() != null) {
+                String fileName = FileUtils.getFileName(path);
+                String currentFile = item.getFileImage().getName();
+                if ((currentFile != null && !currentFile.equals(fileName)) &&
+                        !StringUtils.isEmpty(currentFile)) {
+                    fileService.deleteFile(item.getFileImage().getName());
+                }
+            }
+
+            Product savedItem = itemService.saveItem(unbindFields(item.getId()));
+            if (!itemService.isEmpty(savedItem)) {
+                itemListener.onSavedSuccess(savedItem);
+            } else {
+                itemListener.onSaveFailed(savedItem);
+            }
+        });
+    }
+
     @FXML
     private void clearSupplier() {
         clearComboboxSelection(cbSupplier);
@@ -252,5 +280,4 @@ public class ProductEditController extends EditItemController<Product> {
     public void setFileService(FileService fileService) {
         this.fileService = fileService;
     }
-
 }

@@ -4,6 +4,7 @@ package ph.parcs.rmhometiles.file;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -24,7 +25,7 @@ public class FileService {
     @SneakyThrows
     public void deleteFile(String filename) {
         Path source = Paths.get(getTargetPath(filename));
-        Files.delete(source);
+        Files.deleteIfExists(source);
     }
 
 }
