@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import ph.parcs.rmhometiles.entity.inventory.item.ItemService;
 import ph.parcs.rmhometiles.file.FileService;
+import ph.parcs.rmhometiles.file.FileImage;
+import ph.parcs.rmhometiles.util.FileUtils;
 
 import java.util.Optional;
 import java.util.Set;
@@ -30,11 +32,12 @@ public class ProductService extends ItemService<Product> {
 
     @Override
     public boolean deleteItem(Product product) {
+        FileImage fileImage = product.getFileImage();
+        if (fileImage == null || StringUtils.isEmpty(fileImage.getPath())) return false;
+
+        fileService.deleteFile(fileImage.getName());
         productRepository.delete(product);
-        String filename = product.getFileName();
-        if (!StringUtils.isEmpty(filename)) {
-            fileService.deleteFile(filename);
-        }
+
         Optional<Product> productOptional = productRepository.findById(product.getId());
         return productOptional.isEmpty();
     }
@@ -42,20 +45,18 @@ public class ProductService extends ItemService<Product> {
     @Override
     @SneakyThrows
     public Product saveItem(Product product) {
-        product.setId(productRepository.save(product).getId());
-
-        if (!product.getFilePath().isEmpty()) {
-            saveProductImage(product);
+        FileImage fileImage = product.getFileImage();
+        if (fileImage != null && !StringUtils.isEmpty(fileImage.getPath())) {
+            saveFile(fileImage);
         }
-
         return productRepository.save(product);
     }
 
-    private void saveProductImage(Product product) {
-        String fileName = fileService.getNewName(product.getId().toString(), product.getFilePath());
-        String des = fileService.getFullTargetPath(fileName);
-        String src = product.getFilePath();
-        product.setFileName(fileName);
+    private void saveFile(FileImage fileImage) {
+        String fileName = FileUtils.getFileName(fileImage);
+        String des = FileUtils.getTargetPath(fileName);
+        String src = fileImage.getPath();
+        fileImage.setName(fileName);
         fileService.saveImage(src, des);
     }
 

@@ -20,10 +20,9 @@ public class SceneManager {
     private StageInitializer stageInitializer;
 
     @SneakyThrows
-    public void load() throws IOException {
+    public void load() {
         states = new HashMap<>();
         states.put(State.HOME, loadUI(State.HOME));
-        states.put(State.LOGIN, loadUI(State.LOGIN));
         states.put(State.ERROR, loadUI(State.ERROR));
         states.put(State.INVENTORY, loadUI(State.INVENTORY));
         states.put(State.SUPPLIER, loadUI(State.SUPPLIER));
@@ -33,7 +32,7 @@ public class SceneManager {
     }
 
     @SneakyThrows
-    public Parent loadUI(State view) throws IOException {
+    public Parent loadUI(State view) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(view.getPath()));
         loader.setControllerFactory(aClass -> stageInitializer.getApplicationContext().getBean(aClass));
         return loader.load();

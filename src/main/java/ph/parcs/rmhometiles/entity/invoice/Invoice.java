@@ -14,20 +14,9 @@ import java.util.Set;
 @AttributeOverride(name = "id", column = @Column(name = "invoice_id"))
 public class Invoice extends BaseEntity {
 
-    private Set<Product> products;
     private BigDecimal totalPrice;
     private Customer customer;
     private Date createdAt;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "product_id")
-    public Set<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(Set<Product> products) {
-        this.products = products;
-    }
 
     @Column(name = "total_price", precision = 8, scale = 2)
     public BigDecimal getTotalPrice() {

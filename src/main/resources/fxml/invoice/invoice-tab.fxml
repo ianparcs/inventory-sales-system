@@ -17,7 +17,7 @@
                 </padding>
             </HBox>
         </graphic>
-        <fx:include source="new-sell.fxml"/>
+        <fx:include source="new-invoice.fxml"/>
     </Tab>
     <Tab fx:id="tabManageSell" text="Manage Invoice">
         <graphic>
@@ -28,6 +28,6 @@
                 </padding>
             </VBox>
         </graphic>
-        <fx:include source="manage-sell.fxml"/>
+        <fx:include source="manage-invoice.fxml"/>
     </Tab>
 </JFXTabPane>

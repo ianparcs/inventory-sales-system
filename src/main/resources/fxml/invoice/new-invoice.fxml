@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain" stylesheets="@../../css/invoice.css"
-           xmlns="http://javafx.com/javafx/10.0.2-internal"
-           fx:controller="ph.parcs.rmhometiles.entity.invoice.InvoiceController">
+
+<StackPane fx:id="spMain" stylesheets="@../../css/invoice.css" xmlns="http://javafx.com/javafx/10.0.2-internal"
+           xmlns:fx="http://javafx.com/fxml/1" fx:controller="ph.parcs.rmhometiles.entity.invoice.InvoiceController">
 
     <fx:include source="../customer/edit-customer.fxml"/>
     <fx:include source="invoice-add-product.fxml" visible="false"/>
@@ -16,13 +16,13 @@
     <VBox styleClass="background">
 
         <HBox styleClass="item-headers">
-            <Label text="New Invoice" HBox.hgrow="ALWAYS" maxWidth="1.7976931348623157E308"/>
+            <Label maxWidth="1.7976931348623157E308" text="New Invoice" HBox.hgrow="ALWAYS"/>
             <JFXDatePicker fx:id="dpDate" promptText="Invoice Date" HBox.hgrow="ALWAYS"/>
         </HBox>
 
         <GridPane>
             <HBox GridPane.columnIndex="0" GridPane.rowIndex="0">
-                <HBox spacing="20" HBox.hgrow="ALWAYS">
+                <HBox alignment="CENTER_LEFT" spacing="15.0" HBox.hgrow="ALWAYS">
 
                     <JFXComboBox fx:id="cbCustomer" editable="true" labelFloat="true" onAction="#selectCustomer"
                                  promptText="Customer Name" styleClass="detail-customer"/>
@@ -32,20 +32,28 @@
                                   styleClass="detail-customer"/>
                     <JFXButton onAction="#showAddCustomer" styleClass="add-button" text="New Costumer"/>
                     <JFXButton onAction="#clearFields" styleClass="add-button" text="Clear"/>
+                    <HBox.margin>
+                        <Insets/>
+                    </HBox.margin>
+                    <padding>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0"/>
+                    </padding>
 
                 </HBox>
+                <HBox alignment="CENTER_RIGHT" spacing="15.0">
 
-                <JFXComboBox fx:id="cbProducts" editable="true" labelFloat="true" onAction="#selectProducts"
-                             promptText="Add Item" styleClass="detail-customer" HBox.hgrow="ALWAYS"/>
+                    <JFXComboBox fx:id="cbProducts" editable="true" labelFloat="true" onAction="#selectProducts"
+                                 promptText="Add Item" styleClass="detail-customer" HBox.hgrow="ALWAYS"/>
 
-                <JFXButton onAction="#selectProducts" styleClass="add-button" text="Add Product">
-                    <graphic>
-                        <FontAwesomeIconView styleClass="plus-icon"/>
-                    </graphic>
-                </JFXButton>
+                    <JFXButton onAction="#selectProducts" styleClass="add-button" text="Add Product">
+                        <graphic>
+                            <FontAwesomeIconView styleClass="plus-icon"/>
+                        </graphic>
+                    </JFXButton>
+                </HBox>
 
                 <GridPane.margin>
-                    <Insets top="20" bottom="20"/>
+                    <Insets bottom="20" top="20"/>
                 </GridPane.margin>
             </HBox>
 
@@ -59,7 +67,7 @@
                             <PropertyValueFactory property="code"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn fx:id="tcDescription" reorderable="false" text="Rate">
+                    <TableColumn fx:id="tcDescription" reorderable="false" text="Qty">
                         <cellValueFactory>
                             <PropertyValueFactory property="description"/>
                         </cellValueFactory>

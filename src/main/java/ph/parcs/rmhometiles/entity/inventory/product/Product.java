@@ -5,11 +5,13 @@ import ph.parcs.rmhometiles.entity.inventory.category.Category;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.entity.inventory.stock.StockUnit;
 import ph.parcs.rmhometiles.entity.supplier.Supplier;
+import ph.parcs.rmhometiles.file.FileImage;
 
 import javax.persistence.*;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@AttributeOverride(name = "id", column = @Column(name = "product_id"))
 public class Product extends BaseEntity {
 
     private IntegerProperty stock = new SimpleIntegerProperty();
@@ -19,15 +21,14 @@ public class Product extends BaseEntity {
     private FloatProperty price = new SimpleFloatProperty();
     private FloatProperty cost = new SimpleFloatProperty();
 
-
     private StringProperty description = new SimpleStringProperty();
-    private StringProperty fileName = new SimpleStringProperty();
-    private StringProperty filePath = new SimpleStringProperty();
+
     private StringProperty code = new SimpleStringProperty();
 
     private Supplier supplier;
     private Category category;
     private StockUnit stockUnit;
+    private FileImage fileImage;
 
     @Column(name = "stock")
     public Integer getStock() {
@@ -42,14 +43,6 @@ public class Product extends BaseEntity {
         return stock;
     }
 
-    @Column(name = "file_name")
-    public String getFileName() {
-        return fileName.get();
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName.set(fileName);
-    }
 
     @Column(name = "unit_sold")
     public Integer getUnitSold() {
@@ -126,12 +119,14 @@ public class Product extends BaseEntity {
         this.stockUnit = stockUnit;
     }
 
-    public String getFilePath() {
-        return filePath.get();
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "file_id")
+    public FileImage getFileImage() {
+        return fileImage;
     }
 
-    public void setFilePath(String filePath) {
-        this.filePath.set(filePath);
+    public void setFileImage(FileImage fileImage) {
+        this.fileImage = fileImage;
     }
 
     @Column(name = "code")

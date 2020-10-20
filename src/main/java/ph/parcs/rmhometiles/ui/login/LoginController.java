@@ -36,6 +36,7 @@ public class LoginController {
 
     @FXML
     private void initialize() {
+        userService.saveUser(createUser());
         setUserFieldStyle(pfUserPassword, icoKey);
         setUserFieldStyle(tfUserName, icoUser);
     }
@@ -55,8 +56,8 @@ public class LoginController {
         final String password = pfUserPassword.getText();
 
         new Thread(() -> {
-            userService.login(username, password);
-
+            userService.authenticate(username, password);
+            sceneManager.load();
             Platform.runLater(() -> {
                 if (userService.isAuthenticated()) {
                     gotoHomeScene();

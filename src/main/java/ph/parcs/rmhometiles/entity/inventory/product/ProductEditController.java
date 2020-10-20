@@ -16,7 +16,9 @@ import ph.parcs.rmhometiles.entity.inventory.stock.StockUnit;
 import ph.parcs.rmhometiles.entity.inventory.stock.StockUnitService;
 import ph.parcs.rmhometiles.entity.supplier.Supplier;
 import ph.parcs.rmhometiles.entity.supplier.SupplierService;
+import ph.parcs.rmhometiles.file.FileImage;
 import ph.parcs.rmhometiles.file.FileService;
+import ph.parcs.rmhometiles.util.FileUtils;
 
 import java.io.File;
 import java.util.Optional;
@@ -64,6 +66,7 @@ public class ProductEditController extends EditItemController<Product> {
         validateField(tfPrice);
         validateField(tfName);
         validateField(tfCode);
+        validateField(tfCost);
 
         initComboBoxValues();
     }
@@ -117,6 +120,7 @@ public class ProductEditController extends EditItemController<Product> {
         tfPrice.clear();
         tfName.clear();
         tfCode.clear();
+        tfCost.clear();
         clearValidators();
     }
 
@@ -135,35 +139,43 @@ public class ProductEditController extends EditItemController<Product> {
         if (!itemService.isNew(product)) {
             tfCode.setText(product.getCode());
             tfName.setText(product.getName());
-            tfImage.setText(product.getFilePath());
+            tfCost.setText(product.getCost().toString());
             tfDescription.setText(product.getDescription());
             tfPrice.setText(product.getPrice().toString());
             tfStock.setText(product.getStock().toString());
             tfDiscount.setText(product.getDiscount().toString());
             tfUnitSold.setText(product.getUnitSold().toString());
+
+            if (product.getFileImage() != null) {
+                tfImage.setText(product.getFileImage().getPath());
+            }
         }
 
         setStockUnitValue(product);
         setCategoryValue(product);
         setSupplierValue(product);
-
     }
 
     @Override
     protected Product unbindFields(Integer id) {
         Product product = new Product();
         product.setUnitSold(Integer.valueOf(!tfUnitSold.getText().isEmpty() ? tfUnitSold.getText() : "0"));
-        product.setStock(Integer.valueOf(!tfStock.getText().isEmpty() ? tfStock.getText() : "0"));
         product.setDiscount(Integer.valueOf(!tfDiscount.getText().isEmpty() ? tfDiscount.getText() : "0"));
+        product.setStock(Integer.valueOf(!tfStock.getText().isEmpty() ? tfStock.getText() : "0"));
         product.setPrice(Float.valueOf(!tfPrice.getText().isEmpty() ? tfPrice.getText() : "0.00"));
+        product.setPrice(Float.valueOf(!tfCost.getText().isEmpty() ? tfCost.getText() : "0.00"));
         product.setStockUnit(cbStockUnit.getValue());
         product.setDescription(tfDescription.getText());
         product.setCategory(cbCategory.getValue());
         product.setSupplier(cbSupplier.getValue());
-        product.setFilePath(tfImage.getText());
         product.setName(tfName.getText());
         product.setCode(tfCode.getText());
         product.setId(id);
+
+        FileImage image = new FileImage();
+        image.setPath(tfImage.getText());
+        product.setFileImage(image);
+
         return product;
     }
 
@@ -187,7 +199,7 @@ public class ProductEditController extends EditItemController<Product> {
 
     @FXML
     private void selectImage() {
-        FileChooser fileChooser = fileService.getImageChooser();
+        FileChooser fileChooser = FileUtils.getImageChooser();
         File selectedFile = fileChooser.showOpenDialog(editDialog.getScene().getWindow());
         if (selectedFile != null) tfImage.setText(selectedFile.getAbsolutePath());
     }

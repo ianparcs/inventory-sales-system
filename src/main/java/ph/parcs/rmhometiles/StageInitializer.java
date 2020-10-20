@@ -40,14 +40,13 @@ public class StageInitializer implements ApplicationListener<JavaFxApplication.S
     @SneakyThrows
     @Override
     public void onApplicationEvent(JavaFxApplication.StageReadyEvent stageReadyEvent) {
-        sceneManager.load();
         stage = createStage();
         stage.show();
     }
 
     @SneakyThrows
-    private Stage createStage() throws URISyntaxException {
-        Parent content = sceneManager.getContent(State.LOGIN);
+    private Stage createStage() {
+        Parent content = sceneManager.loadUI(State.LOGIN);
         Scene scene = new Scene(content, appWidth, appHeight);
         scene.setFill(Color.TRANSPARENT);
 
@@ -58,7 +57,6 @@ public class StageInitializer implements ApplicationListener<JavaFxApplication.S
         stage.setTitle(appTitle);
         return stage;
     }
-
 
     @Autowired
     public void setSceneManager(SceneManager sceneManager) {

@@ -53,37 +53,27 @@ public class InvoiceController {
     private InvoiceService invoiceService;
     private SweetAlert successAlert;
 
+    private boolean isCustomerAdded;
     @FXML
     public void initialize() {
         successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
         configureCustomerCombobox();
         configureProductCombobox();
-
-        Product product = new Product();
-        product.setId(0);
-        product.setName("Test");
-
-        Set<Product> products = new HashSet<>();
-        products.add(product);
-
-        Invoice invoice = new Invoice();
-        invoice.setId(1);
-        invoice.setCreatedAt(new Date());
-        invoice.setProducts(products);
-
-        invoiceService.saveItem(invoice);
     }
 
     private void configureCustomerCombobox() {
         setComboboxConverter(cbCustomer);
         cbCustomer.getEditor().textProperty().addListener((observable, oldVal, newVal) -> Platform.runLater(() -> {
-            cbCustomer.show();
-            searchCustomer(newVal);
+            if(!StringUtils.isEmpty(newVal) && !isCustomerAdded){
+                cbCustomer.show();
+                searchCustomer(newVal);
+            }
         }));
 
         cbCustomer.focusedProperty().addListener((observableValue, outOfFocus, focus) -> Platform.runLater(() -> {
             String editorTxt = cbCustomer.getEditor().getText();
             if (focus) {
+                isCustomerAdded = false;
                 if (editorTxt.isEmpty()) {
                     searchCustomer(Global.STRING_EMPTY);
                 }
@@ -156,7 +146,8 @@ public class InvoiceController {
 
     @FXML
     private void clearFields() {
-        cbCustomer.valueProperty().set(null);
+        cbCustomer.setValue(null);
+        cbCustomer.hide();
         tfContact.clear();
         tfAddress.clear();
     }
@@ -165,7 +156,13 @@ public class InvoiceController {
     private void showAddCustomer() {
         customerEditController.onEditItem(new ItemListener<>() {
             @Override
-            public void onSavedSuccess(Customer entity) {
+            public void onSavedSuccess(Customer customer) {
+                if (customer != null) {
+                    cbCustomer.setValue(customer);
+                    tfAddress.setText(StringUtils.isEmpty(customer.getAddress()) ? "n/a" : customer.getAddress());
+                    tfContact.setText(StringUtils.isEmpty(customer.getContact()) ? "n/a" : customer.getContact());
+                }
+                isCustomerAdded = true;
                 successAlert.setContentMessage(Global.MSG.SAVED).show(spMain);
             }
 

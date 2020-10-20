@@ -99,7 +99,7 @@
         <repository>
             <id>internal.repo</id>
             <name>Internal repo</name>
-            <url>file://C:\Users\Ian\My Projects\inventory-sales-system\deployment</url>
+            <url>fileImage://C:\Users\Ian\My Projects\inventory-sales-system\deployment</url>
         </repository>
     </distributionManagement>
 </project>

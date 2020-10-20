@@ -4,8 +4,15 @@
     -jfx-button-type: FLAT;
     -fx-text-fill: WHITE;
     -fx-font-weight: BOLD;
-    -fx-border-radius: 5pt;
-    -fx-background-radius: 5pt;
+    -fx-border-radius: 15pt;
+    -fx-background-radius: 15pt;
+}
+
+.plus-icon {
+    -fx-fill: WHITE;
+    -fx-alignment: center;
+    -glyph-name: "PLUS";
+    -glyph-size: 18px;
 }
 
 VBox .item-headers {

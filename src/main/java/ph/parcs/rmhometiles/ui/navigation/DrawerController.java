@@ -18,7 +18,7 @@ public class DrawerController {
     private SceneManager sceneManager;
 
     @FXML
-    private void initialize() throws IOException {
+    private void initialize() {
         VBox drawerContent = (VBox) sceneManager.loadUI(State.NAVIGATION);
         drawer.setSidePane(drawerContent);
         drawer.open();

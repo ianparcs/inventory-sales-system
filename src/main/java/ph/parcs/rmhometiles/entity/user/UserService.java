@@ -24,35 +24,37 @@ public class UserService implements UserDetailsService {
     private Authentication authenticationToken;
     private UserRepository userRepository;
 
+    private User currentUser;
+
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) {
-        User user = userRepository.findByUsername(username);
+        currentUser = userRepository.findByUsername(username);
 
-        if (user == null || username.isEmpty()) {
+        if (currentUser == null || username.isEmpty()) {
             return null;
         }
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole()));
+        grantedAuthorities.add(new SimpleGrantedAuthority(currentUser.getRole()));
 
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
+        return new org.springframework.security.core.userdetails.User(currentUser.getUsername(), currentUser.getPassword(), grantedAuthorities);
     }
 
-    public void login(String username, String password) {
+    public void authenticate(String username, String password) {
         UserDetails userDetails = loadUserByUsername(username);
         if (userDetails != null) {
             if (isPasswordMatch(password, userDetails.getPassword())) {
-                authenticate(userDetails, password);
+                authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
+                authenticationManager.authenticate(authenticationToken);
+                if (authenticationToken.isAuthenticated()) {
+                    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                }
             }
         }
     }
 
-    private void authenticate(UserDetails userDetails, String password) {
-        authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
-        authenticationManager.authenticate(authenticationToken);
-        if (authenticationToken.isAuthenticated()) {
-            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-        }
+    public User getCurrentUser() {
+        return currentUser;
     }
 
     private boolean isPasswordMatch(String plainPass, String encodedPass) {

@@ -1,11 +1,13 @@
 package ph.parcs.rmhometiles.entity.inventory.product;
 
 import javafx.beans.binding.Bindings;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,10 @@ import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.entity.inventory.category.Category;
 import ph.parcs.rmhometiles.entity.inventory.item.ItemTableController;
 import ph.parcs.rmhometiles.entity.supplier.Supplier;
+import ph.parcs.rmhometiles.file.FileImage;
 import ph.parcs.rmhometiles.file.FileService;
+import ph.parcs.rmhometiles.ui.ActionTableCell;
+import ph.parcs.rmhometiles.util.FileUtils;
 import ph.parcs.rmhometiles.util.Global;
 
 import java.net.URISyntaxException;
@@ -34,7 +39,7 @@ public class ProductTableController extends ItemTableController<Product> {
     @FXML
     private TableColumn<Product, Float> tcPrice;
     @FXML
-    private TableColumn<Product, String> tcImage;
+    private TableColumn<Product, FileImage> tcImage;
 
     private FileService fileService;
 
@@ -73,25 +78,32 @@ public class ProductTableController extends ItemTableController<Product> {
             }
         });
 
-        tcImage.setCellFactory(param -> new TableCell<>() {
-            @Override
-            @SneakyThrows
-            protected void updateItem(String fileName, boolean empty) {
-                if (!empty && fileName != null) {
-                    URL url = fileService.getResourcePath(fileName);
-                    if (url != null) {
-                        try {
+        tcImage.setCellFactory(tc -> {
+            TableCell<Product, FileImage> cell = new TableCell<>() {
+
+                @SneakyThrows
+                @Override
+                protected void updateItem(FileImage fileImage, boolean empty) {
+                    super.updateItem(fileImage, empty);
+                    if (!empty && fileImage != null) {
+                        URL url = FileUtils.getResourcePath(fileImage.getName());
+                        if (url != null) {
                             ImageView image = new ImageView(new Image(url.toURI().toString()));
                             image.setFitHeight(64);
                             image.setFitWidth(64);
                             setGraphic(image);
-                        } catch (URISyntaxException e) {
-                            e.printStackTrace();
                         }
-
                     }
                 }
-            }
+            };
+
+            cell.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+                if (event.getClickCount() > 1) {
+                    TableCell c = (TableCell) event.getSource();
+                    System.out.println("Cell text: " + c.getText());
+                }
+            });
+            return cell;
         });
 
         tcStock.setCellValueFactory(cellData -> {
