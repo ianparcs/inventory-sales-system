@@ -33,9 +33,10 @@ public class ProductService extends ItemService<Product> {
     @Override
     public boolean deleteItem(Product product) {
         FileImage fileImage = product.getFileImage();
-        if (fileImage == null || StringUtils.isEmpty(fileImage.getPath())) return false;
+        if (fileImage != null && !StringUtils.isEmpty(fileImage.getPath())) {
+            fileService.deleteFile(fileImage.getName());
+        }
 
-        fileService.deleteFile(fileImage.getName());
         productRepository.delete(product);
 
         Optional<Product> productOptional = productRepository.findById(product.getId());
