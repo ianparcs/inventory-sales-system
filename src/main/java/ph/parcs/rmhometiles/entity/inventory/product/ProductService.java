@@ -1,5 +1,7 @@
 package ph.parcs.rmhometiles.entity.inventory.product;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,11 +25,12 @@ public class ProductService extends ItemService<Product> {
     @Override
     public Page<Product> findPages(int page, int itemPerPage, String name) {
         PageRequest pageRequest = super.requestPage(page, itemPerPage);
-        return productRepository.findAllByNameContains(pageRequest, name);
+        return productRepository.findAllByCodeContains(pageRequest, name);
     }
 
     public Set<Product> findItems(String query) {
-        return productRepository.findProductByNameContains(query);
+        StringProperty queryProp = new SimpleStringProperty(query);
+        return productRepository.findProductByCodeContains(queryProp);
     }
 
     @Override

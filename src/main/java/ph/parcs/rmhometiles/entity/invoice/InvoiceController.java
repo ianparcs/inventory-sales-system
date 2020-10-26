@@ -24,6 +24,8 @@ import ph.parcs.rmhometiles.ui.alert.SweetAlert;
 import ph.parcs.rmhometiles.ui.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.util.Global;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -52,19 +54,38 @@ public class InvoiceController {
     private ProductService productService;
     private InvoiceService invoiceService;
     private SweetAlert successAlert;
-
     private boolean isCustomerAdded;
+
     @FXML
     public void initialize() {
         successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
         configureCustomerCombobox();
         configureProductCombobox();
+        configureDate();
+
+    }
+
+    private void configureDate() {
+        dpDate.setValue(LocalDate.now());
+        dpDate.setConverter(new StringConverter<>() {
+            final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("EEE, MMM d, yyyy");
+
+            @Override
+            public String toString(LocalDate date) {
+                return (date != null) ? dateFormatter.format(date) : "";
+            }
+
+            @Override
+            public LocalDate fromString(String string) {
+                return (string != null && !string.isEmpty()) ? LocalDate.parse(string, dateFormatter) : null;
+            }
+        });
     }
 
     private void configureCustomerCombobox() {
         setComboboxConverter(cbCustomer);
         cbCustomer.getEditor().textProperty().addListener((observable, oldVal, newVal) -> Platform.runLater(() -> {
-            if(!StringUtils.isEmpty(newVal) && !isCustomerAdded){
+            if (!StringUtils.isEmpty(newVal) && !isCustomerAdded) {
                 cbCustomer.show();
                 searchCustomer(newVal);
             }

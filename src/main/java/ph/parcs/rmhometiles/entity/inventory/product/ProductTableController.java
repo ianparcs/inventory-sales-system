@@ -108,6 +108,7 @@ public class ProductTableController extends ItemTableController<Product> {
                 if (event.getClickCount() >= 1) {
                     try {
                         FileImage fileImage = (FileImage) cell.getUserData();
+                        if (fileImage == null) return;
                         URL url = FileUtils.getResourcePath(fileImage.getName());
                         ImageView image = new ImageView(new Image(url.toURI().toString()));
                         image.setFitWidth(612);

@@ -50,5 +50,9 @@ VBox .item-headers .label {
 
 }
 
+.date-picker > .text-field  {
+    -fx-alignment: center;
+}
+
 
 

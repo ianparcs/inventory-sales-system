@@ -17,7 +17,7 @@
 
         <HBox styleClass="item-headers">
             <Label maxWidth="1.7976931348623157E308" text="New Invoice" HBox.hgrow="ALWAYS"/>
-            <JFXDatePicker fx:id="dpDate" promptText="Invoice Date" HBox.hgrow="ALWAYS"/>
+            <JFXDatePicker fx:id="dpDate" promptText="Invoice Date"  HBox.hgrow="ALWAYS"/>
         </HBox>
 
         <GridPane>

@@ -1,5 +1,8 @@
 package ph.parcs.rmhometiles.entity.inventory.product;
 
+import javafx.beans.property.StringProperty;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import ph.parcs.rmhometiles.entity.inventory.category.Category;
 import ph.parcs.rmhometiles.entity.inventory.item.ItemRepository;
@@ -17,6 +20,8 @@ public interface ProductRepository extends ItemRepository<Product, Integer> {
 
     Set<Product> findProductsByStockUnit(StockUnit stockUnit);
 
-    Set<Product> findProductByNameContains(String name);
+    Set<Product> findProductByCodeContains(StringProperty code);
+
+    Page<Product> findAllByCodeContains(Pageable pageable, String name);
 
 }
