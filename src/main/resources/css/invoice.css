@@ -1,58 +1,48 @@
-.add-button {
-    -fx-padding: 0.533333em 1em 0.533333em 1em;
-    -fx-background-color: blueberries;
-    -jfx-button-type: FLAT;
-    -fx-text-fill: WHITE;
-    -fx-font-weight: BOLD;
-    -fx-border-radius: 15pt;
-    -fx-background-radius: 15pt;
-}
 
-.plus-icon {
+.user-icon {
     -fx-fill: WHITE;
     -fx-alignment: center;
-    -glyph-name: "PLUS";
+    -glyph-name: "USER_PLUS";
     -glyph-size: 18px;
 }
 
-VBox .item-headers {
-    -fx-border-color: black;
-    -fx-border-width: 0px 0px 1px 0px;
-    -fx-padding: 15px;
+.clear-icon {
+    -fx-fill: WHITE;
+    -fx-alignment: center;
+    -glyph-name: "TIMES";
+    -glyph-size: 18px;
 }
 
-VBox .item-headers .label {
-    -fx-font-weight: bold;
-    -fx-font-size: 20;
+.pencil-icon {
+    -fx-fill: WHITE;
+    -fx-alignment: center;
+    -glyph-name: "PENCIL_SQUARE_ALT";
+    -glyph-size: 18px;
 }
 
-.detail-customer {
-    -fx-pref-width: 150px;
+.date-picker > .text-field {
+    -fx-alignment: center;
+}
+
+
+.search-field {
     -jfx-focus-color: primary;
     -fx-border-radius: 0px;
     -fx-border-color: transparent;
     -fx-background-color: transparent;
 }
 
-.detail-customer .combo-box-popup > .list-view {
+.search-field .combo-box-popup > .list-view {
     -fx-pref-height: 200;
 }
 
-.detail-customer > .input-line {
+.search-field > .input-line {
     -fx-background-color: -jfx-unfocus-color;
     -fx-pref-height: 1px;
     -fx-translate-y: 1px;
 }
 
-.detail-customer .combo-box-button-container {
+.search-field .combo-box-button-container {
     -fx-background-color: TRANSPARENT;
     -fx-pref-height: 300px;
-
 }
-
-.date-picker > .text-field  {
-    -fx-alignment: center;
-}
-
-
-

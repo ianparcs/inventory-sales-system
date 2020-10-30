@@ -13,7 +13,7 @@
     -fx-fill: banana;
 }
 
-.add-button {
+.primary-button {
     -fx-padding: 0.533333em 1em 0.533333em 1em;
     -fx-background-color: blueberries;
     -jfx-button-type: FLAT;
@@ -23,11 +23,11 @@
     -fx-background-radius: 15pt;
 }
 
-.add-button:hover {
+.primary-button:hover {
     -fx-background-color: blueberries;
 }
 
-.plus-icon {
+.user-icon {
     -fx-fill: WHITE;
     -fx-alignment: center;
     -glyph-name: "PLUS";

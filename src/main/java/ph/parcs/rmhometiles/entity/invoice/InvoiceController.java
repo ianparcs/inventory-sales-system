@@ -1,11 +1,13 @@
 package ph.parcs.rmhometiles.entity.invoice;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.StackPane;
 import javafx.util.StringConverter;
@@ -26,8 +28,6 @@ import ph.parcs.rmhometiles.util.Global;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 @Controller
@@ -36,15 +36,21 @@ public class InvoiceController {
     @FXML
     private JFXComboBox<BaseEntity> cbCustomer;
     @FXML
-    private JFXComboBox<BaseEntity> cbProducts;
+    private ComboBox<BaseEntity> cbProducts;
     @FXML
     private TableView<Invoice> tvInvoice;
     @FXML
-    private JFXTextField tfAddress;
+    private JFXButton btnClearCustomer;
     @FXML
-    private JFXTextField tfContact;
+    private Label lblAddress;
+    @FXML
+    private Label lblContact;
     @FXML
     private JFXDatePicker dpDate;
+    @FXML
+    private Label lblName;
+    @FXML
+    private JFXButton btnAddUser;
     @FXML
     private StackPane spMain;
 
@@ -101,9 +107,7 @@ public class InvoiceController {
             }
             if (outOfFocus) {
                 Customer customer = (Customer) cbCustomer.getValue();
-                if (customer != null && !customer.getName().equals(editorTxt)) {
-                    cbCustomer.getEditor().setText(customer.getName());
-                } else if (customer == null) {
+                if (customer == null) {
                     clearFields();
                 }
             }
@@ -111,7 +115,7 @@ public class InvoiceController {
     }
 
     private void configureProductCombobox() {
-        setComboboxConverter(cbProducts);
+        //      setComboboxConverter(cbProducts);
 
         cbProducts.getEditor().textProperty().addListener((observable, oldVal, keyTyped) -> Platform.runLater(() -> {
             cbProducts.show();
@@ -152,11 +156,14 @@ public class InvoiceController {
     }
 
     @FXML
-    private void selectCustomer() {
+    private void fillUpCustomerDetails() {
         Customer customer = (Customer) cbCustomer.getValue();
         if (customer != null) {
-            tfAddress.setText(StringUtils.isEmpty(customer.getAddress()) ? "n/a" : customer.getAddress());
-            tfContact.setText(StringUtils.isEmpty(customer.getContact()) ? "n/a" : customer.getContact());
+            lblAddress.setText(StringUtils.isEmpty(customer.getAddress()) ? "n/a" : customer.getAddress());
+            lblContact.setText(StringUtils.isEmpty(customer.getContact()) ? "n/a" : customer.getContact());
+            lblName.setText(StringUtils.isEmpty(customer.getName()) ? "n/a" : customer.getName());
+            btnClearCustomer.setVisible(true);
+            btnAddUser.setVisible(false);
         }
     }
 
@@ -169,8 +176,11 @@ public class InvoiceController {
     private void clearFields() {
         cbCustomer.setValue(null);
         cbCustomer.hide();
-        tfContact.clear();
-        tfAddress.clear();
+        lblContact.setText("");
+        lblAddress.setText("");
+        lblName.setText("");
+        btnClearCustomer.setVisible(false);
+        btnAddUser.setVisible(true);
     }
 
     @FXML
@@ -180,8 +190,8 @@ public class InvoiceController {
             public void onSavedSuccess(Customer customer) {
                 if (customer != null) {
                     cbCustomer.setValue(customer);
-                    tfAddress.setText(StringUtils.isEmpty(customer.getAddress()) ? "n/a" : customer.getAddress());
-                    tfContact.setText(StringUtils.isEmpty(customer.getContact()) ? "n/a" : customer.getContact());
+                    lblAddress.setText(StringUtils.isEmpty(customer.getAddress()) ? "n/a" : customer.getAddress());
+                    lblContact.setText(StringUtils.isEmpty(customer.getContact()) ? "n/a" : customer.getContact());
                 }
                 isCustomerAdded = true;
                 successAlert.setContentMessage(Global.MSG.SAVED).show(spMain);

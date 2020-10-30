@@ -43,9 +43,9 @@
             </HBox>
 
             <HBox alignment="CENTER_RIGHT" spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                <JFXButton styleClass="add-button" text="Add Product">
+                <JFXButton styleClass="primary-button" text="Add Product">
                     <graphic>
-                        <FontAwesomeIconView styleClass="plus-icon"/>
+                        <FontAwesomeIconView styleClass="user-icon"/>
                     </graphic>
                 </JFXButton>
                 <JFXTextField fx:id="tfSearchItem" styleClass="search-input" promptText="Search"/>

@@ -94,7 +94,7 @@
               spacing="10.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.hgrow="NEVER"
               GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
             <JFXButton alignment="BASELINE_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                       styleClass="add-button" text="Add Product" textAlignment="CENTER"
+                       styleClass="primary-button" text="Add Product" textAlignment="CENTER"
                        HBox.hgrow="ALWAYS">
                 <graphic>
                     <FontAwesomeIconView glyphName="PLUS" size="1.25em" styleClass="add-button-icon"

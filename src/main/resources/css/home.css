@@ -12,6 +12,75 @@
     primary-dark: #2b333d
 }
 
+.primary-button {
+    -fx-padding: 0.533333em 1em 0.533333em 1em;
+    -fx-background-color: blueberries;
+    -jfx-button-type: FLAT;
+    -fx-text-fill: WHITE;
+    -fx-font-weight: BOLD;
+    -fx-border-radius: 2pt;
+    -fx-background-radius: 2pt;
+}
+
 .tooltip {
     -fx-text-fill: WHITE;
+}
+
+.tile-default {
+    -fx-padding: 15px;
+    -fx-background-color: white;
+    -fx-border-radius: 2pt;
+    -fx-background-radius: 2pt;
+}
+
+.tile-default .title {
+    -fx-font-weight: bold;
+    -fx-font-size: 20;
+}
+
+.tile-info {
+    -fx-padding: 15px 0 15px 0;
+    -fx-background-color: white;
+    -fx-border-radius: 2pt;
+    -fx-background-radius: 2pt;
+}
+
+.tile-info Label {
+    -fx-padding: 0px 15px 0px 15px;
+}
+
+.tile-info .big-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 20;
+}
+
+.tile-info .small-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 13;
+    -fx-padding: 0 15px 5px 15px;
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: black;
+}
+
+.search-field {
+    -jfx-focus-color: primary;
+    -fx-border-radius: 0px;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
+.search-field .combo-box-popup > .list-view {
+    -fx-pref-height: 200;
+}
+
+.search-field > .input-line {
+    -fx-background-color: -jfx-unfocus-color;
+    -fx-pref-height: 1px;
+    -fx-translate-y: 1px;
+}
+
+.search-field .combo-box-button-container {
+    -fx-background-color: TRANSPARENT;
+    -fx-pref-height: 300px;
+
 }

@@ -10,15 +10,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e42c86d9-149f-4635-a8fc-a8339e3dcdbe" name="Default Changelist" comment="&quot;invoice add&quot;">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/product/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/product/ProductRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/product/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/product/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/product/ProductTableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/product/ProductTableController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/InvoiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/InvoiceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/inventory.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/inventory.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/css/invoice.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/invoice.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/tabpane.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/tabpane.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/customer/customer.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/customer/customer.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/inventory/category/category.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/inventory/category/category.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/inventory/item/product.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/inventory/item/product.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/inventory/unit/unit.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/inventory/unit/unit.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/invoice/manage-invoice.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/invoice/manage-invoice.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/invoice/new-invoice.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/invoice/new-invoice.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/supplier/supplier.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/supplier/supplier.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/test/test.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/test/test.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -228,6 +233,16 @@
       <workItem from="1603627058707" duration="2432000" />
       <workItem from="1603676347840" duration="2332000" />
       <workItem from="1603705342656" duration="2178000" />
+      <workItem from="1603813366529" duration="447000" />
+      <workItem from="1603850041956" duration="11269000" />
+      <workItem from="1603935982297" duration="413000" />
+      <workItem from="1603963830131" duration="2995000" />
+      <workItem from="1603981388629" duration="3440000" />
+      <workItem from="1604014392918" duration="394000" />
+      <workItem from="1604014804845" duration="237000" />
+      <workItem from="1604018644183" duration="3569000" />
+      <workItem from="1604037641203" duration="19269000" />
+      <workItem from="1604071553669" duration="1973000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;invoice add&quot;">
       <created>1596291389908</created>
