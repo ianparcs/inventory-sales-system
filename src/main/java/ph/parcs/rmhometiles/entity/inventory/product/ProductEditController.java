@@ -165,7 +165,7 @@ public class ProductEditController extends EditItemController<Product> {
         product.setDiscount(Integer.valueOf(!tfDiscount.getText().isEmpty() ? tfDiscount.getText() : "0"));
         product.setStock(Integer.valueOf(!tfStock.getText().isEmpty() ? tfStock.getText() : "0"));
         product.setPrice(Float.valueOf(!tfPrice.getText().isEmpty() ? tfPrice.getText() : "0.00"));
-        product.setPrice(Float.valueOf(!tfCost.getText().isEmpty() ? tfCost.getText() : "0.00"));
+        product.setCost(Float.valueOf(!tfCost.getText().isEmpty() ? tfCost.getText() : "0.00"));
         product.setStockUnit(cbStockUnit.getValue());
         product.setDescription(tfDescription.getText());
         product.setCategory(cbCategory.getValue());
