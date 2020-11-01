@@ -1,7 +1,6 @@
 package ph.parcs.rmhometiles.entity.inventory.item;
 
 import com.jfoenix.controls.JFXTextField;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -66,10 +65,8 @@ public abstract class ItemTableController<T extends BaseEntity> {
     public void updateItems() {
         Page<T> items = itemService.findPages(getCurrentPage(), getRowsPerPage(), searchValue);
         updatePageEntries(items);
-        Platform.runLater(() -> {
-            tvItem.setItems(FXCollections.observableArrayList(items.toList()));
-            tvItem.refresh();
-        });
+        tvItem.setItems(FXCollections.observableArrayList(items.toList()));
+        tvItem.refresh();
     }
 
     protected T onItemDeleteAction(T item) {
@@ -113,7 +110,10 @@ public abstract class ItemTableController<T extends BaseEntity> {
 
     @FXML
     private void onPageRowChanged() {
-        updateItems();
+        Page<T> items = itemService.findPages(0, getRowsPerPage(), searchValue);
+        updatePageEntries(items);
+        tvItem.setItems(FXCollections.observableArrayList(items.toList()));
+        tvItem.refresh();
     }
 
     @FXML

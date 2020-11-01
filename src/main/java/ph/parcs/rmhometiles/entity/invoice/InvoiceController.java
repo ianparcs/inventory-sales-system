@@ -36,7 +36,7 @@ public class InvoiceController {
     @FXML
     private JFXComboBox<BaseEntity> cbCustomer;
     @FXML
-    private ComboBox<BaseEntity> cbProducts;
+    private ComboBox<Product> cbProducts;
     @FXML
     private TableView<Invoice> tvInvoice;
     @FXML
@@ -67,11 +67,11 @@ public class InvoiceController {
         successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
         configureCustomerCombobox();
         configureProductCombobox();
-        configureDate();
+        initDate();
 
     }
 
-    private void configureDate() {
+    private void initDate() {
         dpDate.setValue(LocalDate.now());
         dpDate.setConverter(new StringConverter<>() {
             final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("EEE, MMM d, yyyy");

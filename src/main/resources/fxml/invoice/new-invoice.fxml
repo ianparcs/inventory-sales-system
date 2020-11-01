@@ -2,7 +2,7 @@
 
 <?import com.jfoenix.controls.*?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain" stylesheets="@../../css/invoice.css"
@@ -49,19 +49,29 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
             </columnResizePolicy>
             <columns>
-                <TableColumn fx:id="tcCode" reorderable="false" text="Product">
+                <TableColumn fx:id="tcCode" reorderable="false" text="Item Code">
                     <cellValueFactory>
-                        <PropertyValueFactory property="code"/>
+                        <PropertyValueFactory property="Item Code"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="tcDescription" reorderable="false" text="Qty">
+                <TableColumn fx:id="tcStock" reorderable="false" text="Stock">
                     <cellValueFactory>
-                        <PropertyValueFactory property="description"/>
+                        <PropertyValueFactory property="Qty"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="tcPrice" reorderable="false" text="Price">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="Price"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="tcQty" reorderable="false" text="Disc %">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="Qty"/>
                     </cellValueFactory>
                 </TableColumn>
                 <TableColumn fx:id="tcTotal" reorderable="false" text="Total">
                     <cellValueFactory>
-                        <PropertyValueFactory property="descriptions"/>
+                        <PropertyValueFactory property="Total"/>
                     </cellValueFactory>
                 </TableColumn>
                 <TableColumn fx:id="tcAction" text="Action"/>
