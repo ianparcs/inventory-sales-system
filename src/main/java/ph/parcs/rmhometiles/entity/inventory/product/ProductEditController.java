@@ -18,7 +18,7 @@ import ph.parcs.rmhometiles.entity.inventory.stock.StockUnit;
 import ph.parcs.rmhometiles.entity.inventory.stock.StockUnitService;
 import ph.parcs.rmhometiles.entity.supplier.Supplier;
 import ph.parcs.rmhometiles.entity.supplier.SupplierService;
-import ph.parcs.rmhometiles.file.FileImage;
+import ph.parcs.rmhometiles.file.Image;
 import ph.parcs.rmhometiles.file.FileService;
 import ph.parcs.rmhometiles.util.FileUtils;
 
@@ -36,8 +36,6 @@ public class ProductEditController extends EditItemController<Product> {
     private JFXComboBox<Category> cbCategory;
     @FXML
     private JFXTextField tfDescription;
-    @FXML
-    private JFXTextField tfDiscount;
     @FXML
     private JFXTextField tfUnitSold;
     @FXML
@@ -62,7 +60,6 @@ public class ProductEditController extends EditItemController<Product> {
     public void initialize() {
         super.initialize();
         validateField(tfDescription);
-        validateField(tfDiscount);
         validateField(tfUnitSold);
         validateField(tfStock);
         validateField(tfPrice);
@@ -115,7 +112,6 @@ public class ProductEditController extends EditItemController<Product> {
         cbCategory.getSelectionModel().clearSelection();
         cbSupplier.getSelectionModel().clearSelection();
         tfDescription.clear();
-        tfDiscount.clear();
         tfUnitSold.clear();
         tfStock.clear();
         tfImage.clear();
@@ -128,7 +124,6 @@ public class ProductEditController extends EditItemController<Product> {
 
     private void clearValidators() {
         tfDescription.resetValidation();
-        tfDiscount.resetValidation();
         tfUnitSold.resetValidation();
         tfStock.resetValidation();
         tfName.resetValidation();
@@ -145,11 +140,10 @@ public class ProductEditController extends EditItemController<Product> {
             tfDescription.setText(product.getDescription());
             tfPrice.setText(product.getPrice().toString());
             tfStock.setText(product.getStock().toString());
-            tfDiscount.setText(product.getDiscount().toString());
             tfUnitSold.setText(product.getUnitSold().toString());
 
-            if (product.getFileImage() != null) {
-                tfImage.setText(product.getFileImage().getPath());
+            if (product.getImage() != null) {
+                tfImage.setText(product.getImage().getPath());
             }
         }
 
@@ -162,7 +156,6 @@ public class ProductEditController extends EditItemController<Product> {
     protected Product unbindFields(Integer id) {
         Product product = new Product();
         product.setUnitSold(Integer.valueOf(!tfUnitSold.getText().isEmpty() ? tfUnitSold.getText() : "0"));
-        product.setDiscount(Integer.valueOf(!tfDiscount.getText().isEmpty() ? tfDiscount.getText() : "0"));
         product.setStock(Integer.valueOf(!tfStock.getText().isEmpty() ? tfStock.getText() : "0"));
         product.setPrice(Float.valueOf(!tfPrice.getText().isEmpty() ? tfPrice.getText() : "0.00"));
         product.setCost(Float.valueOf(!tfCost.getText().isEmpty() ? tfCost.getText() : "0.00"));
@@ -174,9 +167,9 @@ public class ProductEditController extends EditItemController<Product> {
         product.setCode(tfCode.getText());
         product.setId(id);
 
-        FileImage image = new FileImage();
+        Image image = new Image();
         image.setPath(tfImage.getText());
-        product.setFileImage(image);
+        product.setImage(image);
 
         return product;
     }
@@ -214,12 +207,12 @@ public class ProductEditController extends EditItemController<Product> {
         btnSave.setOnAction(actionEvent -> {
             closeDialog();
             String path = tfImage.getText();
-            if (!path.isEmpty() && item.getFileImage() != null) {
+            if (!path.isEmpty() && item.getImage() != null) {
                 String fileName = FileUtils.getFileName(path);
-                String currentFile = item.getFileImage().getName();
+                String currentFile = item.getImage().getName();
                 if ((currentFile != null && !currentFile.equals(fileName)) &&
                         !StringUtils.isEmpty(currentFile)) {
-                    fileService.deleteFile(item.getFileImage().getName());
+                    fileService.deleteFile(item.getImage().getName());
                 }
             }
 

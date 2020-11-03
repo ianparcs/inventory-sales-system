@@ -99,12 +99,6 @@
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn fx:id="tcDiscount" reorderable="false" text="Discount">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="discount"/>
-                        </cellValueFactory>
-                    </TableColumn>
-
                     <TableColumn fx:id="tcPrice" reorderable="false" text="Price">
                         <cellValueFactory>
                             <PropertyValueFactory property="price"/>

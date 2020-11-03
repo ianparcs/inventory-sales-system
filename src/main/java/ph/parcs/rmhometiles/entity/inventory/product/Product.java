@@ -5,7 +5,7 @@ import ph.parcs.rmhometiles.entity.inventory.category.Category;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.entity.inventory.stock.StockUnit;
 import ph.parcs.rmhometiles.entity.supplier.Supplier;
-import ph.parcs.rmhometiles.file.FileImage;
+import ph.parcs.rmhometiles.file.Image;
 
 import javax.persistence.*;
 
@@ -17,7 +17,6 @@ public class Product extends BaseEntity {
     private IntegerProperty stock = new SimpleIntegerProperty();
     private IntegerProperty unitSold = new SimpleIntegerProperty();
 
-    private IntegerProperty discount = new SimpleIntegerProperty();
     private FloatProperty price = new SimpleFloatProperty();
     private FloatProperty cost = new SimpleFloatProperty();
 
@@ -28,7 +27,7 @@ public class Product extends BaseEntity {
     private Supplier supplier;
     private Category category;
     private StockUnit stockUnit;
-    private FileImage fileImage;
+    private Image image;
 
     @Column(name = "stock")
     public Integer getStock() {
@@ -60,15 +59,6 @@ public class Product extends BaseEntity {
     @Column(name = "cost")
     public void setCost(Float cost) {
         this.cost.set(cost);
-    }
-
-    @Column(name = "discount")
-    public Integer getDiscount() {
-        return discount.get();
-    }
-
-    public void setDiscount(Integer discount) {
-        this.discount.set(discount);
     }
 
     @Column(name = "price")
@@ -120,13 +110,17 @@ public class Product extends BaseEntity {
     }
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "file_id")
-    public FileImage getFileImage() {
-        return fileImage;
+    @JoinTable(name = "product_image",
+            joinColumns =
+                    {@JoinColumn(name = "product_id", referencedColumnName = "product_id")},
+            inverseJoinColumns =
+                    {@JoinColumn(name = "image_id", referencedColumnName = "image_id")})
+    public Image getImage() {
+        return image;
     }
 
-    public void setFileImage(FileImage fileImage) {
-        this.fileImage = fileImage;
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     @Column(name = "code")

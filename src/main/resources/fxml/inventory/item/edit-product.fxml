@@ -91,19 +91,12 @@
                     </validators>
                 </JFXTextField>
 
-                <JFXTextField fx:id="tfDiscount" promptText="Discount" labelFloat="true"
-                              GridPane.columnIndex="0" GridPane.rowIndex="3">
-                    <validators>
-                        <NumberValidator message="Please enter number only"/>
-                    </validators>
-                </JFXTextField>
-
 
                 <JFXComboBox fx:id="cbSupplier" onAction="#clearSupplier" labelFloat="true" promptText="Supplier"
-                             GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                             GridPane.columnIndex="0" GridPane.rowIndex="3"/>
 
                 <JFXTextField fx:id="tfImage" labelFloat="true" promptText="Choose Image" onMouseClicked="#selectImage"
-                              GridPane.columnIndex="2" GridPane.rowIndex="3" editable="false"/>
+                              GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.columnSpan="2" editable="false"/>
             </GridPane>
         </body>
 

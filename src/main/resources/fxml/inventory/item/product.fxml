@@ -103,13 +103,6 @@
                             <PropertyValueFactory property="unitSold"/>
                         </cellValueFactory>
                     </TableColumn>
-
-                    <TableColumn fx:id="tcDiscount" reorderable="false" text="Discount">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="discount"/>
-                        </cellValueFactory>
-                    </TableColumn>
-
                     <TableColumn fx:id="tcPrice" reorderable="false" text="Price">
                         <cellValueFactory>
                             <PropertyValueFactory property="price"/>
@@ -119,7 +112,7 @@
                     <TableColumn fx:id="tcImage" reorderable="false" resizable="false" sortable="false"
                                  styleClass="action-column" text="Image">
                         <cellValueFactory>
-                            <PropertyValueFactory property="fileImage"/>
+                            <PropertyValueFactory property="image"/>
                         </cellValueFactory>
                     </TableColumn>
 

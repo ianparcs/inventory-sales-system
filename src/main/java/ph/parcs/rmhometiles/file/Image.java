@@ -10,7 +10,8 @@ import javax.persistence.*;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class FileImage extends BaseEntity {
+@AttributeOverride(name = "id", column = @Column(name = "image_id"))
+public class Image extends BaseEntity {
 
     private StringProperty path = new SimpleStringProperty();
     private Product product;
@@ -19,7 +20,7 @@ public class FileImage extends BaseEntity {
         this.product = product;
     }
 
-    @OneToOne(mappedBy = "fileImage")
+    @OneToOne(mappedBy = "image")
     public Product getProduct() {
         return product;
     }

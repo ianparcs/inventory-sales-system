@@ -2,7 +2,6 @@ package ph.parcs.rmhometiles.util;
 
 import javafx.stage.FileChooser;
 import lombok.SneakyThrows;
-import ph.parcs.rmhometiles.file.FileImage;
 
 import java.io.File;
 import java.net.URI;

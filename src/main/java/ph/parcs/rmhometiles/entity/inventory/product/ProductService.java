@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import ph.parcs.rmhometiles.entity.inventory.item.ItemService;
 import ph.parcs.rmhometiles.file.FileService;
-import ph.parcs.rmhometiles.file.FileImage;
+import ph.parcs.rmhometiles.file.Image;
 import ph.parcs.rmhometiles.util.FileUtils;
 
 import java.util.Optional;
@@ -35,9 +35,9 @@ public class ProductService extends ItemService<Product> {
 
     @Override
     public boolean deleteItem(Product product) {
-        FileImage fileImage = product.getFileImage();
-        if (fileImage != null && !StringUtils.isEmpty(fileImage.getPath())) {
-            fileService.deleteFile(fileImage.getName());
+        Image image = product.getImage();
+        if (image != null && !StringUtils.isEmpty(image.getPath())) {
+            fileService.deleteFile(image.getName());
         }
 
         productRepository.delete(product);
@@ -49,18 +49,18 @@ public class ProductService extends ItemService<Product> {
     @Override
     @SneakyThrows
     public Product saveItem(Product product) {
-        FileImage fileImage = product.getFileImage();
-        if (fileImage != null && !StringUtils.isEmpty(fileImage.getPath())) {
-            saveFile(fileImage);
+        Image image = product.getImage();
+        if (image != null && !StringUtils.isEmpty(image.getPath())) {
+            saveFile(image);
         }
         return productRepository.save(product);
     }
 
-    private void saveFile(FileImage fileImage) {
-        String fileName = FileUtils.getFileName(fileImage.getPath());
+    private void saveFile(Image image) {
+        String fileName = FileUtils.getFileName(image.getPath());
         String des = FileUtils.getTargetPath(fileName);
-        String src = fileImage.getPath();
-        fileImage.setName(fileName);
+        String src = image.getPath();
+        image.setName(fileName);
         fileService.saveImage(src, des);
     }
 
