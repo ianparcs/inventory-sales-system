@@ -29,8 +29,7 @@ public class ProductService extends ItemService<Product> {
     }
 
     public Set<Product> findItems(String query) {
-        StringProperty queryProp = new SimpleStringProperty(query);
-        return productRepository.findProductByCodeContains(queryProp);
+        return productRepository.findAllByCodeContains(query);
     }
 
     @Override

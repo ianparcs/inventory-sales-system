@@ -20,7 +20,7 @@ public interface ProductRepository extends ItemRepository<Product, Integer> {
 
     Set<Product> findProductsByStockUnit(StockUnit stockUnit);
 
-    Set<Product> findProductByCodeContains(StringProperty code);
+    Set<Product> findAllByCodeContains(String code);
 
     Page<Product> findAllByCodeContains(Pageable pageable, String name);
 

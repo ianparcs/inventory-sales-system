@@ -4,10 +4,12 @@ import javafx.beans.property.*;
 import ph.parcs.rmhometiles.entity.inventory.category.Category;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.entity.inventory.stock.StockUnit;
+import ph.parcs.rmhometiles.entity.invoice.InvoiceLineItem;
 import ph.parcs.rmhometiles.entity.supplier.Supplier;
 import ph.parcs.rmhometiles.file.Image;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -24,9 +26,10 @@ public class Product extends BaseEntity {
 
     private StringProperty code = new SimpleStringProperty();
 
+    private Set<InvoiceLineItem> invoiceLineItem;
+    private StockUnit stockUnit;
     private Supplier supplier;
     private Category category;
-    private StockUnit stockUnit;
     private Image image;
 
     @Column(name = "stock")
@@ -100,7 +103,6 @@ public class Product extends BaseEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "stock_unit_id", referencedColumnName = "stock_unit_id")
     public StockUnit getStockUnit() {
         return stockUnit;
     }
@@ -130,5 +132,14 @@ public class Product extends BaseEntity {
 
     public void setCode(String code) {
         this.code.set(code);
+    }
+
+    public void setInvoiceLineItem(Set<InvoiceLineItem> invoiceLineItem) {
+        this.invoiceLineItem = invoiceLineItem;
+    }
+
+    @OneToMany(mappedBy = "product")
+    public Set<InvoiceLineItem> getInvoiceLineItem() {
+        return invoiceLineItem;
     }
 }

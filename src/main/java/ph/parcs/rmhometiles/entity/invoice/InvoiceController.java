@@ -5,8 +5,8 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.StackPane;
@@ -28,6 +28,8 @@ import ph.parcs.rmhometiles.util.Global;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -36,7 +38,7 @@ public class InvoiceController {
     @FXML
     private JFXComboBox<BaseEntity> cbCustomer;
     @FXML
-    private ComboBox<Product> cbProducts;
+    private JFXComboBox<Product> cbProducts;
     @FXML
     private TableView<Invoice> tvInvoice;
     @FXML
@@ -53,6 +55,7 @@ public class InvoiceController {
     private JFXButton btnAddUser;
     @FXML
     private StackPane spMain;
+    private List<Invoice> invoices;
 
     private EditItemController<Customer> customerEditController;
     private InvoiceProductController invoiceProductController;
@@ -69,6 +72,7 @@ public class InvoiceController {
         configureProductCombobox();
         initDate();
 
+        invoices = new ArrayList<>();
     }
 
     private void initDate() {
@@ -115,7 +119,18 @@ public class InvoiceController {
     }
 
     private void configureProductCombobox() {
-        //      setComboboxConverter(cbProducts);
+        cbProducts.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(Product baseEntity) {
+                if (baseEntity == null) return Global.STRING_EMPTY;
+                return baseEntity.getCode();
+            }
+
+            @Override
+            public Product fromString(String s) {
+                return cbProducts.getValue();
+            }
+        });
 
         cbProducts.getEditor().textProperty().addListener((observable, oldVal, keyTyped) -> Platform.runLater(() -> {
             cbProducts.show();
@@ -168,14 +183,18 @@ public class InvoiceController {
     }
 
     @FXML
-    private void selectProducts() {
-        invoiceProductController.show(spMain);
+    private void addProductToInvoice(ActionEvent actionEvent) {
+        Invoice invoice = new Invoice();
+        invoices.add(invoice);
+        tvInvoice.setItems(FXCollections.observableArrayList(invoices));
+        tvInvoice.refresh();
     }
 
     @FXML
     private void clearFields() {
         cbCustomer.setValue(null);
         cbCustomer.hide();
+
         lblContact.setText("");
         lblAddress.setText("");
         lblName.setText("");
@@ -229,4 +248,5 @@ public class InvoiceController {
     public void setInvoiceService(InvoiceService invoiceService) {
         this.invoiceService = invoiceService;
     }
+
 }

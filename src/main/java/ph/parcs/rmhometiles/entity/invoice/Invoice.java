@@ -1,8 +1,7 @@
 package ph.parcs.rmhometiles.entity.invoice;
 
-import ph.parcs.rmhometiles.entity.customer.Customer;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
-import ph.parcs.rmhometiles.entity.inventory.product.Product;
+import ph.parcs.rmhometiles.entity.order.Orders;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -15,8 +14,10 @@ import java.util.Set;
 public class Invoice extends BaseEntity {
 
     private BigDecimal totalPrice;
-    private Customer customer;
+    private Orders order;
     private Date createdAt;
+
+    private Set<InvoiceLineItem> invoiceLineItems;
 
     @Column(name = "total_price", precision = 8, scale = 2)
     public BigDecimal getTotalPrice() {
@@ -28,13 +29,13 @@ public class Invoice extends BaseEntity {
     }
 
     @OneToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
-    public Customer getCustomer() {
-        return customer;
+    @JoinColumn(name = "orders_id", referencedColumnName = "orders_id")
+    public Orders getOrder() {
+        return order;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setOrder(Orders order) {
+        this.order = order;
     }
 
     @Column(name = "created_at")
@@ -45,5 +46,10 @@ public class Invoice extends BaseEntity {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    @Override
+    public String getName() {
+        return super.getName();
     }
 }

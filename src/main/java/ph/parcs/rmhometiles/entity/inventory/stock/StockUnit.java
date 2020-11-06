@@ -9,7 +9,6 @@ import java.util.Set;
 
 @Entity
 @Access(AccessType.PROPERTY)
-@AttributeOverride(name = "id", column = @Column(name = "stock_unit_id"))
 public class StockUnit extends BaseEntity {
 
     private Set<Product> products;

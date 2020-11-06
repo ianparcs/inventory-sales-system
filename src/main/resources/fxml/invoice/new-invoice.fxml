@@ -39,7 +39,7 @@
             </JFXButton>
 
             <JFXComboBox fx:id="cbProducts" editable="true" labelFloat="true" maxHeight="1.7976931348623157E308"
-                         maxWidth="1.7976931348623157E308" onAction="#fillUpCustomerDetails" promptText="Search Item"
+                         maxWidth="1.7976931348623157E308" promptText="Search Item" onAction="#addProductToInvoice"
                          styleClass="search-field" HBox.hgrow="ALWAYS"/>
         </HBox>
 
