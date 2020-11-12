@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.entity.inventory.category.CategoryTableController;
 import ph.parcs.rmhometiles.entity.inventory.product.ProductTableController;
-import ph.parcs.rmhometiles.entity.inventory.stock.StockUnitTableController;
+import ph.parcs.rmhometiles.entity.inventory.stock.unit.StockUnitTableController;
 
 @Controller
 public class InventoryController {

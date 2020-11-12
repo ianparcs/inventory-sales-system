@@ -10,13 +10,13 @@ import ph.parcs.rmhometiles.entity.inventory.item.ItemTableController;
 public class CategoryTableController extends ItemTableController<Category> {
 
     @FXML
-    private void showAddItemDialog() {
+    private void showEditItemDialog() {
         onItemEditAction(new Category());
         editItemController.showDialog((StackPane) tvItem.getScene().getRoot());
     }
 
     @Autowired
     public void setCategoryService(CategoryService categoryService) {
-        this.itemService = categoryService;
+        this.baseTableService = categoryService;
     }
 }

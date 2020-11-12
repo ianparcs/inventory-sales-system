@@ -1,4 +1,4 @@
-package ph.parcs.rmhometiles.entity.inventory.stock;
+package ph.parcs.rmhometiles.entity.inventory.stock.unit;
 
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
@@ -40,7 +40,7 @@ public class StockUnitEditController extends EditItemController<StockUnit> {
 
     @Autowired
     public void setCategoryService(StockUnitService stockUnitService) {
-        this.itemService = stockUnitService;
+        this.baseTableService = stockUnitService;
     }
 
 }

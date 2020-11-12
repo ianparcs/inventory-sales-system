@@ -7,7 +7,7 @@
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.*?>
 <JFXDialog xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../../css/edit-dialog.css" fx:id="editDialog"
-           fx:controller="ph.parcs.rmhometiles.entity.inventory.stock.StockUnitEditController">
+           fx:controller="ph.parcs.rmhometiles.entity.inventory.stock.unit.StockUnitEditController">
 
     <JFXDialogLayout>
         <heading>
@@ -18,7 +18,7 @@
         </heading>
 
         <body>
-            <GridPane>
+            <GridPane vgap="40" hgap="40">
                 <columnConstraints>
                     <ColumnConstraints hgrow="ALWAYS"/>
                 </columnConstraints>

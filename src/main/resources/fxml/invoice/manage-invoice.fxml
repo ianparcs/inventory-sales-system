@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.*?>
 <?import java.lang.*?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain"
-           stylesheets="@../../css/inventory.css" xmlns="http://javafx.com/javafx/10.0.2-internal">
+           xmlns="http://javafx.com/javafx/10.0.2-internal">
 
     <VBox styleClass="background">
 

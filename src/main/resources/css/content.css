@@ -26,6 +26,7 @@ TableView .action-column,
 TableView .column-header.id-column > .label,
 TableView .column-header.action-column > .label {
     -fx-alignment: center;
+    -fx-max-width: Infinity;
 }
 
 TableView .table-row-cell:selected, .table-row-cell:hover {

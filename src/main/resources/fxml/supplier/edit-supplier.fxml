@@ -17,7 +17,7 @@
         </heading>
 
         <body>
-            <GridPane>
+            <GridPane vgap="40" hgap="40">
                 <columnConstraints>
                     <ColumnConstraints hgrow="ALWAYS"/>
                 </columnConstraints>

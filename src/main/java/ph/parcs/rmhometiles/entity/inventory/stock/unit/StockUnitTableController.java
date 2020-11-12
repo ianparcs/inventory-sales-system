@@ -1,4 +1,4 @@
-package ph.parcs.rmhometiles.entity.inventory.stock;
+package ph.parcs.rmhometiles.entity.inventory.stock.unit;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
@@ -10,13 +10,13 @@ import ph.parcs.rmhometiles.entity.inventory.item.ItemTableController;
 public class StockUnitTableController extends ItemTableController<StockUnit> {
 
     @FXML
-    private void showAddItemDialog() {
+    private void showEditItemDialog() {
         onItemEditAction(new StockUnit());
         editItemController.showDialog((StackPane) tvItem.getScene().getRoot());
     }
 
     @Autowired
     public void setCategoryService(StockUnitService stockUnitService) {
-        this.itemService = stockUnitService;
+        this.baseTableService = stockUnitService;
     }
 }

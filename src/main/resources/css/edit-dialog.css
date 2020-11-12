@@ -43,13 +43,8 @@
 
 .jfx-dialog-layout > .jfx-layout-body {
     -fx-alignment: center;
-    -fx-pref-width: 700px;
+    -fx-pref-width: 600px;
     -fx-padding: 35px;
-}
-
-.jfx-dialog-layout > .jfx-layout-body GridPane {
-    -fx-vgap: 40;
-    -fx-hgap: 40;
 }
 
 .jfx-dialog-layout > .jfx-layout-actions {
@@ -76,7 +71,7 @@
 }
 
 .jfx-text-field > ValidationPane > .error-label-container {
-    -fx-alignment: CENTER-RIGHT;
+    -fx-alignment: CENTER-LEFT;
 }
 
 /*combobox*/
@@ -98,4 +93,7 @@
 .combo-box-popup .list-view {
     -fx-border-color: greysquash;
     -fx-border-width: 0;
+}
+.label{
+    -fx-font-size: 10;
 }

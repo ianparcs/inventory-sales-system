@@ -1,6 +1,6 @@
 * {
     -fx-text-fill: #5a5c69;
-    -fx-font-size: 1.1em;
+    -fx-font-size: 1.3em;
     blueberries: #00AAFF;
     greysquash: #ddd;
     strawberry: #e74a3b;
@@ -26,8 +26,14 @@
     -fx-text-fill: WHITE;
 }
 
+.tile {
+    -fx-background-color: white;
+    -fx-border-radius: 2pt;
+    -fx-background-radius: 2pt;
+}
+
 .tile-default {
-    -fx-padding: 15px;
+    -fx-padding: 20px;
     -fx-background-color: white;
     -fx-border-radius: 2pt;
     -fx-background-radius: 2pt;
@@ -82,5 +88,81 @@
 .search-field .combo-box-button-container {
     -fx-background-color: TRANSPARENT;
     -fx-pref-height: 300px;
+}
 
+.jfx-combo-box > .input-line {
+    -fx-background-color: transparent;
+    -fx-pref-height: 0px;
+    -fx-translate-y: 0px;
+}
+
+.jfx-combo-box > .input-focused-line {
+    -fx-background-color: transparent;
+    -fx-pref-height: 0px;
+}
+
+.pagination {
+    -fx-page-information-visible: false;
+    -fx-font-size: 10;
+}
+
+.pagination > .pagination-control > .control-box > .number-button {
+    -fx-background-color: TRANSPARENT;
+    -fx-border-radius: 2px;
+}
+
+.pagination > .pagination-control > .control-box > .number-button:hover {
+    -fx-background-color: greysquash;
+}
+
+.pagination > .pagination-control > .control-box > .number-button:selected {
+    -fx-background-color: blueberries;
+    -fx-text-fill: WHITE;
+}
+
+.pagination > .pagination-control > .control-box > .left-arrow-button,
+.pagination > .pagination-control > .control-box > .right-arrow-button {
+    -fx-background-color: TRANSPARENT;
+}
+
+.jfx-tab-pane .tab-header-background {
+    -fx-background-color: primary-dark;
+    -fx-border-radius: 3px 3px 0 0;
+    -fx-background-radius: 3px 3px 0 0;
+}
+
+.jfx-tab-pane .headers-region .tab .glyph-icon {
+    -fx-fill: greysquash;
+}
+
+.jfx-tab-pane .headers-region > .tab > .jfx-rippler {
+    -jfx-rippler-fill: greysquash;
+}
+
+.jfx-tab-pane .headers-region .tab-selected-line {
+    -fx-background-color: blueberries;
+}
+
+.jfx-tab-pane .headers-region .tab .tab-container .tab-label {
+    -fx-text-fill: greysquash;
+    -fx-font-weight: BOLD;
+    -fx-font-size: 16;
+    -fx-padding: 12;
+}
+
+.jfx-tab-pane .headers-region .tab:selected .tab-label {
+    -fx-text-fill: red;
+}
+
+.jfx-tab-pane .headers-region .tab:selected .glyph-icon,
+.jfx-tab-pane .headers-region .tab:hover .glyph-icon {
+    -fx-fill: blueberries;
+}
+
+#delete-icon {
+    -fx-fill: strawberry;
+}
+
+#edit-icon {
+    -fx-fill: banana;
 }

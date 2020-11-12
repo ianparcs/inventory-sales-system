@@ -1,6 +1,7 @@
 package ph.parcs.rmhometiles.entity.invoice;
 
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
+import ph.parcs.rmhometiles.entity.invoice.lineitems.InvoiceLineItem;
 import ph.parcs.rmhometiles.entity.order.Orders;
 
 import javax.persistence.*;

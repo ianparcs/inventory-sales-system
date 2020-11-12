@@ -52,7 +52,6 @@ GridPane > .glyph-icon {
     -fx-background-radius: 4pt;
     -fx-padding: 0.6em 1.5em;
     -fx-border-radius: 4pt;
-    -fx-font-size: 12;
 }
 
 .split-pane {

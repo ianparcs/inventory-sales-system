@@ -1,6 +1,5 @@
 package ph.parcs.rmhometiles.entity.inventory.product;
 
-import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -8,16 +7,17 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import lombok.SneakyThrows;
+import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.entity.inventory.category.Category;
 import ph.parcs.rmhometiles.entity.inventory.item.ItemTableController;
+import ph.parcs.rmhometiles.entity.inventory.stock.Stock;
 import ph.parcs.rmhometiles.entity.supplier.Supplier;
 import ph.parcs.rmhometiles.file.Image;
 import ph.parcs.rmhometiles.ui.alert.SweetAlert;
 import ph.parcs.rmhometiles.ui.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.util.FileUtils;
-import ph.parcs.rmhometiles.util.Global;
 
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -26,14 +26,19 @@ import java.net.URL;
 @Controller
 public class ProductTableController extends ItemTableController<Product> {
 
+
     @FXML
     private TableColumn<Product, Supplier> tcSupplier;
     @FXML
     private TableColumn<Product, Category> tcCategory;
     @FXML
-    private TableColumn<Product, String> tcStock;
+    private TableColumn<Product, Stock> tcStock;
     @FXML
-    private TableColumn<Product, Float> tcPrice;
+    private TableColumn<Product, Stock> tcUnitSold;
+    @FXML
+    private TableColumn<Product, Money> tcPrice;
+    @FXML
+    private TableColumn<Product, Money> tcCost;
     @FXML
     private TableColumn<Product, Image> tcImage;
 
@@ -53,7 +58,6 @@ public class ProductTableController extends ItemTableController<Product> {
                 if (!empty) setText((supplier != null) ? supplier.getName() : "n/a");
             }
         });
-
         tcCategory.setCellFactory(param -> new TableCell<>() {
             @Override
             public void updateItem(Category category, boolean empty) {
@@ -63,8 +67,17 @@ public class ProductTableController extends ItemTableController<Product> {
 
         tcPrice.setCellFactory(param -> new TableCell<>() {
             @Override
-            public void updateItem(Float price, boolean empty) {
-                if (!empty) setText(Global.UNIT.PESO + String.format("%,.2f", price));
+            public void updateItem(Money price, boolean empty) {
+                if (empty || price == null) return;
+                setText(price.toString());
+            }
+        });
+
+        tcCost.setCellFactory(param -> new TableCell<>() {
+            @Override
+            public void updateItem(Money cost, boolean empty) {
+                if (empty || cost == null) return;
+                setText(cost.toString());
             }
         });
 
@@ -109,16 +122,24 @@ public class ProductTableController extends ItemTableController<Product> {
             return cell;
         });
 
-        tcStock.setCellValueFactory(cellData -> {
-            Product data = cellData.getValue();
-            return Bindings.createStringBinding(
-                    () -> {
-                        if (data.getStockUnit() != null && data.getStockUnit().getName() != null) {
-                            return data.getStock().toString() + " " + data.getStockUnit().getName();
-                        }
-                        return data.getStock().toString();
-                    }, data.stockProperty()
-            );
+        tcStock.setCellFactory(param -> new TableCell<>() {
+            @Override
+            public void updateItem(Stock stock, boolean empty) {
+                if (empty) return;
+                String unit = stock.getStocks() + " ";
+                if (stock.getStockUnit() != null) {
+                    unit += stock.getStockUnit().getName();
+                }
+                setText(unit);
+            }
+        });
+
+        tcUnitSold.setCellFactory(param -> new TableCell<>() {
+            @Override
+            public void updateItem(Stock stock, boolean empty) {
+                if (empty) return;
+                setText(stock.getStocks().toString());
+            }
         });
     }
 
@@ -130,7 +151,7 @@ public class ProductTableController extends ItemTableController<Product> {
 
     @Autowired
     public void setProductService(ProductService productService) {
-        this.itemService = productService;
+        this.baseTableService = productService;
     }
 
 }

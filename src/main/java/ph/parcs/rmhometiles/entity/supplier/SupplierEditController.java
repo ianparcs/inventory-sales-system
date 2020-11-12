@@ -45,7 +45,7 @@ public class SupplierEditController extends EditItemController<Supplier> {
 
     @Autowired
     public void setSupplierService(SupplierService supplierService) {
-        this.itemService = supplierService;
+        this.baseTableService = supplierService;
     }
 
 }

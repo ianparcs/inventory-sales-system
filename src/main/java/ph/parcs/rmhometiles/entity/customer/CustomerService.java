@@ -6,20 +6,21 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import ph.parcs.rmhometiles.entity.inventory.item.ItemService;
+import ph.parcs.rmhometiles.entity.inventory.item.  BaseTableService;
+import ph.parcs.rmhometiles.util.PageUtil;
 
 import java.util.Optional;
 import java.util.Set;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
-public class CustomerService extends ItemService<Customer> {
+public class CustomerService extends BaseTableService<Customer> {
 
     private CustomerRepository customerRepository;
 
     @Override
     public Page<Customer> findPages(int page, int itemPerPage, String name) {
-        PageRequest pageRequest = super.requestPage(page, itemPerPage);
+        PageRequest pageRequest = PageUtil.requestPage(page, itemPerPage);
         return customerRepository.findAllByNameContains(pageRequest, name);
     }
 
@@ -29,14 +30,14 @@ public class CustomerService extends ItemService<Customer> {
     }
 
     @Override
-    public boolean deleteItem(Customer customer) {
+    public boolean deleteRowItem(Customer customer) {
         customerRepository.delete(customer);
         Optional<Customer> search = customerRepository.findById(customer.getId());
         return search.isEmpty();
     }
 
     @Override
-    public Customer saveItem(Customer customer) {
+    public Customer saveRowItem(Customer customer) {
         return customerRepository.save(customer);
     }
 

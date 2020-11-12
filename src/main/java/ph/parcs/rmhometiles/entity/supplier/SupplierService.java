@@ -8,15 +8,16 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import ph.parcs.rmhometiles.entity.inventory.item.ItemService;
+import ph.parcs.rmhometiles.entity.inventory.item.BaseTableService;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.inventory.product.ProductRepository;
+import ph.parcs.rmhometiles.util.PageUtil;
 
 import java.util.*;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
-public class SupplierService extends ItemService<Supplier> {
+public class SupplierService extends BaseTableService<Supplier> {
 
     private SupplierRepository supplierRepository;
     private ProductRepository productRepository;
@@ -29,7 +30,7 @@ public class SupplierService extends ItemService<Supplier> {
 
     @Override
     public Page<Supplier> findPages(int page, int itemPerPage, String name) {
-        PageRequest pageRequest = super.requestPage(page, itemPerPage);
+        PageRequest pageRequest = PageUtil.requestPage(page, itemPerPage);
         return supplierRepository.findAllByNameContains(pageRequest, name);
     }
 
@@ -39,7 +40,7 @@ public class SupplierService extends ItemService<Supplier> {
     }
 
     @Override
-    public boolean deleteItem(Supplier supplier) {
+    public boolean deleteRowItem(Supplier supplier) {
         Supplier clearProd = removeProductsOfSupplier(supplier);
         supplierRepository.delete(clearProd);
         Optional<Supplier> search = supplierRepository.findById(supplier.getId());
@@ -58,7 +59,7 @@ public class SupplierService extends ItemService<Supplier> {
     }
 
     @Override
-    public Supplier saveItem(Supplier item) {
+    public Supplier saveRowItem(Supplier item) {
         return supplierRepository.save(item);
     }
 

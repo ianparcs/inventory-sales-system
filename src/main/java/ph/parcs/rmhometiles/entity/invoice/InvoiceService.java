@@ -8,7 +8,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import ph.parcs.rmhometiles.entity.inventory.item.ItemService;
+import ph.parcs.rmhometiles.entity.inventory.item.BaseTableService;
+import ph.parcs.rmhometiles.util.PageUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.Set;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
-public class InvoiceService extends ItemService<Invoice> {
+public class InvoiceService extends BaseTableService<Invoice> {
 
     private InvoiceRepository invoiceRepository;
 
@@ -29,7 +30,7 @@ public class InvoiceService extends ItemService<Invoice> {
 
     @Override
     public Page<Invoice> findPages(int page, int itemPerPage, String name) {
-        PageRequest pageRequest = super.requestPage(page, itemPerPage);
+        PageRequest pageRequest = PageUtil.requestPage(page, itemPerPage);
         return invoiceRepository.findAllByNameContains(pageRequest, name);
     }
 
@@ -39,12 +40,12 @@ public class InvoiceService extends ItemService<Invoice> {
     }
 
     @Override
-    public boolean deleteItem(Invoice invoice) {
+    public boolean deleteRowItem(Invoice invoice) {
         return true;
     }
 
     @Override
-    public Invoice saveItem(Invoice invoice) {
+    public Invoice saveRowItem(Invoice invoice) {
         return invoiceRepository.save(invoice);
     }
 

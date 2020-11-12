@@ -3,6 +3,7 @@ package ph.parcs.rmhometiles.entity.inventory.item;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.RegexValidator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -19,7 +20,7 @@ public abstract class EditItemController<T extends BaseEntity> {
     @FXML
     protected Label lblTitle;
 
-    protected ItemService<T> itemService;
+    protected BaseTableService<T> baseTableService;
 
     @FXML
     public void initialize() {
@@ -37,14 +38,22 @@ public abstract class EditItemController<T extends BaseEntity> {
         });
     }
 
+    protected void validateNumberField(JFXTextField tf) {
+        validateField(tf);
+        RegexValidator valid = new RegexValidator();
+        valid.setRegexPattern("^[1-9]\\d*(\\.\\d{1,2})?$");
+        tf.setValidators(valid);
+        tf.getValidators().get(0).setMessage("No special characters(,)\nMaximum of two decimal digits only");
+    }
+
     public void onEditItem(ItemListener<T> itemListener, final T item) {
         setDialogTitle(item);
         bindFields(item);
 
         btnSave.setOnAction(actionEvent -> {
             closeDialog();
-            T savedItem = itemService.saveItem(unbindFields(item.getId()));
-            if (!itemService.isEmpty(savedItem)) {
+            T savedItem = baseTableService.saveRowItem(unbindFields(item.getId()));
+            if (!baseTableService.isEmpty(savedItem)) {
                 itemListener.onSavedSuccess(savedItem);
             } else {
                 itemListener.onSaveFailed(savedItem);

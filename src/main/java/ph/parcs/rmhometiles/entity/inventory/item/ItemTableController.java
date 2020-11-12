@@ -14,9 +14,10 @@ import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.ui.alert.SweetAlert;
 import ph.parcs.rmhometiles.ui.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.util.Global;
+import ph.parcs.rmhometiles.util.PageUtil;
 
 @Controller
-public abstract class ItemTableController<T extends BaseEntity> {
+public abstract class ItemTableController<T extends BaseEntity> implements ItemActions<T> {
 
     @FXML
     protected ComboBox<Integer> cbRowCount;
@@ -34,7 +35,7 @@ public abstract class ItemTableController<T extends BaseEntity> {
     protected StackPane spMain;
 
     protected EditItemController<T> editItemController;
-    protected ItemService<T> itemService;
+    protected BaseTableService<T> baseTableService;
     protected String searchValue = "";
 
     protected SweetAlert deleteAlert;
@@ -58,23 +59,23 @@ public abstract class ItemTableController<T extends BaseEntity> {
     }
 
     private void initActionColumn() {
-        tcAction.setCellFactory(ActionTableCell.forColumn(
+        tcAction.setCellFactory(ActionTableCell.forActions(
                 this::onItemDeleteAction, this::onItemEditAction));
     }
 
     public void updateItems() {
-        Page<T> items = itemService.findPages(getCurrentPage(), getRowsPerPage(), searchValue);
+        Page<T> items = baseTableService.findPages(getCurrentPage(), getRowsPerPage(), searchValue);
         updatePageEntries(items);
         tvItem.setItems(FXCollections.observableArrayList(items.toList()));
         tvItem.refresh();
     }
 
-    protected T onItemDeleteAction(T item) {
+    public T onItemDeleteAction(T item) {
         StackPane root = (StackPane) tvItem.getScene().getRoot();
         deleteAlert.setHeaderMessage("Delete " + item.getClass().getSimpleName());
         deleteAlert.setContentMessage("Are you sure you want to delete " + item.getName() + "?");
         deleteAlert.setConfirmListener(() -> {
-            if (itemService.deleteItem(item)) {
+            if (baseTableService.deleteRowItem(item)) {
                 successAlert.setContentMessage(Global.MSG.DELETE).show(root);
                 updateItems();
             }
@@ -103,14 +104,14 @@ public abstract class ItemTableController<T extends BaseEntity> {
     }
 
     private void updatePageEntries(Page<T> items) {
-        ItemPageEntry itemPageEntry = itemService.getPageEntries(items);
+        ItemPageEntry itemPageEntry = PageUtil.getPageEntries((Page<BaseEntity>) items);
         lblPageEntries.setText("Showing " + itemPageEntry.getFromEntry() + " to " + itemPageEntry.getToEntry() + " of " + items.getTotalElements() + " entries");
         pagination.setPageCount(items.getTotalPages());
     }
 
     @FXML
     private void onPageRowChanged() {
-        Page<T> items = itemService.findPages(0, getRowsPerPage(), searchValue);
+        Page<T> items = baseTableService.findPages(0, getRowsPerPage(), searchValue);
         updatePageEntries(items);
         tvItem.setItems(FXCollections.observableArrayList(items.toList()));
         tvItem.refresh();

@@ -1,4 +1,4 @@
-package ph.parcs.rmhometiles.entity.inventory.stock;
+package ph.parcs.rmhometiles.entity.inventory.stock.unit;
 
 import org.springframework.stereotype.Repository;
 import ph.parcs.rmhometiles.entity.inventory.item.ItemRepository;

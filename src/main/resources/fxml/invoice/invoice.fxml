@@ -9,8 +9,8 @@
            xmlns="http://javafx.com/javafx/10.0.2-internal"
            fx:controller="ph.parcs.rmhometiles.entity.invoice.InvoiceController">
 
+    <fx:include source="edit-lineitem.fxml"/>
     <fx:include source="../customer/edit-customer.fxml"/>
-    <fx:include source="invoice-add-product.fxml" visible="false"/>
     <GridPane hgap="12.0" styleClass="background" vgap="7.0">
         <columnConstraints>
             <ColumnConstraints hgrow="NEVER"/>
@@ -44,37 +44,40 @@
         </HBox>
 
         <TableView fx:id="tvInvoice" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                   prefWidth="900.0" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.rowSpan="2147483647">
+                   prefWidth="900"
+                   GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.rowSpan="2147483647">
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
             </columnResizePolicy>
             <columns>
-                <TableColumn fx:id="tcCode" reorderable="false" text="Item Code">
+                <TableColumn fx:id="tcCode" reorderable="false" text="ITEM CODE">
                     <cellValueFactory>
-                        <PropertyValueFactory property="Item Code"/>
+                        <PropertyValueFactory property="itemCode"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="tcStock" reorderable="false" text="Stock">
+                <TableColumn fx:id="tcStock" reorderable="false" text="STOCK">
                     <cellValueFactory>
-                        <PropertyValueFactory property="Qty"/>
+                        <PropertyValueFactory property="stock"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="tcPrice" reorderable="false" text="Price">
+                <TableColumn fx:id="tcPrice" reorderable="false" text="PRICE">
                     <cellValueFactory>
-                        <PropertyValueFactory property="Price"/>
+                        <PropertyValueFactory property="price"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="tcQty" reorderable="false" text="Disc %">
+                <TableColumn fx:id="tcQty" reorderable="false" text="QTY">
                     <cellValueFactory>
-                        <PropertyValueFactory property="Qty"/>
+                        <PropertyValueFactory property="quantity"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="tcTotal" reorderable="false" text="Total">
+                <TableColumn fx:id="tcTotal" reorderable="false" text="AMOUNT">
                     <cellValueFactory>
-                        <PropertyValueFactory property="Total"/>
+                        <PropertyValueFactory property="amount"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="tcAction" text="Action"/>
+
+                <TableColumn fx:id="tcAction" styleClass="action-column" reorderable="false"
+                             sortable="false" text="Action"/>
             </columns>
         </TableView>
 
@@ -148,5 +151,11 @@
 
         </GridPane>
 
+
+        <JFXButton fx:id="btnTest" text="Test" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                   onAction="#test" styleClass="primary-button" visible="false"
+                   GridPane.columnIndex="1" GridPane.rowIndex="4"
+        />
     </GridPane>
+
 </StackPane>

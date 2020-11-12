@@ -24,13 +24,13 @@ public class CustomerTableController extends ItemTableController<Customer> {
     }
 
     @FXML
-    private void showAddItemDialog() {
+    private void showEditItemDialog() {
         onItemEditAction(new Customer());
         editItemController.showDialog((StackPane) tvItem.getScene().getRoot());
     }
 
     @Autowired
     public void setCustomerService(CustomerService customerService) {
-        this.itemService = customerService;
+        this.baseTableService = customerService;
     }
 }

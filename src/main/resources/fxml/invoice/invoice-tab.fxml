@@ -17,7 +17,7 @@
                 </padding>
             </HBox>
         </graphic>
-        <fx:include source="new-invoice.fxml"/>
+        <fx:include source="invoice.fxml"/>
     </Tab>
     <Tab fx:id="tabManageSell" text="Manage Invoice">
         <graphic>

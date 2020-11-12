@@ -8,15 +8,16 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import ph.parcs.rmhometiles.entity.inventory.item.ItemService;
+import ph.parcs.rmhometiles.entity.inventory.item.BaseTableService;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.inventory.product.ProductRepository;
+import ph.parcs.rmhometiles.util.PageUtil;
 
 import java.util.*;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
-public class CategoryService extends ItemService<Category> {
+public class CategoryService extends BaseTableService<Category> {
 
     private CategoryRepository categoryRepository;
     private ProductRepository productRepository;
@@ -29,7 +30,7 @@ public class CategoryService extends ItemService<Category> {
 
     @Override
     public Page<Category> findPages(int page, int itemPerPage, String name) {
-        PageRequest pageRequest = super.requestPage(page, itemPerPage);
+        PageRequest pageRequest = PageUtil.requestPage(page, itemPerPage);
         return categoryRepository.findAllByNameContains(pageRequest, name);
     }
 
@@ -38,7 +39,7 @@ public class CategoryService extends ItemService<Category> {
     }
 
     @Override
-    public boolean deleteItem(Category category) {
+    public boolean deleteRowItem(Category category) {
         Category clearProd = removeProductsOfCategory(category);
         categoryRepository.delete(clearProd);
         Optional<Category> search = categoryRepository.findById(category.getId());
@@ -57,7 +58,7 @@ public class CategoryService extends ItemService<Category> {
     }
 
     @Override
-    public Category saveItem(Category item) {
+    public Category saveRowItem(Category item) {
         return categoryRepository.save(item);
     }
 

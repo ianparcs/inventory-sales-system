@@ -43,7 +43,21 @@ public class ActionTableCell<S> extends TableCell<S, HBox> {
         hBox.setAlignment(Pos.CENTER);
     }
 
-    public static <S> Callback<TableColumn<S, HBox>, TableCell<S, HBox>> forColumn(Function<S, S> delFunction, Function<S, S> editFunction) {
+    public ActionTableCell(Function<S, S> delFunction) {
+        Text deleteIcon = FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.TRASH, "1.5em");
+        deleteIcon.setId("delete-icon");
+        JFXButton btnDelete = new JFXButton();
+        btnDelete.setTooltip(new Tooltip("Delete"));
+        btnDelete.setGraphic(deleteIcon);
+
+        btnDelete.setOnAction((ActionEvent e) -> delFunction.apply(getCurrentItem()));
+
+        hBox = new HBox();
+        hBox.getChildren().add(btnDelete);
+        hBox.setAlignment(Pos.CENTER);
+    }
+
+    public static <S> Callback<TableColumn<S, HBox>, TableCell<S, HBox>> forActions(Function<S, S> delFunction, Function<S, S> editFunction) {
         return param -> new ActionTableCell<>(delFunction, editFunction);
     }
 

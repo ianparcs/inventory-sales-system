@@ -2,7 +2,6 @@ package ph.parcs.rmhometiles.entity.inventory.product;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
 import javafx.util.StringConverter;
@@ -14,13 +13,15 @@ import ph.parcs.rmhometiles.entity.inventory.category.Category;
 import ph.parcs.rmhometiles.entity.inventory.category.CategoryService;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.entity.inventory.item.EditItemController;
-import ph.parcs.rmhometiles.entity.inventory.stock.StockUnit;
-import ph.parcs.rmhometiles.entity.inventory.stock.StockUnitService;
+import ph.parcs.rmhometiles.entity.inventory.stock.Stock;
+import ph.parcs.rmhometiles.entity.inventory.stock.unit.StockUnit;
+import ph.parcs.rmhometiles.entity.inventory.stock.unit.StockUnitService;
 import ph.parcs.rmhometiles.entity.supplier.Supplier;
 import ph.parcs.rmhometiles.entity.supplier.SupplierService;
-import ph.parcs.rmhometiles.file.Image;
 import ph.parcs.rmhometiles.file.FileService;
+import ph.parcs.rmhometiles.file.Image;
 import ph.parcs.rmhometiles.util.FileUtils;
+import ph.parcs.rmhometiles.util.MoneyConverter;
 
 import java.io.File;
 import java.util.Optional;
@@ -62,10 +63,11 @@ public class ProductEditController extends EditItemController<Product> {
         validateField(tfDescription);
         validateField(tfUnitSold);
         validateField(tfStock);
-        validateField(tfPrice);
         validateField(tfName);
         validateField(tfCode);
-        validateField(tfCost);
+
+        validateNumberField(tfPrice);
+        validateNumberField(tfCost);
 
         initComboBoxValues();
     }
@@ -129,22 +131,24 @@ public class ProductEditController extends EditItemController<Product> {
         tfName.resetValidation();
         tfPrice.resetValidation();
         tfCode.resetValidation();
+        tfCost.resetValidation();
     }
 
     @Override
     protected void bindFields(Product product) {
-        if (!itemService.isNew(product)) {
-            tfCode.setText(product.getCode());
+        if (!baseTableService.isNew(product)) {
             tfName.setText(product.getName());
-            tfCost.setText(product.getCost().toString());
-            tfDescription.setText(product.getDescription());
-            tfPrice.setText(product.getPrice().toString());
-            tfStock.setText(product.getStock().toString());
-            tfUnitSold.setText(product.getUnitSold().toString());
+            tfCode.setText(product.getCodeProperty());
+            tfCost.setText(product.getCost().getAmount().toPlainString());
+            tfPrice.setText(product.getPrice().getAmount().toPlainString());
+            tfDescription.setText(product.getDescriptionProperty());
+            tfStock.setText(product.getStock().getStocks().toString());
+            tfUnitSold.setText(product.getStock().getUnitSold().toString());
 
             if (product.getImage() != null) {
                 tfImage.setText(product.getImage().getPath());
             }
+
         }
 
         setStockUnitValue(product);
@@ -155,16 +159,19 @@ public class ProductEditController extends EditItemController<Product> {
     @Override
     protected Product unbindFields(Integer id) {
         Product product = new Product();
-        product.setUnitSold(Integer.valueOf(!tfUnitSold.getText().isEmpty() ? tfUnitSold.getText() : "0"));
-        product.setStock(Integer.valueOf(!tfStock.getText().isEmpty() ? tfStock.getText() : "0"));
-        product.setPrice(Float.valueOf(!tfPrice.getText().isEmpty() ? tfPrice.getText() : "0.00"));
-        product.setCost(Float.valueOf(!tfCost.getText().isEmpty() ? tfCost.getText() : "0.00"));
-        product.setStockUnit(cbStockUnit.getValue());
-        product.setDescription(tfDescription.getText());
+
+        Stock stock = new Stock();
+        stock.setUnitSold(Integer.valueOf(!tfUnitSold.getText().isEmpty() ? tfUnitSold.getText() : "0"));
+        stock.setStocks(Integer.valueOf(!tfStock.getText().isEmpty() ? tfStock.getText() : "0"));
+        stock.setStockUnit(cbStockUnit.getValue());
+        product.setStock(stock);
+        product.setPrice(MoneyConverter.convert(tfPrice.getText()));
+        product.setCost(MoneyConverter.convert(tfCost.getText()));
+        product.setDescriptionProperty(tfDescription.getText());
         product.setCategory(cbCategory.getValue());
         product.setSupplier(cbSupplier.getValue());
+        product.setCodeProperty(tfCode.getText());
         product.setName(tfName.getText());
-        product.setCode(tfCode.getText());
         product.setId(id);
 
         Image image = new Image();
@@ -188,8 +195,8 @@ public class ProductEditController extends EditItemController<Product> {
 
     private void setStockUnitValue(Product product) {
         cbStockUnit.getItems().setAll(stockUnitService.getStockUnits());
-        Optional<StockUnit> search = stockUnitService.findStockUnitByProduct(cbStockUnit.getItems(), product);
-        search.ifPresent(supplier -> cbStockUnit.getSelectionModel().select(search.get()));
+        if (product.getStock() == null) return;
+        cbStockUnit.getSelectionModel().select(product.getStock().getStockUnit());
     }
 
     @FXML
@@ -216,8 +223,8 @@ public class ProductEditController extends EditItemController<Product> {
                 }
             }
 
-            Product savedItem = itemService.saveItem(unbindFields(item.getId()));
-            if (!itemService.isEmpty(savedItem)) {
+            Product savedItem = baseTableService.saveRowItem(unbindFields(item.getId()));
+            if (!baseTableService.isEmpty(savedItem)) {
                 itemListener.onSavedSuccess(savedItem);
             } else {
                 itemListener.onSaveFailed(savedItem);
@@ -244,7 +251,7 @@ public class ProductEditController extends EditItemController<Product> {
         BaseEntity entity = (BaseEntity) comboBox.getValue();
         if (entity != null) {
             if (entity.getName().isEmpty()) {
-                Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
+                comboBox.getSelectionModel().clearSelection();
             }
         }
     }
@@ -266,7 +273,7 @@ public class ProductEditController extends EditItemController<Product> {
 
     @Autowired
     public void setProductService(ProductService productService) {
-        this.itemService = productService;
+        this.baseTableService = productService;
     }
 
     @Autowired

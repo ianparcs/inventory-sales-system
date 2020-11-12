@@ -9,7 +9,7 @@
 <JFXDialog xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../../css/edit-dialog.css" fx:id="editDialog"
            fx:controller="ph.parcs.rmhometiles.entity.inventory.product.ProductEditController">
 
-    <JFXDialogLayout>
+    <JFXDialogLayout  prefWidth="800">
         <heading>
             <HBox>
                 <FontAwesomeIconView/>
@@ -18,7 +18,7 @@
         </heading>
 
         <body>
-            <GridPane>
+            <GridPane vgap="40" hgap="40">
                 <columnConstraints>
                     <ColumnConstraints hgrow="ALWAYS"/>
                     <ColumnConstraints hgrow="ALWAYS"/>
@@ -79,9 +79,7 @@
 
                 <JFXTextField fx:id="tfCost" labelFloat="true" promptText="Cost"
                               GridPane.columnIndex="1" GridPane.rowIndex="2">
-                    <validators>
-                        <NumberValidator message="Please enter number only"/>
-                    </validators>
+
                 </JFXTextField>
 
                 <JFXTextField fx:id="tfPrice" labelFloat="true" promptText="Price"

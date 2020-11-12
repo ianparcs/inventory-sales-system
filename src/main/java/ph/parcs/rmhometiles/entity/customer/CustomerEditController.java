@@ -44,7 +44,7 @@ public class CustomerEditController extends EditItemController<Customer> {
 
     @Autowired
     public void setCustomerService(CustomerService customerService) {
-        this.itemService = customerService;
+        this.baseTableService = customerService;
     }
 
 }

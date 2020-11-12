@@ -10,14 +10,14 @@ import ph.parcs.rmhometiles.entity.inventory.item.ItemTableController;
 public class SupplierTableController extends ItemTableController<Supplier> {
 
     @FXML
-    private void showAddItemDialog() {
+    private void showEditItemDialog() {
         onItemEditAction(new Supplier());
         editItemController.showDialog((StackPane) tvItem.getScene().getRoot());
     }
 
     @Autowired
     public void setProductService(SupplierService supplierService) {
-        this.itemService = supplierService;
+        this.baseTableService = supplierService;
     }
 
 }
