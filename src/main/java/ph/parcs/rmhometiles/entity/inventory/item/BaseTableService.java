@@ -8,10 +8,6 @@ import java.util.Set;
 @Service
 public abstract class BaseTableService<T extends BaseEntity> {
 
-    public boolean isEmpty(T item) {
-        return item == null;
-    }
-
     public abstract Page<T> findPages(int page, int itemPerPage, String name);
 
     public abstract Set<T> findItems(String query);

@@ -53,10 +53,10 @@ public abstract class EditItemController<T extends BaseEntity> {
         btnSave.setOnAction(actionEvent -> {
             closeDialog();
             T savedItem = baseTableService.saveRowItem(unbindFields(item.getId()));
-            if (!baseTableService.isEmpty(savedItem)) {
+            if (savedItem != null) {
                 itemListener.onSavedSuccess(savedItem);
             } else {
-                itemListener.onSaveFailed(savedItem);
+                itemListener.onSaveFailed(null);
             }
         });
     }

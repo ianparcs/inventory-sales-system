@@ -235,10 +235,10 @@ public class ProductEditController extends EditItemController<Product> {
             }
 
             Product savedItem = baseTableService.saveRowItem(unbindFields(item.getId()));
-            if (!baseTableService.isEmpty(savedItem)) {
+            if (savedItem != null) {
                 itemListener.onSavedSuccess(savedItem);
             } else {
-                itemListener.onSaveFailed(savedItem);
+                itemListener.onSaveFailed(null);
             }
         });
     }
