@@ -1,12 +1,14 @@
 package ph.parcs.rmhometiles.entity.inventory.product;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.CacheHint;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import lombok.SneakyThrows;
 import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +16,7 @@ import ph.parcs.rmhometiles.entity.inventory.category.Category;
 import ph.parcs.rmhometiles.entity.inventory.item.ItemTableController;
 import ph.parcs.rmhometiles.entity.inventory.stock.Stock;
 import ph.parcs.rmhometiles.entity.supplier.Supplier;
-import ph.parcs.rmhometiles.file.Image;
+import ph.parcs.rmhometiles.file.ImageProduct;
 import ph.parcs.rmhometiles.ui.alert.SweetAlert;
 import ph.parcs.rmhometiles.ui.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.util.FileUtils;
@@ -40,7 +42,7 @@ public class ProductTableController extends ItemTableController<Product> {
     @FXML
     private TableColumn<Product, Money> tcCost;
     @FXML
-    private TableColumn<Product, Image> tcImage;
+    private TableColumn<Product, ImageProduct> tcImage;
 
     private SweetAlert sweetAlert;
 
@@ -81,47 +83,6 @@ public class ProductTableController extends ItemTableController<Product> {
             }
         });
 
-        tcImage.setCellFactory(tc -> {
-            TableCell<Product, Image> cell = new TableCell<>() {
-
-                @SneakyThrows
-                @Override
-                protected void updateItem(Image image, boolean empty) {
-                    super.updateItem(image, empty);
-                    if (!empty && image != null) {
-                        URL url = FileUtils.getResourcePath(image.getName());
-                        if (url != null) {
-                            ImageView imageView = new ImageView(new javafx.scene.image.Image(url.toURI().toString()));
-                            imageView.setPreserveRatio(true);
-                            imageView.setFitHeight(128);
-                            imageView.setFitWidth(128);
-                            setGraphic(imageView);
-                            setUserData(image);
-                        }
-                    }
-                }
-            };
-
-            cell.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-                if (event.getClickCount() >= 1) {
-                    try {
-                        Image fileImage = (Image) cell.getUserData();
-                        if (fileImage == null) return;
-                        URL url = FileUtils.getResourcePath(fileImage.getName());
-                        ImageView image = new ImageView(new javafx.scene.image.Image(url.toURI().toString()));
-                        image.setFitWidth(612);
-                        image.setFitHeight(450);
-                        sweetAlert.setHeaderMessage(fileImage.getName());
-                        sweetAlert.setBody(image);
-                        sweetAlert.show(spMain);
-                    } catch (URISyntaxException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-            return cell;
-        });
-
         tcStock.setCellFactory(param -> new TableCell<>() {
             @Override
             public void updateItem(Stock stock, boolean empty) {
@@ -141,6 +102,62 @@ public class ProductTableController extends ItemTableController<Product> {
                 setText(stock.getStocks().toString());
             }
         });
+
+        tcImage.setCellFactory(tc -> {
+            TableCell<Product, ImageProduct> cell = new TableCell<>() {
+                @Override
+                protected void updateItem(ImageProduct productImage, boolean empty) {
+                    if (productImage != null) {
+                        if (productImage.getPath().isEmpty()) return;
+                        URL url = FileUtils.getResourcePath(productImage.getName());
+                        if (url != null) {
+                            new Thread(() -> {
+                                Image image = null;
+                                try {
+                                    Thread.sleep(1000);
+                                    image = new Image(url.toURI().toString());
+                                } catch (URISyntaxException | InterruptedException e) {
+                                    e.printStackTrace();
+                                } finally {
+                                    Image finalImage = image;
+                                    Platform.runLater(() -> {
+                                        productImage.setImage(finalImage);
+                                        ImageView imageView = createImageView(finalImage, 64, 64);
+                                        setUserData(productImage);
+                                        setGraphic(imageView);
+                                    });
+                                }
+                            }).start();
+                        }
+                    }
+                }
+            };
+
+            cell.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+                if (event.getClickCount() >= 1) {
+                    ImageProduct imageProduct = (ImageProduct) cell.getUserData();
+                    if (imageProduct == null || imageProduct.getImage() == null) return;
+                    Image image = imageProduct.getImage();
+                    ImageView imageView = createImageView(image, 600, 400);
+                    sweetAlert.setHeaderMessage(imageProduct.getName());
+                    sweetAlert.setBody(imageView);
+                    sweetAlert.show(spMain);
+                }
+            });
+            return cell;
+        });
+
+
+    }
+
+    private ImageView createImageView(Image image, int width, int height) {
+        ImageView imageView = new ImageView(image);
+        imageView.setCache(true);
+        imageView.setCacheHint(CacheHint.SPEED);
+        imageView.setFitWidth(width);
+        imageView.setFitHeight(height);
+        imageView.setPreserveRatio(true);
+        return imageView;
     }
 
     @FXML

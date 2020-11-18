@@ -24,7 +24,7 @@ public class SupplierService extends BaseTableService<Supplier> {
 
     public ObservableList<Supplier> getSuppliers() {
         List<Supplier> suppliers = supplierRepository.findAll();
-        suppliers.add(0, createDefault());
+       // suppliers.add(0, createDefault());
         return FXCollections.observableArrayList(Objects.requireNonNullElseGet(suppliers, ArrayList::new));
     }
 

@@ -9,7 +9,7 @@
 <JFXDialog xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../../css/edit-dialog.css" fx:id="editDialog"
            fx:controller="ph.parcs.rmhometiles.entity.inventory.product.ProductEditController">
 
-    <JFXDialogLayout  prefWidth="800">
+    <JFXDialogLayout prefWidth="800">
         <heading>
             <HBox>
                 <FontAwesomeIconView/>
@@ -62,11 +62,11 @@
                     </validators>
                 </JFXTextField>
 
-                <JFXComboBox fx:id="cbStockUnit" onAction="#clearStockUnit" labelFloat="true"
+                <JFXComboBox fx:id="cbStockUnit" onAction="#selectStockUnit" styleClass="" labelFloat="true"
                              promptText="Stock Unit" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
 
-                <JFXComboBox fx:id="cbCategory" onAction="#clearCategory" labelFloat="true" promptText="Category"
+                <JFXComboBox fx:id="cbCategory" onAction="#selectCategory" labelFloat="true" promptText="Category"
                              GridPane.columnIndex="2" GridPane.rowIndex="1"/>
 
 
@@ -90,7 +90,7 @@
                 </JFXTextField>
 
 
-                <JFXComboBox fx:id="cbSupplier" onAction="#clearSupplier" labelFloat="true" promptText="Supplier"
+                <JFXComboBox fx:id="cbSupplier" onAction="#selectSupplier" labelFloat="true" promptText="Supplier"
                              GridPane.columnIndex="0" GridPane.rowIndex="3"/>
 
                 <JFXTextField fx:id="tfImage" labelFloat="true" promptText="Choose Image" onMouseClicked="#selectImage"

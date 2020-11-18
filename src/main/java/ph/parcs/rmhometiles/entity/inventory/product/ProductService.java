@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseTableService;
 import ph.parcs.rmhometiles.file.FileService;
-import ph.parcs.rmhometiles.file.Image;
+import ph.parcs.rmhometiles.file.ImageProduct;
 import ph.parcs.rmhometiles.util.FileUtils;
 import ph.parcs.rmhometiles.util.PageUtil;
 
@@ -33,9 +33,9 @@ public class ProductService extends BaseTableService<Product> {
 
     @Override
     public boolean deleteRowItem(Product product) {
-        Image image = product.getImage();
-        if (image != null && !StringUtils.isEmpty(image.getPath())) {
-            fileService.deleteFile(image.getName());
+        ImageProduct imageProduct = product.getImageProduct();
+        if (imageProduct != null && !StringUtils.isEmpty(imageProduct.getPath())) {
+            fileService.deleteFile(imageProduct.getName());
         }
 
         productRepository.delete(product);
@@ -47,18 +47,18 @@ public class ProductService extends BaseTableService<Product> {
     @Override
     @SneakyThrows
     public Product saveRowItem(Product product) {
-        Image image = product.getImage();
-        if (image != null && !StringUtils.isEmpty(image.getPath())) {
-            saveFile(image);
+        ImageProduct imageProduct = product.getImageProduct();
+        if (imageProduct != null && !StringUtils.isEmpty(imageProduct.getPath())) {
+            saveFile(imageProduct);
         }
         return productRepository.save(product);
     }
 
-    private void saveFile(Image image) {
-        String fileName = FileUtils.getFileName(image.getPath());
+    private void saveFile(ImageProduct imageProduct) {
+        String fileName = FileUtils.getFileName(imageProduct.getPath());
         String des = FileUtils.getTargetPath(fileName);
-        String src = image.getPath();
-        image.setName(fileName);
+        String src = imageProduct.getPath();
+        imageProduct.setName(fileName);
         fileService.saveImage(src, des);
     }
 

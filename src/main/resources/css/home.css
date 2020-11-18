@@ -79,26 +79,39 @@
     -fx-pref-height: 200;
 }
 
-.search-field > .input-line {
-    -fx-background-color: -jfx-unfocus-color;
-    -fx-pref-height: 1px;
-    -fx-translate-y: 1px;
-}
-
 .search-field .combo-box-button-container {
     -fx-background-color: TRANSPARENT;
     -fx-pref-height: 300px;
 }
 
+.jfx-combo-box {
+    -fx-max-width: infinity;
+    -jfx-focus-color: primary;
+}
+
 .jfx-combo-box > .input-line {
-    -fx-background-color: transparent;
-    -fx-pref-height: 0px;
-    -fx-translate-y: 0px;
+    -fx-background-color: -jfx-unfocus-color;
+    -fx-pref-height: 1px;
+    -fx-translate-y: 1px;
 }
 
 .jfx-combo-box > .input-focused-line {
+    -fx-background-color: blueberries;
+    -fx-pref-height: 1px;
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-text-fill: WHITE;
+    -fx-background-color: blueberries;
+}
+
+.combo-box .cell:selected {
     -fx-background-color: transparent;
-    -fx-pref-height: 0px;
+}
+
+.combo-box-popup .list-view {
+    -fx-border-color: greysquash;
+    -fx-border-width: 0;
 }
 
 .pagination {

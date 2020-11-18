@@ -15,7 +15,7 @@
 
     <VBox styleClass="background">
 
-        <Label maxWidth="1.7976931348623157E308" styleClass="item-header" text="Manage Invoice"/>
+        <Label maxWidth="1.7976931348623157E308" text="Manage Invoice"/>
 
         <GridPane vgap="15" VBox.vgrow="ALWAYS">
             <columnConstraints>
@@ -25,7 +25,7 @@
 
             <HBox alignment="CENTER_LEFT" spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0">
                 <Label text="Show"/>
-                <JFXComboBox fx:id="cbRowCount" styleClass="rowcount" prefWidth="75">
+                <JFXComboBox fx:id="cbRowCount" prefWidth="75">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <Integer fx:value="5"/>
@@ -48,7 +48,7 @@
                         <FontAwesomeIconView styleClass="user-icon"/>
                     </graphic>
                 </JFXButton>
-                <JFXTextField fx:id="tfSearchItem" styleClass="search-input" promptText="Search"/>
+                <JFXTextField fx:id="tfSearchItem" styleClass="search-field" promptText="Search"/>
             </HBox>
 
             <TableView fx:id="tvItem" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS"

@@ -120,7 +120,7 @@
                 <TableColumn fx:id="tcImage" reorderable="false" resizable="false" sortable="false"
                              styleClass="action-column" text="Image">
                     <cellValueFactory>
-                        <PropertyValueFactory property="image"/>
+                        <PropertyValueFactory property="imageProduct"/>
                     </cellValueFactory>
                 </TableColumn>
 

@@ -1,5 +1,6 @@
 package ph.parcs.rmhometiles.ui.login;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
@@ -29,6 +30,8 @@ public class LoginController {
     @FXML
     private JFXTextField tfUserName;
     @FXML
+    private JFXButton btnLogin;
+    @FXML
     private StackPane spRoot;
 
     private UserService userService;
@@ -36,9 +39,10 @@ public class LoginController {
 
     @FXML
     private void initialize() {
-         userService.saveUser(createUser());
+      //  userService.saveUser(createUser());
         setUserFieldStyle(pfUserPassword, icoKey);
         setUserFieldStyle(tfUserName, icoUser);
+        btnLogin.fire();
     }
 
     private void setUserFieldStyle(TextField textField, FontAwesomeIconView icon) {
@@ -51,6 +55,7 @@ public class LoginController {
         });
     }
 
+    @FXML
     public void login() {
         final String username = tfUserName.getText();
         final String password = pfUserPassword.getText();

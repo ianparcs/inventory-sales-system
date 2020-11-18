@@ -7,7 +7,7 @@ import ph.parcs.rmhometiles.entity.inventory.category.Category;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.entity.inventory.stock.Stock;
 import ph.parcs.rmhometiles.entity.supplier.Supplier;
-import ph.parcs.rmhometiles.file.Image;
+import ph.parcs.rmhometiles.file.ImageProduct;
 
 import javax.persistence.*;
 
@@ -19,10 +19,10 @@ public class Product extends BaseEntity {
     private StringProperty descriptionProperty = new SimpleStringProperty();
     private StringProperty codeProperty = new SimpleStringProperty();
 
+    private ImageProduct imageProduct;
     private Supplier supplier;
     private Category category;
     private Stock stock;
-    private Image image;
 
     private Money price;
     private Money cost;
@@ -73,12 +73,12 @@ public class Product extends BaseEntity {
                     {@JoinColumn(name = "product_id", referencedColumnName = "product_id")},
             inverseJoinColumns =
                     {@JoinColumn(name = "image_id", referencedColumnName = "image_id")})
-    public Image getImage() {
-        return image;
+    public ImageProduct getImageProduct() {
+        return imageProduct;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
+    public void setImageProduct(ImageProduct imageProduct) {
+        this.imageProduct = imageProduct;
     }
 
     @Column(name = "code")

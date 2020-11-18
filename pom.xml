@@ -112,7 +112,7 @@
         <repository>
             <id>internal.repo</id>
             <name>Internal repo</name>
-            <url>image://C:\Users\Ian\My Projects\inventory-sales-system\deployment</url>
+            <url>imageProduct://C:\Users\Ian\My Projects\inventory-sales-system\deployment</url>
         </repository>
     </distributionManagement>
 </project>

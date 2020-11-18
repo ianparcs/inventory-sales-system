@@ -52,42 +52,43 @@ TableView *.decrement-arrow {
     -fx-alignment: right;
 }
 
-.combo-box {
+HBox .combo-box {
     -fx-border-radius: 4px;
     -fx-border-color: greysquash;
     -fx-background-color: transparent;
+    -fx-alignment: center;
 }
 
-.combo-box > .list-cell {
+HBox .combo-box > .list-cell {
     -fx-alignment: center;
     -fx-text-alignment: center;
 }
 
-.combo-box .cell:selected,
-.combo-box-popup .list-view .list-cell:hover {
+HBox .combo-box .cell:selected,
+HBox .combo-box-popup .list-view .list-cell:hover {
     -fx-text-fill: white;
     -fx-background-color: blueberries;
 }
 
-.combo-box-popup .list-view {
+HBox .combo-box-popup .list-view {
     -fx-border-color: greysquash;
     -fx-border-radius: 4px;
 }
 
-.content-container {
-    -fx-background-color: gray-light;
-    -fx-padding: 25px;
+HBox .combo-box > .input-line {
+    -fx-background-color: -jfx-unfocus-color;
+    -fx-pref-height: 0px;
+    -fx-translate-y: 0px;
 }
 
-VBox .item-header {
-    -fx-font-weight: bold;
-    -fx-font-size: 20;
-    -fx-border-color: black;
-    -fx-border-width: 0px 0px 1px 0px;
+HBox .combo-box > .input-focused-line {
+    -fx-background-color: blueberries;
+    -fx-pref-height: 0px;
+}
+
+
+.content-container {
+    -fx-background-color: gray-light;
     -fx-padding: 15px;
 }
 
-.item-options {
-    -fx-spacing: 10;
-    -fx-alignment: center-right;
-}

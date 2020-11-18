@@ -22,7 +22,7 @@ public class StockUnitService extends BaseTableService<StockUnit> {
 
     public ObservableList<StockUnit> getStockUnits() {
         List<StockUnit> stockUnits = stockUnitRepository.findAll();
-        stockUnits.add(0, createDefault());
+     //   stockUnits.add(0, createDefault());
         return FXCollections.observableArrayList(Objects.requireNonNullElseGet(stockUnits, ArrayList::new));
     }
 
@@ -39,11 +39,11 @@ public class StockUnitService extends BaseTableService<StockUnit> {
 
     public Optional<StockUnit> findStockUnitByProduct(ObservableList<StockUnit> items, Product product) {
         Optional<StockUnit> search = Optional.empty();
-/*        if (product.getStockUnit() != null) {
+        if (product.getStock() != null && product.getStock().getStockUnit() != null) {
             search = items.stream()
-                    .filter(item -> item.getId().equals(product.getStockUnit().getId()))
+                    .filter(item -> item.getId().equals(product.getStock().getStockUnit().getId()))
                     .findAny();
-        }*/
+        }
         return search;
     }
 

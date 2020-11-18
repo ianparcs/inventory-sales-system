@@ -24,7 +24,7 @@ public class CategoryService extends BaseTableService<Category> {
 
     public ObservableList<Category> getCategories() {
         List<Category> categoryList = categoryRepository.findAll();
-        categoryList.add(0, createDefault());
+     //   categoryList.add(0, createDefault());
         return FXCollections.observableArrayList(Objects.requireNonNullElseGet(categoryList, ArrayList::new));
     }
 

@@ -2,6 +2,7 @@ package ph.parcs.rmhometiles.entity.inventory.product;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
 import javafx.util.StringConverter;
@@ -19,7 +20,7 @@ import ph.parcs.rmhometiles.entity.inventory.stock.unit.StockUnitService;
 import ph.parcs.rmhometiles.entity.supplier.Supplier;
 import ph.parcs.rmhometiles.entity.supplier.SupplierService;
 import ph.parcs.rmhometiles.file.FileService;
-import ph.parcs.rmhometiles.file.Image;
+import ph.parcs.rmhometiles.file.ImageProduct;
 import ph.parcs.rmhometiles.util.FileUtils;
 import ph.parcs.rmhometiles.util.MoneyConverter;
 
@@ -139,14 +140,14 @@ public class ProductEditController extends EditItemController<Product> {
         if (!baseTableService.isNew(product)) {
             tfName.setText(product.getName());
             tfCode.setText(product.getCodeProperty());
-            tfCost.setText(product.getCost().getAmount().toPlainString());
-            tfPrice.setText(product.getPrice().getAmount().toPlainString());
+            tfCost.setText(product.getCost().getAmount().toString());
+            tfPrice.setText(product.getPrice().getAmount().toString());
             tfDescription.setText(product.getDescriptionProperty());
             tfStock.setText(product.getStock().getStocks().toString());
             tfUnitSold.setText(product.getStock().getUnitSold().toString());
 
-            if (product.getImage() != null) {
-                tfImage.setText(product.getImage().getPath());
+            if (product.getImageProduct() != null) {
+                tfImage.setText(product.getImageProduct().getPath());
             }
 
         }
@@ -163,40 +164,50 @@ public class ProductEditController extends EditItemController<Product> {
         Stock stock = new Stock();
         stock.setUnitSold(Integer.valueOf(!tfUnitSold.getText().isEmpty() ? tfUnitSold.getText() : "0"));
         stock.setStocks(Integer.valueOf(!tfStock.getText().isEmpty() ? tfStock.getText() : "0"));
-        stock.setStockUnit(cbStockUnit.getValue());
-        product.setStock(stock);
+
+        if (!cbStockUnit.getSelectionModel().isEmpty()) stock.setStockUnit(cbStockUnit.getValue());
+        if (!cbCategory.getSelectionModel().isEmpty()) product.setCategory(cbCategory.getValue());
+        if (!cbSupplier.getSelectionModel().isEmpty()) product.setSupplier(cbSupplier.getValue());
+
         product.setPrice(MoneyConverter.convert(tfPrice.getText()));
         product.setCost(MoneyConverter.convert(tfCost.getText()));
         product.setDescriptionProperty(tfDescription.getText());
-        product.setCategory(cbCategory.getValue());
-        product.setSupplier(cbSupplier.getValue());
         product.setCodeProperty(tfCode.getText());
         product.setName(tfName.getText());
+        product.setStock(stock);
         product.setId(id);
 
-        Image image = new Image();
-        image.setPath(tfImage.getText());
-        product.setImage(image);
+        if (!StringUtils.isEmpty(tfImage.getText())) {
+            ImageProduct imageProduct = new ImageProduct();
+            imageProduct.setPath(tfImage.getText());
+            product.setImageProduct(imageProduct);
+        }
 
         return product;
     }
 
     private void setCategoryValue(Product product) {
-        cbCategory.getItems().setAll(categoryService.getCategories());
+        ObservableList<Category> items = categoryService.getCategories();
+        if (items.isEmpty()) return;
+        cbCategory.getItems().setAll(items);
         Optional<Category> search = categoryService.findCategoryByProduct(cbCategory.getItems(), product);
         search.ifPresent(category -> cbCategory.getSelectionModel().select(search.get()));
     }
 
     private void setSupplierValue(Product product) {
-        cbSupplier.getItems().setAll(supplierService.getSuppliers());
+        ObservableList<Supplier> items = supplierService.getSuppliers();
+        if (items.isEmpty()) return;
+        cbSupplier.getItems().setAll(items);
         Optional<Supplier> search = supplierService.findSupplierByProduct(cbSupplier.getItems(), product);
         search.ifPresent(supplier -> cbSupplier.getSelectionModel().select(search.get()));
     }
 
     private void setStockUnitValue(Product product) {
-        cbStockUnit.getItems().setAll(stockUnitService.getStockUnits());
-        if (product.getStock() == null) return;
-        cbStockUnit.getSelectionModel().select(product.getStock().getStockUnit());
+        ObservableList<StockUnit> items = stockUnitService.getStockUnits();
+        if (items.isEmpty()) return;
+        cbStockUnit.getItems().setAll(items);
+        Optional<StockUnit> search = stockUnitService.findStockUnitByProduct(cbStockUnit.getItems(), product);
+        search.ifPresent(supplier -> cbStockUnit.getSelectionModel().select(search.get()));
     }
 
     @FXML
@@ -214,12 +225,12 @@ public class ProductEditController extends EditItemController<Product> {
         btnSave.setOnAction(actionEvent -> {
             closeDialog();
             String path = tfImage.getText();
-            if (!path.isEmpty() && item.getImage() != null) {
+            if (!path.isEmpty() && item.getImageProduct() != null) {
                 String fileName = FileUtils.getFileName(path);
-                String currentFile = item.getImage().getName();
+                String currentFile = item.getImageProduct().getName();
                 if ((currentFile != null && !currentFile.equals(fileName)) &&
                         !StringUtils.isEmpty(currentFile)) {
-                    fileService.deleteFile(item.getImage().getName());
+                    fileService.deleteFile(item.getImageProduct().getName());
                 }
             }
 
@@ -233,24 +244,24 @@ public class ProductEditController extends EditItemController<Product> {
     }
 
     @FXML
-    private void clearSupplier() {
-        clearComboboxSelection(cbSupplier);
+    private void selectSupplier() {
+        unSelectBlankOption(cbSupplier);
     }
 
     @FXML
-    private void clearCategory() {
-        clearComboboxSelection(cbCategory);
+    private void selectCategory() {
+        unSelectBlankOption(cbCategory);
     }
 
     @FXML
-    private void clearStockUnit() {
-        clearComboboxSelection(cbStockUnit);
+    private void selectStockUnit() {
+        unSelectBlankOption(cbStockUnit);
     }
 
-    private void clearComboboxSelection(JFXComboBox<?> comboBox) {
+    private void unSelectBlankOption(JFXComboBox<?> comboBox) {
         BaseEntity entity = (BaseEntity) comboBox.getValue();
         if (entity != null) {
-            if (entity.getName().isEmpty()) {
+            if (StringUtils.isEmpty(entity.getName())) {
                 comboBox.getSelectionModel().clearSelection();
             }
         }
