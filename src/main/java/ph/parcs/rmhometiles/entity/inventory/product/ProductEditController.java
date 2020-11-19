@@ -2,7 +2,10 @@ package ph.parcs.rmhometiles.entity.inventory.product;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
 import javafx.util.StringConverter;
@@ -26,6 +29,7 @@ import ph.parcs.rmhometiles.util.MoneyConverter;
 
 import java.io.File;
 import java.util.Optional;
+import java.util.concurrent.CountDownLatch;
 
 @Controller
 public class ProductEditController extends EditItemController<Product> {
@@ -137,7 +141,7 @@ public class ProductEditController extends EditItemController<Product> {
 
     @Override
     protected void bindFields(Product product) {
-        if (!baseTableService.isNew(product)) {
+        if (baseService.isExist(product.getId())) {
             tfName.setText(product.getName());
             tfCode.setText(product.getCodeProperty());
             tfCost.setText(product.getCost().getAmount().toString());
@@ -222,25 +226,42 @@ public class ProductEditController extends EditItemController<Product> {
         setDialogTitle(item);
         bindFields(item);
 
-        btnSave.setOnAction(actionEvent -> {
-            closeDialog();
-            String path = tfImage.getText();
-            if (!path.isEmpty() && item.getImageProduct() != null) {
-                String fileName = FileUtils.getFileName(path);
-                String currentFile = item.getImageProduct().getName();
-                if ((currentFile != null && !currentFile.equals(fileName)) &&
-                        !StringUtils.isEmpty(currentFile)) {
-                    fileService.deleteFile(item.getImageProduct().getName());
-                }
-            }
+        btnSave.setOnAction(a -> {
+            Service<Void> service = new Service<>() {
+                @Override
+                protected Task<Void> createTask() {
+                    return new Task<>() {
+                        @Override
+                        protected Void call() throws Exception {
+                            String path = tfImage.getText();
+                            if (!path.isEmpty() && item.getImageProduct() != null) {
+                                String fileName = FileUtils.getFileName(path);
+                                String currentFile = item.getImageProduct().getName();
+                                if ((!StringUtils.isEmpty(currentFile) && !currentFile.equals(fileName))) {
+                                    fileService.deleteFile(item.getImageProduct().getName());
+                                }
+                            }
+                            Product savedItem = baseService.saveEntity(unbindFields(item.getId()));
+                            final CountDownLatch latch = new CountDownLatch(1);
 
-            Product savedItem = baseTableService.saveRowItem(unbindFields(item.getId()));
-            if (savedItem != null) {
-                itemListener.onSavedSuccess(savedItem);
-            } else {
-                itemListener.onSaveFailed(null);
-            }
+                            Platform.runLater(() -> {
+                                closeDialog();
+                                if (savedItem != null) {
+                                    itemListener.onSavedSuccess(savedItem);
+                                } else {
+                                    itemListener.onSaveFailed(null);
+                                }
+                                latch.countDown();
+                            });
+                            latch.await();
+                            return null;
+                        }
+                    };
+                }
+            };
+            service.start();
         });
+
     }
 
     @FXML
@@ -284,7 +305,7 @@ public class ProductEditController extends EditItemController<Product> {
 
     @Autowired
     public void setProductService(ProductService productService) {
-        this.baseTableService = productService;
+        this.baseService = productService;
     }
 
     @Autowired

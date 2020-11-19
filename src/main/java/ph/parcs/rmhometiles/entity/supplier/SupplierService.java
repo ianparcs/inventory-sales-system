@@ -8,7 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import ph.parcs.rmhometiles.entity.inventory.item.BaseTableService;
+import ph.parcs.rmhometiles.entity.inventory.item.BaseService;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.inventory.product.ProductRepository;
 import ph.parcs.rmhometiles.util.PageUtil;
@@ -17,14 +17,14 @@ import java.util.*;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
-public class SupplierService extends BaseTableService<Supplier> {
+public class SupplierService extends BaseService<Supplier> {
 
     private SupplierRepository supplierRepository;
     private ProductRepository productRepository;
 
     public ObservableList<Supplier> getSuppliers() {
         List<Supplier> suppliers = supplierRepository.findAll();
-       // suppliers.add(0, createDefault());
+        // suppliers.add(0, createDefault());
         return FXCollections.observableArrayList(Objects.requireNonNullElseGet(suppliers, ArrayList::new));
     }
 
@@ -35,12 +35,12 @@ public class SupplierService extends BaseTableService<Supplier> {
     }
 
     @Override
-    public Set<Supplier> findItems(String query) {
+    public Set<Supplier> findEntities(String query) {
         return supplierRepository.findSupplierByNameContains(query);
     }
 
     @Override
-    public boolean deleteRowItem(Supplier supplier) {
+    public boolean deleteEntity(Supplier supplier) {
         Supplier clearProd = removeProductsOfSupplier(supplier);
         supplierRepository.delete(clearProd);
         Optional<Supplier> search = supplierRepository.findById(supplier.getId());
@@ -59,7 +59,7 @@ public class SupplierService extends BaseTableService<Supplier> {
     }
 
     @Override
-    public Supplier saveRowItem(Supplier item) {
+    public Supplier saveEntity(Supplier item) {
         return supplierRepository.save(item);
     }
 
@@ -69,11 +69,6 @@ public class SupplierService extends BaseTableService<Supplier> {
         supplier.setName("");
         supplier.setId(0);
         return supplier;
-    }
-
-    @Override
-    public boolean isNew(Supplier item) {
-        return supplierRepository.findById(item.getId()).isEmpty();
     }
 
     public Optional<Supplier> findSupplierByProduct(ObservableList<Supplier> items, Product product) {

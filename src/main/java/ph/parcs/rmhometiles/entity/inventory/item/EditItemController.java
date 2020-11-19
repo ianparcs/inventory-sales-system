@@ -20,7 +20,7 @@ public abstract class EditItemController<T extends BaseEntity> {
     @FXML
     protected Label lblTitle;
 
-    protected BaseTableService<T> baseTableService;
+    protected BaseService<T> baseService;
 
     @FXML
     public void initialize() {
@@ -52,7 +52,7 @@ public abstract class EditItemController<T extends BaseEntity> {
 
         btnSave.setOnAction(actionEvent -> {
             closeDialog();
-            T savedItem = baseTableService.saveRowItem(unbindFields(item.getId()));
+            T savedItem = baseService.saveEntity(unbindFields(item.getId()));
             if (savedItem != null) {
                 itemListener.onSavedSuccess(savedItem);
             } else {

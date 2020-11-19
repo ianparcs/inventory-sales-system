@@ -16,12 +16,12 @@ public class StockUnit extends BaseEntity {
 
     private Set<Stock> stocks;
 
-    public void setStocks(Set<Stock> stocks) {
-        this.stocks = stocks;
-    }
-
     @OneToMany(mappedBy = "stockUnit")
     public Set<Stock> getStocks() {
         return stocks;
+    }
+
+    public void setStocks(Set<Stock> stocks) {
+        this.stocks = stocks;
     }
 }

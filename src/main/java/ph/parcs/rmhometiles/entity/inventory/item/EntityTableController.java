@@ -1,7 +1,10 @@
 package ph.parcs.rmhometiles.entity.inventory.item;
 
 import com.jfoenix.controls.JFXTextField;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -16,8 +19,10 @@ import ph.parcs.rmhometiles.ui.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.util.Global;
 import ph.parcs.rmhometiles.util.PageUtil;
 
+import java.util.concurrent.CountDownLatch;
+
 @Controller
-public abstract class ItemTableController<T extends BaseEntity> implements ItemActions<T> {
+public abstract class EntityTableController<T extends BaseEntity> implements EntityActions<T> {
 
     @FXML
     protected ComboBox<Integer> cbRowCount;
@@ -35,7 +40,7 @@ public abstract class ItemTableController<T extends BaseEntity> implements ItemA
     protected StackPane spMain;
 
     protected EditItemController<T> editItemController;
-    protected BaseTableService<T> baseTableService;
+    protected BaseService<T> baseService;
     protected String searchValue = "";
 
     protected SweetAlert deleteAlert;
@@ -60,22 +65,42 @@ public abstract class ItemTableController<T extends BaseEntity> implements ItemA
 
     private void initActionColumn() {
         tcAction.setCellFactory(ActionTableCell.forActions(
-                this::onItemDeleteAction, this::onItemEditAction));
+                this::onDeleteActionClick, this::onEditActionClick));
     }
 
     public void updateItems() {
-        Page<T> items = baseTableService.findPages(getCurrentPage(), getRowsPerPage(), searchValue);
-        updatePageEntries(items);
-        tvItem.setItems(FXCollections.observableArrayList(items.toList()));
-        tvItem.refresh();
+        Service<Void> service = new Service<>() {
+            @Override
+            protected Task<Void> createTask() {
+                return new Task<>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        Page<T> items = baseService.findPages(getCurrentPage(), getRowsPerPage(), searchValue);
+                        final CountDownLatch latch = new CountDownLatch(1);
+                        Platform.runLater(() -> {
+                            try {
+                                updatePageEntries(items);
+                                tvItem.setItems(FXCollections.observableArrayList(items.toList()));
+                                tvItem.refresh();
+                            } finally {
+                                latch.countDown();
+                            }
+                        });
+                        latch.await();
+                        return null;
+                    }
+                };
+            }
+        };
+        service.start();
     }
 
-    public T onItemDeleteAction(T item) {
+    public T onDeleteActionClick(T item) {
         StackPane root = (StackPane) tvItem.getScene().getRoot();
         deleteAlert.setHeaderMessage("Delete " + item.getClass().getSimpleName());
         deleteAlert.setContentMessage("Are you sure you want to delete " + item.getName() + "?");
         deleteAlert.setConfirmListener(() -> {
-            if (baseTableService.deleteRowItem(item)) {
+            if (baseService.deleteEntity(item)) {
                 successAlert.setContentMessage(Global.MSG.DELETE).show(root);
                 updateItems();
             }
@@ -84,7 +109,7 @@ public abstract class ItemTableController<T extends BaseEntity> implements ItemA
         return item;
     }
 
-    public T onItemEditAction(T editItem) {
+    public T onEditActionClick(T entity) {
         StackPane root = (StackPane) tvItem.getScene().getRoot();
 
         editItemController.showDialog(root);
@@ -96,11 +121,11 @@ public abstract class ItemTableController<T extends BaseEntity> implements ItemA
             }
 
             @Override
-            public void onSaveFailed(T savedItem) {
+            public void onSaveFailed(T entity) {
 
             }
-        }, editItem);
-        return editItem;
+        }, entity);
+        return entity;
     }
 
     private void updatePageEntries(Page<T> items) {
@@ -111,7 +136,7 @@ public abstract class ItemTableController<T extends BaseEntity> implements ItemA
 
     @FXML
     private void onPageRowChanged() {
-        Page<T> items = baseTableService.findPages(0, getRowsPerPage(), searchValue);
+        Page<T> items = baseService.findPages(0, getRowsPerPage(), searchValue);
         updatePageEntries(items);
         tvItem.setItems(FXCollections.observableArrayList(items.toList()));
         tvItem.refresh();
@@ -123,11 +148,11 @@ public abstract class ItemTableController<T extends BaseEntity> implements ItemA
         updateItems();
     }
 
-    protected int getCurrentPage() {
+    private int getCurrentPage() {
         return pagination.getCurrentPageIndex();
     }
 
-    protected int getRowsPerPage() {
+    private int getRowsPerPage() {
         return cbRowCount.getValue();
     }
 

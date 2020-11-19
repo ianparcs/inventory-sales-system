@@ -2,12 +2,12 @@ package ph.parcs.rmhometiles.entity.invoice.lineitems;
 
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-import ph.parcs.rmhometiles.entity.inventory.item.BaseTableService;
+import ph.parcs.rmhometiles.entity.inventory.item.BaseService;
 
 import java.util.Set;
 
 @Service
-public class InvoiceLineItemService extends BaseTableService<InvoiceLineItem> {
+public class InvoiceLineItemService extends BaseService<InvoiceLineItem> {
 
     @Override
     public Page<InvoiceLineItem> findPages(int page, int itemPerPage, String name) {
@@ -15,24 +15,20 @@ public class InvoiceLineItemService extends BaseTableService<InvoiceLineItem> {
     }
 
     @Override
-    public Set<InvoiceLineItem> findItems(String query) {
+    public Set<InvoiceLineItem> findEntities(String query) {
         return null;
     }
 
     @Override
-    public boolean deleteRowItem(InvoiceLineItem item) {
+    public boolean deleteEntity(InvoiceLineItem item) {
         return false;
     }
 
     @Override
-    public InvoiceLineItem saveRowItem(InvoiceLineItem item) {
+    public InvoiceLineItem saveEntity(InvoiceLineItem item) {
         return null;
     }
 
-    @Override
-    public boolean isNew(InvoiceLineItem item) {
-        return false;
-    }
 
     @Override
     public InvoiceLineItem createDefault() {

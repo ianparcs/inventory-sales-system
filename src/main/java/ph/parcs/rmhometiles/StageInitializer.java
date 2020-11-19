@@ -15,8 +15,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import ph.parcs.rmhometiles.ui.scene.SceneManager;
 
-import java.net.URISyntaxException;
-
 @Component
 public class StageInitializer implements ApplicationListener<JavaFxApplication.StageReadyEvent> {
 

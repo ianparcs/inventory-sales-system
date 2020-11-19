@@ -173,12 +173,12 @@ public class InvoiceController {
     }
 
     private void searchCustomer(String query) {
-        Set<Customer> customers = customerService.findItems(query);
+        Set<Customer> customers = customerService.findEntities(query);
         cbCustomer.getItems().setAll(FXCollections.observableArrayList(customers));
     }
 
     private void searchProduct(String query) {
-        Set<Product> products = productService.findItems(query);
+        Set<Product> products = productService.findEntities(query);
         cbProducts.getItems().setAll(FXCollections.observableArrayList(products));
     }
 
@@ -201,7 +201,7 @@ public class InvoiceController {
         InvoiceLineItem invoiceLineItem = new InvoiceLineItem();
         invoiceLineItem.setProduct(product);
         invoiceLineItem.setItemCode(product.getCodeProperty());
-     //   invoiceLineItem.setPrice(product.getPrice());
+        //   invoiceLineItem.setPrice(product.getPrice());
         invoiceLineItem.setQuantity((int) (Math.random() * (10 - 1)));
 
         invoiceLineItemList.add(invoiceLineItem);

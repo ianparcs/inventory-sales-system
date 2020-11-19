@@ -39,9 +39,10 @@ public class InvoiceLineItemEditController extends EditItemController<InvoiceLin
         Product product = lineItem.getProduct();
 
         if (!StringUtils.isEmpty(lineItem.getItemCode())) lblCodeName.setText(lineItem.getName());
-        if (!StringUtils.isEmpty(product.getDescriptionProperty())) lblDescription.setText(product.getDescriptionProperty());
+        if (!StringUtils.isEmpty(product.getDescriptionProperty()))
+            lblDescription.setText(product.getDescriptionProperty());
         if (!StringUtils.isEmpty(lineItem.getQuantity())) lblQuantity.setText(lineItem.getQuantity() + "");
-  ///      if (!StringUtils.isEmpty(product.getPrice())) lblPrice.setText(product.getPrice().toString());
+        ///      if (!StringUtils.isEmpty(product.getPrice())) lblPrice.setText(product.getPrice().toString());
 
 
         //   NumberBinding amountBinding = product.getPrice().multiply(Integer.parseInt(lblQuantity.getText()));
@@ -66,6 +67,6 @@ public class InvoiceLineItemEditController extends EditItemController<InvoiceLin
 
     @Autowired
     public void setLineItemService(InvoiceLineItemService invoiceLineItemService) {
-        this.baseTableService = invoiceLineItemService;
+        this.baseService = invoiceLineItemService;
     }
 }

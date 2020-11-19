@@ -1,6 +1,5 @@
 package ph.parcs.rmhometiles.entity.inventory.product;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.CacheHint;
 import javafx.scene.control.TableCell;
@@ -9,11 +8,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import lombok.SneakyThrows;
 import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.entity.inventory.category.Category;
-import ph.parcs.rmhometiles.entity.inventory.item.ItemTableController;
+import ph.parcs.rmhometiles.entity.inventory.item.EntityTableController;
 import ph.parcs.rmhometiles.entity.inventory.stock.Stock;
 import ph.parcs.rmhometiles.entity.supplier.Supplier;
 import ph.parcs.rmhometiles.file.ImageProduct;
@@ -26,8 +26,7 @@ import java.net.URL;
 
 
 @Controller
-public class ProductTableController extends ItemTableController<Product> {
-
+public class ProductTableController extends EntityTableController<Product> {
 
     @FXML
     private TableColumn<Product, Supplier> tcSupplier;
@@ -105,30 +104,18 @@ public class ProductTableController extends ItemTableController<Product> {
 
         tcImage.setCellFactory(tc -> {
             TableCell<Product, ImageProduct> cell = new TableCell<>() {
+                @SneakyThrows
                 @Override
                 protected void updateItem(ImageProduct productImage, boolean empty) {
                     if (productImage != null) {
-                        if (productImage.getPath().isEmpty()) return;
                         URL url = FileUtils.getResourcePath(productImage.getName());
-                        if (url != null) {
-                            new Thread(() -> {
-                                Image image = null;
-                                try {
-                                    Thread.sleep(1000);
-                                    image = new Image(url.toURI().toString());
-                                } catch (URISyntaxException | InterruptedException e) {
-                                    e.printStackTrace();
-                                } finally {
-                                    Image finalImage = image;
-                                    Platform.runLater(() -> {
-                                        productImage.setImage(finalImage);
-                                        ImageView imageView = createImageView(finalImage, 64, 64);
-                                        setUserData(productImage);
-                                        setGraphic(imageView);
-                                    });
-                                }
-                            }).start();
-                        }
+                        Image picture = new Image(url.toURI().toString(), true);
+                        ImageView imageView = createImageView(picture, 64, 64);
+                        setUserData(productImage);
+                        setGraphic(imageView);
+                    } else {
+                        setGraphic(null);
+                        setUserData(null);
                     }
                 }
             };
@@ -136,39 +123,42 @@ public class ProductTableController extends ItemTableController<Product> {
             cell.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
                 if (event.getClickCount() >= 1) {
                     ImageProduct imageProduct = (ImageProduct) cell.getUserData();
-                    if (imageProduct == null || imageProduct.getImage() == null) return;
-                    Image image = imageProduct.getImage();
-                    ImageView imageView = createImageView(image, 600, 400);
-                    sweetAlert.setHeaderMessage(imageProduct.getName());
-                    sweetAlert.setBody(imageView);
-                    sweetAlert.show(spMain);
+                    if (imageProduct == null) return;
+                    URL url = FileUtils.getResourcePath(imageProduct.getName());
+                    try {
+                        Image picture = new Image(url.toURI().toString(), true);
+                        ImageView imageView = createImageView(picture, 600, 400);
+                        sweetAlert.setHeaderMessage(imageProduct.getName());
+                        sweetAlert.setBody(imageView);
+                        sweetAlert.show(spMain);
+                    } catch (URISyntaxException e) {
+                        e.printStackTrace();
+                    }
+
                 }
             });
             return cell;
         });
-
-
     }
 
     private ImageView createImageView(Image image, int width, int height) {
         ImageView imageView = new ImageView(image);
-        imageView.setCache(true);
         imageView.setCacheHint(CacheHint.SPEED);
+        imageView.setCache(true);
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
-        imageView.setPreserveRatio(true);
         return imageView;
     }
 
     @FXML
     private void showEditItemDialog() {
-        onItemEditAction(new Product());
+        onEditActionClick(new Product());
         editItemController.showDialog((StackPane) tvItem.getScene().getRoot());
     }
 
     @Autowired
     public void setProductService(ProductService productService) {
-        this.baseTableService = productService;
+        this.baseService = productService;
     }
 
 }

@@ -3,43 +3,29 @@ package ph.parcs.rmhometiles.entity.inventory.category;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import ph.parcs.rmhometiles.entity.inventory.item.BaseTableService;
+import ph.parcs.rmhometiles.entity.inventory.item.BaseService;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.inventory.product.ProductRepository;
-import ph.parcs.rmhometiles.util.PageUtil;
 
 import java.util.*;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
-public class CategoryService extends BaseTableService<Category> {
+public class CategoryService extends BaseService<Category> {
 
     private CategoryRepository categoryRepository;
     private ProductRepository productRepository;
 
     public ObservableList<Category> getCategories() {
         List<Category> categoryList = categoryRepository.findAll();
-     //   categoryList.add(0, createDefault());
         return FXCollections.observableArrayList(Objects.requireNonNullElseGet(categoryList, ArrayList::new));
     }
 
     @Override
-    public Page<Category> findPages(int page, int itemPerPage, String name) {
-        PageRequest pageRequest = PageUtil.requestPage(page, itemPerPage);
-        return categoryRepository.findAllByNameContains(pageRequest, name);
-    }
-
-    public Set<Category> findItems(String query) {
-        return categoryRepository.findCategoriesByNameContains(query);
-    }
-
-    @Override
-    public boolean deleteRowItem(Category category) {
+    public boolean deleteEntity(Category category) {
         Category clearProd = removeProductsOfCategory(category);
         categoryRepository.delete(clearProd);
         Optional<Category> search = categoryRepository.findById(category.getId());
@@ -57,21 +43,11 @@ public class CategoryService extends BaseTableService<Category> {
         return category;
     }
 
-    @Override
-    public Category saveRowItem(Category item) {
-        return categoryRepository.save(item);
-    }
-
     public Category createDefault() {
         Category category = new Category();
         category.setName("");
         category.setId(0);
         return category;
-    }
-
-    @Override
-    public boolean isNew(Category item) {
-        return categoryRepository.findById(item.getId()).isEmpty();
     }
 
     public Optional<Category> findCategoryByProduct(ObservableList<Category> items, Product product) {
@@ -85,12 +61,13 @@ public class CategoryService extends BaseTableService<Category> {
     }
 
     @Autowired
-    public void setProductRepository(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public void setCategoryRepository(CategoryRepository categoryRepository) {
+        this.entityRepository = categoryRepository;
+        this.categoryRepository = (CategoryRepository) entityRepository;
     }
 
     @Autowired
-    public void setCategoryRepository(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
+    public void setProductRepository(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 }

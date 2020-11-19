@@ -34,7 +34,7 @@ public class CategoryEditController extends EditItemController<Category> {
 
     @Autowired
     public void setCategoryService(CategoryService categoryService) {
-        this.baseTableService = categoryService;
+        this.baseService = categoryService;
     }
 
 }

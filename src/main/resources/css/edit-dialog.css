@@ -1,5 +1,4 @@
 .jfx-button {
-    -fx-padding: 0.55em 1.5em;
     -jfx-button-type: FLAT;
     -fx-border-radius: 5pt;
     -fx-background-radius: 5pt;
@@ -8,13 +7,13 @@
 }
 
 .button-save {
-    -fx-pref-width: 100px;
+    -fx-pref-width: 80px;
     -fx-background-color: primary;
     -fx-text-fill: white;
 }
 
 .button-cancel {
-    -fx-pref-width: 100px;
+    -fx-pref-width: 90px;
     -fx-background-color: WHITE;
     -fx-border-color: primary;
 }

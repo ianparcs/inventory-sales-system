@@ -8,7 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import ph.parcs.rmhometiles.entity.inventory.item.BaseTableService;
+import ph.parcs.rmhometiles.entity.inventory.item.BaseService;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.util.PageUtil;
 
@@ -16,13 +16,13 @@ import java.util.*;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
-public class StockUnitService extends BaseTableService<StockUnit> {
+public class StockUnitService extends BaseService<StockUnit> {
 
     private StockUnitRepository stockUnitRepository;
 
     public ObservableList<StockUnit> getStockUnits() {
         List<StockUnit> stockUnits = stockUnitRepository.findAll();
-     //   stockUnits.add(0, createDefault());
+        //   stockUnits.add(0, createDefault());
         return FXCollections.observableArrayList(Objects.requireNonNullElseGet(stockUnits, ArrayList::new));
     }
 
@@ -33,7 +33,7 @@ public class StockUnitService extends BaseTableService<StockUnit> {
     }
 
     @Override
-    public Set<StockUnit> findItems(String query) {
+    public Set<StockUnit> findEntities(String query) {
         return stockUnitRepository.findStockUnitByNameContains(query);
     }
 
@@ -48,14 +48,14 @@ public class StockUnitService extends BaseTableService<StockUnit> {
     }
 
     @Override
-    public boolean deleteRowItem(StockUnit stockUnit) {
+    public boolean deleteEntity(StockUnit stockUnit) {
         stockUnitRepository.delete(stockUnit);
         Optional<StockUnit> search = stockUnitRepository.findById(stockUnit.getId());
         return search.isEmpty();
     }
 
     @Override
-    public StockUnit saveRowItem(StockUnit stockUnit) {
+    public StockUnit saveEntity(StockUnit stockUnit) {
         return stockUnitRepository.save(stockUnit);
     }
 
@@ -66,10 +66,6 @@ public class StockUnitService extends BaseTableService<StockUnit> {
         return stockUnit;
     }
 
-    @Override
-    public boolean isNew(StockUnit stockUnit) {
-        return stockUnitRepository.findById(stockUnit.getId()).isEmpty();
-    }
 
     @Autowired
     public void setCategoryRepository(StockUnitRepository stockUnitRepository) {

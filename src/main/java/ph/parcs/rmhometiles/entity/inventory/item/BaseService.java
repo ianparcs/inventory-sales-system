@@ -36,7 +36,7 @@ public abstract class BaseService<T extends BaseEntity> implements BaseServiceIn
     @Override
     public boolean deleteEntity(T entity) {
         entityRepository.delete(entity);
-        return isExist(entity.getId());
+        return !isExist(entity.getId());
     }
 
     @Override

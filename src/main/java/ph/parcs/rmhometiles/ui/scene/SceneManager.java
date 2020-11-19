@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import ph.parcs.rmhometiles.StageInitializer;
 import ph.parcs.rmhometiles.State;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 

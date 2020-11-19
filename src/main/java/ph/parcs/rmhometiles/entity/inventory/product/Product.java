@@ -58,13 +58,13 @@ public class Product extends BaseEntity {
         this.supplier = supplier;
     }
 
-    void setStock(Stock stock) {
-        this.stock = stock;
-    }
-
     @OneToOne(cascade = CascadeType.ALL)
     public Stock getStock() {
         return stock;
+    }
+
+    void setStock(Stock stock) {
+        this.stock = stock;
     }
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -90,19 +90,19 @@ public class Product extends BaseEntity {
         this.codeProperty.set(codeProperty);
     }
 
-    void setPrice(Money price) {
-        this.price = price;
-    }
-
     public Money getPrice() {
         return price;
     }
 
-    void setCost(Money cost) {
-        this.cost = cost;
+    void setPrice(Money price) {
+        this.price = price;
     }
 
     public Money getCost() {
         return cost;
+    }
+
+    void setCost(Money cost) {
+        this.cost = cost;
     }
 }

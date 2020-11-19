@@ -13,12 +13,12 @@ public class Customer extends Person {
 
     private Set<Orders> orders;
 
-    public void setOrders(Set<Orders> orders) {
-        this.orders = orders;
-    }
-
     @OneToMany(mappedBy = "customer")
     public Set<Orders> getOrders() {
         return orders;
+    }
+
+    public void setOrders(Set<Orders> orders) {
+        this.orders = orders;
     }
 }

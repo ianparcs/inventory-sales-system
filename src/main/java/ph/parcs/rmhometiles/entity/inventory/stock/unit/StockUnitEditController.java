@@ -39,8 +39,8 @@ public class StockUnitEditController extends EditItemController<StockUnit> {
     }
 
     @Autowired
-    public void setCategoryService(StockUnitService stockUnitService) {
-        this.baseTableService = stockUnitService;
+    public void setStockUnitService(StockUnitService stockUnitService) {
+        this.baseService = stockUnitService;
     }
 
 }

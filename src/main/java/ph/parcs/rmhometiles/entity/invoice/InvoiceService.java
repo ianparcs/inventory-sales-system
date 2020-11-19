@@ -8,7 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import ph.parcs.rmhometiles.entity.inventory.item.BaseTableService;
+import ph.parcs.rmhometiles.entity.inventory.item.BaseService;
 import ph.parcs.rmhometiles.util.PageUtil;
 
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import java.util.Set;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
-public class InvoiceService extends BaseTableService<Invoice> {
+public class InvoiceService extends BaseService<Invoice> {
 
     private InvoiceRepository invoiceRepository;
 
@@ -35,17 +35,17 @@ public class InvoiceService extends BaseTableService<Invoice> {
     }
 
     @Override
-    public Set<Invoice> findItems(String query) {
+    public Set<Invoice> findEntities(String query) {
         return invoiceRepository.findInvoiceByNameContains(query);
     }
 
     @Override
-    public boolean deleteRowItem(Invoice invoice) {
+    public boolean deleteEntity(Invoice invoice) {
         return true;
     }
 
     @Override
-    public Invoice saveRowItem(Invoice invoice) {
+    public Invoice saveEntity(Invoice invoice) {
         return invoiceRepository.save(invoice);
     }
 
@@ -54,11 +54,6 @@ public class InvoiceService extends BaseTableService<Invoice> {
         invoice.setName("");
         invoice.setId(0);
         return invoice;
-    }
-
-    @Override
-    public boolean isNew(Invoice invoice) {
-        return invoiceRepository.findById(invoice.getId()).isEmpty();
     }
 
     @Autowired

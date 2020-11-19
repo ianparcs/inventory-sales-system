@@ -15,10 +15,6 @@ public class Stock {
 
     private StockUnit stockUnit;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "stock_id")
@@ -26,28 +22,32 @@ public class Stock {
         return id;
     }
 
-    public void setStocks(Integer stocks) {
-        this.stocks = stocks;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getStocks() {
         return stocks;
     }
 
-    public void setUnitSold(Integer unitSold) {
-        this.unitSold = unitSold;
+    public void setStocks(Integer stocks) {
+        this.stocks = stocks;
     }
 
     public Integer getUnitSold() {
         return unitSold;
     }
 
-    public void setStockUnit(StockUnit stockUnit) {
-        this.stockUnit = stockUnit;
+    public void setUnitSold(Integer unitSold) {
+        this.unitSold = unitSold;
     }
 
     @ManyToOne
     public StockUnit getStockUnit() {
         return stockUnit;
+    }
+
+    public void setStockUnit(StockUnit stockUnit) {
+        this.stockUnit = stockUnit;
     }
 }

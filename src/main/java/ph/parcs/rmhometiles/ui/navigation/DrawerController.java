@@ -8,8 +8,6 @@ import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.State;
 import ph.parcs.rmhometiles.ui.scene.SceneManager;
 
-import java.io.IOException;
-
 @Controller
 public class DrawerController {
 

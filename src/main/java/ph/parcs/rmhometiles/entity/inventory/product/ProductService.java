@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import ph.parcs.rmhometiles.entity.inventory.item.BaseTableService;
+import ph.parcs.rmhometiles.entity.inventory.item.BaseService;
 import ph.parcs.rmhometiles.file.FileService;
 import ph.parcs.rmhometiles.file.ImageProduct;
 import ph.parcs.rmhometiles.util.FileUtils;
@@ -16,10 +16,11 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
-public class ProductService extends BaseTableService<Product> {
+public class ProductService extends BaseService<Product> {
 
     private ProductRepository productRepository;
     private FileService fileService;
+
 
     @Override
     public Page<Product> findPages(int page, int itemPerPage, String name) {
@@ -27,12 +28,12 @@ public class ProductService extends BaseTableService<Product> {
         return productRepository.findAllByCodePropertyContains(pageRequest, name);
     }
 
-    public Set<Product> findItems(String query) {
+    public Set<Product> findEntities(String query) {
         return productRepository.findAllByCodePropertyContains(query);
     }
 
     @Override
-    public boolean deleteRowItem(Product product) {
+    public boolean deleteEntity(Product product) {
         ImageProduct imageProduct = product.getImageProduct();
         if (imageProduct != null && !StringUtils.isEmpty(imageProduct.getPath())) {
             fileService.deleteFile(imageProduct.getName());
@@ -44,9 +45,10 @@ public class ProductService extends BaseTableService<Product> {
         return productOptional.isEmpty();
     }
 
+
     @Override
     @SneakyThrows
-    public Product saveRowItem(Product product) {
+    public Product saveEntity(Product product) {
         ImageProduct imageProduct = product.getImageProduct();
         if (imageProduct != null && !StringUtils.isEmpty(imageProduct.getPath())) {
             saveFile(imageProduct);
@@ -63,18 +65,8 @@ public class ProductService extends BaseTableService<Product> {
     }
 
     @Override
-    public boolean isNew(Product item) {
-        return productRepository.findById(item.getId()).isEmpty();
-    }
-
-    @Override
     public Product createDefault() {
         return new Product();
-    }
-
-    @Autowired
-    public void setProductRepository(ProductRepository productRepository) {
-        this.productRepository = productRepository;
     }
 
     @Autowired
@@ -82,4 +74,9 @@ public class ProductService extends BaseTableService<Product> {
         this.fileService = fileService;
     }
 
+    @Autowired
+    public void setItemRepository(ProductRepository productRepository) {
+        this.entityRepository = productRepository;
+        this.productRepository = (ProductRepository) entityRepository;
+    }
 }

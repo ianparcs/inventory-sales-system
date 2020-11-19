@@ -1,9 +1,11 @@
 package ph.parcs.rmhometiles.ui.navigation;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.State;
@@ -59,8 +61,20 @@ public class NavigationController {
             }
         }
         states.forEach((key, value) -> value.setOnAction(actionEvent -> {
-            Parent content = sceneManager.getContent(key);
-            homeController.setContent(content);
+            new Thread(new Runnable() {
+                @Override
+                @SneakyThrows
+                public void run() {
+                    Thread.sleep(500);
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            Parent content = sceneManager.getContent(key);
+                            homeController.setContent(content);
+                        }
+                    });
+                }
+            }).start();
         }));
 
     }

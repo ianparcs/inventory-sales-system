@@ -5,9 +5,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
+import java.util.Set;
+
 @NoRepositoryBean
-public interface ItemRepository<T extends BaseEntity, ID> extends PagingAndSortingRepository<T, ID> {
+public interface EntityRepository<T extends BaseEntity, ID> extends PagingAndSortingRepository<T, ID> {
 
     Page<T> findAllByNameContains(Pageable pageable, String name);
+
+    Set<T> findAllByNameContains(String name);
+
 
 }

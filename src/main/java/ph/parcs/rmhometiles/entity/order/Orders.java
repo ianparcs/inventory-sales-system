@@ -13,10 +13,6 @@ public class Orders {
     protected IntegerProperty id = new SimpleIntegerProperty();
     private Customer customer;
 
-    public void setId(int id) {
-        this.id.set(id);
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "orders_id")
@@ -24,13 +20,17 @@ public class Orders {
         return id.get();
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setId(int id) {
+        this.id.set(id);
     }
 
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
     public Customer getCustomer() {
         return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

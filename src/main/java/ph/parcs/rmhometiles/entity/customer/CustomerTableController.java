@@ -4,11 +4,11 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import ph.parcs.rmhometiles.entity.inventory.item.ItemTableController;
+import ph.parcs.rmhometiles.entity.inventory.item.EntityTableController;
 
 
 @Controller
-public class CustomerTableController extends ItemTableController<Customer> {
+public class CustomerTableController extends EntityTableController<Customer> {
 
     public void initialize() {
         super.initialize();
@@ -25,12 +25,12 @@ public class CustomerTableController extends ItemTableController<Customer> {
 
     @FXML
     private void showEditItemDialog() {
-        onItemEditAction(new Customer());
+        onEditActionClick(new Customer());
         editItemController.showDialog((StackPane) tvItem.getScene().getRoot());
     }
 
     @Autowired
     public void setCustomerService(CustomerService customerService) {
-        this.baseTableService = customerService;
+        this.baseService = customerService;
     }
 }

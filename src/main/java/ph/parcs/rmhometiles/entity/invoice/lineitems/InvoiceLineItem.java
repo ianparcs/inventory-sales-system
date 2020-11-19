@@ -34,19 +34,14 @@ public class InvoiceLineItem extends BaseEntity {
         this.id.set(id);
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     public Product getProduct() {
         return product;
     }
 
-    public void setAmount(Money amount) {
-        this.amount = amount;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Column(name = "amount")
@@ -55,8 +50,8 @@ public class InvoiceLineItem extends BaseEntity {
         return amount;
     }
 
-    public void setPrice(Money price) {
-        this.price = price;
+    public void setAmount(Money amount) {
+        this.amount = amount;
     }
 
     @Type(type = Global.JADIRA_PACKAGE)
@@ -64,8 +59,8 @@ public class InvoiceLineItem extends BaseEntity {
         return price;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity.set(quantity);
+    public void setPrice(Money price) {
+        this.price = price;
     }
 
     @Column(name = "quantity")
@@ -73,20 +68,24 @@ public class InvoiceLineItem extends BaseEntity {
         return quantity.get();
     }
 
-    public void setStock(int stock) {
-        this.stock.set(stock);
+    public void setQuantity(int quantity) {
+        this.quantity.set(quantity);
     }
 
     public int getStock() {
         return stock.get();
     }
 
-    public void setItemCode(String itemCode) {
-        this.itemCode.set(itemCode);
+    public void setStock(int stock) {
+        this.stock.set(stock);
     }
 
     public String getItemCode() {
         return itemCode.get();
+    }
+
+    public void setItemCode(String itemCode) {
+        this.itemCode.set(itemCode);
     }
 
 }

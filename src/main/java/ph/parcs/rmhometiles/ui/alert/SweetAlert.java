@@ -6,10 +6,12 @@ import com.jfoenix.controls.JFXDialogLayout;
 import de.jensd.fx.glyphs.GlyphsStack;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.geometry.Pos;
+import javafx.scene.CacheHint;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import ph.parcs.rmhometiles.util.Global;
 
 public class SweetAlert {
@@ -37,7 +39,7 @@ public class SweetAlert {
         lblMessage = new Label();
         lblHeader = new Label();
 
-        VBox headerContainer = new VBox();
+        HBox headerContainer = new HBox(15);
         headerContainer.getChildren().add(icons);
         headerContainer.getChildren().add(lblHeader);
         headerContainer.setAlignment(Pos.CENTER);
@@ -48,6 +50,8 @@ public class SweetAlert {
 
         dialog = new JFXDialog();
         dialog.setContent(content);
+        dialog.setCache(true);
+        dialog.setCacheHint(CacheHint.SPEED);
     }
 
     public SweetAlert show(StackPane root) {
@@ -85,7 +89,7 @@ public class SweetAlert {
         return this;
     }
 
-    public SweetAlert setConfirmButton(String text) {
+    SweetAlert setConfirmButton(String text) {
         btnRemove = new JFXButton();
         btnRemove.setText(text);
         btnRemove.getStyleClass().add("button-confirm");
@@ -93,7 +97,7 @@ public class SweetAlert {
         return this;
     }
 
-    public SweetAlert setCancelButton(String text) {
+    SweetAlert setCancelButton(String text) {
         JFXButton btnCancel = new JFXButton();
         btnCancel.setText(text);
         btnCancel.getStyleClass().add("button-cancel");
@@ -102,8 +106,8 @@ public class SweetAlert {
         return this;
     }
 
-    public void setBody(ImageView image) {
-        content.setBody(image);
+    public void setBody(Node node) {
+        content.setBody(node);
     }
 
     public enum Type {
