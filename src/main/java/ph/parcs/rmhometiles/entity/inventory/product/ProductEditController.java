@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.CacheHint;
 import javafx.stage.FileChooser;
 import javafx.util.StringConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +76,8 @@ public class ProductEditController extends EditItemController<Product> {
         validateNumberField(tfCost);
 
         initComboBoxValues();
+        editDialog.setCache(true);
+        editDialog.setCacheHint(CacheHint.SPEED);
     }
 
     private void initComboBoxValues() {
@@ -222,9 +225,9 @@ public class ProductEditController extends EditItemController<Product> {
     }
 
     @Override
-    public void onEditItem(ItemListener<Product> itemListener, Product item) {
-        setDialogTitle(item);
-        bindFields(item);
+    public void onEditItem(ItemListener<Product> itemListener, Product product) {
+        setDialogTitle(product);
+        bindFields(product);
 
         btnSave.setOnAction(a -> {
             Service<Void> service = new Service<>() {
@@ -233,16 +236,10 @@ public class ProductEditController extends EditItemController<Product> {
                     return new Task<>() {
                         @Override
                         protected Void call() throws Exception {
-                            String path = tfImage.getText();
-                            if (!path.isEmpty() && item.getImageProduct() != null) {
-                                String fileName = FileUtils.getFileName(path);
-                                String currentFile = item.getImageProduct().getName();
-                                if ((!StringUtils.isEmpty(currentFile) && !currentFile.equals(fileName))) {
-                                    fileService.deleteFile(item.getImageProduct().getName());
-                                }
-                            }
-                            Product savedItem = baseService.saveEntity(unbindFields(item.getId()));
-                            final CountDownLatch latch = new CountDownLatch(1);
+                            deleteFile(product);
+
+                            Product savedItem = baseService.saveEntity(unbindFields(product.getId()));
+                            CountDownLatch latch = new CountDownLatch(1);
 
                             Platform.runLater(() -> {
                                 closeDialog();
@@ -262,6 +259,17 @@ public class ProductEditController extends EditItemController<Product> {
             service.start();
         });
 
+    }
+
+    private void deleteFile(Product product) {
+        String path = tfImage.getText();
+        if (!path.isEmpty() && product.getImageProduct() != null) {
+            String fileName = FileUtils.getFileName(path);
+            String currentFile = product.getImageProduct().getName();
+            if ((!StringUtils.isEmpty(currentFile) && !currentFile.equals(fileName))) {
+                fileService.deleteFile(product.getImageProduct().getName());
+            }
+        }
     }
 
     @FXML

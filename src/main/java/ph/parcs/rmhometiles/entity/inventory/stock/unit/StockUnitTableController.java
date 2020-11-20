@@ -16,7 +16,7 @@ public class StockUnitTableController extends EntityTableController<StockUnit> {
     }
 
     @Autowired
-    public void setCategoryService(StockUnitService stockUnitService) {
+    public void setStockUnitService(StockUnitService stockUnitService) {
         this.baseService = stockUnitService;
     }
 }

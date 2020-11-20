@@ -69,19 +69,20 @@ public abstract class EntityTableController<T extends BaseEntity> implements Ent
     }
 
     public void updateItems() {
-        Service<Void> service = new Service<>() {
+        Page<T> items = baseService.findPages(getCurrentPage(), getRowsPerPage(), searchValue);
+        tvItem.setItems(FXCollections.observableArrayList(items.toList()));
+        tvItem.refresh();
+        updatePageEntries(items);
+     /*   Service<Void> service = new Service<>() {
             @Override
             protected Task<Void> createTask() {
                 return new Task<>() {
                     @Override
                     protected Void call() throws Exception {
-                        Page<T> items = baseService.findPages(getCurrentPage(), getRowsPerPage(), searchValue);
+
                         final CountDownLatch latch = new CountDownLatch(1);
                         Platform.runLater(() -> {
                             try {
-                                updatePageEntries(items);
-                                tvItem.setItems(FXCollections.observableArrayList(items.toList()));
-                                tvItem.refresh();
                             } finally {
                                 latch.countDown();
                             }
@@ -92,7 +93,7 @@ public abstract class EntityTableController<T extends BaseEntity> implements Ent
                 };
             }
         };
-        service.start();
+        service.start();*/
     }
 
     public T onDeleteActionClick(T item) {

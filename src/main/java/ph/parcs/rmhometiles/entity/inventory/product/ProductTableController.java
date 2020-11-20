@@ -143,8 +143,8 @@ public class ProductTableController extends EntityTableController<Product> {
 
     private ImageView createImageView(Image image, int width, int height) {
         ImageView imageView = new ImageView(image);
-        imageView.setCacheHint(CacheHint.SPEED);
         imageView.setCache(true);
+        imageView.setCacheHint(CacheHint.SPEED);
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
         return imageView;
@@ -160,5 +160,4 @@ public class ProductTableController extends EntityTableController<Product> {
     public void setProductService(ProductService productService) {
         this.baseService = productService;
     }
-
 }

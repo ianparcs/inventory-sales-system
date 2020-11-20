@@ -1,6 +1,7 @@
 package ph.parcs.rmhometiles.entity.inventory;
 
 import com.jfoenix.controls.JFXTabPane;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ public class InventoryController {
             else if (newTab.equals(tabCategory)) categoryTableController.updateItems();
             else if (newTab.equals(tabProduct)) productTableController.updateItems();
         });
+        tpRoot.setDisableAnimation(true);
     }
 
     @Autowired
@@ -48,4 +50,5 @@ public class InventoryController {
     public void setStockUnitTableController(StockUnitTableController stockUnitTableController) {
         this.stockUnitTableController = stockUnitTableController;
     }
+
 }

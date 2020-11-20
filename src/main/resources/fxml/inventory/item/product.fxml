@@ -61,7 +61,7 @@
         </HBox>
 
         <TableView fx:id="tvItem" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS"
-                   GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+                   GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" cache="true" cacheHint="SPEED">
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
             </columnResizePolicy>

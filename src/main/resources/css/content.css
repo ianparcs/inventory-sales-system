@@ -30,7 +30,7 @@ TableView .column-header.action-column > .label {
 }
 
 TableView .table-row-cell:selected, .table-row-cell:hover {
-    -fx-background-color: #EFEFEF;
+    -fx-background-color: gray-light;
     -fx-table-cell-border-color: transparent;
 }
 

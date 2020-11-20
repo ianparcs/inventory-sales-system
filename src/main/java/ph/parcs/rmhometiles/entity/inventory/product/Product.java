@@ -58,7 +58,7 @@ public class Product extends BaseEntity {
         this.supplier = supplier;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     public Stock getStock() {
         return stock;
     }
