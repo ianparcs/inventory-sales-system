@@ -58,17 +58,17 @@ public class ProductTableController extends EntityTableController<Product> {
         initTableColumnValue();
         sweetAlert = SweetAlertFactory.create(SweetAlert.Type.INFO);
 
-        tcCode.setMaxWidth(1f * Integer.MAX_VALUE * 10); // 50% width
-        tcName.setMaxWidth(1f * Integer.MAX_VALUE * 10); // 50% width
-        tcDescription.setMaxWidth(1f * Integer.MAX_VALUE * 10); // 50% width
-        tcSupplier.setMaxWidth(1f * Integer.MAX_VALUE * 8); // 50% width
-        tcCategory.setMaxWidth(1f * Integer.MAX_VALUE * 8); // 50% width
-        tcStock.setMaxWidth(1f * Integer.MAX_VALUE * 5); // 50% width
-        tcUnitSold.setMaxWidth(1f * Integer.MAX_VALUE * 5); // 50% width
-        tcPrice.setMaxWidth(1f * Integer.MAX_VALUE * 7); // 50% width
-        tcCost.setMaxWidth(1f * Integer.MAX_VALUE * 7); // 50% width
-        tcImage.setMaxWidth(1f * Integer.MAX_VALUE * 5); // 50% width
-        tcAction.setMaxWidth(1f * Integer.MAX_VALUE * 5); // 50% width
+        tcCode.setMaxWidth(1f * Integer.MAX_VALUE * 10);
+        tcName.setMaxWidth(1f * Integer.MAX_VALUE * 10);
+        tcDescription.setMaxWidth(1f * Integer.MAX_VALUE * 10);
+        tcSupplier.setMaxWidth(1f * Integer.MAX_VALUE * 8);
+        tcCategory.setMaxWidth(1f * Integer.MAX_VALUE * 8);
+        tcStock.setMaxWidth(1f * Integer.MAX_VALUE * 5);
+        tcUnitSold.setMaxWidth(1f * Integer.MAX_VALUE * 5);
+        tcPrice.setMaxWidth(1f * Integer.MAX_VALUE * 7);
+        tcCost.setMaxWidth(1f * Integer.MAX_VALUE * 7);
+        tcImage.setMaxWidth(1f * Integer.MAX_VALUE * 5);
+        tcAction.setMaxWidth(1f * Integer.MAX_VALUE * 5);
     }
 
     private void initTableColumnValue() {
