@@ -3,7 +3,6 @@ package ph.parcs.rmhometiles.entity.invoice;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,7 +34,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 public class InvoiceController {
@@ -106,14 +104,14 @@ public class InvoiceController {
 
     private void configureCustomerCombobox() {
         setComboboxConverter(cbCustomer);
-        cbCustomer.getEditor().textProperty().addListener((observable, oldVal, newVal) -> Platform.runLater(() -> {
+        cbCustomer.getEditor().textProperty().addListener((observable, oldVal, newVal) -> {
             if (!StringUtils.isEmpty(newVal) && !isCustomerAdded) {
                 cbCustomer.show();
                 searchCustomer(newVal);
             }
-        }));
+        });
 
-        cbCustomer.focusedProperty().addListener((observableValue, outOfFocus, focus) -> Platform.runLater(() -> {
+        cbCustomer.focusedProperty().addListener((observableValue, outOfFocus, focus) -> {
             String editorTxt = cbCustomer.getEditor().getText();
             if (focus) {
                 isCustomerAdded = false;
@@ -127,7 +125,7 @@ public class InvoiceController {
                     clearFields();
                 }
             }
-        }));
+        });
     }
 
     private void configureProductCombobox() {
@@ -173,12 +171,12 @@ public class InvoiceController {
     }
 
     private void searchCustomer(String query) {
-        Set<Customer> customers = customerService.findEntities(query);
+        List<Customer> customers = customerService.findEntities(query);
         cbCustomer.getItems().setAll(FXCollections.observableArrayList(customers));
     }
 
     private void searchProduct(String query) {
-        Set<Product> products = productService.findEntities(query);
+        List<Product> products = productService.findEntities(query);
         cbProducts.getItems().setAll(FXCollections.observableArrayList(products));
     }
 

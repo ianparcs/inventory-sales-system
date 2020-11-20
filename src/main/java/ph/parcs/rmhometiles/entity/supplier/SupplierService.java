@@ -13,7 +13,10 @@ import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.inventory.product.ProductRepository;
 import ph.parcs.rmhometiles.util.PageUtil;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
@@ -24,7 +27,6 @@ public class SupplierService extends BaseService<Supplier> {
 
     public ObservableList<Supplier> getSuppliers() {
         List<Supplier> suppliers = supplierRepository.findAll();
-        // suppliers.add(0, createDefault());
         return FXCollections.observableArrayList(Objects.requireNonNullElseGet(suppliers, ArrayList::new));
     }
 
@@ -35,7 +37,7 @@ public class SupplierService extends BaseService<Supplier> {
     }
 
     @Override
-    public Set<Supplier> findEntities(String query) {
+    public List<Supplier> findEntities(String query) {
         return supplierRepository.findSupplierByNameContains(query);
     }
 
@@ -48,7 +50,7 @@ public class SupplierService extends BaseService<Supplier> {
     }
 
     private Supplier removeProductsOfSupplier(Supplier supplier) {
-        Set<Product> productSet = productRepository.findProductsBySupplier(supplier);
+        List<Product> productSet = productRepository.findProductsBySupplier(supplier);
         if (productSet != null) {
             for (Product product : productSet) {
                 product.setSupplier(null);

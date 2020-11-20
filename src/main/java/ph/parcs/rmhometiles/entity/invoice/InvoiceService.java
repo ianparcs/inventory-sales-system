@@ -14,7 +14,6 @@ import ph.parcs.rmhometiles.util.PageUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
@@ -35,7 +34,7 @@ public class InvoiceService extends BaseService<Invoice> {
     }
 
     @Override
-    public Set<Invoice> findEntities(String query) {
+    public List<Invoice> findEntities(String query) {
         return invoiceRepository.findInvoiceByNameContains(query);
     }
 

@@ -4,7 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseService;
 
-import java.util.Set;
+import java.util.List;
 
 @Service
 public class InvoiceLineItemService extends BaseService<InvoiceLineItem> {
@@ -15,7 +15,7 @@ public class InvoiceLineItemService extends BaseService<InvoiceLineItem> {
     }
 
     @Override
-    public Set<InvoiceLineItem> findEntities(String query) {
+    public List<InvoiceLineItem> findEntities(String query) {
         return null;
     }
 

@@ -12,8 +12,8 @@ import ph.parcs.rmhometiles.file.ImageProduct;
 import ph.parcs.rmhometiles.util.FileUtils;
 import ph.parcs.rmhometiles.util.PageUtil;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class ProductService extends BaseService<Product> {
@@ -28,7 +28,7 @@ public class ProductService extends BaseService<Product> {
         return productRepository.findAllByCodePropertyContains(pageRequest, name);
     }
 
-    public Set<Product> findEntities(String query) {
+    public List<Product> findEntities(String query) {
         return productRepository.findAllByCodePropertyContains(query);
     }
 

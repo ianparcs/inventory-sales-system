@@ -6,10 +6,8 @@ import com.jfoenix.controls.JFXDialogLayout;
 import de.jensd.fx.glyphs.GlyphsStack;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.geometry.Pos;
-import javafx.scene.CacheHint;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import ph.parcs.rmhometiles.util.Global;
@@ -50,8 +48,6 @@ public class SweetAlert {
 
         dialog = new JFXDialog();
         dialog.setContent(content);
-        dialog.setCache(true);
-        dialog.setCacheHint(CacheHint.SPEED);
     }
 
     public SweetAlert show(StackPane root) {

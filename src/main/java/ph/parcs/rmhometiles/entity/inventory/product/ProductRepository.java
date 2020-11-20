@@ -7,16 +7,16 @@ import ph.parcs.rmhometiles.entity.inventory.category.Category;
 import ph.parcs.rmhometiles.entity.inventory.item.EntityRepository;
 import ph.parcs.rmhometiles.entity.supplier.Supplier;
 
-import java.util.Set;
+import java.util.List;
 
 @Repository
 public interface ProductRepository extends EntityRepository<Product, Integer> {
 
-    Set<Product> findProductsByCategory(Category category);
+    List<Product> findProductsByCategory(Category category);
 
-    Set<Product> findProductsBySupplier(Supplier supplier);
+    List<Product> findProductsBySupplier(Supplier supplier);
 
-    Set<Product> findAllByCodePropertyContains(String code);
+    List<Product> findAllByCodePropertyContains(String code);
 
     Page<Product> findAllByCodePropertyContains(Pageable pageable, String name);
 

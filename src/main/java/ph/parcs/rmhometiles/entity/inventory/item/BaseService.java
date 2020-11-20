@@ -5,7 +5,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ph.parcs.rmhometiles.util.PageUtil;
 
-import java.util.Set;
+import java.util.List;
 
 @Service
 public abstract class BaseService<T extends BaseEntity> implements BaseServiceInterface<T, Integer> {
@@ -24,7 +24,7 @@ public abstract class BaseService<T extends BaseEntity> implements BaseServiceIn
     }
 
     @Override
-    public Set<T> findEntities(String query) {
+    public List<T> findEntities(String query) {
         return entityRepository.findAllByNameContains(query);
     }
 

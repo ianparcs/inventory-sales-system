@@ -1,10 +1,7 @@
 package ph.parcs.rmhometiles.entity.inventory.item;
 
 import com.jfoenix.controls.JFXTextField;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
-import javafx.concurrent.Service;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -18,8 +15,6 @@ import ph.parcs.rmhometiles.ui.alert.SweetAlert;
 import ph.parcs.rmhometiles.ui.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.util.Global;
 import ph.parcs.rmhometiles.util.PageUtil;
-
-import java.util.concurrent.CountDownLatch;
 
 @Controller
 public abstract class EntityTableController<T extends BaseEntity> implements EntityActions<T> {
@@ -73,27 +68,6 @@ public abstract class EntityTableController<T extends BaseEntity> implements Ent
         tvItem.setItems(FXCollections.observableArrayList(items.toList()));
         tvItem.refresh();
         updatePageEntries(items);
-     /*   Service<Void> service = new Service<>() {
-            @Override
-            protected Task<Void> createTask() {
-                return new Task<>() {
-                    @Override
-                    protected Void call() throws Exception {
-
-                        final CountDownLatch latch = new CountDownLatch(1);
-                        Platform.runLater(() -> {
-                            try {
-                            } finally {
-                                latch.countDown();
-                            }
-                        });
-                        latch.await();
-                        return null;
-                    }
-                };
-            }
-        };
-        service.start();*/
     }
 
     public T onDeleteActionClick(T item) {

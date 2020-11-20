@@ -10,7 +10,10 @@ import ph.parcs.rmhometiles.entity.inventory.item.BaseService;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.inventory.product.ProductRepository;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
@@ -33,7 +36,7 @@ public class CategoryService extends BaseService<Category> {
     }
 
     private Category removeProductsOfCategory(Category category) {
-        Set<Product> productSet = productRepository.findProductsByCategory(category);
+        List<Product> productSet = productRepository.findProductsByCategory(category);
         if (productSet != null) {
             for (Product product : productSet) {
                 product.setCategory(null);
