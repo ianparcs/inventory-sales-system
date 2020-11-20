@@ -1,7 +1,6 @@
 package ph.parcs.rmhometiles.ui.home;
 
 import javafx.fxml.FXML;
-import javafx.scene.CacheHint;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
 import org.springframework.stereotype.Controller;

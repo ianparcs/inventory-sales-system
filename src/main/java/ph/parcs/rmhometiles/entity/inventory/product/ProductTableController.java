@@ -28,6 +28,9 @@ import java.net.URL;
 @Controller
 public class ProductTableController extends EntityTableController<Product> {
 
+
+    @FXML
+    private TableColumn<Product, String> tcDescription;
     @FXML
     private TableColumn<Product, Supplier> tcSupplier;
     @FXML
@@ -42,6 +45,10 @@ public class ProductTableController extends EntityTableController<Product> {
     private TableColumn<Product, Money> tcCost;
     @FXML
     private TableColumn<Product, ImageProduct> tcImage;
+    @FXML
+    private TableColumn<Product, String> tcCode;
+    @FXML
+    private TableColumn<Product, String> tcName;
 
     private SweetAlert sweetAlert;
 
@@ -50,15 +57,29 @@ public class ProductTableController extends EntityTableController<Product> {
         super.initialize();
         initTableColumnValue();
         sweetAlert = SweetAlertFactory.create(SweetAlert.Type.INFO);
+
+        tcCode.setMaxWidth(1f * Integer.MAX_VALUE * 10); // 50% width
+        tcName.setMaxWidth(1f * Integer.MAX_VALUE * 10); // 50% width
+        tcDescription.setMaxWidth(1f * Integer.MAX_VALUE * 10); // 50% width
+        tcSupplier.setMaxWidth(1f * Integer.MAX_VALUE * 8); // 50% width
+        tcCategory.setMaxWidth(1f * Integer.MAX_VALUE * 8); // 50% width
+        tcStock.setMaxWidth(1f * Integer.MAX_VALUE * 5); // 50% width
+        tcUnitSold.setMaxWidth(1f * Integer.MAX_VALUE * 5); // 50% width
+        tcPrice.setMaxWidth(1f * Integer.MAX_VALUE * 7); // 50% width
+        tcCost.setMaxWidth(1f * Integer.MAX_VALUE * 7); // 50% width
+        tcImage.setMaxWidth(1f * Integer.MAX_VALUE * 5); // 50% width
+        tcAction.setMaxWidth(1f * Integer.MAX_VALUE * 5); // 50% width
     }
 
     private void initTableColumnValue() {
+
         tcSupplier.setCellFactory(param -> new TableCell<>() {
             @Override
             public void updateItem(Supplier supplier, boolean empty) {
                 if (!empty) setText((supplier != null) ? supplier.getName() : "n/a");
             }
         });
+
         tcCategory.setCellFactory(param -> new TableCell<>() {
             @Override
             public void updateItem(Category category, boolean empty) {
@@ -110,7 +131,7 @@ public class ProductTableController extends EntityTableController<Product> {
                     if (productImage != null) {
                         URL url = FileUtils.getResourcePath(productImage.getName());
                         Image picture = new Image(url.toURI().toString(), true);
-                        ImageView imageView = createImageView(picture, 64, 64);
+                        ImageView imageView = createImageView(picture, 48, 48);
                         setUserData(productImage);
                         setGraphic(imageView);
                     } else {

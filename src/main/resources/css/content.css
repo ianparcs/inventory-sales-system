@@ -9,21 +9,15 @@ TableView {
 }
 
 TableView .column-header, .column-header .label {
-    -fx-background-color: white;
     -fx-alignment: center-left;
-    -fx-border-width: 0 0 1.5 0;
-    -fx-border-color: greysquash;
     -fx-padding: 4px;
 }
 
 TableView .table-cell {
     -fx-alignment: center-left;
-    -fx-padding: 3px 10px 3px 10px;
 }
 
-TableView .id-column,
 TableView .action-column,
-TableView .column-header.id-column > .label,
 TableView .column-header.action-column > .label {
     -fx-alignment: center;
     -fx-max-width: Infinity;
