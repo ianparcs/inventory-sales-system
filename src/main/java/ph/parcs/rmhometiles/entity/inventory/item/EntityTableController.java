@@ -20,7 +20,7 @@ import ph.parcs.rmhometiles.util.PageUtil;
 public abstract class EntityTableController<T extends BaseEntity> implements EntityActions<T> {
 
     @FXML
-    protected ComboBox<Integer> cbRowCount;
+    protected ComboBox<String> cbRowCount;
     @FXML
     protected TableColumn<T, HBox> tcAction;
     @FXML
@@ -36,10 +36,10 @@ public abstract class EntityTableController<T extends BaseEntity> implements Ent
 
     protected EditItemController<T> editItemController;
     protected BaseService<T> baseService;
-    protected String searchValue = "";
+    private String searchValue = "";
 
-    protected SweetAlert deleteAlert;
-    protected SweetAlert successAlert;
+    private SweetAlert deleteAlert;
+    private SweetAlert successAlert;
 
     @FXML
     protected void initialize() {
@@ -68,6 +68,11 @@ public abstract class EntityTableController<T extends BaseEntity> implements Ent
         tvItem.setItems(FXCollections.observableArrayList(items.toList()));
         tvItem.refresh();
         updatePageEntries(items);
+    }
+
+    @FXML
+    private void onPageRowChanged() {
+       updateItems();
     }
 
     public T onDeleteActionClick(T item) {
@@ -109,13 +114,6 @@ public abstract class EntityTableController<T extends BaseEntity> implements Ent
         pagination.setPageCount(items.getTotalPages());
     }
 
-    @FXML
-    private void onPageRowChanged() {
-        Page<T> items = baseService.findPages(0, getRowsPerPage(), searchValue);
-        updatePageEntries(items);
-        tvItem.setItems(FXCollections.observableArrayList(items.toList()));
-        tvItem.refresh();
-    }
 
     @FXML
     private void searchItem() {
@@ -128,7 +126,8 @@ public abstract class EntityTableController<T extends BaseEntity> implements Ent
     }
 
     private int getRowsPerPage() {
-        return cbRowCount.getValue();
+        if (cbRowCount.getValue().equalsIgnoreCase("all")) return Integer.MAX_VALUE;
+        return Integer.parseInt(cbRowCount.getValue());
     }
 
     @Autowired
