@@ -10,7 +10,7 @@ TableView {
 
 TableView .column-header, .column-header .label {
     -fx-alignment: center-left;
-    -fx-padding: 5px;
+    -fx-padding: 0px 5px 0px 5px;
 }
 
 TableView .table-cell {

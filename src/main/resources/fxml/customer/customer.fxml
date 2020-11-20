@@ -46,15 +46,16 @@
             <JFXComboBox fx:id="cbRowCount" onAction="#onPageRowChanged">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <Integer fx:value="5"/>
-                        <Integer fx:value="10"/>
-                        <Integer fx:value="15"/>
-                        <Integer fx:value="20"/>
-                        <Integer fx:value="30"/>
+                        <String fx:value="5"/>
+                        <String fx:value="10"/>
+                        <String fx:value="15"/>
+                        <String fx:value="20"/>
+                        <String fx:value="30"/>
+                        <String fx:value="All"/>
                     </FXCollections>
                 </items>
                 <value>
-                    <Integer fx:value="5"/>
+                    <String fx:value="5"/>
                 </value>
             </JFXComboBox>
             <Label text="entries"/>
