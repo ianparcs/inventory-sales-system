@@ -16,8 +16,8 @@ public interface ProductRepository extends EntityRepository<Product, Integer> {
 
     List<Product> findProductsBySupplier(Supplier supplier);
 
-    List<Product> findAllByCodePropertyContains(String code);
+    List<Product> findAllByCodeContains(String code);
 
-    Page<Product> findAllByCodePropertyContains(Pageable pageable, String name);
+    Page<Product> findAllByCodeContains(Pageable pageable, String name);
 
 }

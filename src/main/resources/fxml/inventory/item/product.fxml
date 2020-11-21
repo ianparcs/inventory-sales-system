@@ -70,7 +70,7 @@
 
                 <TableColumn fx:id="tcCode" reorderable="false" text="Code">
                     <cellValueFactory>
-                        <PropertyValueFactory property="codeProperty"/>
+                        <PropertyValueFactory property="code"/>
                     </cellValueFactory>
                 </TableColumn>
 
@@ -82,7 +82,7 @@
 
                 <TableColumn fx:id="tcDescription" reorderable="false" text="Description">
                     <cellValueFactory>
-                        <PropertyValueFactory property="descriptionProperty"/>
+                        <PropertyValueFactory property="description"/>
                     </cellValueFactory>
                 </TableColumn>
 
@@ -108,22 +108,9 @@
                         <PropertyValueFactory property="stock"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="tcCost" reorderable="false" text="Cost" styleClass="action-column">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="cost"/>
-                    </cellValueFactory>
-                </TableColumn>
-                <TableColumn fx:id="tcPrice" reorderable="false" text="Price" styleClass="action-column">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="price"/>
-                    </cellValueFactory>
-                </TableColumn>
-                <TableColumn fx:id="tcImage" reorderable="false" sortable="false" styleClass="action-column"
-                             text="Image">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="imageProduct"/>
-                    </cellValueFactory>
-                </TableColumn>
+                <TableColumn fx:id="tcCost" reorderable="false" text="Cost" styleClass="action-column"/>
+                <TableColumn fx:id="tcPrice" reorderable="false" text="Price" styleClass="action-column"/>
+                <TableColumn fx:id="tcImage" reorderable="false" sortable="false" styleClass="action-column" text="Image"/>
 
                 <TableColumn fx:id="tcAction" reorderable="false"
                              sortable="false" styleClass="action-column" text="Action"/>

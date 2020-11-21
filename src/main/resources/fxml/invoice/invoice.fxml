@@ -2,14 +2,13 @@
 
 <?import com.jfoenix.controls.*?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain" stylesheets="@../../css/invoice.css"
            xmlns="http://javafx.com/javafx/10.0.2-internal"
            fx:controller="ph.parcs.rmhometiles.entity.invoice.InvoiceController">
 
-    <fx:include source="edit-lineitem.fxml"/>
     <fx:include source="../customer/edit-customer.fxml"/>
     <GridPane hgap="12.0" styleClass="background" vgap="7.0">
         <columnConstraints>
@@ -50,22 +49,11 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
             </columnResizePolicy>
             <columns>
-                <TableColumn fx:id="tcCode" reorderable="false" text="Code">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="Code"/>
-                    </cellValueFactory>
-                </TableColumn>
-                <TableColumn fx:id="tcStock" styleClass="action-column" reorderable="false" text="Stock">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="stock"/>
-                    </cellValueFactory>
-                </TableColumn>
-                <TableColumn fx:id="tcPrice" styleClass="action-column" reorderable="false" text="Price">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="price"/>
-                    </cellValueFactory>
-                </TableColumn>
-                <TableColumn fx:id="tcQty" styleClass="action-column" reorderable="false" text="Qty.">
+                <TableColumn fx:id="tcCode" reorderable="false" text="Code"/>
+                <TableColumn fx:id="tcStock" styleClass="action-column" reorderable="false" text="Stock"/>
+                <TableColumn fx:id="tcPrice" styleClass="action-column" reorderable="false" text="Price"/>
+                <TableColumn fx:id="tcQty" styleClass="action-column" reorderable="false" text="Qty."
+                             onEditCommit="#changeQuantity">
                     <cellValueFactory>
                         <PropertyValueFactory property="quantity"/>
                     </cellValueFactory>

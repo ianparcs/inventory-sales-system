@@ -74,6 +74,12 @@ public class ProductTableController extends EntityTableController<Product> {
         tcStock.setComparator(Comparator.comparingInt(Stock::getStocks));
         tcUnitSold.setComparator(Comparator.comparingInt(Stock::getUnitSold));
 
+
+        Product product = new Product();
+        product.setCode("test");
+        product.setName("Test");
+        baseService.saveEntity(product);
+
     }
 
     private void initTableColumnValue() {

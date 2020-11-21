@@ -143,10 +143,10 @@ public class ProductEditController extends EditItemController<Product> {
     protected void bindFields(Product product) {
         if (baseService.isExist(product.getId())) {
             tfName.setText(product.getName());
-            tfCode.setText(product.getCodeProperty());
+            tfCode.setText(product.getCode());
             tfCost.setText(product.getCost().getAmount().toString());
             tfPrice.setText(product.getPrice().getAmount().toString());
-            tfDescription.setText(product.getDescriptionProperty());
+            tfDescription.setText(product.getDescription());
             tfStock.setText(product.getStock().getStocks().toString());
             tfUnitSold.setText(product.getStock().getUnitSold().toString());
 
@@ -175,8 +175,8 @@ public class ProductEditController extends EditItemController<Product> {
 
         product.setPrice(MoneyConverter.convert(tfPrice.getText()));
         product.setCost(MoneyConverter.convert(tfCost.getText()));
-        product.setDescriptionProperty(tfDescription.getText());
-        product.setCodeProperty(tfCode.getText());
+        product.setDescription(tfDescription.getText());
+        product.setCode(tfCode.getText());
         product.setName(tfName.getText());
         product.setStock(stock);
         product.setId(id);

@@ -4,14 +4,18 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.util.StringConverter;
+import javafx.util.converter.IntegerStringConverter;
+import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -24,8 +28,6 @@ import ph.parcs.rmhometiles.entity.inventory.item.EditItemController;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.inventory.product.ProductService;
 import ph.parcs.rmhometiles.entity.invoice.lineitems.InvoiceLineItem;
-import ph.parcs.rmhometiles.entity.invoice.lineitems.InvoiceLineItemEditController;
-import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.ui.alert.SweetAlert;
 import ph.parcs.rmhometiles.ui.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.util.Global;
@@ -37,7 +39,16 @@ import java.util.List;
 @Controller
 public class InvoiceController {
 
-    public TableColumn<InvoiceLineItem, Integer> tcQty;
+    @FXML
+    private TableColumn<InvoiceLineItem, Integer> tcStock;
+    @FXML
+    private TableColumn<InvoiceLineItem, Integer> tcQty;
+    @FXML
+    private TableColumn<InvoiceLineItem, String> tcCode;
+    @FXML
+    private TableColumn<InvoiceLineItem, Money> tcPrice;
+    @FXML
+    private TableColumn<InvoiceLineItem, Money> tcTotal;
     @FXML
     private JFXComboBox<BaseEntity> cbCustomer;
     @FXML
@@ -62,12 +73,10 @@ public class InvoiceController {
     private TableColumn<InvoiceLineItem, HBox> tcAction;
 
     private EditItemController<Customer> customerEditController;
-    private EditItemController<InvoiceLineItem> lineItemEditController;
 
     private CustomerService customerService;
     private ProductService productService;
     private SweetAlert successAlert;
-    private boolean isCustomerAdded;
 
     @FXML
     public void initialize() {
@@ -77,7 +86,12 @@ public class InvoiceController {
         initDate();
 
         tvInvoice.setEditable(true);
-        tcAction.setCellFactory(ActionTableCell.forActions(this::onItemDeleteAction, this::onItemEditAction));
+        // tcAction.setCellFactory(ActionTableCell.forActions(this::onItemDeleteAction));
+        tcQty.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        tcCode.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "code"));
+        tcPrice.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "price"));
+        tcStock.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "stock", "stocks"));
+
     }
 
     private void initDate() {
@@ -123,7 +137,7 @@ public class InvoiceController {
             public String toString(BaseEntity baseEntity) {
                 Product product = (Product) baseEntity;
                 if (baseEntity == null) return Global.STRING_EMPTY;
-                return product.getCodeProperty();
+                return product.getCode();
             }
 
             @Override
@@ -131,7 +145,6 @@ public class InvoiceController {
                 return (Product) cbProducts.getValue();
             }
         });
-
 
         cbProducts.getEditor().textProperty().addListener((observable, oldVal, keyTyped) -> {
             List<Product> products = productService.findEntities(keyTyped);
@@ -179,12 +192,8 @@ public class InvoiceController {
     private void addInvoiceLineItem() {
         Product product = (Product) cbProducts.getValue();
         if (product == null) return;
-        InvoiceLineItem invoiceLineItem = new InvoiceLineItem();
-        invoiceLineItem.setProduct(product);
-        invoiceLineItem.setCode(product.getCodeProperty());
-        //   invoiceLineItem.setPrice(product.getPrice());
-        invoiceLineItem.setQuantity((int) (Math.random() * (10 - 1)));
-
+        InvoiceLineItem invoiceLineItem = new InvoiceLineItem(product);
+        invoiceLineItem.setQuantity(0);
         tvInvoice.getItems().add(invoiceLineItem);
 
         Platform.runLater(() -> {
@@ -195,24 +204,13 @@ public class InvoiceController {
         });
     }
 
-    private InvoiceLineItem onItemEditAction(InvoiceLineItem item) {
-        lineItemEditController.showDialog((StackPane) tvInvoice.getScene().getRoot());
-        lineItemEditController.onEditItem(new ItemListener<>() {
-            @Override
-            public void onSavedSuccess(InvoiceLineItem entity) {
-
-            }
-
-            @Override
-            public void onSaveFailed(InvoiceLineItem savedItem) {
-
-            }
-        }, item);
-        return item;
+    @FXML
+    public void changeQuantity(TableColumn.CellEditEvent<InvoiceLineItem, Integer> event) {
+        event.getTableView().getItems().get(event.getTablePosition().getRow()).setQuantity(event.getNewValue());
     }
 
     private InvoiceLineItem onItemDeleteAction(InvoiceLineItem s) {
-        return new InvoiceLineItem();
+        return s;
     }
 
     @FXML
@@ -237,7 +235,6 @@ public class InvoiceController {
                     lblAddress.setText(StringUtils.isEmpty(customer.getAddress()) ? "n/a" : customer.getAddress());
                     lblContact.setText(StringUtils.isEmpty(customer.getContact()) ? "n/a" : customer.getContact());
                 }
-                isCustomerAdded = true;
                 successAlert.setContentMessage(Global.MSG.SAVED).show(spMain);
                 cbCustomer.hide();
             }
@@ -253,11 +250,6 @@ public class InvoiceController {
     @Autowired
     public void setCustomerEditController(CustomerEditController customerEditController) {
         this.customerEditController = customerEditController;
-    }
-
-    @Autowired
-    public void setLineItemEditController(InvoiceLineItemEditController lineItemEditController) {
-        this.lineItemEditController = lineItemEditController;
     }
 
     @Autowired

@@ -1,6 +1,9 @@
 package ph.parcs.rmhometiles.entity.invoice.lineitems;
 
-import javafx.beans.property.*;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import org.hibernate.annotations.Type;
 import org.joda.money.Money;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
@@ -15,16 +18,10 @@ public class InvoiceLineItem extends BaseEntity {
 
     private ObjectProperty<Product> product = new SimpleObjectProperty<>();
     private ObjectProperty<Money> amount = new SimpleObjectProperty<>();
-    private ObjectProperty<Money> price = new SimpleObjectProperty<>();
     private IntegerProperty quantity = new SimpleIntegerProperty();
-    private IntegerProperty stock = new SimpleIntegerProperty();
-    private StringProperty code = new SimpleStringProperty();
-    private IntegerProperty id = new SimpleIntegerProperty();
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId() {
-        return id.get();
+    public InvoiceLineItem(Product product) {
+        this.product.set(product);
     }
 
     public void setId(Integer id) {
@@ -42,22 +39,13 @@ public class InvoiceLineItem extends BaseEntity {
     }
 
     @Column(name = "amount")
-    @Type(type = Global.JADIRA_PACKAGE)
+    @Type(type = Global.JADIRA_PACKAGE, parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "PHP")})
     public Money getAmount() {
         return amount.get();
     }
 
     public void setAmount(Money amount) {
         this.amount.set(amount);
-    }
-
-    @Type(type = Global.JADIRA_PACKAGE)
-    public Money getPrice() {
-        return price.get();
-    }
-
-    public void setPrice(Money price) {
-        this.price.set(price);
     }
 
     @Column(name = "quantity")
@@ -69,20 +57,14 @@ public class InvoiceLineItem extends BaseEntity {
         this.quantity.set(quantity);
     }
 
-    public int getStock() {
-        return stock.get();
+    @Transient
+    public IntegerProperty quantityProperty() {
+        return quantity;
     }
 
-    public void setStock(int stock) {
-        this.stock.set(stock);
-    }
-
-    public String getCode() {
-        return code.get();
-    }
-
-    public void setCode(String code) {
-        this.code.set(code);
+    @Transient
+    public ObjectProperty<Product> productProperty() {
+        return product;
     }
 
 }

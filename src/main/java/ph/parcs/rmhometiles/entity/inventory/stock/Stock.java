@@ -1,5 +1,7 @@
 package ph.parcs.rmhometiles.entity.inventory.stock;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import ph.parcs.rmhometiles.entity.inventory.stock.unit.StockUnit;
 
 import javax.persistence.*;
@@ -9,9 +11,9 @@ import javax.persistence.*;
 @Access(AccessType.PROPERTY)
 public class Stock {
 
+    private IntegerProperty stocks = new SimpleIntegerProperty();
+    private IntegerProperty unitSold = new SimpleIntegerProperty();
     private Integer id;
-    private Integer stocks;
-    private Integer unitSold;
 
     private StockUnit stockUnit;
 
@@ -27,19 +29,19 @@ public class Stock {
     }
 
     public Integer getStocks() {
-        return stocks;
+        return stocks.get();
     }
 
     public void setStocks(Integer stocks) {
-        this.stocks = stocks;
+        this.stocks.set(stocks);
     }
 
     public Integer getUnitSold() {
-        return unitSold;
+        return unitSold.get();
     }
 
     public void setUnitSold(Integer unitSold) {
-        this.unitSold = unitSold;
+        this.unitSold.set(unitSold);
     }
 
     @ManyToOne
@@ -50,4 +52,6 @@ public class Stock {
     public void setStockUnit(StockUnit stockUnit) {
         this.stockUnit = stockUnit;
     }
+
+
 }

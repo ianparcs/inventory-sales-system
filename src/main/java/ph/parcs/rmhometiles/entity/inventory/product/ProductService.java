@@ -25,11 +25,11 @@ public class ProductService extends BaseService<Product> {
     @Override
     public Page<Product> findPages(int page, int itemPerPage, String name) {
         PageRequest pageRequest = PageUtil.requestPage(page, itemPerPage);
-        return productRepository.findAllByCodePropertyContains(pageRequest, name);
+        return productRepository.findAllByCodeContains(pageRequest, name);
     }
 
     public List<Product> findEntities(String query) {
-        return productRepository.findAllByCodePropertyContains(query);
+        return productRepository.findAllByCodeContains(query);
     }
 
     @Override
