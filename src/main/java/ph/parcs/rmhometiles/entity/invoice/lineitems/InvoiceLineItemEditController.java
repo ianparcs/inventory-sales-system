@@ -38,7 +38,7 @@ public class InvoiceLineItemEditController extends EditItemController<InvoiceLin
         if (lineItem.getProduct() == null) return;
         Product product = lineItem.getProduct();
 
-        if (!StringUtils.isEmpty(lineItem.getItemCode())) lblCodeName.setText(lineItem.getName());
+        if (!StringUtils.isEmpty(lineItem.getCode())) lblCodeName.setText(lineItem.getName());
         if (!StringUtils.isEmpty(product.getDescriptionProperty()))
             lblDescription.setText(product.getDescriptionProperty());
         if (!StringUtils.isEmpty(lineItem.getQuantity())) lblQuantity.setText(lineItem.getQuantity() + "");

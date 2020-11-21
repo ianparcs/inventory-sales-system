@@ -3,8 +3,8 @@ package ph.parcs.rmhometiles.entity.invoice;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -32,7 +32,6 @@ import ph.parcs.rmhometiles.util.Global;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -42,7 +41,7 @@ public class InvoiceController {
     @FXML
     private JFXComboBox<BaseEntity> cbCustomer;
     @FXML
-    private JFXComboBox<Product> cbProducts;
+    private JFXComboBox<BaseEntity> cbProducts;
     @FXML
     private TableView<InvoiceLineItem> tvInvoice;
     @FXML
@@ -70,16 +69,12 @@ public class InvoiceController {
     private SweetAlert successAlert;
     private boolean isCustomerAdded;
 
-    private List<InvoiceLineItem> invoiceLineItemList;
-
     @FXML
     public void initialize() {
         successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
         configureCustomerCombobox();
         configureProductCombobox();
         initDate();
-
-        invoiceLineItemList = new ArrayList<>();
 
         tvInvoice.setEditable(true);
         tcAction.setCellFactory(ActionTableCell.forActions(this::onItemDeleteAction, this::onItemEditAction));
@@ -104,26 +99,20 @@ public class InvoiceController {
 
     private void configureCustomerCombobox() {
         setComboboxConverter(cbCustomer);
-        cbCustomer.getEditor().textProperty().addListener((observable, oldVal, newVal) -> {
-            if (!StringUtils.isEmpty(newVal) && !isCustomerAdded) {
-                cbCustomer.show();
-                searchCustomer(newVal);
-            }
+
+        cbCustomer.getEditor().textProperty().addListener((observable, oldVal, keyTyped) -> {
+            List<Customer> customers = customerService.findEntities(keyTyped);
+            cbCustomer.show();
+            Platform.runLater(() -> cbCustomer.getItems().setAll(FXCollections.observableArrayList(customers)));
         });
 
         cbCustomer.focusedProperty().addListener((observableValue, outOfFocus, focus) -> {
-            String editorTxt = cbCustomer.getEditor().getText();
             if (focus) {
-                isCustomerAdded = false;
-                if (editorTxt.isEmpty()) {
-                    searchCustomer(Global.STRING_EMPTY);
-                }
-            }
-            if (outOfFocus) {
-                Customer customer = (Customer) cbCustomer.getValue();
-                if (customer == null) {
-                    clearFields();
-                }
+                List<Customer> customers = customerService.findEntities(Global.STRING_EMPTY);
+                cbCustomer.show();
+                Platform.runLater(() -> {
+                    cbCustomer.getItems().setAll(FXCollections.observableArrayList(customers));
+                });
             }
         });
     }
@@ -131,26 +120,30 @@ public class InvoiceController {
     private void configureProductCombobox() {
         cbProducts.setConverter(new StringConverter<>() {
             @Override
-            public String toString(Product baseEntity) {
+            public String toString(BaseEntity baseEntity) {
+                Product product = (Product) baseEntity;
                 if (baseEntity == null) return Global.STRING_EMPTY;
-                return baseEntity.getCodeProperty();
+                return product.getCodeProperty();
             }
 
             @Override
             public Product fromString(String s) {
-                return cbProducts.getValue();
+                return (Product) cbProducts.getValue();
             }
         });
 
+
         cbProducts.getEditor().textProperty().addListener((observable, oldVal, keyTyped) -> {
+            List<Product> products = productService.findEntities(keyTyped);
             cbProducts.show();
-            searchProduct(keyTyped);
+            Platform.runLater(() -> cbProducts.getItems().setAll(FXCollections.observableArrayList(products)));
         });
 
         cbProducts.focusedProperty().addListener((observableValue, outOfFocus, focus) -> {
-            String editorTxt = cbCustomer.getEditor().getText();
-            if (focus && editorTxt.isEmpty()) {
-                searchCustomer(Global.STRING_EMPTY);
+            if (focus) {
+                List<Product> products = productService.findEntities(Global.STRING_EMPTY);
+                cbProducts.show();
+                Platform.runLater(() -> cbProducts.getItems().setAll(FXCollections.observableArrayList(products)));
             }
         });
     }
@@ -170,16 +163,6 @@ public class InvoiceController {
         });
     }
 
-    private void searchCustomer(String query) {
-        List<Customer> customers = customerService.findEntities(query);
-        cbCustomer.getItems().setAll(FXCollections.observableArrayList(customers));
-    }
-
-    private void searchProduct(String query) {
-        List<Product> products = productService.findEntities(query);
-        cbProducts.getItems().setAll(FXCollections.observableArrayList(products));
-    }
-
     @FXML
     private void fillUpCustomerDetails() {
         Customer customer = (Customer) cbCustomer.getValue();
@@ -193,20 +176,23 @@ public class InvoiceController {
     }
 
     @FXML
-    private void addProductToInvoice() {
-        Product product = cbProducts.getValue();
+    private void addInvoiceLineItem() {
+        Product product = (Product) cbProducts.getValue();
         if (product == null) return;
         InvoiceLineItem invoiceLineItem = new InvoiceLineItem();
         invoiceLineItem.setProduct(product);
-        invoiceLineItem.setItemCode(product.getCodeProperty());
+        invoiceLineItem.setCode(product.getCodeProperty());
         //   invoiceLineItem.setPrice(product.getPrice());
         invoiceLineItem.setQuantity((int) (Math.random() * (10 - 1)));
 
-        invoiceLineItemList.add(invoiceLineItem);
         tvInvoice.getItems().add(invoiceLineItem);
-        tvInvoice.refresh();
 
-        cbProducts.getSelectionModel().clearSelection();
+        Platform.runLater(() -> {
+            cbProducts.valueProperty().set(null);
+            cbProducts.hide();
+            spMain.requestFocus();
+            tvInvoice.refresh();
+        });
     }
 
     private InvoiceLineItem onItemEditAction(InvoiceLineItem item) {
@@ -227,12 +213,6 @@ public class InvoiceController {
 
     private InvoiceLineItem onItemDeleteAction(InvoiceLineItem s) {
         return new InvoiceLineItem();
-
-    }
-
-    public void test(ActionEvent actionEvent) {
-        invoiceLineItemList.get(0).setQuantity(42);
-        tvInvoice.refresh();
     }
 
     @FXML
@@ -259,6 +239,7 @@ public class InvoiceController {
                 }
                 isCustomerAdded = true;
                 successAlert.setContentMessage(Global.MSG.SAVED).show(spMain);
+                cbCustomer.hide();
             }
 
             @Override

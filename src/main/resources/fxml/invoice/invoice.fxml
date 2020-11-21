@@ -39,7 +39,7 @@
             </JFXButton>
 
             <JFXComboBox fx:id="cbProducts" editable="true" labelFloat="true" maxHeight="1.7976931348623157E308"
-                         maxWidth="1.7976931348623157E308" promptText="Search Item" onAction="#addProductToInvoice"
+                         maxWidth="1.7976931348623157E308" promptText="Search Item" onAction="#addInvoiceLineItem"
                          styleClass="search-field" HBox.hgrow="ALWAYS"/>
         </HBox>
 
@@ -50,27 +50,27 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
             </columnResizePolicy>
             <columns>
-                <TableColumn fx:id="tcCode" reorderable="false" text="ITEM CODE">
+                <TableColumn fx:id="tcCode" reorderable="false" text="Code">
                     <cellValueFactory>
-                        <PropertyValueFactory property="itemCode"/>
+                        <PropertyValueFactory property="Code"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="tcStock" reorderable="false" text="STOCK">
+                <TableColumn fx:id="tcStock" styleClass="action-column" reorderable="false" text="Stock">
                     <cellValueFactory>
                         <PropertyValueFactory property="stock"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="tcPrice" reorderable="false" text="PRICE">
+                <TableColumn fx:id="tcPrice" styleClass="action-column" reorderable="false" text="Price">
                     <cellValueFactory>
                         <PropertyValueFactory property="price"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="tcQty" reorderable="false" text="QTY">
+                <TableColumn fx:id="tcQty" styleClass="action-column" reorderable="false" text="Qty.">
                     <cellValueFactory>
                         <PropertyValueFactory property="quantity"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="tcTotal" reorderable="false" text="AMOUNT">
+                <TableColumn fx:id="tcTotal" styleClass="action-column" reorderable="false" text="amount">
                     <cellValueFactory>
                         <PropertyValueFactory property="amount"/>
                     </cellValueFactory>
@@ -151,11 +151,6 @@
 
         </GridPane>
 
-
-        <JFXButton fx:id="btnTest" text="Test" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                   onAction="#test" styleClass="primary-button" visible="false"
-                   GridPane.columnIndex="1" GridPane.rowIndex="4"
-        />
     </GridPane>
 
 </StackPane>

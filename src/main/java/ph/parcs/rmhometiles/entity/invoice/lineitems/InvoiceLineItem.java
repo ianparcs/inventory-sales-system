@@ -13,16 +13,13 @@ import javax.persistence.*;
 @Access(AccessType.PROPERTY)
 public class InvoiceLineItem extends BaseEntity {
 
-    private FloatProperty amountProperty = new SimpleFloatProperty();
-    private FloatProperty priceProperty = new SimpleFloatProperty();
+    private ObjectProperty<Product> product = new SimpleObjectProperty<>();
+    private ObjectProperty<Money> amount = new SimpleObjectProperty<>();
+    private ObjectProperty<Money> price = new SimpleObjectProperty<>();
     private IntegerProperty quantity = new SimpleIntegerProperty();
-    private StringProperty itemCode = new SimpleStringProperty();
     private IntegerProperty stock = new SimpleIntegerProperty();
+    private StringProperty code = new SimpleStringProperty();
     private IntegerProperty id = new SimpleIntegerProperty();
-
-    private Product product;
-    private Money amount;
-    private Money price;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,30 +34,30 @@ public class InvoiceLineItem extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     public Product getProduct() {
-        return product;
+        return product.get();
     }
 
     public void setProduct(Product product) {
-        this.product = product;
+        this.product.set(product);
     }
 
     @Column(name = "amount")
     @Type(type = Global.JADIRA_PACKAGE)
     public Money getAmount() {
-        return amount;
+        return amount.get();
     }
 
     public void setAmount(Money amount) {
-        this.amount = amount;
+        this.amount.set(amount);
     }
 
     @Type(type = Global.JADIRA_PACKAGE)
     public Money getPrice() {
-        return price;
+        return price.get();
     }
 
     public void setPrice(Money price) {
-        this.price = price;
+        this.price.set(price);
     }
 
     @Column(name = "quantity")
@@ -80,12 +77,12 @@ public class InvoiceLineItem extends BaseEntity {
         this.stock.set(stock);
     }
 
-    public String getItemCode() {
-        return itemCode.get();
+    public String getCode() {
+        return code.get();
     }
 
-    public void setItemCode(String itemCode) {
-        this.itemCode.set(itemCode);
+    public void setCode(String code) {
+        this.code.set(code);
     }
 
 }

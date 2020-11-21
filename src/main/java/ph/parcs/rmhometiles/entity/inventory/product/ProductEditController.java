@@ -7,7 +7,6 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.scene.CacheHint;
 import javafx.stage.FileChooser;
 import javafx.util.StringConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,8 +75,6 @@ public class ProductEditController extends EditItemController<Product> {
         validateNumberField(tfCost);
 
         initComboBoxValues();
-        editDialog.setCache(true);
-        editDialog.setCacheHint(CacheHint.SPEED);
     }
 
     private void initComboBoxValues() {
