@@ -23,6 +23,7 @@ import ph.parcs.rmhometiles.util.FileUtils;
 
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Comparator;
 
 
 @Controller
@@ -63,12 +64,16 @@ public class ProductTableController extends EntityTableController<Product> {
         tcDescription.setMaxWidth(1f * Integer.MAX_VALUE * 10);
         tcSupplier.setMaxWidth(1f * Integer.MAX_VALUE * 8);
         tcCategory.setMaxWidth(1f * Integer.MAX_VALUE * 8);
-        tcStock.setMaxWidth(1f * Integer.MAX_VALUE * 5);
-        tcUnitSold.setMaxWidth(1f * Integer.MAX_VALUE * 5);
+        tcStock.setMaxWidth(1f * Integer.MAX_VALUE * 6);
+        tcUnitSold.setMaxWidth(1f * Integer.MAX_VALUE * 6);
         tcPrice.setMaxWidth(1f * Integer.MAX_VALUE * 7);
         tcCost.setMaxWidth(1f * Integer.MAX_VALUE * 7);
         tcImage.setMaxWidth(1f * Integer.MAX_VALUE * 5);
         tcAction.setMaxWidth(1f * Integer.MAX_VALUE * 5);
+
+        tcStock.setComparator(Comparator.comparingInt(Stock::getStocks));
+        tcUnitSold.setComparator(Comparator.comparingInt(Stock::getUnitSold));
+
     }
 
     private void initTableColumnValue() {
@@ -106,7 +111,7 @@ public class ProductTableController extends EntityTableController<Product> {
         tcStock.setCellFactory(param -> new TableCell<>() {
             @Override
             public void updateItem(Stock stock, boolean empty) {
-                if (empty) return;
+                if (stock == null || empty) return;
                 String unit = stock.getStocks() + " ";
                 if (stock.getStockUnit() != null) {
                     unit += stock.getStockUnit().getName();
@@ -118,8 +123,8 @@ public class ProductTableController extends EntityTableController<Product> {
         tcUnitSold.setCellFactory(param -> new TableCell<>() {
             @Override
             public void updateItem(Stock stock, boolean empty) {
-                if (empty) return;
-                setText(stock.getStocks().toString());
+                if (stock == null || empty) return;
+                setText(stock.getUnitSold().toString());
             }
         });
 
