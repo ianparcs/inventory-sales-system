@@ -43,7 +43,7 @@ public abstract class EditItemController<T extends BaseEntity> {
         RegexValidator valid = new RegexValidator();
         valid.setRegexPattern("^[1-9]\\d*(\\.\\d{1,2})?$");
         tf.setValidators(valid);
-        tf.getValidators().get(0).setMessage("No special characters(,)\nMaximum of two decimal digits only");
+        tf.getValidators().get(0).setMessage("No special characters(,)\nMaximum of two decimal digits");
     }
 
     public void onEditItem(ItemListener<T> itemListener, final T item) {
