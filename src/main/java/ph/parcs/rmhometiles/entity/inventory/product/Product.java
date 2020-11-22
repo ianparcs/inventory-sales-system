@@ -23,11 +23,10 @@ public class Product extends BaseEntity {
     private StringProperty description = new SimpleStringProperty();
     private StringProperty code = new SimpleStringProperty();
 
-    private ImageProduct imageProduct;
-    private Supplier supplier;
-    private Category category;
+    private ObjectProperty<ImageProduct> imageProduct = new SimpleObjectProperty<>();
+    private ObjectProperty<Supplier> supplier = new SimpleObjectProperty<>();
+    private ObjectProperty<Category> category = new SimpleObjectProperty<>();
     private ObjectProperty<Stock> stock = new SimpleObjectProperty<>();
-
     private ObjectProperty<Money> price = new SimpleObjectProperty<>();
     private ObjectProperty<Money> cost = new SimpleObjectProperty<>();
 
@@ -36,7 +35,7 @@ public class Product extends BaseEntity {
         return description.get();
     }
 
-    void setDescription(String description) {
+    public void setDescription(String description) {
         this.description.set(description);
     }
 
@@ -45,21 +44,21 @@ public class Product extends BaseEntity {
             {@JoinColumn(name = "product_id", referencedColumnName = "product_id")},
             inverseJoinColumns = {@JoinColumn(name = "category_id", referencedColumnName = "category_id")})
     public Category getCategory() {
-        return category;
+        return category.get();
     }
 
     public void setCategory(Category category) {
-        this.category = category;
+        this.category.set(category);
     }
 
     @ManyToOne
     @JoinColumn(name = "supplier_id", referencedColumnName = "supplier_id")
     public Supplier getSupplier() {
-        return supplier;
+        return supplier.get();
     }
 
     public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
+        this.supplier.set(supplier);
     }
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -78,11 +77,11 @@ public class Product extends BaseEntity {
             inverseJoinColumns =
                     {@JoinColumn(name = "image_id", referencedColumnName = "image_id")})
     ImageProduct getImageProduct() {
-        return imageProduct;
+        return imageProduct.get();
     }
 
     void setImageProduct(ImageProduct imageProduct) {
-        this.imageProduct = imageProduct;
+        this.imageProduct.set(imageProduct);
     }
 
     @Column(name = "code")
@@ -104,7 +103,7 @@ public class Product extends BaseEntity {
     }
 
     @Type(type = Global.JADIRA_PACKAGE, parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "PHP")})
-    Money getCost() {
+    public Money getCost() {
         return cost.get();
     }
 
@@ -132,4 +131,13 @@ public class Product extends BaseEntity {
         return price;
     }
 
+    @Transient
+    public ObjectProperty<Supplier> supplierProperty() {
+        return supplier;
+    }
+
+    @Transient
+    public ObjectProperty<Category> categoryProperty() {
+        return category;
+    }
 }

@@ -50,11 +50,11 @@ public class InvoiceController {
     @FXML
     private TableColumn<InvoiceLineItem, Money> tcTotal;
     @FXML
+    private TableView<InvoiceLineItem> tvInvoice;
+    @FXML
     private JFXComboBox<BaseEntity> cbCustomer;
     @FXML
     private JFXComboBox<BaseEntity> cbProducts;
-    @FXML
-    private TableView<InvoiceLineItem> tvInvoice;
     @FXML
     private JFXButton btnClearCustomer;
     @FXML
@@ -62,17 +62,16 @@ public class InvoiceController {
     @FXML
     private JFXButton btnAddUser;
     @FXML
+    private StackPane spMain;
+    @FXML
     private Label lblAddress;
     @FXML
     private Label lblContact;
     @FXML
     private Label lblName;
-    @FXML
-    private StackPane spMain;
-    @FXML
-    private TableColumn<InvoiceLineItem, HBox> tcAction;
 
     private EditItemController<Customer> customerEditController;
+    private TableColumn<InvoiceLineItem, HBox> tcAction;
 
     private CustomerService customerService;
     private ProductService productService;
@@ -91,7 +90,14 @@ public class InvoiceController {
         tcCode.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "code"));
         tcPrice.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "price"));
         tcStock.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "stock", "stocks"));
+        tcTotal.setCellValueFactory(cellData -> {
+            InvoiceLineItem lineItem = cellData.getValue();
+            return Bindings.createObjectBinding(() -> lineItem.getProduct().getPrice().multipliedBy(lineItem.getQuantity()));
+        });
 
+        spMain.sceneProperty().addListener((observableValue, scene, newScene) -> {
+            if (newScene != null) tvInvoice.refresh();
+        });
     }
 
     private void initDate() {
@@ -193,7 +199,7 @@ public class InvoiceController {
         Product product = (Product) cbProducts.getValue();
         if (product == null) return;
         InvoiceLineItem invoiceLineItem = new InvoiceLineItem(product);
-        invoiceLineItem.setQuantity(0);
+        invoiceLineItem.setQuantity(5);
         tvInvoice.getItems().add(invoiceLineItem);
 
         Platform.runLater(() -> {
@@ -207,6 +213,7 @@ public class InvoiceController {
     @FXML
     public void changeQuantity(TableColumn.CellEditEvent<InvoiceLineItem, Integer> event) {
         event.getTableView().getItems().get(event.getTablePosition().getRow()).setQuantity(event.getNewValue());
+        tvInvoice.refresh();
     }
 
     private InvoiceLineItem onItemDeleteAction(InvoiceLineItem s) {

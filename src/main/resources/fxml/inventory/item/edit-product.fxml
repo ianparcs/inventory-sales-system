@@ -101,7 +101,7 @@
         <actions>
             <JFXButton onAction="#closeDialog" styleClass="button-cancel" text="Cancel"/>
             <JFXButton fx:id="btnSave" styleClass="button-save" text="Save"
-                       disable="${tfPrice.text.empty || tfName.text.empty || tfDescription.text.empty || tfCode.text.empty}"/>
+                       disable="${tfPrice.text.empty || tfName.text.empty || tfCode.text.empty}"/>
         </actions>
 
     </JFXDialogLayout>

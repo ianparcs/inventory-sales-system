@@ -1,5 +1,6 @@
 package ph.parcs.rmhometiles.entity.inventory.product;
 
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.CacheHint;
 import javafx.scene.control.TableCell;
@@ -23,42 +24,42 @@ import ph.parcs.rmhometiles.util.FileUtils;
 
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.Comparator;
 
 
 @Controller
 public class ProductTableController extends EntityTableController<Product> {
 
-
     @FXML
     private TableColumn<Product, String> tcDescription;
+    @FXML
+    private TableColumn<Product, ImageProduct> tcImage;
     @FXML
     private TableColumn<Product, Supplier> tcSupplier;
     @FXML
     private TableColumn<Product, Category> tcCategory;
     @FXML
-    private TableColumn<Product, Stock> tcStock;
+    private TableColumn<Product, Integer> tcUnitSold;
     @FXML
-    private TableColumn<Product, Stock> tcUnitSold;
-    @FXML
-    private TableColumn<Product, Money> tcPrice;
-    @FXML
-    private TableColumn<Product, Money> tcCost;
-    @FXML
-    private TableColumn<Product, ImageProduct> tcImage;
+    private TableColumn<Product, String> tcStock;
     @FXML
     private TableColumn<Product, String> tcCode;
     @FXML
     private TableColumn<Product, String> tcName;
-
-    private SweetAlert sweetAlert;
+    @FXML
+    private TableColumn<Product, Money> tcPrice;
+    @FXML
+    private TableColumn<Product, Money> tcCost;
 
     @FXML
     public void initialize() {
         super.initialize();
         initTableColumnValue();
-        sweetAlert = SweetAlertFactory.create(SweetAlert.Type.INFO);
+        initTableColumnSize();
 
+        //     createFakeData();
+    }
+
+    private void initTableColumnSize() {
         tcCode.setMaxWidth(1f * Integer.MAX_VALUE * 10);
         tcName.setMaxWidth(1f * Integer.MAX_VALUE * 10);
         tcDescription.setMaxWidth(1f * Integer.MAX_VALUE * 10);
@@ -70,68 +71,20 @@ public class ProductTableController extends EntityTableController<Product> {
         tcCost.setMaxWidth(1f * Integer.MAX_VALUE * 7);
         tcImage.setMaxWidth(1f * Integer.MAX_VALUE * 5);
         tcAction.setMaxWidth(1f * Integer.MAX_VALUE * 5);
-
-        tcStock.setComparator(Comparator.comparingInt(Stock::getStocks));
-        tcUnitSold.setComparator(Comparator.comparingInt(Stock::getUnitSold));
-
-
-        Product product = new Product();
-        product.setCode("test");
-        product.setName("Test");
-        baseService.saveEntity(product);
-
     }
 
     private void initTableColumnValue() {
-
-        tcSupplier.setCellFactory(param -> new TableCell<>() {
-            @Override
-            public void updateItem(Supplier supplier, boolean empty) {
-                if (!empty) setText((supplier != null) ? supplier.getName() : "n/a");
-            }
-        });
-
-        tcCategory.setCellFactory(param -> new TableCell<>() {
-            @Override
-            public void updateItem(Category category, boolean empty) {
-                if (!empty) setText((category != null) ? category.getName() : "n/a");
-            }
-        });
-
-        tcPrice.setCellFactory(param -> new TableCell<>() {
-            @Override
-            public void updateItem(Money price, boolean empty) {
-                if (empty || price == null) return;
-                setText(price.toString());
-            }
-        });
-
-        tcCost.setCellFactory(param -> new TableCell<>() {
-            @Override
-            public void updateItem(Money cost, boolean empty) {
-                if (empty || cost == null) return;
-                setText(cost.toString());
-            }
-        });
-
-        tcStock.setCellFactory(param -> new TableCell<>() {
-            @Override
-            public void updateItem(Stock stock, boolean empty) {
-                if (stock == null || empty) return;
-                String unit = stock.getStocks() + " ";
-                if (stock.getStockUnit() != null) {
-                    unit += stock.getStockUnit().getName();
-                }
-                setText(unit);
-            }
-        });
-
-        tcUnitSold.setCellFactory(param -> new TableCell<>() {
-            @Override
-            public void updateItem(Stock stock, boolean empty) {
-                if (stock == null || empty) return;
-                setText(stock.getUnitSold().toString());
-            }
+        tcSupplier.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().supplierProperty(), "name"));
+        tcCategory.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().categoryProperty(), "name"));
+        tcUnitSold.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().stockProperty(), "unitSold"));
+        tcStock.setCellValueFactory(cellData -> {
+            Product product = cellData.getValue();
+            return Bindings.createObjectBinding(() -> {
+                Stock stock = product.getStock();
+                String value = stock.getStocks() + " ";
+                if (stock.getStockUnit() != null) value += stock.getStockUnit().getName();
+                return value.trim();
+            });
         });
 
         tcImage.setCellFactory(tc -> {
@@ -160,6 +113,7 @@ public class ProductTableController extends EntityTableController<Product> {
                     try {
                         Image picture = new Image(url.toURI().toString(), true);
                         ImageView imageView = createImageView(picture, 600, 400);
+                        SweetAlert sweetAlert = SweetAlertFactory.create(SweetAlert.Type.INFO);
                         sweetAlert.setHeaderMessage(imageProduct.getName());
                         sweetAlert.setBody(imageView);
                         sweetAlert.show(spMain);
@@ -192,4 +146,20 @@ public class ProductTableController extends EntityTableController<Product> {
     public void setProductService(ProductService productService) {
         this.baseService = productService;
     }
+
+    private void createFakeData() {
+        Product product = new Product();
+        product.setCode("test");
+        product.setName("Test");
+        Stock stock = new Stock();
+        stock.setStocks(5);
+        product.setStock(stock);
+        Money money = Money.parse("PHP 23.17");
+        Money cost = Money.parse("PHP 15.17");
+        product.setPrice(money);
+        product.setCost(cost);
+        product.setDescription("");
+        baseService.saveEntity(product);
+    }
+
 }

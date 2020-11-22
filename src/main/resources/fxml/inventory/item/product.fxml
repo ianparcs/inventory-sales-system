@@ -98,19 +98,28 @@
                     </cellValueFactory>
                 </TableColumn>
 
-                <TableColumn fx:id="tcStock" reorderable="false" text="Stock" styleClass="action-column">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="stock"/>
-                    </cellValueFactory>
-                </TableColumn>
+                <TableColumn fx:id="tcStock" reorderable="false" text="Stock" styleClass="action-column"/>
+
                 <TableColumn fx:id="tcUnitSold" reorderable="false" text="Unit Sold" styleClass="action-column">
                     <cellValueFactory>
                         <PropertyValueFactory property="stock"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="tcCost" reorderable="false" text="Cost" styleClass="action-column"/>
-                <TableColumn fx:id="tcPrice" reorderable="false" text="Price" styleClass="action-column"/>
-                <TableColumn fx:id="tcImage" reorderable="false" sortable="false" styleClass="action-column" text="Image"/>
+
+                <TableColumn fx:id="tcCost" reorderable="false" text="Cost" styleClass="action-column">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="cost"/>
+                    </cellValueFactory>
+                </TableColumn>
+
+                <TableColumn fx:id="tcPrice" reorderable="false" text="Price" styleClass="action-column">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="price"/>
+                    </cellValueFactory>
+                </TableColumn>
+
+                <TableColumn fx:id="tcImage" reorderable="false" sortable="false" styleClass="action-column"
+                             text="Image"/>
 
                 <TableColumn fx:id="tcAction" reorderable="false"
                              sortable="false" styleClass="action-column" text="Action"/>
