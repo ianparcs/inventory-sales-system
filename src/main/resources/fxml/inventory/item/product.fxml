@@ -32,7 +32,7 @@
                 </graphic>
             </JFXButton>
 
-            <JFXTextField fx:id="tfSearchItem" labelFloat="true" onKeyTyped="#searchItem" promptText="Search Product"
+            <JFXTextField fx:id="tfSearchItem" labelFloat="true" onKeyReleased="#searchItem" promptText="Search Product"
                           styleClass="search-field" HBox.hgrow="ALWAYS"/>
             <JFXButton onAction="#showEditItemDialog" styleClass="primary-button" text="Add New">
                 <graphic>
@@ -117,9 +117,12 @@
                         <PropertyValueFactory property="price"/>
                     </cellValueFactory>
                 </TableColumn>
-
-                <TableColumn fx:id="tcImage" reorderable="false" sortable="false" styleClass="action-column"
-                             text="Image"/>
+                <TableColumn fx:id="tcImage" reorderable="false" resizable="false" sortable="false"
+                             styleClass="action-column" text="Image">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="imageProduct"/>
+                    </cellValueFactory>
+                </TableColumn>
 
                 <TableColumn fx:id="tcAction" reorderable="false"
                              sortable="false" styleClass="action-column" text="Action"/>

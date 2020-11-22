@@ -58,7 +58,7 @@
                         <PropertyValueFactory property="quantity"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="tcTotal" styleClass="action-column" reorderable="false" text="amount">
+                <TableColumn fx:id="tcTotal" styleClass="action-column" reorderable="false" text="Amount">
                     <cellValueFactory>
                         <PropertyValueFactory property="amount"/>
                     </cellValueFactory>

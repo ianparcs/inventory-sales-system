@@ -7,7 +7,6 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import lombok.SneakyThrows;
 import org.joda.money.Money;
@@ -86,41 +85,37 @@ public class ProductTableController extends EntityTableController<Product> {
                 return value.trim();
             });
         });
-
         tcImage.setCellFactory(tc -> {
             TableCell<Product, ImageProduct> cell = new TableCell<>() {
                 @SneakyThrows
                 @Override
                 protected void updateItem(ImageProduct productImage, boolean empty) {
+                    setGraphic(null);
+                    setUserData(null);
+
                     if (productImage != null) {
                         URL url = FileUtils.getResourcePath(productImage.getName());
                         Image picture = new Image(url.toURI().toString(), true);
                         ImageView imageView = createImageView(picture, 48, 48);
                         setUserData(productImage);
                         setGraphic(imageView);
-                    } else {
-                        setGraphic(null);
-                        setUserData(null);
                     }
                 }
             };
 
-            cell.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-                if (event.getClickCount() >= 1) {
-                    ImageProduct imageProduct = (ImageProduct) cell.getUserData();
-                    if (imageProduct == null) return;
-                    URL url = FileUtils.getResourcePath(imageProduct.getName());
-                    try {
-                        Image picture = new Image(url.toURI().toString(), true);
-                        ImageView imageView = createImageView(picture, 600, 400);
-                        SweetAlert sweetAlert = SweetAlertFactory.create(SweetAlert.Type.INFO);
-                        sweetAlert.setHeaderMessage(imageProduct.getName());
-                        sweetAlert.setBody(imageView);
-                        sweetAlert.show(spMain);
-                    } catch (URISyntaxException e) {
-                        e.printStackTrace();
-                    }
-
+            cell.setOnMouseClicked(mouseEvent -> {
+                ImageProduct imageProduct = (ImageProduct) cell.getUserData();
+                if (imageProduct == null) return;
+                URL url = FileUtils.getResourcePath(imageProduct.getName());
+                try {
+                    Image picture = new Image(url.toURI().toString(), true);
+                    ImageView imageView = createImageView(picture, 600, 400);
+                    SweetAlert sweetAlert = SweetAlertFactory.create(SweetAlert.Type.INFO);
+                    sweetAlert.setHeaderMessage(imageProduct.getName());
+                    sweetAlert.setBody(imageView);
+                    sweetAlert.show(spMain);
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
                 }
             });
             return cell;

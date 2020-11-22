@@ -20,7 +20,7 @@ import javax.persistence.*;
 @AttributeOverride(name = "id", column = @Column(name = "product_id"))
 public class Product extends BaseEntity {
 
-    private ObjectProperty<ImageProduct> imageProduct = new SimpleObjectProperty<>();
+    private ImageProduct imageProduct;
     private ObjectProperty<Supplier> supplier = new SimpleObjectProperty<>();
     private ObjectProperty<Category> category = new SimpleObjectProperty<>();
     private ObjectProperty<Stock> stock = new SimpleObjectProperty<>();
@@ -76,12 +76,12 @@ public class Product extends BaseEntity {
                     {@JoinColumn(name = "product_id", referencedColumnName = "product_id")},
             inverseJoinColumns =
                     {@JoinColumn(name = "image_id", referencedColumnName = "image_id")})
-    ImageProduct getImageProduct() {
-        return imageProduct.get();
+    public ImageProduct getImageProduct() {
+        return imageProduct;
     }
 
-    void setImageProduct(ImageProduct imageProduct) {
-        this.imageProduct.set(imageProduct);
+    public void setImageProduct(ImageProduct imageProduct) {
+        this.imageProduct = imageProduct;
     }
 
     @Column(name = "code")

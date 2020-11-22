@@ -8,11 +8,13 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.util.Callback;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import org.joda.money.Money;
@@ -71,6 +73,8 @@ public class InvoiceController {
     private Label lblName;
 
     private EditItemController<Customer> customerEditController;
+
+    @FXML
     private TableColumn<InvoiceLineItem, HBox> tcAction;
 
     private CustomerService customerService;
@@ -85,7 +89,6 @@ public class InvoiceController {
         initDate();
 
         tvInvoice.setEditable(true);
-        // tcAction.setCellFactory(ActionTableCell.forActions(this::onItemDeleteAction));
         tcQty.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         tcCode.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "code"));
         tcPrice.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "price"));
