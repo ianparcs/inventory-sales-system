@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.utils.FontAwesomeIconFactory;
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -32,7 +33,9 @@ public class ActionTableCell<S> extends TableCell<S, HBox> {
         btnEdit.setTooltip(new Tooltip("Edit"));
 
         btnDelete.setGraphic(deleteIcon);
+        btnDelete.setPadding(new Insets(5));
         btnEdit.setGraphic(editIcon);
+        btnEdit.setPadding(new Insets(5));
 
         btnDelete.setOnAction((ActionEvent e) -> delFunction.apply(getCurrentItem()));
         btnEdit.setOnAction((ActionEvent e) -> editFunction.apply(getCurrentItem()));
@@ -47,9 +50,9 @@ public class ActionTableCell<S> extends TableCell<S, HBox> {
         Text deleteIcon = FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.TRASH, "1.5em");
         deleteIcon.setId("delete-icon");
         JFXButton btnDelete = new JFXButton();
+        btnDelete.setPadding(new Insets(5));
         btnDelete.setTooltip(new Tooltip("Delete"));
         btnDelete.setGraphic(deleteIcon);
-
         btnDelete.setOnAction((ActionEvent e) -> delFunction.apply(getCurrentItem()));
 
         hBox = new HBox();
@@ -59,6 +62,10 @@ public class ActionTableCell<S> extends TableCell<S, HBox> {
 
     public static <S> Callback<TableColumn<S, HBox>, TableCell<S, HBox>> forActions(Function<S, S> delFunction, Function<S, S> editFunction) {
         return param -> new ActionTableCell<>(delFunction, editFunction);
+    }
+
+    public static <S> Callback<TableColumn<S, HBox>, TableCell<S, HBox>> forActions(Function<S, S> delFunction) {
+        return param -> new ActionTableCell<>(delFunction);
     }
 
     public S getCurrentItem() {

@@ -32,10 +32,12 @@ TableView .table-row-cell:selected, .table-row-cell:hover {
 TableView .table-row-cell:empty {
     -fx-background-color: white;
     -fx-border-width: 0px;
+    -fx-cursor: default;
 }
 
 TableView .table-row-cell:empty .table-cell {
     -fx-border-width: 0px;
+    -fx-cursor: default;
 }
 
 TableView *.increment-button,
@@ -81,9 +83,21 @@ HBox .combo-box > .input-focused-line {
     -fx-pref-height: 0px;
 }
 
-
 .content-container {
     -fx-background-color: gray-light;
     -fx-padding: 15px;
+}
+
+TableView .column-header.quantity-column > .label {
+    -fx-alignment: center;
+    -fx-max-width: Infinity;
+    -fx-cursor: default;
+}
+
+TableView .quantity-column{
+    -fx-text-fill: blueberries;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+    -fx-underline: true;
 }
 

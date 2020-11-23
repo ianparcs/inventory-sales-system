@@ -72,7 +72,7 @@ public abstract class EntityTableController<T extends BaseEntity> implements Ent
 
     @FXML
     private void onPageRowChanged() {
-       updateItems();
+        updateItems();
     }
 
     public T onDeleteActionClick(T item) {

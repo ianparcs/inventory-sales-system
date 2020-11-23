@@ -23,6 +23,7 @@ import ph.parcs.rmhometiles.util.FileUtils;
 
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Comparator;
 
 
 @Controller
@@ -54,8 +55,22 @@ public class ProductTableController extends EntityTableController<Product> {
         super.initialize();
         initTableColumnValue();
         initTableColumnSize();
-
+        initTableColumnSort();
         //     createFakeData();
+    }
+
+    private void initTableColumnSort() {
+        tcStock.setComparator(new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return extractInt(o1) - extractInt(o2);
+            }
+
+            int extractInt(String s) {
+                String num = s.replaceAll("\\D", "");
+                return num.isEmpty() ? 0 : Integer.parseInt(num);
+            }
+        });
     }
 
     private void initTableColumnSize() {

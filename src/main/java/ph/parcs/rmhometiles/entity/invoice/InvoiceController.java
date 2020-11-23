@@ -3,18 +3,17 @@ package ph.parcs.rmhometiles.entity.invoice;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.util.Callback;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import org.joda.money.Money;
@@ -30,6 +29,7 @@ import ph.parcs.rmhometiles.entity.inventory.item.EditItemController;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.inventory.product.ProductService;
 import ph.parcs.rmhometiles.entity.invoice.lineitems.InvoiceLineItem;
+import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.ui.alert.SweetAlert;
 import ph.parcs.rmhometiles.ui.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.util.Global;
@@ -64,6 +64,8 @@ public class InvoiceController {
     @FXML
     private JFXButton btnAddUser;
     @FXML
+    private JFXTextField tfAmount;
+    @FXML
     private StackPane spMain;
     @FXML
     private Label lblAddress;
@@ -79,27 +81,55 @@ public class InvoiceController {
 
     private CustomerService customerService;
     private ProductService productService;
-    private SweetAlert successAlert;
 
     @FXML
     public void initialize() {
-        successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
         configureCustomerCombobox();
         configureProductCombobox();
+        initFieldValidation();
         initDate();
 
         tvInvoice.setEditable(true);
-        tcQty.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         tcCode.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "code"));
         tcPrice.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "price"));
         tcStock.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "stock", "stocks"));
+        tcAction.setCellFactory(ActionTableCell.forActions(this::onItemDeleteAction));
+
         tcTotal.setCellValueFactory(cellData -> {
             InvoiceLineItem lineItem = cellData.getValue();
             return Bindings.createObjectBinding(() -> lineItem.getProduct().getPrice().multipliedBy(lineItem.getQuantity()));
         });
 
+        tcQty.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter() {
+            @Override
+            public Integer fromString(String s) {
+                if (org.apache.commons.lang3.StringUtils.isNumeric(s)) {
+                    return super.fromString(s);
+                }
+                return 0;
+            }
+        }));
+
         spMain.sceneProperty().addListener((observableValue, scene, newScene) -> {
-            if (newScene != null) tvInvoice.refresh();
+            if (newScene != null) {
+                for (InvoiceLineItem item : tvInvoice.getItems()) {
+                    Product result = productService.findEntityById(item.getProduct().getId());
+                    item.setProduct(result);
+                }
+                tvInvoice.refresh();
+            }
+        });
+
+    }
+
+    private void initFieldValidation() {
+        tfAmount.focusedProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (!newValue) {
+                tfAmount.validate();
+                if (tfAmount.getActiveValidator() != null && tfAmount.getActiveValidator().getHasErrors()) {
+                    tfAmount.requestFocus();
+                }
+            }
         });
     }
 
@@ -201,9 +231,7 @@ public class InvoiceController {
     private void addInvoiceLineItem() {
         Product product = (Product) cbProducts.getValue();
         if (product == null) return;
-        InvoiceLineItem invoiceLineItem = new InvoiceLineItem(product);
-        invoiceLineItem.setQuantity(5);
-        tvInvoice.getItems().add(invoiceLineItem);
+        tvInvoice.getItems().add(new InvoiceLineItem(product));
 
         Platform.runLater(() -> {
             cbProducts.valueProperty().set(null);
@@ -215,12 +243,25 @@ public class InvoiceController {
 
     @FXML
     public void changeQuantity(TableColumn.CellEditEvent<InvoiceLineItem, Integer> event) {
-        event.getTableView().getItems().get(event.getTablePosition().getRow()).setQuantity(event.getNewValue());
+        InvoiceLineItem lineItem = event.getTableView().getItems().get(event.getTablePosition().getRow());
+        int stocks = lineItem.getProduct().getStock().getStocks();
+        int quantity = event.getNewValue();
+
+        if (quantity > stocks) {
+            SweetAlert sweetAlert = SweetAlertFactory.create(SweetAlert.Type.DANGER);
+            sweetAlert.setContentMessage("Quantity must not exceed stocks");
+            sweetAlert.show(spMain);
+            lineItem.setQuantity(event.getOldValue());
+        } else {
+            lineItem.setQuantity(event.getNewValue());
+        }
         tvInvoice.refresh();
     }
 
-    private InvoiceLineItem onItemDeleteAction(InvoiceLineItem s) {
-        return s;
+    private InvoiceLineItem onItemDeleteAction(InvoiceLineItem item) {
+        tvInvoice.getItems().remove(item);
+        tvInvoice.refresh();
+        return item;
     }
 
     @FXML
@@ -228,11 +269,11 @@ public class InvoiceController {
         cbCustomer.setValue(null);
         cbCustomer.hide();
 
+        btnClearCustomer.setVisible(false);
+        btnAddUser.setVisible(true);
         lblContact.setText("");
         lblAddress.setText("");
         lblName.setText("");
-        btnClearCustomer.setVisible(false);
-        btnAddUser.setVisible(true);
     }
 
     @FXML
@@ -245,6 +286,8 @@ public class InvoiceController {
                     lblAddress.setText(StringUtils.isEmpty(customer.getAddress()) ? "n/a" : customer.getAddress());
                     lblContact.setText(StringUtils.isEmpty(customer.getContact()) ? "n/a" : customer.getContact());
                 }
+
+                SweetAlert successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
                 successAlert.setContentMessage(Global.MSG.SAVED).show(spMain);
                 cbCustomer.hide();
             }

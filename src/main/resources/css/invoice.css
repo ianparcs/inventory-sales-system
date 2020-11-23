@@ -46,3 +46,53 @@
     -fx-background-color: TRANSPARENT;
     -fx-pref-height: 300px;
 }
+
+.amount-container {
+    -fx-padding: 5 5 0 5;
+    -fx-border-width: 1 0 0 0;
+    -fx-border-color: greysquash;
+}
+
+.amount-container > .label-amount, .label-total {
+    -fx-padding: 3 3 0 3;
+    -fx-font-size: 16px;
+    -fx-font-weight: bolder;
+}
+
+.label-amount {
+    -fx-text-fill: banana;
+}
+
+.label-total {
+    -fx-text-fill: avocado;
+}
+
+.text-field-amount {
+    -fx-padding: 5px;
+    -jfx-focus-color: primary;
+    -fx-border-radius: 0px;
+    -fx-background-color: transparent;
+    -fx-border-color: greysquash;
+    -fx-border-width: 1;
+}
+
+.text-field-amount > .input-line {
+    -fx-background-color: -jfx-unfocus-color;
+    -fx-pref-height: 0px;
+    -fx-translate-y: 0px;
+}
+
+.text-field-amount > .input-focused-line {
+    -fx-background-color: -jfx-focus-color;
+    -fx-pref-height: 0px;
+}
+
+.button-amount {
+    -fx-padding: 0.533333em 1em 0.533333em 1em;
+    -fx-background-color: blueberries;
+    -jfx-button-type: raised;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 0 0 0 1;
+    -fx-border-radius: 0 0 0 1;
+}
