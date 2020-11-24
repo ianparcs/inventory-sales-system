@@ -1,12 +1,11 @@
 package ph.parcs.rmhometiles.entity.invoice;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -14,12 +13,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.util.Duration;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
+import ph.parcs.rmhometiles.DateConverter;
 import ph.parcs.rmhometiles.ItemListener;
 import ph.parcs.rmhometiles.entity.customer.Customer;
 import ph.parcs.rmhometiles.entity.customer.CustomerEditController;
@@ -29,13 +30,16 @@ import ph.parcs.rmhometiles.entity.inventory.item.EditItemController;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.inventory.product.ProductService;
 import ph.parcs.rmhometiles.entity.invoice.lineitems.InvoiceLineItem;
+import ph.parcs.rmhometiles.entity.user.User;
+import ph.parcs.rmhometiles.entity.user.UserService;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.ui.alert.SweetAlert;
 import ph.parcs.rmhometiles.ui.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.util.Global;
+import ph.parcs.rmhometiles.util.NameConverter;
+import ph.parcs.rmhometiles.util.SnackbarLayoutFactory;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -43,6 +47,8 @@ public class InvoiceController {
 
     @FXML
     private TableColumn<InvoiceLineItem, Integer> tcStock;
+    @FXML
+    private TableColumn<InvoiceLineItem, HBox> tcAction;
     @FXML
     private TableColumn<InvoiceLineItem, Integer> tcQty;
     @FXML
@@ -58,57 +64,46 @@ public class InvoiceController {
     @FXML
     private JFXComboBox<BaseEntity> cbProducts;
     @FXML
+    private JFXTextField lblDiscountSales;
+    @FXML
+    private JFXButton lblCreateInvoice;
+    @FXML
     private JFXButton btnClearCustomer;
+    @FXML
+    private JFXTextField tfAmount;
     @FXML
     private JFXDatePicker dpDate;
     @FXML
     private JFXButton btnAddUser;
     @FXML
-    private JFXTextField tfAmount;
-    @FXML
     private StackPane spMain;
+    @FXML
+    private Label lblSalesPerson;
     @FXML
     private Label lblAddress;
     @FXML
     private Label lblContact;
     @FXML
     private Label lblName;
+    @FXML
+    private Label lblTax;
+
 
     private EditItemController<Customer> customerEditController;
-
-    @FXML
-    private TableColumn<InvoiceLineItem, HBox> tcAction;
-
     private CustomerService customerService;
     private ProductService productService;
+    private InvoiceService invoiceService;
+    private UserService userService;
 
     @FXML
     public void initialize() {
+        initColumnCellValueFactory();
         configureCustomerCombobox();
         configureProductCombobox();
+        initInvoiceSummaryValue();
         initFieldValidation();
         initDate();
 
-        tvInvoice.setEditable(true);
-        tcCode.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "code"));
-        tcPrice.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "price"));
-        tcStock.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "stock", "stocks"));
-        tcAction.setCellFactory(ActionTableCell.forActions(this::onItemDeleteAction));
-
-        tcTotal.setCellValueFactory(cellData -> {
-            InvoiceLineItem lineItem = cellData.getValue();
-            return Bindings.createObjectBinding(() -> lineItem.getProduct().getPrice().multipliedBy(lineItem.getQuantity()));
-        });
-
-        tcQty.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter() {
-            @Override
-            public Integer fromString(String s) {
-                if (org.apache.commons.lang3.StringUtils.isNumeric(s)) {
-                    return super.fromString(s);
-                }
-                return 0;
-            }
-        }));
 
         spMain.sceneProperty().addListener((observableValue, scene, newScene) -> {
             if (newScene != null) {
@@ -120,6 +115,51 @@ public class InvoiceController {
             }
         });
 
+        lblCreateInvoice.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+            }
+        });
+    }
+
+    private void initColumnCellValueFactory() {
+        tcCode.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "code"));
+        tcPrice.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "price"));
+        tcStock.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "stock", "stocks"));
+        tcAction.setCellFactory(ActionTableCell.forActions(this::onItemDeleteAction));
+
+        setQuantityCellFactory();
+        setTotalCellFactory();
+    }
+
+    private void setTotalCellFactory() {
+        tcTotal.setCellValueFactory(cellData -> {
+            InvoiceLineItem lineItem = cellData.getValue();
+            return Bindings.createObjectBinding(() -> lineItem.getProduct().getPrice().multipliedBy(lineItem.getQuantity()));
+        });
+    }
+
+    private void setQuantityCellFactory() {
+        tcQty.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter() {
+            @Override
+            public Integer fromString(String s) {
+                if (org.apache.commons.lang3.StringUtils.isNumeric(s)) {
+                    return super.fromString(s);
+                }
+                return quantityOldValue;
+            }
+
+            @Override
+            public String toString() {
+                return super.toString();
+            }
+        }));
+    }
+
+    private void initInvoiceSummaryValue() {
+        User user = userService.getCurrentUser();
+        lblSalesPerson.setText(user.getUsername());
     }
 
     private void initFieldValidation() {
@@ -128,6 +168,8 @@ public class InvoiceController {
                 tfAmount.validate();
                 if (tfAmount.getActiveValidator() != null && tfAmount.getActiveValidator().getHasErrors()) {
                     tfAmount.requestFocus();
+                    String errorMessage = invoiceService.getAmountValidatorMessage(tfAmount.getActiveValidator());
+                    showError(errorMessage);
                 }
             }
         });
@@ -135,37 +177,29 @@ public class InvoiceController {
 
     private void initDate() {
         dpDate.setValue(LocalDate.now());
-        dpDate.setConverter(new StringConverter<>() {
-            final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("EEE, MMM d, yyyy");
-
-            @Override
-            public String toString(LocalDate date) {
-                return (date != null) ? dateFormatter.format(date) : "";
-            }
-
-            @Override
-            public LocalDate fromString(String string) {
-                return (string != null && !string.isEmpty()) ? LocalDate.parse(string, dateFormatter) : null;
-            }
-        });
+        dpDate.setConverter(new DateConverter());
     }
 
     private void configureCustomerCombobox() {
-        setComboboxConverter(cbCustomer);
+        cbCustomer.setConverter(new NameConverter(cbCustomer.getValue()));
+        setCustomerComboboxFocusProperty();
+        setCustomerComboboxValues();
+    }
 
+    private void setCustomerComboboxValues() {
         cbCustomer.getEditor().textProperty().addListener((observable, oldVal, keyTyped) -> {
             List<Customer> customers = customerService.findEntities(keyTyped);
             cbCustomer.show();
             Platform.runLater(() -> cbCustomer.getItems().setAll(FXCollections.observableArrayList(customers)));
         });
+    }
 
+    private void setCustomerComboboxFocusProperty() {
         cbCustomer.focusedProperty().addListener((observableValue, outOfFocus, focus) -> {
             if (focus) {
                 List<Customer> customers = customerService.findEntities(Global.STRING_EMPTY);
                 cbCustomer.show();
-                Platform.runLater(() -> {
-                    cbCustomer.getItems().setAll(FXCollections.observableArrayList(customers));
-                });
+                Platform.runLater(() -> cbCustomer.getItems().setAll(FXCollections.observableArrayList(customers)));
             }
         });
     }
@@ -200,21 +234,6 @@ public class InvoiceController {
         });
     }
 
-    private void setComboboxConverter(JFXComboBox<BaseEntity> cb) {
-        cb.setConverter(new StringConverter<>() {
-            @Override
-            public String toString(BaseEntity baseEntity) {
-                if (baseEntity == null) return Global.STRING_EMPTY;
-                return baseEntity.getName();
-            }
-
-            @Override
-            public BaseEntity fromString(String s) {
-                return cb.getValue();
-            }
-        });
-    }
-
     @FXML
     private void fillUpCustomerDetails() {
         Customer customer = (Customer) cbCustomer.getValue();
@@ -241,21 +260,30 @@ public class InvoiceController {
         });
     }
 
+    private int quantityOldValue;
+
     @FXML
     public void changeQuantity(TableColumn.CellEditEvent<InvoiceLineItem, Integer> event) {
+        this.quantityOldValue = event.getOldValue();
+
         InvoiceLineItem lineItem = event.getTableView().getItems().get(event.getTablePosition().getRow());
         int stocks = lineItem.getProduct().getStock().getStocks();
         int quantity = event.getNewValue();
-
         if (quantity > stocks) {
-            SweetAlert sweetAlert = SweetAlertFactory.create(SweetAlert.Type.DANGER);
-            sweetAlert.setContentMessage("Quantity must not exceed stocks");
-            sweetAlert.show(spMain);
+            showError("Quantity must not exceed stocks");
             lineItem.setQuantity(event.getOldValue());
         } else {
             lineItem.setQuantity(event.getNewValue());
         }
         tvInvoice.refresh();
+    }
+
+    private void showError(String message) {
+        JFXSnackbar snackbar = new JFXSnackbar(spMain);
+        JFXSnackbarLayout snackbarLayout = SnackbarLayoutFactory.create(message);
+
+        snackbar.fireEvent(new JFXSnackbar.SnackbarEvent(
+                snackbarLayout, Duration.millis(3000)));
     }
 
     private InvoiceLineItem onItemDeleteAction(InvoiceLineItem item) {
@@ -315,4 +343,13 @@ public class InvoiceController {
         this.productService = productService;
     }
 
+    @Autowired
+    public void setInvoiceService(InvoiceService invoiceService) {
+        this.invoiceService = invoiceService;
+    }
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 }

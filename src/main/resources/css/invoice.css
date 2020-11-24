@@ -24,7 +24,6 @@
     -fx-alignment: center;
 }
 
-
 .search-field {
     -jfx-focus-color: primary;
     -fx-border-radius: 0px;
@@ -87,12 +86,54 @@
     -fx-pref-height: 0px;
 }
 
+.text-field-amount:focused {
+    -fx-border-color: blueberries;
+}
+
 .button-amount {
     -fx-padding: 0.533333em 1em 0.533333em 1em;
     -fx-background-color: blueberries;
-    -jfx-button-type: raised;
+    -jfx-button-type: FLAT;
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-background-radius: 0 0 0 1;
     -fx-border-radius: 0 0 0 1;
+}
+
+.non-search-field {
+    -jfx-focus-color: primary;
+    -fx-border-radius: 0px;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
+.non-search-field > .input-line {
+    -fx-background-color: -jfx-unfocus-color;
+    -fx-pref-height: 0px;
+    -fx-translate-y: 0px;
+}
+
+.jfx-snackbar-content {
+    -fx-background-color: strawberry;
+    -fx-background-radius: 4px;
+    -fx-pref-height: 45px;
+    -fx-min-height: 40px;
+    -fx-padding: 10px;
+}
+
+.jfx-snackbar-toast {
+    -fx-text-fill: white;
+    -fx-padding: 0;
+}
+
+.snack-bar-icon {
+    -fx-fill: WHITE;
+    -glyph-name: "TIMES_CIRCLE";
+    -glyph-size: 30px;
+}
+
+.snack-bar-label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
 }

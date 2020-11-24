@@ -1,5 +1,8 @@
 package ph.parcs.rmhometiles.entity.invoice;
 
+import com.jfoenix.validation.NumberValidator;
+import com.jfoenix.validation.RequiredFieldValidator;
+import com.jfoenix.validation.base.ValidatorBase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +49,16 @@ public class InvoiceService extends BaseService<Invoice> {
     @Override
     public Invoice saveEntity(Invoice invoice) {
         return invoiceRepository.save(invoice);
+    }
+
+    public String getAmountValidatorMessage(ValidatorBase activeValidator) {
+        String validatorMessage = "Please input two decimal digits only";
+        if (activeValidator instanceof NumberValidator) {
+            validatorMessage = "Please enter numerical value only";
+        }else if(activeValidator instanceof RequiredFieldValidator){
+            validatorMessage = "Please enter an amount";
+        }
+        return validatorMessage;
     }
 
     public Invoice createDefault() {
