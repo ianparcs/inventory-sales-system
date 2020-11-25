@@ -1,4 +1,4 @@
-package ph.parcs.rmhometiles.util;
+package ph.parcs.rmhometiles.util.converter;
 
 import lombok.SneakyThrows;
 import org.joda.money.CurrencyUnit;
@@ -7,7 +7,6 @@ import org.joda.money.Money;
 import java.math.BigDecimal;
 
 public class MoneyConverter {
-
 
     @SneakyThrows
     public static Money convert(String value) {

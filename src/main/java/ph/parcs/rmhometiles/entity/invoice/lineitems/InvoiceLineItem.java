@@ -67,4 +67,9 @@ public class InvoiceLineItem extends BaseEntity {
         return product;
     }
 
+    @Transient
+    public ObjectProperty<Money> amountProperty() {
+        return amount;
+    }
+
 }

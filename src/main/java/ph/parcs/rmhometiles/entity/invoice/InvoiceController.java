@@ -3,9 +3,9 @@ package ph.parcs.rmhometiles.entity.invoice;
 import com.jfoenix.controls.*;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.ObjectBinding;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -14,7 +14,6 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
-import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +35,9 @@ import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.ui.alert.SweetAlert;
 import ph.parcs.rmhometiles.ui.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.util.Global;
-import ph.parcs.rmhometiles.util.NameConverter;
 import ph.parcs.rmhometiles.util.SnackbarLayoutFactory;
+import ph.parcs.rmhometiles.util.converter.NameConverter;
+import ph.parcs.rmhometiles.util.converter.ProductConverter;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -66,7 +66,7 @@ public class InvoiceController {
     @FXML
     private JFXTextField lblDiscountSales;
     @FXML
-    private JFXButton lblCreateInvoice;
+    private JFXButton btnCreateInvoice;
     @FXML
     private JFXButton btnClearCustomer;
     @FXML
@@ -88,6 +88,7 @@ public class InvoiceController {
     @FXML
     private Label lblTax;
 
+    private final ReadOnlyObjectWrapper<Integer> total = new ReadOnlyObjectWrapper<>();
 
     private EditItemController<Customer> customerEditController;
     private CustomerService customerService;
@@ -104,21 +105,34 @@ public class InvoiceController {
         initFieldValidation();
         initDate();
 
+        refreshItems();
+        ObjectBinding<Money> sum = new ObjectBinding<>() {
 
+            @Override
+            protected Money computeValue() {
+                Money money = Money.parse("PHP 0.00");
+                for (InvoiceLineItem item : tvInvoice.getItems()) {
+                    money.plus(item.getAmount());
+                }
+                System.out.println("test");
+                return money;
+            }
+        };
+        total.bind(Bindings.createObjectBinding(() ->
+                tvInvoice.getItems().stream().mapToInt(InvoiceLineItem::getQuantity).sum(), tvInvoice.getItems()));
+        lblTax.textProperty().bind(total.asString());
+    }
+
+
+    private void refreshItems() {
         spMain.sceneProperty().addListener((observableValue, scene, newScene) -> {
             if (newScene != null) {
                 for (InvoiceLineItem item : tvInvoice.getItems()) {
                     Product result = productService.findEntityById(item.getProduct().getId());
                     item.setProduct(result);
                 }
+
                 tvInvoice.refresh();
-            }
-        });
-
-        lblCreateInvoice.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-
             }
         });
     }
@@ -136,25 +150,26 @@ public class InvoiceController {
     private void setTotalCellFactory() {
         tcTotal.setCellValueFactory(cellData -> {
             InvoiceLineItem lineItem = cellData.getValue();
-            return Bindings.createObjectBinding(() -> lineItem.getProduct().getPrice().multipliedBy(lineItem.getQuantity()));
+            return Bindings.createObjectBinding(() -> {
+                Money subTotal = lineItem.getProduct().getPrice().multipliedBy(lineItem.getQuantity());
+                lineItem.setAmount(subTotal);
+                return subTotal;
+            });
         });
     }
 
     private void setQuantityCellFactory() {
-        tcQty.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter() {
+  /*      tcQty.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter() {
             @Override
             public Integer fromString(String s) {
                 if (org.apache.commons.lang3.StringUtils.isNumeric(s)) {
                     return super.fromString(s);
                 }
-                return quantityOldValue;
+                return 0;
             }
-
-            @Override
-            public String toString() {
-                return super.toString();
-            }
-        }));
+        }));*/
+        tcQty.setCellFactory(
+                TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
     }
 
     private void initInvoiceSummaryValue() {
@@ -182,56 +197,38 @@ public class InvoiceController {
 
     private void configureCustomerCombobox() {
         cbCustomer.setConverter(new NameConverter(cbCustomer.getValue()));
-        setCustomerComboboxFocusProperty();
-        setCustomerComboboxValues();
+        fillCustomerComboboxValues();
     }
 
-    private void setCustomerComboboxValues() {
-        cbCustomer.getEditor().textProperty().addListener((observable, oldVal, keyTyped) -> {
-            List<Customer> customers = customerService.findEntities(keyTyped);
-            cbCustomer.show();
-            Platform.runLater(() -> cbCustomer.getItems().setAll(FXCollections.observableArrayList(customers)));
-        });
-    }
-
-    private void setCustomerComboboxFocusProperty() {
+    private void fillCustomerComboboxValues() {
+        cbCustomer.getEditor().textProperty().addListener((observable, oldVal, keyTyped) -> showCustomer(keyTyped));
         cbCustomer.focusedProperty().addListener((observableValue, outOfFocus, focus) -> {
-            if (focus) {
-                List<Customer> customers = customerService.findEntities(Global.STRING_EMPTY);
-                cbCustomer.show();
-                Platform.runLater(() -> cbCustomer.getItems().setAll(FXCollections.observableArrayList(customers)));
-            }
+            if (focus) showCustomer(Global.STRING_EMPTY);
         });
+    }
+
+    private void showCustomer(String query) {
+        List<Customer> customers = customerService.findEntities(query);
+        cbCustomer.show();
+        Platform.runLater(() -> cbCustomer.getItems().setAll(FXCollections.observableArrayList(customers)));
     }
 
     private void configureProductCombobox() {
-        cbProducts.setConverter(new StringConverter<>() {
-            @Override
-            public String toString(BaseEntity baseEntity) {
-                Product product = (Product) baseEntity;
-                if (baseEntity == null) return Global.STRING_EMPTY;
-                return product.getCode();
-            }
+        cbProducts.setConverter(new ProductConverter(cbProducts.getValue()));
+        fillProductComboboxValues();
+    }
 
-            @Override
-            public Product fromString(String s) {
-                return (Product) cbProducts.getValue();
-            }
-        });
-
-        cbProducts.getEditor().textProperty().addListener((observable, oldVal, keyTyped) -> {
-            List<Product> products = productService.findEntities(keyTyped);
-            cbProducts.show();
-            Platform.runLater(() -> cbProducts.getItems().setAll(FXCollections.observableArrayList(products)));
-        });
-
+    private void fillProductComboboxValues() {
+        cbProducts.getEditor().textProperty().addListener((observable, oldVal, keyTyped) -> showProduct(keyTyped));
         cbProducts.focusedProperty().addListener((observableValue, outOfFocus, focus) -> {
-            if (focus) {
-                List<Product> products = productService.findEntities(Global.STRING_EMPTY);
-                cbProducts.show();
-                Platform.runLater(() -> cbProducts.getItems().setAll(FXCollections.observableArrayList(products)));
-            }
+            if (focus) showProduct(Global.STRING_EMPTY);
         });
+    }
+
+    private void showProduct(String query) {
+        List<Product> products = productService.findEntities(query);
+        cbProducts.show();
+        Platform.runLater(() -> cbProducts.getItems().setAll(FXCollections.observableArrayList(products)));
     }
 
     @FXML
@@ -260,28 +257,31 @@ public class InvoiceController {
         });
     }
 
-    private int quantityOldValue;
 
     @FXML
     public void changeQuantity(TableColumn.CellEditEvent<InvoiceLineItem, Integer> event) {
-        this.quantityOldValue = event.getOldValue();
-
         InvoiceLineItem lineItem = event.getTableView().getItems().get(event.getTablePosition().getRow());
         int stocks = lineItem.getProduct().getStock().getStocks();
         int quantity = event.getNewValue();
         if (quantity > stocks) {
             showError("Quantity must not exceed stocks");
             lineItem.setQuantity(event.getOldValue());
+            lineItem.quantityProperty().setValue(event.getOldValue());
         } else {
             lineItem.setQuantity(event.getNewValue());
+            lineItem.quantityProperty().setValue(event.getNewValue());
         }
-        tvInvoice.refresh();
+        Platform.runLater(() -> {
+            cbProducts.valueProperty().set(null);
+            cbProducts.hide();
+            spMain.requestFocus();
+            tvInvoice.refresh();
+        });
     }
 
     private void showError(String message) {
         JFXSnackbar snackbar = new JFXSnackbar(spMain);
         JFXSnackbarLayout snackbarLayout = SnackbarLayoutFactory.create(message);
-
         snackbar.fireEvent(new JFXSnackbar.SnackbarEvent(
                 snackbarLayout, Duration.millis(3000)));
     }
@@ -293,7 +293,7 @@ public class InvoiceController {
     }
 
     @FXML
-    private void clearFields() {
+    private void clearCustomerDetails() {
         cbCustomer.setValue(null);
         cbCustomer.hide();
 
