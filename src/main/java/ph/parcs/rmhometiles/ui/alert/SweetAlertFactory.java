@@ -46,7 +46,7 @@ public class SweetAlertFactory {
 
     private static SweetAlert deleteDialog(String message) {
         return new SweetAlert()
-                .setHeaderMessage(Global.MSG.ASK)
+                .setHeaderMessage(Global.Message.ASK)
                 .setContentMessage(message)
                 .setType(SweetAlert.Type.WARNING)
                 .setCancelButton("Cancel")
@@ -55,7 +55,7 @@ public class SweetAlertFactory {
 
     private static SweetAlert infoDialog(String message) {
         return new SweetAlert()
-                .setHeaderMessage(Global.MSG.ASK)
+                .setHeaderMessage(Global.Message.ASK)
                 .setContentMessage(message)
                 .setType(SweetAlert.Type.INFO)
                 .setCancelButton("Close");

@@ -5,23 +5,28 @@ public interface Global {
     String STRING_EMPTY = "";
     String JADIRA_PACKAGE = "org.jadira.usertype.moneyandcurrency.joda.PersistentMoneyAmount";
 
-    interface UNIT {
+    interface Unit {
         String PCS = "pcs";
         String PERCENT = "%";
         String PESO = "₱";
     }
 
+    interface Regex {
+        String DECIMAL_PERCENT = "\\d+(\\.\\d*)[%]|\\d+[%]|\\d+(\\.\\d*)?|(\\.\\d+)|^$";
 
-    interface CSS {
+    }
+
+    interface Css {
         String CIRCLE = "circle-icon";
         String SYMBOL = "symbol-icon";
     }
 
-    interface MSG {
+    interface Message {
         String ADD = "Item successfully added!";
         String SAVED = "Item has been successfully saved";
         String DELETE = "Item successfully removed";
         String ASK = "Are you sure?";
+        String QUANTITY_EXCEED = "Quantity must not exceed stocks";
     }
 
 }

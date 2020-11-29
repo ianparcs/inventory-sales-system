@@ -1,9 +1,5 @@
 package ph.parcs.rmhometiles.entity.invoice;
 
-import com.jfoenix.validation.NumberValidator;
-import com.jfoenix.validation.RequiredFieldValidator;
-import com.jfoenix.validation.base.ValidatorBase;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,23 +8,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseService;
+import ph.parcs.rmhometiles.entity.inventory.product.Product;
+import ph.parcs.rmhometiles.entity.inventory.product.ProductRepository;
+import ph.parcs.rmhometiles.entity.invoice.lineitems.InvoiceLineItem;
 import ph.parcs.rmhometiles.util.PageUtil;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
 public class InvoiceService extends BaseService<Invoice> {
 
     private InvoiceRepository invoiceRepository;
-
-    public ObservableList<Invoice> getInvoices() {
-        List<Invoice> invoices = (List<Invoice>) invoiceRepository.findAll();
-        invoices.add(0, createDefault());
-        return FXCollections.observableArrayList(Objects.requireNonNullElseGet(invoices, ArrayList::new));
-    }
+    private ProductRepository productRepository;
 
     @Override
     public Page<Invoice> findPages(int page, int itemPerPage, String name) {
@@ -43,7 +35,7 @@ public class InvoiceService extends BaseService<Invoice> {
 
     @Override
     public boolean deleteEntity(Invoice invoice) {
-        return true;
+        return invoice == null;
     }
 
     @Override
@@ -51,14 +43,14 @@ public class InvoiceService extends BaseService<Invoice> {
         return invoiceRepository.save(invoice);
     }
 
-    public String getAmountValidatorMessage(ValidatorBase activeValidator) {
-        String validatorMessage = "Please input two decimal digits only";
-        if (activeValidator instanceof NumberValidator) {
-            validatorMessage = "Please enter numerical value only";
-        }else if(activeValidator instanceof RequiredFieldValidator){
-            validatorMessage = "Please enter an amount";
+    public void updateLineItems(ObservableList<InvoiceLineItem> items) {
+        for (InvoiceLineItem item : items) {
+            if (item.getProduct() != null) {
+                Product result = productRepository.findById(item.getProduct().getId()).orElse(null);
+                item.setProduct(result);
+            }
         }
-        return validatorMessage;
+        items.removeIf(lineItem -> lineItem.getProduct() == null);
     }
 
     public Invoice createDefault() {
@@ -71,6 +63,11 @@ public class InvoiceService extends BaseService<Invoice> {
     @Autowired
     public void setInvoiceRepository(InvoiceRepository invoiceRepository) {
         this.invoiceRepository = invoiceRepository;
+    }
+
+    @Autowired
+    public void setProductRepository(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 }
 

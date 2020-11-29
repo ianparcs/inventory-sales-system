@@ -4,6 +4,8 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import org.hibernate.annotations.Type;
 import org.joda.money.Money;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
@@ -22,6 +24,13 @@ public class InvoiceLineItem extends BaseEntity {
 
     public InvoiceLineItem(Product product) {
         this.product.set(product);
+        amount.set(Money.parse("PHP 0.00"));
+        quantity.addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                amount.set(product.priceProperty().get().multipliedBy(quantity.get()));
+            }
+        });
     }
 
     public void setId(Integer id) {

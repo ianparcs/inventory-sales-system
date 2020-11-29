@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
+import ph.parcs.rmhometiles.entity.invoice.lineitems.InvoiceLineItem;
 
 import javax.persistence.*;
 
@@ -33,5 +34,4 @@ public abstract class BaseEntity {
     public void setId(Integer id) {
         this.id.set(id);
     }
-
 }

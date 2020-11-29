@@ -105,6 +105,7 @@
     -fx-border-radius: 0px;
     -fx-border-color: transparent;
     -fx-background-color: transparent;
+    -fx-text-fill: blueberries;
 }
 
 .non-search-field > .input-line {

@@ -81,7 +81,7 @@ public abstract class EntityTableController<T extends BaseEntity> implements Ent
         deleteAlert.setContentMessage("Are you sure you want to delete " + item.getName() + "?");
         deleteAlert.setConfirmListener(() -> {
             if (baseService.deleteEntity(item)) {
-                successAlert.setContentMessage(Global.MSG.DELETE).show(root);
+                successAlert.setContentMessage(Global.Message.DELETE).show(root);
                 updateItems();
             }
         }).show(root);
@@ -96,7 +96,7 @@ public abstract class EntityTableController<T extends BaseEntity> implements Ent
         editItemController.onEditItem(new ItemListener<>() {
             @Override
             public void onSavedSuccess(T entity) {
-                successAlert.setContentMessage(Global.MSG.SAVED).show(root);
+                successAlert.setContentMessage(Global.Message.SAVED).show(root);
                 updateItems();
             }
 

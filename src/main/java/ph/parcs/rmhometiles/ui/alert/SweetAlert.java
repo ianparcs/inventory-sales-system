@@ -25,8 +25,8 @@ public class SweetAlert {
     public SweetAlert() {
         FontAwesomeIconView circleIcon = new FontAwesomeIconView();
         FontAwesomeIconView symbolIcon = new FontAwesomeIconView();
-        circleIcon.getStyleClass().add(Global.CSS.CIRCLE);
-        symbolIcon.getStyleClass().add(Global.CSS.SYMBOL);
+        circleIcon.getStyleClass().add(Global.Css.CIRCLE);
+        symbolIcon.getStyleClass().add(Global.Css.SYMBOL);
         circleIcon.setSize("6em");
         symbolIcon.setSize("3em");
 
