@@ -24,7 +24,7 @@
                 </GridPane.margin>
             </FontAwesomeIconView>
 
-            <JFXTextField fx:id="tfUserName" labelFloat="true" promptText="Username" text="ian" GridPane.columnIndex="1"
+            <JFXTextField fx:id="tfUserName" labelFloat="true" promptText="Username" text="Ian Jasper Parcon" GridPane.columnIndex="1"
                           GridPane.rowIndex="1">
                 <GridPane.margin>
                     <Insets bottom="10"/>

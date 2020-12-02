@@ -10,18 +10,35 @@ import java.text.DecimalFormat;
 @Service
 public class MoneyService {
 
-    public Money computeDiscountAmount(Money amount, Number discountPercent) {
+    public Money computePercentage(Money amount, String discountPercent) {
+        Number discountNumber = getDiscountPercent(discountPercent);
+
         Money discountAmount = Money.parse("PHP 0.00");
-        if (!amount.isNegativeOrZero()) {
-            discountAmount = amount.multipliedBy(discountPercent.doubleValue(), RoundingMode.HALF_EVEN);
+        if (amount != null && !amount.isNegativeOrZero()) {
+            discountAmount = amount.multipliedBy(discountNumber.doubleValue(), RoundingMode.HALF_EVEN);
         }
         return discountAmount;
     }
 
     @SneakyThrows
-    public Number getDiscountPercent(String discountPercent) {
+    private Number getDiscountPercent(String discountPercent) {
         if (!discountPercent.matches(".*\\d.*")) discountPercent = "0.00%";
         if (!discountPercent.endsWith("%")) discountPercent += "%";
         return new DecimalFormat("0.0#%").parse(discountPercent);
+    }
+
+    public Money computeTotalAmountDue(Money amount, Money cashPaid) {
+        if (amount == null || cashPaid == null) return Money.parse("PHP 0.00");
+        return amount.minus(cashPaid);
+    }
+
+    public Money computeTotalAmount(Money currentTotal, Money taxAmount, Money deliveryRate) {
+        Money totalAmount = currentTotal.minus(taxAmount);
+        if(totalAmount.isGreaterThan(deliveryRate)){
+            totalAmount.minus(deliveryRate);
+        }else{
+            deliveryRate.minus(totalAmount);
+        }
+        return currentTotal.minus(taxAmount).minus(deliveryRate);
     }
 }

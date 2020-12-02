@@ -13,7 +13,6 @@ import ph.parcs.rmhometiles.entity.order.Orders;
 import ph.parcs.rmhometiles.util.Global;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -26,8 +25,6 @@ public class Invoice extends BaseEntity {
     private ObjectProperty<Money> taxAmount = new SimpleObjectProperty<>();
     private ObjectProperty<Money> discount = new SimpleObjectProperty<>();
     private ObjectProperty<Money> amount = new SimpleObjectProperty<>();
-
-    private ObjectProperty<Date> createdAt = new SimpleObjectProperty<>();
     private ObjectProperty<Orders> order = new SimpleObjectProperty<>();
 
     public void setAmount(Money amount) {
@@ -80,15 +77,6 @@ public class Invoice extends BaseEntity {
         return taxAmount.get();
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt.set(createdAt);
-    }
-
-    @Column(name = "created_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    public Date getCreatedAt() {
-        return createdAt.get();
-    }
 
     public void setOrder(Orders order) {
         this.order.set(order);
@@ -107,6 +95,11 @@ public class Invoice extends BaseEntity {
     @Transient
     public ObservableList<InvoiceLineItem> getInvoiceLineItems() {
         return invoiceLineItems.get();
+    }
+
+    @Transient
+    public ObjectProperty<Money> taxAmountProperty() {
+        return taxAmount;
     }
 
     @Transient

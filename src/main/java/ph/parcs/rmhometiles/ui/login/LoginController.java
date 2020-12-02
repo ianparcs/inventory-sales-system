@@ -39,10 +39,10 @@ public class LoginController {
 
     @FXML
     private void initialize() {
-        //userService.saveUser(createUser());
+      //  userService.saveUser(createUser());
         setUserFieldStyle(pfUserPassword, icoKey);
         setUserFieldStyle(tfUserName, icoUser);
-      btnLogin.fire();
+        btnLogin.fire();
     }
 
     private void setUserFieldStyle(TextField textField, FontAwesomeIconView icon) {
@@ -87,7 +87,7 @@ public class LoginController {
     private User createUser() {
         User fakeUser = new User();
         fakeUser.setPassword("ian");
-        fakeUser.setUsername("ian");
+        fakeUser.setUsername("Ian Jasper Parcon");
         fakeUser.setRole("admin");
         return fakeUser;
     }

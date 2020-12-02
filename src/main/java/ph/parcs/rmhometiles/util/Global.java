@@ -4,16 +4,17 @@ public interface Global {
 
     String STRING_EMPTY = "";
     String JADIRA_PACKAGE = "org.jadira.usertype.moneyandcurrency.joda.PersistentMoneyAmount";
+    String TAX = "3%";
 
     interface Unit {
         String PCS = "pcs";
         String PERCENT = "%";
-        String PESO = "₱";
+        String CURRENCY = "PHP";
     }
 
     interface Regex {
-        String DECIMAL_PERCENT = "\\d+(\\.\\d*)[%]|\\d+[%]|\\d+(\\.\\d*)?|(\\.\\d+)|^$";
-
+        String DECIMAL_PERCENT = "^$|\\d+(\\.\\d*)[%]|\\d+[%]|\\d+(\\.\\d*)?|(\\.\\d+)|^$";
+        String DECIMAL = "\\d+(\\.\\d*)?|(\\.\\d+)|^$";
     }
 
     interface Css {

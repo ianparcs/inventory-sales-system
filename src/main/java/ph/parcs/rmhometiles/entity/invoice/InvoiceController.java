@@ -31,7 +31,6 @@ import ph.parcs.rmhometiles.entity.inventory.item.EditItemController;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.inventory.product.ProductService;
 import ph.parcs.rmhometiles.entity.invoice.lineitems.InvoiceLineItem;
-import ph.parcs.rmhometiles.entity.user.User;
 import ph.parcs.rmhometiles.entity.user.UserService;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.ui.alert.SweetAlert;
@@ -44,6 +43,7 @@ import ph.parcs.rmhometiles.util.converter.NumberConverter;
 import ph.parcs.rmhometiles.util.converter.ProductConverter;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Controller
@@ -70,8 +70,6 @@ public class InvoiceController {
     @FXML
     private JFXTextField tfDeliveryAmount;
     @FXML
-    private JFXButton btnCreateInvoice;
-    @FXML
     private JFXButton btnClearCustomer;
     @FXML
     private JFXTextField tfCashPay;
@@ -83,6 +81,8 @@ public class InvoiceController {
     private Label lblAmount;
     @FXML
     private StackPane spMain;
+    @FXML
+    private Label lblTotalBeforeTax;
     @FXML
     private Label lblDiscountAmount;
     @FXML
@@ -100,6 +100,7 @@ public class InvoiceController {
     @FXML
     private Label lblTax;
 
+
     private EditItemController<Customer> customerEditController;
     private CustomerService customerService;
     private ProductService productService;
@@ -114,23 +115,31 @@ public class InvoiceController {
         invoice = new Invoice();
         invoice.setInvoiceLineItems(tvInvoice.getItems());
 
-        setDiscountPercentFormatter();
+        setNumberInputFormatter(tfDeliveryAmount);
+        setNumberInputFormatter(tfCashPay);
+
+        setDiscountPercentInputValidation();
         initColumnCellValueFactory();
         configureCustomerCombobox();
         configureProductCombobox();
         showInvoiceSummary();
+
         initFieldValidation();
         initDate();
 
         refreshItems();
-
-        invoice.amountProperty().bind(Bindings.createObjectBinding(this::showItemLineAmounts, tvInvoice.getItems()));
-        invoice.discountProperty().bind(Bindings.createObjectBinding(this::showDiscountAmount, tfDiscountPercent.textProperty(), invoice.amountProperty()));
-        invoice.totalAmountDueProperty().bind(Bindings.createObjectBinding(this::showTotalAmountDue, invoice.amountProperty(), tfCashPay.textProperty()));
-
+        bindInvoiceFields();
     }
 
-    private void setDiscountPercentFormatter() {
+    private void bindInvoiceFields() {
+        invoice.amountProperty().bind(Bindings.createObjectBinding(this::showItemLineAmounts, tvInvoice.getItems()));
+        invoice.discountProperty().bind(Bindings.createObjectBinding(this::showDiscountAmount, tfDiscountPercent.textProperty(), invoice.amountProperty()));
+        invoice.taxAmountProperty().bind(Bindings.createObjectBinding(this::showTaxAmount, tfDiscountPercent.textProperty(), invoice.amountProperty()));
+        invoice.totalAmountDueProperty().bind(Bindings.createObjectBinding(this::showTotalAmountDue, invoice.amountProperty(), tfCashPay.textProperty()));
+        invoice.totalAmountProperty().bind(Bindings.createObjectBinding(this::showTotalAmount, invoice.amountProperty(), tfDeliveryAmount.textProperty()));
+    }
+
+    private void setDiscountPercentInputValidation() {
         tfDiscountPercent.setTextFormatter(new TextFormatter<String>((TextFormatter.Change change) -> {
             String newText = change.getControlNewText();
             if (newText.matches(Global.Regex.DECIMAL_PERCENT)) {
@@ -139,6 +148,17 @@ public class InvoiceController {
             return null;
         }));
         setDiscountPercentTextBehavior();
+    }
+
+    private void setNumberInputFormatter(JFXTextField textField) {
+        textField.setTextFormatter(new TextFormatter<String>((TextFormatter.Change change) -> {
+            String newText = change.getControlNewText();
+            if (newText.matches(Global.Regex.DECIMAL)) {
+                return change;
+            }
+            return null;
+        }));
+
     }
 
     private void setDiscountPercentTextBehavior() {
@@ -152,27 +172,41 @@ public class InvoiceController {
         });
     }
 
-    @SneakyThrows
-    private Money showDiscountAmount() {
-        Money amount = invoice.getAmount();
-        Number discountPercent = moneyService.getDiscountPercent(tfDiscountPercent.getText());
-        return moneyService.computeDiscountAmount(amount, discountPercent);
-    }
-
-    private Money showTotalAmountDue() {
-        String text = tfCashPay.getText();
-        String value = "0.00";
-        if (!StringUtils.isEmpty(text) && org.apache.commons.lang3.StringUtils.isNumeric(text)) {
-            value = tfCashPay.getText();
-        }
-
-        return invoice.amountProperty().get().minus(Money.parse("PHP" + " " + value));
-    }
-
     private Money showItemLineAmounts() {
         return tvInvoice.getItems().stream()
                 .map(InvoiceLineItem::getAmount)
                 .reduce(Money.parse("PHP 0.00"), Money::plus);
+    }
+
+    @SneakyThrows
+    private Money showDiscountAmount() {
+        Money amount = invoice.getAmount();
+        if (StringUtils.isEmpty(tfDiscountPercent.getText())) return Money.parse("PHP 0.00");
+        return moneyService.computePercentage(amount, tfDiscountPercent.getText());
+    }
+
+    private Money showTotalBeforeTax() {
+        if (invoice.getAmount() == null) return Money.parse("PHP 0.00");
+        return invoice.getAmount().minus(showDiscountAmount());
+    }
+
+    @SneakyThrows
+    private Money showTaxAmount() {
+        Money totalBeforeTax = showTotalBeforeTax();
+        return moneyService.computePercentage(totalBeforeTax, Global.TAX);
+    }
+
+    private Money showTotalAmount() {
+        Money currentTotal = showTotalBeforeTax();
+        Money taxAmount = moneyService.computePercentage(currentTotal, Global.TAX);
+        Money deliveryRate = Money.parse(Global.Unit.CURRENCY + " " + (tfDeliveryAmount.getText().isEmpty() ? "0.00" : tfDeliveryAmount.getText()));
+        return moneyService.computeTotalAmount(currentTotal, taxAmount, deliveryRate);
+    }
+
+    private Money showTotalAmountDue() {
+        String cashPayText = tfCashPay.getText();
+        Money cashPaid = Money.parse(cashPayText.isEmpty() ? "PHP 0.00" : Global.Unit.CURRENCY + " " + cashPayText);
+        return moneyService.computeTotalAmountDue(invoice.getTotalAmount(), cashPaid);
     }
 
     private void refreshItems() {
@@ -194,12 +228,14 @@ public class InvoiceController {
     }
 
     private void showInvoiceSummary() {
-        User user = userService.getCurrentUser();
-        lblSalesPerson.setText(user.getUsername());
+      /*  UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        lblSalesPerson.setText(user.getUsername());*/
+        lblTax.textProperty().bind(invoice.taxAmountProperty().asString());
         lblAmount.textProperty().bind(invoice.amountProperty().asString());
         lblTotalAmount.textProperty().bind(invoice.totalAmountProperty().asString());
         lblDiscountAmount.textProperty().bind(invoice.discountProperty().asString());
         lblAmountDue.textProperty().bind(invoice.totalAmountDueProperty().asString());
+        lblTotalBeforeTax.textProperty().bind(Bindings.createObjectBinding(this::showTotalBeforeTax, invoice.amountProperty(), tfDiscountPercent.textProperty()).asString());
     }
 
     private void initFieldValidation() {
@@ -227,6 +263,8 @@ public class InvoiceController {
 
 
     private void initDate() {
+        LocalDate todayDate = LocalDate.now();
+        System.out.println(todayDate);
         dpDate.setValue(LocalDate.now());
         dpDate.setConverter(new DateConverter());
     }
@@ -290,6 +328,15 @@ public class InvoiceController {
             spMain.requestFocus();
             tvInvoice.refresh();
         });
+    }
+
+    @FXML
+    private void onCreateInvoiceClick() {
+        invoice.setCreatedAt(dpDate.getValue().atTime(LocalTime.now()));
+        invoice.setInvoiceLineItems(tvInvoice.getItems());
+        Invoice savedInvoice = invoiceService.saveEntity(invoice);
+        savedInvoice.setName("INV-" + dpDate.getValue() + "-ID" + savedInvoice.getId());
+        invoiceService.saveEntity(savedInvoice);
     }
 
     @FXML
@@ -389,4 +436,5 @@ public class InvoiceController {
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
+
 }

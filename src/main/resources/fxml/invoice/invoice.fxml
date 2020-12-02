@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
-<?import com.jfoenix.validation.NumberValidator?>
-<?import com.jfoenix.validation.RegexValidator?>
-<?import com.jfoenix.validation.RequiredFieldValidator?>
+<?import com.jfoenix.validation.*?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
@@ -127,8 +125,9 @@
             <Label text="Amount:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
             <Label text="Discount:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
             <Label text="Discount amount:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-            <Label text="Tax Rate 3%" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-            <Label text="Delivery" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+            <Label text="Total before tax:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+            <Label text="Tax amount 3%:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+            <Label text="Delivery Rate:" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
 
             <Label fx:id="lblSalesPerson" alignment="CENTER" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1"
                    GridPane.hgrow="ALWAYS" GridPane.rowIndex="1"/>
@@ -146,26 +145,30 @@
             <Label fx:id="lblDiscountAmount" alignment="CENTER" maxWidth="1.7976931348623157E308" text="PHP 0.00"
                    GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 
-            <Label fx:id="lblTax" alignment="CENTER" maxWidth="1.7976931348623157E308" text="PHP 0.00"
+            <Label fx:id="lblTotalBeforeTax" alignment="CENTER" maxWidth="1.7976931348623157E308" text="PHP 0.00"
                    GridPane.columnIndex="1" GridPane.rowIndex="5"/>
 
-            <JFXTextField fx:id="tfDeliveryAmount" alignment="CENTER" styleClass="non-search-field" text="0"
-                          GridPane.columnIndex="1" GridPane.rowIndex="6" promptText="Enter delivery rate">
+            <Label fx:id="lblTax" alignment="CENTER" maxWidth="1.7976931348623157E308" text="PHP 0.00"
+                   GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+
+            <JFXTextField fx:id="tfDeliveryAmount" alignment="CENTER" styleClass="non-search-field" text="0.00"
+                          GridPane.columnIndex="1" GridPane.rowIndex="7" promptText="Enter Delivery Rate">
                 <cursor>
                     <Cursor fx:constant="HAND"/>
                 </cursor>
                 <validators>
                     <NumberValidator/>
+                    <RegexValidator regexPattern="^[1-9]\d*(\.\d{1,2})?$"/>
                 </validators>
             </JFXTextField>
 
-            <VBox styleClass="amount-container" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7">
+            <VBox styleClass="amount-container" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8">
                 <Label text="Amount Due"/>
                 <Label fx:id="lblAmountDue" alignment="CENTER" maxWidth="1.7976931348623157E308"
                        styleClass="label-amount" text="PHP 0.00"/>
             </VBox>
 
-            <VBox styleClass="amount-container" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7">
+            <VBox styleClass="amount-container" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8">
                 <Label text="Total"/>
                 <Label fx:id="lblTotalAmount" alignment="CENTER" maxWidth="1.7976931348623157E308"
                        styleClass="label-total" text="PHP 0.00"/>
@@ -183,9 +186,9 @@
                     <RegexValidator regexPattern="^[1-9]\d*(\.\d{1,2})?$"/>
                 </validators>
             </JFXTextField>
-            <JFXButton fx:id="btnCreateInvoice" alignment="CENTER" maxHeight="1.7976931348623157E308"
+            <JFXButton alignment="CENTER" maxHeight="1.7976931348623157E308"
                        maxWidth="1.7976931348623157E308" styleClass="button-amount" text="Create Invoice"
-                       HBox.hgrow="ALWAYS"/>
+                       HBox.hgrow="ALWAYS" onMouseClicked="#onCreateInvoiceClick"/>
             <padding>
                 <Insets bottom="7.0" left="7.0" right="7.0" top="7.0"/>
             </padding>
