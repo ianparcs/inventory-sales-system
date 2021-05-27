@@ -34,6 +34,8 @@ public class NavigationController {
     @FXML
     private JFXButton btnSales;
     @FXML
+    private JFXButton btnOrder;
+    @FXML
     private JFXButton btnLog;
     @FXML
     private VBox vbContainer;
@@ -51,6 +53,7 @@ public class NavigationController {
         states.put(State.SALE_REPORT, btnSales);
         states.put(State.CUSTOMER, btnCustomer);
         states.put(State.INVOICE, btnInvoice);
+        states.put(State.ORDER, btnOrder);
         states.put(State.LOG, btnLog);
 
         User currentUser = userService.getCurrentUser();

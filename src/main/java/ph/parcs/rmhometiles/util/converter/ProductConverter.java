@@ -5,18 +5,17 @@ import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.util.Global;
 
-public class ProductConverter extends StringConverter<BaseEntity> {
+public class ProductConverter extends StringConverter<Product> {
 
     private Product product;
 
-    public ProductConverter(BaseEntity baseEntity) {
-        this.product = (Product) baseEntity;
+    public ProductConverter(Product product) {
+        this.product = product;
     }
 
     @Override
-    public String toString(BaseEntity baseEntity) {
-        Product product = (Product) baseEntity;
-        if (baseEntity == null) return Global.STRING_EMPTY;
+    public String toString(Product product) {
+        if (product == null) return Global.STRING_EMPTY;
         return product.getCode();
     }
 

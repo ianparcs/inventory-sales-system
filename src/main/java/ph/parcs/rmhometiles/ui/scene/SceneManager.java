@@ -28,6 +28,7 @@ public class SceneManager {
         states.put(State.CUSTOMER, loadUI(State.CUSTOMER));
         states.put(State.DASHBOARD, loadUI(State.DASHBOARD));
         states.put(State.INVOICE, loadUI(State.INVOICE));
+        states.put(State.ORDER, loadUI(State.ORDER));
     }
 
     @SneakyThrows

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain"
+           xmlns="http://javafx.com/javafx/10.0.2-internal">
+
+    <VBox styleClass="background">
+
+        <Label maxWidth="1.7976931348623157E308" text="Manage Invoice"/>
+
+        <GridPane vgap="15" VBox.vgrow="ALWAYS">
+            <columnConstraints>
+                <ColumnConstraints halignment="LEFT" hgrow="ALWAYS"/>
+                <ColumnConstraints fillWidth="false" halignment="RIGHT" hgrow="ALWAYS"/>
+            </columnConstraints>
+
+            <HBox alignment="CENTER_LEFT" spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <Label text="Show"/>
+                <JFXComboBox fx:id="cbRowCount" prefWidth="75">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <Integer fx:value="5"/>
+                            <Integer fx:value="10"/>
+                            <Integer fx:value="15"/>
+                            <Integer fx:value="20"/>
+                            <Integer fx:value="30"/>
+                        </FXCollections>
+                    </items>
+                    <value>
+                        <Integer fx:value="5"/>
+                    </value>
+                </JFXComboBox>
+                <Label text="entries"/>
+            </HBox>
+
+            <HBox alignment="CENTER_RIGHT" spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <JFXButton styleClass="primary-button" text="Add Product">
+                    <graphic>
+                        <FontAwesomeIconView styleClass="user-icon"/>
+                    </graphic>
+                </JFXButton>
+                <JFXTextField fx:id="tfSearchItem" styleClass="search-field" promptText="Search"/>
+            </HBox>
+
+            <TableView fx:id="tvItem" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS"
+                       GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
+                <columns>
+                    <TableColumn maxWidth="50" minWidth="50" resizable="false" styleClass="id-column" text="#">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="id"/>
+                        </cellValueFactory>
+                    </TableColumn>
+
+                    <TableColumn reorderable="false" text="Code">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="name"/>
+                        </cellValueFactory>
+                    </TableColumn>
+
+                    <TableColumn reorderable="false" text="Description">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="description"/>
+                        </cellValueFactory>
+                    </TableColumn>
+
+                    <TableColumn fx:id="tcCategory" reorderable="false" text="Category">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="category"/>
+                        </cellValueFactory>
+                    </TableColumn>
+
+                    <TableColumn fx:id="tcSupplier" reorderable="false" text="Supplier">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="supplier"/>
+                        </cellValueFactory>
+                    </TableColumn>
+
+                    <TableColumn fx:id="tcStock" reorderable="false" text="Stock">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="stock"/>
+                        </cellValueFactory>
+                    </TableColumn>
+
+                    <TableColumn reorderable="false" text="Unit Sold">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="unitSold"/>
+                        </cellValueFactory>
+                    </TableColumn>
+
+                    <TableColumn fx:id="tcPrice" reorderable="false" text="Price">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="price"/>
+                        </cellValueFactory>
+                    </TableColumn>
+
+                    <TableColumn fx:id="tcImage" reorderable="false" resizable="false" sortable="false"
+                                 styleClass="action-column" text="Image">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="fileName"/>
+                        </cellValueFactory>
+                    </TableColumn>
+
+                    <TableColumn fx:id="tcAction" maxWidth="80" minWidth="35" reorderable="false"
+                                 resizable="false" sortable="false" styleClass="action-column" text="Action"/>
+                </columns>
+            </TableView>
+
+            <Label fx:id="lblPageEntries" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                   GridPane.valignment="TOP"/>
+            <Pagination fx:id="pagination" maxHeight="35.0" maxPageIndicatorCount="5" minHeight="35.0"
+                        prefHeight="35.0" GridPane.columnIndex="1" GridPane.rowIndex="2"
+                        GridPane.valignment="TOP"/>
+            <padding>
+                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+            </padding>
+            <rowConstraints>
+                <RowConstraints/>
+                <RowConstraints/>
+                <RowConstraints/>
+            </rowConstraints>
+            <padding>
+                <Insets bottom="15.0" left="25.0" right="25.0" top="15.0"/>
+            </padding>
+        </GridPane>
+    </VBox>
+</StackPane>

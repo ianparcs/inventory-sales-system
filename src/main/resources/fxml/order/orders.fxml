@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain" stylesheets="@../../css/invoice.css"
+           xmlns="http://javafx.com/javafx/10.0.2-internal"
+           fx:controller="ph.parcs.rmhometiles.entity.order.OrderController">
+
+    <fx:include source="../customer/edit-customer.fxml"/>
+    <GridPane hgap="12.0" styleClass="background" vgap="7.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="NEVER"/>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints/>
+            <RowConstraints/>
+            <RowConstraints/>
+        </rowConstraints>
+
+        <HBox maxWidth="1.7976931348623157E308" styleClass="tile-info" GridPane.columnIndex="0" GridPane.columnSpan="2"
+              GridPane.rowIndex="0">
+            <Label maxWidth="1.7976931348623157E308" styleClass="big-title" text="Create Order" HBox.hgrow="ALWAYS"/>
+            <JFXDatePicker fx:id="dpDate" promptText="Order Date Placed" HBox.hgrow="ALWAYS"/>
+        </HBox>
+
+        <HBox fillHeight="false" spacing="5" styleClass="tile-default" GridPane.columnIndex="0" GridPane.hgrow="NEVER"
+              GridPane.rowIndex="1" GridPane.vgrow="NEVER">
+            <JFXButton styleClass="primary-button">
+                <graphic>
+                    <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="18"/>
+                </graphic>
+            </JFXButton>
+            <JFXComboBox fx:id="cbProducts" editable="true" labelFloat="true" maxHeight="1.7976931348623157E308"
+                         maxWidth="1.7976931348623157E308" onAction="#onProductItemSearch" promptText="Search Item"
+                         styleClass="search-field" HBox.hgrow="ALWAYS"/>
+        </HBox>
+
+        <TableView fx:id="tvOrderItems" editable="true" maxWidth="1.7976931348623157E308" GridPane.columnIndex="0"
+                   GridPane.fillHeight="true" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2"
+                   GridPane.rowSpan="2147483647">
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+            </columnResizePolicy>
+            <columns>
+                <TableColumn fx:id="tcCode" reorderable="false" text="Code"/>
+                <TableColumn fx:id="tcStock" reorderable="false" styleClass="action-column" text="Stock"/>
+                <TableColumn fx:id="tcPrice" reorderable="false" styleClass="action-column" text="Price"/>
+                <TableColumn fx:id="tcQty" onEditCommit="#onQuantityEditCommit" reorderable="false"
+                             styleClass="quantity-column" text="Qty.">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="quantity"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="tcSubTotal" reorderable="false" styleClass="action-column" text="Amount">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="amount"/>
+                    </cellValueFactory>
+                </TableColumn>
+
+                <TableColumn fx:id="tcAction" reorderable="false" sortable="false" styleClass="action-column"
+                             text="Action"/>
+            </columns>
+        </TableView>
+
+        <fx:include source="../customer/search-customer.fxml" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                    GridPane.halignment="CENTER" GridPane.rowSpan="2"/>
+
+        <JFXButton alignment="TOP_CENTER" maxWidth="1.7976931348623157E308" styleClass="button-amount"
+                   GridPane.halignment="CENTER" GridPane.valignment="TOP"
+                   text="Create Order" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+    </GridPane>
+</StackPane>

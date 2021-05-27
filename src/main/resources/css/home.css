@@ -32,6 +32,10 @@
     -fx-background-radius: 2pt;
 }
 
+.transparent {
+    -fx-background-color: transparent;
+}
+
 .tile-default {
     -fx-padding: 20px;
     -fx-background-color: white;

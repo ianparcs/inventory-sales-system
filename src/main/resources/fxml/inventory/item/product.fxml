@@ -28,7 +28,7 @@
 
             <JFXButton styleClass="primary-button">
                 <graphic>
-                    <FontAwesomeIconView fill="WHITE" glyphName="SEARCH_PLUS" size="18"/>
+                    <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="18"/>
                 </graphic>
             </JFXButton>
 

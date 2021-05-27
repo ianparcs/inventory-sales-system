@@ -11,7 +11,9 @@ public enum State {
     LOG("/fxml/log/log.fxml"),
     ERROR("/fxml/main/error.fxml"),
     NAVIGATION("/fxml/main/navigation.fxml"),
-    CUSTOMER("/fxml/customer/customer.fxml");
+    CUSTOMER("/fxml/customer/customer.fxml"),
+    ORDER("/fxml/order/orders-tab.fxml");
+
 
     public final String path;
 

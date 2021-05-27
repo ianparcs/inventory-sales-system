@@ -21,24 +21,16 @@ import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import ph.parcs.rmhometiles.ItemListener;
 import ph.parcs.rmhometiles.entity.MoneyService;
-import ph.parcs.rmhometiles.entity.customer.Customer;
-import ph.parcs.rmhometiles.entity.customer.CustomerEditController;
-import ph.parcs.rmhometiles.entity.customer.CustomerService;
+import ph.parcs.rmhometiles.entity.customer.CustomerController;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
-import ph.parcs.rmhometiles.entity.inventory.item.EditItemController;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.inventory.product.ProductService;
 import ph.parcs.rmhometiles.entity.invoice.lineitems.InvoiceLineItem;
-import ph.parcs.rmhometiles.entity.user.UserService;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
-import ph.parcs.rmhometiles.ui.alert.SweetAlert;
-import ph.parcs.rmhometiles.ui.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.util.Global;
 import ph.parcs.rmhometiles.util.SnackbarLayoutFactory;
 import ph.parcs.rmhometiles.util.converter.DateConverter;
-import ph.parcs.rmhometiles.util.converter.NameConverter;
 import ph.parcs.rmhometiles.util.converter.NumberConverter;
 import ph.parcs.rmhometiles.util.converter.ProductConverter;
 
@@ -62,21 +54,15 @@ public class InvoiceController {
     @FXML
     private TableView<InvoiceLineItem> tvInvoice;
     @FXML
-    private JFXComboBox<BaseEntity> cbCustomer;
-    @FXML
-    private JFXComboBox<BaseEntity> cbProducts;
+    private JFXComboBox<Product> cbProducts;
     @FXML
     private JFXTextField tfDiscountPercent;
     @FXML
     private JFXTextField tfDeliveryAmount;
     @FXML
-    private JFXButton btnClearCustomer;
-    @FXML
     private JFXTextField tfCashPay;
     @FXML
     private JFXDatePicker dpDate;
-    @FXML
-    private JFXButton btnAddUser;
     @FXML
     private Label lblAmount;
     @FXML
@@ -86,28 +72,16 @@ public class InvoiceController {
     @FXML
     private Label lblDiscountAmount;
     @FXML
-    private Label lblSalesPerson;
-    @FXML
     private Label lblTotalAmount;
     @FXML
     private Label lblAmountDue;
     @FXML
-    private Label lblAddress;
-    @FXML
-    private Label lblContact;
-    @FXML
-    private Label lblName;
-    @FXML
     private Label lblTax;
 
-
-    private EditItemController<Customer> customerEditController;
-    private CustomerService customerService;
+    private CustomerController customerController;
     private ProductService productService;
     private InvoiceService invoiceService;
     private MoneyService moneyService;
-    private UserService userService;
-
     private Invoice invoice;
 
     @FXML
@@ -120,7 +94,6 @@ public class InvoiceController {
 
         setDiscountPercentInputValidation();
         initColumnCellValueFactory();
-        configureCustomerCombobox();
         configureProductCombobox();
         showInvoiceSummary();
 
@@ -129,6 +102,8 @@ public class InvoiceController {
 
         refreshItems();
         bindInvoiceFields();
+
+        customerController.setSpMain(spMain);
     }
 
     private void bindInvoiceFields() {
@@ -228,8 +203,6 @@ public class InvoiceController {
     }
 
     private void showInvoiceSummary() {
-      /*  UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        lblSalesPerson.setText(user.getUsername());*/
         lblTax.textProperty().bind(invoice.taxAmountProperty().asString());
         lblAmount.textProperty().bind(invoice.amountProperty().asString());
         lblTotalAmount.textProperty().bind(invoice.totalAmountProperty().asString());
@@ -251,7 +224,7 @@ public class InvoiceController {
         });
     }
 
-    public String getAmountValidatorMessage(ValidatorBase activeValidator) {
+    private String getAmountValidatorMessage(ValidatorBase activeValidator) {
         String validatorMessage = "Please input two decimal digits only";
         if (activeValidator instanceof NumberValidator) {
             validatorMessage = "Please enter numerical value only";
@@ -267,24 +240,6 @@ public class InvoiceController {
         System.out.println(todayDate);
         dpDate.setValue(LocalDate.now());
         dpDate.setConverter(new DateConverter());
-    }
-
-    private void configureCustomerCombobox() {
-        cbCustomer.setConverter(new NameConverter(cbCustomer.getValue()));
-        fillCustomerComboboxValues();
-    }
-
-    private void fillCustomerComboboxValues() {
-        cbCustomer.getEditor().textProperty().addListener((observable, oldVal, keyTyped) -> showCustomer(keyTyped));
-        cbCustomer.focusedProperty().addListener((observableValue, outOfFocus, focus) -> {
-            if (focus) showCustomer(Global.STRING_EMPTY);
-        });
-    }
-
-    private void showCustomer(String query) {
-        List<Customer> customers = customerService.findEntities(query);
-        cbCustomer.show();
-        Platform.runLater(() -> cbCustomer.getItems().setAll(FXCollections.observableArrayList(customers)));
     }
 
     private void configureProductCombobox() {
@@ -305,21 +260,10 @@ public class InvoiceController {
         Platform.runLater(() -> cbProducts.getItems().setAll(FXCollections.observableArrayList(products)));
     }
 
-    @FXML
-    private void fillUpCustomerDetails() {
-        Customer customer = (Customer) cbCustomer.getValue();
-        if (customer != null) {
-            lblAddress.setText(StringUtils.isEmpty(customer.getAddress()) ? "n/a" : customer.getAddress());
-            lblContact.setText(StringUtils.isEmpty(customer.getContact()) ? "n/a" : customer.getContact());
-            lblName.setText(StringUtils.isEmpty(customer.getName()) ? "n/a" : customer.getName());
-            btnClearCustomer.setVisible(true);
-            btnAddUser.setVisible(false);
-        }
-    }
 
     @FXML
     private void onProductItemClick() {
-        Product product = (Product) cbProducts.getValue();
+        Product product = cbProducts.getValue();
         if (product == null) return;
         tvInvoice.getItems().add(new InvoiceLineItem(product));
         Platform.runLater(() -> {
@@ -371,52 +315,6 @@ public class InvoiceController {
         return item;
     }
 
-    @FXML
-    private void clearCustomerDetails() {
-        cbCustomer.setValue(null);
-        cbCustomer.hide();
-
-        btnClearCustomer.setVisible(false);
-        btnAddUser.setVisible(true);
-        lblContact.setText("");
-        lblAddress.setText("");
-        lblName.setText("");
-    }
-
-    @FXML
-    private void showAddCustomer() {
-        customerEditController.onEditItem(new ItemListener<>() {
-            @Override
-            public void onSavedSuccess(Customer customer) {
-                if (customer != null) {
-                    cbCustomer.setValue(customer);
-                    lblAddress.setText(StringUtils.isEmpty(customer.getAddress()) ? "n/a" : customer.getAddress());
-                    lblContact.setText(StringUtils.isEmpty(customer.getContact()) ? "n/a" : customer.getContact());
-                }
-
-                SweetAlert successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
-                successAlert.setContentMessage(Global.Message.SAVED).show(spMain);
-                cbCustomer.hide();
-            }
-
-            @Override
-            public void onSaveFailed(Customer savedItem) {
-
-            }
-        }, new Customer());
-        customerEditController.showDialog(spMain);
-    }
-
-    @Autowired
-    public void setCustomerEditController(CustomerEditController customerEditController) {
-        this.customerEditController = customerEditController;
-    }
-
-    @Autowired
-    public void setCustomerService(CustomerService customerService) {
-        this.customerService = customerService;
-    }
-
     @Autowired
     public void setProductService(ProductService productService) {
         this.productService = productService;
@@ -433,8 +331,7 @@ public class InvoiceController {
     }
 
     @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
+    public void setCustomerController(CustomerController customerController) {
+        this.customerController = customerController;
     }
-
 }
