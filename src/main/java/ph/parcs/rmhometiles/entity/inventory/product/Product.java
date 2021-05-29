@@ -20,12 +20,12 @@ import javax.persistence.*;
 @AttributeOverride(name = "id", column = @Column(name = "product_id"))
 public class Product extends BaseEntity {
 
-    private ImageProduct imageProduct;
     private ObjectProperty<Supplier> supplier = new SimpleObjectProperty<>();
     private ObjectProperty<Category> category = new SimpleObjectProperty<>();
     private ObjectProperty<Stock> stock = new SimpleObjectProperty<>();
     private ObjectProperty<Money> price = new SimpleObjectProperty<>();
     private ObjectProperty<Money> cost = new SimpleObjectProperty<>();
+    private ImageProduct imageProduct;
 
     private StringProperty description = new SimpleStringProperty();
     private StringProperty code = new SimpleStringProperty();

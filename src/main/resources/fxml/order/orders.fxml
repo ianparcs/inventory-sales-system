@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain" stylesheets="@../../css/invoice.css"
            xmlns="http://javafx.com/javafx/10.0.2-internal"
-           fx:controller="ph.parcs.rmhometiles.entity.order.OrderController">
+           fx:controller="ph.parcs.rmhometiles.entity.order.OrdersController">
 
     <fx:include source="../customer/edit-customer.fxml"/>
     <GridPane hgap="12.0" styleClass="background" vgap="7.0">
@@ -26,7 +26,6 @@
         <HBox maxWidth="1.7976931348623157E308" styleClass="tile-info" GridPane.columnIndex="0" GridPane.columnSpan="2"
               GridPane.rowIndex="0">
             <Label maxWidth="1.7976931348623157E308" styleClass="big-title" text="Create Order" HBox.hgrow="ALWAYS"/>
-            <JFXDatePicker fx:id="dpDate" promptText="Order Date Placed" HBox.hgrow="ALWAYS"/>
         </HBox>
 
         <HBox fillHeight="false" spacing="5" styleClass="tile-default" GridPane.columnIndex="0" GridPane.hgrow="NEVER"
@@ -68,11 +67,12 @@
             </columns>
         </TableView>
 
-        <fx:include source="../customer/search-customer.fxml" GridPane.columnIndex="1" GridPane.rowIndex="1"
+        <fx:include fx:id="customer" source="../customer/search-customer.fxml" GridPane.columnIndex="1"
+                    GridPane.rowIndex="1"
                     GridPane.halignment="CENTER" GridPane.rowSpan="2"/>
 
         <JFXButton alignment="TOP_CENTER" maxWidth="1.7976931348623157E308" styleClass="button-amount"
-                   GridPane.halignment="CENTER" GridPane.valignment="TOP"
+                   GridPane.halignment="CENTER" GridPane.valignment="TOP" onAction="#createOrder"
                    text="Create Order" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
     </GridPane>
 </StackPane>

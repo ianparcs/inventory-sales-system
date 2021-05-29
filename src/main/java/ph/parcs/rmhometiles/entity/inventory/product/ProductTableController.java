@@ -91,15 +91,12 @@ public class ProductTableController extends EntityTableController<Product> {
         tcSupplier.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().supplierProperty(), "name"));
         tcCategory.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().categoryProperty(), "name"));
         tcUnitSold.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().stockProperty(), "unitSold"));
-        tcStock.setCellValueFactory(cellData -> {
-            Product product = cellData.getValue();
-            return Bindings.createObjectBinding(() -> {
-                Stock stock = product.getStock();
-                String value = stock.getStocks() + " ";
-                if (stock.getStockUnit() != null) value += stock.getStockUnit().getName();
-                return value.trim();
-            });
-        });
+
+        initStockColumnProperty();
+        initImageColumnProperty();
+    }
+
+    private void initImageColumnProperty() {
         tcImage.setCellFactory(tc -> {
             TableCell<Product, ImageProduct> cell = new TableCell<>() {
                 @SneakyThrows
@@ -107,7 +104,6 @@ public class ProductTableController extends EntityTableController<Product> {
                 protected void updateItem(ImageProduct productImage, boolean empty) {
                     setGraphic(null);
                     setUserData(null);
-
                     if (productImage != null) {
                         URL url = FileUtils.getResourcePath(productImage.getName());
                         Image picture = new Image(url.toURI().toString(), true);
@@ -125,16 +121,35 @@ public class ProductTableController extends EntityTableController<Product> {
                 try {
                     Image picture = new Image(url.toURI().toString(), true);
                     ImageView imageView = createImageView(picture, 600, 400);
-                    SweetAlert sweetAlert = SweetAlertFactory.create(SweetAlert.Type.INFO);
-                    sweetAlert.setHeaderMessage(imageProduct.getName());
-                    sweetAlert.setBody(imageView);
-                    sweetAlert.show(spMain);
+                    showAlert(imageView, imageProduct.getName());
                 } catch (URISyntaxException e) {
                     e.printStackTrace();
                 }
             });
             return cell;
         });
+    }
+
+    private void initStockColumnProperty() {
+        tcStock.setCellValueFactory(cellData -> {
+            Product product = cellData.getValue();
+            return Bindings.createObjectBinding(() -> {
+                Stock stock = product.getStock();
+                if (stock != null) {
+                    String value = stock.getStocks() + " ";
+                    if (stock.getStockUnit() != null) value += stock.getStockUnit().getName();
+                    return value.trim();
+                }
+                return "";
+            });
+        });
+    }
+
+    private void showAlert(ImageView imageView, String name) {
+        SweetAlert sweetAlert = SweetAlertFactory.create(SweetAlert.Type.INFO);
+        sweetAlert.setHeaderMessage(name);
+        sweetAlert.setBody(imageView);
+        sweetAlert.show(spMain);
     }
 
     private ImageView createImageView(Image image, int width, int height) {
@@ -144,17 +159,6 @@ public class ProductTableController extends EntityTableController<Product> {
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
         return imageView;
-    }
-
-    @FXML
-    private void showEditItemDialog() {
-        onEditActionClick(new Product());
-        editItemController.showDialog((StackPane) tvItem.getScene().getRoot());
-    }
-
-    @Autowired
-    public void setProductService(ProductService productService) {
-        this.baseService = productService;
     }
 
     private void createFakeData() {
@@ -170,6 +174,17 @@ public class ProductTableController extends EntityTableController<Product> {
         product.setCost(cost);
         product.setDescription("");
         baseService.saveEntity(product);
+    }
+
+    @FXML
+    private void showEditItemDialog() {
+        onEditActionClick(new Product());
+        editItemController.showDialog((StackPane) tvItem.getScene().getRoot());
+    }
+
+    @Autowired
+    public void setProductService(ProductService productService) {
+        this.baseService = productService;
     }
 
 }

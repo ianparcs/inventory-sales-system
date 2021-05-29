@@ -10,17 +10,19 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.StackPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import ph.parcs.rmhometiles.entity.customer.Customer;
 import ph.parcs.rmhometiles.entity.customer.CustomerController;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.inventory.product.ProductService;
-import ph.parcs.rmhometiles.entity.invoice.lineitems.InvoiceLineItem;
+import ph.parcs.rmhometiles.ui.alert.SweetAlert;
+import ph.parcs.rmhometiles.ui.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.util.Global;
 import ph.parcs.rmhometiles.util.converter.ProductConverter;
 
 import java.util.List;
 
 @Controller
-public class OrderController {
+public class OrdersController {
 
     @FXML
     private TableColumn<Orders, Integer> tcSubTotal;
@@ -35,14 +37,14 @@ public class OrderController {
     @FXML
     private JFXComboBox<Product> cbProducts;
     @FXML
-    private TableView<OrderItem> tvOrderItems;
-    @FXML
-    private JFXDatePicker dpDate;
+    private TableView<Product> tvOrderItems;
     @FXML
     private StackPane spMain;
 
+    @FXML
     private CustomerController customerController;
     private ProductService productService;
+    private OrdersService ordersService;
 
     @FXML
     public void initialize() {
@@ -69,17 +71,31 @@ public class OrderController {
     }
 
     @FXML
+    public void createOrder() {
+        Customer customer = customerController.getCustomer();
+        if (customer == null) showErrorDialog();
+        Orders orders = ordersService.createOrder(customer);
+        ordersService.saveEntity(orders);
+    }
+
+    @FXML
     public void onProductItemSearch() {
-       /* Product product = cbProducts.getValue();
+        Product product = cbProducts.getValue();
         if (product == null) return;
-        tvOrderItems.getItems().add(new OrderItem(product));
         Platform.runLater(() -> {
             cbProducts.valueProperty().set(null);
             cbProducts.hide();
             spMain.requestFocus();
-            tvInvoice.refresh();
-        });*/
+            tvOrderItems.getItems().add(product);
+            tvOrderItems.refresh();
+        });
+    }
 
+    private void showErrorDialog() {
+        SweetAlert alert = SweetAlertFactory.create(SweetAlert.Type.DANGER);
+        alert.setHeaderMessage("No customer selected");
+        alert.setContentMessage("Please select customer");
+        alert.show(spMain);
     }
 
     @Autowired
@@ -90,5 +106,10 @@ public class OrderController {
     @Autowired
     public void setProductService(ProductService productService) {
         this.productService = productService;
+    }
+
+    @Autowired
+    public void setOrdersService(OrdersService ordersService) {
+        this.ordersService = ordersService;
     }
 }

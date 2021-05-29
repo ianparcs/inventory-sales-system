@@ -27,18 +27,14 @@ public class Invoice extends BaseEntity {
     private ObjectProperty<Money> amount = new SimpleObjectProperty<>();
     private ObjectProperty<Orders> order = new SimpleObjectProperty<>();
 
-    public void setAmount(Money amount) {
-        this.amount.set(amount);
-    }
-
     @Column(name = "amount", precision = 8, scale = 2)
     @Type(type = Global.JADIRA_PACKAGE, parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "PHP")})
     public Money getAmount() {
         return amount.get();
     }
 
-    public void setTotalAmountDue(Money totalAmountDue) {
-        this.totalAmountDue.set(totalAmountDue);
+    public void setAmount(Money amount) {
+        this.amount.set(amount);
     }
 
     @Column(name = "amount_due", precision = 8, scale = 2)
@@ -47,8 +43,8 @@ public class Invoice extends BaseEntity {
         return totalAmountDue.get();
     }
 
-    public void setTotalAmount(Money totalAmount) {
-        this.totalAmount.set(totalAmount);
+    public void setTotalAmountDue(Money totalAmountDue) {
+        this.totalAmountDue.set(totalAmountDue);
     }
 
     @Column(name = "total_amount", precision = 8, scale = 2)
@@ -57,8 +53,8 @@ public class Invoice extends BaseEntity {
         return totalAmount.get();
     }
 
-    public void setDiscount(Money discount) {
-        this.discount.set(discount);
+    public void setTotalAmount(Money totalAmount) {
+        this.totalAmount.set(totalAmount);
     }
 
     @Column(name = "discount_amount", precision = 8, scale = 2)
@@ -67,8 +63,8 @@ public class Invoice extends BaseEntity {
         return discount.get();
     }
 
-    public void setTaxAmount(Money taxAmount) {
-        this.taxAmount.set(taxAmount);
+    public void setDiscount(Money discount) {
+        this.discount.set(discount);
     }
 
     @Column(name = "tax_amount", precision = 8, scale = 2)
@@ -77,9 +73,8 @@ public class Invoice extends BaseEntity {
         return taxAmount.get();
     }
 
-
-    public void setOrder(Orders order) {
-        this.order.set(order);
+    public void setTaxAmount(Money taxAmount) {
+        this.taxAmount.set(taxAmount);
     }
 
     @OneToOne
@@ -88,13 +83,17 @@ public class Invoice extends BaseEntity {
         return order.get();
     }
 
-    public void setInvoiceLineItems(ObservableList<InvoiceLineItem> invoiceLineItems) {
-        this.invoiceLineItems.set(invoiceLineItems);
+    public void setOrder(Orders order) {
+        this.order.set(order);
     }
 
     @Transient
     public ObservableList<InvoiceLineItem> getInvoiceLineItems() {
         return invoiceLineItems.get();
+    }
+
+    public void setInvoiceLineItems(ObservableList<InvoiceLineItem> invoiceLineItems) {
+        this.invoiceLineItems.set(invoiceLineItems);
     }
 
     @Transient

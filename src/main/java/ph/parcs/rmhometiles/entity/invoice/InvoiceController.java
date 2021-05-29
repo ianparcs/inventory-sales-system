@@ -23,7 +23,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import ph.parcs.rmhometiles.entity.MoneyService;
 import ph.parcs.rmhometiles.entity.customer.CustomerController;
-import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.inventory.product.ProductService;
 import ph.parcs.rmhometiles.entity.invoice.lineitems.InvoiceLineItem;
@@ -78,7 +77,7 @@ public class InvoiceController {
     @FXML
     private Label lblTax;
 
-    private CustomerController customerController;
+    private CustomerController invoiceCustomerController;
     private ProductService productService;
     private InvoiceService invoiceService;
     private MoneyService moneyService;
@@ -103,7 +102,7 @@ public class InvoiceController {
         refreshItems();
         bindInvoiceFields();
 
-        customerController.setSpMain(spMain);
+        invoiceCustomerController.setSpMain(spMain);
     }
 
     private void bindInvoiceFields() {
@@ -331,7 +330,7 @@ public class InvoiceController {
     }
 
     @Autowired
-    public void setCustomerController(CustomerController customerController) {
-        this.customerController = customerController;
+    public void setCustomerController(CustomerController invoiceCustomerController) {
+        this.invoiceCustomerController = invoiceCustomerController;
     }
 }

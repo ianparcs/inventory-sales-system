@@ -34,9 +34,9 @@ public class MoneyService {
 
     public Money computeTotalAmount(Money currentTotal, Money taxAmount, Money deliveryRate) {
         Money totalAmount = currentTotal.minus(taxAmount);
-        if(totalAmount.isGreaterThan(deliveryRate)){
+        if (totalAmount.isGreaterThan(deliveryRate)) {
             totalAmount.minus(deliveryRate);
-        }else{
+        } else {
             deliveryRate.minus(totalAmount);
         }
         return currentTotal.minus(taxAmount).minus(deliveryRate);

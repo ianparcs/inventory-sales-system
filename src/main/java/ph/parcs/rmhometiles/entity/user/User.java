@@ -23,48 +23,48 @@ public class User {
         return id.get();
     }
 
-    public IntegerProperty idProperty() {
-        return id;
-    }
-
     public void setId(int id) {
         this.id.set(id);
+    }
+
+    public IntegerProperty idProperty() {
+        return id;
     }
 
     public String getUsername() {
         return username.get();
     }
 
-    public StringProperty usernameProperty() {
-        return username;
-    }
-
     public void setUsername(String username) {
         this.username.set(username);
+    }
+
+    public StringProperty usernameProperty() {
+        return username;
     }
 
     public String getPassword() {
         return password.get();
     }
 
-    public StringProperty passwordProperty() {
-        return password;
-    }
-
     public void setPassword(String password) {
         this.password.set(password);
+    }
+
+    public StringProperty passwordProperty() {
+        return password;
     }
 
     public String getRole() {
         return role.get();
     }
 
-    public StringProperty roleProperty() {
-        return role;
-    }
-
     public void setRole(String role) {
         this.role.set(role);
+    }
+
+    public StringProperty roleProperty() {
+        return role;
     }
 
 

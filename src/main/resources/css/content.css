@@ -94,7 +94,7 @@ TableView .column-header.quantity-column > .label {
     -fx-cursor: default;
 }
 
-TableView .quantity-column{
+TableView .quantity-column {
     -fx-text-fill: blueberries;
     -fx-alignment: center;
     -fx-cursor: hand;

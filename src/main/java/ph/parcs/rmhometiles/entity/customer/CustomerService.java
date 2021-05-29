@@ -10,8 +10,6 @@ import ph.parcs.rmhometiles.entity.inventory.item.BaseService;
 @Transactional(propagation = Propagation.REQUIRED)
 public class CustomerService extends BaseService<Customer> {
 
-    private CustomerRepository customerRepository;
-
     @Override
     public Customer createDefault() {
         Customer customer = new Customer();
@@ -23,7 +21,6 @@ public class CustomerService extends BaseService<Customer> {
     @Autowired
     public void setItemRepository(CustomerRepository customerRepository) {
         this.entityRepository = customerRepository;
-        this.customerRepository = (CustomerRepository) entityRepository;
     }
 
 }

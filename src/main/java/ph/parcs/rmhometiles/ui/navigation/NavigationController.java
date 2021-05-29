@@ -64,6 +64,7 @@ public class NavigationController {
                 vbContainer.getChildren().remove(btnSales);
             }
         }
+
         states.forEach((key, value) -> value.setOnAction(actionEvent -> {
             new Thread(new Runnable() {
                 @Override

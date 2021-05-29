@@ -33,13 +33,13 @@ public abstract class BaseEntity {
         this.id.set(id);
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt.set(createdAt);
-    }
-
     @Column(name = "created_at", columnDefinition = "TIMESTAMP")
     public LocalDateTime getCreatedAt() {
         return createdAt.get();
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt.set(createdAt);
     }
 
     @Column(name = "updated_at", columnDefinition = "TIMESTAMP")
@@ -47,11 +47,11 @@ public abstract class BaseEntity {
         return updatedAt.get();
     }
 
-    public ObjectProperty<LocalDateTime> updatedAtProperty() {
-        return updatedAt;
-    }
-
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt.set(updatedAt);
+    }
+
+    public ObjectProperty<LocalDateTime> updatedAtProperty() {
+        return updatedAt;
     }
 }
