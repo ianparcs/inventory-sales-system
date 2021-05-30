@@ -5,52 +5,50 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<StackPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="1.7976931348623157E308"
-           maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/10.0.2-internal"
-           fx:controller="ph.parcs.rmhometiles.entity.customer.CustomerController">
-    <VBox spacing="7">
-        <HBox maxWidth="1.7976931348623157E308" spacing="5.0" styleClass="tile-default">
-            <StackPane>
-                <JFXButton fx:id="btnClearCustomer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                           onAction="#clearCustomerDetails" styleClass="primary-button-close" visible="false">
-                    <graphic>
-                        <FontAwesomeIconView styleClass="clear-icon"/>
-                    </graphic>
-                </JFXButton>
-                <JFXButton fx:id="btnAddUser" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                           onAction="#showAddCustomer" styleClass="primary-button">
-                    <graphic>
-                        <FontAwesomeIconView styleClass="user-icon"/>
-                    </graphic>
-                </JFXButton>
-            </StackPane>
+<VBox xmlns:fx="http://javafx.com/fxml/1" spacing="7" maxHeight="1.7976931348623157E308"
+      maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/10.0.2-internal"
+      fx:controller="ph.parcs.rmhometiles.entity.customer.CustomerController">
+    <HBox maxWidth="1.7976931348623157E308" spacing="5.0" styleClass="tile-default">
+        <StackPane>
+            <JFXButton fx:id="btnClearCustomer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                       onAction="#clearCustomerDetails" styleClass="primary-button-close" visible="false">
+                <graphic>
+                    <FontAwesomeIconView styleClass="clear-icon"/>
+                </graphic>
+            </JFXButton>
+            <JFXButton fx:id="btnAddUser" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                       onAction="#showAddCustomer" styleClass="primary-button">
+                <graphic>
+                    <FontAwesomeIconView styleClass="user-icon"/>
+                </graphic>
+            </JFXButton>
+        </StackPane>
 
-            <JFXComboBox fx:id="cbCustomer" editable="true" labelFloat="true" maxHeight="1.7976931348623157E308"
-                         maxWidth="1.7976931348623157E308" onAction="#fillUpCustomerDetails"
-                         promptText="Search Customer" styleClass="search-field" HBox.hgrow="ALWAYS"/>
-        </HBox>
+        <JFXComboBox fx:id="cbCustomer" editable="true" labelFloat="true" maxHeight="1.7976931348623157E308"
+                     maxWidth="1.7976931348623157E308" onAction="#fillUpCustomerDetails"
+                     promptText="Search Customer" styleClass="search-field" HBox.hgrow="ALWAYS"/>
+    </HBox>
 
-        <GridPane styleClass="tile-info" vgap="10" GridPane.columnIndex="0" GridPane.rowIndex="1">
-            <columnConstraints>
-                <ColumnConstraints halignment="LEFT" hgrow="ALWAYS"/>
-                <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS"/>
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints/>
-                <RowConstraints/>
-                <RowConstraints/>
-                <RowConstraints/>
-            </rowConstraints>
+    <GridPane styleClass="tile-info" vgap="10" GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <columnConstraints>
+            <ColumnConstraints halignment="LEFT" hgrow="ALWAYS"/>
+            <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints/>
+            <RowConstraints/>
+            <RowConstraints/>
+            <RowConstraints/>
+        </rowConstraints>
 
-            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="small-title"
-                   text="Customer Details" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0"/>
-            <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-            <Label text="Contact:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-            <Label text="Address:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="small-title"
+               text="Customer Details" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0"/>
+        <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <Label text="Contact:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <Label text="Address:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
 
-            <Label fx:id="lblName" alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-            <Label fx:id="lblContact" alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-            <Label fx:id="lblAddress" alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-        </GridPane>
-    </VBox>
-</StackPane>
+        <Label fx:id="lblName" alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <Label fx:id="lblContact" alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        <Label fx:id="lblAddress" alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+    </GridPane>
+</VBox>

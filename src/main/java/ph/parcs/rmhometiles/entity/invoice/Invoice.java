@@ -8,7 +8,7 @@ import javafx.collections.ObservableList;
 import org.hibernate.annotations.Type;
 import org.joda.money.Money;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
-import ph.parcs.rmhometiles.entity.invoice.lineitems.InvoiceLineItem;
+import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.entity.order.Orders;
 import ph.parcs.rmhometiles.util.Global;
 
@@ -19,7 +19,7 @@ import javax.persistence.*;
 @AttributeOverride(name = "id", column = @Column(name = "invoice_id"))
 public class Invoice extends BaseEntity {
 
-    private ListProperty<InvoiceLineItem> invoiceLineItems = new SimpleListProperty<>();
+    private ListProperty<OrderItem> orderItems = new SimpleListProperty<>();
     private ObjectProperty<Money> totalAmountDue = new SimpleObjectProperty<>();
     private ObjectProperty<Money> totalAmount = new SimpleObjectProperty<>();
     private ObjectProperty<Money> taxAmount = new SimpleObjectProperty<>();
@@ -88,12 +88,12 @@ public class Invoice extends BaseEntity {
     }
 
     @Transient
-    public ObservableList<InvoiceLineItem> getInvoiceLineItems() {
-        return invoiceLineItems.get();
+    public ObservableList<OrderItem> getOrderItems() {
+        return orderItems.get();
     }
 
-    public void setInvoiceLineItems(ObservableList<InvoiceLineItem> invoiceLineItems) {
-        this.invoiceLineItems.set(invoiceLineItems);
+    public void setOrderItems(ObservableList<OrderItem> orderItems) {
+        this.orderItems.set(orderItems);
     }
 
     @Transient

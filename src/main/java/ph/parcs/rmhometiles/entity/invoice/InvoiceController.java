@@ -25,7 +25,7 @@ import ph.parcs.rmhometiles.entity.MoneyService;
 import ph.parcs.rmhometiles.entity.customer.CustomerController;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.inventory.product.ProductService;
-import ph.parcs.rmhometiles.entity.invoice.lineitems.InvoiceLineItem;
+import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.util.Global;
 import ph.parcs.rmhometiles.util.SnackbarLayoutFactory;
@@ -41,17 +41,17 @@ import java.util.List;
 public class InvoiceController {
 
     @FXML
-    private TableColumn<InvoiceLineItem, Integer> tcStock;
+    private TableColumn<OrderItem, Integer> tcStock;
     @FXML
-    private TableColumn<InvoiceLineItem, HBox> tcAction;
+    private TableColumn<OrderItem, HBox> tcAction;
     @FXML
-    private TableColumn<InvoiceLineItem, Integer> tcQty;
+    private TableColumn<OrderItem, Integer> tcQty;
     @FXML
-    private TableColumn<InvoiceLineItem, String> tcCode;
+    private TableColumn<OrderItem, String> tcCode;
     @FXML
-    private TableColumn<InvoiceLineItem, Money> tcPrice;
+    private TableColumn<OrderItem, Money> tcPrice;
     @FXML
-    private TableView<InvoiceLineItem> tvInvoice;
+    private TableView<OrderItem> tvInvoice;
     @FXML
     private JFXComboBox<Product> cbProducts;
     @FXML
@@ -86,7 +86,7 @@ public class InvoiceController {
     @FXML
     public void initialize() {
         invoice = new Invoice();
-        invoice.setInvoiceLineItems(tvInvoice.getItems());
+        invoice.setOrderItems(tvInvoice.getItems());
 
         setNumberInputFormatter(tfDeliveryAmount);
         setNumberInputFormatter(tfCashPay);
@@ -148,7 +148,7 @@ public class InvoiceController {
 
     private Money showItemLineAmounts() {
         return tvInvoice.getItems().stream()
-                .map(InvoiceLineItem::getAmount)
+                .map(OrderItem::getAmount)
                 .reduce(Money.parse("PHP 0.00"), Money::plus);
     }
 
@@ -264,7 +264,7 @@ public class InvoiceController {
     private void onProductItemClick() {
         Product product = cbProducts.getValue();
         if (product == null) return;
-        tvInvoice.getItems().add(new InvoiceLineItem(product));
+        tvInvoice.getItems().add(new OrderItem(product));
         Platform.runLater(() -> {
             cbProducts.valueProperty().set(null);
             cbProducts.hide();
@@ -276,15 +276,15 @@ public class InvoiceController {
     @FXML
     private void onCreateInvoiceClick() {
         invoice.setCreatedAt(dpDate.getValue().atTime(LocalTime.now()));
-        invoice.setInvoiceLineItems(tvInvoice.getItems());
+        invoice.setOrderItems(tvInvoice.getItems());
         Invoice savedInvoice = invoiceService.saveEntity(invoice);
         savedInvoice.setName("INV-" + dpDate.getValue() + "-ID" + savedInvoice.getId());
         invoiceService.saveEntity(savedInvoice);
     }
 
     @FXML
-    public void onQuantityEditCommit(TableColumn.CellEditEvent<InvoiceLineItem, Integer> event) {
-        InvoiceLineItem lineItem = event.getTableView().getItems().get(event.getTablePosition().getRow());
+    public void onQuantityEditCommit(TableColumn.CellEditEvent<OrderItem, Integer> event) {
+        OrderItem lineItem = event.getTableView().getItems().get(event.getTablePosition().getRow());
         int stocks = lineItem.getProduct().getStock().getStocks();
         int quantity = event.getNewValue();
         if (quantity > stocks) {
@@ -308,7 +308,7 @@ public class InvoiceController {
                 snackbarLayout, Duration.millis(3000)));
     }
 
-    private InvoiceLineItem onItemDeleteAction(InvoiceLineItem item) {
+    private OrderItem onItemDeleteAction(OrderItem item) {
         tvInvoice.getItems().remove(item);
         tvInvoice.refresh();
         return item;

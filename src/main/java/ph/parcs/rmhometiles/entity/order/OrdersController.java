@@ -1,12 +1,10 @@
 package ph.parcs.rmhometiles.entity.order;
 
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDatePicker;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,24 +23,12 @@ import java.util.List;
 public class OrdersController {
 
     @FXML
-    private TableColumn<Orders, Integer> tcSubTotal;
-    @FXML
-    private TableColumn<Orders, String> tcPrice;
-    @FXML
-    private TableColumn<Orders, String> tcStock;
-    @FXML
-    private TableColumn<Orders, String> tcCode;
-    @FXML
-    private TableColumn<Orders, String> tcQty;
+    private CustomerController customerController;
     @FXML
     private JFXComboBox<Product> cbProducts;
     @FXML
-    private TableView<Product> tvOrderItems;
-    @FXML
     private StackPane spMain;
 
-    @FXML
-    private CustomerController customerController;
     private ProductService productService;
     private OrdersService ordersService;
 
@@ -50,10 +36,6 @@ public class OrdersController {
     public void initialize() {
         customerController.setSpMain(spMain);
         fillProductComboboxValues();
-    }
-
-    public void onQuantityEditCommit(TableColumn.CellEditEvent cellEditEvent) {
-
     }
 
     private void fillProductComboboxValues() {
@@ -86,8 +68,8 @@ public class OrdersController {
             cbProducts.valueProperty().set(null);
             cbProducts.hide();
             spMain.requestFocus();
-            tvOrderItems.getItems().add(product);
-            tvOrderItems.refresh();
+  /*          tvOrderItems.getItems().add(product);
+            tvOrderItems.refresh();*/
         });
     }
 

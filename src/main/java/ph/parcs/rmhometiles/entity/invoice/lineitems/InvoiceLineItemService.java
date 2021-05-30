@@ -3,35 +3,36 @@ package ph.parcs.rmhometiles.entity.invoice.lineitems;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseService;
+import ph.parcs.rmhometiles.entity.order.OrderItem;
 
 import java.util.List;
 
 @Service
-public class InvoiceLineItemService extends BaseService<InvoiceLineItem> {
+public class InvoiceLineItemService extends BaseService<OrderItem> {
 
     @Override
-    public Page<InvoiceLineItem> findPages(int page, int itemPerPage, String name) {
+    public Page<OrderItem> findPages(int page, int itemPerPage, String name) {
         return null;
     }
 
     @Override
-    public List<InvoiceLineItem> findEntities(String query) {
+    public List<OrderItem> findEntities(String query) {
         return null;
     }
 
     @Override
-    public boolean deleteEntity(InvoiceLineItem item) {
+    public boolean deleteEntity(OrderItem item) {
         return false;
     }
 
     @Override
-    public InvoiceLineItem saveEntity(InvoiceLineItem item) {
+    public OrderItem saveEntity(OrderItem item) {
         return null;
     }
 
 
     @Override
-    public InvoiceLineItem createDefault() {
+    public OrderItem createDefault() {
         return null;
     }
 }

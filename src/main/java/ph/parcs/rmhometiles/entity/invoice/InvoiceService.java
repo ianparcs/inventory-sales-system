@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseService;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.inventory.product.ProductRepository;
-import ph.parcs.rmhometiles.entity.invoice.lineitems.InvoiceLineItem;
+import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.util.PageUtil;
 
 import java.util.List;
@@ -43,8 +43,8 @@ public class InvoiceService extends BaseService<Invoice> {
         return invoiceRepository.save(invoice);
     }
 
-    public void updateLineItems(ObservableList<InvoiceLineItem> items) {
-        for (InvoiceLineItem item : items) {
+    public void updateLineItems(ObservableList<OrderItem> items) {
+        for (OrderItem item : items) {
             if (item.getProduct() != null) {
                 Product result = productRepository.findById(item.getProduct().getId()).orElse(null);
                 item.setProduct(result);
