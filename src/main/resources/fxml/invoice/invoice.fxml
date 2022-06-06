@@ -13,10 +13,10 @@
            fx:controller="ph.parcs.rmhometiles.entity.invoice.InvoiceController">
 
     <fx:include source="../customer/edit-customer.fxml"/>
-    <GridPane hgap="12.0" styleClass="background" vgap="7.0">
+    <GridPane hgap="12.0" styleClass="background" vgap="7.0" maxWidth="1.7976931348623157E308">
         <columnConstraints>
             <ColumnConstraints hgrow="NEVER"/>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES"/>
+            <ColumnConstraints hgrow="NEVER"/>
         </columnConstraints>
         <rowConstraints>
             <RowConstraints/>
@@ -25,8 +25,9 @@
         </rowConstraints>
 
         <HBox maxWidth="1.7976931348623157E308" styleClass="tile-info" GridPane.columnIndex="0" GridPane.columnSpan="2"
-              GridPane.rowIndex="0">
+              GridPane.rowIndex="0" spacing="5">
             <Label maxWidth="1.7976931348623157E308" styleClass="big-title" text="New Invoice" HBox.hgrow="ALWAYS"/>
+            <JFXButton fx:id="btnClearAll" onAction="#clearAllInvoice" styleClass="primary-button" text="Clear All"/>
             <JFXDatePicker fx:id="dpDate" promptText="Invoice Date" HBox.hgrow="ALWAYS"/>
         </HBox>
 
@@ -83,6 +84,7 @@
             <Label text="Discount:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
             <Label text="Discount amount:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
             <Label text="Total before tax:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+            <Label text="Tax amount 3%:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
             <Label text="Tax amount 3%:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
             <Label text="Delivery Rate:" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
 
@@ -153,13 +155,13 @@
             <JFXTextField fx:id="tfCashPay" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
                           promptText="Enter Cash Amount" styleClass="text-field-amount">
                 <validators>
-                    <NumberValidator/>
                     <RequiredFieldValidator/>
+                    <NumberValidator/>
                     <RegexValidator regexPattern="^[1-9]\d*(\.\d{1,2})?$"/>
                 </validators>
             </JFXTextField>
             <JFXButton alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                       onMouseClicked="#onCreateInvoiceClick" styleClass="button-amount" text="Create Invoice"
+                       onMouseClicked="#onCheckout" styleClass="button-amount" text="Checkout"
                        HBox.hgrow="ALWAYS"/>
             <padding>
                 <Insets bottom="7.0" left="7.0" right="7.0" top="7.0"/>

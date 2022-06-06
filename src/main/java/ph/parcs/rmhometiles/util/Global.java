@@ -28,6 +28,8 @@ public interface Global {
         String DELETE = "Item successfully removed";
         String ASK = "Are you sure?";
         String QUANTITY_EXCEED = "Quantity must not exceed stocks";
+        String ENTER_CUSTOMER = "Please select a customer";
+
     }
 
 }

@@ -11,6 +11,8 @@ import javafx.scene.layout.StackPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.State;
+import ph.parcs.rmhometiles.entity.customer.Customer;
+import ph.parcs.rmhometiles.entity.customer.CustomerService;
 import ph.parcs.rmhometiles.entity.user.User;
 import ph.parcs.rmhometiles.entity.user.UserService;
 import ph.parcs.rmhometiles.ui.alert.SweetAlert;
@@ -37,12 +39,20 @@ public class LoginController {
     private UserService userService;
     private SceneManager sceneManager;
 
+    @Autowired
+    private CustomerService customerService;
+
     @FXML
     private void initialize() {
-        userService.saveUser(createUser());
+        //userService.saveUser(createUser());
         setUserFieldStyle(pfUserPassword, icoKey);
         setUserFieldStyle(tfUserName, icoUser);
         btnLogin.fire();
+        Customer customer = new Customer();
+        customer.setName("IAN");
+        customer.setContact("tEST");
+
+        customerService.saveEntity(customer);
     }
 
     private void setUserFieldStyle(TextField textField, FontAwesomeIconView icon) {

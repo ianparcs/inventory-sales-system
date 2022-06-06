@@ -1,6 +1,6 @@
 package ph.parcs.rmhometiles.entity.customer;
 
-import ph.parcs.rmhometiles.entity.order.Orders;
+import ph.parcs.rmhometiles.entity.invoice.Invoice;
 import ph.parcs.rmhometiles.entity.user.Person;
 
 import javax.persistence.*;
@@ -11,14 +11,14 @@ import java.util.Set;
 @AttributeOverride(name = "id", column = @Column(name = "customer_id"))
 public class Customer extends Person {
 
-    private Set<Orders> orders;
+    private Set<Invoice> invoices;
 
     @OneToMany(mappedBy = "customer")
-    public Set<Orders> getOrders() {
-        return orders;
+    public Set<Invoice> getInvoices() {
+        return invoices;
     }
 
-    public void setOrders(Set<Orders> orders) {
-        this.orders = orders;
+    public void setInvoices(Set<Invoice> invoices) {
+        this.invoices = invoices;
     }
 }

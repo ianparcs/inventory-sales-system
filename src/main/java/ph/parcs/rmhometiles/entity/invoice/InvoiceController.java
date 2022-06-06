@@ -2,6 +2,7 @@ package ph.parcs.rmhometiles.entity.invoice;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.NumberValidator;
+import com.jfoenix.validation.RegexValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
 import com.jfoenix.validation.base.ValidatorBase;
 import javafx.application.Platform;
@@ -22,11 +23,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import ph.parcs.rmhometiles.entity.MoneyService;
+import ph.parcs.rmhometiles.entity.customer.Customer;
 import ph.parcs.rmhometiles.entity.customer.CustomerController;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.inventory.product.ProductService;
 import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
+import ph.parcs.rmhometiles.ui.alert.SweetAlert;
+import ph.parcs.rmhometiles.ui.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.util.Global;
 import ph.parcs.rmhometiles.util.SnackbarLayoutFactory;
 import ph.parcs.rmhometiles.util.converter.DateConverter;
@@ -77,7 +81,7 @@ public class InvoiceController {
     @FXML
     private Label lblTax;
 
-    private CustomerController invoiceCustomerController;
+    private CustomerController customerController;
     private ProductService productService;
     private InvoiceService invoiceService;
     private MoneyService moneyService;
@@ -88,32 +92,32 @@ public class InvoiceController {
         invoice = new Invoice();
         invoice.setOrderItems(tvInvoice.getItems());
 
-        setNumberInputFormatter(tfDeliveryAmount);
-        setNumberInputFormatter(tfCashPay);
-
-        setDiscountPercentInputValidation();
+        initNumberInputFormatter(tfDeliveryAmount);
+        initNumberInputFormatter(tfCashPay);
+        initDiscountNumberFormatter();
         initColumnCellValueFactory();
-        configureProductCombobox();
-        showInvoiceSummary();
-
+        initProductSearchBox();
         initFieldValidation();
+        initInvoiceProperty();
+        initInvoiceProperties();
         initDate();
 
         refreshItems();
-        bindInvoiceFields();
 
-        invoiceCustomerController.setSpMain(spMain);
+        customerController.setCustomer(null);
+        customerController.setSpMain(spMain);
+        tfCashPay.clear();
     }
 
-    private void bindInvoiceFields() {
+    private void initInvoiceProperty() {
         invoice.amountProperty().bind(Bindings.createObjectBinding(this::showItemLineAmounts, tvInvoice.getItems()));
         invoice.discountProperty().bind(Bindings.createObjectBinding(this::showDiscountAmount, tfDiscountPercent.textProperty(), invoice.amountProperty()));
         invoice.taxAmountProperty().bind(Bindings.createObjectBinding(this::showTaxAmount, tfDiscountPercent.textProperty(), invoice.amountProperty()));
         invoice.totalAmountDueProperty().bind(Bindings.createObjectBinding(this::showTotalAmountDue, invoice.amountProperty(), tfCashPay.textProperty()));
-        invoice.totalAmountProperty().bind(Bindings.createObjectBinding(this::showTotalAmount, invoice.amountProperty(), tfDeliveryAmount.textProperty()));
+        invoice.totalAmountProperty().bind(Bindings.createObjectBinding(this::showTotalAmount, invoice.amountProperty(), tfDeliveryAmount.textProperty(), tfDiscountPercent.textProperty()));
     }
 
-    private void setDiscountPercentInputValidation() {
+    private void initDiscountNumberFormatter() {
         tfDiscountPercent.setTextFormatter(new TextFormatter<String>((TextFormatter.Change change) -> {
             String newText = change.getControlNewText();
             if (newText.matches(Global.Regex.DECIMAL_PERCENT)) {
@@ -124,7 +128,7 @@ public class InvoiceController {
         setDiscountPercentTextBehavior();
     }
 
-    private void setNumberInputFormatter(JFXTextField textField) {
+    private void initNumberInputFormatter(JFXTextField textField) {
         textField.setTextFormatter(new TextFormatter<String>((TextFormatter.Change change) -> {
             String newText = change.getControlNewText();
             if (newText.matches(Global.Regex.DECIMAL)) {
@@ -156,7 +160,7 @@ public class InvoiceController {
     private Money showDiscountAmount() {
         Money amount = invoice.getAmount();
         if (StringUtils.isEmpty(tfDiscountPercent.getText())) return Money.parse("PHP 0.00");
-        return moneyService.computePercentage(amount, tfDiscountPercent.getText());
+        return moneyService.computeDiscount(amount, tfDiscountPercent.getText());
     }
 
     private Money showTotalBeforeTax() {
@@ -167,12 +171,12 @@ public class InvoiceController {
     @SneakyThrows
     private Money showTaxAmount() {
         Money totalBeforeTax = showTotalBeforeTax();
-        return moneyService.computePercentage(totalBeforeTax, Global.TAX);
+        return moneyService.computeDiscount(totalBeforeTax, Global.TAX);
     }
 
     private Money showTotalAmount() {
         Money currentTotal = showTotalBeforeTax();
-        Money taxAmount = moneyService.computePercentage(currentTotal, Global.TAX);
+        Money taxAmount = moneyService.computeDiscount(currentTotal, Global.TAX);
         Money deliveryRate = Money.parse(Global.Unit.CURRENCY + " " + (tfDeliveryAmount.getText().isEmpty() ? "0.00" : tfDeliveryAmount.getText()));
         return moneyService.computeTotalAmount(currentTotal, taxAmount, deliveryRate);
     }
@@ -201,7 +205,7 @@ public class InvoiceController {
 
     }
 
-    private void showInvoiceSummary() {
+    private void initInvoiceProperties() {
         lblTax.textProperty().bind(invoice.taxAmountProperty().asString());
         lblAmount.textProperty().bind(invoice.amountProperty().asString());
         lblTotalAmount.textProperty().bind(invoice.totalAmountProperty().asString());
@@ -224,29 +228,25 @@ public class InvoiceController {
     }
 
     private String getAmountValidatorMessage(ValidatorBase activeValidator) {
-        String validatorMessage = "Please input two decimal digits only";
+        String validatorMessage = "";
         if (activeValidator instanceof NumberValidator) {
             validatorMessage = "Please enter numerical value only";
         } else if (activeValidator instanceof RequiredFieldValidator) {
             validatorMessage = "Please enter an amount";
+        } else if (activeValidator instanceof RegexValidator) {
+            validatorMessage = "Please input two decimal digits only";
         }
         return validatorMessage;
     }
 
 
     private void initDate() {
-        LocalDate todayDate = LocalDate.now();
-        System.out.println(todayDate);
         dpDate.setValue(LocalDate.now());
         dpDate.setConverter(new DateConverter());
     }
 
-    private void configureProductCombobox() {
+    private void initProductSearchBox() {
         cbProducts.setConverter(new ProductConverter(cbProducts.getValue()));
-        fillProductComboboxValues();
-    }
-
-    private void fillProductComboboxValues() {
         cbProducts.getEditor().textProperty().addListener((observable, oldVal, keyTyped) -> showProduct(keyTyped));
         cbProducts.focusedProperty().addListener((observableValue, outOfFocus, focus) -> {
             if (focus) showProduct(Global.STRING_EMPTY);
@@ -258,7 +258,6 @@ public class InvoiceController {
         cbProducts.show();
         Platform.runLater(() -> cbProducts.getItems().setAll(FXCollections.observableArrayList(products)));
     }
-
 
     @FXML
     private void onProductItemClick() {
@@ -274,12 +273,29 @@ public class InvoiceController {
     }
 
     @FXML
-    private void onCreateInvoiceClick() {
-        invoice.setCreatedAt(dpDate.getValue().atTime(LocalTime.now()));
+    private void onCheckout() {
+        if(tfCashPay.getText().isEmpty()){
+            tfCashPay.getValidators().add(new RequiredFieldValidator());
+            tfCashPay.requestFocus();
+            return;
+        }
+        Customer customer = customerController.getCustomer();
+        if (customer == null) {
+            SweetAlert successAlert = SweetAlertFactory.create(SweetAlert.Type.DANGER);
+            successAlert.setContentMessage(Global.Message.ENTER_CUSTOMER).show(spMain);
+            return;
+        }
+
+        invoice.setCustomer(customer);
         invoice.setOrderItems(tvInvoice.getItems());
+        invoice.setName("INV-" + dpDate.getValue() + "-ID" + 1);
+        invoice.setCreatedAt(dpDate.getValue().atTime(LocalTime.now()));
+
         Invoice savedInvoice = invoiceService.saveEntity(invoice);
-        savedInvoice.setName("INV-" + dpDate.getValue() + "-ID" + savedInvoice.getId());
-        invoiceService.saveEntity(savedInvoice);
+        if (savedInvoice != null) {
+            SweetAlert successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
+            successAlert.setContentMessage(Global.Message.SAVED).show(spMain);
+        }
     }
 
     @FXML
@@ -301,17 +317,40 @@ public class InvoiceController {
         tvInvoice.refresh();
     }
 
-    private void showError(String message) {
-        JFXSnackbar snackbar = new JFXSnackbar(spMain);
-        JFXSnackbarLayout snackbarLayout = SnackbarLayoutFactory.create(message);
-        snackbar.fireEvent(new JFXSnackbar.SnackbarEvent(
-                snackbarLayout, Duration.millis(3000)));
-    }
-
     private OrderItem onItemDeleteAction(OrderItem item) {
         tvInvoice.getItems().remove(item);
         tvInvoice.refresh();
         return item;
+    }
+
+    private void showError(String message) {
+        JFXSnackbar snackbar = new JFXSnackbar(spMain);
+        JFXSnackbarLayout snackbarLayout = SnackbarLayoutFactory.create(message);
+        snackbar.fireEvent(new JFXSnackbar.SnackbarEvent(
+                snackbarLayout, Duration.millis(5000)));
+    }
+
+    public void clearAllInvoice() {
+        clearCustomer();
+        clearInvoiceSummary();
+
+        initDate();
+
+        invoice = new Invoice();
+        tvInvoice.getItems().clear();
+
+        initInvoiceProperty();
+    }
+
+    private void clearInvoiceSummary() {
+        tfDiscountPercent.clear();
+        tfDeliveryAmount.clear();
+        tfCashPay.clear();
+    }
+
+    private void clearCustomer() {
+        customerController.setCustomer(null);
+        customerController.clearCustomerDetails();
     }
 
     @Autowired
@@ -330,7 +369,8 @@ public class InvoiceController {
     }
 
     @Autowired
-    public void setCustomerController(CustomerController invoiceCustomerController) {
-        this.invoiceCustomerController = invoiceCustomerController;
+    public void setCustomerController(CustomerController customerController) {
+        this.customerController = customerController;
     }
+
 }

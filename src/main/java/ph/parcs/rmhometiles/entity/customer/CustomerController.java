@@ -23,7 +23,7 @@ import ph.parcs.rmhometiles.util.converter.CustomerConverter;
 import java.util.List;
 
 @Controller
-@Scope("prototype")
+@Scope("singleton")
 public class CustomerController {
 
     @FXML
@@ -100,8 +100,9 @@ public class CustomerController {
     }
 
     @FXML
-    private void clearCustomerDetails() {
+    public void clearCustomerDetails() {
         this.customer = null;
+        System.out.println("clear costumer");
         cbCustomer.setValue(null);
         cbCustomer.hide();
 
@@ -115,6 +116,7 @@ public class CustomerController {
     @FXML
     private void showAddCustomer() {
         customerEditController.onEditItem(new ItemListener<>() {
+
             @Override
             public void onSavedSuccess(Customer customer) {
                 if (customer != null) {
@@ -137,6 +139,10 @@ public class CustomerController {
         customerEditController.showDialog(spMain);
     }
 
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
     public Customer getCustomer() {
         return customer;
     }
@@ -154,4 +160,5 @@ public class CustomerController {
     public void setCustomerEditController(CustomerEditController customerEditController) {
         this.customerEditController = customerEditController;
     }
+
 }

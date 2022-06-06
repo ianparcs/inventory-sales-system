@@ -24,19 +24,13 @@
         </graphic>
     </JFXButton>
 
-    <JFXButton fx:id="btnOrder" maxWidth="1.7976931348623157E308" text="Orders">
-        <graphic>
-            <FontAwesomeIconView glyphName="SHOPPING_CART"/>
-        </graphic>
-    </JFXButton>
-
     <JFXButton fx:id="btnInvoice" maxWidth="1.7976931348623157E308" text="Invoice">
         <graphic>
             <FontAwesomeIconView glyphName="MONEY"/>
         </graphic>
     </JFXButton>
 
-    <JFXButton fx:id="btnInventory" maxWidth="1.7976931348623157E308" text="Manage Product">
+    <JFXButton fx:id="btnInventory" maxWidth="1.7976931348623157E308" text="Products">
         <graphic>
             <FontAwesomeIconView glyphName="SUITCASE"/>
         </graphic>

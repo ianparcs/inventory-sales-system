@@ -10,7 +10,7 @@ import java.text.DecimalFormat;
 @Service
 public class MoneyService {
 
-    public Money computePercentage(Money amount, String discountPercent) {
+    public Money computeDiscount(Money amount, String discountPercent) {
         Number discountNumber = getDiscountPercent(discountPercent);
 
         Money discountAmount = Money.parse("PHP 0.00");
@@ -34,11 +34,7 @@ public class MoneyService {
 
     public Money computeTotalAmount(Money currentTotal, Money taxAmount, Money deliveryRate) {
         Money totalAmount = currentTotal.minus(taxAmount);
-        if (totalAmount.isGreaterThan(deliveryRate)) {
-            totalAmount.minus(deliveryRate);
-        } else {
-            deliveryRate.minus(totalAmount);
-        }
-        return currentTotal.minus(taxAmount).minus(deliveryRate);
+        totalAmount.plus(deliveryRate);
+        return totalAmount;
     }
 }
