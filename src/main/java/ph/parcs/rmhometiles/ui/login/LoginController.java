@@ -15,8 +15,8 @@ import ph.parcs.rmhometiles.entity.customer.Customer;
 import ph.parcs.rmhometiles.entity.customer.CustomerService;
 import ph.parcs.rmhometiles.entity.user.User;
 import ph.parcs.rmhometiles.entity.user.UserService;
-import ph.parcs.rmhometiles.ui.alert.SweetAlert;
-import ph.parcs.rmhometiles.ui.alert.SweetAlertFactory;
+import ph.parcs.rmhometiles.util.alert.SweetAlert;
+import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.ui.scene.SceneManager;
 
 
@@ -44,7 +44,7 @@ public class LoginController {
 
     @FXML
     private void initialize() {
-        //userService.saveUser(createUser());
+        userService.saveUser(createUser());
         setUserFieldStyle(pfUserPassword, icoKey);
         setUserFieldStyle(tfUserName, icoUser);
         btnLogin.fire();

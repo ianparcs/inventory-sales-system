@@ -17,8 +17,8 @@ import ph.parcs.rmhometiles.entity.inventory.item.EntityTableController;
 import ph.parcs.rmhometiles.entity.inventory.stock.Stock;
 import ph.parcs.rmhometiles.entity.supplier.Supplier;
 import ph.parcs.rmhometiles.file.ImageProduct;
-import ph.parcs.rmhometiles.ui.alert.SweetAlert;
-import ph.parcs.rmhometiles.ui.alert.SweetAlertFactory;
+import ph.parcs.rmhometiles.util.alert.SweetAlert;
+import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.util.FileUtils;
 
 import java.net.URISyntaxException;
@@ -168,7 +168,7 @@ public class ProductTableController extends EntityTableController<Product> {
         Stock stock = new Stock();
         stock.setStocks(5);
         product.setStock(stock);
-        Money money = Money.parse("PHP 23.17");
+        Money money = Money.parse("PHP 23");
         Money cost = Money.parse("PHP 15.17");
         product.setPrice(money);
         product.setCost(cost);

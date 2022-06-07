@@ -34,7 +34,7 @@ public class MoneyService {
 
     public Money computeTotalAmount(Money currentTotal, Money taxAmount, Money deliveryRate) {
         Money totalAmount = currentTotal.minus(taxAmount);
-        totalAmount.plus(deliveryRate);
+        totalAmount = totalAmount.plus(deliveryRate);
         return totalAmount;
     }
 }

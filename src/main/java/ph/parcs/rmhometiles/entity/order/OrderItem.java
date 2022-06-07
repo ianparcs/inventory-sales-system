@@ -26,6 +26,10 @@ public class OrderItem extends BaseEntity {
         quantity.addListener((observableValue, number, t1) -> amount.set(product.priceProperty().get().multipliedBy(quantity.get())));
     }
 
+    public OrderItem() {
+
+    }
+
     public void setId(Integer id) {
         this.id.set(id);
     }

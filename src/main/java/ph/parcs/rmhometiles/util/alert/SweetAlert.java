@@ -1,4 +1,4 @@
-package ph.parcs.rmhometiles.ui.alert;
+package ph.parcs.rmhometiles.util.alert;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;

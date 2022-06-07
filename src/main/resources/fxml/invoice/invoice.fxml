@@ -116,7 +116,6 @@
                     <Cursor fx:constant="HAND"/>
                 </cursor>
                 <validators>
-                    <NumberValidator/>
                     <RegexValidator regexPattern="^[1-9]\d*(\.\d{1,2})?$"/>
                 </validators>
             </JFXTextField>

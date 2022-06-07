@@ -12,7 +12,8 @@ public class Address {
     protected IntegerProperty id = new SimpleIntegerProperty();
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
+    @SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
     public Integer getId() {
         return id.get();
     }

@@ -1,4 +1,4 @@
-package ph.parcs.rmhometiles.ui.alert;
+package ph.parcs.rmhometiles.util.alert;
 
 
 import ph.parcs.rmhometiles.util.Global;
@@ -17,7 +17,7 @@ public class SweetAlertFactory {
                 return infoDialog(msg);
 
         }
-        return null;
+        return defaultDialog("Unspecified Dialog");
     }
 
     public static SweetAlert create(SweetAlert.Type type) {
@@ -60,4 +60,13 @@ public class SweetAlertFactory {
                 .setType(SweetAlert.Type.INFO)
                 .setCancelButton("Close");
     }
+
+    private static SweetAlert defaultDialog(String unspecified_dialog) {
+        return new SweetAlert()
+                .setHeaderMessage(unspecified_dialog)
+                .setContentMessage(unspecified_dialog)
+                .setType(SweetAlert.Type.INFO)
+                .setCancelButton("Close");
+    }
+
 }

@@ -16,7 +16,6 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.util.Duration;
 import lombok.SneakyThrows;
 import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +28,9 @@ import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.inventory.product.ProductService;
 import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
-import ph.parcs.rmhometiles.ui.alert.SweetAlert;
-import ph.parcs.rmhometiles.ui.alert.SweetAlertFactory;
+import ph.parcs.rmhometiles.util.alert.SweetAlert;
+import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.util.Global;
-import ph.parcs.rmhometiles.util.SnackbarLayoutFactory;
 import ph.parcs.rmhometiles.util.converter.DateConverter;
 import ph.parcs.rmhometiles.util.converter.NumberConverter;
 import ph.parcs.rmhometiles.util.converter.ProductConverter;
@@ -215,7 +213,7 @@ public class InvoiceController {
     }
 
     private void initFieldValidation() {
-        tfCashPay.focusedProperty().addListener((observableValue, oldValue, newValue) -> {
+   /*     tfCashPay.focusedProperty().addListener((observableValue, oldValue, newValue) -> {
             if (!newValue) {
                 tfCashPay.validate();
                 if (tfCashPay.getActiveValidator() != null && tfCashPay.getActiveValidator().getHasErrors()) {
@@ -224,7 +222,7 @@ public class InvoiceController {
                     showError(errorMessage);
                 }
             }
-        });
+        });*/
     }
 
     private String getAmountValidatorMessage(ValidatorBase activeValidator) {
@@ -238,7 +236,6 @@ public class InvoiceController {
         }
         return validatorMessage;
     }
-
 
     private void initDate() {
         dpDate.setValue(LocalDate.now());
@@ -263,6 +260,14 @@ public class InvoiceController {
     private void onProductItemClick() {
         Product product = cbProducts.getValue();
         if (product == null) return;
+
+        for (OrderItem item : tvInvoice.getItems()) {
+            if (item.getProduct().getCode().equalsIgnoreCase(product.getCode())){
+                showError("Cannot have duplicate item");
+                return;
+            }
+        }
+
         tvInvoice.getItems().add(new OrderItem(product));
         Platform.runLater(() -> {
             cbProducts.valueProperty().set(null);
@@ -274,9 +279,10 @@ public class InvoiceController {
 
     @FXML
     private void onCheckout() {
-        if(tfCashPay.getText().isEmpty()){
+        if (tfCashPay.getText().isEmpty()) {
             tfCashPay.getValidators().add(new RequiredFieldValidator());
             tfCashPay.requestFocus();
+            showError("Please enter an amount");
             return;
         }
         Customer customer = customerController.getCustomer();
@@ -324,10 +330,8 @@ public class InvoiceController {
     }
 
     private void showError(String message) {
-        JFXSnackbar snackbar = new JFXSnackbar(spMain);
-        JFXSnackbarLayout snackbarLayout = SnackbarLayoutFactory.create(message);
-        snackbar.fireEvent(new JFXSnackbar.SnackbarEvent(
-                snackbarLayout, Duration.millis(5000)));
+     SweetAlert sweetAlert = SweetAlertFactory.create(SweetAlert.Type.DANGER, message);
+     sweetAlert.show(spMain);
     }
 
     public void clearAllInvoice() {

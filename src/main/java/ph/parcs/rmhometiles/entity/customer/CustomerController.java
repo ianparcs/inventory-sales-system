@@ -15,8 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.ItemListener;
-import ph.parcs.rmhometiles.ui.alert.SweetAlert;
-import ph.parcs.rmhometiles.ui.alert.SweetAlertFactory;
+import ph.parcs.rmhometiles.util.alert.SweetAlert;
+import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.util.Global;
 import ph.parcs.rmhometiles.util.converter.CustomerConverter;
 
@@ -102,7 +102,6 @@ public class CustomerController {
     @FXML
     public void clearCustomerDetails() {
         this.customer = null;
-        System.out.println("clear costumer");
         cbCustomer.setValue(null);
         cbCustomer.hide();
 
