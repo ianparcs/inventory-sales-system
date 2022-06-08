@@ -287,8 +287,7 @@ public class InvoiceController {
         }
         Customer customer = customerController.getCustomer();
         if (customer == null) {
-            SweetAlert successAlert = SweetAlertFactory.create(SweetAlert.Type.DANGER);
-            successAlert.setContentMessage(Global.Message.ENTER_CUSTOMER).show(spMain);
+            showError(Global.Message.ENTER_CUSTOMER);
             return;
         }
 

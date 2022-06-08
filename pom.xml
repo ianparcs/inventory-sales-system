@@ -79,15 +79,9 @@
         </dependency>
 
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
             <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.xerial</groupId>
-            <artifactId>sqlite-jdbc</artifactId>
-            <version>3.36.0.3</version>
         </dependency>
 
         <dependency>
@@ -123,7 +117,7 @@
         <repository>
             <id>internal.repo</id>
             <name>Internal repo</name>
-            <url>imageProduct://C:\Users\Ian\My Projects\inventory-sales-system\deployment</url>
+            <url>file://C:/Users/Ian/My Projects/inventory-sales-system/deployment</url>
         </repository>
     </distributionManagement>
 </project>

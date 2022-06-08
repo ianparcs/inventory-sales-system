@@ -10,27 +10,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e42c86d9-149f-4635-a8fc-a8339e3dcdbe" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deployment/ph/parcs/rmhometiles/0.0.2/rmhometiles-0.0.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deployment/ph/parcs/rmhometiles/0.0.2/rmhometiles-0.0.2.jar.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deployment/ph/parcs/rmhometiles/0.0.2/rmhometiles-0.0.2.jar.sha1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deployment/ph/parcs/rmhometiles/0.0.2/rmhometiles-0.0.2.pom" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deployment/ph/parcs/rmhometiles/0.0.2/rmhometiles-0.0.2.pom.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deployment/ph/parcs/rmhometiles/0.0.2/rmhometiles-0.0.2.pom.sha1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deployment/ph/parcs/rmhometiles/maven-metadata.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deployment/ph/parcs/rmhometiles/maven-metadata.xml.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deployment/ph/parcs/rmhometiles/maven-metadata.xml.sha1" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/Address.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/MoneyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/MoneyService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/customer/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/customer/CustomerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/item/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/item/BaseEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/item/EntityTableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/item/EntityTableController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rmhometiles.db" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/product/ProductTableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/product/ProductTableController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/stock/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/stock/Stock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/InvoiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/InvoiceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/order/OrderItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/order/OrderItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/user/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/user/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/user/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/ui/alert/SweetAlert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/util/alert/SweetAlert.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/ui/alert/SweetAlertFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/util/alert/SweetAlertFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/security/AppSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/security/AppSecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/ui/login/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/ui/login/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/util/SnackbarLayoutFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/util/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/util/FileUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/util/alert/SweetAlertFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/util/alert/SweetAlertFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/invoice/invoice.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/invoice/invoice.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +92,7 @@
       <map>
         <entry key="com.haulmont.jpb.jpaInspector" value="true" />
         <entry key="com.haulmont.jpb.jpaPalette" value="false" />
-        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
       </map>
     </option>
   </component>
@@ -101,11 +100,6 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="mavenHome" value="$USER_HOME$/.m2/wrapper/dists/apache-maven-3.6.2-bin/795eh28tki48bv3l67maojf0ra/apache-maven-3.6.2" />
-      </MavenGeneralSettings>
-    </option>
     <option name="importingSettings">
       <MavenImportingSettings>
         <option name="jdkForImporter" value="11" />
@@ -122,7 +116,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DatabaseDriversLRU" value="mysql&#10;sqlite" />
+    <property name="DatabaseDriversLRU" value="mysql&#10;sqlite&#10;h2" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
@@ -138,7 +132,7 @@
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
     <property name="show.run.dashboard.notification" value="false" />
   </component>
   <component name="RecentsManager">
@@ -424,12 +418,13 @@
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.History.Properties">
-    <option name="COLUMN_ORDER">
+    <option name="COLUMN_ID_ORDER">
       <list>
-        <option value="0" />
-        <option value="2" />
-        <option value="3" />
-        <option value="1" />
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
       </list>
     </option>
   </component>
@@ -453,17 +448,6 @@
     <MESSAGE value="remove comment" />
     <MESSAGE value="update change" />
     <option name="LAST_COMMIT_MESSAGE" value="" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/InvoiceController.java</url>
-          <line>288</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/rmhometiles$RmHomeTilesApplication_.ic" NAME="RmHomeTilesApplication  Coverage Results" MODIFIED="1604843234518" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

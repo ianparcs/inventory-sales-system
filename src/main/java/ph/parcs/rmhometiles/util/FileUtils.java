@@ -24,14 +24,18 @@ public class FileUtils {
     }
 
     public static String getTargetPath(String filename) {
-        String fullPath = getResourcePath() + File.separator + filename;
+        String fullPath = getParentDirectoryFromJar() + File.separator + filename;
         return fullPath.trim();
     }
-
-    @SneakyThrows
-    private static String getResourcePath() {
-        URI desPath = ClassLoader.getSystemResource(BASE_PATH).toURI();
-        return Paths.get(desPath).toString();
+    public static String getParentDirectoryFromJar() {
+        String dirtyPath = FileUtils.class.getResource("").toString();
+        String jarPath = dirtyPath.replaceAll("^.*file:/", ""); //removes file:/ and everything before it
+        jarPath = jarPath.replaceAll("jar!.*", "jar"); //removes everything after .jar, if .jar exists in dirtyPath
+        jarPath = jarPath.replaceAll("%20", " "); //necessary if path has spaces within
+        if (!jarPath.endsWith(".jar")) { // this is needed if you plan to run the app using Spring Tools Suit play button.
+            jarPath = jarPath.replaceAll("/classes/.*", "/classes/");
+        }
+        return Paths.get(jarPath).getParent().toString();
     }
 
     public static URL getResourcePath(String fileName) {

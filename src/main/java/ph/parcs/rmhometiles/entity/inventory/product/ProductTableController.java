@@ -21,6 +21,7 @@ import ph.parcs.rmhometiles.util.alert.SweetAlert;
 import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.util.FileUtils;
 
+import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Comparator;
@@ -105,8 +106,9 @@ public class ProductTableController extends EntityTableController<Product> {
                     setGraphic(null);
                     setUserData(null);
                     if (productImage != null) {
-                        URL url = FileUtils.getResourcePath(productImage.getName());
-                        Image picture = new Image(url.toURI().toString(), true);
+                        String path = FileUtils.getParentDirectoryFromJar() + File.separator + productImage.getName();
+                        System.out.println(path);
+                        Image picture = new Image("file:" + path, true);
                         ImageView imageView = createImageView(picture, 48, 48);
                         setUserData(productImage);
                         setGraphic(imageView);
@@ -117,14 +119,10 @@ public class ProductTableController extends EntityTableController<Product> {
             cell.setOnMouseClicked(mouseEvent -> {
                 ImageProduct imageProduct = (ImageProduct) cell.getUserData();
                 if (imageProduct == null) return;
-                URL url = FileUtils.getResourcePath(imageProduct.getName());
-                try {
-                    Image picture = new Image(url.toURI().toString(), true);
-                    ImageView imageView = createImageView(picture, 600, 400);
-                    showAlert(imageView, imageProduct.getName());
-                } catch (URISyntaxException e) {
-                    e.printStackTrace();
-                }
+                String path = FileUtils.getParentDirectoryFromJar() + File.separator + imageProduct.getName();
+                Image picture = new Image("file:" + path, true);
+                ImageView imageView = createImageView(picture, 600, 400);
+                showAlert(imageView, imageProduct.getName());
             });
             return cell;
         });
