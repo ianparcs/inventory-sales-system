@@ -27,9 +27,12 @@ public class MoneyService {
         return new DecimalFormat("0.0#%").parse(discountPercent);
     }
 
-    public Money computeTotalAmountDue(Money amount, Money cashPaid) {
-        if (amount == null || cashPaid == null) return Money.parse("PHP 0.00");
-        return amount.minus(cashPaid);
+    public Money computeTotalAmountDue(Money totalAmount, Money cashPaid) {
+        if (totalAmount == null || cashPaid == null) return Money.parse("PHP 0.00");
+        if (totalAmount.isGreaterThan(cashPaid)) {
+            return cashPaid.minus(totalAmount);
+        }
+        return totalAmount.minus(cashPaid).abs();
     }
 
     public Money computeTotalAmount(Money currentTotal, Money taxAmount, Money deliveryRate) {

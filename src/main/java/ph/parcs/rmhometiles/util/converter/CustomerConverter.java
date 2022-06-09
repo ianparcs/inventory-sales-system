@@ -6,7 +6,7 @@ import ph.parcs.rmhometiles.util.Global;
 
 public class CustomerConverter extends StringConverter<Customer> {
 
-    private Customer customer;
+    private final Customer customer;
 
     public CustomerConverter(Customer customer) {
         this.customer = customer;

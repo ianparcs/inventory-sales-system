@@ -16,9 +16,9 @@ import ph.parcs.rmhometiles.entity.customer.CustomerService;
 import ph.parcs.rmhometiles.entity.user.User;
 import ph.parcs.rmhometiles.entity.user.UserRepository;
 import ph.parcs.rmhometiles.entity.user.UserService;
+import ph.parcs.rmhometiles.ui.scene.SceneManager;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
 import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
-import ph.parcs.rmhometiles.ui.scene.SceneManager;
 
 
 @Controller
@@ -48,7 +48,7 @@ public class LoginController {
     @FXML
     private void initialize() {
         User user = userRepository.findByUsername(tfUserName.getText());
-        if(user == null){
+        if (user == null) {
             userService.saveUser(createUser());
         }
 

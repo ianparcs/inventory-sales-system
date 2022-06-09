@@ -16,9 +16,9 @@ import javax.persistence.*;
 @Access(AccessType.PROPERTY)
 public class OrderItem extends BaseEntity {
 
-    private ObjectProperty<Product> product = new SimpleObjectProperty<>();
-    private ObjectProperty<Money> amount = new SimpleObjectProperty<>();
-    private IntegerProperty quantity = new SimpleIntegerProperty();
+    private final ObjectProperty<Product> product = new SimpleObjectProperty<>();
+    private final ObjectProperty<Money> amount = new SimpleObjectProperty<>();
+    private final IntegerProperty quantity = new SimpleIntegerProperty();
 
     public OrderItem(Product product) {
         this.product.set(product);

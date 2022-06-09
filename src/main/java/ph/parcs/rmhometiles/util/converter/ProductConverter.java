@@ -6,7 +6,7 @@ import ph.parcs.rmhometiles.util.Global;
 
 public class ProductConverter extends StringConverter<Product> {
 
-    private Product product;
+    private final Product product;
 
     public ProductConverter(Product product) {
         this.product = product;

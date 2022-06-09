@@ -55,7 +55,7 @@ public class WindowHelper {
     }
 
     static class ResizeListener implements EventHandler<MouseEvent> {
-        private Stage stage;
+        private final Stage stage;
         private Cursor cursorEvent = Cursor.DEFAULT;
         private double startX = 0;
         private double startY = 0;

@@ -17,7 +17,7 @@ import java.util.function.Function;
 
 public class ActionTableCell<S> extends TableCell<S, HBox> {
 
-    private HBox hBox;
+    private final HBox hBox;
 
     public ActionTableCell(Function<S, S> delFunction, Function<S, S> editFunction) {
         Text deleteIcon = FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.TRASH, "1.5em");

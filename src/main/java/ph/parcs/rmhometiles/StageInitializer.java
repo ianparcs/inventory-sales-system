@@ -18,16 +18,13 @@ import ph.parcs.rmhometiles.ui.scene.SceneManager;
 @Component
 public class StageInitializer implements ApplicationListener<JavaFxApplication.StageReadyEvent> {
 
+    private final ApplicationContext applicationContext;
     @Value("${spring.application.ui.title}")
     private String appTitle;
-
     @Value("${spring.application.ui.width}")
     private Integer appWidth;
-
     @Value("${spring.application.ui.height}")
     private Integer appHeight;
-
-    private ApplicationContext applicationContext;
     private SceneManager sceneManager;
     private Stage stage;
 

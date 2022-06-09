@@ -1,6 +1,7 @@
 * {
     -fx-text-fill: #5a5c69;
-    -fx-font-size: 1.15em;
+    -fx-font-size: 1.30em;
+    -fx-font-family: Calibri;
     blueberries: #00AAFF;
     greysquash: #ddd;
     strawberry: #e74a3b;
@@ -10,6 +11,9 @@
     primary: #4e73df;
     gray-light: #e9ebee;
     primary-dark: #2b333d
+}
+.label{
+    -fx-font-size: 12;
 }
 
 .primary-button {

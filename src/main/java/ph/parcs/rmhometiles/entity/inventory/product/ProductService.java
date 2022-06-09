@@ -1,5 +1,6 @@
 package ph.parcs.rmhometiles.entity.inventory.product;
 
+import javafx.collections.ObservableList;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -7,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseService;
+import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.file.FileService;
 import ph.parcs.rmhometiles.file.ImageProduct;
 import ph.parcs.rmhometiles.util.FileUtils;
@@ -78,5 +80,17 @@ public class ProductService extends BaseService<Product> {
     public void setItemRepository(ProductRepository productRepository) {
         this.entityRepository = productRepository;
         this.productRepository = (ProductRepository) entityRepository;
+    }
+
+    public OrderItem checkQuantity(ObservableList<OrderItem> items) {
+        OrderItem temp = null;
+        for (OrderItem item : items) {
+            temp = item;
+            if(temp != null){
+                int quantity = temp.getQuantity();
+                if (quantity <= 0) return item;
+            }
+        }
+        return null;
     }
 }

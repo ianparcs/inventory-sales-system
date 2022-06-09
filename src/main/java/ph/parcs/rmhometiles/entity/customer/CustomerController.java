@@ -15,9 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.ItemListener;
+import ph.parcs.rmhometiles.util.Global;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
 import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
-import ph.parcs.rmhometiles.util.Global;
 import ph.parcs.rmhometiles.util.converter.CustomerConverter;
 
 import java.util.List;
@@ -138,12 +138,12 @@ public class CustomerController {
         customerEditController.showDialog(spMain);
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
     public Customer getCustomer() {
         return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public void setSpMain(StackPane spMain) {

@@ -16,11 +16,11 @@ public class SweetAlert {
 
     private static final String DEFAULT_CSS = SweetAlert.class.getResource("/css/sweetalert/sweetalert.css").toExternalForm();
 
-    private JFXDialogLayout content;
+    private final JFXDialogLayout content;
+    private final JFXDialog dialog;
+    private final Label lblMessage;
+    private final Label lblHeader;
     private JFXButton btnRemove;
-    private JFXDialog dialog;
-    private Label lblMessage;
-    private Label lblHeader;
 
     public SweetAlert() {
         FontAwesomeIconView circleIcon = new FontAwesomeIconView();
@@ -112,7 +112,7 @@ public class SweetAlert {
         SUCCESS("/css/sweetalert/success.css"),
         INFO("/css/sweetalert/info.css");
 
-        private String name;
+        private final String name;
 
         Type(String name) {
             this.name = name;

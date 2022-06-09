@@ -1,6 +1,8 @@
 package ph.parcs.rmhometiles.entity.invoice;
 
-import com.jfoenix.controls.*;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.NumberValidator;
 import com.jfoenix.validation.RegexValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
@@ -28,9 +30,9 @@ import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.inventory.product.ProductService;
 import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
+import ph.parcs.rmhometiles.util.Global;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
 import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
-import ph.parcs.rmhometiles.util.Global;
 import ph.parcs.rmhometiles.util.converter.DateConverter;
 import ph.parcs.rmhometiles.util.converter.NumberConverter;
 import ph.parcs.rmhometiles.util.converter.ProductConverter;
@@ -53,9 +55,9 @@ public class InvoiceController {
     @FXML
     private TableColumn<OrderItem, Money> tcPrice;
     @FXML
-    private TableView<OrderItem> tvInvoice;
-    @FXML
     private JFXComboBox<Product> cbProducts;
+    @FXML
+    private TableView<OrderItem> tvOrders;
     @FXML
     private JFXTextField tfDiscountPercent;
     @FXML
@@ -64,14 +66,17 @@ public class InvoiceController {
     private JFXTextField tfCashPay;
     @FXML
     private JFXDatePicker dpDate;
+
     @FXML
     private Label lblAmount;
     @FXML
-    private StackPane spMain;
+    private Label lblAmountDueBalance;
     @FXML
     private Label lblTotalBeforeTax;
     @FXML
     private Label lblDiscountAmount;
+    @FXML
+    private StackPane spMain;
     @FXML
     private Label lblTotalAmount;
     @FXML
@@ -88,16 +93,15 @@ public class InvoiceController {
     @FXML
     public void initialize() {
         invoice = new Invoice();
-        invoice.setOrderItems(tvInvoice.getItems());
+        invoice.setOrderItems(tvOrders.getItems());
 
         initNumberInputFormatter(tfDeliveryAmount);
         initNumberInputFormatter(tfCashPay);
         initDiscountNumberFormatter();
         initColumnCellValueFactory();
-        initProductSearchBox();
-        initFieldValidation();
-        initInvoiceProperty();
         initInvoiceProperties();
+        initProductSearchBox();
+        initInvoiceProperty();
         initDate();
 
         refreshItems();
@@ -108,10 +112,10 @@ public class InvoiceController {
     }
 
     private void initInvoiceProperty() {
-        invoice.amountProperty().bind(Bindings.createObjectBinding(this::showItemLineAmounts, tvInvoice.getItems()));
-        invoice.discountProperty().bind(Bindings.createObjectBinding(this::showDiscountAmount, tfDiscountPercent.textProperty(), invoice.amountProperty()));
-        invoice.taxAmountProperty().bind(Bindings.createObjectBinding(this::showTaxAmount, tfDiscountPercent.textProperty(), invoice.amountProperty()));
-        invoice.totalAmountDueProperty().bind(Bindings.createObjectBinding(this::showTotalAmountDue, invoice.amountProperty(), tfCashPay.textProperty()));
+        invoice.amountProperty().bind(Bindings.createObjectBinding(this::showItemLineAmounts, tvOrders.getItems()));
+        invoice.discountProperty().bind(Bindings.createObjectBinding(this::showDiscountAmount, tfDiscountPercent.textProperty()));
+        invoice.taxAmountProperty().bind(Bindings.createObjectBinding(this::showTaxAmount, invoice.amountProperty()));
+        invoice.totalAmountDueProperty().bind(Bindings.createObjectBinding(this::showTotalAmountDue, invoice.totalAmountProperty(), tfCashPay.textProperty()));
         invoice.totalAmountProperty().bind(Bindings.createObjectBinding(this::showTotalAmount, invoice.amountProperty(), tfDeliveryAmount.textProperty(), tfDiscountPercent.textProperty()));
     }
 
@@ -149,7 +153,7 @@ public class InvoiceController {
     }
 
     private Money showItemLineAmounts() {
-        return tvInvoice.getItems().stream()
+        return tvOrders.getItems().stream()
                 .map(OrderItem::getAmount)
                 .reduce(Money.parse("PHP 0.00"), Money::plus);
     }
@@ -188,8 +192,8 @@ public class InvoiceController {
     private void refreshItems() {
         spMain.sceneProperty().addListener((observableValue, scene, newScene) -> {
             if (newScene != null) {
-                invoiceService.updateLineItems(tvInvoice.getItems());
-                tvInvoice.refresh();
+                invoiceService.updateLineItems(tvOrders.getItems());
+                tvOrders.refresh();
             }
         });
     }
@@ -209,32 +213,17 @@ public class InvoiceController {
         lblTotalAmount.textProperty().bind(invoice.totalAmountProperty().asString());
         lblDiscountAmount.textProperty().bind(invoice.discountProperty().asString());
         lblAmountDue.textProperty().bind(invoice.totalAmountDueProperty().asString());
+        lblAmountDueBalance.textProperty().bind(Bindings.createObjectBinding(this::changeAmountDueLabel, lblAmountDue.textProperty()));
         lblTotalBeforeTax.textProperty().bind(Bindings.createObjectBinding(this::showTotalBeforeTax, invoice.amountProperty(), tfDiscountPercent.textProperty()).asString());
     }
 
-    private void initFieldValidation() {
-   /*     tfCashPay.focusedProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (!newValue) {
-                tfCashPay.validate();
-                if (tfCashPay.getActiveValidator() != null && tfCashPay.getActiveValidator().getHasErrors()) {
-                    tfCashPay.requestFocus();
-                    String errorMessage = getAmountValidatorMessage(tfCashPay.getActiveValidator());
-                    showError(errorMessage);
-                }
+    private String changeAmountDueLabel() {
+        if(invoice.totalAmountDueProperty().get() != null){
+            if (invoice.totalAmountDueProperty().get().isPositive()) {
+                return "Change";
             }
-        });*/
-    }
-
-    private String getAmountValidatorMessage(ValidatorBase activeValidator) {
-        String validatorMessage = "";
-        if (activeValidator instanceof NumberValidator) {
-            validatorMessage = "Please enter numerical value only";
-        } else if (activeValidator instanceof RequiredFieldValidator) {
-            validatorMessage = "Please enter an amount";
-        } else if (activeValidator instanceof RegexValidator) {
-            validatorMessage = "Please input two decimal digits only";
         }
-        return validatorMessage;
+        return "Balance";
     }
 
     private void initDate() {
@@ -261,38 +250,32 @@ public class InvoiceController {
         Product product = cbProducts.getValue();
         if (product == null) return;
 
-        for (OrderItem item : tvInvoice.getItems()) {
-            if (item.getProduct().getCode().equalsIgnoreCase(product.getCode())){
+        for (OrderItem item : tvOrders.getItems()) {
+            if (item.getProduct().getCode().equalsIgnoreCase(product.getCode())) {
                 showError("Cannot have duplicate item");
                 return;
             }
         }
 
-        tvInvoice.getItems().add(new OrderItem(product));
+        tvOrders.getItems().add(new OrderItem(product));
         Platform.runLater(() -> {
             cbProducts.valueProperty().set(null);
             cbProducts.hide();
             spMain.requestFocus();
-            tvInvoice.refresh();
+            tvOrders.refresh();
         });
     }
 
     @FXML
     private void onCheckout() {
-        if (tfCashPay.getText().isEmpty()) {
-            tfCashPay.getValidators().add(new RequiredFieldValidator());
-            tfCashPay.requestFocus();
-            showError("Please enter an amount");
-            return;
-        }
-        Customer customer = customerController.getCustomer();
-        if (customer == null) {
-            showError(Global.Message.ENTER_CUSTOMER);
+        String validateMsg = validateCheckout();
+        if (!validateMsg.isEmpty()) {
+            showError(validateMsg);
             return;
         }
 
-        invoice.setCustomer(customer);
-        invoice.setOrderItems(tvInvoice.getItems());
+        invoice.setOrderItems(tvOrders.getItems());
+        invoice.setCustomer(customerController.getCustomer());
         invoice.setName("INV-" + dpDate.getValue() + "-ID" + 1);
         invoice.setCreatedAt(dpDate.getValue().atTime(LocalTime.now()));
 
@@ -301,6 +284,26 @@ public class InvoiceController {
             SweetAlert successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
             successAlert.setContentMessage(Global.Message.SAVED).show(spMain);
         }
+    }
+
+    private String validateCheckout() {
+        if (tfCashPay.getText().isEmpty()) {
+            tfCashPay.getValidators().add(new RequiredFieldValidator());
+            tfCashPay.requestFocus();
+            return "Please enter an amount";
+        }
+
+        Customer customer = customerController.getCustomer();
+        if (customer == null) {
+            return Global.Message.ENTER_CUSTOMER;
+        }
+
+        OrderItem item = productService.checkQuantity(tvOrders.getItems());
+
+        if (item != null) return "Please enter quantity for item " + item.getProduct().getCode();
+        if (tvOrders.getItems().isEmpty()) return "Please put an order(s)";
+
+        return "";
     }
 
     @FXML
@@ -314,23 +317,23 @@ public class InvoiceController {
         } else {
             lineItem.setQuantity(event.getNewValue());
         }
-        if (tvInvoice.getItems().contains(lineItem)) {
-            int index = tvInvoice.getItems().indexOf(lineItem);
-            tvInvoice.getItems().remove(lineItem);
-            tvInvoice.getItems().add(index, lineItem);
+        if (tvOrders.getItems().contains(lineItem)) {
+            int index = tvOrders.getItems().indexOf(lineItem);
+            tvOrders.getItems().remove(lineItem);
+            tvOrders.getItems().add(index, lineItem);
         }
-        tvInvoice.refresh();
+        tvOrders.refresh();
     }
 
     private OrderItem onItemDeleteAction(OrderItem item) {
-        tvInvoice.getItems().remove(item);
-        tvInvoice.refresh();
+        tvOrders.getItems().remove(item);
+        tvOrders.refresh();
         return item;
     }
 
     private void showError(String message) {
-     SweetAlert sweetAlert = SweetAlertFactory.create(SweetAlert.Type.DANGER, message);
-     sweetAlert.show(spMain);
+        SweetAlert sweetAlert = SweetAlertFactory.create(SweetAlert.Type.DANGER, message);
+        sweetAlert.show(spMain);
     }
 
     public void clearAllInvoice() {
@@ -340,7 +343,7 @@ public class InvoiceController {
         initDate();
 
         invoice = new Invoice();
-        tvInvoice.getItems().clear();
+        tvOrders.getItems().clear();
 
         initInvoiceProperty();
     }
