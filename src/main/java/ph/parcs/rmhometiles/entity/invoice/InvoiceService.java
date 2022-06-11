@@ -53,6 +53,12 @@ public class InvoiceService extends BaseService<Invoice> {
         items.removeIf(lineItem -> lineItem.getProduct() == null);
     }
 
+    public void saveOrderItem(Invoice invoice, ObservableList<OrderItem> items) {
+        for (OrderItem item : items) {
+            item.setInvoice(invoice);
+        }
+    }
+
     public Invoice createDefault() {
         Invoice invoice = new Invoice();
         invoice.setName("");
@@ -69,5 +75,6 @@ public class InvoiceService extends BaseService<Invoice> {
     public void setProductRepository(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
+
 }
 

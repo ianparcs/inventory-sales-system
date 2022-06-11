@@ -8,17 +8,20 @@ import org.hibernate.annotations.Type;
 import org.joda.money.Money;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
+import ph.parcs.rmhometiles.entity.invoice.Invoice;
 import ph.parcs.rmhometiles.util.Global;
 
 import javax.persistence.*;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@AttributeOverride(name = "id", column = @Column(name = "order_item_id"))
 public class OrderItem extends BaseEntity {
 
     private final ObjectProperty<Product> product = new SimpleObjectProperty<>();
     private final ObjectProperty<Money> amount = new SimpleObjectProperty<>();
     private final IntegerProperty quantity = new SimpleIntegerProperty();
+    private final ObjectProperty<Invoice> invoice = new SimpleObjectProperty<>();
 
     public OrderItem(Product product) {
         this.product.set(product);
@@ -32,6 +35,18 @@ public class OrderItem extends BaseEntity {
 
     public void setId(Integer id) {
         this.id.set(id);
+    }
+
+    @ManyToOne
+    @JoinTable(name = "invoice_order_item",
+            joinColumns = {@JoinColumn(name = "order_item_id", referencedColumnName = "order_item_id")},
+            inverseJoinColumns = {@JoinColumn(name = "invoice_id", referencedColumnName = "invoice_id")})
+    public Invoice getInvoice() {
+        return invoice.get();
+    }
+
+    public void setInvoice(Invoice invoice) {
+        this.invoice.set(invoice);
     }
 
     @ManyToOne

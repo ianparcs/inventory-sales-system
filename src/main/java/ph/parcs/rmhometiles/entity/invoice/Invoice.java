@@ -13,6 +13,7 @@ import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.util.Global;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -26,7 +27,7 @@ public class Invoice extends BaseEntity {
     private ObjectProperty<Money> discount = new SimpleObjectProperty<>();
     private ObjectProperty<Money> amount = new SimpleObjectProperty<>();
 
-    private ListProperty<OrderItem> orderItems = new SimpleListProperty<>();
+    private Set<OrderItem> orderItems;
 
     @ManyToOne
     @JoinTable(name = "customer_invoice", joinColumns =
@@ -38,6 +39,15 @@ public class Invoice extends BaseEntity {
 
     public void setCustomer(Customer customer) {
         this.customer.set(customer);
+    }
+
+    @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, orphanRemoval = true)
+    public Set<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(Set<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 
     @Column(name = "amount", precision = 8, scale = 2)
@@ -88,15 +98,6 @@ public class Invoice extends BaseEntity {
 
     public void setTaxAmount(Money taxAmount) {
         this.taxAmount.set(taxAmount);
-    }
-
-    @Transient
-    public ObservableList<OrderItem> getOrderItems() {
-        return orderItems.get();
-    }
-
-    public void setOrderItems(ObservableList<OrderItem> orderItems) {
-        this.orderItems.set(orderItems);
     }
 
     @Transient

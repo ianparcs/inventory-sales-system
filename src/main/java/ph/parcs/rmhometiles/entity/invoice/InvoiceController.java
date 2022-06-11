@@ -39,7 +39,9 @@ import ph.parcs.rmhometiles.util.converter.ProductConverter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class InvoiceController {
@@ -93,7 +95,7 @@ public class InvoiceController {
     @FXML
     public void initialize() {
         invoice = new Invoice();
-        invoice.setOrderItems(tvOrders.getItems());
+        invoice.setOrderItems(new HashSet<>(tvOrders.getItems()));
 
         initNumberInputFormatter(tfDeliveryAmount);
         initNumberInputFormatter(tfCashPay);
@@ -274,7 +276,9 @@ public class InvoiceController {
             return;
         }
 
-        invoice.setOrderItems(tvOrders.getItems());
+        invoiceService.saveOrderItem(invoice, tvOrders.getItems());
+
+        invoice.setOrderItems(new HashSet<>(tvOrders.getItems()));
         invoice.setCustomer(customerController.getCustomer());
         invoice.setName("INV-" + dpDate.getValue() + "-ID" + 1);
         invoice.setCreatedAt(dpDate.getValue().atTime(LocalTime.now()));
