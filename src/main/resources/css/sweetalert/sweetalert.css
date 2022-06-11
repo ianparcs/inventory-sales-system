@@ -31,3 +31,7 @@
     -fx-alignment: center;
     -fx-text-alignment: center;
 }
+
+.jfx-dialog-layout .jfx-layout-heading .text {
+    -fx-font-size: 2em;
+}

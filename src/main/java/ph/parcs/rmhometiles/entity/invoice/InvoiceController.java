@@ -88,10 +88,17 @@ public class InvoiceController {
     private MoneyService moneyService;
     private Invoice invoice;
 
+    private SweetAlert askSaveAlert;
+
     @FXML
     public void initialize() {
         invoice = new Invoice();
         invoice.setOrderItems(new HashSet<>(tvOrders.getItems()));
+
+        askSaveAlert = SweetAlertFactory.create(SweetAlert.Type.INFO);
+        askSaveAlert.setContentMessage("Create new invoice?");
+        askSaveAlert.setHeaderMessage("Checkout");
+        askSaveAlert.setConfirmButton("Yes");
 
         initNumberInputFormatter(tfDeliveryAmount);
         initNumberInputFormatter(tfCashPay);
@@ -272,18 +279,20 @@ public class InvoiceController {
             return;
         }
 
-        invoiceService.saveOrderItem(invoice, tvOrders.getItems());
+        askSaveAlert.setConfirmListener(() -> {
 
-        invoice.setOrderItems(new HashSet<>(tvOrders.getItems()));
-        invoice.setCustomer(customerController.getCustomer());
-        invoice.setName("INV-" + dpDate.getValue() + "-ID" + 1);
-        invoice.setCreatedAt(dpDate.getValue().atTime(LocalTime.now()));
+            invoiceService.saveOrderItem(invoice, tvOrders.getItems());
+            invoice.setOrderItems(new HashSet<>(tvOrders.getItems()));
+            invoice.setCustomer(customerController.getCustomer());
+            invoice.setName("INV-" + dpDate.getValue() + "-ID" + 1);
+            invoice.setCreatedAt(dpDate.getValue().atTime(LocalTime.now()));
 
-        Invoice savedInvoice = invoiceService.saveEntity(invoice);
-        if (savedInvoice != null) {
-            SweetAlert successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
-            successAlert.setContentMessage(Global.Message.SAVED).show(spMain);
-        }
+            Invoice savedInvoice = invoiceService.saveEntity(invoice);
+            if (savedInvoice != null) {
+                SweetAlert successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
+                successAlert.setContentMessage(Global.Message.SAVED).show(spMain);
+            }
+        }).show(spMain);
     }
 
     private String validateCheckout() {

@@ -85,7 +85,7 @@ public class SweetAlert {
         return this;
     }
 
-    SweetAlert setConfirmButton(String text) {
+    public SweetAlert setConfirmButton(String text) {
         btnRemove = new JFXButton();
         btnRemove.setText(text);
         btnRemove.getStyleClass().add("button-confirm");
@@ -93,7 +93,7 @@ public class SweetAlert {
         return this;
     }
 
-    SweetAlert setCancelButton(String text) {
+    public  SweetAlert setCancelButton(String text) {
         JFXButton btnCancel = new JFXButton();
         btnCancel.setText(text);
         btnCancel.getStyleClass().add("button-cancel");
