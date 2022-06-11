@@ -86,7 +86,7 @@ public class ProductService extends BaseService<Product> {
         OrderItem temp = null;
         for (OrderItem item : items) {
             temp = item;
-            if(temp != null){
+            if (temp != null) {
                 int quantity = temp.getQuantity();
                 if (quantity <= 0) return item;
             }

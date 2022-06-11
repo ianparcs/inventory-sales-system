@@ -18,8 +18,7 @@ public class User {
     private StringProperty role = new SimpleStringProperty();
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_Sequence")
-    @SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id.get();
     }

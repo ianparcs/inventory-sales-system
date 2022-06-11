@@ -3,10 +3,7 @@ package ph.parcs.rmhometiles.entity.invoice;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.validation.NumberValidator;
-import com.jfoenix.validation.RegexValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
-import com.jfoenix.validation.base.ValidatorBase;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
@@ -41,7 +38,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 public class InvoiceController {
@@ -220,7 +216,7 @@ public class InvoiceController {
     }
 
     private String changeAmountDueLabel() {
-        if(invoice.totalAmountDueProperty().get() != null){
+        if (invoice.totalAmountDueProperty().get() != null) {
             if (invoice.totalAmountDueProperty().get().isPositive()) {
                 return "Change";
             }
