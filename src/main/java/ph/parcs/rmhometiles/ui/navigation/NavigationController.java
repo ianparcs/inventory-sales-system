@@ -67,7 +67,6 @@ public class NavigationController {
                 @Override
                 @SneakyThrows
                 public void run() {
-                    Thread.sleep(200);
                     Platform.runLater(() -> {
                         Parent content = sceneManager.getContent(key);
                         content.setCache(true);

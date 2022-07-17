@@ -6,7 +6,9 @@ import org.hibernate.annotations.Type;
 import org.joda.money.Money;
 import ph.parcs.rmhometiles.entity.customer.Customer;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
+import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.order.OrderItem;
+import ph.parcs.rmhometiles.entity.payment.Payment;
 import ph.parcs.rmhometiles.util.Global;
 
 import javax.persistence.*;
@@ -25,6 +27,7 @@ public class Invoice extends BaseEntity {
     private ObjectProperty<Money> amount = new SimpleObjectProperty<>();
 
     private Set<OrderItem> orderItems;
+    private Set<Payment> payments;
 
     @ManyToOne
     @JoinTable(name = "customer_invoice", joinColumns =
@@ -36,6 +39,15 @@ public class Invoice extends BaseEntity {
 
     public void setCustomer(Customer customer) {
         this.customer.set(customer);
+    }
+
+    public void setPayments(Set<Payment> payments) {
+        this.payments = payments;
+    }
+
+    @OneToMany(mappedBy = "invoice")
+    public Set<Payment> getPayments() {
+        return payments;
     }
 
     @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, orphanRemoval = true)

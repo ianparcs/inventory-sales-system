@@ -28,6 +28,7 @@ import ph.parcs.rmhometiles.entity.customer.CustomerController;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.inventory.product.ProductService;
 import ph.parcs.rmhometiles.entity.order.OrderItem;
+import ph.parcs.rmhometiles.entity.payment.Payment;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.util.Global;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
@@ -294,12 +295,16 @@ public class InvoiceController {
             }
 
             invoiceService.saveOrderItem(invoice, tvOrders.getItems());
+
+            Payment payment = new Payment();
+            payment.setInvoice(invoice);
+
             invoice.setOrderItems(new HashSet<>(tvOrders.getItems()));
             invoice.setCustomer(customerController.getCustomer());
             invoice.setName("INV-" + dpDate.getValue() + "-ID" + 1);
             invoice.setCreatedAt(dpDate.getValue().atTime(LocalTime.now()));
-
             Invoice savedInvoice = invoiceService.saveEntity(invoice);
+
             if (savedInvoice != null) {
                 SweetAlert successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
                 successAlert.setContentMessage(Global.Message.SAVED).show(spMain);

@@ -29,7 +29,11 @@
         <HBox maxWidth="1.7976931348623157E308" styleClass="tile-info" GridPane.columnIndex="0" GridPane.columnSpan="2"
               GridPane.rowIndex="0" spacing="5">
             <Label maxWidth="1.7976931348623157E308" styleClass="big-title" text="New Invoice" HBox.hgrow="ALWAYS"/>
-            <JFXButton fx:id="btnClearAll" onAction="#clearAllInvoice" styleClass="primary-button" text="Clear All"/>
+            <JFXButton fx:id="btnClearAll" onAction="#clearAllInvoice" styleClass="primary-button" text="Clear">
+                <graphic>
+                    <FontAwesomeIconView styleClass="clear-icon"/>
+                </graphic>
+            </JFXButton>
             <JFXDatePicker fx:id="dpDate" promptText="Invoice Date" HBox.hgrow="ALWAYS"/>
         </HBox>
 
