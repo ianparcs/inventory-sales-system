@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseService;
 import ph.parcs.rmhometiles.entity.order.OrderItem;
+import ph.parcs.rmhometiles.entity.order.OrderItemService;
+import ph.parcs.rmhometiles.exception.ItemLockedException;
 import ph.parcs.rmhometiles.file.FileService;
 import ph.parcs.rmhometiles.file.ImageProduct;
 import ph.parcs.rmhometiles.util.FileUtils;
@@ -19,10 +21,9 @@ import java.util.Optional;
 
 @Service
 public class ProductService extends BaseService<Product> {
-
     private ProductRepository productRepository;
+    private OrderItemService orderItemService;
     private FileService fileService;
-
 
     @Override
     public Page<Product> findPages(int page, int itemPerPage, String name) {
@@ -35,10 +36,14 @@ public class ProductService extends BaseService<Product> {
     }
 
     @Override
-    public boolean deleteEntity(Product product) {
+    public boolean deleteEntity(Product product) throws ItemLockedException {
         ImageProduct imageProduct = product.getImageProduct();
         if (imageProduct != null && !StringUtils.isEmpty(imageProduct.getPath())) {
             fileService.deleteFile(imageProduct.getName());
+        }
+
+        if (orderItemService.isItemsExists(product.getOrderItems())) {
+            throw new ItemLockedException("Unable to delete. Item is used from order items");
         }
 
         productRepository.delete(product);
@@ -80,6 +85,11 @@ public class ProductService extends BaseService<Product> {
     public void setItemRepository(ProductRepository productRepository) {
         this.entityRepository = productRepository;
         this.productRepository = (ProductRepository) entityRepository;
+    }
+
+    @Autowired
+    public void setOrderItemService(OrderItemService orderItemService) {
+        this.orderItemService = orderItemService;
     }
 
     public OrderItem checkQuantity(ObservableList<OrderItem> items) {

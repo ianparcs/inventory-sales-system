@@ -6,10 +6,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.ItemListener;
+import ph.parcs.rmhometiles.exception.ItemLockedException;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.util.Global;
 import ph.parcs.rmhometiles.util.PageUtil;
@@ -40,11 +42,13 @@ public abstract class EntityTableController<T extends BaseEntity> implements Ent
 
     private SweetAlert deleteAlert;
     private SweetAlert successAlert;
+    private SweetAlert errorAlert;
 
     @FXML
     protected void initialize() {
-        deleteAlert = SweetAlertFactory.create(SweetAlert.Type.WARNING);
         successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
+        deleteAlert = SweetAlertFactory.create(SweetAlert.Type.WARNING);
+        errorAlert = SweetAlertFactory.create(SweetAlert.Type.DANGER);
 
         initItemPagination();
         initActionColumn();
@@ -75,15 +79,21 @@ public abstract class EntityTableController<T extends BaseEntity> implements Ent
         updateItems();
     }
 
+    @SneakyThrows
     public T onDeleteActionClick(T item) {
         StackPane root = (StackPane) tvItem.getScene().getRoot();
         deleteAlert.setHeaderMessage("Delete " + item.getClass().getSimpleName());
         deleteAlert.setContentMessage("Are you sure you want to delete " + item.getName() + "?");
         deleteAlert.setConfirmListener(() -> {
-            if (baseService.deleteEntity(item)) {
-                successAlert.setContentMessage(Global.Message.DELETE).show(root);
-                updateItems();
+            try {
+                if (baseService.deleteEntity(item)) {
+                    successAlert.setContentMessage(Global.Message.DELETE).show(root);
+                    updateItems();
+                }
+            }catch (ItemLockedException itemLockedException){
+                errorAlert.setContentMessage(itemLockedException.getMessage()).show(root);
             }
+
         }).show(root);
 
         return item;

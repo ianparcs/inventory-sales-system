@@ -11,9 +11,13 @@
   <component name="ChangeListManager">
     <list default="true" id="e42c86d9-149f-4635-a8fc-a8339e3dcdbe" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/rmhometiles.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/data/rmhometiles.mv.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/rmhometiles.mv.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/item/BaseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/item/BaseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/item/BaseServiceInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/item/BaseServiceInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/item/EntityTableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/item/EntityTableController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/product/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/product/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/product/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/product/ProductService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/InvoiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/InvoiceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/util/alert/SweetAlert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/util/alert/SweetAlert.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +115,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="PUML" />
     <property name="full.screen.before.presentation.mode" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/fxml/invoice" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/order" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.15" />
@@ -121,6 +125,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\java\ph\parcs\rmhometiles\entity\order" />
       <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\resources\fxml\invoice" />
       <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\resources\fxml\order" />
     </key>
@@ -346,6 +351,9 @@
       <workItem from="1654514004763" duration="22125000" />
       <workItem from="1654580135097" duration="1141000" />
       <workItem from="1654947676329" duration="5240000" />
+      <workItem from="1657894128159" duration="2187000" />
+      <workItem from="1657970548996" duration="4933000" />
+      <workItem from="1658055935459" duration="2784000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;invoice add&quot;">
       <created>1596291389908</created>

@@ -3,6 +3,7 @@ package ph.parcs.rmhometiles.entity.inventory.item;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import ph.parcs.rmhometiles.exception.ItemLockedException;
 import ph.parcs.rmhometiles.util.PageUtil;
 
 import java.util.List;
@@ -28,13 +29,21 @@ public abstract class BaseService<T extends BaseEntity> implements BaseServiceIn
         return entityRepository.findAllByNameContains(query);
     }
 
+    public boolean isItemsExists(List<T> items) {
+        for (T item : items) {
+            boolean isExist = entityRepository.existsById(item.getId());
+            if (isExist) return true;
+        }
+        return false;
+    }
+
     @Override
     public T saveEntity(T entity) {
         return entityRepository.save(entity);
     }
 
     @Override
-    public boolean deleteEntity(T entity) {
+    public boolean deleteEntity(T entity) throws ItemLockedException {
         entityRepository.delete(entity);
         return !isExist(entity.getId());
     }

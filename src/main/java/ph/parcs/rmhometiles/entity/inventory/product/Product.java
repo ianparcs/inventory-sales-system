@@ -9,11 +9,14 @@ import org.joda.money.Money;
 import ph.parcs.rmhometiles.entity.inventory.category.Category;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.entity.inventory.stock.Stock;
+import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.entity.supplier.Supplier;
 import ph.parcs.rmhometiles.file.ImageProduct;
 import ph.parcs.rmhometiles.util.Global;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -27,8 +30,19 @@ public class Product extends BaseEntity {
     private ObjectProperty<Money> cost = new SimpleObjectProperty<>();
     private ImageProduct imageProduct;
 
+    private List<OrderItem> orderItems;
+
     private StringProperty description = new SimpleStringProperty();
     private StringProperty code = new SimpleStringProperty();
+
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
 
     @Column(name = "description")
     public String getDescription() {

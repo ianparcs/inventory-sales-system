@@ -6,6 +6,8 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -143,7 +145,14 @@ public class InvoiceController {
             }
             return null;
         }));
-
+        final int MAX_LENGTH = 6;
+        textField.lengthProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.intValue() > oldValue.intValue()) {
+                if (textField.getText().length() >= MAX_LENGTH) {
+                    textField.setText(textField.getText().substring(0, MAX_LENGTH));
+                }
+            }
+        });
     }
 
     private void setDiscountPercentTextBehavior() {
@@ -280,6 +289,9 @@ public class InvoiceController {
         }
 
         askSaveAlert.setConfirmListener(() -> {
+            for (OrderItem item : tvOrders.getItems()) {
+                productService.saveEntity(item.getProduct());
+            }
 
             invoiceService.saveOrderItem(invoice, tvOrders.getItems());
             invoice.setOrderItems(new HashSet<>(tvOrders.getItems()));
@@ -291,6 +303,7 @@ public class InvoiceController {
             if (savedInvoice != null) {
                 SweetAlert successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
                 successAlert.setContentMessage(Global.Message.SAVED).show(spMain);
+                clearAllInvoice();
             }
         }).show(spMain);
     }
@@ -324,6 +337,7 @@ public class InvoiceController {
             showError(Global.Message.QUANTITY_EXCEED);
             lineItem.setQuantity(event.getOldValue());
         } else {
+            lineItem.getProduct().getStock().setStocks(event.getNewValue());
             lineItem.setQuantity(event.getNewValue());
         }
         if (tvOrders.getItems().contains(lineItem)) {
