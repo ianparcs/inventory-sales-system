@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import com.jfoenix.validation.RequiredFieldValidator?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.*?>
+<JFXDialog xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/edit-dialog.css" fx:id="editDialog"
+           fx:controller="ph.parcs.rmhometiles.entity.invoice.manage.ManageInvoiceEditController">
+
+    <JFXDialogLayout>
+        <heading>
+            <HBox>
+                <FontAwesomeIconView/>
+                <Label fx:id="lblTitle"/>
+            </HBox>
+        </heading>
+
+        <body>
+            <GridPane vgap="40" hgap="40">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                </columnConstraints>
+
+                <JFXTextField fx:id="tfName" labelFloat="true" promptText="Name"
+                              GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <tooltip>
+                        <Tooltip text="Category name"/>
+                    </tooltip>
+                    <validators>
+                        <RequiredFieldValidator message="Please fill out this field"/>
+                    </validators>
+                </JFXTextField>
+            </GridPane>
+        </body>
+
+        <actions>
+            <JFXButton onAction="#closeDialog" styleClass="button-cancel" text="Cancel"/>
+            <JFXButton fx:id="btnSave" styleClass="button-save" text="Save"
+                       disable="${tfName.text.empty}"/>
+        </actions>
+
+    </JFXDialogLayout>
+
+</JFXDialog>
+

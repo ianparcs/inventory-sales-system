@@ -38,6 +38,7 @@ import ph.parcs.rmhometiles.util.converter.NumberConverter;
 import ph.parcs.rmhometiles.util.converter.ProductConverter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
@@ -299,10 +300,12 @@ public class InvoiceController {
             Payment payment = new Payment();
             payment.setInvoice(invoice);
 
-            invoice.setOrderItems(new HashSet<>(tvOrders.getItems()));
-            invoice.setCustomer(customerController.getCustomer());
-            invoice.setName("INV-" + dpDate.getValue() + "-ID" + 1);
             invoice.setCreatedAt(dpDate.getValue().atTime(LocalTime.now()));
+            invoice.setOrderItems(new HashSet<>(tvOrders.getItems()));
+            invoice.setName("INV-" + dpDate.getValue() + "-ID" + 1);
+            invoice.setCustomer(customerController.getCustomer());
+            invoice.setLastPaid(LocalDateTime.now());
+
             Invoice savedInvoice = invoiceService.saveEntity(invoice);
 
             if (savedInvoice != null) {

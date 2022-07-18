@@ -26,9 +26,9 @@ public class Payment extends BaseEntity {
     }
 
     @ManyToOne
-    @JoinTable(name = "invoice_payment", joinColumns =
-            {@JoinColumn(name = "invoice_id", referencedColumnName = "invoice_id")},
-            inverseJoinColumns = {@JoinColumn(name = "payment_id", referencedColumnName = "payment_id")})
+    @JoinTable(name = "invoice_payment",
+            joinColumns = {@JoinColumn(name = "payment_id", referencedColumnName = "payment_id")},
+            inverseJoinColumns = {@JoinColumn(name = "invoice_id", referencedColumnName = "invoice_id")})
     public Invoice getInvoice() {
         return invoice.get();
     }

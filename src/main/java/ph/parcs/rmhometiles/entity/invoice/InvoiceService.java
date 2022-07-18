@@ -14,6 +14,7 @@ import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.util.PageUtil;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
@@ -35,7 +36,9 @@ public class InvoiceService extends BaseService<Invoice> {
 
     @Override
     public boolean deleteEntity(Invoice invoice) {
-        return invoice == null;
+        invoiceRepository.delete(invoice);
+        Optional<Invoice> invoiceOptional = invoiceRepository.findById(invoice.getId());
+        return invoiceOptional.isEmpty();
     }
 
     @Override

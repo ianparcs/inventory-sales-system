@@ -6,12 +6,13 @@ import org.hibernate.annotations.Type;
 import org.joda.money.Money;
 import ph.parcs.rmhometiles.entity.customer.Customer;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
-import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.entity.payment.Payment;
 import ph.parcs.rmhometiles.util.Global;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -19,6 +20,7 @@ import java.util.Set;
 @AttributeOverride(name = "id", column = @Column(name = "invoice_id"))
 public class Invoice extends BaseEntity {
 
+    private ObjectProperty<LocalDateTime> lastPaid = new SimpleObjectProperty<>();
     private ObjectProperty<Money> totalAmountDue = new SimpleObjectProperty<>();
     private ObjectProperty<Customer> customer = new SimpleObjectProperty<>();
     private ObjectProperty<Money> totalAmount = new SimpleObjectProperty<>();
@@ -45,7 +47,7 @@ public class Invoice extends BaseEntity {
         this.payments = payments;
     }
 
-    @OneToMany(mappedBy = "invoice")
+    @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<Payment> getPayments() {
         return payments;
     }
@@ -58,6 +60,16 @@ public class Invoice extends BaseEntity {
     public void setOrderItems(Set<OrderItem> orderItems) {
         this.orderItems = orderItems;
     }
+
+    @Column(name = "last_paid_date", columnDefinition = "TIMESTAMP")
+    public LocalDateTime getLastPaid() {
+        return lastPaid.get();
+    }
+
+    public void setLastPaid(LocalDateTime lastPaid) {
+        this.lastPaid.set(lastPaid);
+    }
+
 
     @Column(name = "amount", precision = 8, scale = 2)
     @Type(type = Global.JADIRA_PACKAGE, parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "PHP")})

@@ -14,6 +14,7 @@
 <StackPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal" fx:id="spMain"
            fx:controller="ph.parcs.rmhometiles.entity.invoice.manage.ManageInvoiceTableController">
 
+    <fx:include source="edit-invoice.fxml" visible="false"/>
 
     <GridPane styleClass="background" vgap="7.0" hgap="12.0">
         <columnConstraints>
@@ -44,7 +45,7 @@
             <JFXDatePicker fx:id="dpStartDate" promptText="From" HBox.hgrow="ALWAYS"/>
             <JFXDatePicker fx:id="dpEndDate" promptText="To" HBox.hgrow="ALWAYS"/>
 
-            <JFXButton onAction="#SearchItems" styleClass="primary-button" text="Add New">
+            <JFXButton styleClass="primary-button" text="Add New">
                 <graphic>
                     <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="18"/>
                 </graphic>
@@ -84,15 +85,34 @@
                     </cellValueFactory>
                 </TableColumn>
 
-                <TableColumn reorderable="false" text="Contact">
+                <TableColumn fx:id="tcCustomer" reorderable="false" text="Customer" styleClass="action-column">
                     <cellValueFactory>
-                        <PropertyValueFactory property="contact"/>
+                        <PropertyValueFactory property="customer"/>
                     </cellValueFactory>
                 </TableColumn>
 
-                <TableColumn reorderable="false" text="Address">
+                <TableColumn reorderable="false" text="Invoice Date">
                     <cellValueFactory>
-                        <PropertyValueFactory property="address"/>
+                        <PropertyValueFactory property="createdAt"/>
+                    </cellValueFactory>
+                </TableColumn>
+
+                <TableColumn reorderable="false" text="Total">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="totalAmount"/>
+                    </cellValueFactory>
+                </TableColumn>
+
+
+                <TableColumn reorderable="false" text="Balance">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="totalAmountDue"/>
+                    </cellValueFactory>
+                </TableColumn>
+
+                <TableColumn reorderable="false" text="Last Paid">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="lastPaid"/>
                     </cellValueFactory>
                 </TableColumn>
 

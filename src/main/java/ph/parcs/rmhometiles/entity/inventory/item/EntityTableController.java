@@ -18,6 +18,8 @@ import ph.parcs.rmhometiles.util.PageUtil;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
 import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
 
+import java.util.concurrent.CompletableFuture;
+
 @Controller
 public abstract class EntityTableController<T extends BaseEntity> implements EntityActions<T> {
 
@@ -68,6 +70,9 @@ public abstract class EntityTableController<T extends BaseEntity> implements Ent
     }
 
     public void updateItems() {
+   /*     CompletableFuture<Long> completableFuture = CompletableFuture.supplyAsync(() ->{
+
+        });*/
         Page<T> items = baseService.findPages(getCurrentPage(), getRowsPerPage(), searchValue);
         tvItem.setItems(FXCollections.observableArrayList(items.toList()));
         tvItem.refresh();
