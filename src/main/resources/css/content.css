@@ -10,17 +10,17 @@ TableView {
 
 TableView .column-header, .column-header .label {
     -fx-alignment: center-left;
-    -fx-padding: 0px 5px 0px 5px;
+    -fx-padding: 4px;
 }
 
 TableView .table-cell {
     -fx-alignment: center-left;
-    -fx-padding: 0px 6px 0px 6px;
+    -fx-padding: 4px;
 }
 
 TableView .action-column,
 TableView .column-header.action-column > .label {
-    -fx-alignment: center;
+    -fx-alignment: center-left;
     -fx-max-width: Infinity;
 }
 

@@ -1,8 +1,11 @@
 package ph.parcs.rmhometiles.entity.inventory.item;
 
 import com.jfoenix.controls.JFXTextField;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.CacheHint;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -73,10 +76,13 @@ public abstract class EntityTableController<T extends BaseEntity> implements Ent
    /*     CompletableFuture<Long> completableFuture = CompletableFuture.supplyAsync(() ->{
 
         });*/
+
         Page<T> items = baseService.findPages(getCurrentPage(), getRowsPerPage(), searchValue);
-        tvItem.setItems(FXCollections.observableArrayList(items.toList()));
-        tvItem.refresh();
-        updatePageEntries(items);
+        Platform.runLater(() -> {
+            tvItem.setItems(FXCollections.observableArrayList(items.toList()));
+            tvItem.refresh();
+            updatePageEntries(items);
+        });
     }
 
     @FXML

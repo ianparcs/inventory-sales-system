@@ -12,12 +12,8 @@
     <list default="true" id="e42c86d9-149f-4635-a8fc-a8339e3dcdbe" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/rmhometiles.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/data/rmhometiles.mv.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/Invoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/Invoice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/InvoiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/InvoiceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/InvoiceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/InvoiceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/manage/ManageInvoiceTableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/manage/ManageInvoiceTableController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/payment/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/payment/Payment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/invoice/manage-invoice.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/invoice/manage-invoice.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/item/EntityTableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/item/EntityTableController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/content.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/content.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -455,12 +451,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/item/EntityTableController.java</url>
-          <line>90</line>
+          <line>101</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/item/EntityTableController.java</url>
-          <line>93</line>
+          <line>104</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
