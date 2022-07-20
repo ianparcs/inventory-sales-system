@@ -17,7 +17,7 @@
         <HBox maxWidth="1.7976931348623157E308" styleClass="tile-info" GridPane.columnIndex="0" GridPane.columnSpan="2"
               GridPane.rowIndex="0">
             <Label maxWidth="1.7976931348623157E308" styleClass="big-title" text="Invoice Details" HBox.hgrow="ALWAYS"/>
-            <JFXButton onAction="#backToInvoice" alignment="CENTER_RIGHT" styleClass="primary-button"
+            <JFXButton  onAction="#backToInvoice" alignment="CENTER_RIGHT" styleClass="primary-button"
                        text="Back To Invoices">
                 <graphic>
                     <FontAwesomeIconView fill="WHITE" glyphName="LONG_ARROW_LEFT" size="18"/>

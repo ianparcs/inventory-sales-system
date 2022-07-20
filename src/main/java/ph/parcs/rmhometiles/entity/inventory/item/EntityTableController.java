@@ -69,17 +69,14 @@ public abstract class EntityTableController<T extends BaseEntity> implements Ent
     }
 
     public void updateItems() {
-        Page<T> items = baseService.findPages(getCurrentPage(), getRowsPerPage(), searchValue);
-        tvItem.setItems(FXCollections.observableArrayList(items.toList()));
-        tvItem.refresh();
-        updatePageEntries(items);
-    /*    new Thread(() -> {
+         new Thread(() -> {
+            Page<T> items = baseService.findPages(getCurrentPage(), getRowsPerPage(), searchValue);
             Platform.runLater(() -> {
                 tvItem.setItems(FXCollections.observableArrayList(items.toList()));
                 tvItem.refresh();
                 updatePageEntries(items);
             });
-        }).start();*/
+        }).start();
     }
 
     @FXML

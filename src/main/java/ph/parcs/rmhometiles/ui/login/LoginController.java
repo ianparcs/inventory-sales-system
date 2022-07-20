@@ -79,8 +79,8 @@ public class LoginController {
 
         new Thread(() -> {
             userService.authenticate(username, password);
-            sceneManager.load();
             Platform.runLater(() -> {
+                sceneManager.load();
                 if (userService.isAuthenticated()) {
                     gotoHomeScene();
                 } else {

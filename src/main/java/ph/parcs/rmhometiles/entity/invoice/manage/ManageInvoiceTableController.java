@@ -8,6 +8,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.layout.StackPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import ph.parcs.rmhometiles.StageInitializer;
 import ph.parcs.rmhometiles.entity.customer.Customer;
 import ph.parcs.rmhometiles.entity.inventory.item.EntityTableController;
 import ph.parcs.rmhometiles.entity.invoice.Invoice;
@@ -30,14 +31,17 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
         tcAction.setCellFactory(ActionTableCell.forActions(this::onViewActionClick, this::onEditActionClick, this::onDeleteActionClick));
     }
 
+    @Autowired
+    private StageInitializer stageInitializer;
+
     public Invoice onViewActionClick(Invoice item) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/invoice/view-invoice.fxml"));
+        fxmlLoader.setControllerFactory(aClass -> stageInitializer.getApplicationContext().getBean(aClass));
 
         try {
             Parent parent = fxmlLoader.load();
             ViewInvoiceController viewInvoiceController = fxmlLoader.getController();
             viewInvoiceController.initData(item);
-            viewInvoiceController.setPreviousPage(spMain);
             spMain.getChildren().setAll(parent);
         } catch (IOException e) {
             e.printStackTrace();
