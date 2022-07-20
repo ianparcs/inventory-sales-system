@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:id="spMain" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ph.parcs.rmhometiles.entity.invoice.ViewInvoiceController">
+
+    <GridPane hgap="12.0" styleClass="background" vgap="7.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS" />
+            <ColumnConstraints hgrow="ALWAYS" />
+        </columnConstraints>
+
+        <HBox maxWidth="1.7976931348623157E308" styleClass="tile-info" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0">
+            <Label maxWidth="1.7976931348623157E308" styleClass="big-title" text="Invoice Details" HBox.hgrow="ALWAYS"/>
+            <JFXButton onAction="#backToInvoice" alignment="CENTER_RIGHT" styleClass="primary-button" text="Back To Invoices">
+                <graphic>
+                    <FontAwesomeIconView fill="WHITE" glyphName="LONG_ARROW_LEFT" size="18" />
+                </graphic>
+            </JFXButton>
+        </HBox>
+
+        <GridPane hgap="20" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="tile-info" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1">
+            <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="60.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="20.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="20.0" prefWidth="100.0" />
+            </columnConstraints>
+            <TitledPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="titled-blue" text="Details" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+                <VBox alignment="CENTER_LEFT">
+                    <Label fx:id="lblInvoiceDate" />
+                    <Label fx:id="lblCustomer" />
+                </VBox>
+            </TitledPane>
+
+            <TitledPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="titled-green" text="Total" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+                    <Label fx:id="lblTotalAmount" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-weight: BOLD; -fx-font-size: 2em" styleClass="label-total" />
+            </TitledPane>
+            <TitledPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="titled-red" text="Balance" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+                       <Label fx:id="lblBalance" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-weight: BOLD; -fx-font-size: 2em" styleClass="label-total" />
+            </TitledPane>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" percentHeight="100.0" prefHeight="100.0" vgrow="ALWAYS" />
+            </rowConstraints>
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+        </GridPane>
+
+        <rowConstraints>
+            <RowConstraints />
+            <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="200.0" vgrow="ALWAYS" />
+        </rowConstraints>
+    </GridPane>
+
+
+</StackPane>

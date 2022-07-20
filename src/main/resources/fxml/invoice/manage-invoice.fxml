@@ -85,7 +85,7 @@
                     </cellValueFactory>
                 </TableColumn>
 
-                <TableColumn fx:id="tcCustomer" reorderable="false" text="Customer" styleClass="action-column">
+                <TableColumn fx:id="tcCustomer" reorderable="false" text="Customer">
                     <cellValueFactory>
                         <PropertyValueFactory property="customer"/>
                     </cellValueFactory>
@@ -112,7 +112,7 @@
 
                 <TableColumn reorderable="false" text="Last Paid">
                     <cellValueFactory>
-                        <PropertyValueFactory property="lastPaid"/>
+                        <PropertyValueFactory property="totalAmountDue"/>
                     </cellValueFactory>
                 </TableColumn>
 

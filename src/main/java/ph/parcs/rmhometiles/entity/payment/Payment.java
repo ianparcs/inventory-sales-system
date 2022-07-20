@@ -10,6 +10,7 @@ import ph.parcs.rmhometiles.entity.invoice.Invoice;
 import ph.parcs.rmhometiles.util.Global;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -19,7 +20,6 @@ public class Payment extends BaseEntity {
     private ObjectProperty<Money> paymentAmount = new SimpleObjectProperty<>();
     private ObjectProperty<Invoice> invoice = new SimpleObjectProperty<>();
     private SimpleStringProperty paymentType = new SimpleStringProperty();
-
 
     public void setInvoice(Invoice invoice) {
         this.invoice.set(invoice);

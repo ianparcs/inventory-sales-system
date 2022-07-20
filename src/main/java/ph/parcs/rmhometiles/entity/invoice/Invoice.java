@@ -20,7 +20,6 @@ import java.util.Set;
 @AttributeOverride(name = "id", column = @Column(name = "invoice_id"))
 public class Invoice extends BaseEntity {
 
-    private ObjectProperty<LocalDateTime> lastPaid = new SimpleObjectProperty<>();
     private ObjectProperty<Money> totalAmountDue = new SimpleObjectProperty<>();
     private ObjectProperty<Customer> customer = new SimpleObjectProperty<>();
     private ObjectProperty<Money> totalAmount = new SimpleObjectProperty<>();
@@ -60,16 +59,6 @@ public class Invoice extends BaseEntity {
     public void setOrderItems(Set<OrderItem> orderItems) {
         this.orderItems = orderItems;
     }
-
-    @Column(name = "last_paid_date", columnDefinition = "TIMESTAMP")
-    public LocalDateTime getLastPaid() {
-        return lastPaid.get();
-    }
-
-    public void setLastPaid(LocalDateTime lastPaid) {
-        this.lastPaid.set(lastPaid);
-    }
-
 
     @Column(name = "amount", precision = 8, scale = 2)
     @Type(type = Global.JADIRA_PACKAGE, parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "PHP")})

@@ -20,7 +20,7 @@ TableView .table-cell {
 
 TableView .action-column,
 TableView .column-header.action-column > .label {
-    -fx-alignment: center-left;
+    -fx-alignment: center;
     -fx-max-width: Infinity;
 }
 

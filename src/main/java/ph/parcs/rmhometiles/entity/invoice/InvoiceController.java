@@ -304,7 +304,6 @@ public class InvoiceController {
             invoice.setOrderItems(new HashSet<>(tvOrders.getItems()));
             invoice.setName("INV-" + dpDate.getValue() + "-ID" + 1);
             invoice.setCustomer(customerController.getCustomer());
-            invoice.setLastPaid(LocalDateTime.now());
 
             Invoice savedInvoice = invoiceService.saveEntity(invoice);
 

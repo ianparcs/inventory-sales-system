@@ -4,8 +4,6 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.CacheHint;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -20,8 +18,6 @@ import ph.parcs.rmhometiles.util.Global;
 import ph.parcs.rmhometiles.util.PageUtil;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
 import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
-
-import java.util.concurrent.CompletableFuture;
 
 @Controller
 public abstract class EntityTableController<T extends BaseEntity> implements EntityActions<T> {
@@ -69,20 +65,21 @@ public abstract class EntityTableController<T extends BaseEntity> implements Ent
 
     private void initActionColumn() {
         tcAction.setCellFactory(ActionTableCell.forActions(
-                this::onDeleteActionClick, this::onEditActionClick));
+                this::onEditActionClick, this::onDeleteActionClick));
     }
 
     public void updateItems() {
-   /*     CompletableFuture<Long> completableFuture = CompletableFuture.supplyAsync(() ->{
-
-        });*/
-
         Page<T> items = baseService.findPages(getCurrentPage(), getRowsPerPage(), searchValue);
-        Platform.runLater(() -> {
-            tvItem.setItems(FXCollections.observableArrayList(items.toList()));
-            tvItem.refresh();
-            updatePageEntries(items);
-        });
+        tvItem.setItems(FXCollections.observableArrayList(items.toList()));
+        tvItem.refresh();
+        updatePageEntries(items);
+    /*    new Thread(() -> {
+            Platform.runLater(() -> {
+                tvItem.setItems(FXCollections.observableArrayList(items.toList()));
+                tvItem.refresh();
+                updatePageEntries(items);
+            });
+        }).start();*/
     }
 
     @FXML
@@ -101,12 +98,12 @@ public abstract class EntityTableController<T extends BaseEntity> implements Ent
                     successAlert.setContentMessage(Global.Message.DELETE).show(root);
                     updateItems();
                 }
-            }catch (ItemLockedException itemLockedException){
+            } catch (ItemLockedException itemLockedException) {
                 errorAlert.setContentMessage(itemLockedException.getMessage()).show(root);
             }
 
-        }).show(root);
-
+        });
+        Platform.runLater(() -> deleteAlert.show(root));
         return item;
     }
 

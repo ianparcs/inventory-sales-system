@@ -2,14 +2,21 @@ package ph.parcs.rmhometiles.entity.invoice.manage;
 
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.layout.StackPane;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.entity.customer.Customer;
 import ph.parcs.rmhometiles.entity.inventory.item.EntityTableController;
 import ph.parcs.rmhometiles.entity.invoice.Invoice;
 import ph.parcs.rmhometiles.entity.invoice.InvoiceService;
+import ph.parcs.rmhometiles.entity.invoice.ViewInvoiceController;
+import ph.parcs.rmhometiles.ui.ActionTableCell;
+
+import java.io.IOException;
 
 @Controller
 public class ManageInvoiceTableController extends EntityTableController<Invoice> {
@@ -21,7 +28,24 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
     public void initialize() {
         super.initialize();
         tcCustomer.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().getCustomer(), "name"));
+        tcAction.setCellFactory(ActionTableCell.forActions(this::onViewActionClick, this::onEditActionClick, this::onDeleteActionClick));
     }
+
+    public Invoice onViewActionClick(Invoice item) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/invoice/view-invoice.fxml"));
+
+        try {
+            Parent parent = fxmlLoader.load();
+            ViewInvoiceController viewInvoiceController = fxmlLoader.getController();
+            viewInvoiceController.initData(item);
+            viewInvoiceController.setPreviousPage(spMain);
+            spMain.getChildren().setAll(parent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return item;
+    }
+
 
     @FXML
     private void showEditItemDialog() {
