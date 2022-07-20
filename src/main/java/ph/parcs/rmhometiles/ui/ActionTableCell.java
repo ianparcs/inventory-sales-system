@@ -66,7 +66,7 @@ public class ActionTableCell<S> extends TableCell<S, HBox> {
 
 
     public static <S> Callback<TableColumn<S, HBox>, TableCell<S, HBox>> forActions(Function<S, S> viewFunction, Function<S, S> editFunction, Function<S, S> delFunction) {
-        return param -> new ActionTableCell<>(viewFunction,  editFunction, delFunction);
+        return param -> new ActionTableCell<>(viewFunction, editFunction, delFunction);
     }
 
     public static <S> Callback<TableColumn<S, HBox>, TableCell<S, HBox>> forActions(Function<S, S> editFunction, Function<S, S> delFunction) {

@@ -8,7 +8,6 @@ import org.springframework.util.StringUtils;
 import ph.parcs.rmhometiles.entity.inventory.item.EditItemController;
 import ph.parcs.rmhometiles.entity.invoice.Invoice;
 import ph.parcs.rmhometiles.entity.invoice.InvoiceService;
-import ph.parcs.rmhometiles.ui.ActionTableCell;
 
 @Controller
 public class ManageInvoiceEditController extends EditItemController<Invoice> {
@@ -36,7 +35,7 @@ public class ManageInvoiceEditController extends EditItemController<Invoice> {
     }
 
     @Autowired
-    public void setInvoiceService(InvoiceService invoiceService){
+    public void setInvoiceService(InvoiceService invoiceService) {
         this.baseService = invoiceService;
     }
 

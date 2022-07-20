@@ -10,7 +10,6 @@ import ph.parcs.rmhometiles.entity.invoice.Invoice;
 import ph.parcs.rmhometiles.util.Global;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -21,10 +20,6 @@ public class Payment extends BaseEntity {
     private ObjectProperty<Invoice> invoice = new SimpleObjectProperty<>();
     private SimpleStringProperty paymentType = new SimpleStringProperty();
 
-    public void setInvoice(Invoice invoice) {
-        this.invoice.set(invoice);
-    }
-
     @ManyToOne
     @JoinTable(name = "invoice_payment",
             joinColumns = {@JoinColumn(name = "payment_id", referencedColumnName = "payment_id")},
@@ -33,13 +28,17 @@ public class Payment extends BaseEntity {
         return invoice.get();
     }
 
-    public void setPaymentAmount(Money paymentAmount) {
-        this.paymentAmount.set(paymentAmount);
+    public void setInvoice(Invoice invoice) {
+        this.invoice.set(invoice);
     }
 
     @Type(type = Global.JADIRA_PACKAGE, parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "PHP")})
     public Money getPaymentAmount() {
         return paymentAmount.get();
+    }
+
+    public void setPaymentAmount(Money paymentAmount) {
+        this.paymentAmount.set(paymentAmount);
     }
 
     @Column(name = "payment_type")

@@ -16,7 +16,6 @@ import ph.parcs.rmhometiles.util.Global;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Access(AccessType.PROPERTY)

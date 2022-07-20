@@ -7,7 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.layout.StackPane;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.entity.customer.Customer;
 import ph.parcs.rmhometiles.entity.inventory.item.EntityTableController;

@@ -11,8 +11,6 @@ import ph.parcs.rmhometiles.entity.payment.Payment;
 import ph.parcs.rmhometiles.util.Global;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -42,13 +40,13 @@ public class Invoice extends BaseEntity {
         this.customer.set(customer);
     }
 
-    public void setPayments(Set<Payment> payments) {
-        this.payments = payments;
-    }
-
     @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<Payment> getPayments() {
         return payments;
+    }
+
+    public void setPayments(Set<Payment> payments) {
+        this.payments = payments;
     }
 
     @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, orphanRemoval = true)

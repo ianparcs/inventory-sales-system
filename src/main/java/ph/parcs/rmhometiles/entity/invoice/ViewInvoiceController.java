@@ -1,15 +1,11 @@
 package ph.parcs.rmhometiles.entity.invoice;
 
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
@@ -30,6 +26,7 @@ public class ViewInvoiceController {
     private StackPane spMain;
 
     private Invoice invoice;
+    private StackPane test;
 
     private void displayDetails(Invoice invoice) {
         if (invoice != null) {
@@ -50,17 +47,16 @@ public class ViewInvoiceController {
 
     @FXML
     public void backToInvoice() {
-            Platform.runLater(() -> {
-                try {
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/invoice/manage-invoice.fxml"));
-                    Node node = fxmlLoader.load();
-                    test.getChildren().setAll(node);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
+        Platform.runLater(() -> {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/invoice/manage-invoice.fxml"));
+                Node node = fxmlLoader.load();
+                test.getChildren().setAll(node);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
-    private StackPane test;
 
     public void setPreviousPage(StackPane test) {
         this.test = test;
