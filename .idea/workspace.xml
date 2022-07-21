@@ -12,9 +12,9 @@
     <list default="true" id="e42c86d9-149f-4635-a8fc-a8339e3dcdbe" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/rmhometiles.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/data/rmhometiles.mv.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/ViewInvoiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/ViewInvoiceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/manage/ManageInvoiceTableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/manage/ManageInvoiceTableController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/ui/login/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/ui/login/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/InvoiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/InvoiceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/invoice.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/invoice.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/invoice/invoice.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/invoice/invoice.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/invoice/view-invoice.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/invoice/view-invoice.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -359,6 +359,7 @@
       <workItem from="1658193160633" duration="4519000" />
       <workItem from="1658227504323" duration="6109000" />
       <workItem from="1658316290589" duration="8857000" />
+      <workItem from="1658395234501" duration="11094000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;invoice add&quot;">
       <created>1596291389908</created>
@@ -456,9 +457,9 @@
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/item/EntityTableController.java</url>
-          <line>72</line>
-          <option name="timeStamp" value="5" />
+          <url>file://$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/manage/ManageInvoiceTableController.java</url>
+          <line>33</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

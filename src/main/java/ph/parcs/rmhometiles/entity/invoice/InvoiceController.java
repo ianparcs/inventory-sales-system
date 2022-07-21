@@ -7,6 +7,7 @@ import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -53,6 +54,8 @@ public class InvoiceController {
     private TableColumn<OrderItem, String> tcCode;
     @FXML
     private TableColumn<OrderItem, Money> tcPrice;
+    @FXML
+    private JFXComboBox<String> cbPaymentType;
     @FXML
     private JFXComboBox<Product> cbProducts;
     @FXML
@@ -350,6 +353,11 @@ public class InvoiceController {
             tvOrders.getItems().add(index, lineItem);
         }
         tvOrders.refresh();
+    }
+
+    @FXML
+    public void onSelectPaymentType() {
+
     }
 
     private OrderItem onItemDeleteAction(OrderItem item) {

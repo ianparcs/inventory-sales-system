@@ -5,6 +5,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain" xmlns="http://javafx.com/javafx/11.0.14-internal"
            fx:controller="ph.parcs.rmhometiles.entity.invoice.ViewInvoiceController">
 
@@ -25,13 +26,14 @@
             </JFXButton>
         </HBox>
 
-        <GridPane hgap="20" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="tile-info"
+        <GridPane hgap="20" vgap="20" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="tile-info"
                   GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1">
             <columnConstraints>
                 <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="60.0" prefWidth="100.0"/>
                 <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="20.0" prefWidth="100.0"/>
                 <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="20.0" prefWidth="100.0"/>
             </columnConstraints>
+
             <TitledPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="titled-blue"
                         text="Details" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
                 <VBox alignment="CENTER_LEFT">
@@ -50,17 +52,29 @@
                 <Label fx:id="lblBalance" alignment="CENTER" maxWidth="1.7976931348623157E308"
                        style="-fx-font-weight: BOLD; -fx-font-size: 2em" styleClass="label-total"/>
             </TitledPane>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" percentHeight="100.0" prefHeight="100.0" vgrow="ALWAYS"/>
-            </rowConstraints>
-            <GridPane.margin>
-                <Insets/>
-            </GridPane.margin>
+
+            <TitledPane GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="1" text="Payments">
+                <TableView fx:id="tvItem" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="1">
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                    </columnResizePolicy>
+                    <columns>
+                        <TableColumn reorderable="false" text="ID" >
+                            <cellValueFactory>
+                                <PropertyValueFactory property="name"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn reorderable="false" text="Payment Date" />
+                        <TableColumn reorderable="false" text="Payment Type" />
+                        <TableColumn reorderable="false" text="Payment Amount" />
+                    </columns>
+                </TableView>
+            </TitledPane>
         </GridPane>
 
         <rowConstraints>
             <RowConstraints/>
-            <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="200.0" vgrow="ALWAYS"/>
+            <RowConstraints/>
         </rowConstraints>
     </GridPane>
 

@@ -81,82 +81,80 @@
 
         <fx:include source="../customer/search-customer.fxml" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
-        <GridPane styleClass="tile-info" vgap="10" GridPane.columnIndex="1" GridPane.rowIndex="3">
+        <ScrollPane fitToWidth="true" fitToHeight="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                <GridPane styleClass="tile-info" vgap="10" GridPane.columnIndex="1" GridPane.rowIndex="3">
 
-            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="small-title"
-                   text="Invoice Summary" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0"/>
-            <Label text="Sales person:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-            <Label text="Amount:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-            <Label text="Discount:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-            <Label text="Discount amount:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-            <Label text="Total before tax:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-            <Label text="Tax amount 3%:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
-            <Label text="Tax amount 3%:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
-            <Label text="Delivery Rate:" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
+                    <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="small-title"
+                           text="Invoice Summary" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0"/>
+                    <Label text="Sales person:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                    <Label text="Amount:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                    <Label text="Discount:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                    <Label text="Discount amount:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                    <Label text="Total before tax:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                    <Label text="Tax amount 3%:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+                    <Label text="Tax amount 3%:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+                    <Label text="Delivery Rate:" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
 
-            <Label fx:id="lblSalesPerson" alignment="CENTER" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1"
-                   GridPane.hgrow="ALWAYS" GridPane.rowIndex="1"/>
-            <Label fx:id="lblAmount" alignment="CENTER" maxWidth="1.7976931348623157E308" text="PHP 0.00"
-                   GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    <Label fx:id="lblSalesPerson" alignment="CENTER" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1"
+                           GridPane.hgrow="ALWAYS" GridPane.rowIndex="1"/>
+                    <Label fx:id="lblAmount" alignment="CENTER" maxWidth="1.7976931348623157E308" text="PHP 0.00"
+                           GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
-            <JFXTextField fx:id="tfDiscountPercent" alignment="CENTER" promptText="Enter Discount %"
-                          styleClass="non-search-field" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                <cursor>
-                    <Cursor fx:constant="HAND"/>
-                </cursor>
-            </JFXTextField>
+                    <JFXTextField fx:id="tfDiscountPercent" alignment="CENTER" promptText="Enter Discount %"
+                                  styleClass="non-search-field" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <cursor>
+                            <Cursor fx:constant="HAND"/>
+                        </cursor>
+                    </JFXTextField>
 
 
-            <Label fx:id="lblDiscountAmount" alignment="CENTER" maxWidth="1.7976931348623157E308" text="PHP 0.00"
-                   GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                    <Label fx:id="lblDiscountAmount" alignment="CENTER" maxWidth="1.7976931348623157E308" text="PHP 0.00"
+                           GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 
-            <Label fx:id="lblTotalBeforeTax" alignment="CENTER" maxWidth="1.7976931348623157E308" text="PHP 0.00"
-                   GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                    <Label fx:id="lblTotalBeforeTax" alignment="CENTER" maxWidth="1.7976931348623157E308" text="PHP 0.00"
+                           GridPane.columnIndex="1" GridPane.rowIndex="5"/>
 
-            <Label fx:id="lblTax" alignment="CENTER" maxWidth="1.7976931348623157E308" text="PHP 0.00"
-                   GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+                    <Label fx:id="lblTax" alignment="CENTER" maxWidth="1.7976931348623157E308" text="PHP 0.00"
+                           GridPane.columnIndex="1" GridPane.rowIndex="6"/>
 
-            <JFXTextField fx:id="tfDeliveryAmount" alignment="CENTER" promptText="Enter Delivery Rate"
-                          styleClass="non-search-field" text="0.00" GridPane.columnIndex="1" GridPane.rowIndex="7">
-                <cursor>
-                    <Cursor fx:constant="HAND"/>
-                </cursor>
-                <validators>
-                    <RegexValidator regexPattern="^[1-9]\d*(\.\d{1,2})?$"/>
-                </validators>
-            </JFXTextField>
+                    <JFXTextField fx:id="tfDeliveryAmount" alignment="CENTER" promptText="Enter Delivery Rate"
+                                  styleClass="non-search-field" text="0.00" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                        <cursor>
+                            <Cursor fx:constant="HAND"/>
+                        </cursor>
+                        <validators>
+                            <RegexValidator regexPattern="^[1-9]\d*(\.\d{1,2})?$"/>
+                        </validators>
+                    </JFXTextField>
 
-            <VBox styleClass="amount-container" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8">
-                <Label fx:id="lblAmountDueBalance" text="Amount Due"/>
-                <Label fx:id="lblAmountDue" alignment="CENTER" maxWidth="1.7976931348623157E308"
-                       styleClass="label-amount" text="PHP 0.00"/>
-            </VBox>
+                    <VBox styleClass="amount-container" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8">
+                        <Label fx:id="lblAmountDueBalance" text="Amount Due"/>
+                        <Label fx:id="lblAmountDue" alignment="CENTER" maxWidth="1.7976931348623157E308"
+                               styleClass="label-amount" text="PHP 0.00"/>
+                    </VBox>
+                    <VBox styleClass="amount-container" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8">
+                        <Label text="Total"/>
+                        <Label fx:id="lblTotalAmount" alignment="CENTER" maxWidth="1.7976931348623157E308"
+                               styleClass="label-total" text="PHP 0.00"/>
+                    </VBox>
 
-            <VBox styleClass="amount-container" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8">
-                <Label text="Total"/>
-                <Label fx:id="lblTotalAmount" alignment="CENTER" maxWidth="1.7976931348623157E308"
-                       styleClass="label-total" text="PHP 0.00"/>
-            </VBox>
-            <columnConstraints>
-                <ColumnConstraints/>
-                <ColumnConstraints/>
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints/>
-                <RowConstraints/>
-                <RowConstraints/>
-                <RowConstraints/>
-                <RowConstraints/>
-                <RowConstraints/>
-                <RowConstraints/>
-                <RowConstraints/>
-                <RowConstraints/>
-            </rowConstraints>
+                    <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                           text="Payment Type" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="9"/>
 
-        </GridPane>
+                    <HBox maxWidth="1.7976931348623157E308"  GridPane.columnSpan="2" GridPane.columnIndex="0"  GridPane.rowIndex="10">
+                        <JFXTogglePane>
 
-        <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="tile"
-              GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+                        </JFXTogglePane>
+                        <JFXRadioButton HBox.hgrow="ALWAYS" alignment="CENTER" text="Cash"  maxWidth="1.7976931348623157E308"/>
+                        <JFXRadioButton HBox.hgrow="ALWAYS" text="GCash" alignment="CENTER"  maxWidth="1.7976931348623157E308"/>
+                    </HBox>
+
+                </GridPane>
+        </ScrollPane>
+
+        <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="tile"
+               GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+        <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
             <JFXTextField fx:id="tfCashPay" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
                           promptText="Enter Cash Amount" styleClass="text-field-amount">
                 <validators>
@@ -166,11 +164,17 @@
                 </validators>
             </JFXTextField>
             <JFXButton alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                       onMouseClicked="#onCheckout" styleClass="button-amount" text="Checkout"
+                       onMouseClicked="#onCheckout" styleClass="button-amount" text="Complete Sales"
                        HBox.hgrow="ALWAYS"/>
+
+
             <padding>
                 <Insets bottom="7.0" left="7.0" right="7.0" top="7.0"/>
             </padding>
         </HBox>
+
+            <TextArea promptText="Remarks" prefColumnCount="2" prefRowCount="3"/>
+            <JFXCheckBox text="Show comments on receipt"/>
+        </VBox>
     </GridPane>
 </StackPane>
