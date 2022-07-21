@@ -7,7 +7,6 @@ import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -77,6 +76,8 @@ public class InvoiceController {
     private Label lblTotalBeforeTax;
     @FXML
     private Label lblDiscountAmount;
+    @FXML
+    private Label lblSalesPerson;
     @FXML
     private StackPane spMain;
     @FXML

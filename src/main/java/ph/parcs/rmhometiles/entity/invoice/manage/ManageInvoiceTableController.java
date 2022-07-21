@@ -23,6 +23,8 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
 
     @FXML
     private TableColumn<Invoice, Customer> tcCustomer;
+    @Autowired
+    private StageInitializer stageInitializer;
 
     @FXML
     public void initialize() {
@@ -30,9 +32,6 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
         tcCustomer.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().getCustomer(), "name"));
         tcAction.setCellFactory(ActionTableCell.forActions(this::onViewActionClick, this::onEditActionClick, this::onDeleteActionClick));
     }
-
-    @Autowired
-    private StageInitializer stageInitializer;
 
     public Invoice onViewActionClick(Invoice item) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/invoice/view-invoice.fxml"));

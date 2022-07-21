@@ -2,10 +2,9 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain" xmlns="http://javafx.com/javafx/11.0.14-internal"
            fx:controller="ph.parcs.rmhometiles.entity.invoice.ViewInvoiceController">
 
@@ -18,7 +17,7 @@
         <HBox maxWidth="1.7976931348623157E308" styleClass="tile-info" GridPane.columnIndex="0" GridPane.columnSpan="2"
               GridPane.rowIndex="0">
             <Label maxWidth="1.7976931348623157E308" styleClass="big-title" text="Invoice Details" HBox.hgrow="ALWAYS"/>
-            <JFXButton  onAction="#backToInvoice" alignment="CENTER_RIGHT" styleClass="primary-button"
+            <JFXButton onAction="#backToInvoice" alignment="CENTER_RIGHT" styleClass="primary-button"
                        text="Back To Invoices">
                 <graphic>
                     <FontAwesomeIconView fill="WHITE" glyphName="LONG_ARROW_LEFT" size="18"/>
@@ -26,7 +25,8 @@
             </JFXButton>
         </HBox>
 
-        <GridPane hgap="20" vgap="20" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="tile-info"
+        <GridPane hgap="20" vgap="20" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                  styleClass="tile-info"
                   GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1">
             <columnConstraints>
                 <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="60.0" prefWidth="100.0"/>
@@ -59,14 +59,14 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
                     </columnResizePolicy>
                     <columns>
-                        <TableColumn reorderable="false" text="ID" >
+                        <TableColumn reorderable="false" text="ID">
                             <cellValueFactory>
                                 <PropertyValueFactory property="name"/>
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn reorderable="false" text="Payment Date" />
-                        <TableColumn reorderable="false" text="Payment Type" />
-                        <TableColumn reorderable="false" text="Payment Amount" />
+                        <TableColumn reorderable="false" text="Payment Date"/>
+                        <TableColumn reorderable="false" text="Payment Type"/>
+                        <TableColumn reorderable="false" text="Payment Amount"/>
                     </columns>
                 </TableView>
             </TitledPane>
