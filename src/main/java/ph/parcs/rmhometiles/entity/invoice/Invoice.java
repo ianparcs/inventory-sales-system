@@ -2,6 +2,8 @@ package ph.parcs.rmhometiles.entity.invoice;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import org.hibernate.annotations.Type;
 import org.joda.money.Money;
 import ph.parcs.rmhometiles.entity.customer.Customer;
@@ -11,6 +13,7 @@ import ph.parcs.rmhometiles.entity.payment.Payment;
 import ph.parcs.rmhometiles.util.Global;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -24,9 +27,10 @@ public class Invoice extends BaseEntity {
     private ObjectProperty<Money> taxAmount = new SimpleObjectProperty<>();
     private ObjectProperty<Money> discount = new SimpleObjectProperty<>();
     private ObjectProperty<Money> amount = new SimpleObjectProperty<>();
+    private StringProperty remarks = new SimpleStringProperty();
 
+    private Set<Payment> payments = new HashSet<>();
     private Set<OrderItem> orderItems;
-    private Set<Payment> payments;
 
     @ManyToOne
     @JoinTable(name = "customer_invoice", joinColumns =
@@ -106,6 +110,15 @@ public class Invoice extends BaseEntity {
 
     public void setTaxAmount(Money taxAmount) {
         this.taxAmount.set(taxAmount);
+    }
+
+    @Column(name = "remarks")
+    public String getRemarks() {
+        return remarks.get();
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks.set(remarks);
     }
 
     @Transient

@@ -11,12 +11,12 @@
   <component name="ChangeListManager">
     <list default="true" id="e42c86d9-149f-4635-a8fc-a8339e3dcdbe" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/rmhometiles.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/data/rmhometiles.mv.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/item/EntityTableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/item/EntityTableController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/rmhometiles.mv.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/rmhometiles.trace.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/Invoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/Invoice.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/InvoiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/InvoiceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/manage/ManageInvoiceTableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/manage/ManageInvoiceTableController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/InvoiceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/InvoiceService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/invoice/invoice.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/invoice/invoice.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/invoice/view-invoice.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/invoice/view-invoice.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +53,7 @@
         <option value="Interface" />
         <option value="FxmlFile" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -361,6 +362,7 @@
       <workItem from="1658227504323" duration="6109000" />
       <workItem from="1658316290589" duration="8857000" />
       <workItem from="1658395234501" duration="14490000" />
+      <workItem from="1658577515494" duration="3360000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;invoice add&quot;">
       <created>1596291389908</created>

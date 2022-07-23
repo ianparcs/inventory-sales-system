@@ -12,6 +12,7 @@ import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.inventory.product.ProductRepository;
 import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.util.PageUtil;
+import ph.parcs.rmhometiles.util.PaymentType;
 
 import java.util.List;
 import java.util.Optional;
@@ -60,6 +61,12 @@ public class InvoiceService extends BaseService<Invoice> {
         for (OrderItem item : items) {
             item.setInvoice(invoice);
         }
+    }
+
+    public String getPaymentType(boolean cashPayment, boolean gcashPayment) {
+        if(gcashPayment) return PaymentType.GCASH.name();
+        if(cashPayment) return PaymentType.CASH.name();
+        return "UNKNOWN_PAYMENT_TYPE";
     }
 
     public Invoice createDefault() {

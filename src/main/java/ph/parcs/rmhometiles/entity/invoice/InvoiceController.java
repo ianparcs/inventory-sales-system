@@ -2,16 +2,15 @@ package ph.parcs.rmhometiles.entity.invoice;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextFormatter;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -29,6 +28,7 @@ import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.entity.payment.Payment;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.util.Global;
+import ph.parcs.rmhometiles.util.PaymentType;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
 import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.util.converter.DateConverter;
@@ -36,6 +36,7 @@ import ph.parcs.rmhometiles.util.converter.NumberConverter;
 import ph.parcs.rmhometiles.util.converter.ProductConverter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
@@ -64,10 +65,15 @@ public class InvoiceController {
     @FXML
     private JFXTextField tfDeliveryAmount;
     @FXML
+    private JFXRadioButton rbGCashType;
+    @FXML
+    private JFXRadioButton rbCashType;
+    @FXML
     private JFXTextField tfCashPay;
     @FXML
     private JFXDatePicker dpDate;
-
+    @FXML
+    private TextArea txaRemarks;
     @FXML
     private Label lblAmount;
     @FXML
@@ -92,6 +98,7 @@ public class InvoiceController {
     private InvoiceService invoiceService;
     private MoneyService moneyService;
     private Invoice invoice;
+    private Payment payment;
 
     private SweetAlert askSaveAlert;
 
@@ -99,6 +106,8 @@ public class InvoiceController {
     public void initialize() {
         invoice = new Invoice();
         invoice.setOrderItems(new HashSet<>(tvOrders.getItems()));
+
+        payment = new Payment();
 
         askSaveAlert = SweetAlertFactory.create(SweetAlert.Type.INFO);
         askSaveAlert.setContentMessage("Create new invoice?");
@@ -298,13 +307,21 @@ public class InvoiceController {
 
             invoiceService.saveOrderItem(invoice, tvOrders.getItems());
 
+            String paymentType = invoiceService.getPaymentType(rbCashType.isSelected(),rbGCashType.isSelected());
+
+            LocalDateTime createdAt = dpDate.getValue().atTime(LocalTime.now());
             Payment payment = new Payment();
             payment.setInvoice(invoice);
+            payment.setCreatedAt(createdAt);
+            payment.setPaymentType(paymentType);
+            payment.setPaymentAmount(invoice.getAmount());
 
-            invoice.setCreatedAt(dpDate.getValue().atTime(LocalTime.now()));
+            invoice.setCreatedAt(createdAt);
             invoice.setOrderItems(new HashSet<>(tvOrders.getItems()));
             invoice.setName("INV-" + dpDate.getValue() + "-ID" + 1);
             invoice.setCustomer(customerController.getCustomer());
+            invoice.setRemarks(txaRemarks.getText());
+            invoice.getPayments().add(payment);
 
             Invoice savedInvoice = invoiceService.saveEntity(invoice);
 
@@ -357,8 +374,13 @@ public class InvoiceController {
     }
 
     @FXML
-    public void onSelectPaymentType() {
+    public void onCashTypeClicked() {
+        rbGCashType.setSelected(false);
+    }
 
+    @FXML
+    public void onGCashTypeClicked() {
+        rbCashType.setSelected(false);
     }
 
     private OrderItem onItemDeleteAction(OrderItem item) {
