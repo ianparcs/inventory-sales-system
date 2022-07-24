@@ -28,7 +28,7 @@
             <HBox spacing="5" styleClass="tile-default">
                 <JFXComboBox fx:id="cbProducts" editable="true" labelFloat="true" maxWidth="1.7976931348623157E308" onAction="#onProductItemClick" promptText="Search Order" styleClass="search-field" HBox.hgrow="ALWAYS" />
                 <JFXDatePicker fx:id="dpDate" promptText="Invoice Date" HBox.hgrow="ALWAYS" />
-                <JFXButton onAction="#clearAllInvoice" styleClass="primary-button" text="Clear">
+                <JFXButton onAction="#clearAllInvoice" styleClass="primary-button">
                     <graphic>
                         <FontAwesomeIconView styleClass="clear-icon" />
                     </graphic>

@@ -25,6 +25,10 @@
                           styleClass="search-field" HBox.hgrow="ALWAYS"/>
 
 
+
+            <JFXDatePicker fx:id="dpStartDate" promptText="From" HBox.hgrow="ALWAYS"/>
+            <JFXDatePicker fx:id="dpEndDate" promptText="To" HBox.hgrow="ALWAYS"/>
+
             <JFXComboBox fx:id="cbInvoices" labelFloat="false" promptText="Status"
                          GridPane.columnIndex="0" GridPane.rowIndex="3">
                 <items>
@@ -39,12 +43,9 @@
                 </value>
             </JFXComboBox>
 
-            <JFXDatePicker fx:id="dpStartDate" promptText="From" HBox.hgrow="ALWAYS"/>
-            <JFXDatePicker fx:id="dpEndDate" promptText="To" HBox.hgrow="ALWAYS"/>
-
-            <JFXButton styleClass="primary-button" text="Add New">
+            <JFXButton styleClass="primary-button">
                 <graphic>
-                    <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="18"/>
+                    <FontAwesomeIconView fill="WHITE" glyphName="REFRESH" size="18"/>
                 </graphic>
             </JFXButton>
         </HBox>
