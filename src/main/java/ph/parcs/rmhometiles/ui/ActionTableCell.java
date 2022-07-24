@@ -20,22 +20,28 @@ public class ActionTableCell<S> extends TableCell<S, HBox> {
     private final HBox hBox = new HBox();
 
 
-    public ActionTableCell(Function<S, S> editFunction) {
-        Text editIcon = FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.PENCIL, "1.5em");
-        editIcon.setId("edit-icon");
+    public ActionTableCell(Function<S, S> editFunction, String type) {
+        JFXButton button = new JFXButton();
+        Text icon;
+        if (type.equalsIgnoreCase("EDIT")) {
+            icon = FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.PENCIL, "1.5em");
+            icon.setId("edit-icon");
+            button.setTooltip(new Tooltip("Edit"));
+        } else {
+            icon = FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.TRASH, "1.5em");
+            icon.setId("delete-icon");
+            button.setTooltip(new Tooltip("Delete"));
+        }
+        button.setGraphic(icon);
+        button.setPadding(new Insets(5));
+        button.setOnAction((ActionEvent e) -> editFunction.apply(getCurrentItem()));
 
-        JFXButton btnEdit = new JFXButton();
-        btnEdit.setTooltip(new Tooltip("Edit"));
-        btnEdit.setGraphic(editIcon);
-        btnEdit.setPadding(new Insets(5));
-        btnEdit.setOnAction((ActionEvent e) -> editFunction.apply(getCurrentItem()));
-
-        hBox.getChildren().add(btnEdit);
+        hBox.getChildren().add(button);
         hBox.setAlignment(Pos.CENTER);
     }
 
     public ActionTableCell(Function<S, S> editFunction, Function<S, S> delFunction) {
-        this(editFunction);
+        this(editFunction, "EDIT");
 
         Text deleteIcon = FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.TRASH, "1.5em");
         deleteIcon.setId("delete-icon");
@@ -72,8 +78,8 @@ public class ActionTableCell<S> extends TableCell<S, HBox> {
         return param -> new ActionTableCell<>(editFunction, delFunction);
     }
 
-    public static <S> Callback<TableColumn<S, HBox>, TableCell<S, HBox>> forActions(Function<S, S> delFunction) {
-        return param -> new ActionTableCell<>(delFunction);
+    public static <S> Callback<TableColumn<S, HBox>, TableCell<S, HBox>> forActions(Function<S, S> delFunction, String type) {
+        return param -> new ActionTableCell<>(delFunction, type);
     }
 
     public S getCurrentItem() {

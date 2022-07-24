@@ -230,7 +230,7 @@ public class InvoiceController {
         tcPrice.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "price"));
         tcStock.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "stock", "stocks"));
         tcQty.setCellFactory(TextFieldTableCell.forTableColumn(new NumberConverter()));
-        tcAction.setCellFactory(ActionTableCell.forActions(this::onItemDeleteAction));
+        tcAction.setCellFactory(ActionTableCell.forActions(this::onItemDeleteAction,"DELETE"));
 
     }
 
