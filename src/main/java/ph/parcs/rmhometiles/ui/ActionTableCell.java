@@ -20,22 +20,7 @@ public class ActionTableCell<S> extends TableCell<S, HBox> {
     private final HBox hBox = new HBox();
 
 
-    public ActionTableCell(Function<S, S> delFunction) {
-        Text deleteIcon = FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.TRASH, "1.5em");
-        deleteIcon.setId("delete-icon");
-        JFXButton btnDelete = new JFXButton();
-        btnDelete.setPadding(new Insets(5));
-        btnDelete.setTooltip(new Tooltip("Delete"));
-        btnDelete.setGraphic(deleteIcon);
-        btnDelete.setOnAction((ActionEvent e) -> delFunction.apply(getCurrentItem()));
-
-        hBox.getChildren().add(btnDelete);
-        hBox.setAlignment(Pos.CENTER);
-    }
-
-    public ActionTableCell(Function<S, S> editFunction, Function<S, S> delFunction) {
-        this(delFunction);
-
+    public ActionTableCell(Function<S, S> editFunction) {
         Text editIcon = FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.PENCIL, "1.5em");
         editIcon.setId("edit-icon");
 
@@ -46,6 +31,21 @@ public class ActionTableCell<S> extends TableCell<S, HBox> {
         btnEdit.setOnAction((ActionEvent e) -> editFunction.apply(getCurrentItem()));
 
         hBox.getChildren().add(btnEdit);
+        hBox.setAlignment(Pos.CENTER);
+    }
+
+    public ActionTableCell(Function<S, S> editFunction, Function<S, S> delFunction) {
+        this(editFunction);
+
+        Text deleteIcon = FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.TRASH, "1.5em");
+        deleteIcon.setId("delete-icon");
+        JFXButton btnDelete = new JFXButton();
+        btnDelete.setPadding(new Insets(5));
+        btnDelete.setTooltip(new Tooltip("Delete"));
+        btnDelete.setGraphic(deleteIcon);
+        btnDelete.setOnAction((ActionEvent e) -> delFunction.apply(getCurrentItem()));
+
+        hBox.getChildren().add(btnDelete);
         hBox.setAlignment(Pos.CENTER);
     }
 
@@ -63,7 +63,6 @@ public class ActionTableCell<S> extends TableCell<S, HBox> {
         hBox.getChildren().add(btnView);
         hBox.getChildren().get(1).toFront();
     }
-
 
     public static <S> Callback<TableColumn<S, HBox>, TableCell<S, HBox>> forActions(Function<S, S> viewFunction, Function<S, S> editFunction, Function<S, S> delFunction) {
         return param -> new ActionTableCell<>(viewFunction, editFunction, delFunction);
