@@ -3,6 +3,7 @@ package ph.parcs.rmhometiles.entity;
 import lombok.SneakyThrows;
 import org.joda.money.Money;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -39,5 +40,12 @@ public class MoneyService {
         Money totalAmount = currentTotal.minus(taxAmount);
         totalAmount = totalAmount.plus(deliveryRate);
         return totalAmount;
+    }
+
+    public Money parseMoney(String text) {
+        if (!StringUtils.isEmpty(text)) {
+            return Money.parse("PHP " + text);
+        }
+        return Money.parse("PHP 0.00");
     }
 }

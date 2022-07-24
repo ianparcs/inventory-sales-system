@@ -1,14 +1,10 @@
 package ph.parcs.rmhometiles.entity.invoice;
 
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXRadioButton;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -28,7 +24,6 @@ import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.entity.payment.Payment;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.util.Global;
-import ph.parcs.rmhometiles.util.PaymentType;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
 import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.util.converter.DateConverter;
@@ -75,6 +70,8 @@ public class InvoiceController {
     @FXML
     private TextArea txaRemarks;
     @FXML
+    private JFXButton btnSales;
+    @FXML
     private Label lblAmount;
     @FXML
     private Label lblAmountDueBalance;
@@ -118,9 +115,9 @@ public class InvoiceController {
         initNumberInputFormatter(tfCashPay);
         initDiscountNumberFormatter();
         initColumnCellValueFactory();
-        initInvoiceProperties();
+        initInvoiceLabelProperties();
         initProductSearchBox();
-        initInvoiceProperty();
+        initInvoiceProperties();
         initDate();
 
         refreshItems();
@@ -130,7 +127,9 @@ public class InvoiceController {
         tfCashPay.clear();
     }
 
-    private void initInvoiceProperty() {
+    private void initInvoiceProperties() {
+        invoice.statusProperty().bind(Bindings.createStringBinding(() -> invoiceService.setInvoiceStatus(invoice.totalAmountDueProperty().get()), invoice.totalAmountDueProperty().asString()));
+
         invoice.amountProperty().bind(Bindings.createObjectBinding(this::showItemLineAmounts, tvOrders.getItems()));
         invoice.discountProperty().bind(Bindings.createObjectBinding(this::showDiscountAmount, tfDiscountPercent.textProperty()));
         invoice.taxAmountProperty().bind(Bindings.createObjectBinding(this::showTaxAmount, invoice.amountProperty()));
@@ -206,7 +205,9 @@ public class InvoiceController {
         Money currentTotal = showTotalBeforeTax();
         Money taxAmount = moneyService.computeDiscount(currentTotal, Global.TAX);
         Money deliveryRate = Money.parse(Global.Unit.CURRENCY + " " + (tfDeliveryAmount.getText().isEmpty() ? "0.00" : tfDeliveryAmount.getText()));
-        return moneyService.computeTotalAmount(currentTotal, taxAmount, deliveryRate);
+        Money totalAmount = moneyService.computeTotalAmount(currentTotal, taxAmount, deliveryRate);
+        tfCashPay.setText(totalAmount.getAmount().toString());
+        return totalAmount;
     }
 
     private Money showTotalAmountDue() {
@@ -233,7 +234,9 @@ public class InvoiceController {
 
     }
 
-    private void initInvoiceProperties() {
+    private void initInvoiceLabelProperties() {
+        btnSales.textProperty().bind(Bindings.createObjectBinding(this::changeCashPayTextButton, tfCashPay.textProperty()));
+
         lblTax.textProperty().bind(invoice.taxAmountProperty().asString());
         lblAmount.textProperty().bind(invoice.amountProperty().asString());
         lblTotalAmount.textProperty().bind(invoice.totalAmountProperty().asString());
@@ -241,6 +244,15 @@ public class InvoiceController {
         lblAmountDue.textProperty().bind(invoice.totalAmountDueProperty().asString());
         lblAmountDueBalance.textProperty().bind(Bindings.createObjectBinding(this::changeAmountDueLabel, lblAmountDue.textProperty()));
         lblTotalBeforeTax.textProperty().bind(Bindings.createObjectBinding(this::showTotalBeforeTax, invoice.amountProperty(), tfDiscountPercent.textProperty()).asString());
+    }
+
+    private String changeCashPayTextButton() {
+        Money cashPay = moneyService.parseMoney(tfCashPay.getText());
+
+        if(invoice.getTotalAmount() != null && cashPay.isLessThan(invoice.getTotalAmount())){
+            return "Add Payment";
+        }
+        return "Complete Sales";
     }
 
     private String changeAmountDueLabel() {
@@ -321,7 +333,7 @@ public class InvoiceController {
             invoice.setName("INV-" + dpDate.getValue() + "-ID" + 1);
             invoice.setCustomer(customerController.getCustomer());
             invoice.setRemarks(txaRemarks.getText());
-            invoice.getPayments().add(payment);
+            invoice.addPayments(payment);
 
             Invoice savedInvoice = invoiceService.saveEntity(invoice);
 
@@ -362,7 +374,6 @@ public class InvoiceController {
             showError(Global.Message.QUANTITY_EXCEED);
             lineItem.setQuantity(event.getOldValue());
         } else {
-            lineItem.getProduct().getStock().setStocks(event.getNewValue());
             lineItem.setQuantity(event.getNewValue());
         }
         if (tvOrders.getItems().contains(lineItem)) {
@@ -403,7 +414,7 @@ public class InvoiceController {
         invoice = new Invoice();
         tvOrders.getItems().clear();
 
-        initInvoiceProperty();
+        initInvoiceProperties();
     }
 
     private void clearInvoiceSummary() {

@@ -84,7 +84,6 @@ public class ActionTableCell<S> extends TableCell<S, HBox> {
     @Override
     public void updateItem(HBox item, boolean empty) {
         super.updateItem(item, empty);
-        hBox.getChildren().stream().findFirst().get().toFront();
 
         if (empty) {
             setGraphic(null);

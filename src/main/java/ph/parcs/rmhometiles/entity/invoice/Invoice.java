@@ -28,6 +28,7 @@ public class Invoice extends BaseEntity {
     private ObjectProperty<Money> discount = new SimpleObjectProperty<>();
     private ObjectProperty<Money> amount = new SimpleObjectProperty<>();
     private StringProperty remarks = new SimpleStringProperty();
+    private StringProperty status = new SimpleStringProperty();
 
     private Set<Payment> payments = new HashSet<>();
     private Set<OrderItem> orderItems;
@@ -121,6 +122,21 @@ public class Invoice extends BaseEntity {
         this.remarks.set(remarks);
     }
 
+    @Column(name = "status")
+    public String getStatus() {
+        return status.get();
+    }
+
+    public void setStatus(String status) {
+        this.status.set(status);
+    }
+
+    public void addPayments(Payment payment) {
+        if(payment != null && payments != null){
+            payments.add(payment);
+        }
+    }
+
     @Transient
     public ObjectProperty<Money> taxAmountProperty() {
         return taxAmount;
@@ -132,9 +148,10 @@ public class Invoice extends BaseEntity {
     }
 
     @Transient
-    public ObjectProperty<Money> amountProperty() {
-        return amount;
-    }
+    public ObjectProperty<Money> amountProperty() {return amount;}
+
+    @Transient
+    public StringProperty statusProperty() {return status;}
 
     @Transient
     public ObjectProperty<Money> totalAmountDueProperty() {
@@ -145,4 +162,5 @@ public class Invoice extends BaseEntity {
     public ObjectProperty<Money> totalAmountProperty() {
         return totalAmount;
     }
+
 }

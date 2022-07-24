@@ -107,9 +107,9 @@
                     </cellValueFactory>
                 </TableColumn>
 
-                <TableColumn reorderable="false" text="Last Paid">
+                <TableColumn reorderable="false" text="Status">
                     <cellValueFactory>
-                        <PropertyValueFactory property="totalAmountDue"/>
+                        <PropertyValueFactory property="status"/>
                     </cellValueFactory>
                 </TableColumn>
 
