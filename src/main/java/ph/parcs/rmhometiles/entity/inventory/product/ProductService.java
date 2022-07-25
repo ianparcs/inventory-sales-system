@@ -8,6 +8,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseService;
+import ph.parcs.rmhometiles.entity.inventory.stock.Stock;
+import ph.parcs.rmhometiles.entity.inventory.stock.StockService;
 import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.entity.order.OrderItemService;
 import ph.parcs.rmhometiles.exception.ItemLockedException;
@@ -23,6 +25,7 @@ import java.util.Optional;
 public class ProductService extends BaseService<Product> {
     private ProductRepository productRepository;
     private OrderItemService orderItemService;
+    private StockService stockService;
     private FileService fileService;
 
     @Override
@@ -52,6 +55,26 @@ public class ProductService extends BaseService<Product> {
         return productOptional.isEmpty();
     }
 
+    public OrderItem checkQuantity(ObservableList<OrderItem> items) {
+        OrderItem temp = null;
+        for (OrderItem item : items) {
+            temp = item;
+            if (temp != null) {
+                int quantity = temp.getQuantity();
+                if (quantity <= 0) return item;
+            }
+        }
+        return null;
+    }
+
+    public void saveInvoiceProduct(ObservableList<OrderItem> items) {
+        for (OrderItem item : items) {
+            Stock stock = stockService.computeStocks(item.getProduct(),item.getQuantity());
+            Product invoiceProduct = item.getProduct();
+            invoiceProduct.setStock(stock);
+            saveEntity(invoiceProduct);
+        }
+    }
 
     @Override
     @SneakyThrows
@@ -77,6 +100,11 @@ public class ProductService extends BaseService<Product> {
     }
 
     @Autowired
+    public void setStockService(StockService stockService) {
+        this.stockService = stockService;
+    }
+
+    @Autowired
     public void setFileService(FileService fileService) {
         this.fileService = fileService;
     }
@@ -92,15 +120,4 @@ public class ProductService extends BaseService<Product> {
         this.orderItemService = orderItemService;
     }
 
-    public OrderItem checkQuantity(ObservableList<OrderItem> items) {
-        OrderItem temp = null;
-        for (OrderItem item : items) {
-            temp = item;
-            if (temp != null) {
-                int quantity = temp.getQuantity();
-                if (quantity <= 0) return item;
-            }
-        }
-        return null;
-    }
 }

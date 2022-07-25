@@ -310,10 +310,7 @@ public class InvoiceController {
         }
 
         askSaveAlert.setConfirmListener(() -> {
-            for (OrderItem item : tvOrders.getItems()) {
-                productService.saveEntity(item.getProduct());
-            }
-
+            productService.saveInvoiceProduct(tvOrders.getItems());
             invoiceService.saveOrderItem(invoice, tvOrders.getItems());
 
             String paymentType = invoiceService.getPaymentType(rbCashType.isSelected(),rbGCashType.isSelected());
