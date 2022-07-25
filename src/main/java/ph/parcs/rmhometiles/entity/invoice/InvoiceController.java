@@ -95,7 +95,6 @@ public class InvoiceController {
     private InvoiceService invoiceService;
     private MoneyService moneyService;
     private Invoice invoice;
-    private Payment payment;
 
     private SweetAlert askSaveAlert;
 
@@ -103,8 +102,6 @@ public class InvoiceController {
     public void initialize() {
         invoice = new Invoice();
         invoice.setOrderItems(new HashSet<>(tvOrders.getItems()));
-
-        payment = new Payment();
 
         askSaveAlert = SweetAlertFactory.create(SweetAlert.Type.INFO);
         askSaveAlert.setContentMessage("Create new invoice?");

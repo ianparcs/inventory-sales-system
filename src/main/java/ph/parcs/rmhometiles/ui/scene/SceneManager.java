@@ -37,6 +37,12 @@ public class SceneManager {
         return loader.load();
     }
 
+    public FXMLLoader create(String path){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
+        fxmlLoader.setControllerFactory(aClass -> stageInitializer.getApplicationContext().getBean(aClass));
+        return fxmlLoader;
+    }
+
     @SneakyThrows
     public void changeScene(State state) {
         Stage root = stageInitializer.getStage();

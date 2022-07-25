@@ -70,7 +70,7 @@ public class NavigationController {
                     Platform.runLater(() -> {
                         Parent content = sceneManager.getContent(key);
                         content.setCache(true);
-                        content.setCacheHint(CacheHint.SPEED);
+                        content.setCacheHint(CacheHint.QUALITY);
                         homeController.setContent(content);
                     });
                 }

@@ -39,10 +39,8 @@ public class LoginController {
 
     private UserService userService;
     private SceneManager sceneManager;
-    @Autowired
-    private UserRepository userRepository;
 
-    @Autowired
+    private UserRepository userRepository;
     private CustomerService customerService;
 
     @FXML
@@ -117,5 +115,15 @@ public class LoginController {
     @Autowired
     public void setSceneManager(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
+    }
+
+    @Autowired
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    @Autowired
+    public void setCustomerService(CustomerService customerService) {
+        this.customerService = customerService;
     }
 }

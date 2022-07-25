@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.*?>
-<StackPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal" fx:id="spMain"
+<StackPane xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/manage-invoice.css" xmlns="http://javafx.com/javafx/10.0.2-internal" fx:id="spMain"
            fx:controller="ph.parcs.rmhometiles.entity.invoice.manage.ManageInvoiceTableController">
 
     <fx:include source="edit-invoice.fxml" visible="false"/>
@@ -43,7 +43,7 @@
                 </value>
             </JFXComboBox>
 
-            <JFXButton styleClass="primary-button">
+            <JFXButton onAction="#onRefreshClicked" styleClass="primary-button">
                 <graphic>
                     <FontAwesomeIconView fill="WHITE" glyphName="REFRESH" size="18"/>
                 </graphic>
@@ -77,9 +77,9 @@
             </columnResizePolicy>
             <columns>
 
-                <TableColumn reorderable="false" text="Name">
+                <TableColumn reorderable="false" text="ID">
                     <cellValueFactory>
-                        <PropertyValueFactory property="name"/>
+                        <PropertyValueFactory property="id"/>
                     </cellValueFactory>
                 </TableColumn>
 
@@ -89,7 +89,7 @@
                     </cellValueFactory>
                 </TableColumn>
 
-                <TableColumn reorderable="false" text="Invoice Date">
+                <TableColumn fx:id="tcInvoiceDate" reorderable="false" text="Invoice Date">
                     <cellValueFactory>
                         <PropertyValueFactory property="createdAt"/>
                     </cellValueFactory>
@@ -108,7 +108,7 @@
                     </cellValueFactory>
                 </TableColumn>
 
-                <TableColumn reorderable="false" text="Status">
+                <TableColumn fx:id="tcStatus" styleClass="status-column" reorderable="false" text="Status">
                     <cellValueFactory>
                         <PropertyValueFactory property="status"/>
                     </cellValueFactory>

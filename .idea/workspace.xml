@@ -11,9 +11,20 @@
   <component name="ChangeListManager">
     <list default="true" id="e42c86d9-149f-4635-a8fc-a8339e3dcdbe" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/rmhometiles.mv.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/invoice.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/invoice.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deployment/ph/parcs/rmhometiles/0.0.2/data/rmhometiles.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/deployment/ph/parcs/rmhometiles/0.0.2/data/rmhometiles.mv.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deployment/ph/parcs/rmhometiles/0.0.2/rmhometiles-0.0.2.jar" beforeDir="false" afterPath="$PROJECT_DIR$/deployment/ph/parcs/rmhometiles/0.0.2/rmhometiles-0.0.2.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deployment/ph/parcs/rmhometiles/0.0.2/rmhometiles-0.0.2.jar.md5" beforeDir="false" afterPath="$PROJECT_DIR$/deployment/ph/parcs/rmhometiles/0.0.2/rmhometiles-0.0.2.jar.md5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deployment/ph/parcs/rmhometiles/0.0.2/rmhometiles-0.0.2.jar.sha1" beforeDir="false" afterPath="$PROJECT_DIR$/deployment/ph/parcs/rmhometiles/0.0.2/rmhometiles-0.0.2.jar.sha1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deployment/ph/parcs/rmhometiles/maven-metadata.xml" beforeDir="false" afterPath="$PROJECT_DIR$/deployment/ph/parcs/rmhometiles/maven-metadata.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deployment/ph/parcs/rmhometiles/maven-metadata.xml.md5" beforeDir="false" afterPath="$PROJECT_DIR$/deployment/ph/parcs/rmhometiles/maven-metadata.xml.md5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deployment/ph/parcs/rmhometiles/maven-metadata.xml.sha1" beforeDir="false" afterPath="$PROJECT_DIR$/deployment/ph/parcs/rmhometiles/maven-metadata.xml.sha1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/InvoiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/InvoiceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/manage/ManageInvoiceTableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/manage/ManageInvoiceTableController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/ui/login/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/ui/login/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/ui/navigation/NavigationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/ui/navigation/NavigationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/ui/scene/SceneManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/ui/scene/SceneManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/invoice/manage-invoice.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/invoice/manage-invoice.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/main/navigation.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/main/navigation.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +123,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="PUML" />
     <property name="full.screen.before.presentation.mode" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/fxml/invoice" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/css" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.15" />
@@ -122,6 +133,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\resources\css" />
       <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\resources\fxml\invoice" />
       <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\java\ph\parcs\rmhometiles\entity\order" />
       <recent name="C:\Users\Ian\My Projects\inventory-sales-system\src\main\resources\fxml\order" />
@@ -361,7 +373,8 @@
       <workItem from="1658395234501" duration="14490000" />
       <workItem from="1658577515494" duration="3360000" />
       <workItem from="1658618884243" duration="6147000" />
-      <workItem from="1658628857691" duration="7576000" />
+      <workItem from="1658628857691" duration="8722000" />
+      <workItem from="1658702390406" duration="3994000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;invoice add&quot;">
       <created>1596291389908</created>
@@ -457,11 +470,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/inventory/item/BaseService.java</url>
           <line>46</line>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/ph/parcs/rmhometiles/entity/invoice/manage/ManageInvoiceTableController.java</url>
-          <line>25</line>
-          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -1,0 +1,15 @@
+
+.item-paid {
+    -fx-text-fill: avocado;
+    -fx-font-weight: BOLD;
+    -fx-alignment: center;
+}
+.item-unpaid{
+    -fx-text-fill: strawberry;
+    -fx-font-weight: BOLD;
+    -fx-alignment: center;
+}
+
+TableView .column-header.status-column > .label{
+    -fx-alignment: center;
+}

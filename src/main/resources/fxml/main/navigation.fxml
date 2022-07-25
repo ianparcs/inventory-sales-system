@@ -30,7 +30,7 @@
         </graphic>
     </JFXButton>
 
-    <JFXButton fx:id="btnInventory" maxWidth="1.7976931348623157E308" text="Products">
+    <JFXButton fx:id="btnInventory" maxWidth="1.7976931348623157E308" text="Inventory">
         <graphic>
             <FontAwesomeIconView glyphName="SUITCASE"/>
         </graphic>
