@@ -54,7 +54,7 @@
             </TitledPane>
 
             <TitledPane styleClass="custom-tiledpane"  collapsible="false" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="1" text="Payments">
-                <TableView fx:id="tvPayments" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="1">
+                <TableView fx:id="tvPayments" styleClass="customTableView" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="1">
                     <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
                     </columnResizePolicy>

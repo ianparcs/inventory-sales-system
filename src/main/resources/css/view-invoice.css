@@ -43,9 +43,15 @@
 
 .custom-tiledpane > .title {
     -fx-background-color: transparent;
-    -fx-border-color: greysquash;
     -fx-font-weight: BOLD;
 }
 .custom-tiledpane{
-    -fx-border-color: greysquash;
+    -fx-border-color: #c8c8c8;
+}
+TableView .column-header,
+TableView .column-header .filler,
+TableView .column-header-background .filler {
+    -fx-background-color: greysquash;
+    -fx-border-color: #c8c8c8;
+    -fx-border-width: 1 0 1 0;
 }
