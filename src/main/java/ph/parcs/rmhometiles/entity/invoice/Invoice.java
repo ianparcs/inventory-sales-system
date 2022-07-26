@@ -30,9 +30,8 @@ public class Invoice extends BaseEntity {
     private StringProperty remarks = new SimpleStringProperty();
     private StringProperty status = new SimpleStringProperty();
 
+    private Set<OrderItem> orderItems = new HashSet<>();
     private Set<Payment> payments = new HashSet<>();
-    private Set<OrderItem> orderItems;
-
     @ManyToOne
     @JoinTable(name = "customer_invoice", joinColumns =
             {@JoinColumn(name = "invoice_id", referencedColumnName = "invoice_id")},
@@ -45,7 +44,7 @@ public class Invoice extends BaseEntity {
         this.customer.set(customer);
     }
 
-    @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL,  fetch = FetchType.EAGER)
     public Set<Payment> getPayments() {
         return payments;
     }
@@ -54,7 +53,7 @@ public class Invoice extends BaseEntity {
         this.payments = payments;
     }
 
-    @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public Set<OrderItem> getOrderItems() {
         return orderItems;
     }

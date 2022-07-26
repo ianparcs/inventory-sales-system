@@ -49,7 +49,7 @@ public class OrderItem extends BaseEntity {
         this.invoice.set(invoice);
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     public Product getProduct() {
         return product.get();

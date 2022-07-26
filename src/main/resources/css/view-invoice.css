@@ -1,0 +1,51 @@
+.titled-blue,
+.titled-blue > .title {
+    -fx-background-color: #d9edf7;
+    -fx-border-color: #bce8f1;
+    -fx-text-fill: #31708f;
+}
+
+.titled-blue > *.content {
+    -fx-border-color: #bce8f1;
+}
+
+.titled-green,
+.titled-green > .title {
+    -fx-background-color: #dff0d8;
+    -fx-border-color: #d6e9c6;
+    -fx-text-fill: #3c763d;
+
+}
+
+.titled-green > *.content {
+    -fx-border-color: #d6e9c6;
+}
+
+.titled-red,
+.titled-red > .title {
+    -fx-background-color: #f2dede;
+    -fx-border-color: #ebccd1;
+    -fx-text-fill: #a94442;
+}
+
+.titled-red > *.content {
+    -fx-border-color: #ebccd1;
+}
+
+.titled-pane > .title > .arrow-button > .arrow {
+    visibility: hidden;
+}
+
+.titled-pane > .title {
+    -fx-font-size: 0.5em;
+    -fx-padding: 12px;
+}
+
+.custom-tiledpane > .title {
+    -fx-background-color: transparent;
+    -fx-border-color: greysquash;
+    -fx-font-weight: BOLD;
+}
+.custom-tiledpane{
+    -fx-border-color: greysquash;
+}
