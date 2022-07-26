@@ -153,14 +153,14 @@ public class InvoiceController {
             }
             return null;
         }));
-        final int MAX_LENGTH = 6;
+    /*    final int MAX_LENGTH = 6;
         textField.lengthProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.intValue() > oldValue.intValue()) {
                 if (textField.getText().length() >= MAX_LENGTH) {
                     textField.setText(textField.getText().substring(0, MAX_LENGTH));
                 }
             }
-        });
+        });*/
     }
 
     private void setDiscountPercentTextBehavior() {
@@ -209,8 +209,7 @@ public class InvoiceController {
 
     private Money showTotalAmountDue() {
         String cashPayText = tfCashPay.getText();
-        Money cashPaid = Money.parse(cashPayText.isEmpty() ? "PHP 0.00" : Global.Unit.CURRENCY + " " + cashPayText);
-        return moneyService.computeTotalAmountDue(invoice.getTotalAmount(), cashPaid);
+        return moneyService.computeTotalAmountDue(invoice.getTotalAmount(),cashPayText);
     }
 
     private void refreshItems() {
@@ -340,11 +339,11 @@ public class InvoiceController {
     }
 
     private String validateCheckout() {
-        if (tfCashPay.getText().isEmpty()) {
+/*        if (tfCashPay.getText().isEmpty()) {
             tfCashPay.getValidators().add(new RequiredFieldValidator());
             tfCashPay.requestFocus();
             return "Please enter an amount";
-        }
+        }*/
 
         Customer customer = customerController.getCustomer();
         if (customer == null) {

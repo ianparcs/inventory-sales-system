@@ -54,7 +54,7 @@
 
 .amount-container > .label-amount, .label-total {
     -fx-padding: 3 3 0 3;
-    -fx-font-size: 16px;
+    -fx-font-size: 14px;
     -fx-font-weight: bolder;
 }
 

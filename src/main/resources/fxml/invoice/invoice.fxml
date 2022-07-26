@@ -140,7 +140,7 @@
                     <validators>
                         <RequiredFieldValidator />
                         <NumberValidator />
-                        <RegexValidator regexPattern="^[1-9]\d*(\.\d{1,2})?$" />
+                        <RegexValidator regexPattern="^[0-9]*\.[0-9]{2}$" />
                     </validators>
                 </JFXTextField>
                 <JFXButton fx:id="btnSales" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#onCheckout" styleClass="button-amount" text="Complete Sales" HBox.hgrow="ALWAYS" />
