@@ -12,6 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
+import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.StageInitializer;
@@ -21,11 +22,16 @@ import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.entity.payment.Payment;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Controller
 public class ViewInvoiceController {
 
+    @FXML
+    private TableColumn<Payment, String> tcPaymentPaidDate;
+    @FXML
+    private TableColumn<OrderItem, Money> tcItemPrice;
     @FXML
     private TableColumn<OrderItem, String> tcItemName;
     @FXML
@@ -43,24 +49,32 @@ public class ViewInvoiceController {
     @FXML
     private StackPane spMain;
 
-    private Invoice invoice;
-
     @Autowired
     private StageInitializer stageInitializer;
 
     private void displayDetails(Invoice invoice) {
         if (invoice != null) {
+            DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd/MM/yyyy h:mm a");
+
             tcItemName.setCellValueFactory(cellData -> {
                 Product orderProduct = cellData.getValue().getProduct();
                 return Bindings.createObjectBinding(orderProduct::getCode);
             });
-            DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd/MM/yyyy h:mm a");
-            String formattedDate = invoice.getCreatedAt().format(myFormatObj);
 
-            lblCustomer.setText("Customer: " + invoice.getCustomer().getName());
-            lblTotalAmount.setText("₱" + invoice.getTotalAmount().getAmount());
-            lblInvoiceDate.setText("Invoice Date: " + formattedDate);
+            tcItemPrice.setCellValueFactory(cellData -> {
+                Product orderProduct = cellData.getValue().getProduct();
+                return Bindings.createObjectBinding(orderProduct::getPrice);
+            });
+
+            tcPaymentPaidDate.setCellValueFactory(cellData -> {
+                LocalDateTime paidDate = cellData.getValue().getCreatedAt();
+                return Bindings.createObjectBinding(()-> paidDate.format(myFormatObj));
+            });
+
             lblBalance.setText("₱" + invoice.getTotalAmountDue().getAmount());
+            lblTotalAmount.setText("₱" + invoice.getTotalAmount().getAmount());
+            lblCustomer.setText("Customer: " + invoice.getCustomer().getName());
+            lblInvoiceDate.setText("Invoice Date: " +  invoice.getCreatedAt().format(myFormatObj));
 
             tvPayments.setItems(FXCollections.observableArrayList(invoice.getPayments()));
             tvOrderItems.setItems(FXCollections.observableArrayList(invoice.getOrderItems()));
@@ -68,7 +82,6 @@ public class ViewInvoiceController {
     }
 
     public void initData(Invoice invoice) {
-        this.invoice = invoice;
         displayDetails(invoice);
     }
 

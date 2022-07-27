@@ -51,7 +51,7 @@
 TableView .column-header,
 TableView .column-header .filler,
 TableView .column-header-background .filler {
-    -fx-background-color: greysquash;
+    -fx-background-color: #f4f8fb;
     -fx-border-color: #c8c8c8;
     -fx-border-width: 1 0 1 0;
 }
