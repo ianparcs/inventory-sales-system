@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.CacheHint;
 import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
-import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.State;
@@ -62,20 +61,14 @@ public class NavigationController {
             }
         }
 
-        states.forEach((key, value) -> value.setOnAction(actionEvent -> {
-            new Thread(new Runnable() {
-                @Override
-                @SneakyThrows
-                public void run() {
-                    Platform.runLater(() -> {
-                        Parent content = sceneManager.getContent(key);
-                        content.setCache(true);
-                        content.setCacheHint(CacheHint.QUALITY);
-                        homeController.setContent(content);
-                    });
-                }
-            }).start();
-        }));
+        new Thread(() -> states.forEach((key, value) -> value.setOnAction(actionEvent -> {
+            Platform.runLater(() -> {
+                Parent content = sceneManager.getContent(key);
+                content.setCache(true);
+                content.setCacheHint(CacheHint.QUALITY);
+                homeController.setContent(content);
+            });
+        }))).start();
     }
 
     @Autowired

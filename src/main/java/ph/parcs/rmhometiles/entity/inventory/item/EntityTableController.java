@@ -141,7 +141,7 @@ public abstract class EntityTableController<T extends BaseEntity> implements Ent
     }
 
     private int getRowsPerPage() {
-        if (cbRowCount.getValue().equalsIgnoreCase("all")) return Integer.MAX_VALUE;
+        if (cbRowCount.getValue().equalsIgnoreCase("all")) return 10000;
         return Integer.parseInt(cbRowCount.getValue());
     }
 

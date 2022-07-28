@@ -48,6 +48,7 @@
 .custom-tiledpane{
     -fx-border-color: #c8c8c8;
 }
+
 TableView .column-header,
 TableView .column-header .filler,
 TableView .column-header-background .filler {

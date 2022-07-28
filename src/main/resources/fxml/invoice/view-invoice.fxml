@@ -61,7 +61,7 @@
                     <columns>
                         <TableColumn reorderable="false" text="ID">
                             <cellValueFactory>
-                                <PropertyValueFactory property="name"/>
+                                <PropertyValueFactory property="id"/>
                             </cellValueFactory>
                         </TableColumn>
                         <TableColumn fx:id="tcPaymentPaidDate" reorderable="false" text="Payment Date"/>
