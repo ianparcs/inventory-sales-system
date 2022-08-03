@@ -23,11 +23,12 @@ public class SceneManager {
         states = new HashMap<>();
         states.put(State.HOME, loadUI(State.HOME));
         states.put(State.ERROR, loadUI(State.ERROR));
-        states.put(State.INVENTORY, loadUI(State.INVENTORY));
+        states.put(State.INVOICE, loadUI(State.INVOICE));
         states.put(State.SUPPLIER, loadUI(State.SUPPLIER));
         states.put(State.CUSTOMER, loadUI(State.CUSTOMER));
         states.put(State.DASHBOARD, loadUI(State.DASHBOARD));
-        states.put(State.INVOICE, loadUI(State.INVOICE));
+        states.put(State.INVENTORY, loadUI(State.INVENTORY));
+        states.put(State.SALE_REPORT, loadUI(State.SALE_REPORT));
     }
 
     @SneakyThrows

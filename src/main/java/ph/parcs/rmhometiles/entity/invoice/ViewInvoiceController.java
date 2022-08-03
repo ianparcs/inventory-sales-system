@@ -1,9 +1,12 @@
 package ph.parcs.rmhometiles.entity.invoice;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -38,6 +41,8 @@ public class ViewInvoiceController {
     private TableView<OrderItem> tvOrderItems;
     @FXML
     private TableView<Payment> tvPayments;
+    @FXML
+    private JFXTextField tfCashPay;
     @FXML
     private Label lblTotalAmount;
     @FXML
@@ -97,5 +102,8 @@ public class ViewInvoiceController {
                 e.printStackTrace();
             }
         });
+    }
+
+    public void onClickedAddPayment() {
     }
 }

@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.*?>
-<StackPane AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0"
-           AnchorPane.bottomAnchor="0" maxHeight="1.7976931348623157E308"
-           maxWidth="1.7976931348623157E308">
-    <Label text="Sale Report"/>
+<?import javafx.scene.layout.HBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal" fx:id="spMain"
+           fx:controller="ph.parcs.rmhometiles.entity.report.SalesReportController">
+
+    <HBox styleClass="tile-info" >
+        <Label alignment="CENTER" styleClass="big-title" text="Sales Report" HBox.hgrow="ALWAYS"/>
+        <JFXComboBox fx:id="cbDateRange">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Yesterday"/>
+                    <String fx:value="This Week"/>
+                    <String fx:value="Last Week"/>
+                    <String fx:value="This Month"/>
+                    <String fx:value="All Time"/>
+                    <String fx:value="Custom Date Range"/>
+                </FXCollections>
+            </items>
+            <value>
+                <String fx:value="Today"/>
+            </value>
+        </JFXComboBox>
+        <JFXDatePicker fx:id="dpStartDate" visible="false" promptText="Start Date"/>
+        <JFXDatePicker fx:id="dpEndDate" visible="false" promptText="End Date"/>
+    </HBox>
 </StackPane>
