@@ -104,11 +104,6 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
                     </columnResizePolicy>
                     <columns>
-                        <TableColumn reorderable="false" text="ID">
-                            <cellValueFactory>
-                                <PropertyValueFactory property="id"/>
-                            </cellValueFactory>
-                        </TableColumn>
                         <TableColumn fx:id="tcPaymentPaidDate" reorderable="false" text="Payment Date"/>
                         <TableColumn reorderable="false" text="Payment Type">
                             <cellValueFactory>

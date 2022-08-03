@@ -1,6 +1,7 @@
 package ph.parcs.rmhometiles.entity.invoice;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -23,6 +24,7 @@ import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.inventory.stock.Stock;
 import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.entity.payment.Payment;
+import ph.parcs.rmhometiles.entity.payment.PaymentService;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -40,6 +42,8 @@ public class ViewInvoiceController {
     @FXML
     private TableView<OrderItem> tvOrderItems;
     @FXML
+    private JFXComboBox<String> cbPaymentType;
+    @FXML
     private TableView<Payment> tvPayments;
     @FXML
     private JFXTextField tfCashPay;
@@ -54,8 +58,11 @@ public class ViewInvoiceController {
     @FXML
     private StackPane spMain;
 
-    @Autowired
+    private PaymentService paymentService;
+    private Invoice invoice;
+
     private StageInitializer stageInitializer;
+
 
     private void displayDetails(Invoice invoice) {
         if (invoice != null) {
@@ -87,6 +94,7 @@ public class ViewInvoiceController {
     }
 
     public void initData(Invoice invoice) {
+        this.invoice = invoice;
         displayDetails(invoice);
     }
 
@@ -104,6 +112,24 @@ public class ViewInvoiceController {
         });
     }
 
+    @FXML
     public void onClickedAddPayment() {
+        String amount = tfCashPay.getText();
+        String paymentType = cbPaymentType.getValue();
+
+        Payment payment = paymentService.createPayment(invoice,amount,paymentType);
+
+        tvPayments.getItems().add(payment);
+        tvPayments.refresh();
+    }
+
+    @Autowired
+    public void setPaymentService(PaymentService paymentService) {
+        this.paymentService = paymentService;
+    }
+
+    @Autowired
+    public void setStageInitializer(StageInitializer stageInitializer) {
+        this.stageInitializer = stageInitializer;
     }
 }
