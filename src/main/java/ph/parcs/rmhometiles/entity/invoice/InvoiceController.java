@@ -252,8 +252,8 @@ public class InvoiceController {
     }
 
     private String changeAmountDueLabel() {
-        if (invoice.balanceProperty().get() != null) {
-            if (invoice.balanceProperty().get().isPositive()) {
+        if (invoice.changeProperty().get() != null) {
+            if (invoice.changeProperty().get().isPositive()) {
                 return "Change";
             }
         }
