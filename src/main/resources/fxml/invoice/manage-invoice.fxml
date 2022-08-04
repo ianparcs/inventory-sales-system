@@ -104,7 +104,7 @@
 
                 <TableColumn reorderable="false" text="Balance">
                     <cellValueFactory>
-                        <PropertyValueFactory property="totalAmountDue"/>
+                        <PropertyValueFactory property="balance"/>
                     </cellValueFactory>
                 </TableColumn>
 

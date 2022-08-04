@@ -111,7 +111,7 @@
             <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Payment Type" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="9" />
 
             <HBox maxWidth="1.7976931348623157E308" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="10">
-                <JFXRadioButton fx:id="rbCashType" onAction="#onCashTypeClicked" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Cash" HBox.hgrow="ALWAYS" />
+                <JFXRadioButton fx:id="rbCashType" selected="true" onAction="#onCashTypeClicked" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Cash" HBox.hgrow="ALWAYS" />
                 <JFXRadioButton fx:id="rbGCashType" onAction="#onGCashTypeClicked" alignment="CENTER" maxWidth="1.7976931348623157E308" text="GCash" HBox.hgrow="ALWAYS" />
             </HBox>
          <columnConstraints>

@@ -21,17 +21,19 @@ import java.util.Set;
 @AttributeOverride(name = "id", column = @Column(name = "invoice_id"))
 public class Invoice extends BaseEntity {
 
-    private ObjectProperty<Money> totalAmountDue = new SimpleObjectProperty<>();
     private ObjectProperty<Customer> customer = new SimpleObjectProperty<>();
     private ObjectProperty<Money> totalAmount = new SimpleObjectProperty<>();
     private ObjectProperty<Money> taxAmount = new SimpleObjectProperty<>();
     private ObjectProperty<Money> discount = new SimpleObjectProperty<>();
+    private ObjectProperty<Money> balance = new SimpleObjectProperty<>();
+    private ObjectProperty<Money> change = new SimpleObjectProperty<>();
     private ObjectProperty<Money> amount = new SimpleObjectProperty<>();
     private StringProperty remarks = new SimpleStringProperty();
     private StringProperty status = new SimpleStringProperty();
 
     private Set<OrderItem> orderItems = new HashSet<>();
     private Set<Payment> payments = new HashSet<>();
+
     @ManyToOne
     @JoinTable(name = "customer_invoice", joinColumns =
             {@JoinColumn(name = "invoice_id", referencedColumnName = "invoice_id")},
@@ -72,14 +74,14 @@ public class Invoice extends BaseEntity {
         this.amount.set(amount);
     }
 
-    @Column(name = "amount_due", precision = 8, scale = 2)
+    @Column(name = "balance", precision = 8, scale = 2)
     @Type(type = Global.JADIRA_PACKAGE, parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "PHP")})
-    public Money getTotalAmountDue() {
-        return totalAmountDue.get();
+    public Money getBalance() {
+        return balance.get();
     }
 
-    public void setTotalAmountDue(Money totalAmountDue) {
-        this.totalAmountDue.set(totalAmountDue);
+    public void setBalance(Money balance) {
+        this.balance.set(balance);
     }
 
     @Column(name = "total_amount", precision = 8, scale = 2)
@@ -130,6 +132,14 @@ public class Invoice extends BaseEntity {
         this.status.set(status);
     }
 
+    public Money getChange() {
+        return change.get();
+    }
+
+    public void setChange(Money change) {
+        this.change.set(change);
+    }
+
     public void addPayments(Payment payment) {
         if(payment != null && payments != null){
             payments.add(payment);
@@ -153,8 +163,8 @@ public class Invoice extends BaseEntity {
     public StringProperty statusProperty() {return status;}
 
     @Transient
-    public ObjectProperty<Money> totalAmountDueProperty() {
-        return totalAmountDue;
+    public ObjectProperty<Money> balanceProperty() {
+        return balance;
     }
 
     @Transient
@@ -162,4 +172,8 @@ public class Invoice extends BaseEntity {
         return totalAmount;
     }
 
+    @Transient
+    public ObjectProperty<Money> changeProperty() {
+        return change;
+    }
 }

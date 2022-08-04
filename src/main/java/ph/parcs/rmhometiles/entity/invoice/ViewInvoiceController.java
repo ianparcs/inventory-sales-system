@@ -1,13 +1,10 @@
 package ph.parcs.rmhometiles.entity.invoice;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -15,13 +12,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.StackPane;
-import javafx.util.Callback;
 import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.StageInitializer;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
-import ph.parcs.rmhometiles.entity.inventory.stock.Stock;
 import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.entity.payment.Payment;
 import ph.parcs.rmhometiles.entity.payment.PaymentService;
@@ -83,7 +78,7 @@ public class ViewInvoiceController {
                 return Bindings.createObjectBinding(()-> paidDate.format(myFormatObj));
             });
 
-            lblBalance.setText("₱" + invoice.getTotalAmountDue().getAmount());
+            lblBalance.textProperty().bind(invoice.balanceProperty().asString());
             lblTotalAmount.setText("₱" + invoice.getTotalAmount().getAmount());
             lblCustomer.setText("Customer: " + invoice.getCustomer().getName());
             lblInvoiceDate.setText("Invoice Date: " +  invoice.getCreatedAt().format(myFormatObj));

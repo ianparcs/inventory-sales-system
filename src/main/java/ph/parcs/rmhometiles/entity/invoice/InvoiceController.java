@@ -1,7 +1,6 @@
 package ph.parcs.rmhometiles.entity.invoice;
 
 import com.jfoenix.controls.*;
-import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
@@ -104,7 +103,7 @@ public class InvoiceController {
         invoice.setOrderItems(new HashSet<>(tvOrders.getItems()));
 
         askSaveAlert = SweetAlertFactory.create(SweetAlert.Type.INFO);
-        askSaveAlert.setContentMessage("Create new invoice?");
+        askSaveAlert.setContentMessage("Checkout new order?");
         askSaveAlert.setHeaderMessage("Checkout");
         askSaveAlert.setConfirmButton("Yes");
 
@@ -125,12 +124,13 @@ public class InvoiceController {
     }
 
     private void initInvoiceProperties() {
-        invoice.statusProperty().bind(Bindings.createStringBinding(() -> invoiceService.setInvoiceStatus(invoice.totalAmountDueProperty().get()), invoice.totalAmountDueProperty().asString()));
+        invoice.statusProperty().bind(Bindings.createStringBinding(() -> invoiceService.setInvoiceStatus(invoice.balanceProperty().get()), invoice.balanceProperty().asString()));
 
         invoice.amountProperty().bind(Bindings.createObjectBinding(this::showItemLineAmounts, tvOrders.getItems()));
         invoice.discountProperty().bind(Bindings.createObjectBinding(this::showDiscountAmount, tfDiscountPercent.textProperty()));
         invoice.taxAmountProperty().bind(Bindings.createObjectBinding(this::showTaxAmount, invoice.amountProperty()));
-        invoice.totalAmountDueProperty().bind(Bindings.createObjectBinding(this::showTotalAmountDue, invoice.totalAmountProperty(), tfCashPay.textProperty()));
+        invoice.balanceProperty().bind(Bindings.createObjectBinding(()-> moneyService.computeBalance(invoice.getTotalAmount(),tfCashPay.getText()), invoice.totalAmountProperty(), tfCashPay.textProperty()));
+        invoice.changeProperty().bind(Bindings.createObjectBinding(this::showMoneyChange, invoice.totalAmountProperty(), tfCashPay.textProperty()));
         invoice.totalAmountProperty().bind(Bindings.createObjectBinding(this::showTotalAmount, invoice.amountProperty(), tfDeliveryAmount.textProperty(), tfDiscountPercent.textProperty()));
     }
 
@@ -207,9 +207,9 @@ public class InvoiceController {
         return totalAmount;
     }
 
-    private Money showTotalAmountDue() {
+    private Money showMoneyChange() {
         String cashPayText = tfCashPay.getText();
-        return moneyService.computeTotalAmountDue(invoice.getTotalAmount(),cashPayText);
+        return moneyService.computeMoneyChange(invoice.getTotalAmount(), cashPayText);
     }
 
     private void refreshItems() {
@@ -226,7 +226,7 @@ public class InvoiceController {
         tcPrice.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "price"));
         tcStock.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "stock", "stocks"));
         tcQty.setCellFactory(TextFieldTableCell.forTableColumn(new NumberConverter()));
-        tcAction.setCellFactory(ActionTableCell.forActions(this::onItemDeleteAction,"DELETE"));
+        tcAction.setCellFactory(ActionTableCell.forActions(this::onItemDeleteAction, "DELETE"));
 
     }
 
@@ -237,7 +237,7 @@ public class InvoiceController {
         lblAmount.textProperty().bind(invoice.amountProperty().asString());
         lblTotalAmount.textProperty().bind(invoice.totalAmountProperty().asString());
         lblDiscountAmount.textProperty().bind(invoice.discountProperty().asString());
-        lblAmountDue.textProperty().bind(invoice.totalAmountDueProperty().asString());
+        lblAmountDue.textProperty().bind(invoice.changeProperty().asString());
         lblAmountDueBalance.textProperty().bind(Bindings.createObjectBinding(this::changeAmountDueLabel, lblAmountDue.textProperty()));
         lblTotalBeforeTax.textProperty().bind(Bindings.createObjectBinding(this::showTotalBeforeTax, invoice.amountProperty(), tfDiscountPercent.textProperty()).asString());
     }
@@ -245,15 +245,15 @@ public class InvoiceController {
     private String changeCashPayTextButton() {
         Money cashPay = moneyService.parseMoney(tfCashPay.getText());
 
-        if(invoice.getTotalAmount() != null && cashPay.isLessThan(invoice.getTotalAmount())){
+        if (invoice.getTotalAmount() != null && cashPay.isLessThan(invoice.getTotalAmount())) {
             return "Add Payment";
         }
         return "Complete Sales";
     }
 
     private String changeAmountDueLabel() {
-        if (invoice.totalAmountDueProperty().get() != null) {
-            if (invoice.totalAmountDueProperty().get().isPositive()) {
+        if (invoice.balanceProperty().get() != null) {
+            if (invoice.balanceProperty().get().isPositive()) {
                 return "Change";
             }
         }
@@ -312,7 +312,7 @@ public class InvoiceController {
             productService.saveInvoiceProduct(tvOrders.getItems());
             invoiceService.saveOrderItem(invoice, tvOrders.getItems());
 
-            String paymentType = invoiceService.getPaymentType(rbCashType.isSelected(),rbGCashType.isSelected());
+            String paymentType = invoiceService.getPaymentType(rbCashType.isSelected(), rbGCashType.isSelected());
 
             LocalDateTime createdAt = dpDate.getValue().atTime(LocalTime.now());
             Payment payment = new Payment();
@@ -339,11 +339,9 @@ public class InvoiceController {
     }
 
     private String validateCheckout() {
-/*        if (tfCashPay.getText().isEmpty()) {
-            tfCashPay.getValidators().add(new RequiredFieldValidator());
-            tfCashPay.requestFocus();
+        if (tfCashPay.getText().isEmpty()) {
             return "Please enter an amount";
-        }*/
+        }
 
         Customer customer = customerController.getCustomer();
         if (customer == null) {

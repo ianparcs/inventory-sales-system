@@ -28,13 +28,22 @@ public class MoneyService {
         return new DecimalFormat("0.0#%").parse(discountPercent);
     }
 
-    public Money computeTotalAmountDue(Money totalAmount, String cashPaidText) {
+    public Money computeMoneyChange(Money balance, String cashPaidText) {
         Money cashPaid = parseMoney(cashPaidText);
-        if (totalAmount == null || cashPaid == null) return parseMoney("0.00");
-        if (totalAmount.isGreaterThan(cashPaid)) {
-            return cashPaid.minus(totalAmount);
+        if (balance == null || cashPaid == null) return parseMoney("0.00");
+        if (balance.isGreaterThan(cashPaid)) {
+            return cashPaid.minus(balance);
         }
-        return totalAmount.minus(cashPaid).abs();
+        return balance.minus(cashPaid).abs();
+    }
+
+    public Money computeBalance(Money balance, String paidText) {
+        Money paid = parseMoney(paidText);
+        if (balance == null || paid == null) return parseMoney("0.00");
+        if (paid.isGreaterThan(balance)) {
+            return parseMoney("0.00");
+        }
+        return balance.minus(paid);
     }
 
     public Money computeTotalAmount(Money currentTotal, Money taxAmount, Money deliveryRate) {
