@@ -8,7 +8,7 @@
 <?import com.jfoenix.validation.RequiredFieldValidator?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.collections.FXCollections?>
-<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.String?>
@@ -64,8 +64,9 @@
                        style="-fx-font-weight: BOLD; -fx-font-size: 2em" styleClass="label-total"/>
             </TitledPane>
 
-            <HBox GridPane.columnIndex="0" GridPane.rowIndex="1" >
-                <JFXComboBox promptText="Payment Type" fx:id="cbPaymentType" style="-fx-text-alignment: LEFT" HBox.hgrow="ALWAYS" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+            <HBox GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <JFXComboBox promptText="Payment Type" fx:id="cbPaymentType" style="-fx-text-alignment: LEFT"
+                             HBox.hgrow="ALWAYS" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="Cash"/>

@@ -45,7 +45,8 @@
     -fx-background-color: transparent;
     -fx-font-weight: BOLD;
 }
-.custom-tiledpane{
+
+.custom-tiledpane {
     -fx-border-color: #c8c8c8;
 }
 

@@ -129,7 +129,7 @@ public class InvoiceController {
         invoice.amountProperty().bind(Bindings.createObjectBinding(this::showItemLineAmounts, tvOrders.getItems()));
         invoice.discountProperty().bind(Bindings.createObjectBinding(this::showDiscountAmount, tfDiscountPercent.textProperty()));
         invoice.taxAmountProperty().bind(Bindings.createObjectBinding(this::showTaxAmount, invoice.amountProperty()));
-        invoice.balanceProperty().bind(Bindings.createObjectBinding(()-> moneyService.computeBalance(invoice.getTotalAmount(),tfCashPay.getText()), invoice.totalAmountProperty(), tfCashPay.textProperty()));
+        invoice.balanceProperty().bind(Bindings.createObjectBinding(() -> moneyService.computeBalance(invoice.getTotalAmount(), tfCashPay.getText()), invoice.totalAmountProperty(), tfCashPay.textProperty()));
         invoice.changeProperty().bind(Bindings.createObjectBinding(this::showMoneyChange, invoice.totalAmountProperty(), tfCashPay.textProperty()));
         invoice.totalAmountProperty().bind(Bindings.createObjectBinding(this::showTotalAmount, invoice.amountProperty(), tfDeliveryAmount.textProperty(), tfDiscountPercent.textProperty()));
     }

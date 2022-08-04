@@ -54,11 +54,11 @@ public class MoneyService {
 
     public Money parseMoney(String text) {
         if (!StringUtils.isEmpty(text)) {
-            if(text.contains(".") && text.lastIndexOf(".") + 1 != text.length()){
+            if (text.contains(".") && text.lastIndexOf(".") + 1 != text.length()) {
                 String[] split = text.split("\\.");
                 String decimal = split[1];
-                if(decimal.length() > 2){
-                    text = split[0] + "." +  decimal.substring(0, 2);
+                if (decimal.length() > 2) {
+                    text = split[0] + "." + decimal.substring(0, 2);
                 }
             }
             return Money.parse("PHP " + text);

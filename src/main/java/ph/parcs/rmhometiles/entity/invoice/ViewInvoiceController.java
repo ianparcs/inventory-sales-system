@@ -75,13 +75,13 @@ public class ViewInvoiceController {
 
             tcPaymentPaidDate.setCellValueFactory(cellData -> {
                 LocalDateTime paidDate = cellData.getValue().getCreatedAt();
-                return Bindings.createObjectBinding(()-> paidDate.format(myFormatObj));
+                return Bindings.createObjectBinding(() -> paidDate.format(myFormatObj));
             });
 
             lblBalance.textProperty().bind(invoice.balanceProperty().asString());
             lblTotalAmount.setText("₱" + invoice.getTotalAmount().getAmount());
             lblCustomer.setText("Customer: " + invoice.getCustomer().getName());
-            lblInvoiceDate.setText("Invoice Date: " +  invoice.getCreatedAt().format(myFormatObj));
+            lblInvoiceDate.setText("Invoice Date: " + invoice.getCreatedAt().format(myFormatObj));
 
             tvPayments.setItems(FXCollections.observableArrayList(invoice.getPayments()));
             tvOrderItems.setItems(FXCollections.observableArrayList(invoice.getOrderItems()));
@@ -112,7 +112,7 @@ public class ViewInvoiceController {
         String amount = tfCashPay.getText();
         String paymentType = cbPaymentType.getValue();
 
-        Payment payment = paymentService.createPayment(invoice,amount,paymentType);
+        Payment payment = paymentService.createPayment(invoice, amount, paymentType);
 
         tvPayments.getItems().add(payment);
         tvPayments.refresh();

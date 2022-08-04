@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" styleClass="tile-info" fx:id="spMain"
+      xmlns="http://javafx.com/javafx/11.0.14-internal">
+    <Label alignment="CENTER" styleClass="big-title" text="Sales Report"/>
+    <Label alignment="CENTER" styleClass="big-title" text="Sales Report"/>
+</VBox>

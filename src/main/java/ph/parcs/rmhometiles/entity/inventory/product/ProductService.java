@@ -69,7 +69,7 @@ public class ProductService extends BaseService<Product> {
 
     public void saveInvoiceProduct(ObservableList<OrderItem> items) {
         for (OrderItem item : items) {
-            Stock stock = stockService.computeStocks(item.getProduct(),item.getQuantity());
+            Stock stock = stockService.computeStocks(item.getProduct(), item.getQuantity());
             Product invoiceProduct = item.getProduct();
             invoiceProduct.setStock(stock);
             saveEntity(invoiceProduct);

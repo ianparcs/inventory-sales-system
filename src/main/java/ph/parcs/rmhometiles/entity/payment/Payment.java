@@ -20,18 +20,6 @@ public class Payment extends BaseEntity {
     private ObjectProperty<Invoice> invoice = new SimpleObjectProperty<>();
     private SimpleStringProperty paymentType = new SimpleStringProperty();
 
-    public enum Method {
-        GCASH,
-        CASH,
-        UNKNOWN;
-    }
-
-    public enum Status {
-        PAID,
-        UNPAID
-    }
-
-
     @ManyToOne
     @JoinTable(name = "invoice_payment",
             joinColumns = {@JoinColumn(name = "payment_id", referencedColumnName = "payment_id")},
@@ -60,6 +48,17 @@ public class Payment extends BaseEntity {
 
     public void setPaymentType(String paymentType) {
         this.paymentType.set(paymentType);
+    }
+
+    public enum Method {
+        GCASH,
+        CASH,
+        UNKNOWN;
+    }
+
+    public enum Status {
+        PAID,
+        UNPAID
     }
 
 }

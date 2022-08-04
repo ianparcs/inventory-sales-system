@@ -46,7 +46,7 @@ public class Invoice extends BaseEntity {
         this.customer.set(customer);
     }
 
-    @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL,  fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public Set<Payment> getPayments() {
         return payments;
     }
@@ -141,7 +141,7 @@ public class Invoice extends BaseEntity {
     }
 
     public void addPayments(Payment payment) {
-        if(payment != null && payments != null){
+        if (payment != null && payments != null) {
             payments.add(payment);
         }
     }
@@ -157,10 +157,14 @@ public class Invoice extends BaseEntity {
     }
 
     @Transient
-    public ObjectProperty<Money> amountProperty() {return amount;}
+    public ObjectProperty<Money> amountProperty() {
+        return amount;
+    }
 
     @Transient
-    public StringProperty statusProperty() {return status;}
+    public StringProperty statusProperty() {
+        return status;
+    }
 
     @Transient
     public ObjectProperty<Money> balanceProperty() {

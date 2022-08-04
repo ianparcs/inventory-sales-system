@@ -1,33 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.HBox?>
-<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
-<StackPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal" fx:id="spMain"
-           fx:controller="ph.parcs.rmhometiles.entity.report.SalesReportController">
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain" stylesheets="@../../css/report.css"
+           xmlns="http://javafx.com/javafx/11.0.14-internal" fx:controller="ph.parcs.rmhometiles.entity.report.SalesReportController">
 
-    <HBox styleClass="tile-info" >
-        <Label alignment="CENTER" styleClass="big-title" text="Sales Report" HBox.hgrow="ALWAYS"/>
-        <JFXComboBox fx:id="cbDateRange">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Yesterday"/>
-                    <String fx:value="This Week"/>
-                    <String fx:value="Last Week"/>
-                    <String fx:value="This Month"/>
-                    <String fx:value="All Time"/>
-                    <String fx:value="Custom Date Range"/>
-                </FXCollections>
-            </items>
-            <value>
-                <String fx:value="Today"/>
-            </value>
-        </JFXComboBox>
-        <JFXDatePicker fx:id="dpStartDate" visible="false" promptText="Start Date"/>
-        <JFXDatePicker fx:id="dpEndDate" visible="false" promptText="End Date"/>
-    </HBox>
+    <GridPane hgap="10.0" styleClass="background">
+        <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS"/>
+            <ColumnConstraints hgrow="ALWAYS"/>
+            <ColumnConstraints hgrow="ALWAYS"/>
+            <ColumnConstraints hgrow="ALWAYS"/>
+        </columnConstraints>
+        <HBox fillHeight="false" maxWidth="1.7976931348623157E308" styleClass="tile-info" GridPane.columnIndex="0"
+              GridPane.columnSpan="4" GridPane.rowIndex="0">
+            <Label alignment="CENTER" styleClass="big-title" text="Sales Report" HBox.hgrow="ALWAYS"/>
+            <JFXComboBox fx:id="cbDateRange">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Yesterday"/>
+                        <String fx:value="This Week"/>
+                        <String fx:value="Last Week"/>
+                        <String fx:value="This Month"/>
+                        <String fx:value="All Time"/>
+                        <String fx:value="Custom Date Range"/>
+                    </FXCollections>
+                </items>
+                <value>
+                    <String fx:value="Today"/>
+                </value>
+            </JFXComboBox>
+            <JFXDatePicker fx:id="dpStartDate" promptText="Start Date" visible="false"/>
+            <JFXDatePicker fx:id="dpEndDate" promptText="End Date" visible="false"/>
+        </HBox>
+
+        <fx:include source="tile.fxml" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <fx:include source="tile.fxml" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <fx:include source="tile.fxml" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+        <fx:include source="tile.fxml" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+        <rowConstraints>
+            <RowConstraints vgrow="NEVER"/>
+            <RowConstraints vgrow="NEVER"/>
+        </rowConstraints>
+
+    </GridPane>
 </StackPane>

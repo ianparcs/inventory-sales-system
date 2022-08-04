@@ -1,8 +1,6 @@
 package ph.parcs.rmhometiles.entity.invoice.manage;
 
 import javafx.beans.binding.Bindings;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,11 +10,8 @@ import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import ph.parcs.rmhometiles.StageInitializer;
 import ph.parcs.rmhometiles.entity.customer.Customer;
 import ph.parcs.rmhometiles.entity.inventory.item.EntityTableController;
-import ph.parcs.rmhometiles.entity.inventory.product.Product;
-import ph.parcs.rmhometiles.entity.inventory.stock.Stock;
 import ph.parcs.rmhometiles.entity.invoice.Invoice;
 import ph.parcs.rmhometiles.entity.invoice.InvoiceService;
 import ph.parcs.rmhometiles.entity.invoice.ViewInvoiceController;
@@ -89,7 +84,7 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
 
     @FXML
     public void onRefreshClicked() {
-            super.updateItems();
+        super.updateItems();
     }
 
     @FXML

@@ -67,13 +67,13 @@ public class InvoiceService extends BaseService<Invoice> {
     }
 
     public String getPaymentType(boolean cashPayment, boolean gcashPayment) {
-        if(gcashPayment) return Payment.Method.GCASH.name();
-        if(cashPayment) return Payment.Method.CASH.name();
+        if (gcashPayment) return Payment.Method.GCASH.name();
+        if (cashPayment) return Payment.Method.CASH.name();
         return Payment.Method.UNKNOWN.name();
     }
 
     public String setInvoiceStatus(Money money) {
-        if(money != null && money.isPositiveOrZero()){
+        if (money != null && money.isPositiveOrZero()) {
             return Payment.Status.PAID.name();
         }
         return Payment.Status.UNPAID.name();

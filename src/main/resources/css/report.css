@@ -1,0 +1,65 @@
+* {
+    -fx-text-fill: #5a5c69;
+    -fx-font-size: 1.3em;
+    blueberries: #00AAFF;
+    greysquash: #dddd;
+    strawberry: #e74a3b;
+    banana: #f6c23e;
+    avocado: #4cbd9b;
+    water: #2a96a5;
+    primary: #4e73df;
+}
+
+GridPane {
+    -fx-alignment: top-center;
+    -fx-padding: 15px;
+    -fx-hgap: 8px;
+    -fx-vgap: 15px;
+}
+
+.background {
+    -fx-background-radius: 0 4pt 4pt 0pt;
+    -fx-border-radius: 0 4pt 4pt 0pt;
+}
+
+GridPane > .glyph-icon {
+    -glyph-size: 20px;
+    -fx-text-fill: primary;
+}
+
+.image {
+    -fx-background-image: url('/image/tiles.jpg');
+    -fx-background-size: cover;
+}
+
+.logo {
+    -fx-background-image: url('/image/logo.png');
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-padding: 100px;
+}
+
+.jfx-password-field,
+.jfx-text-field {
+    -jfx-focus-color: primary;
+}
+
+.jfx-button {
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-background-color: primary;
+    -fx-background-radius: 4pt;
+    -fx-padding: 0.6em 1.5em;
+    -fx-border-radius: 4pt;
+}
+
+.split-pane {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-padding: 0;
+}
+
+.split-pane *.split-pane-divider {
+    -fx-padding: 0;
+}
