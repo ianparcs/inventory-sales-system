@@ -7,9 +7,12 @@ TableView {
     -fx-border-radius: 4px;
     -fx-padding: 0;
 }
-
+TableView .column-header {
+    -fx-padding: 10px;
+}
 TableView .column-header, .column-header .label {
     -fx-alignment: center-left;
+    -fx-font-size: 1em;
     -fx-padding: 4px;
 }
 
