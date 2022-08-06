@@ -2,5 +2,6 @@
 
 Inventory and Sales System made with Spring Boot and JavaFX
 
-![image](https://user-images.githubusercontent.com/18359279/183252660-ad425be4-f2dd-4b84-9582-e5db3847eed5.png)
+![image](https://user-images.githubusercontent.com/18359279/183252757-423eceb9-5902-47fa-979c-fe9988be63fb.png)
+
 
