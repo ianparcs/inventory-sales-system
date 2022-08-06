@@ -85,12 +85,12 @@ public class SalesReportController {
 
         new Thread(() -> {
             List<SalesReport> salesReportsToday = salesReportService.findReports(cbDateRange.getValue());
-            Map<Global.Sales, Money> moneyMap = moneyService.computeAllMoney(salesReportsToday);
+            Map<Global.Sales, String> moneyMap = moneyService.computeAllMoney(salesReportsToday);
             Platform.runLater(() -> {
-                lblTax.setText(moneyMap.get(Global.Sales.TAX).toString());
-                lblCost.setText(moneyMap.get(Global.Sales.COST).toString());
-                lblTotal.setText(moneyMap.get(Global.Sales.TOTAL).toString());
-                lblProfit.setText(moneyMap.get(Global.Sales.PROFIT).toString());
+                lblTax.setText(moneyMap.get(Global.Sales.TAX));
+                lblCost.setText(moneyMap.get(Global.Sales.COST));
+                lblTotal.setText(moneyMap.get(Global.Sales.TOTAL));
+                lblProfit.setText(moneyMap.get(Global.Sales.PROFIT));
 
                 tvSalesReports.getItems().setAll(salesReportsToday);
                 tvSalesReports.refresh();
