@@ -72,7 +72,7 @@
             </columnResizePolicy>
             <columns>
 
-                <TableColumn text="Date">
+                <TableColumn fx:id="tcSalesDate" text="Date">
                     <cellValueFactory>
                         <PropertyValueFactory property="createdAt"/>
                     </cellValueFactory>

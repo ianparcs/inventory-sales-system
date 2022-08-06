@@ -1,17 +1,15 @@
 package ph.parcs.rmhometiles.entity.report;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ph.parcs.rmhometiles.entity.invoice.Invoice;
 import ph.parcs.rmhometiles.entity.invoice.InvoiceRepository;
-import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.util.DateUtility;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +20,12 @@ public class SalesReportService {
     private InvoiceRepository invoiceRepository;
 
     public List<SalesReport> findReports(String dateRangeText) {
-        LocalDateTime[] dateTimeRange = DateUtility.findDate(dateRangeText);
+        if (dateRangeText.equalsIgnoreCase("All Time")) {
+            Iterable<Invoice> invoiceIterable = invoiceRepository.findAll();
+            return createSalesReport(Streamable.of(invoiceIterable).toList());
+        }
 
+        LocalDateTime[] dateTimeRange = DateUtility.findDate(dateRangeText);
         LocalDateTime startTime = dateTimeRange[0];
         LocalDateTime endTime = dateTimeRange[1];
 

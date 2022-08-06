@@ -15,12 +15,12 @@ public class DateUtility {
         dateRangeSets.put("Today", createTodayDate());
         dateRangeSets.put("Yesterday", createYesterdayDate());
         dateRangeSets.put("This Week", createThisWeekDate());
-        dateRangeSets.put("Last Week", createTodayDate());
-        dateRangeSets.put("This Month", createTodayDate());
-        dateRangeSets.put("Last Month", createTodayDate());
+        dateRangeSets.put("Last Week", createLastWeekDate());
+        dateRangeSets.put("This Month", createThisMonthDate());
+        dateRangeSets.put("Last Month", createLastMonthDate());
         dateRangeSets.put("This Year", createTodayDate());
         dateRangeSets.put("Last Year", createTodayDate());
-        dateRangeSets.put("All Time", createTodayDate());
+        dateRangeSets.put("All Time", createAllTimeDate());
     }
 
     public static LocalDateTime[] findDate(String dateRange) {
@@ -44,7 +44,6 @@ public class DateUtility {
     private static LocalDateTime[] createYesterdayDate() {
         LocalDateTime startTime = LocalDateTime.now().with(LocalTime.MIN).minusDays(1);
         LocalDateTime endTime = getTodayEndTime().minusDays(1);
-
         return createLocalDateTime(startTime, endTime);
     }
 
@@ -56,10 +55,26 @@ public class DateUtility {
     }
 
     private static LocalDateTime[] createLastWeekDate() {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now().with(LocalTime.MIN);
         LocalDateTime weekStart = now.minusDays(7 + now.getDayOfWeek().getValue() - 1);
         LocalDateTime weekEnd = now.minusDays(now.getDayOfWeek().getValue());
         return createLocalDateTime(weekStart, weekEnd);
+    }
+
+    private static LocalDateTime[] createThisMonthDate() {
+        LocalDateTime now = LocalDateTime.now().with(LocalTime.MIN);
+        LocalDateTime monthStart = now.minusDays(now.getDayOfMonth());
+        return createLocalDateTime(monthStart, now);
+    }
+
+    private static LocalDateTime[] createLastMonthDate() {
+        LocalDateTime now = LocalDateTime.now().with(LocalTime.MAX);
+        LocalDateTime monthStart = now.minusMonths(now.getDayOfMonth());
+        return createLocalDateTime(monthStart, now);
+    }
+
+    private static LocalDateTime[] createAllTimeDate() {
+        return createLocalDateTime(null, getTodayEndTime());
     }
 
     private static LocalDateTime getTodayEndTime() {
