@@ -11,8 +11,8 @@ public abstract class BaseEntity {
 
     protected IntegerProperty id = new SimpleIntegerProperty();
     protected StringProperty name = new SimpleStringProperty();
-    private ObjectProperty<LocalDateTime> createdAt = new SimpleObjectProperty<>();
-    private ObjectProperty<LocalDateTime> updatedAt = new SimpleObjectProperty<>();
+    protected ObjectProperty<LocalDateTime> createdAt = new SimpleObjectProperty<>();
+    protected ObjectProperty<LocalDateTime> updatedAt = new SimpleObjectProperty<>();
 
     @Column(name = "name")
     public String getName() {

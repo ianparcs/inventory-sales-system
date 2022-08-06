@@ -1,7 +1,6 @@
 
 GridPane {
     -fx-alignment: top-center;
-    -fx-padding: 15px;
     -fx-hgap: 10px;
     -fx-vgap: 15px;
 }

@@ -1,4 +1,5 @@
 /target/
 /.mvn/
 /.idea/
+.idea/
 data

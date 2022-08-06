@@ -3,10 +3,10 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.*?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain" stylesheets="@../../css/report.css"
            xmlns="http://javafx.com/javafx/11.0.14-internal"
            fx:controller="ph.parcs.rmhometiles.entity.report.SalesReportController">
@@ -31,6 +31,9 @@
                         <String fx:value="This Week"/>
                         <String fx:value="Last Week"/>
                         <String fx:value="This Month"/>
+                        <String fx:value="Last Month"/>
+                        <String fx:value="This Year"/>
+                        <String fx:value="Last Year"/>
                         <String fx:value="All Time"/>
                         <String fx:value="Custom Date Range"/>
                     </FXCollections>
@@ -49,7 +52,7 @@
         <VBox styleClass="report-tile-info" GridPane.columnIndex="1" GridPane.rowIndex="1"
               spacing="5">
             <Label styleClass="report-big-title" text="TOTAL"/>
-            <Label maxWidth="1.7976931348623157E308"  styleClass="report-small-title" text="PHP 0.00"/>
+            <Label maxWidth="1.7976931348623157E308" styleClass="report-small-title" text="PHP 0.00"/>
         </VBox>
         <VBox styleClass="report-tile-info" GridPane.columnIndex="2" GridPane.rowIndex="1"
               xmlns="http://javafx.com/javafx/11.0.14-internal" spacing="5">
@@ -59,7 +62,7 @@
         <VBox styleClass="report-tile-info" GridPane.columnIndex="3" GridPane.rowIndex="1"
               spacing="5">
             <Label styleClass="report-big-title" text="PROFIT"/>
-            <Label maxWidth="1.7976931348623157E308"  styleClass="report-small-title" text="PHP 0.00"/>
+            <Label maxWidth="1.7976931348623157E308" styleClass="report-small-title" text="PHP 0.00"/>
         </VBox>
 
         <TableView fx:id="tvSalesReports" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.hgrow="ALWAYS"
@@ -71,7 +74,7 @@
 
                 <TableColumn text="Date">
                     <cellValueFactory>
-                        <PropertyValueFactory property="date"/>
+                        <PropertyValueFactory property="createdAt"/>
                     </cellValueFactory>
                 </TableColumn>
 
