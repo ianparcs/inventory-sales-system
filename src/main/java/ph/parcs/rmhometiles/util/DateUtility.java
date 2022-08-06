@@ -2,9 +2,13 @@ package ph.parcs.rmhometiles.util;
 
 import org.springframework.util.StringUtils;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.TemporalAdjusters;
 import java.util.HashMap;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 public class DateUtility {
 
@@ -18,8 +22,8 @@ public class DateUtility {
         dateRangeSets.put("Last Week", createLastWeekDate());
         dateRangeSets.put("This Month", createThisMonthDate());
         dateRangeSets.put("Last Month", createLastMonthDate());
-        dateRangeSets.put("This Year", createTodayDate());
-        dateRangeSets.put("Last Year", createTodayDate());
+        dateRangeSets.put("This Year", createThisYearDate());
+        dateRangeSets.put("Last Year", createLastYearDate());
         dateRangeSets.put("All Time", createAllTimeDate());
     }
 
@@ -37,13 +41,13 @@ public class DateUtility {
 
     private static LocalDateTime[] createTodayDate() {
         LocalDateTime startTime = LocalDateTime.now().with(LocalTime.MIN);
-        LocalDateTime endTime = getTodayEndTime();
+        LocalDateTime endTime = LocalDateTime.now().with(LocalTime.MAX);
         return createLocalDateTime(startTime, endTime);
     }
 
     private static LocalDateTime[] createYesterdayDate() {
         LocalDateTime startTime = LocalDateTime.now().with(LocalTime.MIN).minusDays(1);
-        LocalDateTime endTime = getTodayEndTime().minusDays(1);
+        LocalDateTime endTime = LocalDateTime.now().with(LocalTime.MAX).minusDays(1);
         return createLocalDateTime(startTime, endTime);
     }
 
@@ -62,23 +66,43 @@ public class DateUtility {
     }
 
     private static LocalDateTime[] createThisMonthDate() {
-        LocalDateTime now = LocalDateTime.now().with(LocalTime.MIN);
-        LocalDateTime monthStart = now.minusDays(now.getDayOfMonth());
-        return createLocalDateTime(monthStart, now);
+        LocalDateTime todayStart = LocalDateTime.now().with(LocalTime.MIN);
+        LocalDateTime todayEnd = LocalDateTime.now().with(LocalTime.MAX);
+
+        LocalDateTime monthStart = todayStart.with(TemporalAdjusters.firstDayOfMonth());
+        LocalDateTime monthEnd = todayEnd.with(TemporalAdjusters.lastDayOfMonth());
+
+        return createLocalDateTime(monthStart, monthEnd);
     }
 
     private static LocalDateTime[] createLastMonthDate() {
-        LocalDateTime now = LocalDateTime.now().with(LocalTime.MAX);
-        LocalDateTime monthStart = now.minusMonths(now.getDayOfMonth());
-        return createLocalDateTime(monthStart, now);
+        LocalDateTime nowStart = LocalDateTime.now().with(LocalTime.MIN).minusMonths(1);
+        LocalDateTime nowEnd = LocalDateTime.now().with(LocalTime.MAX).minusMonths(1);
+
+        LocalDateTime monthStart = nowStart.withDayOfMonth(1);
+        LocalDateTime monthEnd = nowEnd.with(TemporalAdjusters.lastDayOfMonth());
+        return createLocalDateTime(monthStart, monthEnd);
+    }
+
+    private static LocalDateTime[] createThisYearDate() {
+        LocalDateTime nowStart = LocalDateTime.now().with(LocalTime.MIN);
+        LocalDateTime nowEnd = LocalDateTime.now().with(LocalTime.MAX);
+        LocalDateTime yearStart = nowStart.with(TemporalAdjusters.firstDayOfYear());
+        LocalDateTime yearEnd = nowEnd.with(TemporalAdjusters.lastDayOfYear());
+        return createLocalDateTime(yearStart, yearEnd);
+    }
+
+    private static LocalDateTime[] createLastYearDate() {
+        LocalDateTime nowStart = LocalDateTime.now().with(LocalTime.MIN).minusYears(1);
+        LocalDateTime nowEnd = LocalDateTime.now().with(LocalTime.MAX).minusYears(1);
+
+        LocalDateTime yearStart = nowStart.with(TemporalAdjusters.firstDayOfYear());
+        LocalDateTime yearEnd = nowEnd.with(TemporalAdjusters.lastDayOfYear());
+
+        return createLocalDateTime(yearStart, yearEnd);
     }
 
     private static LocalDateTime[] createAllTimeDate() {
-        return createLocalDateTime(null, getTodayEndTime());
+        return createLocalDateTime(null, LocalDateTime.now().with(LocalTime.MAX));
     }
-
-    private static LocalDateTime getTodayEndTime() {
-        return LocalDateTime.now().with(LocalTime.MAX);
-    }
-
 }
