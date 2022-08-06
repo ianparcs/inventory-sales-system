@@ -57,10 +57,10 @@ public class MoneyService {
         return totalAmount;
     }
 
-    public Map<Global.Sales, Money> computeAllMoney(List<SalesReport> salesReportsToday) {
+    public Map<Global.Sales, String> computeAllMoney(List<SalesReport> salesReportsToday) {
         if (salesReportsToday == null) return new HashMap<>();
 
-        Map<Global.Sales, Money> moneyMap = new HashMap<>();
+        Map<Global.Sales, String> moneyMap = new HashMap<>();
         Money tax = parseMoney("0.00");
         Money cost = parseMoney("0.00");
         Money total = parseMoney("0.00");
@@ -72,10 +72,10 @@ public class MoneyService {
         }
         Money profit = total.minus(cost);
 
-        moneyMap.put(Global.Sales.TAX, tax);
-        moneyMap.put(Global.Sales.COST, cost);
-        moneyMap.put(Global.Sales.TOTAL, total);
-        moneyMap.put(Global.Sales.PROFIT, profit);
+        moneyMap.put(Global.Sales.TAX, tax.toString().replace("PHP","₱"));
+        moneyMap.put(Global.Sales.COST, cost.toString().replace("PHP","₱"));
+        moneyMap.put(Global.Sales.TOTAL, total.toString().replace("PHP","₱"));
+        moneyMap.put(Global.Sales.PROFIT, profit.toString().replace("PHP","₱"));
         return moneyMap;
     }
 
