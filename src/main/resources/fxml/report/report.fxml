@@ -46,23 +46,23 @@
 
         <VBox styleClass="report-tile-info" GridPane.columnIndex="0" GridPane.rowIndex="1"
               spacing="5">
-            <Label styleClass="report-big-title" text="SUBTOTAL"/>
-            <Label maxWidth="1.7976931348623157E308" styleClass="report-small-title" text="PHP 0.00"/>
+            <Label styleClass="report-big-title" text="COST"/>
+            <Label fx:id="lblCost" maxWidth="1.7976931348623157E308" styleClass="report-small-title" text="PHP 0.00"/>
         </VBox>
         <VBox styleClass="report-tile-info" GridPane.columnIndex="1" GridPane.rowIndex="1"
               spacing="5">
             <Label styleClass="report-big-title" text="TOTAL"/>
-            <Label maxWidth="1.7976931348623157E308" styleClass="report-small-title" text="PHP 0.00"/>
+            <Label fx:id="lblTotal" maxWidth="1.7976931348623157E308" styleClass="report-small-title" text="PHP 0.00"/>
         </VBox>
         <VBox styleClass="report-tile-info" GridPane.columnIndex="2" GridPane.rowIndex="1"
               xmlns="http://javafx.com/javafx/11.0.14-internal" spacing="5">
             <Label styleClass="report-big-title" text="TAX"/>
-            <Label maxWidth="1.7976931348623157E308" styleClass="report-small-title" text="PHP 0.00"/>
+            <Label fx:id="lblTax" maxWidth="1.7976931348623157E308" styleClass="report-small-title" text="PHP 0.00"/>
         </VBox>
         <VBox styleClass="report-tile-info" GridPane.columnIndex="3" GridPane.rowIndex="1"
               spacing="5">
             <Label styleClass="report-big-title" text="PROFIT"/>
-            <Label maxWidth="1.7976931348623157E308" styleClass="report-small-title" text="PHP 0.00"/>
+            <Label fx:id="lblProfit" maxWidth="1.7976931348623157E308" styleClass="report-small-title" text="PHP 0.00"/>
         </VBox>
 
         <TableView fx:id="tvSalesReports" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.hgrow="ALWAYS"
@@ -80,31 +80,25 @@
 
                 <TableColumn text="Cost">
                     <cellValueFactory>
-                        <PropertyValueFactory property="createdAt"/>
-                    </cellValueFactory>
-                </TableColumn>
-
-                <TableColumn text="Price">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="createdAt"/>
+                        <PropertyValueFactory property="cost"/>
                     </cellValueFactory>
                 </TableColumn>
 
                 <TableColumn text="Subtotal">
                     <cellValueFactory>
-                        <PropertyValueFactory property="createdAt"/>
+                        <PropertyValueFactory property="subtotal"/>
                     </cellValueFactory>
                 </TableColumn>
 
                 <TableColumn text="Total">
                     <cellValueFactory>
-                        <PropertyValueFactory property="createdAt"/>
+                        <PropertyValueFactory property="total"/>
                     </cellValueFactory>
                 </TableColumn>
 
                 <TableColumn text="Tax">
                     <cellValueFactory>
-                        <PropertyValueFactory property="createdAt"/>
+                        <PropertyValueFactory property="tax"/>
                     </cellValueFactory>
                 </TableColumn>
             </columns>

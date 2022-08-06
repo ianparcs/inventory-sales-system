@@ -1,35 +1,36 @@
 package ph.parcs.rmhometiles.entity.report;
 
+import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import ph.parcs.rmhometiles.entity.MoneyService;
 import ph.parcs.rmhometiles.entity.invoice.Invoice;
-import ph.parcs.rmhometiles.entity.invoice.InvoiceRepository;
+import ph.parcs.rmhometiles.entity.invoice.InvoiceService;
 import ph.parcs.rmhometiles.util.DateUtility;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
 public class SalesReportService {
 
-    private InvoiceRepository invoiceRepository;
+    private InvoiceService invoiceService;
+    private MoneyService moneyService;
 
     public List<SalesReport> findReports(String dateRangeText) {
         if (dateRangeText.equalsIgnoreCase("All Time")) {
-            Iterable<Invoice> invoiceIterable = invoiceRepository.findAll();
-            return createSalesReport(Streamable.of(invoiceIterable).toList());
+            return createSalesReport(invoiceService.findAllInvoice());
         }
 
         LocalDateTime[] dateTimeRange = DateUtility.findDate(dateRangeText);
-        LocalDateTime startTime = dateTimeRange[0];
-        LocalDateTime endTime = dateTimeRange[1];
-
-        List<Invoice> invoices = invoiceRepository.findAllByCreatedAtBetween(startTime, endTime);
+        List<Invoice> invoices = invoiceService.findAllInvoiceByDate(dateTimeRange);
 
         return createSalesReport(invoices);
     }
@@ -37,18 +38,43 @@ public class SalesReportService {
     private List<SalesReport> createSalesReport(List<Invoice> invoices) {
         List<SalesReport> salesReports = new ArrayList<>();
 
-        if (invoices != null) {
-            for (Invoice invoice : invoices) {
-                SalesReport salesReport = new SalesReport();
-                salesReports.add(salesReport);
+        if (invoices == null) return new ArrayList<>();
+
+        Map<LocalDate, List<Invoice>> groupedByDate = invoices.stream()
+                .collect(Collectors.groupingBy(Invoice::getCreatedLocalDate));
+
+        for (var entry : groupedByDate.entrySet()) {
+            List<Invoice> groupInvoice = entry.getValue();
+            SalesReport salesReport = new SalesReport();
+            Money tax = moneyService.parseMoney("0.00");
+            Money cost = moneyService.parseMoney("0.00");
+            Money total = moneyService.parseMoney("0.00");
+            Money subtotal = moneyService.parseMoney("0.00");
+
+            for (Invoice invoice : groupInvoice) {
+                tax = tax.plus(invoice.getTaxAmount());
+                cost = cost.plus(invoice.getItemCosts());
+                total = total.plus(invoice.getTotalAmount());
+                subtotal = subtotal.plus(invoice.getTotalAmount());
                 salesReport.setCreatedAt(invoice.getCreatedAt());
             }
+            salesReport.setTax(tax);
+            salesReport.setCost(cost);
+            salesReport.setTotal(total);
+            salesReports.add(salesReport);
+            salesReport.setSubtotal(subtotal);
         }
+
         return salesReports;
     }
 
     @Autowired
-    public void setInvoiceRepository(InvoiceRepository invoiceRepository) {
-        this.invoiceRepository = invoiceRepository;
+    public void setMoneyService(MoneyService moneyService) {
+        this.moneyService = moneyService;
+    }
+
+    @Autowired
+    public void setInvoiceService(InvoiceService invoiceService) {
+        this.invoiceService = invoiceService;
     }
 }

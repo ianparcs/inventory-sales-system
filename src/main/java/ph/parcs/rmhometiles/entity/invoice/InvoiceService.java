@@ -5,6 +5,7 @@ import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,7 @@ import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.entity.payment.Payment;
 import ph.parcs.rmhometiles.util.PageUtil;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Callable;
@@ -23,7 +25,6 @@ import java.util.concurrent.Callable;
 @Transactional(propagation = Propagation.REQUIRED)
 public class InvoiceService extends BaseService<Invoice> {
 
-    public Callable<String> setInvoiceStatus;
     private InvoiceRepository invoiceRepository;
     private ProductRepository productRepository;
 
@@ -77,6 +78,17 @@ public class InvoiceService extends BaseService<Invoice> {
             return Payment.Status.PAID.name();
         }
         return Payment.Status.UNPAID.name();
+    }
+
+    public List<Invoice> findAllInvoice() {
+        Iterable<Invoice> invoiceIterable = invoiceRepository.findAll();
+        return Streamable.of(invoiceIterable).toList();
+    }
+
+    public List<Invoice> findAllInvoiceByDate(LocalDateTime[] dateTimeRange) {
+        LocalDateTime startTime = dateTimeRange[0];
+        LocalDateTime endTime = dateTimeRange[1];
+        return invoiceRepository.findAllByCreatedAtBetween(startTime, endTime);
     }
 
     public Invoice createDefault() {
