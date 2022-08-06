@@ -26,9 +26,25 @@
                           styleClass="search-field" HBox.hgrow="ALWAYS"/>
 
 
-            <JFXDatePicker fx:id="dpStartDate" promptText="From" HBox.hgrow="ALWAYS"/>
-            <JFXDatePicker fx:id="dpEndDate" promptText="To" HBox.hgrow="ALWAYS"/>
-
+            <JFXComboBox fx:id="cbDateRange" onAction="#onDateRangeSelect" promptText="Date Range">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Today"/>
+                        <String fx:value="Yesterday"/>
+                        <String fx:value="This Week"/>
+                        <String fx:value="Last Week"/>
+                        <String fx:value="This Month"/>
+                        <String fx:value="Last Month"/>
+                        <String fx:value="This Year"/>
+                        <String fx:value="Last Year"/>
+                        <String fx:value="All Time"/>
+                        <String fx:value="Custom Date Range"/>
+                    </FXCollections>
+                </items>
+                <value>
+                    <String fx:value="Today"/>
+                </value>
+            </JFXComboBox>
             <JFXComboBox fx:id="cbInvoices" labelFloat="false" promptText="Status"
                          GridPane.columnIndex="0" GridPane.rowIndex="3">
                 <items>

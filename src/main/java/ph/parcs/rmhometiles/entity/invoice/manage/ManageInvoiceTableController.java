@@ -1,5 +1,7 @@
 package ph.parcs.rmhometiles.entity.invoice.manage;
 
+import com.jfoenix.controls.JFXComboBox;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,12 +17,17 @@ import ph.parcs.rmhometiles.entity.inventory.item.EntityTableController;
 import ph.parcs.rmhometiles.entity.invoice.Invoice;
 import ph.parcs.rmhometiles.entity.invoice.InvoiceService;
 import ph.parcs.rmhometiles.entity.invoice.ViewInvoiceController;
+import ph.parcs.rmhometiles.entity.report.SalesReport;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.ui.scene.SceneManager;
+import ph.parcs.rmhometiles.util.DateUtility;
+import ph.parcs.rmhometiles.util.Global;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ManageInvoiceTableController extends EntityTableController<Invoice> {
@@ -31,7 +38,10 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
     private TableColumn<Invoice, Customer> tcCustomer;
     @FXML
     private TableColumn<Invoice, String> tcStatus;
+    @FXML
+    private JFXComboBox<String> cbDateRange;
 
+    private InvoiceService invoiceService;
     private SceneManager sceneManager;
 
     @FXML
@@ -83,8 +93,21 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
     }
 
     @FXML
+    public void onDateRangeSelect() {
+        new Thread(() -> {
+            LocalDateTime[] dateTimeRange = DateUtility.findDate(cbDateRange.getValue());
+            List<Invoice> invoices = invoiceService.findAllInvoiceByDate(dateTimeRange);
+            Platform.runLater(() -> {
+                tvItem.getItems().setAll(invoices);
+                tvItem.refresh();
+            });
+        }).start();
+    }
+
+    @FXML
     public void onRefreshClicked() {
         super.updateItems();
+        cbDateRange.getSelectionModel().selectFirst();
     }
 
     @FXML
@@ -100,7 +123,7 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
 
     @Autowired
     public void setInvoiceService(InvoiceService invoiceService) {
+        this.invoiceService = invoiceService;
         this.baseService = invoiceService;
     }
-
 }

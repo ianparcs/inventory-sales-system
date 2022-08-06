@@ -21,7 +21,7 @@
         </columnConstraints>
 
         <HBox styleClass="tile-info" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0">
-            <Label alignment="CENTER" styleClass="big-title" text="Products"/>
+            <Label alignment="CENTER" styleClass="big-title" text="Inventory"/>
         </HBox>
 
         <HBox spacing="10.0" styleClass="tile-default" GridPane.columnIndex="0" GridPane.rowIndex="1">
