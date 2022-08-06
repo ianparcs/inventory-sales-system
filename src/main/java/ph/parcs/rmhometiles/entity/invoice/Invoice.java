@@ -13,6 +13,7 @@ import ph.parcs.rmhometiles.entity.payment.Payment;
 import ph.parcs.rmhometiles.util.Global;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -147,6 +148,20 @@ public class Invoice extends BaseEntity {
     }
 
     @Transient
+    public Money getItemCosts() {
+        Money cost = Money.parse("PHP 0.00");
+        for (OrderItem orderItem : orderItems) {
+            cost = cost.plus(orderItem.getProduct().getCost());
+        }
+        return cost;
+    }
+
+    @Transient
+    public LocalDate getCreatedLocalDate() {
+        return getCreatedAt().toLocalDate();
+    }
+
+    @Transient
     public ObjectProperty<Money> taxAmountProperty() {
         return taxAmount;
     }
@@ -180,4 +195,5 @@ public class Invoice extends BaseEntity {
     public ObjectProperty<Money> changeProperty() {
         return change;
     }
+
 }

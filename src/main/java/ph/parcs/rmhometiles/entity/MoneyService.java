@@ -4,9 +4,14 @@ import lombok.SneakyThrows;
 import org.joda.money.Money;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import ph.parcs.rmhometiles.entity.report.SalesReport;
+import ph.parcs.rmhometiles.util.Global;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class MoneyService {
@@ -52,6 +57,28 @@ public class MoneyService {
         return totalAmount;
     }
 
+    public Map<Global.Sales, Money> computeAllMoney(List<SalesReport> salesReportsToday) {
+        if (salesReportsToday == null) return new HashMap<>();
+
+        Map<Global.Sales, Money> moneyMap = new HashMap<>();
+        Money tax = parseMoney("0.00");
+        Money cost = parseMoney("0.00");
+        Money total = parseMoney("0.00");
+
+        for (SalesReport salesReport : salesReportsToday) {
+            tax = tax.plus(salesReport.getTax() != null ? salesReport.getTax() : parseMoney("0.00"));
+            cost = cost.plus(salesReport.getTax() != null ? salesReport.getCost() : parseMoney("0.00"));
+            total = total.plus(salesReport.getTax() != null ? salesReport.getTotal() : parseMoney("0.00"));
+        }
+        Money profit = total.minus(cost);
+
+        moneyMap.put(Global.Sales.TAX, tax);
+        moneyMap.put(Global.Sales.COST, cost);
+        moneyMap.put(Global.Sales.TOTAL, total);
+        moneyMap.put(Global.Sales.PROFIT, profit);
+        return moneyMap;
+    }
+
     public Money parseMoney(String text) {
         if (!StringUtils.isEmpty(text)) {
             if (text.contains(".") && text.lastIndexOf(".") + 1 != text.length()) {
@@ -65,4 +92,5 @@ public class MoneyService {
         }
         return Money.parse("PHP 0.00");
     }
+
 }

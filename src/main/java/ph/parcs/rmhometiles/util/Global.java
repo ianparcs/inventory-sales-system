@@ -22,6 +22,10 @@ public interface Global {
         String SYMBOL = "symbol-icon";
     }
 
+    enum Sales {
+         TAX, PROFIT, TOTAL, COST;
+    }
+
     interface Message {
         String ADD = "Item successfully added!";
         String SAVED = "Item has been successfully saved";
