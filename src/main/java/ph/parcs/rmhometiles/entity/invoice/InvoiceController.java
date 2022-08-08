@@ -10,6 +10,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import lombok.SneakyThrows;
+import org.hibernate.criterion.Order;
 import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,7 @@ import ph.parcs.rmhometiles.util.Global;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
 import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.util.converter.DateConverter;
+import ph.parcs.rmhometiles.util.converter.FloatConverter;
 import ph.parcs.rmhometiles.util.converter.NumberConverter;
 import ph.parcs.rmhometiles.util.converter.ProductConverter;
 
@@ -38,6 +40,8 @@ import java.util.List;
 @Controller
 public class InvoiceController {
 
+    @FXML
+    private TableColumn<OrderItem, Float> tcDiscountPercent;
     @FXML
     private TableColumn<OrderItem, Integer> tcStock;
     @FXML
@@ -125,7 +129,6 @@ public class InvoiceController {
 
     private void initInvoiceProperties() {
         invoice.statusProperty().bind(Bindings.createStringBinding(() -> invoiceService.setInvoiceStatus(invoice.balanceProperty().get()), invoice.balanceProperty().asString()));
-
         invoice.amountProperty().bind(Bindings.createObjectBinding(this::showItemLineAmounts, tvOrders.getItems()));
         invoice.discountProperty().bind(Bindings.createObjectBinding(this::showDiscountAmount, tfDiscountPercent.textProperty()));
         invoice.taxAmountProperty().bind(Bindings.createObjectBinding(this::showTaxAmount, invoice.amountProperty()));
@@ -222,11 +225,12 @@ public class InvoiceController {
     }
 
     private void initColumnCellValueFactory() {
+        tcQty.setCellFactory(TextFieldTableCell.forTableColumn(new NumberConverter()));
+        tcDiscountPercent.setCellFactory(TextFieldTableCell.forTableColumn(new FloatConverter()));
+        tcAction.setCellFactory(ActionTableCell.forActions(this::onItemDeleteAction, "DELETE"));
         tcCode.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "code"));
         tcPrice.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "price"));
         tcStock.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "stock", "stocks"));
-        tcQty.setCellFactory(TextFieldTableCell.forTableColumn(new NumberConverter()));
-        tcAction.setCellFactory(ActionTableCell.forActions(this::onItemDeleteAction, "DELETE"));
 
     }
 
@@ -291,7 +295,10 @@ public class InvoiceController {
             }
         }
 
-        tvOrders.getItems().add(new OrderItem(product));
+        OrderItem orderItem = new OrderItem(product);
+   //     orderItem.amountProperty().bind(Bindings.createObjectBinding(()-> moneyService.computeOrderItemAmount( ,orderItem.getDiscount()), orderItem.discountPercentProperty(), orderItem.quantityProperty()));
+
+        tvOrders.getItems().add(orderItem);
         Platform.runLater(() -> {
             cbProducts.valueProperty().set(null);
             cbProducts.hide();
@@ -313,13 +320,12 @@ public class InvoiceController {
             invoiceService.saveOrderItem(invoice, tvOrders.getItems());
 
             String paymentType = invoiceService.getPaymentType(rbCashType.isSelected(), rbGCashType.isSelected());
-
             LocalDateTime createdAt = dpDate.getValue().atTime(LocalTime.now());
             Payment payment = new Payment();
             payment.setInvoice(invoice);
             payment.setCreatedAt(createdAt);
             payment.setPaymentType(paymentType);
-            payment.setPaymentAmount(invoice.getAmount());
+            payment.setPaymentAmount(invoice.getBalance());
 
             invoice.setCreatedAt(createdAt);
             invoice.setOrderItems(new HashSet<>(tvOrders.getItems()));
@@ -374,6 +380,16 @@ public class InvoiceController {
         }
         tvOrders.refresh();
     }
+
+    @FXML
+    public void onDiscountPercentEditCommit(TableColumn.CellEditEvent<OrderItem, Float> event) {
+        float discount = event.getNewValue();
+        OrderItem lineItem = event.getTableView().getItems().get(event.getTablePosition().getRow());
+        if (lineItem != null) {
+            lineItem.setDiscountPercent(discount);
+        }
+    }
+
 
     @FXML
     public void onCashTypeClicked() {
