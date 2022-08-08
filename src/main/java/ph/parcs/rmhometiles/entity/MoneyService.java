@@ -48,11 +48,11 @@ public class MoneyService {
         if (paid.isGreaterThan(balance)) {
             return parseMoney("0.00");
         }
-        return balance.minus(paid);
+        return paid.minus(balance);
     }
 
     public Money computeTotalAmount(Money currentTotal, Money taxAmount, Money deliveryRate) {
-        Money totalAmount = currentTotal.minus(taxAmount);
+        Money totalAmount = currentTotal.plus(taxAmount);
         totalAmount = totalAmount.plus(deliveryRate);
         return totalAmount;
     }
@@ -77,6 +77,10 @@ public class MoneyService {
         moneyMap.put(Global.Sales.TOTAL, total.toString().replace("PHP","₱"));
         moneyMap.put(Global.Sales.PROFIT, profit.toString().replace("PHP","₱"));
         return moneyMap;
+    }
+
+    public Money computeOrderItemAmount() {
+        return parseMoney("0.00");
     }
 
     public Money parseMoney(String text) {

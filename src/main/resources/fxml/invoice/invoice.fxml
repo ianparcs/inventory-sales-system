@@ -54,7 +54,18 @@
                             <PropertyValueFactory property="quantity"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn fx:id="tcSubTotal" reorderable="false" styleClass="action-column" text="Amount">
+                    <TableColumn fx:id="tcDiscountPercent" onEditCommit="#onDiscountPercentEditCommit" reorderable="false"
+                                 styleClass="quantity-column" text="Disc. %">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="discountPercent"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn reorderable="false" text="Discount">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="discount"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn reorderable="false" styleClass="action-column" text="Amount">
                         <cellValueFactory>
                             <PropertyValueFactory property="amount"/>
                         </cellValueFactory>
@@ -75,7 +86,7 @@
                                text="Invoice Summary" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0"/>-->
             <Label text="Sales person:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
             <Label text="Amount:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-            <Label text="Discount:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+            <Label text="Discount All:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
             <Label text="Discount amount:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
             <Label text="Total before tax:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
             <Label text="Tax amount 3%:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
