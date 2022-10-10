@@ -10,7 +10,7 @@
     </parent>
     <groupId>ph.parcs</groupId>
     <artifactId>rmhometiles</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.1</version>
     <name>RM HomeTiles</name>
     <description>Sales and Inventory System</description>
 
