@@ -22,12 +22,15 @@ import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.ui.scene.SceneManager;
 import ph.parcs.rmhometiles.util.DateUtility;
 import ph.parcs.rmhometiles.util.Global;
+import ph.parcs.rmhometiles.util.ThreadUtil;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Controller
 public class ManageInvoiceTableController extends EntityTableController<Invoice> {
@@ -94,14 +97,16 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
 
     @FXML
     public void onDateRangeSelect() {
-        new Thread(() -> {
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        executorService.submit(() -> {
             LocalDateTime[] dateTimeRange = DateUtility.findDate(cbDateRange.getValue());
             List<Invoice> invoices = invoiceService.findAllInvoiceByDate(dateTimeRange);
             Platform.runLater(() -> {
                 tvItem.getItems().setAll(invoices);
                 tvItem.refresh();
             });
-        }).start();
+        });
+        ThreadUtil.shutdownAndAwaitTermination(executorService);
     }
 
     @FXML

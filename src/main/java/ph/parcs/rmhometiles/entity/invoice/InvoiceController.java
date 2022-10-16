@@ -24,6 +24,7 @@ import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.entity.payment.Payment;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.util.Global;
+import ph.parcs.rmhometiles.util.ThreadUtil;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
 import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.util.converter.DateConverter;
@@ -36,6 +37,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Controller
 public class InvoiceController {
@@ -316,31 +319,39 @@ public class InvoiceController {
         }
 
         askSaveAlert.setConfirmListener(() -> {
-            productService.saveInvoiceProduct(tvOrders.getItems());
-            invoiceService.saveOrderItem(invoice, tvOrders.getItems());
 
-            String paymentType = invoiceService.getPaymentType(rbCashType.isSelected(), rbGCashType.isSelected());
-            LocalDateTime createdAt = dpDate.getValue().atTime(LocalTime.now());
-            Payment payment = new Payment();
-            payment.setInvoice(invoice);
-            payment.setCreatedAt(createdAt);
-            payment.setPaymentType(paymentType);
-            payment.setPaymentAmount(moneyService.parseMoney(tfCashPay.getText()));
+            ExecutorService executorService = Executors.newCachedThreadPool();
+            executorService.submit(() -> {
+                productService.saveInvoiceProduct(tvOrders.getItems());
+                invoiceService.saveOrderItem(invoice, tvOrders.getItems());
 
-            invoice.setCreatedAt(createdAt);
-            invoice.setOrderItems(new HashSet<>(tvOrders.getItems()));
-            invoice.setName("INV-" + dpDate.getValue() + "-ID" + 1);
-            invoice.setCustomer(customerController.getCustomer());
-            invoice.setRemarks(txaRemarks.getText());
-            invoice.addPayments(payment);
+                String paymentType = invoiceService.getPaymentType(rbCashType.isSelected(), rbGCashType.isSelected());
+                LocalDateTime createdAt = dpDate.getValue().atTime(LocalTime.now());
+                Payment payment = new Payment();
+                payment.setInvoice(invoice);
+                payment.setCreatedAt(createdAt);
+                payment.setPaymentType(paymentType);
+                payment.setPaymentAmount(moneyService.parseMoney(tfCashPay.getText()));
 
-            Invoice savedInvoice = invoiceService.saveEntity(invoice);
+                invoice.setCreatedAt(createdAt);
+                invoice.setOrderItems(new HashSet<>(tvOrders.getItems()));
+                invoice.setName("INV-" + dpDate.getValue() + "-ID" + 1);
+                invoice.setCustomer(customerController.getCustomer());
+                invoice.setRemarks(txaRemarks.getText());
+                invoice.addPayments(payment);
 
-            if (savedInvoice != null) {
-                SweetAlert successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
-                successAlert.setContentMessage(Global.Message.SAVED).show(spMain);
-                clearAllInvoice();
-            }
+                Invoice savedInvoice = invoiceService.saveEntity(invoice);
+
+                Platform.runLater(() -> {
+                    if (savedInvoice != null) {
+                        SweetAlert successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
+                        successAlert.setContentMessage(Global.Message.SAVED).show(spMain);
+                        clearAllInvoice();
+                    }
+                });
+            });
+            ThreadUtil.shutdownAndAwaitTermination(executorService);
+
         }).show(spMain);
     }
 

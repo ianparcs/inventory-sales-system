@@ -23,11 +23,14 @@ import ph.parcs.rmhometiles.entity.supplier.SupplierService;
 import ph.parcs.rmhometiles.file.FileService;
 import ph.parcs.rmhometiles.file.ImageProduct;
 import ph.parcs.rmhometiles.util.FileUtils;
+import ph.parcs.rmhometiles.util.ThreadUtil;
 import ph.parcs.rmhometiles.util.converter.MoneyConverter;
 
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Controller
 public class ProductEditController extends EditItemController<Product> {
@@ -217,18 +220,21 @@ public class ProductEditController extends EditItemController<Product> {
         if (product.getId() == 0) product.setCreatedAt(LocalDateTime.now());
         else product.setUpdatedAt(LocalDateTime.now());
 
-        btnSave.setOnAction(a -> new Thread(() -> {
-            deleteFile(product);
-            Product savedItem = baseService.saveEntity(createEntity(product));
-            Platform.runLater(() -> {
-                closeDialog();
-                if (savedItem != null) {
-                    itemListener.onSavedSuccess(savedItem);
-                } else {
-                    itemListener.onSaveFailed(null);
-                }
-            });
-        }).start());
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.execute(() ->
+                btnSave.setOnAction(a -> {
+                    deleteFile(product);
+                    Product savedItem = baseService.saveEntity(createEntity(product));
+                    Platform.runLater(() -> {
+                        closeDialog();
+                        if (savedItem != null) {
+                            itemListener.onSavedSuccess(savedItem);
+                        } else {
+                            itemListener.onSaveFailed(null);
+                        }
+                    });
+                }));
+        ThreadUtil.shutdownAndAwaitTermination(executorService);
     }
 
     private void deleteFile(Product product) {
