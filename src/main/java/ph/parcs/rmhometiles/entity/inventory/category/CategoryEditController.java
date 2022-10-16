@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import ph.parcs.rmhometiles.entity.inventory.item.EditItemController;
 
+import java.time.LocalDateTime;
+
 @Controller
 public class CategoryEditController extends EditItemController<Category> {
 
@@ -14,10 +16,14 @@ public class CategoryEditController extends EditItemController<Category> {
     private JFXTextField tfName;
 
     @Override
-    protected Category unbindFields(Integer id) {
+    protected Category createEntity(Integer id) {
         Category category = new Category();
         category.setName(tfName.getText());
         category.setId(id);
+
+        if (id == 0) category.setCreatedAt(LocalDateTime.now());
+        else category.setUpdatedAt(LocalDateTime.now());
+
         return category;
     }
 
