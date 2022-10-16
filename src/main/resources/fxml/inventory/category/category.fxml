@@ -25,20 +25,14 @@
         </HBox>
 
         <HBox spacing="10.0" styleClass="tile-default" GridPane.columnIndex="0" GridPane.rowIndex="1">
-
-            <JFXButton styleClass="primary-button">
+            <JFXButton onAction="#showEditItemDialog" styleClass="primary-button" text="New Category">
                 <graphic>
-                    <FontAwesomeIconView fill="WHITE" glyphName="SEARCH_PLUS" size="18"/>
+                    <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="18"/>
                 </graphic>
             </JFXButton>
 
             <JFXTextField fx:id="tfSearchItem" labelFloat="true" onKeyTyped="#searchItem" promptText="Search Category"
                           styleClass="search-field" HBox.hgrow="ALWAYS"/>
-            <JFXButton onAction="#showEditItemDialog" styleClass="primary-button" text="Add New">
-                <graphic>
-                    <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="18"/>
-                </graphic>
-            </JFXButton>
         </HBox>
 
         <HBox alignment="CENTER" spacing="10" styleClass="tile-default" GridPane.columnIndex="1" GridPane.rowIndex="1">

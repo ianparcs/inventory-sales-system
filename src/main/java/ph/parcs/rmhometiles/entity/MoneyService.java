@@ -67,8 +67,8 @@ public class MoneyService {
 
         for (SalesReport salesReport : salesReportsToday) {
             tax = tax.plus(salesReport.getTax() != null ? salesReport.getTax() : parseMoney("0.00"));
-            cost = cost.plus(salesReport.getTax() != null ? salesReport.getCost() : parseMoney("0.00"));
-            total = total.plus(salesReport.getTax() != null ? salesReport.getTotal() : parseMoney("0.00"));
+            cost = cost.plus(salesReport.getCost() != null ? salesReport.getCost() : parseMoney("0.00"));
+            total = total.plus(salesReport.getTotal() != null ? salesReport.getTotal() : parseMoney("0.00"));
         }
         Money profit = total.minus(cost);
 
@@ -77,10 +77,6 @@ public class MoneyService {
         moneyMap.put(Global.Sales.TOTAL, total.toString().replace("PHP","₱"));
         moneyMap.put(Global.Sales.PROFIT, profit.toString().replace("PHP","₱"));
         return moneyMap;
-    }
-
-    public Money computeOrderItemAmount() {
-        return parseMoney("0.00");
     }
 
     public Money parseMoney(String text) {

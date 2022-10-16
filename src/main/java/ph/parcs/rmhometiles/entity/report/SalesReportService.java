@@ -15,7 +15,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
@@ -43,8 +45,10 @@ public class SalesReportService {
         Map<LocalDate, List<Invoice>> groupedByDate = invoices.stream()
                 .collect(Collectors.groupingBy(Invoice::getCreatedLocalDate));
 
+
         for (var entry : groupedByDate.entrySet()) {
             List<Invoice> groupInvoice = entry.getValue();
+
             SalesReport salesReport = new SalesReport();
             Money tax = moneyService.parseMoney("0.00");
             Money cost = moneyService.parseMoney("0.00");

@@ -21,8 +21,8 @@
         <HBox fillHeight="false" maxWidth="1.7976931348623157E308" styleClass="tile-info" GridPane.columnIndex="0"
               GridPane.columnSpan="4" GridPane.rowIndex="0">
             <Label styleClass="big-title" text="Sales Report" HBox.hgrow="ALWAYS" maxWidth="1.7976931348623157E308"/>
-            <JFXDatePicker fx:id="dpStartDate" promptText="Start Date" visible="false"/>
-            <JFXDatePicker fx:id="dpEndDate" promptText="End Date" visible="false"/>
+            <JFXDatePicker fx:id="dpStartDate" promptText="Start Date" visible="false" minWidth="100"/>
+            <JFXDatePicker fx:id="dpEndDate" promptText="End Date" visible="false" minWidth="100"/>
             <JFXComboBox fx:id="cbDateRange" onAction="#onDateRangeSelect">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
