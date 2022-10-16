@@ -70,12 +70,8 @@
                              GridPane.columnIndex="2" GridPane.rowIndex="1"/>
 
 
-                <JFXTextField fx:id="tfUnitSold" labelFloat="true" promptText="Unit Sold"
-                              GridPane.columnIndex="0" GridPane.rowIndex="2">
-                    <validators>
-                        <NumberValidator message="Please enter number only"/>
-                    </validators>
-                </JFXTextField>
+                <JFXComboBox fx:id="cbSupplier" onAction="#selectSupplier" labelFloat="true" promptText="Supplier"
+                             GridPane.columnIndex="0" GridPane.rowIndex="2"/>
 
                 <JFXTextField fx:id="tfCost" labelFloat="true" promptText="Cost"
                               GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -90,11 +86,8 @@
                 </JFXTextField>
 
 
-                <JFXComboBox fx:id="cbSupplier" onAction="#selectSupplier" labelFloat="true" promptText="Supplier"
-                             GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-
                 <JFXTextField fx:id="tfImage" labelFloat="true" promptText="Choose Image" onMouseClicked="#selectImage"
-                              GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.columnSpan="2" editable="false"/>
+                              GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="3" editable="false"/>
             </GridPane>
         </body>
 

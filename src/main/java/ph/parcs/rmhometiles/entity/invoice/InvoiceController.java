@@ -325,7 +325,7 @@ public class InvoiceController {
             payment.setInvoice(invoice);
             payment.setCreatedAt(createdAt);
             payment.setPaymentType(paymentType);
-            payment.setPaymentAmount(invoice.getBalance());
+            payment.setPaymentAmount(moneyService.parseMoney(tfCashPay.getText()));
 
             invoice.setCreatedAt(createdAt);
             invoice.setOrderItems(new HashSet<>(tvOrders.getItems()));
