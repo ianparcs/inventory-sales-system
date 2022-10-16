@@ -10,6 +10,8 @@ import javafx.scene.layout.StackPane;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.ItemListener;
 
+import java.time.LocalDateTime;
+
 @Controller
 public abstract class EditItemController<T extends BaseEntity> {
 
@@ -46,13 +48,16 @@ public abstract class EditItemController<T extends BaseEntity> {
         tf.getValidators().get(0).setMessage("No special characters. Maximum of two decimal digits");
     }
 
-    public void onEditItem(ItemListener<T> itemListener, final T item) {
+    public void onEditItem(ItemListener<T> itemListener, T item) {
         setDialogTitle(item);
         bindFields(item);
 
+        if (item.getId() == 0) item.setCreatedAt(LocalDateTime.now());
+        else item.setUpdatedAt(LocalDateTime.now());
+
         btnSave.setOnAction(actionEvent -> {
             closeDialog();
-            T savedItem = baseService.saveEntity(createEntity(item.getId()));
+            T savedItem = baseService.saveEntity(createEntity(item));
             if (savedItem != null) {
                 itemListener.onSavedSuccess(savedItem);
             } else {
@@ -75,7 +80,7 @@ public abstract class EditItemController<T extends BaseEntity> {
         lblTitle.setText(title + " " + item.getClass().getSimpleName());
     }
 
-    protected abstract T createEntity(Integer id);
+    protected abstract T createEntity(T item);
 
     protected abstract void bindFields(T item);
 

@@ -16,11 +16,9 @@ public class ManageInvoiceEditController extends EditItemController<Invoice> {
     private JFXTextField tfName;
 
     @Override
-    protected Invoice createEntity(Integer id) {
-        Invoice category = new Invoice();
-        category.setName(tfName.getText());
-        category.setId(id);
-        return category;
+    protected Invoice createEntity(Invoice invoice) {
+        invoice.setName(tfName.getText());
+        return invoice;
     }
 
     @Override

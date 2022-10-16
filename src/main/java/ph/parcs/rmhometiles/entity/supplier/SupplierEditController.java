@@ -18,14 +18,10 @@ public class SupplierEditController extends EditItemController<Supplier> {
     private JFXTextField tfName;
 
     @Override
-    protected Supplier createEntity(Integer id) {
-        Supplier supplier = new Supplier();
-        supplier.setId(id);
-
+    protected Supplier createEntity(Supplier supplier) {
         if (!StringUtils.isEmpty(tfName.getText())) supplier.setName(tfName.getText());
         if (!StringUtils.isEmpty(tfContact.getText())) supplier.setContact(tfContact.getText());
         if (!StringUtils.isEmpty(tfAddress.getText())) supplier.setAddress(tfAddress.getText());
-
         return supplier;
     }
 
