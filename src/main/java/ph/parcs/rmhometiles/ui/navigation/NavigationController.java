@@ -61,15 +61,14 @@ public class NavigationController {
             }
         }
 
-        new Thread(() -> states.forEach((key, value) -> value.setOnAction(actionEvent -> {
-            Platform.runLater(() -> {
-                Parent content = sceneManager.getContent(key);
-                content.setCache(true);
-                content.setCacheHint(CacheHint.QUALITY);
-                homeController.setContent(content);
-            });
-        }))).start();
+        Platform.runLater(() -> states.forEach((key, value) -> value.setOnAction(actionEvent -> {
+            Parent content = sceneManager.getContent(key);
+            content.setCache(true);
+            content.setCacheHint(CacheHint.QUALITY);
+            homeController.setContent(content);
+        })));
     }
+
 
     @Autowired
     public void setUserService(UserService userService) {

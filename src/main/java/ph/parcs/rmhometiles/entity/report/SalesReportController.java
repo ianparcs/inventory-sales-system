@@ -15,11 +15,14 @@ import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.entity.MoneyService;
 import ph.parcs.rmhometiles.util.DateUtility;
 import ph.parcs.rmhometiles.util.Global;
+import ph.parcs.rmhometiles.util.ThreadUtil;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Controller
 @Scope("singleton")
@@ -84,7 +87,8 @@ public class SalesReportController {
         String dateSelect = cbDateRange.getValue();
         if (dateSelect == null || dateSelect.equalsIgnoreCase("Custom Date Range")) return;
 
-        new Thread(() -> {
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        executorService.submit(()->{
             List<SalesReport> salesReportsToday = salesReportService.findReports(cbDateRange.getValue());
             Map<Global.Sales, String> moneyMap = moneyService.computeAllMoney(salesReportsToday);
             Platform.runLater(() -> {
@@ -96,7 +100,8 @@ public class SalesReportController {
                 tvSalesReports.getItems().setAll(salesReportsToday);
                 tvSalesReports.refresh();
             });
-        }).start();
+        });
+        ThreadUtil.shutdownAndAwaitTermination(executorService);
     }
 
     @Autowired
