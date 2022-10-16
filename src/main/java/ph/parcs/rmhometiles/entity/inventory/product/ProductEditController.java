@@ -28,6 +28,7 @@ import ph.parcs.rmhometiles.util.FileUtils;
 import ph.parcs.rmhometiles.util.converter.MoneyConverter;
 
 import java.io.File;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 
@@ -156,9 +157,7 @@ public class ProductEditController extends EditItemController<Product> {
     }
 
     @Override
-    protected Product createEntity(Integer id) {
-        Product product = new Product();
-
+    protected Product createEntity(Product product) {
         Stock stock = new Stock();
         stock.setStocks(Integer.valueOf(!tfStock.getText().isEmpty() ? tfStock.getText() : "0"));
 
@@ -172,7 +171,6 @@ public class ProductEditController extends EditItemController<Product> {
         product.setCode(tfCode.getText());
         product.setName(tfName.getText());
         product.setStock(stock);
-        product.setId(id);
 
         if (!StringUtils.isEmpty(tfImage.getText())) {
             ImageProduct imageProduct = new ImageProduct();
@@ -219,6 +217,9 @@ public class ProductEditController extends EditItemController<Product> {
         setDialogTitle(product);
         bindFields(product);
 
+        if (product.getId() == 0) product.setCreatedAt(LocalDateTime.now());
+        else product.setUpdatedAt(LocalDateTime.now());
+
         btnSave.setOnAction(a -> {
             Service<Void> service = new Service<>() {
                 @Override
@@ -228,7 +229,7 @@ public class ProductEditController extends EditItemController<Product> {
                         protected Void call() throws Exception {
                             deleteFile(product);
 
-                            Product savedItem = baseService.saveEntity(createEntity(product.getId()));
+                            Product savedItem = baseService.saveEntity(createEntity(product));
                             CountDownLatch latch = new CountDownLatch(1);
 
                             Platform.runLater(() -> {
