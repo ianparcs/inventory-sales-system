@@ -14,6 +14,7 @@ import ph.parcs.rmhometiles.util.Global;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -156,6 +157,11 @@ public class Invoice extends BaseEntity {
             cost = cost.plus(orderItem.getProduct().getCost().multipliedBy(orderItem.getQuantity()));
         }
         return cost;
+    }
+
+    @Override
+    public LocalDateTime getCreatedAt() {
+        return createdAt.get();
     }
 
     @Transient

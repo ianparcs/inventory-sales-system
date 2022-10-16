@@ -14,7 +14,7 @@ public class StockUnitEditController extends EditItemController<StockUnit> {
     private JFXTextField tfName;
 
     @Override
-    protected StockUnit unbindFields(Integer id) {
+    protected StockUnit createEntity(Integer id) {
         StockUnit stockUnit = new StockUnit();
         stockUnit.setName(tfName.getText());
         stockUnit.setId(id);

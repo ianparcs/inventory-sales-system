@@ -18,7 +18,7 @@ public class CustomerEditController extends EditItemController<Customer> {
     private JFXTextField tfName;
 
     @Override
-    protected Customer unbindFields(Integer id) {
+    protected Customer createEntity(Integer id) {
         Customer customer = new Customer();
         customer.setId(id);
 

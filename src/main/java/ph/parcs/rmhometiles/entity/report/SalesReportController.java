@@ -81,7 +81,8 @@ public class SalesReportController {
     }
 
     private void displaySalesReport() {
-        if (cbDateRange.getValue().equalsIgnoreCase("Custom Date Range")) return;
+        String dateSelect = cbDateRange.getValue();
+        if (dateSelect == null || dateSelect.equalsIgnoreCase("Custom Date Range")) return;
 
         new Thread(() -> {
             List<SalesReport> salesReportsToday = salesReportService.findReports(cbDateRange.getValue());

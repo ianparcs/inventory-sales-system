@@ -8,6 +8,8 @@ import org.joda.money.Money;
 import ph.parcs.rmhometiles.entity.customer.Customer;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 
+import java.time.LocalDateTime;
+
 public class SalesReport extends BaseEntity {
 
     private final ObjectProperty<Money> totalAmount = new SimpleObjectProperty<>();
@@ -15,6 +17,11 @@ public class SalesReport extends BaseEntity {
     private final ObjectProperty<Money> total = new SimpleObjectProperty<>();
     private final ObjectProperty<Money> cost = new SimpleObjectProperty<>();
     private final ObjectProperty<Money> tax = new SimpleObjectProperty<>();
+
+    @Override
+    public LocalDateTime getCreatedAt() {
+        return createdAt.get();
+    }
 
     public Money getSubtotal() {
         return subtotal.get();

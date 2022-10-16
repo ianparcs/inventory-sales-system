@@ -18,7 +18,7 @@ public class SupplierEditController extends EditItemController<Supplier> {
     private JFXTextField tfName;
 
     @Override
-    protected Supplier unbindFields(Integer id) {
+    protected Supplier createEntity(Integer id) {
         Supplier supplier = new Supplier();
         supplier.setId(id);
 

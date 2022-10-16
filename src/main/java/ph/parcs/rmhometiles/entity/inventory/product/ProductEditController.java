@@ -156,7 +156,7 @@ public class ProductEditController extends EditItemController<Product> {
     }
 
     @Override
-    protected Product unbindFields(Integer id) {
+    protected Product createEntity(Integer id) {
         Product product = new Product();
 
         Stock stock = new Stock();
@@ -228,7 +228,7 @@ public class ProductEditController extends EditItemController<Product> {
                         protected Void call() throws Exception {
                             deleteFile(product);
 
-                            Product savedItem = baseService.saveEntity(unbindFields(product.getId()));
+                            Product savedItem = baseService.saveEntity(createEntity(product.getId()));
                             CountDownLatch latch = new CountDownLatch(1);
 
                             Platform.runLater(() -> {

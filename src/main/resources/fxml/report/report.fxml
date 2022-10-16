@@ -23,7 +23,7 @@
             <Label styleClass="big-title" text="Sales Report" HBox.hgrow="ALWAYS" maxWidth="1.7976931348623157E308"/>
             <JFXDatePicker fx:id="dpStartDate" promptText="Start Date" visible="false" minWidth="100"/>
             <JFXDatePicker fx:id="dpEndDate" promptText="End Date" visible="false" minWidth="100"/>
-            <JFXComboBox fx:id="cbDateRange" onAction="#onDateRangeSelect">
+            <JFXComboBox fx:id="cbDateRange" onAction="#onDateRangeSelect" promptText="Select Date">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="Today"/>
@@ -38,9 +38,6 @@
                         <String fx:value="Custom Date Range"/>
                     </FXCollections>
                 </items>
-                <value>
-                    <String fx:value="Today"/>
-                </value>
             </JFXComboBox>
         </HBox>
 
