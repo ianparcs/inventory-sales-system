@@ -11,11 +11,14 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.StageInitializer;
+import ph.parcs.rmhometiles.entity.MoneyService;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.entity.payment.Payment;
@@ -27,6 +30,7 @@ import java.time.format.DateTimeFormatter;
 
 @Controller
 public class ViewInvoiceController {
+
 
     @FXML
     private TableColumn<Payment, String> tcPaymentPaidDate;
@@ -41,6 +45,12 @@ public class ViewInvoiceController {
     @FXML
     private TableView<Payment> tvPayments;
     @FXML
+    private HBox hbPaymentSelectContainer;
+    @FXML
+    private HBox hbPaymentSubmitContainer;
+    @FXML
+    private GridPane gpPaymentControl;
+    @FXML
     private JFXTextField tfCashPay;
     @FXML
     private Label lblTotalAmount;
@@ -54,12 +64,14 @@ public class ViewInvoiceController {
     private StackPane spMain;
 
     private PaymentService paymentService;
+    private InvoiceService invoiceService;
+    private MoneyService moneyService;
     private Invoice invoice;
 
     private StageInitializer stageInitializer;
 
 
-    private void displayDetails(Invoice invoice) {
+    private void displayDetails() {
         if (invoice != null) {
             DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd/MM/yyyy h:mm a");
 
@@ -78,19 +90,27 @@ public class ViewInvoiceController {
                 return Bindings.createObjectBinding(() -> paidDate.format(myFormatObj));
             });
 
-            lblBalance.textProperty().bind(invoice.balanceProperty().asString());
             lblTotalAmount.setText("₱" + invoice.getTotalAmount().getAmount());
             lblCustomer.setText("Customer: " + invoice.getCustomer().getName());
             lblInvoiceDate.setText("Invoice Date: " + invoice.getCreatedAt().format(myFormatObj));
+            lblBalance.textProperty().bind(Bindings.createObjectBinding(this::hidePaymentContainer, invoice.balanceProperty()));
 
             tvPayments.setItems(FXCollections.observableArrayList(invoice.getPayments()));
             tvOrderItems.setItems(FXCollections.observableArrayList(invoice.getOrderItems()));
         }
     }
 
+    private String hidePaymentContainer() {
+        if (invoice.getBalance() == null || invoice.getBalance().isZero()) {
+            gpPaymentControl.getChildren().remove(hbPaymentSelectContainer);
+            gpPaymentControl.getChildren().remove(hbPaymentSubmitContainer);
+        }
+        return invoice.getBalance().toString();
+    }
+
     public void initData(Invoice invoice) {
         this.invoice = invoice;
-        displayDetails(invoice);
+        displayDetails();
     }
 
     @FXML
@@ -110,12 +130,35 @@ public class ViewInvoiceController {
     @FXML
     public void onClickedAddPayment() {
         String amount = tfCashPay.getText();
-        String paymentType = cbPaymentType.getValue();
+        String paymentType = cbPaymentType.getValue().toUpperCase();
 
-        Payment payment = paymentService.createPayment(invoice, amount, paymentType);
+        new Thread(() -> {
+            Money balance = moneyService.computeBalance(invoice.getBalance().abs(), amount);
+            Payment payment = paymentService.createPayment(amount, paymentType);
 
-        tvPayments.getItems().add(payment);
-        tvPayments.refresh();
+            payment.setInvoice(invoice);
+
+            Platform.runLater(() -> {
+                invoice.addPayments(payment);
+                invoice.setBalance(balance);
+                if (balance.isZero()) invoice.setStatus(Payment.Status.PAID.name());
+
+                invoiceService.saveEntity(invoice);
+
+                tvPayments.getItems().add(payment);
+                tvPayments.refresh();
+            });
+        }).start();
+    }
+
+    @Autowired
+    public void setInvoiceService(InvoiceService invoiceService) {
+        this.invoiceService = invoiceService;
+    }
+
+    @Autowired
+    public void setMoneyService(MoneyService moneyService) {
+        this.moneyService = moneyService;
     }
 
     @Autowired

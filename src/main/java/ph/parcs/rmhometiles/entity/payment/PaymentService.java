@@ -14,18 +14,13 @@ public class PaymentService {
     private PaymentRepository paymentRepository;
     private MoneyService moneyService;
 
-    public Payment createPayment(Invoice invoice, String amount, String paymentType) {
-        Money balance = moneyService.computeMoneyChange(invoice.getBalance(), amount);
-        invoice.setBalance(balance);
-
+    public Payment createPayment(String amount, String paymentType) {
         Money paymentAmount = moneyService.parseMoney(amount);
         Payment payment = new Payment();
-        payment.setInvoice(invoice);
         payment.setPaymentType(paymentType);
         payment.setPaymentAmount(paymentAmount);
         payment.setCreatedAt(LocalDateTime.now());
-
-        return paymentRepository.save(payment);
+        return payment;
     }
 
     @Autowired

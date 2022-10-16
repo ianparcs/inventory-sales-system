@@ -43,8 +43,6 @@ public class ProductEditController extends EditItemController<Product> {
     @FXML
     private JFXTextField tfDescription;
     @FXML
-    private JFXTextField tfUnitSold;
-    @FXML
     private JFXTextField tfStock;
     @FXML
     private JFXTextField tfImage;
@@ -66,7 +64,6 @@ public class ProductEditController extends EditItemController<Product> {
     public void initialize() {
         super.initialize();
         validateField(tfDescription);
-        validateField(tfUnitSold);
         validateField(tfStock);
         validateField(tfName);
         validateField(tfCode);
@@ -119,7 +116,6 @@ public class ProductEditController extends EditItemController<Product> {
         cbCategory.getSelectionModel().clearSelection();
         cbSupplier.getSelectionModel().clearSelection();
         tfDescription.clear();
-        tfUnitSold.clear();
         tfStock.clear();
         tfImage.clear();
         tfPrice.clear();
@@ -131,7 +127,6 @@ public class ProductEditController extends EditItemController<Product> {
 
     private void clearValidators() {
         tfDescription.resetValidation();
-        tfUnitSold.resetValidation();
         tfStock.resetValidation();
         tfName.resetValidation();
         tfPrice.resetValidation();
@@ -148,7 +143,6 @@ public class ProductEditController extends EditItemController<Product> {
             tfPrice.setText(product.getPrice().getAmount().toString());
             tfDescription.setText(product.getDescription());
             tfStock.setText(product.getStock().getStocks().toString());
-            tfUnitSold.setText(product.getStock().getUnitSold().toString());
 
             if (product.getImageProduct() != null) {
                 tfImage.setText(product.getImageProduct().getPath());
@@ -166,7 +160,6 @@ public class ProductEditController extends EditItemController<Product> {
         Product product = new Product();
 
         Stock stock = new Stock();
-        stock.setUnitSold(Integer.valueOf(!tfUnitSold.getText().isEmpty() ? tfUnitSold.getText() : "0"));
         stock.setStocks(Integer.valueOf(!tfStock.getText().isEmpty() ? tfStock.getText() : "0"));
 
         if (!cbStockUnit.getSelectionModel().isEmpty()) stock.setStockUnit(cbStockUnit.getValue());

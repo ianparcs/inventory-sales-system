@@ -9,8 +9,8 @@
 .clear-icon {
     -fx-fill: WHITE;
     -fx-alignment: center;
-    -glyph-name: "PAINT_BRUSH";
-    -glyph-size: 18px;
+    -glyph-name: "TIMES_CIRCLE";
+    -glyph-size: 20px;
 }
 
 .pencil-icon {

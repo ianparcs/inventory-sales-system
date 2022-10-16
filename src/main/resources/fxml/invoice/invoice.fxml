@@ -13,17 +13,17 @@
            xmlns="http://javafx.com/javafx/11.0.14-internal" fx:controller="ph.parcs.rmhometiles.entity.invoice.InvoiceController">
 
     <fx:include source="../customer/edit-customer.fxml"/>
-    <GridPane hgap="12.0" maxWidth="1.7976931348623157E308" styleClass="background" vgap="7.0">
+    <GridPane hgap="12.0" maxWidth="1.7976931348623157E308" maxHeight="1.7976931348623157E308" styleClass="background" vgap="7.0">
         <columnConstraints>
-            <ColumnConstraints hgrow="NEVER"/>
-            <ColumnConstraints hgrow="NEVER"/>
+            <ColumnConstraints hgrow="ALWAYS" percentWidth="75"/>
+            <ColumnConstraints hgrow="ALWAYS" percentWidth="25"/>
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints/>
-            <RowConstraints/>
-            <RowConstraints/>
-            <RowConstraints/>
-            <RowConstraints/>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints vgrow="ALWAYS"/>
         </rowConstraints>
 
         <VBox spacing="7" styleClass="transparent" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS"
@@ -32,7 +32,7 @@
                 <JFXComboBox fx:id="cbProducts" editable="true" labelFloat="true" maxWidth="1.7976931348623157E308"
                              onAction="#onProductItemClick" promptText="Search Order" styleClass="search-field"
                              HBox.hgrow="ALWAYS"/>
-                <JFXDatePicker fx:id="dpDate" promptText="Invoice Date" HBox.hgrow="ALWAYS"/>
+                <JFXDatePicker fx:id="dpDate" promptText="Invoice Date"  minWidth="100" maxWidth="1.7976931348623157E308"/>
                 <JFXButton onAction="#clearAllInvoice" styleClass="primary-button">
                     <graphic>
                         <FontAwesomeIconView styleClass="clear-icon"/>
@@ -81,9 +81,6 @@
 
         <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="tile-info" vgap="8"
                   GridPane.columnIndex="1" GridPane.rowIndex="3">
-            <!--
-                        <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="small-title"
-                               text="Invoice Summary" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0"/>-->
             <Label text="Sales person:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
             <Label text="Amount:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
             <Label text="Discount All:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
