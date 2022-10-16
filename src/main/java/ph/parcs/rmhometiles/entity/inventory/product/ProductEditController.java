@@ -4,8 +4,6 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Service;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
 import javafx.util.StringConverter;
@@ -30,7 +28,6 @@ import ph.parcs.rmhometiles.util.converter.MoneyConverter;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.Optional;
-import java.util.concurrent.CountDownLatch;
 
 @Controller
 public class ProductEditController extends EditItemController<Product> {
@@ -220,36 +217,18 @@ public class ProductEditController extends EditItemController<Product> {
         if (product.getId() == 0) product.setCreatedAt(LocalDateTime.now());
         else product.setUpdatedAt(LocalDateTime.now());
 
-        btnSave.setOnAction(a -> {
-            Service<Void> service = new Service<>() {
-                @Override
-                protected Task<Void> createTask() {
-                    return new Task<>() {
-                        @Override
-                        protected Void call() throws Exception {
-                            deleteFile(product);
-
-                            Product savedItem = baseService.saveEntity(createEntity(product));
-                            CountDownLatch latch = new CountDownLatch(1);
-
-                            Platform.runLater(() -> {
-                                closeDialog();
-                                if (savedItem != null) {
-                                    itemListener.onSavedSuccess(savedItem);
-                                } else {
-                                    itemListener.onSaveFailed(null);
-                                }
-                                latch.countDown();
-                            });
-                            latch.await();
-                            return null;
-                        }
-                    };
+        btnSave.setOnAction(a -> new Thread(() -> {
+            deleteFile(product);
+            Product savedItem = baseService.saveEntity(createEntity(product));
+            Platform.runLater(() -> {
+                closeDialog();
+                if (savedItem != null) {
+                    itemListener.onSavedSuccess(savedItem);
+                } else {
+                    itemListener.onSaveFailed(null);
                 }
-            };
-            service.start();
-        });
-
+            });
+        }).start());
     }
 
     private void deleteFile(Product product) {
