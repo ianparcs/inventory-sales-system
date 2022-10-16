@@ -133,6 +133,8 @@ public class Invoice extends BaseEntity {
         this.status.set(status);
     }
 
+    @Column(name = "change", precision = 8, scale = 2)
+    @Type(type = Global.JADIRA_PACKAGE, parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "PHP")})
     public Money getChange() {
         return change.get();
     }
@@ -151,7 +153,7 @@ public class Invoice extends BaseEntity {
     public Money getItemCosts() {
         Money cost = Money.parse("PHP 0.00");
         for (OrderItem orderItem : orderItems) {
-            cost = cost.plus(orderItem.getProduct().getCost());
+            cost = cost.plus(orderItem.getProduct().getCost().multipliedBy(orderItem.getQuantity()));
         }
         return cost;
     }
