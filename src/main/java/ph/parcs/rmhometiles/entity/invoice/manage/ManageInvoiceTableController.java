@@ -17,18 +17,15 @@ import ph.parcs.rmhometiles.entity.inventory.item.EntityTableController;
 import ph.parcs.rmhometiles.entity.invoice.Invoice;
 import ph.parcs.rmhometiles.entity.invoice.InvoiceService;
 import ph.parcs.rmhometiles.entity.invoice.ViewInvoiceController;
-import ph.parcs.rmhometiles.entity.report.SalesReport;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.ui.scene.SceneManager;
 import ph.parcs.rmhometiles.util.DateUtility;
-import ph.parcs.rmhometiles.util.Global;
 import ph.parcs.rmhometiles.util.ThreadUtil;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 

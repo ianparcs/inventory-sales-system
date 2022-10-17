@@ -1,7 +1,6 @@
 package ph.parcs.rmhometiles.util;
 
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public final class ThreadUtil {

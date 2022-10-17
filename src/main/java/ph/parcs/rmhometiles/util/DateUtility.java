@@ -2,13 +2,10 @@ package ph.parcs.rmhometiles.util;
 
 import org.springframework.util.StringUtils;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.TemporalAdjusters;
 import java.util.HashMap;
-
-import static java.time.temporal.ChronoUnit.DAYS;
 
 public class DateUtility {
 
@@ -53,7 +50,7 @@ public class DateUtility {
 
     private static LocalDateTime[] createThisWeekDate() {
         LocalDateTime nowStart = LocalDateTime.now().with(LocalTime.MIN);
-        LocalDateTime nowEnd =  LocalDateTime.now().with(LocalTime.MAX);
+        LocalDateTime nowEnd = LocalDateTime.now().with(LocalTime.MAX);
         LocalDateTime weekStart = nowStart.minusDays(nowStart.getDayOfWeek().getValue() - 1);
         return createLocalDateTime(weekStart, nowEnd);
     }

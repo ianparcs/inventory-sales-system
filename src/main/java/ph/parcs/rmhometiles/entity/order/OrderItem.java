@@ -1,10 +1,8 @@
 package ph.parcs.rmhometiles.entity.order;
 
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 import org.hibernate.annotations.Type;
 import org.joda.money.Money;
-import ph.parcs.rmhometiles.entity.MoneyService;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.invoice.Invoice;
@@ -29,8 +27,8 @@ public class OrderItem extends BaseEntity {
         this.product.set(product);
         amount.set(Money.parse("PHP 0.00"));
         quantity.addListener((observableValue, number, t1) -> amount.set(product.priceProperty().get().multipliedBy(quantity.get())));
-   //     discount.addListener((observableValue, number, t1) -> discount.set(amount.get())));
-    //    amount.bind(Bindings.createObjectBinding(this::createAmount, quantity,discountPercent));
+        //     discount.addListener((observableValue, number, t1) -> discount.set(amount.get())));
+        //    amount.bind(Bindings.createObjectBinding(this::createAmount, quantity,discountPercent));
 
     }
 

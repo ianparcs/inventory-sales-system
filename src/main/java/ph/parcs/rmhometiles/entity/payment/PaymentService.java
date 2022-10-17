@@ -4,7 +4,6 @@ import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ph.parcs.rmhometiles.entity.MoneyService;
-import ph.parcs.rmhometiles.entity.invoice.Invoice;
 
 import java.time.LocalDateTime;
 

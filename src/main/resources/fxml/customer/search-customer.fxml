@@ -3,10 +3,11 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" spacing="7" maxHeight="1.7976931348623157E308"
-      maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/10.0.2-internal"
+<VBox xmlns:fx="http://javafx.com/fxml/1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+      spacing="7" xmlns="http://javafx.com/javafx/11.0.14-internal"
       fx:controller="ph.parcs.rmhometiles.entity.customer.CustomerController">
     <HBox maxWidth="1.7976931348623157E308" spacing="5.0" styleClass="tile-default">
         <StackPane>
@@ -24,9 +25,13 @@
             </JFXButton>
         </StackPane>
 
-        <JFXComboBox fx:id="cbCustomer" editable="true" labelFloat="true" maxHeight="1.7976931348623157E308"
-                     maxWidth="1.7976931348623157E308" onAction="#fillUpCustomerDetails"
-                     promptText="Search Customer" styleClass="search-field" HBox.hgrow="ALWAYS"/>
+        <JFXComboBox fx:id="cbCustomer" editable="true" labelFloat="true"
+                     onAction="#selectCostumer" promptText="Search Customer" styleClass="search-field"
+                     HBox.hgrow="ALWAYS">
+            <HBox.margin>
+                <Insets/>
+            </HBox.margin>
+        </JFXComboBox>
     </HBox>
 
     <GridPane styleClass="tile-info" vgap="10" GridPane.columnIndex="0" GridPane.rowIndex="1">

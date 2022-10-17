@@ -10,19 +10,21 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.layout.*?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain" stylesheets="@../../css/invoice.css"
-           xmlns="http://javafx.com/javafx/11.0.14-internal" fx:controller="ph.parcs.rmhometiles.entity.invoice.InvoiceController">
+           xmlns="http://javafx.com/javafx/11.0.14-internal"
+           fx:controller="ph.parcs.rmhometiles.entity.invoice.InvoiceController">
 
     <fx:include source="../customer/edit-customer.fxml"/>
-    <GridPane hgap="12.0" maxWidth="1.7976931348623157E308" maxHeight="1.7976931348623157E308" styleClass="background" vgap="7.0">
+    <GridPane hgap="12.0" maxWidth="1.7976931348623157E308" maxHeight="1.7976931348623157E308" styleClass="background"
+              vgap="7.0">
         <columnConstraints>
             <ColumnConstraints hgrow="ALWAYS" percentWidth="75"/>
             <ColumnConstraints hgrow="ALWAYS" percentWidth="25"/>
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
+            <RowConstraints/>
+            <RowConstraints/>
+            <RowConstraints/>
+            <RowConstraints/>
             <RowConstraints vgrow="ALWAYS"/>
         </rowConstraints>
 
@@ -32,7 +34,8 @@
                 <JFXComboBox fx:id="cbProducts" editable="true" labelFloat="true" maxWidth="1.7976931348623157E308"
                              onAction="#onProductItemClick" promptText="Search Order" styleClass="search-field"
                              HBox.hgrow="ALWAYS"/>
-                <JFXDatePicker fx:id="dpDate" promptText="Invoice Date"  minWidth="100" maxWidth="1.7976931348623157E308"/>
+                <JFXDatePicker fx:id="dpDate" promptText="Invoice Date" minWidth="100"
+                               maxWidth="1.7976931348623157E308"/>
                 <JFXButton onAction="#clearAllInvoice" styleClass="primary-button">
                     <graphic>
                         <FontAwesomeIconView styleClass="clear-icon"/>
@@ -54,7 +57,8 @@
                             <PropertyValueFactory property="quantity"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn fx:id="tcDiscountPercent" onEditCommit="#onDiscountPercentEditCommit" reorderable="false"
+                    <TableColumn fx:id="tcDiscountPercent" onEditCommit="#onDiscountPercentEditCommit"
+                                 reorderable="false"
                                  styleClass="quantity-column" text="Disc. %">
                         <cellValueFactory>
                             <PropertyValueFactory property="discountPercent"/>

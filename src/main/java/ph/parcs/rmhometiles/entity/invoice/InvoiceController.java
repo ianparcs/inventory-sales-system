@@ -10,7 +10,6 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import lombok.SneakyThrows;
-import org.hibernate.criterion.Order;
 import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -86,8 +85,6 @@ public class InvoiceController {
     @FXML
     private Label lblDiscountAmount;
     @FXML
-    private Label lblSalesPerson;
-    @FXML
     private StackPane spMain;
     @FXML
     private Label lblTotalAmount;
@@ -96,6 +93,7 @@ public class InvoiceController {
     @FXML
     private Label lblTax;
 
+    @FXML
     private CustomerController customerController;
     private ProductService productService;
     private InvoiceService invoiceService;
@@ -299,7 +297,7 @@ public class InvoiceController {
         }
 
         OrderItem orderItem = new OrderItem(product);
-   //     orderItem.amountProperty().bind(Bindings.createObjectBinding(()-> moneyService.computeOrderItemAmount( ,orderItem.getDiscount()), orderItem.discountPercentProperty(), orderItem.quantityProperty()));
+        //     orderItem.amountProperty().bind(Bindings.createObjectBinding(()-> moneyService.computeOrderItemAmount( ,orderItem.getDiscount()), orderItem.discountPercentProperty(), orderItem.quantityProperty()));
 
         tvOrders.getItems().add(orderItem);
         Platform.runLater(() -> {
@@ -361,6 +359,7 @@ public class InvoiceController {
         }
 
         Customer customer = customerController.getCustomer();
+
         if (customer == null) {
             return Global.Message.ENTER_CUSTOMER;
         }

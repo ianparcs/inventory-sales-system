@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.StackPane?>
-<StackPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="1.7976931348623157E308"
-           maxWidth="1.7976931348623157E308" fx:controller="ph.parcs.rmhometiles.ui.dashboard.DashboardController">
+<StackPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+           xmlns="http://javafx.com/javafx/11.0.14-internal"
+           fx:controller="ph.parcs.rmhometiles.ui.dashboard.DashboardController">
     <Label text="DASHBOARD"/>
+    <GridPane hgap="12.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="background"
+              vgap="7.0">
+        <LineChart>
+            <xAxis>
+                <CategoryAxis side="BOTTOM"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis side="LEFT"/>
+            </yAxis>
+        </LineChart>
+    </GridPane>
+
 </StackPane>

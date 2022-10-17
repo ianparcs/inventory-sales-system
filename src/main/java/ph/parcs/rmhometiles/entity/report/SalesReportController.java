@@ -8,7 +8,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -88,7 +87,7 @@ public class SalesReportController {
         if (dateSelect == null || dateSelect.equalsIgnoreCase("Custom Date Range")) return;
 
         ExecutorService executorService = Executors.newCachedThreadPool();
-        executorService.submit(()->{
+        executorService.submit(() -> {
             List<SalesReport> salesReportsToday = salesReportService.findReports(cbDateRange.getValue());
             Map<Global.Sales, String> moneyMap = moneyService.computeAllMoney(salesReportsToday);
             Platform.runLater(() -> {
