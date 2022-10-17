@@ -1,7 +1,6 @@
 package ph.parcs.rmhometiles.util.converter;
 
 import javafx.util.converter.FloatStringConverter;
-import javafx.util.converter.IntegerStringConverter;
 import org.apache.commons.lang3.StringUtils;
 
 public class FloatConverter extends FloatStringConverter {

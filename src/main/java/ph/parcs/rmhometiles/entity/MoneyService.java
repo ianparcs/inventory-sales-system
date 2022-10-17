@@ -72,10 +72,10 @@ public class MoneyService {
         }
         Money profit = total.minus(cost);
 
-        moneyMap.put(Global.Sales.TAX, tax.toString().replace("PHP","₱"));
-        moneyMap.put(Global.Sales.COST, cost.toString().replace("PHP","₱"));
-        moneyMap.put(Global.Sales.TOTAL, total.toString().replace("PHP","₱"));
-        moneyMap.put(Global.Sales.PROFIT, profit.toString().replace("PHP","₱"));
+        moneyMap.put(Global.Sales.TAX, tax.toString().replace("PHP", "₱"));
+        moneyMap.put(Global.Sales.COST, cost.toString().replace("PHP", "₱"));
+        moneyMap.put(Global.Sales.TOTAL, total.toString().replace("PHP", "₱"));
+        moneyMap.put(Global.Sales.PROFIT, profit.toString().replace("PHP", "₱"));
         return moneyMap;
     }
 

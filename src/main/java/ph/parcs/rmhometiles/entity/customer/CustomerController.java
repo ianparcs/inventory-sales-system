@@ -6,10 +6,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.StackPane;
-import javafx.util.Callback;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -46,11 +43,12 @@ public class CustomerController {
 
     @FXML
     public void initialize() {
-        configureCustomerCombobox();
+        fillCustomerComboboxValues();
     }
 
     @FXML
-    private void fillUpCustomerDetails() {
+    private void selectCostumer() {
+        if (cbCustomer != null && cbCustomer.getValue() != null) customer = cbCustomer.getValue();
         if (customer != null) {
             lblAddress.setText(StringUtils.isEmpty(customer.getAddress()) ? "n/a" : customer.getAddress());
             lblContact.setText(StringUtils.isEmpty(customer.getContact()) ? "n/a" : customer.getContact());
@@ -58,32 +56,16 @@ public class CustomerController {
             btnClearCustomer.setVisible(true);
             btnAddUser.setVisible(false);
         }
-    }
 
-    private void configureCustomerCombobox() {
-        cbCustomer.setCellFactory(new Callback<>() {
-            @Override
-            public ListCell<Customer> call(ListView<Customer> p) {
-                return new ListCell<>() {
-                    @Override
-                    protected void updateItem(Customer item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (item == null || empty) {
-                            setGraphic(null);
-                            setText(null);
-                        } else {
-                            customer = item;
-                            setText(item.getName());
-                        }
-                    }
-                };
-            }
+        Platform.runLater(() -> {
+            //  cbCustomer.valueProperty().set(null);
+            cbCustomer.hide();
+            spMain.requestFocus();
         });
-        cbCustomer.setConverter(new CustomerConverter(cbCustomer.getValue()));
-        fillCustomerComboboxValues();
     }
 
     private void fillCustomerComboboxValues() {
+        cbCustomer.setConverter(new CustomerConverter(cbCustomer.getValue()));
         cbCustomer.getEditor().textProperty().addListener((observable, oldVal, keyTyped) -> showCustomer(keyTyped));
         cbCustomer.focusedProperty().addListener((observableValue, outOfFocus, focus) -> {
             if (focus) showCustomer(Global.STRING_EMPTY);
@@ -95,15 +77,14 @@ public class CustomerController {
         cbCustomer.show();
         Platform.runLater(() -> {
             cbCustomer.getItems().setAll(FXCollections.observableArrayList(customers));
-            cbCustomer.setVisibleRowCount(customers.size());
         });
     }
 
     @FXML
     public void clearCustomerDetails() {
         this.customer = null;
-        cbCustomer.setValue(null);
-        cbCustomer.hide();
+        cbCustomer.getSelectionModel().clearSelection();
+        //  cbCustomer.hide();
 
         btnClearCustomer.setVisible(false);
         btnAddUser.setVisible(true);

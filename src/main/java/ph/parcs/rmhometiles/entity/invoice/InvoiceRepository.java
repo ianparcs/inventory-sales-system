@@ -3,7 +3,6 @@ package ph.parcs.rmhometiles.entity.invoice;
 import org.springframework.stereotype.Repository;
 import ph.parcs.rmhometiles.entity.inventory.item.EntityRepository;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 

@@ -16,6 +16,7 @@ GridPane > .glyph-icon {
     -fx-border-color: blueberries;
     -fx-background-color: white;
 }
+
 .report-big-title {
     -fx-font-weight: bold;
     -fx-font-size: 11px;

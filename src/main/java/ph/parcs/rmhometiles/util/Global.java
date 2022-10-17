@@ -6,6 +6,10 @@ public interface Global {
     String JADIRA_PACKAGE = "org.jadira.usertype.moneyandcurrency.joda.PersistentMoneyAmount";
     String TAX = "3%";
 
+    enum Sales {
+        TAX, PROFIT, TOTAL, COST;
+    }
+
     interface Unit {
         String PCS = "pcs";
         String PERCENT = "%";
@@ -20,10 +24,6 @@ public interface Global {
     interface Css {
         String CIRCLE = "circle-icon";
         String SYMBOL = "symbol-icon";
-    }
-
-    enum Sales {
-         TAX, PROFIT, TOTAL, COST;
     }
 
     interface Message {
