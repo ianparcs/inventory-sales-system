@@ -55,7 +55,7 @@ public class ProductTableController extends EntityTableController<Product> {
         initTableColumnValue();
         initTableColumnSize();
         initTableColumnSort();
-        createFakeData();
+       // createFakeData();
     }
 
     private void initTableColumnSort() {

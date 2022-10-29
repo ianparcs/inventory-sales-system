@@ -24,7 +24,7 @@
                 </GridPane.margin>
             </FontAwesomeIconView>
 
-            <JFXTextField fx:id="tfUserName" labelFloat="true" promptText="Username" text="Ian Jasper Parcon"
+            <JFXTextField fx:id="tfUserName" labelFloat="true" promptText="Username" text="admin"
                           GridPane.columnIndex="1"
                           GridPane.rowIndex="1">
                 <GridPane.margin>
@@ -35,7 +35,7 @@
             <FontAwesomeIconView fx:id="icoKey" glyphName="KEY" size="1.5em" GridPane.columnIndex="0"
                                  GridPane.rowIndex="2"/>
 
-            <JFXPasswordField fx:id="pfUserPassword" labelFloat="true" promptText="Password" text="ian"
+            <JFXPasswordField fx:id="pfUserPassword" labelFloat="true" promptText="Password" text="admin"
                               GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
             <JFXButton fx:id="btnLogin" buttonType="FLAT" maxWidth="1.7976931348623157E308" onAction="#login"
