@@ -49,7 +49,6 @@ public class SceneManager {
         Stage root = stageInitializer.getStage();
         root.getScene().setRoot(states.get(state));
         root.setMaximized(true);
-        root.centerOnScreen();
     }
 
     @SneakyThrows

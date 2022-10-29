@@ -53,11 +53,6 @@ public class LoginController {
         setUserFieldStyle(pfUserPassword, icoKey);
         setUserFieldStyle(tfUserName, icoUser);
         btnLogin.fire();
-        Customer customer = new Customer();
-        customer.setName("IAN");
-        customer.setContact("tEST");
-
-        customerService.saveEntity(customer);
     }
 
     private void setUserFieldStyle(TextField textField, FontAwesomeIconView icon) {
@@ -100,11 +95,11 @@ public class LoginController {
     }
 
     private User createUser() {
-        User fakeUser = new User();
-        fakeUser.setPassword("ian");
-        fakeUser.setUsername("Ian Jasper Parcon");
-        fakeUser.setRole("admin");
-        return fakeUser;
+        User admin  = new User();
+        admin.setUsername("admin");
+        admin.setPassword("admin");
+        admin.setRole("admin");
+        return admin;
     }
 
     @Autowired
