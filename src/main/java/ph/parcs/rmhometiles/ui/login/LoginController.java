@@ -52,7 +52,7 @@ public class LoginController {
 
         setUserFieldStyle(pfUserPassword, icoKey);
         setUserFieldStyle(tfUserName, icoUser);
-        btnLogin.fire();
+        //btnLogin.fire();
     }
 
     private void setUserFieldStyle(TextField textField, FontAwesomeIconView icon) {
