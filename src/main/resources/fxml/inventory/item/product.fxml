@@ -32,7 +32,7 @@
                     <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="18"/>
                 </graphic>
             </JFXButton>
-            <JFXButton alignment="CENTER_RIGHT" onAction="#showSaveToExcelDialog" styleClass="excel-button" HBox.hgrow="ALWAYS">
+            <JFXButton alignment="CENTER_RIGHT" onAction="#showExportAsExcelDialog" styleClass="excel-button" HBox.hgrow="ALWAYS">
                 <graphic>
                     <FontAwesomeIconView fill="WHITE" glyphName="FILE_EXCEL_ALT" size="19"/>
                 </graphic>
