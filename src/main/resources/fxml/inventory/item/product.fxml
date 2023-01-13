@@ -21,7 +21,8 @@
         </columnConstraints>
 
         <HBox styleClass="tile-info" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0">
-            <Label alignment="CENTER" styleClass="big-title" text="Inventory"/>
+            <Label styleClass="big-title" text="Inventory" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS"/>
+
         </HBox>
 
         <HBox spacing="10.0" styleClass="tile-default" GridPane.columnIndex="0" GridPane.rowIndex="1">
@@ -31,7 +32,11 @@
                     <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="18"/>
                 </graphic>
             </JFXButton>
-
+            <JFXButton alignment="CENTER_RIGHT" onAction="#showSaveToExcelDialog" styleClass="excel-button" HBox.hgrow="ALWAYS">
+                <graphic>
+                    <FontAwesomeIconView fill="WHITE" glyphName="FILE_EXCEL_ALT" size="19"/>
+                </graphic>
+            </JFXButton>
             <JFXTextField fx:id="tfSearchItem" labelFloat="true" onKeyReleased="#searchItem" promptText="Search Product"
                           styleClass="search-field" HBox.hgrow="ALWAYS"/>
         </HBox>

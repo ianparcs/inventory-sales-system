@@ -3,6 +3,7 @@ package ph.parcs.rmhometiles.file;
 
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
+import ph.parcs.rmhometiles.file.writer.ExcelWriter;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -27,4 +28,8 @@ public class FileService {
         Files.deleteIfExists(source);
     }
 
+    @SneakyThrows
+    public void exportToExcel(ExcelWriter excelWriter) {
+        excelWriter.write();
+    }
 }

@@ -153,4 +153,9 @@ public class Product extends BaseEntity {
     public ObjectProperty<Category> categoryProperty() {
         return category;
     }
+
+    @Transient
+    public int getColumnCount() {
+        return getClass().getDeclaredFields().length;
+    }
 }

@@ -36,6 +36,13 @@
     -fx-border-radius: 2pt;
     -fx-background-radius: 2pt;
 }
+.excel-button {
+    -fx-padding: 0.533333em;
+    -fx-background-color: avocado;
+    -jfx-button-type: FLAT;
+    -fx-text-fill: WHITE;
+    -fx-font-weight: BOLD;
+}
 
 .tooltip {
     -fx-text-fill: WHITE;
