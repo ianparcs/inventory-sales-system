@@ -13,6 +13,8 @@ public interface BaseServiceInterface<T, ID> {
 
     List<T> findEntities(String query);
 
+    List<T> findAll();
+
     T findEntityById(ID id);
 
     T saveEntity(T item);

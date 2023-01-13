@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import ph.parcs.rmhometiles.exception.ItemLockedException;
 import ph.parcs.rmhometiles.util.PageUtil;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -27,6 +29,14 @@ public abstract class BaseService<T extends BaseEntity> implements BaseServiceIn
     @Override
     public List<T> findEntities(String query) {
         return entityRepository.findAllByNameContains(query);
+    }
+
+    @Override
+    public List<T> findAll() {
+        Iterator<T> source = entityRepository.findAll().iterator();
+        List<T> target = new ArrayList<>();
+        source.forEachRemaining(target::add);
+        return target;
     }
 
     public boolean isItemsExists(List<T> items) {
