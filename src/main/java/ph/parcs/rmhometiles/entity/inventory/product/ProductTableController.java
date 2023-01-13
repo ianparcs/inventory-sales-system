@@ -2,7 +2,6 @@ package ph.parcs.rmhometiles.entity.inventory.product;
 
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.CacheHint;
 import javafx.scene.control.TableCell;
@@ -20,14 +19,13 @@ import ph.parcs.rmhometiles.entity.inventory.stock.Stock;
 import ph.parcs.rmhometiles.entity.supplier.Supplier;
 import ph.parcs.rmhometiles.file.FileService;
 import ph.parcs.rmhometiles.file.ImageProduct;
-import ph.parcs.rmhometiles.file.writer.ExcelWriter;
 import ph.parcs.rmhometiles.file.writer.ProductExcelWriter;
 import ph.parcs.rmhometiles.util.FileUtils;
+import ph.parcs.rmhometiles.util.Global;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
 import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
 
 import java.io.File;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -175,20 +173,22 @@ public class ProductTableController extends EntityTableController<Product> {
     }
 
     @FXML
-    private void showSaveToExcelDialog() {
+    private void showExportAsExcelDialog() {
         SweetAlert sweetAlert = SweetAlertFactory.create(SweetAlert.Type.INFO,"Save as Excel File?");
         sweetAlert.setHeaderMessage("Export Excel");
         sweetAlert.setConfirmButton("Export");
         sweetAlert.setConfirmListener(() -> {
             ExecutorService executorService = Executors.newSingleThreadExecutor();
             executorService.execute(() -> {
-                System.out.println("testt");
                 List<Product> productList = baseService.findAll();
                 fileService.exportToExcel(new ProductExcelWriter(productList));
+                Platform.runLater(() -> {
+                    SweetAlert successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
+                    successAlert.setContentMessage(Global.Message.EXPORT).show(spMain);
+                });
             });
 
-        });
-        Platform.runLater(() -> sweetAlert.show(spMain));
+        }).show(spMain);
     }
 
     @Autowired

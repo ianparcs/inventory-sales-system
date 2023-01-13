@@ -33,7 +33,7 @@ public interface Global {
         String ASK = "Are you sure?";
         String QUANTITY_EXCEED = "Quantity must not exceed stocks";
         String ENTER_CUSTOMER = "Please select a customer";
-
+        String EXPORT = "File exported successfully";
     }
 
 }
