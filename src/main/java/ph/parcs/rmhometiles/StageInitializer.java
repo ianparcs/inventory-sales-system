@@ -1,11 +1,14 @@
 package ph.parcs.rmhometiles;
 
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import lombok.Data;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +18,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import ph.parcs.rmhometiles.ui.scene.SceneManager;
 
+@Data
 @Component
 public class StageInitializer implements ApplicationListener<JavaFxApplication.StageReadyEvent> {
 
@@ -26,6 +30,7 @@ public class StageInitializer implements ApplicationListener<JavaFxApplication.S
     @Value("${spring.application.ui.height}")
     private Integer appHeight;
     private SceneManager sceneManager;
+
     private Stage stage;
 
     public StageInitializer(ApplicationContext applicationContext) {
@@ -42,14 +47,21 @@ public class StageInitializer implements ApplicationListener<JavaFxApplication.S
     @SneakyThrows
     private Stage createStage() {
         Parent content = sceneManager.loadUI(State.LOGIN);
-        Scene scene = new Scene(content, appWidth, appHeight);
+        Scene scene = new Scene(content);
         scene.setFill(Color.TRANSPARENT);
+
+        Rectangle2D screen = Screen.getPrimary().getVisualBounds();
 
         Stage stage = new Stage();
         stage.getIcons().add(new Image(getClass().getResource("/image/logo.png").toURI().toString()));
         stage.setScene(scene);
-        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setResizable(true);
         stage.setTitle(appTitle);
+        stage.setX(screen.getMinX());
+        stage.setY(screen.getMinY());
+        stage.setWidth(screen.getWidth());
+        stage.setHeight(screen.getHeight());
+        stage.initStyle(StageStyle.TRANSPARENT);
         return stage;
     }
 
@@ -62,10 +74,5 @@ public class StageInitializer implements ApplicationListener<JavaFxApplication.S
     public Stage getStage() {
         return stage;
     }
-
-    public ApplicationContext getApplicationContext() {
-        return applicationContext;
-    }
-
 
 }

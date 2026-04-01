@@ -56,11 +56,10 @@ public class NavigationController {
         if (currentUser != null) {
             String userRole = currentUser.getRole();
             vbContainer.getChildren().remove(btnDashboard);
-            vbContainer.getChildren().remove(btnLog);
 
-/*            if (userRole.equals("user")) {
+            if (userRole.equals("user")) {
                 vbContainer.getChildren().remove(btnLog);
-            }*/
+            }
         }
 
         Platform.runLater(() -> states.forEach((key, value) -> value.setOnAction(actionEvent -> {

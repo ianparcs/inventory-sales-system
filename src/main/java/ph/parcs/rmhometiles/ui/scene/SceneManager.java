@@ -18,9 +18,9 @@ public class SceneManager {
     private Map<State, Parent> states = new HashMap<>();
     private StageInitializer stageInitializer;
 
-    @SneakyThrows
     public void load() {
         states = new HashMap<>();
+        states.put(State.LOG, loadUI(State.LOG));
         states.put(State.HOME, loadUI(State.HOME));
         states.put(State.ERROR, loadUI(State.ERROR));
         states.put(State.INVOICE, loadUI(State.INVOICE));
@@ -48,7 +48,6 @@ public class SceneManager {
     public void changeScene(State state) {
         Stage root = stageInitializer.getStage();
         root.getScene().setRoot(states.get(state));
-        root.setMaximized(true);
     }
 
     @SneakyThrows
