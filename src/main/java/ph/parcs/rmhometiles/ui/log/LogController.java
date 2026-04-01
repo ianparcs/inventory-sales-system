@@ -1,4 +1,4 @@
-package ph.parcs.rmhometiles.ui.login;
+package ph.parcs.rmhometiles.ui.log;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
@@ -11,8 +11,6 @@ import javafx.scene.layout.StackPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.State;
-import ph.parcs.rmhometiles.entity.customer.Customer;
-import ph.parcs.rmhometiles.entity.customer.CustomerService;
 import ph.parcs.rmhometiles.entity.user.User;
 import ph.parcs.rmhometiles.entity.user.UserRepository;
 import ph.parcs.rmhometiles.entity.user.UserService;
@@ -22,7 +20,7 @@ import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
 
 
 @Controller
-public class LoginController {
+public class LogController {
 
     @FXML
     private JFXPasswordField pfUserPassword;
