@@ -13,7 +13,9 @@ import lombok.SneakyThrows;
 import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import ph.parcs.rmhometiles.entity.customer.Customer;
 import ph.parcs.rmhometiles.entity.inventory.category.Category;
+import ph.parcs.rmhometiles.entity.inventory.item.EditItemController;
 import ph.parcs.rmhometiles.entity.inventory.item.EntityTableController;
 import ph.parcs.rmhometiles.entity.inventory.stock.Stock;
 import ph.parcs.rmhometiles.entity.supplier.Supplier;
@@ -199,5 +201,10 @@ public class ProductTableController extends EntityTableController<Product> {
     @Autowired
     public void setFileService(FileService fileService) {
         this.fileService = fileService;
+    }
+
+    @Autowired
+    public void setEditItemController(EditItemController<Product> editItemController) {
+        this.editItemController = editItemController;
     }
 }

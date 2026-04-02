@@ -9,6 +9,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.ItemListener;
@@ -27,16 +29,14 @@ import java.util.concurrent.Executors;
 @Controller
 public abstract class EntityTableController<T extends BaseEntity> extends PaginationController<T> implements EntityActions<BaseEntity> {
 
-
     @FXML
     protected TableColumn<BaseEntity, HBox> tcAction;
     @FXML
     protected JFXTextField tfSearchItem;
-
     @FXML
     protected StackPane spMain;
 
-    protected EditItemController<BaseEntity> editItemController;
+    protected EditItemController<T> editItemController;
 
     private SweetAlert deleteAlert;
     private SweetAlert successAlert;
@@ -101,7 +101,7 @@ public abstract class EntityTableController<T extends BaseEntity> extends Pagina
             public void onSaveFailed(BaseEntity entity) {
 
             }
-        }, entity);
+        }, (T)entity);
         return entity;
     }
 
@@ -111,8 +111,4 @@ public abstract class EntityTableController<T extends BaseEntity> extends Pagina
         updateItems();
     }
 
-    @Autowired
-    public void setEditItemController(EditItemController<BaseEntity> editItemController) {
-        this.editItemController = editItemController;
-    }
 }
