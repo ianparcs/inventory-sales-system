@@ -35,6 +35,8 @@ public abstract class EntityTableController<T extends BaseEntity> extends Pagina
     @FXML
     protected void initialize() {
         super.initialize();
+        tvItem.setSelectionModel(null);
+
         successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
         deleteAlert = SweetAlertFactory.create(SweetAlert.Type.WARNING);
         errorAlert = SweetAlertFactory.create(SweetAlert.Type.DANGER);
@@ -49,11 +51,6 @@ public abstract class EntityTableController<T extends BaseEntity> extends Pagina
     private void initActionColumn() {
         tcAction.setCellFactory(ActionTableCell.forActions(
                 this::onEditActionClick, this::onDeleteActionClick));
-    }
-
-    @FXML
-    private void onPageRowChanged() {
-        updateItems();
     }
 
     @SneakyThrows

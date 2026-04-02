@@ -112,12 +112,6 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
         cbDateRange.getSelectionModel().selectFirst();
     }
 
-    @FXML
-    private void showEditItemDialog() {
-        onEditActionClick(new Invoice());
-        editItemController.showDialog((StackPane) tvItem.getScene().getRoot());
-    }
-
     @Autowired
     public void setSceneManager(SceneManager sceneManager) {
         this.sceneManager = sceneManager;

@@ -29,9 +29,6 @@ public class OrderItem extends BaseEntity {
         this.product.set(product);
         amount.set(Money.parse("PHP 0.00"));
         quantity.addListener((observableValue, number, t1) -> amount.set(product.priceProperty().get().multipliedBy(quantity.get())));
-        //     discount.addListener((observableValue, number, t1) -> discount.set(amount.get())));
-        //    amount.bind(Bindings.createObjectBinding(this::createAmount, quantity,discountPercent));
-
     }
 
     public OrderItem() {
@@ -42,7 +39,7 @@ public class OrderItem extends BaseEntity {
         this.id.set(id);
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinTable(name = "invoice_order_item",
             joinColumns = {@JoinColumn(name = "order_item_id", referencedColumnName = "order_item_id")},
             inverseJoinColumns = {@JoinColumn(name = "invoice_id", referencedColumnName = "invoice_id")})

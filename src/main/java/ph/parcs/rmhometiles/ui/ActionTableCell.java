@@ -19,8 +19,7 @@ public class ActionTableCell<S> extends TableCell<S, HBox> {
 
     private final HBox hBox = new HBox();
 
-
-    public ActionTableCell(Function<S, S> editFunction, String type) {
+    public ActionTableCell(Function<S, S> function, String type) {
         JFXButton button = new JFXButton();
         Text icon;
         if (type.equalsIgnoreCase("EDIT")) {
@@ -34,7 +33,7 @@ public class ActionTableCell<S> extends TableCell<S, HBox> {
         }
         button.setGraphic(icon);
         button.setPadding(new Insets(5));
-        button.setOnAction((ActionEvent e) -> editFunction.apply(getCurrentItem()));
+        button.setOnAction((ActionEvent e) -> function.apply(getCurrentItem()));
 
         hBox.getChildren().add(button);
         hBox.setAlignment(Pos.CENTER);
@@ -83,6 +82,7 @@ public class ActionTableCell<S> extends TableCell<S, HBox> {
     }
 
     public S getCurrentItem() {
+        if (getTableView().getItems().isEmpty()) return null;
         return getTableView().getItems().get(getIndex());
     }
 
