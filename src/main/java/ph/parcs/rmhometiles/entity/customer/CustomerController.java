@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.ItemListener;
 import ph.parcs.rmhometiles.util.AppConstant;

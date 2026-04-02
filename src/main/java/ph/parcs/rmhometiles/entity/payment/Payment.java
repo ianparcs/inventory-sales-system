@@ -4,12 +4,9 @@ import jakarta.persistence.*;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import org.hibernate.annotations.Type;
-import org.hibernate.usertype.UserTypeLegacyBridge;
 import org.joda.money.Money;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.entity.invoice.Invoice;
-import ph.parcs.rmhometiles.util.AppConstant;
 import ph.parcs.rmhometiles.util.converter.MoneyConverter;
 
 
@@ -18,9 +15,9 @@ import ph.parcs.rmhometiles.util.converter.MoneyConverter;
 @AttributeOverride(name = "id", column = @Column(name = "payment_id"))
 public class Payment extends BaseEntity {
 
-    private ObjectProperty<Money> paymentAmount = new SimpleObjectProperty<>();
-    private ObjectProperty<Invoice> invoice = new SimpleObjectProperty<>();
-    private SimpleStringProperty paymentType = new SimpleStringProperty();
+    private final ObjectProperty<Money> paymentAmount = new SimpleObjectProperty<>();
+    private final ObjectProperty<Invoice> invoice = new SimpleObjectProperty<>();
+    private final SimpleStringProperty paymentType = new SimpleStringProperty();
 
     @ManyToOne
     @JoinTable(name = "invoice_payment",
@@ -55,7 +52,7 @@ public class Payment extends BaseEntity {
     public enum Method {
         GCASH,
         CASH,
-        UNKNOWN;
+        UNKNOWN
     }
 
     public enum Status {

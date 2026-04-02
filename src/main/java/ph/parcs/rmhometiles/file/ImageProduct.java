@@ -7,13 +7,12 @@ import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 
 
-
 @Entity
 @Access(AccessType.PROPERTY)
 @AttributeOverride(name = "id", column = @Column(name = "image_id"))
 public class ImageProduct extends BaseEntity {
 
-    private StringProperty path = new SimpleStringProperty();
+    private final StringProperty path = new SimpleStringProperty();
     private Product product;
 
     @OneToOne(mappedBy = "imageProduct")

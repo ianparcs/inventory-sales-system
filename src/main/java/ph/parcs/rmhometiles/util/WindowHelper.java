@@ -45,8 +45,7 @@ public class WindowHelper {
         node.addEventHandler(MouseEvent.MOUSE_DRAGGED, listener);
         node.addEventHandler(MouseEvent.MOUSE_EXITED, listener);
         node.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, listener);
-        if (node instanceof Parent) {
-            Parent parent = (Parent) node;
+        if (node instanceof Parent parent) {
             ObservableList<Node> children = parent.getChildrenUnmodifiable();
             for (Node child : children) {
                 addListenerDeeply(child, listener);

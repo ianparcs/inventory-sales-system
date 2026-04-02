@@ -21,8 +21,8 @@ import ph.parcs.rmhometiles.entity.supplier.Supplier;
 import ph.parcs.rmhometiles.file.FileService;
 import ph.parcs.rmhometiles.file.ImageProduct;
 import ph.parcs.rmhometiles.file.writer.ProductExcelWriter;
-import ph.parcs.rmhometiles.util.FileUtils;
 import ph.parcs.rmhometiles.util.AppConstant;
+import ph.parcs.rmhometiles.util.FileUtils;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
 import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
 
@@ -175,7 +175,7 @@ public class ProductTableController extends EntityTableController<Product> {
 
     @FXML
     private void showExportAsExcelDialog() {
-        SweetAlert sweetAlert = SweetAlertFactory.create(SweetAlert.Type.INFO,"Save as Excel File?");
+        SweetAlert sweetAlert = SweetAlertFactory.create(SweetAlert.Type.INFO, "Save as Excel File?");
         sweetAlert.setHeaderMessage("Export Excel");
         sweetAlert.setConfirmButton("Export");
         sweetAlert.setConfirmListener(() -> {

@@ -48,7 +48,7 @@ public abstract class PaginationController<T extends BaseEntity> {
 
     public void updatePageEntries(Page<BaseEntity> items) {
         ItemPageEntry itemPageEntry = PageUtil.getPageEntries(items);
-        lblPageEntries.setText("Showing " + itemPageEntry.getFromEntry() + " to " + itemPageEntry.getToEntry() + " of " + items.getTotalElements() + " entries");
+        lblPageEntries.setText("Showing " + itemPageEntry.fromEntry() + " to " + itemPageEntry.toEntry() + " of " + items.getTotalElements() + " entries");
         pagination.setPageCount(items.getTotalPages());
     }
 

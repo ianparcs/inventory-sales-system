@@ -5,8 +5,6 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import org.hibernate.annotations.Type;
-import org.hibernate.usertype.UserTypeLegacyBridge;
 import org.joda.money.Money;
 import ph.parcs.rmhometiles.entity.inventory.category.Category;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
@@ -14,7 +12,6 @@ import ph.parcs.rmhometiles.entity.inventory.stock.Stock;
 import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.entity.supplier.Supplier;
 import ph.parcs.rmhometiles.file.ImageProduct;
-import ph.parcs.rmhometiles.util.AppConstant;
 import ph.parcs.rmhometiles.util.converter.MoneyConverter;
 
 import java.util.List;
@@ -24,17 +21,17 @@ import java.util.List;
 @AttributeOverride(name = "id", column = @Column(name = "product_id"))
 public class Product extends BaseEntity {
 
-    private ObjectProperty<Supplier> supplier = new SimpleObjectProperty<>();
-    private ObjectProperty<Category> category = new SimpleObjectProperty<>();
-    private ObjectProperty<Stock> stock = new SimpleObjectProperty<>();
-    private ObjectProperty<Money> price = new SimpleObjectProperty<>();
-    private ObjectProperty<Money> cost = new SimpleObjectProperty<>();
+    private final ObjectProperty<Supplier> supplier = new SimpleObjectProperty<>();
+    private final ObjectProperty<Category> category = new SimpleObjectProperty<>();
+    private final ObjectProperty<Stock> stock = new SimpleObjectProperty<>();
+    private final ObjectProperty<Money> price = new SimpleObjectProperty<>();
+    private final ObjectProperty<Money> cost = new SimpleObjectProperty<>();
     private ImageProduct imageProduct;
 
     private List<OrderItem> orderItems;
 
-    private StringProperty description = new SimpleStringProperty();
-    private StringProperty code = new SimpleStringProperty();
+    private final StringProperty description = new SimpleStringProperty();
+    private final StringProperty code = new SimpleStringProperty();
 
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
     public List<OrderItem> getOrderItems() {
