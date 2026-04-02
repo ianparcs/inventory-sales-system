@@ -4,24 +4,12 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import ph.parcs.rmhometiles.entity.inventory.item.EditItemController;
 import ph.parcs.rmhometiles.entity.inventory.item.EntityTableController;
 
 
 @Controller
 public class CustomerTableController extends EntityTableController<Customer> {
-
-    public void initialize() {
-        super.initialize();
-/*        tvItem.setEditable(true);
-        tcName.setCellFactory(TextFieldTableCell.forTableColumn());
-        tcName.setOnEditCommit(
-                (TableColumn.CellEditEvent<Customer, String> t) ->
-                        (t.getTableView().getItems().get(
-                                t.getTablePosition().getRow())
-                        ).setName(t.getNewValue())
-        );
-        */
-    }
 
     @FXML
     private void showEditItemDialog() {
@@ -32,5 +20,10 @@ public class CustomerTableController extends EntityTableController<Customer> {
     @Autowired
     public void setCustomerService(CustomerService customerService) {
         this.baseService = customerService;
+    }
+
+    @Autowired
+    public void setEditItemController(EditItemController<Customer> editItemController) {
+        this.editItemController = editItemController;
     }
 }

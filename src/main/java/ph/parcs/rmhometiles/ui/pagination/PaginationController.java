@@ -7,6 +7,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TableView;
+import org.springframework.context.annotation.Scope;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
@@ -19,6 +20,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 
+@Scope("prototype")
 @Controller
 public abstract class PaginationController<T extends BaseEntity> {
 
@@ -37,6 +39,11 @@ public abstract class PaginationController<T extends BaseEntity> {
     @FXML
     protected void initialize() {
         pagination.currentPageIndexProperty().addListener((observable) -> updateItems());
+    }
+
+    @FXML
+    private void onPageRowChanged() {
+        updateItems();
     }
 
     public void updatePageEntries(Page<BaseEntity> items) {
