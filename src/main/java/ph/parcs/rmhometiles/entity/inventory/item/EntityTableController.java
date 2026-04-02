@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.ItemListener;
 import ph.parcs.rmhometiles.exception.ItemLockedException;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
+import ph.parcs.rmhometiles.ui.pagination.PaginationController;
 import ph.parcs.rmhometiles.util.Global;
 import ph.parcs.rmhometiles.util.PageUtil;
 import ph.parcs.rmhometiles.util.ThreadUtil;
@@ -24,26 +25,18 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Controller
-public abstract class EntityTableController<T extends BaseEntity> implements EntityActions<T> {
+public abstract class EntityTableController<T extends BaseEntity> extends PaginationController<T> implements EntityActions<BaseEntity> {
+
 
     @FXML
-    protected ComboBox<String> cbRowCount;
-    @FXML
-    protected TableColumn<T, HBox> tcAction;
+    protected TableColumn<BaseEntity, HBox> tcAction;
     @FXML
     protected JFXTextField tfSearchItem;
-    @FXML
-    protected Pagination pagination;
-    @FXML
-    protected Label lblPageEntries;
-    @FXML
-    protected TableView<T> tvItem;
+
     @FXML
     protected StackPane spMain;
 
-    protected EditItemController<T> editItemController;
-    protected BaseService<T> baseService;
-    private String searchValue = "";
+    protected EditItemController<BaseEntity> editItemController;
 
     private SweetAlert deleteAlert;
     private SweetAlert successAlert;
@@ -51,11 +44,11 @@ public abstract class EntityTableController<T extends BaseEntity> implements Ent
 
     @FXML
     protected void initialize() {
+        super.initialize();
         successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
         deleteAlert = SweetAlertFactory.create(SweetAlert.Type.WARNING);
         errorAlert = SweetAlertFactory.create(SweetAlert.Type.DANGER);
 
-        initItemPagination();
         initActionColumn();
 
         spMain.sceneProperty().addListener((observableValue, scene, newScene) -> {
@@ -63,26 +56,9 @@ public abstract class EntityTableController<T extends BaseEntity> implements Ent
         });
     }
 
-    private void initItemPagination() {
-        pagination.currentPageIndexProperty().addListener((observable) -> updateItems());
-    }
-
     private void initActionColumn() {
         tcAction.setCellFactory(ActionTableCell.forActions(
                 this::onEditActionClick, this::onDeleteActionClick));
-    }
-
-    public void updateItems() {
-        ExecutorService executorService = Executors.newCachedThreadPool();
-        executorService.submit(() -> {
-            Page<T> items = baseService.findPages(getCurrentPage(), getRowsPerPage(), searchValue);
-            Platform.runLater(() -> {
-                tvItem.setItems(FXCollections.observableArrayList(items.toList()));
-                tvItem.refresh();
-                updatePageEntries(items);
-            });
-        });
-        ThreadUtil.shutdownAndAwaitTermination(executorService);
     }
 
     @FXML
@@ -91,13 +67,13 @@ public abstract class EntityTableController<T extends BaseEntity> implements Ent
     }
 
     @SneakyThrows
-    public T onDeleteActionClick(T item) {
+    public BaseEntity onDeleteActionClick(BaseEntity item) {
         StackPane root = (StackPane) tvItem.getScene().getRoot();
         deleteAlert.setHeaderMessage("Delete " + item.getClass().getSimpleName());
         deleteAlert.setContentMessage("Are you sure you want to delete " + item.getName() + "?");
         deleteAlert.setConfirmListener(() -> {
             try {
-                if (baseService.deleteEntity(item)) {
+                if (baseService.deleteEntity((T) item)) {
                     successAlert.setContentMessage(Global.Message.DELETE).show(root);
                     updateItems();
                 }
@@ -110,31 +86,24 @@ public abstract class EntityTableController<T extends BaseEntity> implements Ent
         return item;
     }
 
-    public T onEditActionClick(T entity) {
+    public BaseEntity onEditActionClick(BaseEntity entity) {
         StackPane root = (StackPane) tvItem.getScene().getRoot();
 
         editItemController.showDialog(root);
         editItemController.onEditItem(new ItemListener<>() {
             @Override
-            public void onSavedSuccess(T entity) {
+            public void onSavedSuccess(BaseEntity entity) {
                 successAlert.setContentMessage(Global.Message.SAVED).show(root);
                 updateItems();
             }
 
             @Override
-            public void onSaveFailed(T entity) {
+            public void onSaveFailed(BaseEntity entity) {
 
             }
         }, entity);
         return entity;
     }
-
-    private void updatePageEntries(Page<T> items) {
-        ItemPageEntry itemPageEntry = PageUtil.getPageEntries((Page<BaseEntity>) items);
-        lblPageEntries.setText("Showing " + itemPageEntry.getFromEntry() + " to " + itemPageEntry.getToEntry() + " of " + items.getTotalElements() + " entries");
-        pagination.setPageCount(items.getTotalPages());
-    }
-
 
     @FXML
     private void searchItem() {
@@ -142,17 +111,8 @@ public abstract class EntityTableController<T extends BaseEntity> implements Ent
         updateItems();
     }
 
-    private int getCurrentPage() {
-        return pagination.getCurrentPageIndex();
-    }
-
-    private int getRowsPerPage() {
-        if (cbRowCount.getValue().equalsIgnoreCase("all")) return 10000;
-        return Integer.parseInt(cbRowCount.getValue());
-    }
-
     @Autowired
-    public void setEditItemController(EditItemController<T> editItemController) {
+    public void setEditItemController(EditItemController<BaseEntity> editItemController) {
         this.editItemController = editItemController;
     }
 }
