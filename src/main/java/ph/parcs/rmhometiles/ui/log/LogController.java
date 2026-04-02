@@ -7,16 +7,16 @@ import javafx.scene.control.TableView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import ph.parcs.rmhometiles.entity.log.Log;
 import ph.parcs.rmhometiles.entity.log.LogService;
 import ph.parcs.rmhometiles.entity.report.SalesReport;
 import ph.parcs.rmhometiles.ui.pagination.PaginationController;
 
 @Controller
-@Scope("singleton")
-public class LogController extends PaginationController {
+public class LogController extends PaginationController<Log> {
 
     @FXML
-    private TableView<SalesReport> tvItem;
+    private TableView<Log> tvItem;
     @FXML
     private JFXComboBox<String> cbDateRange;
 

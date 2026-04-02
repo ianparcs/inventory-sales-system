@@ -37,7 +37,7 @@
 
         <TableView fx:id="tvItem" GridPane.columnIndex="0" GridPane.rowIndex="1">
             <columnResizePolicy>
-                <TableView fx:constant="UNCONSTRAINED_RESIZE_POLICY"/>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
             </columnResizePolicy>
             <columns>
 
