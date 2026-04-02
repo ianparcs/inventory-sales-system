@@ -1,10 +1,10 @@
 package ph.parcs.rmhometiles.entity.inventory.stock;
 
+import jakarta.persistence.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import ph.parcs.rmhometiles.entity.inventory.stock.unit.StockUnit;
 
-import javax.persistence.*;
 
 @Entity
 @Table(name = "stock")

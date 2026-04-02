@@ -1,10 +1,12 @@
 package ph.parcs.rmhometiles.entity.inventory.product;
 
+import jakarta.persistence.*;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import org.hibernate.annotations.Type;
+import org.hibernate.usertype.UserTypeLegacyBridge;
 import org.joda.money.Money;
 import ph.parcs.rmhometiles.entity.inventory.category.Category;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
@@ -12,9 +14,9 @@ import ph.parcs.rmhometiles.entity.inventory.stock.Stock;
 import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.entity.supplier.Supplier;
 import ph.parcs.rmhometiles.file.ImageProduct;
-import ph.parcs.rmhometiles.util.Global;
+import ph.parcs.rmhometiles.util.AppConstant;
+import ph.parcs.rmhometiles.util.converter.MoneyConverter;
 
-import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -106,7 +108,7 @@ public class Product extends BaseEntity {
         this.code.set(code);
     }
 
-    @Type(type = Global.JADIRA_PACKAGE, parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "PHP")})
+    @Convert(converter = MoneyConverter.class)
     public Money getPrice() {
         return price.get();
     }
@@ -115,7 +117,7 @@ public class Product extends BaseEntity {
         this.price.set(price);
     }
 
-    @Type(type = Global.JADIRA_PACKAGE, parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "PHP")})
+    @Convert(converter = MoneyConverter.class)
     public Money getCost() {
         return cost.get();
     }

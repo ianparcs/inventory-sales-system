@@ -3,7 +3,7 @@ package ph.parcs.rmhometiles.entity.payment;
 import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ph.parcs.rmhometiles.entity.MoneyService;
+import ph.parcs.rmhometiles.entity.money.MoneyService;
 
 import java.time.LocalDateTime;
 

@@ -1,11 +1,11 @@
 package ph.parcs.rmhometiles.file;
 
+import jakarta.persistence.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 
-import javax.persistence.*;
 
 
 @Entity

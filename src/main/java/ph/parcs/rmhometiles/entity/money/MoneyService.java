@@ -1,11 +1,11 @@
-package ph.parcs.rmhometiles.entity;
+package ph.parcs.rmhometiles.entity.money;
 
 import lombok.SneakyThrows;
 import org.joda.money.Money;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import ph.parcs.rmhometiles.entity.report.SalesReport;
-import ph.parcs.rmhometiles.util.Global;
+import ph.parcs.rmhometiles.util.AppConstant;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -57,10 +57,10 @@ public class MoneyService {
         return totalAmount;
     }
 
-    public Map<Global.Sales, String> computeAllMoney(List<SalesReport> salesReportsToday) {
+    public Map<AppConstant.Sales, String> computeAllMoney(List<SalesReport> salesReportsToday) {
         if (salesReportsToday == null) return new HashMap<>();
 
-        Map<Global.Sales, String> moneyMap = new HashMap<>();
+        Map<AppConstant.Sales, String> moneyMap = new HashMap<>();
         Money tax = parseMoney("0.00");
         Money cost = parseMoney("0.00");
         Money total = parseMoney("0.00");
@@ -72,10 +72,10 @@ public class MoneyService {
         }
         Money profit = total.minus(cost);
 
-        moneyMap.put(Global.Sales.TAX, tax.toString().replace("PHP", "₱"));
-        moneyMap.put(Global.Sales.COST, cost.toString().replace("PHP", "₱"));
-        moneyMap.put(Global.Sales.TOTAL, total.toString().replace("PHP", "₱"));
-        moneyMap.put(Global.Sales.PROFIT, profit.toString().replace("PHP", "₱"));
+        moneyMap.put(AppConstant.Sales.TAX, tax.toString().replace("PHP", "₱"));
+        moneyMap.put(AppConstant.Sales.COST, cost.toString().replace("PHP", "₱"));
+        moneyMap.put(AppConstant.Sales.TOTAL, total.toString().replace("PHP", "₱"));
+        moneyMap.put(AppConstant.Sales.PROFIT, profit.toString().replace("PHP", "₱"));
         return moneyMap;
     }
 

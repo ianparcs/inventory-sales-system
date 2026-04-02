@@ -1,14 +1,16 @@
 package ph.parcs.rmhometiles.entity.order;
 
+import jakarta.persistence.*;
 import javafx.beans.property.*;
 import org.hibernate.annotations.Type;
+import org.hibernate.usertype.UserTypeLegacyBridge;
 import org.joda.money.Money;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.invoice.Invoice;
-import ph.parcs.rmhometiles.util.Global;
+import ph.parcs.rmhometiles.util.AppConstant;
+import ph.parcs.rmhometiles.util.converter.MoneyConverter;
 
-import javax.persistence.*;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -63,7 +65,7 @@ public class OrderItem extends BaseEntity {
     }
 
     @Column(name = "amount")
-    @Type(type = Global.JADIRA_PACKAGE, parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "PHP")})
+    @Convert(converter = MoneyConverter.class)
     public Money getAmount() {
         return amount.get();
     }

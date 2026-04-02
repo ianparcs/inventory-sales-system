@@ -2,7 +2,7 @@ package ph.parcs.rmhometiles.util.converter;
 
 import javafx.util.StringConverter;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
-import ph.parcs.rmhometiles.util.Global;
+import ph.parcs.rmhometiles.util.AppConstant;
 
 public class ProductConverter extends StringConverter<Product> {
 
@@ -14,7 +14,7 @@ public class ProductConverter extends StringConverter<Product> {
 
     @Override
     public String toString(Product product) {
-        if (product == null) return Global.STRING_EMPTY;
+        if (product == null) return AppConstant.STRING_EMPTY;
         return product.getCode();
     }
 

@@ -2,29 +2,19 @@ package ph.parcs.rmhometiles.entity.inventory.item;
 
 import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Scope;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.ItemListener;
 import ph.parcs.rmhometiles.exception.ItemLockedException;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.ui.pagination.PaginationController;
-import ph.parcs.rmhometiles.util.Global;
-import ph.parcs.rmhometiles.util.PageUtil;
-import ph.parcs.rmhometiles.util.ThreadUtil;
+import ph.parcs.rmhometiles.util.AppConstant;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
 import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 @Controller
 public abstract class EntityTableController<T extends BaseEntity> extends PaginationController<T> implements EntityActions<BaseEntity> {
@@ -74,7 +64,7 @@ public abstract class EntityTableController<T extends BaseEntity> extends Pagina
         deleteAlert.setConfirmListener(() -> {
             try {
                 if (baseService.deleteEntity((T) item)) {
-                    successAlert.setContentMessage(Global.Message.DELETE).show(root);
+                    successAlert.setContentMessage(AppConstant.Message.DELETE).show(root);
                     updateItems();
                 }
             } catch (ItemLockedException itemLockedException) {
@@ -93,7 +83,7 @@ public abstract class EntityTableController<T extends BaseEntity> extends Pagina
         editItemController.onEditItem(new ItemListener<>() {
             @Override
             public void onSavedSuccess(BaseEntity entity) {
-                successAlert.setContentMessage(Global.Message.SAVED).show(root);
+                successAlert.setContentMessage(AppConstant.Message.SAVED).show(root);
                 updateItems();
             }
 
