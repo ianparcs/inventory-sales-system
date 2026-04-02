@@ -10,9 +10,11 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.entity.customer.Customer;
+import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.entity.inventory.item.EntityTableController;
 import ph.parcs.rmhometiles.entity.invoice.Invoice;
 import ph.parcs.rmhometiles.entity.invoice.InvoiceService;
@@ -22,7 +24,6 @@ import ph.parcs.rmhometiles.ui.scene.SceneManager;
 import ph.parcs.rmhometiles.util.DateUtility;
 import ph.parcs.rmhometiles.util.ThreadUtil;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -78,18 +79,15 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
         tcAction.setCellFactory(ActionTableCell.forActions(this::onViewActionClick, this::onEditActionClick, this::onDeleteActionClick));
     }
 
-    public Invoice onViewActionClick(Invoice item) {
+    @SneakyThrows
+    public Invoice onViewActionClick(BaseEntity item) {
         FXMLLoader fxmlLoader = sceneManager.create("/fxml/invoice/view-invoice.fxml");
-
-        try {
-            Parent parent = fxmlLoader.load();
-            ViewInvoiceController viewInvoiceController = fxmlLoader.getController();
-            viewInvoiceController.initData(item);
-            spMain.getChildren().setAll(parent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return item;
+        Invoice invoice = (Invoice) item;
+        Parent parent = fxmlLoader.load();
+        ViewInvoiceController viewInvoiceController = fxmlLoader.getController();
+        viewInvoiceController.initData(invoice);
+        spMain.getChildren().setAll(parent);
+        return invoice;
     }
 
     @FXML

@@ -7,6 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.*?>
+<?import javafx.geometry.Insets?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spMain" stylesheets="@../../css/report.css"
            xmlns="http://javafx.com/javafx/11.0.14-internal"
            fx:controller="ph.parcs.rmhometiles.entity.report.SalesReportController">
@@ -101,10 +102,24 @@
             </columns>
         </TableView>
 
+        <BorderPane styleClass="tile" GridPane.columnIndex="0" GridPane.columnSpan="4"
+                    GridPane.rowIndex="3">
+            <left>
+                <Label fx:id="lblPageEntries" BorderPane.alignment="CENTER" text="Showing"/>
+            </left>
+            <right>
+                <Pagination fx:id="pagination" maxPageIndicatorCount="5" BorderPane.alignment="CENTER"/>
+            </right>
+            <padding>
+                <Insets left="15.0" right="15.0"/>
+            </padding>
+        </BorderPane>
+
         <rowConstraints>
             <RowConstraints vgrow="NEVER"/>
             <RowConstraints vgrow="NEVER"/>
             <RowConstraints vgrow="ALWAYS"/>
+            <RowConstraints vgrow="NEVER"/>
         </rowConstraints>
 
     </GridPane>

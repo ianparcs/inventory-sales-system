@@ -4,16 +4,22 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.entity.MoneyService;
+import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
+import ph.parcs.rmhometiles.entity.inventory.item.ItemPageEntry;
+import ph.parcs.rmhometiles.ui.pagination.PaginationController;
 import ph.parcs.rmhometiles.util.DateUtility;
 import ph.parcs.rmhometiles.util.Global;
+import ph.parcs.rmhometiles.util.PageUtil;
 import ph.parcs.rmhometiles.util.ThreadUtil;
 
 import java.time.LocalDateTime;
@@ -25,7 +31,7 @@ import java.util.concurrent.Executors;
 
 @Controller
 @Scope("singleton")
-public class SalesReportController {
+public class SalesReportController extends PaginationController {
 
     @FXML
     private TableColumn<SalesReport, String> tcSalesDate;
@@ -50,7 +56,9 @@ public class SalesReportController {
     private MoneyService moneyService;
 
     @FXML
-    private void initialize() {
+    protected void initialize() {
+        super.initialize();
+
         DateUtility.initialize();
         displaySalesReport();
 
@@ -64,6 +72,11 @@ public class SalesReportController {
                 return "";
             });
         });
+    }
+
+    @Override
+    public void updateItems() {
+
     }
 
     @FXML
@@ -111,5 +124,9 @@ public class SalesReportController {
     @Autowired
     public void setMoneyService(MoneyService moneyService) {
         this.moneyService = moneyService;
+    }
+
+    public void onPageRowChanged(ActionEvent actionEvent) {
+
     }
 }
