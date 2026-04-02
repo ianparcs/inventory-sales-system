@@ -1,13 +1,14 @@
 package ph.parcs.rmhometiles.entity.user;
 
+import jakarta.persistence.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-import javax.persistence.*;
 
 @Entity
+@Table(name = "users")
 @Access(AccessType.PROPERTY)
 public class User {
 

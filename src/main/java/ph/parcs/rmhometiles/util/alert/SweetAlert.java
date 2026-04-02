@@ -10,7 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import ph.parcs.rmhometiles.util.Global;
+import ph.parcs.rmhometiles.util.AppConstant;
 
 public class SweetAlert {
 
@@ -25,8 +25,8 @@ public class SweetAlert {
     public SweetAlert() {
         FontAwesomeIconView circleIcon = new FontAwesomeIconView();
         FontAwesomeIconView symbolIcon = new FontAwesomeIconView();
-        circleIcon.getStyleClass().add(Global.Css.CIRCLE);
-        symbolIcon.getStyleClass().add(Global.Css.SYMBOL);
+        circleIcon.getStyleClass().add(AppConstant.Css.CIRCLE);
+        symbolIcon.getStyleClass().add(AppConstant.Css.SYMBOL);
         circleIcon.setSize("6em");
         symbolIcon.setSize("3em");
 

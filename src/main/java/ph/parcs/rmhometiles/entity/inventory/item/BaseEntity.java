@@ -1,8 +1,8 @@
 package ph.parcs.rmhometiles.entity.inventory.item;
 
+import jakarta.persistence.*;
 import javafx.beans.property.*;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @MappedSuperclass

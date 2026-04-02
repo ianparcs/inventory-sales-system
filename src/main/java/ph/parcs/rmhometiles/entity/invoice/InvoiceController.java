@@ -14,15 +14,15 @@ import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import ph.parcs.rmhometiles.entity.MoneyService;
 import ph.parcs.rmhometiles.entity.customer.Customer;
 import ph.parcs.rmhometiles.entity.customer.CustomerController;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.inventory.product.ProductService;
+import ph.parcs.rmhometiles.entity.money.MoneyService;
 import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.entity.payment.Payment;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
-import ph.parcs.rmhometiles.util.Global;
+import ph.parcs.rmhometiles.util.AppConstant;
 import ph.parcs.rmhometiles.util.ThreadUtil;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
 import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
@@ -141,7 +141,7 @@ public class InvoiceController {
     private void initDiscountNumberFormatter() {
         tfDiscountPercent.setTextFormatter(new TextFormatter<String>((TextFormatter.Change change) -> {
             String newText = change.getControlNewText();
-            if (newText.matches(Global.Regex.DECIMAL_PERCENT)) {
+            if (newText.matches(AppConstant.Regex.DECIMAL_PERCENT)) {
                 return change;
             }
             return null;
@@ -152,27 +152,19 @@ public class InvoiceController {
     private void initNumberInputFormatter(JFXTextField textField) {
         textField.setTextFormatter(new TextFormatter<String>((TextFormatter.Change change) -> {
             String newText = change.getControlNewText();
-            if (newText.matches(Global.Regex.DECIMAL)) {
+            if (newText.matches(AppConstant.Regex.DECIMAL)) {
                 return change;
             }
             return null;
         }));
-    /*    final int MAX_LENGTH = 6;
-        textField.lengthProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.intValue() > oldValue.intValue()) {
-                if (textField.getText().length() >= MAX_LENGTH) {
-                    textField.setText(textField.getText().substring(0, MAX_LENGTH));
-                }
-            }
-        });*/
     }
 
     private void setDiscountPercentTextBehavior() {
         tfDiscountPercent.focusedProperty().addListener((observableValue, outOfFocus, focus) -> {
             if (outOfFocus) {
                 String discountText = tfDiscountPercent.getText();
-                if (!discountText.endsWith(Global.Unit.PERCENT)) {
-                    tfDiscountPercent.setText(discountText + Global.Unit.PERCENT);
+                if (!discountText.endsWith(AppConstant.Unit.PERCENT)) {
+                    tfDiscountPercent.setText(discountText + AppConstant.Unit.PERCENT);
                 }
             }
         });
@@ -184,7 +176,6 @@ public class InvoiceController {
                 .reduce(Money.parse("PHP 0.00"), Money::plus);
     }
 
-    @SneakyThrows
     private Money showDiscountAmount() {
         Money amount = invoice.getAmount();
         if (StringUtils.isEmpty(tfDiscountPercent.getText())) return Money.parse("PHP 0.00");
@@ -199,13 +190,13 @@ public class InvoiceController {
     @SneakyThrows
     private Money showTaxAmount() {
         Money totalBeforeTax = showTotalBeforeTax();
-        return moneyService.computeDiscount(totalBeforeTax, Global.TAX);
+        return moneyService.computeDiscount(totalBeforeTax, AppConstant.TAX);
     }
 
     private Money showTotalAmount() {
         Money currentTotal = showTotalBeforeTax();
-        Money taxAmount = moneyService.computeDiscount(currentTotal, Global.TAX);
-        Money deliveryRate = Money.parse(Global.Unit.CURRENCY + " " + (tfDeliveryAmount.getText().isEmpty() ? "0.00" : tfDeliveryAmount.getText()));
+        Money taxAmount = moneyService.computeDiscount(currentTotal, AppConstant.TAX);
+        Money deliveryRate = Money.parse(AppConstant.Unit.CURRENCY + " " + (tfDeliveryAmount.getText().isEmpty() ? "0.00" : tfDeliveryAmount.getText()));
         Money totalAmount = moneyService.computeTotalAmount(currentTotal, taxAmount, deliveryRate);
         tfCashPay.setText(totalAmount.getAmount().toString());
         return totalAmount;
@@ -274,7 +265,7 @@ public class InvoiceController {
         cbProducts.setConverter(new ProductConverter(cbProducts.getValue()));
         cbProducts.getEditor().textProperty().addListener((observable, oldVal, keyTyped) -> showProduct(keyTyped));
         cbProducts.focusedProperty().addListener((observableValue, outOfFocus, focus) -> {
-            if (focus) showProduct(Global.STRING_EMPTY);
+            if (focus) showProduct(AppConstant.STRING_EMPTY);
         });
     }
 
@@ -297,7 +288,6 @@ public class InvoiceController {
         }
 
         OrderItem orderItem = new OrderItem(product);
-        //     orderItem.amountProperty().bind(Bindings.createObjectBinding(()-> moneyService.computeOrderItemAmount( ,orderItem.getDiscount()), orderItem.discountPercentProperty(), orderItem.quantityProperty()));
 
         tvOrders.getItems().add(orderItem);
         Platform.runLater(() -> {
@@ -343,7 +333,7 @@ public class InvoiceController {
                 Platform.runLater(() -> {
                     if (savedInvoice != null) {
                         SweetAlert successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
-                        successAlert.setContentMessage(Global.Message.SAVED).show(spMain);
+                        successAlert.setContentMessage(AppConstant.Message.SAVED).show(spMain);
                         clearAllInvoice();
                     }
                 });
@@ -361,7 +351,7 @@ public class InvoiceController {
         Customer customer = customerController.getCustomer();
 
         if (customer == null) {
-            return Global.Message.ENTER_CUSTOMER;
+            return AppConstant.Message.ENTER_CUSTOMER;
         }
 
         OrderItem item = productService.checkQuantity(tvOrders.getItems());
@@ -378,15 +368,10 @@ public class InvoiceController {
         int stocks = lineItem.getProduct().getStock().getStocks();
         int quantity = event.getNewValue();
         if (quantity > stocks) {
-            showError(Global.Message.QUANTITY_EXCEED);
+            showError(AppConstant.Message.QUANTITY_EXCEED);
             lineItem.setQuantity(event.getOldValue());
         } else {
             lineItem.setQuantity(event.getNewValue());
-        }
-        if (tvOrders.getItems().contains(lineItem)) {
-            int index = tvOrders.getItems().indexOf(lineItem);
-            tvOrders.getItems().remove(lineItem);
-            tvOrders.getItems().add(index, lineItem);
         }
         tvOrders.refresh();
     }

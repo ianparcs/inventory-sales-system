@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import javafx.stage.Stage;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import ph.parcs.rmhometiles.StageInitializer;
 import ph.parcs.rmhometiles.State;
@@ -56,6 +57,7 @@ public class SceneManager {
         return states.get(State.ERROR);
     }
 
+    @Lazy
     @Autowired
     public void setStageInitializer(StageInitializer stageInitializer) {
         this.stageInitializer = stageInitializer;

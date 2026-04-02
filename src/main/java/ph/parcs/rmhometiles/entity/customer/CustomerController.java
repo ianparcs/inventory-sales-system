@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.ItemListener;
-import ph.parcs.rmhometiles.util.Global;
+import ph.parcs.rmhometiles.util.AppConstant;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
 import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.util.converter.CustomerConverter;
@@ -20,7 +20,6 @@ import ph.parcs.rmhometiles.util.converter.CustomerConverter;
 import java.util.List;
 
 @Controller
-@Scope("singleton")
 public class CustomerController {
 
     @FXML
@@ -49,16 +48,14 @@ public class CustomerController {
     @FXML
     private void selectCostumer() {
         if (cbCustomer != null && cbCustomer.getValue() != null) customer = cbCustomer.getValue();
-        if (customer != null) {
+
+        Platform.runLater(() -> {
             lblAddress.setText(StringUtils.isEmpty(customer.getAddress()) ? "n/a" : customer.getAddress());
             lblContact.setText(StringUtils.isEmpty(customer.getContact()) ? "n/a" : customer.getContact());
             lblName.setText(StringUtils.isEmpty(customer.getName()) ? "n/a" : customer.getName());
             btnClearCustomer.setVisible(true);
             btnAddUser.setVisible(false);
-        }
 
-        Platform.runLater(() -> {
-            //  cbCustomer.valueProperty().set(null);
             cbCustomer.hide();
             spMain.requestFocus();
         });
@@ -68,7 +65,7 @@ public class CustomerController {
         cbCustomer.setConverter(new CustomerConverter(cbCustomer.getValue()));
         cbCustomer.getEditor().textProperty().addListener((observable, oldVal, keyTyped) -> showCustomer(keyTyped));
         cbCustomer.focusedProperty().addListener((observableValue, outOfFocus, focus) -> {
-            if (focus) showCustomer(Global.STRING_EMPTY);
+            if (focus) showCustomer(AppConstant.STRING_EMPTY);
         });
     }
 
@@ -107,7 +104,7 @@ public class CustomerController {
                 }
 
                 SweetAlert successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
-                successAlert.setContentMessage(Global.Message.SAVED).show(spMain);
+                successAlert.setContentMessage(AppConstant.Message.SAVED).show(spMain);
                 cbCustomer.hide();
             }
 

@@ -1,9 +1,9 @@
 package ph.parcs.rmhometiles.entity.inventory.category;
 
+import jakarta.persistence.*;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 
-import javax.persistence.*;
 import java.util.Set;
 
 @Entity

@@ -11,15 +11,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
-import ph.parcs.rmhometiles.entity.MoneyService;
-import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
-import ph.parcs.rmhometiles.entity.inventory.item.ItemPageEntry;
+import ph.parcs.rmhometiles.entity.money.MoneyService;
 import ph.parcs.rmhometiles.ui.pagination.PaginationController;
 import ph.parcs.rmhometiles.util.DateUtility;
-import ph.parcs.rmhometiles.util.Global;
-import ph.parcs.rmhometiles.util.PageUtil;
+import ph.parcs.rmhometiles.util.AppConstant;
 import ph.parcs.rmhometiles.util.ThreadUtil;
 
 import java.time.LocalDateTime;
@@ -102,12 +98,12 @@ public class SalesReportController extends PaginationController {
         ExecutorService executorService = Executors.newCachedThreadPool();
         executorService.submit(() -> {
             List<SalesReport> salesReportsToday = salesReportService.findReports(cbDateRange.getValue());
-            Map<Global.Sales, String> moneyMap = moneyService.computeAllMoney(salesReportsToday);
+            Map<AppConstant.Sales, String> moneyMap = moneyService.computeAllMoney(salesReportsToday);
             Platform.runLater(() -> {
-                lblTax.setText(moneyMap.get(Global.Sales.TAX));
-                lblCost.setText(moneyMap.get(Global.Sales.COST));
-                lblTotal.setText(moneyMap.get(Global.Sales.TOTAL));
-                lblProfit.setText(moneyMap.get(Global.Sales.PROFIT));
+                lblTax.setText(moneyMap.get(AppConstant.Sales.TAX));
+                lblCost.setText(moneyMap.get(AppConstant.Sales.COST));
+                lblTotal.setText(moneyMap.get(AppConstant.Sales.TOTAL));
+                lblProfit.setText(moneyMap.get(AppConstant.Sales.PROFIT));
 
                 tvSalesReports.getItems().setAll(salesReportsToday);
                 tvSalesReports.refresh();

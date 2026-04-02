@@ -1,6 +1,6 @@
 package ph.parcs.rmhometiles.util;
 
-public interface Global {
+public interface AppConstant {
 
     String STRING_EMPTY = "";
     String JADIRA_PACKAGE = "org.jadira.usertype.moneyandcurrency.joda.PersistentMoneyAmount";

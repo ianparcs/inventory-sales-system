@@ -13,7 +13,6 @@ import lombok.SneakyThrows;
 import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import ph.parcs.rmhometiles.entity.customer.Customer;
 import ph.parcs.rmhometiles.entity.inventory.category.Category;
 import ph.parcs.rmhometiles.entity.inventory.item.EditItemController;
 import ph.parcs.rmhometiles.entity.inventory.item.EntityTableController;
@@ -23,7 +22,7 @@ import ph.parcs.rmhometiles.file.FileService;
 import ph.parcs.rmhometiles.file.ImageProduct;
 import ph.parcs.rmhometiles.file.writer.ProductExcelWriter;
 import ph.parcs.rmhometiles.util.FileUtils;
-import ph.parcs.rmhometiles.util.Global;
+import ph.parcs.rmhometiles.util.AppConstant;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
 import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
 
@@ -186,7 +185,7 @@ public class ProductTableController extends EntityTableController<Product> {
                 fileService.exportToExcel(new ProductExcelWriter(productList));
                 Platform.runLater(() -> {
                     SweetAlert successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
-                    successAlert.setContentMessage(Global.Message.EXPORT).show(spMain);
+                    successAlert.setContentMessage(AppConstant.Message.EXPORT).show(spMain);
                 });
             });
 

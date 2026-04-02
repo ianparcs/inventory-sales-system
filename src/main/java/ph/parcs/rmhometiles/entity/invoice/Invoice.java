@@ -1,18 +1,20 @@
 package ph.parcs.rmhometiles.entity.invoice;
 
+import jakarta.persistence.*;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import org.hibernate.annotations.Type;
+import org.hibernate.usertype.UserTypeLegacyBridge;
 import org.joda.money.Money;
 import ph.parcs.rmhometiles.entity.customer.Customer;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.entity.payment.Payment;
-import ph.parcs.rmhometiles.util.Global;
+import ph.parcs.rmhometiles.util.AppConstant;
+import ph.parcs.rmhometiles.util.converter.MoneyConverter;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -67,7 +69,7 @@ public class Invoice extends BaseEntity {
     }
 
     @Column(name = "amount", precision = 8, scale = 2)
-    @Type(type = Global.JADIRA_PACKAGE, parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "PHP")})
+    @Convert(converter = MoneyConverter.class)
     public Money getAmount() {
         return amount.get();
     }
@@ -77,7 +79,7 @@ public class Invoice extends BaseEntity {
     }
 
     @Column(name = "balance", precision = 8, scale = 2)
-    @Type(type = Global.JADIRA_PACKAGE, parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "PHP")})
+    @Convert(converter = MoneyConverter.class)
     public Money getBalance() {
         return balance.get();
     }
@@ -87,7 +89,7 @@ public class Invoice extends BaseEntity {
     }
 
     @Column(name = "total_amount", precision = 8, scale = 2)
-    @Type(type = Global.JADIRA_PACKAGE, parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "PHP")})
+    @Convert(converter = MoneyConverter.class)
     public Money getTotalAmount() {
         return totalAmount.get();
     }
@@ -97,7 +99,7 @@ public class Invoice extends BaseEntity {
     }
 
     @Column(name = "discount_amount", precision = 8, scale = 2)
-    @Type(type = Global.JADIRA_PACKAGE, parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "PHP")})
+    @Convert(converter = MoneyConverter.class)
     public Money getDiscount() {
         return discount.get();
     }
@@ -107,7 +109,7 @@ public class Invoice extends BaseEntity {
     }
 
     @Column(name = "tax_amount", precision = 8, scale = 2)
-    @Type(type = Global.JADIRA_PACKAGE, parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "PHP")})
+    @Convert(converter = MoneyConverter.class)
     public Money getTaxAmount() {
         return taxAmount.get();
     }
@@ -135,7 +137,7 @@ public class Invoice extends BaseEntity {
     }
 
     @Column(name = "change", precision = 8, scale = 2)
-    @Type(type = Global.JADIRA_PACKAGE, parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "PHP")})
+    @Convert(converter = MoneyConverter.class)
     public Money getChange() {
         return change.get();
     }
