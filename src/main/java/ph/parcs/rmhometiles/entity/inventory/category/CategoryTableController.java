@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import ph.parcs.rmhometiles.entity.inventory.item.EditItemController;
 import ph.parcs.rmhometiles.entity.inventory.item.EntityTableController;
 
 @Controller
@@ -18,5 +19,10 @@ public class CategoryTableController extends EntityTableController<Category> {
     @Autowired
     public void setCategoryService(CategoryService categoryService) {
         this.baseService = categoryService;
+    }
+
+    @Autowired
+    public void setEditItemController(EditItemController<Category> editItemController) {
+        this.editItemController = editItemController;
     }
 }

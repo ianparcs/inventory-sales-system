@@ -8,7 +8,7 @@ import ph.parcs.rmhometiles.entity.inventory.item.ItemPageEntry;
 public class PageUtil {
 
     public static ItemPageEntry getPageEntries(Page<BaseEntity> items) {
-        long toEntry = items.getNumberOfElements() * (items.getNumber() + 1);
+        long toEntry = (long) items.getNumberOfElements() * (items.getNumber() + 1);
         long fromEntry = (toEntry - items.getNumberOfElements()) + 1;
 
         if (items.isLast()) {

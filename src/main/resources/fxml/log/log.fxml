@@ -15,7 +15,8 @@
             <ColumnConstraints hgrow="ALWAYS"/>
         </columnConstraints>
 
-        <HBox fillHeight="false" maxWidth="1.7976931348623157E308" styleClass="tile-info" GridPane.columnIndex="0" GridPane.rowIndex="0">
+        <HBox fillHeight="false" maxWidth="1.7976931348623157E308" styleClass="tile-info" GridPane.columnIndex="0"
+              GridPane.rowIndex="0">
             <Label styleClass="big-title" text="Activity Logs" HBox.hgrow="ALWAYS" maxWidth="1.7976931348623157E308"/>
             <JFXComboBox fx:id="cbDateRange" onAction="#onDateRangeSelect" promptText="Select Date">
                 <items>

@@ -3,7 +3,6 @@ package ph.parcs.rmhometiles.entity.customer;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import ph.parcs.rmhometiles.entity.inventory.item.EditItemController;

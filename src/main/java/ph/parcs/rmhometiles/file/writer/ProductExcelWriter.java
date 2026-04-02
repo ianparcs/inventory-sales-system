@@ -24,12 +24,12 @@ public class ProductExcelWriter extends ExcelWriter {
     }
 
     private Object createCategoryField(Category category) {
-        if(category == null || category.getName().isEmpty()) return " ";
+        if (category == null || category.getName().isEmpty()) return " ";
         return category.getName();
     }
 
     private Integer createStockField(Stock stock) {
-        if(stock == null || stock.getStocks() <= 0) return 0;
+        if (stock == null || stock.getStocks() <= 0) return 0;
         return stock.getStocks();
     }
 }

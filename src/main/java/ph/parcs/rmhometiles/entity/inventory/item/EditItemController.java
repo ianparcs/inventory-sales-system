@@ -7,7 +7,6 @@ import com.jfoenix.validation.RegexValidator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.ItemListener;
 

@@ -11,8 +11,8 @@ import ph.parcs.rmhometiles.entity.inventory.stock.unit.StockUnit;
 @Access(AccessType.PROPERTY)
 public class Stock {
 
-    private IntegerProperty stocks = new SimpleIntegerProperty();
-    private IntegerProperty unitSold = new SimpleIntegerProperty();
+    private final IntegerProperty stocks = new SimpleIntegerProperty();
+    private final IntegerProperty unitSold = new SimpleIntegerProperty();
     private Integer id;
 
     private StockUnit stockUnit;

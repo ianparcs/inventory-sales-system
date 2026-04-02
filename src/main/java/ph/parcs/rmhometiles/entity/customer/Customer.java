@@ -1,7 +1,6 @@
 package ph.parcs.rmhometiles.entity.customer;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Setter;
 import ph.parcs.rmhometiles.entity.invoice.Invoice;

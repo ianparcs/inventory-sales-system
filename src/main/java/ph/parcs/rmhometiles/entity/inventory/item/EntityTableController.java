@@ -3,7 +3,7 @@ package ph.parcs.rmhometiles.entity.inventory.item;
 import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.TableColumn;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import lombok.SneakyThrows;
@@ -88,7 +88,7 @@ public abstract class EntityTableController<T extends BaseEntity> extends Pagina
             public void onSaveFailed(BaseEntity entity) {
 
             }
-        }, (T)entity);
+        }, (T) entity);
         return entity;
     }
 

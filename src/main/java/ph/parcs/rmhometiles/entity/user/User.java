@@ -12,11 +12,11 @@ import javafx.beans.property.StringProperty;
 @Access(AccessType.PROPERTY)
 public class User {
 
-    private IntegerProperty id = new SimpleIntegerProperty();
+    private final IntegerProperty id = new SimpleIntegerProperty();
 
-    private StringProperty username = new SimpleStringProperty();
-    private StringProperty password = new SimpleStringProperty();
-    private StringProperty role = new SimpleStringProperty();
+    private final StringProperty username = new SimpleStringProperty();
+    private final StringProperty password = new SimpleStringProperty();
+    private final StringProperty role = new SimpleStringProperty();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

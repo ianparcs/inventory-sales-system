@@ -36,6 +36,7 @@
     -fx-border-radius: 2pt;
     -fx-background-radius: 2pt;
 }
+
 .excel-button {
     -fx-padding: 0.533333em;
     -fx-background-color: avocado;

@@ -23,6 +23,7 @@ public class MoneyConverter implements AttributeConverter<Money, String> {
         return attribute == null ? null : attribute.toString();
         // outputs "PHP 123.45"
     }
+
     @Override
     public Money convertToEntityAttribute(String dbData) {
         return dbData == null ? null : Money.parse(dbData);

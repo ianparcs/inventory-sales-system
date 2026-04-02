@@ -5,14 +5,11 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import org.hibernate.annotations.Type;
-import org.hibernate.usertype.UserTypeLegacyBridge;
 import org.joda.money.Money;
 import ph.parcs.rmhometiles.entity.customer.Customer;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.entity.payment.Payment;
-import ph.parcs.rmhometiles.util.AppConstant;
 import ph.parcs.rmhometiles.util.converter.MoneyConverter;
 
 import java.time.LocalDate;
@@ -25,15 +22,15 @@ import java.util.Set;
 @AttributeOverride(name = "id", column = @Column(name = "invoice_id"))
 public class Invoice extends BaseEntity {
 
-    private ObjectProperty<Customer> customer = new SimpleObjectProperty<>();
-    private ObjectProperty<Money> totalAmount = new SimpleObjectProperty<>();
-    private ObjectProperty<Money> taxAmount = new SimpleObjectProperty<>();
-    private ObjectProperty<Money> discount = new SimpleObjectProperty<>();
-    private ObjectProperty<Money> balance = new SimpleObjectProperty<>();
-    private ObjectProperty<Money> change = new SimpleObjectProperty<>();
-    private ObjectProperty<Money> amount = new SimpleObjectProperty<>();
-    private StringProperty remarks = new SimpleStringProperty();
-    private StringProperty status = new SimpleStringProperty();
+    private final ObjectProperty<Customer> customer = new SimpleObjectProperty<>();
+    private final ObjectProperty<Money> totalAmount = new SimpleObjectProperty<>();
+    private final ObjectProperty<Money> taxAmount = new SimpleObjectProperty<>();
+    private final ObjectProperty<Money> discount = new SimpleObjectProperty<>();
+    private final ObjectProperty<Money> balance = new SimpleObjectProperty<>();
+    private final ObjectProperty<Money> change = new SimpleObjectProperty<>();
+    private final ObjectProperty<Money> amount = new SimpleObjectProperty<>();
+    private final StringProperty remarks = new SimpleStringProperty();
+    private final StringProperty status = new SimpleStringProperty();
 
     private Set<OrderItem> orderItems = new HashSet<>();
     private Set<Payment> payments = new HashSet<>();

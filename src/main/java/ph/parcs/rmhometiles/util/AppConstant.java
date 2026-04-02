@@ -7,7 +7,7 @@ public interface AppConstant {
     String TAX = "3%";
 
     enum Sales {
-        TAX, PROFIT, TOTAL, COST;
+        TAX, PROFIT, TOTAL, COST
     }
 
     interface Unit {

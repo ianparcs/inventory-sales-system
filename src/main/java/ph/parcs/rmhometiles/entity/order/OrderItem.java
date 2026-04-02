@@ -2,13 +2,10 @@ package ph.parcs.rmhometiles.entity.order;
 
 import jakarta.persistence.*;
 import javafx.beans.property.*;
-import org.hibernate.annotations.Type;
-import org.hibernate.usertype.UserTypeLegacyBridge;
 import org.joda.money.Money;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.invoice.Invoice;
-import ph.parcs.rmhometiles.util.AppConstant;
 import ph.parcs.rmhometiles.util.converter.MoneyConverter;
 
 
