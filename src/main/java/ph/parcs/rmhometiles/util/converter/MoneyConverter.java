@@ -18,7 +18,6 @@ public class MoneyConverter implements AttributeConverter<Money, String> {
         return Money.of(CurrencyUnit.ofCountry("PH"), bc);
     }
 
-
     @Override
     public String convertToDatabaseColumn(Money attribute) {
         return attribute == null ? null : attribute.toString();

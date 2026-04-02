@@ -9,7 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,6 +39,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+@Slf4j
 @Controller
 public class InvoiceController {
 
@@ -187,7 +188,6 @@ public class InvoiceController {
         return invoice.getAmount().minus(showDiscountAmount());
     }
 
-    @SneakyThrows
     private Money showTaxAmount() {
         Money totalBeforeTax = showTotalBeforeTax();
         return moneyService.computeDiscount(totalBeforeTax, AppConstant.TAX);
@@ -223,7 +223,6 @@ public class InvoiceController {
         tcCode.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "code"));
         tcPrice.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "price"));
         tcStock.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "stock", "stocks"));
-
     }
 
     private void initInvoiceLabelProperties() {
@@ -363,8 +362,8 @@ public class InvoiceController {
     }
 
     @FXML
-    public void onQuantityEditCommit(TableColumn.CellEditEvent<OrderItem, Integer> event) {
-        OrderItem lineItem = event.getTableView().getItems().get(event.getTablePosition().getRow());
+    public void onEditInvoiceQuantity(TableColumn.CellEditEvent<OrderItem, Integer> event) {
+        OrderItem lineItem = event.getRowValue();
         int stocks = lineItem.getProduct().getStock().getStocks();
         int quantity = event.getNewValue();
         if (quantity > stocks) {
@@ -373,18 +372,22 @@ public class InvoiceController {
         } else {
             lineItem.setQuantity(event.getNewValue());
         }
-        tvOrders.refresh();
+        Platform.runLater(() -> {
+            int index = tvOrders.getItems().indexOf(lineItem);
+            tvOrders.getItems().remove(index);
+            tvOrders.getItems().add(index, lineItem);
+            tvOrders.refresh();
+        });
     }
 
     @FXML
     public void onDiscountPercentEditCommit(TableColumn.CellEditEvent<OrderItem, Float> event) {
         float discount = event.getNewValue();
-        OrderItem lineItem = event.getTableView().getItems().get(event.getTablePosition().getRow());
+        OrderItem lineItem = event.getRowValue();
         if (lineItem != null) {
             lineItem.setDiscountPercent(discount);
         }
     }
-
 
     @FXML
     public void onCashTypeClicked() {
@@ -396,9 +399,12 @@ public class InvoiceController {
         rbCashType.setSelected(false);
     }
 
+    @FXML
     private OrderItem onItemDeleteAction(OrderItem item) {
-        tvOrders.getItems().remove(item);
-        tvOrders.refresh();
+        if (item != null && tvOrders.getItems().contains(item)) {
+            tvOrders.getItems().remove(item);
+            tvOrders.refresh();
+        }
         return item;
     }
 
