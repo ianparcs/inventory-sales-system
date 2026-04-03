@@ -27,7 +27,6 @@ import ph.parcs.rmhometiles.util.DateUtil;
 import ph.parcs.rmhometiles.util.ThreadUtil;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ExecutorService;
@@ -51,6 +50,8 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
     @FXML
     public void initialize() {
         super.initialize();
+
+        tcCustomer.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().getCustomer(), "name"));
 
         tcStatus.setCellFactory(new Callback<>() {
             @Override
@@ -77,8 +78,6 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
                 return "";
             });
         });
-
-        tcCustomer.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().getCustomer(), "name"));
     }
 
     @Override
@@ -87,8 +86,10 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
         currentUser.ifPresent(user -> {
             if (tcAction.getCellFactory() != null) {
                 switch (user.getRole()) {
-                    case ADMIN -> tcAction.setCellFactory(ActionTableCell.forActions(this::onViewActionClick, this::onEditActionClick, this::onDeleteActionClick));
-                    case USER -> tcAction.setCellFactory(ActionTableCell.forActions(this::onViewActionClick, AppConstant.ActionType.VIEW));
+                    case ADMIN ->
+                            tcAction.setCellFactory(ActionTableCell.forActions(this::onViewActionClick, this::onEditActionClick, this::onDeleteActionClick));
+                    case USER ->
+                            tcAction.setCellFactory(ActionTableCell.forActions(this::onViewActionClick, AppConstant.ActionType.VIEW));
                 }
             }
         });

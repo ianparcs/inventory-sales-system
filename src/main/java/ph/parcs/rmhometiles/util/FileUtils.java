@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class FileUtils {
 
-    private static final String BASE_PATH = "image/product" + File.separator;
+    private static final String BASE_PATH = "data/image/";
 
     public static FileChooser getImageChooser() {
         FileChooser fileChooser = new FileChooser();
@@ -22,7 +22,7 @@ public class FileUtils {
     }
 
     public static String getTargetPath(String filename) {
-        String fullPath = System.getProperty("user.home") + "/rmhometiles-images/" + filename;
+        String fullPath = BASE_PATH + filename;
         return fullPath.trim();
     }
 
