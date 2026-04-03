@@ -148,7 +148,6 @@ public class ProductEditController extends EditItemController<Product> {
             if (product.getImageProduct() != null) {
                 tfImage.setText(product.getImageProduct().getPath());
             }
-
         }
 
         setStockUnitValue(product);
@@ -157,7 +156,7 @@ public class ProductEditController extends EditItemController<Product> {
     }
 
     @Override
-    protected Product createEntity(Product product) {
+    protected Product editItemInfo(Product product) {
         Stock stock = new Stock();
         stock.setStocks(Integer.valueOf(!tfStock.getText().isEmpty() ? tfStock.getText() : "0"));
 
@@ -224,7 +223,7 @@ public class ProductEditController extends EditItemController<Product> {
         executorService.execute(() ->
                 btnSave.setOnAction(a -> {
                     deleteFile(product);
-                    Product savedItem = baseService.saveEntity(createEntity(product));
+                    Product savedItem = baseService.saveEntity(editItemInfo(product));
                     Platform.runLater(() -> {
                         closeDialog();
                         if (savedItem != null) {

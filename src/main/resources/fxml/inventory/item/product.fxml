@@ -126,7 +126,7 @@
                 </TableColumn>
 
                 <TableColumn fx:id="tcAction" reorderable="false"
-                             sortable="false" styleClass="action-column" text="Action"/>
+                             sortable="false" styleClass="action-column" text="Action" prefWidth="Infinity"/>
             </columns>
         </TableView>
 

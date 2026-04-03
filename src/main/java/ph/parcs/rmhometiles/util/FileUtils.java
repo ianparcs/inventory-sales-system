@@ -22,7 +22,7 @@ public class FileUtils {
     }
 
     public static String getTargetPath(String filename) {
-        String fullPath = getParentDirectoryFromJar() + File.separator + filename;
+        String fullPath = System.getProperty("user.home") + "/rmhometiles-images/" + filename;
         return fullPath.trim();
     }
 

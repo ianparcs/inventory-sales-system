@@ -96,7 +96,7 @@ public class Product extends BaseEntity {
         this.imageProduct = imageProduct;
     }
 
-    @Column(name = "code")
+    @Column(name = "code", unique = true)
     public String getCode() {
         return code.get();
     }
