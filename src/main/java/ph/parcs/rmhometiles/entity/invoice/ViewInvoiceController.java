@@ -57,7 +57,9 @@ public class ViewInvoiceController {
     @FXML
     private Label lblInvoiceDate;
     @FXML
-    private Label lblCustomer;
+    private Label lblCustomerName;
+    @FXML
+    private Label lblCustomerContact;
     @FXML
     private Label lblBalance;
     @FXML
@@ -91,7 +93,8 @@ public class ViewInvoiceController {
             });
 
             lblTotalAmount.setText("₱" + invoice.getTotalAmount().getAmount());
-            lblCustomer.setText("Customer: " + invoice.getCustomer().getName());
+            lblCustomerName.setText("Customer: " + invoice.getCustomer().getName());
+            lblCustomerContact.setText("Contact: " + invoice.getCustomer().getContact());
             lblInvoiceDate.setText("Invoice Date: " + invoice.getCreatedAt().format(myFormatObj));
             lblBalance.textProperty().bind(Bindings.createObjectBinding(this::hidePaymentContainer, invoice.balanceProperty()));
 

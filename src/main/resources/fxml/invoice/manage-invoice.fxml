@@ -10,7 +10,7 @@
 <?import java.lang.*?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/manage-invoice.css"
            xmlns="http://javafx.com/javafx/10.0.2-internal" fx:id="spMain"
-           fx:controller="ph.parcs.rmhometiles.entity.invoice.manage.ManageInvoiceTableController">
+           fx:controller="ph.parcs.rmhometiles.entity.invoice.manage.ManageInvoiceTableController" cache="true">
 
     <fx:include source="edit-invoice.fxml" visible="false"/>
 
