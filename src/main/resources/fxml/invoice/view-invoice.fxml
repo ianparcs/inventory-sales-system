@@ -33,7 +33,7 @@
             </JFXButton>
         </HBox>
 
-        <GridPane fx:id="gpPaymentControl" hgap="20" vgap="20" maxHeight="1.7976931348623157E308"
+        <GridPane fx:id="gpPaymentControl" hgap="5" vgap="5" maxHeight="1.7976931348623157E308"
                   maxWidth="1.7976931348623157E308"
                   styleClass="tile-info"
                   GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1">
@@ -48,7 +48,8 @@
                         text="Details" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
                 <VBox alignment="CENTER_LEFT">
                     <Label fx:id="lblInvoiceDate"/>
-                    <Label fx:id="lblCustomer"/>
+                    <Label fx:id="lblCustomerName"/>
+                    <Label fx:id="lblCustomerContact"/>
                 </VBox>
             </TitledPane>
 
