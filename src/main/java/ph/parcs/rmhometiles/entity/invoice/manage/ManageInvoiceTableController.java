@@ -19,14 +19,17 @@ import ph.parcs.rmhometiles.entity.inventory.item.EntityTableController;
 import ph.parcs.rmhometiles.entity.invoice.Invoice;
 import ph.parcs.rmhometiles.entity.invoice.InvoiceService;
 import ph.parcs.rmhometiles.entity.invoice.ViewInvoiceController;
+import ph.parcs.rmhometiles.session.SessionService;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.ui.scene.SceneManager;
+import ph.parcs.rmhometiles.util.AppConstant;
 import ph.parcs.rmhometiles.util.DateUtility;
 import ph.parcs.rmhometiles.util.ThreadUtil;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -48,6 +51,7 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
     @FXML
     public void initialize() {
         super.initialize();
+
         tcStatus.setCellFactory(new Callback<>() {
             @Override
             public TableCell<Invoice, String> call(TableColumn<Invoice, String> param) {
@@ -76,7 +80,20 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
         });
 
         tcCustomer.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().getCustomer(), "name"));
-        tcAction.setCellFactory(ActionTableCell.forActions(this::onViewActionClick, this::onEditActionClick, this::onDeleteActionClick));
+
+        spMain.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                    var currentUser = Optional.of(SessionService.getInstance().getLoggedInUser());
+                    currentUser.ifPresent(user -> {
+                        if (tcAction.getCellFactory() != null) {
+                            switch (user.getRole()) {
+                                case USER -> tcAction.setCellFactory(ActionTableCell.forActions(this::onViewActionClick, this::onEditActionClick, this::onDeleteActionClick));
+                                case ADMIN -> tcAction.setCellFactory(ActionTableCell.forActions(this::onViewActionClick, AppConstant.ActionType.VIEW));
+                            }
+                        }
+                    });
+            }
+        });
     }
 
     @SneakyThrows
@@ -111,18 +128,19 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
     }
 
     @Autowired
-    public void setSceneManager(SceneManager sceneManager) {
-        this.sceneManager = sceneManager;
-    }
-
-    @Autowired
     public void setInvoiceService(InvoiceService invoiceService) {
         this.invoiceService = invoiceService;
         this.baseService = invoiceService;
     }
 
     @Autowired
+    public void setSceneManager(SceneManager sceneManager) {
+        this.sceneManager = sceneManager;
+    }
+
+    @Autowired
     public void setEditItemController(EditItemController<Invoice> editItemController) {
         this.editItemController = editItemController;
     }
+
 }

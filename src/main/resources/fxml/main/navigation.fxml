@@ -54,7 +54,7 @@
         </graphic>
     </JFXButton>
 
-    <JFXButton fx:id="btnLog" maxWidth="1.7976931348623157E308" text="Log Manager">
+    <JFXButton fx:id="btnLog" maxWidth="1.7976931348623157E308" text="User Activity">
         <graphic>
             <FontAwesomeIconView glyphName="CLIPBOARD"/>
         </graphic>

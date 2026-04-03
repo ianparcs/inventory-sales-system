@@ -11,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.State;
 import ph.parcs.rmhometiles.entity.user.User;
 import ph.parcs.rmhometiles.entity.user.UserService;
+import ph.parcs.rmhometiles.session.SessionService;
 import ph.parcs.rmhometiles.ui.home.HomeController;
 import ph.parcs.rmhometiles.ui.scene.SceneManager;
+import ph.parcs.rmhometiles.util.AppConstant;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,7 +41,6 @@ public class NavigationController {
 
     private HomeController homeController;
     private SceneManager sceneManager;
-    private UserService userService;
 
     @FXML
     private void initialize() {
@@ -52,15 +53,18 @@ public class NavigationController {
         states.put(State.INVOICE, btnInvoice);
         states.put(State.LOG, btnLog);
 
-        User currentUser = userService.getCurrentUser();
-        if (currentUser != null) {
-            String userRole = currentUser.getRole();
-            vbContainer.getChildren().remove(btnDashboard);
 
-            if (userRole.equals("user")) {
-                vbContainer.getChildren().remove(btnLog);
+        Platform.runLater(() -> {
+            User currentUser = SessionService.getInstance().getLoggedInUser();
+            if (currentUser != null) {
+                var userRole = currentUser.getRole();
+                vbContainer.getChildren().remove(btnDashboard);
+
+                if (userRole.equals(AppConstant.Role.USER)) {
+                    vbContainer.getChildren().remove(btnDashboard);
+                }
             }
-        }
+        });
 
         Platform.runLater(() -> states.forEach((key, value) -> value.setOnAction(actionEvent -> {
             Parent content = sceneManager.getContent(key);
@@ -68,12 +72,6 @@ public class NavigationController {
             content.setCacheHint(CacheHint.QUALITY);
             homeController.setContent(content);
         })));
-    }
-
-
-    @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
     }
 
     @Autowired

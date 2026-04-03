@@ -12,6 +12,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
+import ph.parcs.rmhometiles.util.AppConstant;
 
 import java.util.function.Function;
 
@@ -19,18 +20,28 @@ public class ActionTableCell<S> extends TableCell<S, HBox> {
 
     private final HBox hBox = new HBox();
 
-    public ActionTableCell(Function<S, S> function, String type) {
+    public ActionTableCell(Function<S, S> function, AppConstant.ActionType type) {
         JFXButton button = new JFXButton();
-        Text icon;
-        if (type.equalsIgnoreCase("EDIT")) {
-            icon = FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.PENCIL, "1.5em");
-            icon.setId("edit-icon");
-            button.setTooltip(new Tooltip("Edit"));
-        } else {
-            icon = FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.TRASH, "1.5em");
-            icon.setId("delete-icon");
-            button.setTooltip(new Tooltip("Delete"));
+        Text icon = FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.PENCIL, "1.5em");
+
+        switch (type) {
+            case VIEW -> {
+                icon = FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.EYE, "1.5em");
+                icon.setId("view-icon");
+                button.setTooltip(new Tooltip("View"));
+            }
+            case EDIT -> {
+                icon = FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.PENCIL, "1.5em");
+                icon.setId("edit-icon");
+                button.setTooltip(new Tooltip("Edit"));
+            }
+            case DELETE -> {
+                icon = FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.TRASH, "1.5em");
+                icon.setId("delete-icon");
+                button.setTooltip(new Tooltip("Delete"));
+            }
         }
+
         button.setGraphic(icon);
         button.setPadding(new Insets(5));
         button.setOnAction((ActionEvent e) -> function.apply(getCurrentItem()));
@@ -40,7 +51,7 @@ public class ActionTableCell<S> extends TableCell<S, HBox> {
     }
 
     public ActionTableCell(Function<S, S> editFunction, Function<S, S> delFunction) {
-        this(editFunction, "EDIT");
+        this(editFunction, AppConstant.ActionType.EDIT);
 
         Text deleteIcon = FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.TRASH, "1.5em");
         deleteIcon.setId("delete-icon");
@@ -77,7 +88,7 @@ public class ActionTableCell<S> extends TableCell<S, HBox> {
         return param -> new ActionTableCell<>(editFunction, delFunction);
     }
 
-    public static <S> Callback<TableColumn<S, HBox>, TableCell<S, HBox>> forActions(Function<S, S> delFunction, String type) {
+    public static <S> Callback<TableColumn<S, HBox>, TableCell<S, HBox>> forActions(Function<S, S> delFunction, AppConstant.ActionType type) {
         return param -> new ActionTableCell<>(delFunction, type);
     }
 

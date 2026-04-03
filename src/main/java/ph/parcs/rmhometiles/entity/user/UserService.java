@@ -24,18 +24,16 @@ public class UserService implements UserDetailsService {
     private Authentication authenticationToken;
     private UserRepository userRepository;
 
-    private User currentUser;
-
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) {
-        currentUser = userRepository.findByUsername(username);
+        User currentUser = userRepository.findByUsername(username);
 
         if (currentUser == null || username.isEmpty()) {
             return null;
         }
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority(currentUser.getRole()));
+        grantedAuthorities.add(new SimpleGrantedAuthority(currentUser.getRole().name()));
 
         return new org.springframework.security.core.userdetails.User(currentUser.getUsername(), currentUser.getPassword(), grantedAuthorities);
     }
@@ -52,11 +50,6 @@ public class UserService implements UserDetailsService {
             }
         }
     }
-
-    public User getCurrentUser() {
-        return currentUser;
-    }
-
     private boolean isPasswordMatch(String plainPass, String encodedPass) {
         return bCryptPasswordEncoder.matches(plainPass, encodedPass);
     }
@@ -65,7 +58,6 @@ public class UserService implements UserDetailsService {
         return authenticationToken != null && authenticationToken.isAuthenticated();
     }
 
-    //TODO
     @Transactional
     public void saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));

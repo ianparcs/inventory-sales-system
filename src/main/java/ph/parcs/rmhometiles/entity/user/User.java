@@ -1,10 +1,8 @@
 package ph.parcs.rmhometiles.entity.user;
 
 import jakarta.persistence.*;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
+import ph.parcs.rmhometiles.util.AppConstant;
 
 
 @Entity
@@ -16,7 +14,7 @@ public class User {
 
     private final StringProperty username = new SimpleStringProperty();
     private final StringProperty password = new SimpleStringProperty();
-    private final StringProperty role = new SimpleStringProperty();
+    private final ObjectProperty<AppConstant.Role> role = new SimpleObjectProperty<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,15 +54,16 @@ public class User {
         return password;
     }
 
-    public String getRole() {
+    @Enumerated(EnumType.STRING)
+    public AppConstant.Role getRole() {
         return role.get();
     }
 
-    public void setRole(String role) {
+    public void setRole(AppConstant.Role role) {
         this.role.set(role);
     }
 
-    public StringProperty roleProperty() {
+    public ObjectProperty<AppConstant.Role> roleProperty() {
         return role;
     }
 

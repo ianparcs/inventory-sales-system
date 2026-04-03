@@ -15,7 +15,9 @@ import ph.parcs.rmhometiles.entity.customer.CustomerService;
 import ph.parcs.rmhometiles.entity.user.User;
 import ph.parcs.rmhometiles.entity.user.UserRepository;
 import ph.parcs.rmhometiles.entity.user.UserService;
+import ph.parcs.rmhometiles.session.SessionService;
 import ph.parcs.rmhometiles.ui.scene.SceneManager;
+import ph.parcs.rmhometiles.util.AppConstant;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
 import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
 
@@ -40,15 +42,9 @@ public class LoginController {
     private SceneManager sceneManager;
 
     private UserRepository userRepository;
-    private CustomerService customerService;
 
     @FXML
     private void initialize() {
-        User user = userRepository.findByUsername(tfUserName.getText());
-        if (user == null) {
-            userService.saveUser(createUser());
-        }
-
         setUserFieldStyle(pfUserPassword, icoKey);
         setUserFieldStyle(tfUserName, icoUser);
         btnLogin.fire();
@@ -70,10 +66,15 @@ public class LoginController {
         final String password = pfUserPassword.getText();
 
         new Thread(() -> {
+            User user = userRepository.findByUsername(tfUserName.getText());
+            if (user == null) {
+                userService.saveUser(createUser());
+            }
             userService.authenticate(username, password);
             Platform.runLater(() -> {
                 sceneManager.load();
                 if (userService.isAuthenticated()) {
+                    SessionService.getInstance().setLoggedInUser(user);
                     gotoHomeScene();
                 } else {
                     showErrorDialog();
@@ -97,7 +98,7 @@ public class LoginController {
         User admin = new User();
         admin.setUsername("admin");
         admin.setPassword("admin");
-        admin.setRole("admin");
+        admin.setRole(AppConstant.Role.ADMIN);
         return admin;
     }
 
@@ -116,8 +117,4 @@ public class LoginController {
         this.userRepository = userRepository;
     }
 
-    @Autowired
-    public void setCustomerService(CustomerService customerService) {
-        this.customerService = customerService;
-    }
 }
