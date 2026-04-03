@@ -9,7 +9,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-import lombok.SneakyThrows;
 import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +20,7 @@ import ph.parcs.rmhometiles.entity.supplier.Supplier;
 import ph.parcs.rmhometiles.file.FileService;
 import ph.parcs.rmhometiles.file.ImageProduct;
 import ph.parcs.rmhometiles.file.writer.ProductExcelWriter;
+import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.util.AppConstant;
 import ph.parcs.rmhometiles.util.FileUtils;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
@@ -65,7 +65,9 @@ public class ProductTableController extends EntityTableController<Product> {
         initTableColumnValue();
         initTableColumnSize();
         initTableColumnSort();
-        // createFakeData();
+
+        tcAction.setCellFactory(ActionTableCell.forActions(
+                this::onEditActionClick, this::onDeleteActionClick));
     }
 
     private void initTableColumnSort() {
@@ -108,15 +110,12 @@ public class ProductTableController extends EntityTableController<Product> {
     private void initImageColumnProperty() {
         tcImage.setCellFactory(tc -> {
             TableCell<Product, ImageProduct> cell = new TableCell<>() {
-                @SneakyThrows
                 @Override
                 protected void updateItem(ImageProduct productImage, boolean empty) {
                     setGraphic(null);
                     setUserData(null);
                     if (productImage != null) {
-                        String path = FileUtils.getParentDirectoryFromJar() + File.separator + productImage.getName();
-                        System.out.println(path);
-                        Image picture = new Image("file:" + path, true);
+                        Image picture = new Image("file:" + productImage.getPath(), true);
                         ImageView imageView = createImageView(picture, 48, 48);
                         setUserData(productImage);
                         setGraphic(imageView);
@@ -125,12 +124,11 @@ public class ProductTableController extends EntityTableController<Product> {
             };
 
             cell.setOnMouseClicked(mouseEvent -> {
-                ImageProduct imageProduct = (ImageProduct) cell.getUserData();
-                if (imageProduct == null) return;
-                String path = FileUtils.getParentDirectoryFromJar() + File.separator + imageProduct.getName();
-                Image picture = new Image("file:" + path, true);
+                ImageProduct productImage = (ImageProduct) cell.getUserData();
+                if (productImage == null) return;
+                Image picture = new Image("file:" + productImage.getPath(), true);
                 ImageView imageView = createImageView(picture, 600, 400);
-                showAlert(imageView, imageProduct.getName());
+                showAlert(imageView, productImage.getName());
             });
             return cell;
         });

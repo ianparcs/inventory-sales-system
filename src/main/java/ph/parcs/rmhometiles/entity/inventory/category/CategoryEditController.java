@@ -14,7 +14,7 @@ public class CategoryEditController extends EditItemController<Category> {
     private JFXTextField tfName;
 
     @Override
-    protected Category createEntity(Category category) {
+    protected Category editItemInfo(Category category) {
         category.setName(tfName.getText());
         return category;
     }

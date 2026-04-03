@@ -18,7 +18,7 @@ public class CustomerEditController extends EditItemController<Customer> {
     private JFXTextField tfName;
 
     @Override
-    protected Customer createEntity(Customer customer) {
+    protected Customer editItemInfo(Customer customer) {
         if (!StringUtils.isEmpty(tfContact.getText())) customer.setContact(tfContact.getText());
         if (!StringUtils.isEmpty(tfName.getText())) customer.setName(tfName.getText());
         if (!StringUtils.isEmpty(tfAddress.getText())) customer.setAddress(tfAddress.getText());

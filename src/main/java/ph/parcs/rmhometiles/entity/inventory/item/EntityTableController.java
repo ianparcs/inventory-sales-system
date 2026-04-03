@@ -35,22 +35,13 @@ public abstract class EntityTableController<T extends BaseEntity> extends Pagina
     @FXML
     protected void initialize() {
         super.initialize();
-        tvItem.setSelectionModel(null);
-
         successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
         deleteAlert = SweetAlertFactory.create(SweetAlert.Type.WARNING);
         errorAlert = SweetAlertFactory.create(SweetAlert.Type.DANGER);
 
-       // initActionColumn();
-
         spMain.sceneProperty().addListener((observableValue, scene, newScene) -> {
             if (newScene != null) updateItems();
         });
-    }
-
-    private void initActionColumn() {
-        tcAction.setCellFactory(ActionTableCell.forActions(
-                this::onEditActionClick, this::onDeleteActionClick));
     }
 
     @SneakyThrows

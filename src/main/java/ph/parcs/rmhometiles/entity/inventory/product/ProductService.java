@@ -15,7 +15,6 @@ import ph.parcs.rmhometiles.entity.order.OrderItemService;
 import ph.parcs.rmhometiles.exception.ItemLockedException;
 import ph.parcs.rmhometiles.file.FileService;
 import ph.parcs.rmhometiles.file.ImageProduct;
-import ph.parcs.rmhometiles.util.FileUtils;
 import ph.parcs.rmhometiles.util.PageUtil;
 
 import java.util.List;
@@ -81,17 +80,9 @@ public class ProductService extends BaseService<Product> {
     public Product saveEntity(Product product) {
         ImageProduct imageProduct = product.getImageProduct();
         if (imageProduct != null && !StringUtils.isEmpty(imageProduct.getPath())) {
-            saveFile(imageProduct);
+            fileService.saveImage(imageProduct);
         }
         return productRepository.save(product);
-    }
-
-    private void saveFile(ImageProduct imageProduct) {
-        String fileName = FileUtils.getFileName(imageProduct.getPath());
-        String des = FileUtils.getTargetPath(fileName);
-        String src = imageProduct.getPath();
-        imageProduct.setName(fileName);
-        fileService.saveImage(src, des);
     }
 
     @Override

@@ -57,7 +57,7 @@ public abstract class EditItemController<T extends BaseEntity> {
 
         btnSave.setOnAction(actionEvent -> {
             closeDialog();
-            T savedItem = baseService.saveEntity(createEntity(item));
+            T savedItem = baseService.saveEntity(editItemInfo(item));
             if (savedItem != null) {
                 itemListener.onSavedSuccess(savedItem);
             } else {
@@ -80,7 +80,7 @@ public abstract class EditItemController<T extends BaseEntity> {
         lblTitle.setText(title + " " + item.getClass().getSimpleName());
     }
 
-    protected abstract T createEntity(T item);
+    protected abstract T editItemInfo(T item);
 
     protected abstract void bindFields(T item);
 
