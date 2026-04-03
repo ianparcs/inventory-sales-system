@@ -3,17 +3,13 @@ package ph.parcs.rmhometiles.ui.navigation;
 import com.jfoenix.controls.JFXButton;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.CacheHint;
-import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.State;
 import ph.parcs.rmhometiles.entity.user.User;
-import ph.parcs.rmhometiles.entity.user.UserService;
 import ph.parcs.rmhometiles.session.SessionService;
 import ph.parcs.rmhometiles.ui.home.HomeController;
-import ph.parcs.rmhometiles.ui.scene.SceneManager;
 import ph.parcs.rmhometiles.util.AppConstant;
 
 import java.util.HashMap;
@@ -40,7 +36,6 @@ public class NavigationController {
     private VBox vbContainer;
 
     private HomeController homeController;
-    private SceneManager sceneManager;
 
     @FXML
     private void initialize() {
@@ -52,7 +47,6 @@ public class NavigationController {
         states.put(State.CUSTOMER, btnCustomer);
         states.put(State.INVOICE, btnInvoice);
         states.put(State.LOG, btnLog);
-
 
         Platform.runLater(() -> {
             User currentUser = SessionService.getInstance().getLoggedInUser();
@@ -68,17 +62,9 @@ public class NavigationController {
             }
         });
 
-        Platform.runLater(() -> states.forEach((key, value) -> value.setOnAction(actionEvent -> {
-            Parent content = sceneManager.getContent(key);
-            content.setCache(true);
-            content.setCacheHint(CacheHint.QUALITY);
-            homeController.setContent(content);
-        })));
-    }
-
-    @Autowired
-    public void setSceneManager(SceneManager sceneManager) {
-        this.sceneManager = sceneManager;
+        Platform.runLater(() -> states.forEach((key, navButton) -> {
+            navButton.setOnAction(actionEvent -> homeController.setContent(key));
+        }));
     }
 
     @Autowired
