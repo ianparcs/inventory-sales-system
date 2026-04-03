@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
 import javafx.util.StringConverter;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -222,26 +223,27 @@ public class ProductEditController extends EditItemController<Product> {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(() ->
                 btnSave.setOnAction(a -> {
-                    deleteFile(product);
-                    Product savedItem = baseService.saveEntity(editItemInfo(product));
-                    Platform.runLater(() -> {
-                        closeDialog();
-                        if (savedItem != null) {
-                            itemListener.onSavedSuccess(savedItem);
-                        } else {
-                            itemListener.onSaveFailed(null);
-                        }
-                    });
+                    try {
+                        Product savedItem = baseService.saveEntity(editItemInfo(product));
+                        deleteFileImage(product);
+                        Platform.runLater(() -> {
+                            closeDialog();
+                            if (savedItem != null) itemListener.onSavedSuccess(savedItem);
+                        });
+                    } catch (Exception e) {
+                        itemListener.onSaveFailed(new Exception("The product cannot be saved because the code is already in use."));
+                    }
+
                 }));
         ThreadUtil.shutdownAndAwaitTermination(executorService);
     }
 
-    private void deleteFile(Product product) {
+    private void deleteFileImage(Product product) {
         String path = tfImage.getText();
         if (!path.isEmpty() && product.getImageProduct() != null) {
             String fileName = FileUtils.getFileName(path);
             String currentFile = product.getImageProduct().getName();
-            if ((!StringUtils.isEmpty(currentFile) && !currentFile.equals(fileName))) {
+            if ((StringUtils.hasText(currentFile) && !currentFile.equals(fileName))) {
                 fileService.deleteFile(product.getImageProduct().getName());
             }
         }

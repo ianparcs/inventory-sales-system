@@ -6,4 +6,6 @@ public interface EntityActions<T> {
 
     T onEditActionClick(T item);
 
+    T onViewActionClick(T item);
+
 }

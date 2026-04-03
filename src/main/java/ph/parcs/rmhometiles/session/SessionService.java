@@ -1,8 +1,11 @@
 package ph.parcs.rmhometiles.session;
 
+import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 import ph.parcs.rmhometiles.entity.user.User;
 
+@Data
 public class SessionService {
 
     @Getter
@@ -13,11 +16,4 @@ public class SessionService {
     private SessionService() {
     }
 
-    public User getLoggedInUser() {
-        return loggedInUser;
-    }
-
-    public void setLoggedInUser(User user) {
-        this.loggedInUser = user;
-    }
 }

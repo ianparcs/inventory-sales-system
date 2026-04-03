@@ -80,23 +80,23 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
         });
 
         tcCustomer.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().getCustomer(), "name"));
+    }
 
-        spMain.sceneProperty().addListener((obs, oldScene, newScene) -> {
-            if (newScene != null) {
-                    var currentUser = Optional.of(SessionService.getInstance().getLoggedInUser());
-                    currentUser.ifPresent(user -> {
-                        if (tcAction.getCellFactory() != null) {
-                            switch (user.getRole()) {
-                                case USER -> tcAction.setCellFactory(ActionTableCell.forActions(this::onViewActionClick, this::onEditActionClick, this::onDeleteActionClick));
-                                case ADMIN -> tcAction.setCellFactory(ActionTableCell.forActions(this::onViewActionClick, AppConstant.ActionType.VIEW));
-                            }
-                        }
-                    });
+    @Override
+    protected void hideUIBasedOnUserRole() {
+        var currentUser = Optional.of(SessionService.getInstance().getLoggedInUser());
+        currentUser.ifPresent(user -> {
+            if (tcAction.getCellFactory() != null) {
+                switch (user.getRole()) {
+                    case ADMIN -> tcAction.setCellFactory(ActionTableCell.forActions(this::onViewActionClick, this::onEditActionClick, this::onDeleteActionClick));
+                    case USER -> tcAction.setCellFactory(ActionTableCell.forActions(this::onViewActionClick, AppConstant.ActionType.VIEW));
+                }
             }
         });
     }
 
     @SneakyThrows
+    @Override
     public Invoice onViewActionClick(BaseEntity item) {
         FXMLLoader fxmlLoader = sceneManager.create("/fxml/invoice/view-invoice.fxml");
         Invoice invoice = (Invoice) item;

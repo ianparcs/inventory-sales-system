@@ -1,7 +1,7 @@
 * {
     -fx-text-fill: #5a5c69;
-    -fx-font-size: 1.30em;
-    -fx-font-family: Calibri;
+    -fx-font-size: 1.15em;
+    -fx-font-family: Arial Black;
     blueberries: #00AAFF;
     greysquash: #ddd;
     strawberry: #e74a3b;
@@ -84,7 +84,7 @@
 
 .tile-info .big-title {
     -fx-font-weight: bold;
-    -fx-font-size: 20;
+    -fx-font-size: 16px;
 }
 
 .tile-info .small-title {

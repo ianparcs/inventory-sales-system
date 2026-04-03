@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <VBox xmlns:fx="http://javafx.com/fxml/1" fx:id="vbContainer" styleClass="background"
       stylesheets="@../../css/navigation.css"
-      fx:controller="ph.parcs.rmhometiles.ui.navigation.NavigationController" cache="true">
+      fx:controller="ph.parcs.rmhometiles.ui.navigation.NavigationController" cache="true" cacheHint="SPEED">
 
     <JFXButton styleClass="nav-title" focusTraversable="false" maxWidth="1.7976931348623157E308"
                text="RM HOME TILES">

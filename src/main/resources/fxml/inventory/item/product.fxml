@@ -20,13 +20,7 @@
             <ColumnConstraints hgrow="ALWAYS"/>
         </columnConstraints>
 
-        <HBox styleClass="tile-info" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0">
-            <Label styleClass="big-title" text="Inventory" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS"/>
-
-        </HBox>
-
         <HBox spacing="10.0" styleClass="tile-default" GridPane.columnIndex="0" GridPane.rowIndex="1">
-
             <JFXButton onAction="#showEditItemDialog" styleClass="primary-button" text="New Item">
                 <graphic>
                     <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="18"/>
@@ -126,7 +120,7 @@
                 </TableColumn>
 
                 <TableColumn fx:id="tcAction" reorderable="false"
-                             sortable="false" styleClass="action-column" text="Action" prefWidth="Infinity"/>
+                             sortable="false" styleClass="action-column" text="Action"/>
             </columns>
         </TableView>
 
