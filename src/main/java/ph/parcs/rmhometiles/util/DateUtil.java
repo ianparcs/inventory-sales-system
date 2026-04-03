@@ -4,11 +4,13 @@ import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.HashMap;
 
-public class DateUtility {
+public class DateUtil {
 
+    public static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("MMMM d, yyyy h:mm a");
     private final static HashMap<String, LocalDateTime[]> dateRangeSets = new HashMap<>();
     private final static int MAX_SIZE = 2;
 

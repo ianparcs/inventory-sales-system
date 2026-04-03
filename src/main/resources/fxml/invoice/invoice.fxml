@@ -127,12 +127,12 @@
             </JFXTextField>
 
             <VBox styleClass="amount-container" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8">
-                <Label fx:id="lblAmountDueBalance" text="Amount Due"/>
-                <Label fx:id="lblAmountDue" alignment="CENTER" maxWidth="1.7976931348623157E308"
+                <Label fx:id="lblAmountDueBalance" text="Amount Due" style="-fx-font-weight: BOLD"/>
+                <Label fx:id="lblAmountDue" alignment="CENTER" prefWidth="150"
                        styleClass="label-amount" text="PHP 0.00"/>
             </VBox>
             <VBox styleClass="amount-container" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8">
-                <Label text="Total"/>
+                <Label text="TOTAL" style="-fx-font-weight: BOLD"/>
                 <Label fx:id="lblTotalAmount" alignment="CENTER" maxWidth="1.7976931348623157E308"
                        styleClass="label-total" text="PHP 0.00"/>
             </VBox>

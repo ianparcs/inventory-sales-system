@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ph.parcs.rmhometiles.entity.invoice.Invoice;
 import ph.parcs.rmhometiles.entity.invoice.InvoiceService;
 import ph.parcs.rmhometiles.entity.money.MoneyService;
-import ph.parcs.rmhometiles.util.DateUtility;
+import ph.parcs.rmhometiles.util.DateUtil;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -29,7 +29,7 @@ public class SalesReportService {
             return createSalesReport(invoiceService.findAllInvoice());
         }
 
-        LocalDateTime[] dateTimeRange = DateUtility.findDate(dateRangeText);
+        LocalDateTime[] dateTimeRange = DateUtil.findDate(dateRangeText);
         List<Invoice> invoices = invoiceService.findAllInvoiceByDate(dateTimeRange);
 
         return createSalesReport(invoices);

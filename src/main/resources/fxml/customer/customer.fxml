@@ -64,6 +64,12 @@
             </columnResizePolicy>
             <columns>
 
+                <TableColumn reorderable="false" text="Date Added">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="createdAt"/>
+                    </cellValueFactory>
+                </TableColumn>
+
                 <TableColumn reorderable="false" text="Name">
                     <cellValueFactory>
                         <PropertyValueFactory property="name"/>

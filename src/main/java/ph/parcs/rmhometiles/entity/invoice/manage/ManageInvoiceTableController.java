@@ -23,12 +23,11 @@ import ph.parcs.rmhometiles.session.SessionService;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.ui.scene.SceneManager;
 import ph.parcs.rmhometiles.util.AppConstant;
-import ph.parcs.rmhometiles.util.DateUtility;
+import ph.parcs.rmhometiles.util.DateUtil;
 import ph.parcs.rmhometiles.util.ThreadUtil;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ExecutorService;
@@ -72,9 +71,8 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
         tcInvoiceDate.setCellValueFactory(cellData -> {
             LocalDateTime createdAt = cellData.getValue().getCreatedAt();
             return Bindings.createObjectBinding(() -> {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd | hh:mm a");
                 if (createdAt != null) {
-                    return createdAt.format(formatter);
+                    return createdAt.format(DateUtil.FORMAT);
                 }
                 return "";
             });
@@ -112,7 +110,7 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
     public void onDateRangeSelect() {
         ExecutorService executorService = Executors.newCachedThreadPool();
         executorService.submit(() -> {
-            LocalDateTime[] dateTimeRange = DateUtility.findDate(cbDateRange.getValue());
+            LocalDateTime[] dateTimeRange = DateUtil.findDate(cbDateRange.getValue());
             List<Invoice> invoices = invoiceService.findAllInvoiceByDate(dateTimeRange);
             Platform.runLater(() -> {
                 tvItem.getItems().setAll(invoices);

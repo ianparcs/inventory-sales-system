@@ -9,6 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.util.Callback;
 import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,17 +17,18 @@ import ph.parcs.rmhometiles.entity.inventory.category.Category;
 import ph.parcs.rmhometiles.entity.inventory.item.EditItemController;
 import ph.parcs.rmhometiles.entity.inventory.item.EntityTableController;
 import ph.parcs.rmhometiles.entity.inventory.stock.Stock;
+import ph.parcs.rmhometiles.entity.invoice.Invoice;
 import ph.parcs.rmhometiles.entity.supplier.Supplier;
 import ph.parcs.rmhometiles.file.FileService;
 import ph.parcs.rmhometiles.file.ImageProduct;
 import ph.parcs.rmhometiles.file.writer.ProductExcelWriter;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.util.AppConstant;
-import ph.parcs.rmhometiles.util.FileUtils;
+import ph.parcs.rmhometiles.util.DateUtil;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
 import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
 
-import java.io.File;
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -36,6 +38,8 @@ import java.util.concurrent.Executors;
 @Controller
 public class ProductTableController extends EntityTableController<Product> {
 
+    @FXML
+    private TableColumn<Product, LocalDateTime> tcDateAdded;
     @FXML
     private TableColumn<Product, String> tcDescription;
     @FXML
@@ -85,15 +89,16 @@ public class ProductTableController extends EntityTableController<Product> {
     }
 
     private void initTableColumnSize() {
+        tcDateAdded.setMaxWidth(1f * Integer.MAX_VALUE * 11);
+        tcDescription.setMaxWidth(1f * Integer.MAX_VALUE * 10);
         tcCode.setMaxWidth(1f * Integer.MAX_VALUE * 10);
         tcName.setMaxWidth(1f * Integer.MAX_VALUE * 10);
-        tcDescription.setMaxWidth(1f * Integer.MAX_VALUE * 10);
         tcSupplier.setMaxWidth(1f * Integer.MAX_VALUE * 8);
         tcCategory.setMaxWidth(1f * Integer.MAX_VALUE * 8);
-        tcStock.setMaxWidth(1f * Integer.MAX_VALUE * 6);
-        tcUnitSold.setMaxWidth(1f * Integer.MAX_VALUE * 6);
         tcPrice.setMaxWidth(1f * Integer.MAX_VALUE * 7);
         tcCost.setMaxWidth(1f * Integer.MAX_VALUE * 7);
+        tcStock.setMaxWidth(1f * Integer.MAX_VALUE * 5);
+        tcUnitSold.setMaxWidth(1f * Integer.MAX_VALUE * 5);
         tcImage.setMaxWidth(1f * Integer.MAX_VALUE * 5);
         tcAction.setMaxWidth(1f * Integer.MAX_VALUE * 5);
     }
@@ -102,6 +107,19 @@ public class ProductTableController extends EntityTableController<Product> {
         tcSupplier.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().supplierProperty(), "name"));
         tcCategory.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().categoryProperty(), "name"));
         tcUnitSold.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().stockProperty(), "unitSold"));
+        tcDateAdded.setCellFactory(new Callback<>() {
+            @Override
+            public TableCell<Product, LocalDateTime> call(TableColumn<Product, LocalDateTime> param) {
+                return new TableCell<>() {
+                    protected void updateItem(LocalDateTime item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item != null) {
+                            setText(item.format(DateUtil.FORMAT));
+                        }
+                    }
+                };
+            }
+        });
 
         initStockColumnProperty();
         initImageColumnProperty();

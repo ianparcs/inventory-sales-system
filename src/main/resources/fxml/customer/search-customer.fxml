@@ -52,8 +52,8 @@
         <Label text="Contact:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
         <Label text="Address:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
 
-        <Label fx:id="lblName" alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-        <Label fx:id="lblContact" alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-        <Label fx:id="lblAddress" alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        <Label fx:id="lblName" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <Label fx:id="lblContact" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        <Label fx:id="lblAddress" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
     </GridPane>
 </VBox>

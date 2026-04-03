@@ -247,10 +247,10 @@ public class InvoiceController {
     private String changeAmountDueLabel() {
         if (invoice.changeProperty().get() != null) {
             if (invoice.changeProperty().get().isPositive()) {
-                return "Change";
+                return "CHANGE";
             }
         }
-        return "Balance";
+        return "BALANCE";
     }
 
     private void initDate() {

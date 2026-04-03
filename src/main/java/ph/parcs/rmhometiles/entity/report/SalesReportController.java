@@ -15,11 +15,10 @@ import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.entity.money.MoneyService;
 import ph.parcs.rmhometiles.ui.pagination.PaginationController;
 import ph.parcs.rmhometiles.util.AppConstant;
-import ph.parcs.rmhometiles.util.DateUtility;
+import ph.parcs.rmhometiles.util.DateUtil;
 import ph.parcs.rmhometiles.util.ThreadUtil;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -55,16 +54,13 @@ public class SalesReportController extends PaginationController {
     protected void initialize() {
         super.initialize();
 
-        DateUtility.initialize();
+        DateUtil.initialize();
         displaySalesReport();
 
         tcSalesDate.setCellValueFactory(cellData -> {
             LocalDateTime createdAt = cellData.getValue().getCreatedAt();
             return Bindings.createObjectBinding(() -> {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                if (createdAt != null) {
-                    return createdAt.format(formatter);
-                }
+                if (createdAt != null) return createdAt.format(DateUtil.FORMAT);
                 return "";
             });
         });

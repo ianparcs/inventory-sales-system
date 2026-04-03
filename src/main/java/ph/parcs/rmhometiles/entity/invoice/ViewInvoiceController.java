@@ -23,6 +23,7 @@ import ph.parcs.rmhometiles.entity.money.MoneyService;
 import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.entity.payment.Payment;
 import ph.parcs.rmhometiles.entity.payment.PaymentService;
+import ph.parcs.rmhometiles.util.DateUtil;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -75,8 +76,6 @@ public class ViewInvoiceController {
 
     private void displayDetails() {
         if (invoice != null) {
-            DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd/MM/yyyy h:mm a");
-
             tcItemName.setCellValueFactory(cellData -> {
                 Product orderProduct = cellData.getValue().getProduct();
                 return Bindings.createObjectBinding(orderProduct::getCode);
@@ -89,13 +88,13 @@ public class ViewInvoiceController {
 
             tcPaymentPaidDate.setCellValueFactory(cellData -> {
                 LocalDateTime paidDate = cellData.getValue().getCreatedAt();
-                return Bindings.createObjectBinding(() -> paidDate.format(myFormatObj));
+                return Bindings.createObjectBinding(() -> paidDate.format(DateUtil.FORMAT));
             });
 
             lblTotalAmount.setText("₱" + invoice.getTotalAmount().getAmount());
             lblCustomerName.setText("Customer: " + invoice.getCustomer().getName());
             lblCustomerContact.setText("Contact: " + invoice.getCustomer().getContact());
-            lblInvoiceDate.setText("Invoice Date: " + invoice.getCreatedAt().format(myFormatObj));
+            lblInvoiceDate.setText("Invoice Date: " + invoice.getCreatedAt().format(DateUtil.FORMAT));
             lblBalance.textProperty().bind(Bindings.createObjectBinding(this::hidePaymentContainer, invoice.balanceProperty()));
 
             tvPayments.setItems(FXCollections.observableArrayList(invoice.getPayments()));
