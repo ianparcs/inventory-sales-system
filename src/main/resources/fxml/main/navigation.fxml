@@ -38,15 +38,16 @@
 
     <JFXButton fx:id="btnCustomer" maxWidth="1.7976931348623157E308" text="Customer">
         <graphic>
-            <FontAwesomeIconView glyphName="HANDSHAKE_ALT"/>
+            <FontAwesomeIconView glyphName="GROUP"/>
         </graphic>
     </JFXButton>
 
     <JFXButton fx:id="btnSupplier" maxWidth="1.7976931348623157E308" text="Supplier">
         <graphic>
-            <FontAwesomeIconView glyphName="GROUP"/>
+            <FontAwesomeIconView glyphName="TRUCK"/>
         </graphic>
     </JFXButton>
+
 
     <JFXButton fx:id="btnSales" maxWidth="1.7976931348623157E308" text="Sales Report">
         <graphic>

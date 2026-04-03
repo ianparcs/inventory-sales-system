@@ -14,7 +14,6 @@ public class HomeController {
 
     @FXML
     private StackPane apContent;
-
     private SceneManager sceneManager;
 
     public void setContent(State state) {

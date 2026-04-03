@@ -39,15 +39,11 @@ public class NavigationController {
 
     @FXML
     private void initialize() {
-        Map<State, JFXButton> states = new HashMap<>();
-        states.put(State.INVENTORY, btnInventory);
-        states.put(State.DASHBOARD, btnDashboard);
-        states.put(State.SUPPLIER, btnSupplier);
-        states.put(State.SALE_REPORT, btnSales);
-        states.put(State.CUSTOMER, btnCustomer);
-        states.put(State.INVOICE, btnInvoice);
-        states.put(State.LOG, btnLog);
+        configureUIVisibilityByUserRole();
+        configureNavigationButtonAction();
+    }
 
+    private void configureUIVisibilityByUserRole() {
         Platform.runLater(() -> {
             User currentUser = SessionService.getInstance().getLoggedInUser();
             if (currentUser != null) {
@@ -60,7 +56,19 @@ public class NavigationController {
                     vbContainer.getChildren().remove(btnLog);
                 }
             }
+            homeController.setContent(State.INVOICE);
         });
+    }
+
+    private void configureNavigationButtonAction() {
+        Map<State, JFXButton> states = new HashMap<>();
+        states.put(State.INVENTORY, btnInventory);
+        states.put(State.DASHBOARD, btnDashboard);
+        states.put(State.SUPPLIER, btnSupplier);
+        states.put(State.SALE_REPORT, btnSales);
+        states.put(State.CUSTOMER, btnCustomer);
+        states.put(State.INVOICE, btnInvoice);
+        states.put(State.LOG, btnLog);
 
         Platform.runLater(() -> states.forEach((key, navButton) -> {
             navButton.setOnAction(actionEvent -> homeController.setContent(key));
