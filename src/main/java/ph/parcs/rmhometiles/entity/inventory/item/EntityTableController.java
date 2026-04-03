@@ -41,7 +41,7 @@ public abstract class EntityTableController<T extends BaseEntity> extends Pagina
         deleteAlert = SweetAlertFactory.create(SweetAlert.Type.WARNING);
         errorAlert = SweetAlertFactory.create(SweetAlert.Type.DANGER);
 
-        initActionColumn();
+       // initActionColumn();
 
         spMain.sceneProperty().addListener((observableValue, scene, newScene) -> {
             if (newScene != null) updateItems();

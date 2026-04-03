@@ -3,11 +3,17 @@ package ph.parcs.rmhometiles.util;
 public interface AppConstant {
 
     String STRING_EMPTY = "";
-    String JADIRA_PACKAGE = "org.jadira.usertype.moneyandcurrency.joda.PersistentMoneyAmount";
     String TAX = "3%";
 
     enum Sales {
         TAX, PROFIT, TOTAL, COST
+    }
+
+    enum ActionType {
+        EDIT, VIEW, DELETE
+    }
+    enum Role {
+        ADMIN, USER
     }
 
     interface Unit {

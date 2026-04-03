@@ -196,7 +196,7 @@ public class InvoiceController {
     private Money showTotalAmount() {
         Money currentTotal = showTotalBeforeTax();
         Money taxAmount = moneyService.computeDiscount(currentTotal, AppConstant.TAX);
-        Money deliveryRate = Money.parse(AppConstant.Unit.CURRENCY + " " + (tfDeliveryAmount.getText().isEmpty() ? "0.00" : tfDeliveryAmount.getText()));
+        Money deliveryRate = Money.parse(AppConstant.Unit.CURRENCY + " " + (tfDeliveryAmount.getText().isEmpty() ? "PHP 0.00" : tfDeliveryAmount.getText()));
         Money totalAmount = moneyService.computeTotalAmount(currentTotal, taxAmount, deliveryRate);
         tfCashPay.setText(totalAmount.getAmount().toString());
         return totalAmount;
@@ -219,7 +219,7 @@ public class InvoiceController {
     private void initColumnCellValueFactory() {
         tcQty.setCellFactory(TextFieldTableCell.forTableColumn(new NumberConverter()));
         tcDiscountPercent.setCellFactory(TextFieldTableCell.forTableColumn(new FloatConverter()));
-        tcAction.setCellFactory(ActionTableCell.forActions(this::onItemDeleteAction, "DELETE"));
+        tcAction.setCellFactory(ActionTableCell.forActions(this::onItemDeleteAction, AppConstant.ActionType.DELETE));
         tcCode.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "code"));
         tcPrice.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "price"));
         tcStock.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "stock", "stocks"));

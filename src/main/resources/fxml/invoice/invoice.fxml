@@ -116,7 +116,7 @@
             <Label fx:id="lblTax" alignment="CENTER" maxWidth="1.7976931348623157E308" text="PHP 0.00"
                    GridPane.columnIndex="1" GridPane.rowIndex="6"/>
 
-            <JFXTextField fx:id="tfDeliveryAmount" alignment="CENTER" promptText="Enter Delivery Rate"
+            <JFXTextField fx:id="tfDeliveryAmount" alignment="CENTER" promptText="PHP 0.00"
                           styleClass="non-search-field" text="0.00" GridPane.columnIndex="1" GridPane.rowIndex="7">
                 <cursor>
                     <Cursor fx:constant="HAND"/>

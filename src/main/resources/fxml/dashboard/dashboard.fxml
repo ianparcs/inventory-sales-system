@@ -4,22 +4,39 @@
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.*?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
            xmlns="http://javafx.com/javafx/11.0.14-internal"
            fx:controller="ph.parcs.rmhometiles.ui.dashboard.DashboardController">
     <Label text="DASHBOARD"/>
-    <GridPane hgap="12.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="background"
-              vgap="7.0">
-        <LineChart>
+    <GridPane hgap="12.0" vgap="7.0"
+              maxHeight="Infinity" maxWidth="Infinity"
+              styleClass="background"
+              xmlns="http://javafx.com/javafx/21"
+              xmlns:fx="http://javafx.com/fxml/1">
+
+        <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints vgrow="ALWAYS"/>
+        </rowConstraints>
+        <LineChart fx:id="lcSalesOverview"
+                   GridPane.hgrow="ALWAYS"
+                   GridPane.vgrow="ALWAYS"
+                   prefWidth="0"
+                   prefHeight="0">
+
             <xAxis>
-                <CategoryAxis side="BOTTOM"/>
+                <CategoryAxis side="BOTTOM" />
             </xAxis>
+
             <yAxis>
-                <NumberAxis side="LEFT"/>
+                <NumberAxis side="LEFT" />
             </yAxis>
+
         </LineChart>
+
     </GridPane>
 
 </StackPane>
