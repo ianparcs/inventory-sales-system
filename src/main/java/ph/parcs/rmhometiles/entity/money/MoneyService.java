@@ -93,4 +93,7 @@ public class MoneyService {
         return Money.parse("PHP 0.00");
     }
 
+    public Money computeDeliveryRate(String text) {
+        return Money.parse(text.isEmpty() ? "PHP 0.00" : text);
+    }
 }

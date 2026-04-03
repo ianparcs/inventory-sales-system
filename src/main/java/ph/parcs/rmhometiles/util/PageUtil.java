@@ -2,6 +2,7 @@ package ph.parcs.rmhometiles.util;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.entity.inventory.item.ItemPageEntry;
 
@@ -22,7 +23,7 @@ public class PageUtil {
     }
 
     public static PageRequest requestPage(int page, int itemPerPage) {
-        return PageRequest.of(page, itemPerPage);
+        return PageRequest.of(page, itemPerPage,Sort.by("createdAt").descending());
     }
 
 }

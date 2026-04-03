@@ -80,7 +80,7 @@
                     </FXCollections>
                 </items>
                 <value>
-                    <String fx:value="5"/>
+                    <String fx:value="All"/>
                 </value>
             </JFXComboBox>
             <Label text="entries"/>

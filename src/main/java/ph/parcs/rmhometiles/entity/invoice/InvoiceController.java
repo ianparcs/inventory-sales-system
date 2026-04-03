@@ -196,10 +196,8 @@ public class InvoiceController {
     private Money showTotalAmount() {
         Money currentTotal = showTotalBeforeTax();
         Money taxAmount = moneyService.computeDiscount(currentTotal, AppConstant.TAX);
-        Money deliveryRate = Money.parse(AppConstant.Unit.CURRENCY + " " + (tfDeliveryAmount.getText().isEmpty() ? "PHP 0.00" : tfDeliveryAmount.getText()));
-        Money totalAmount = moneyService.computeTotalAmount(currentTotal, taxAmount, deliveryRate);
-        tfCashPay.setText(totalAmount.getAmount().toString());
-        return totalAmount;
+        Money deliveryRate = moneyService.computeDeliveryRate(tfDeliveryAmount.getText());
+        return moneyService.computeTotalAmount(currentTotal, taxAmount, deliveryRate);
     }
 
     private Money showMoneyChange() {

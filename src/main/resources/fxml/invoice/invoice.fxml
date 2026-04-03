@@ -117,7 +117,7 @@
                    GridPane.columnIndex="1" GridPane.rowIndex="6"/>
 
             <JFXTextField fx:id="tfDeliveryAmount" alignment="CENTER" promptText="PHP 0.00"
-                          styleClass="non-search-field" text="0.00" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                          styleClass="non-search-field" text="PHP 0.00" GridPane.columnIndex="1" GridPane.rowIndex="7">
                 <cursor>
                     <Cursor fx:constant="HAND"/>
                 </cursor>
