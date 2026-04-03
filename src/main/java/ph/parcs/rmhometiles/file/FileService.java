@@ -26,7 +26,8 @@ public class FileService {
 
         Path from = Paths.get(src);
         Path to = Paths.get(des);
-        Files.createDirectories(to.getParent());
+
+        if (!Files.exists(to.getParent())) Files.createDirectories(to.getParent());
         Files.copy(from, to, StandardCopyOption.REPLACE_EXISTING);
     }
 
