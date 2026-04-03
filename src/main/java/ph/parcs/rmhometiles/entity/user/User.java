@@ -11,7 +11,6 @@ import ph.parcs.rmhometiles.util.AppConstant;
 public class User {
 
     private final IntegerProperty id = new SimpleIntegerProperty();
-
     private final StringProperty username = new SimpleStringProperty();
     private final StringProperty password = new SimpleStringProperty();
     private final ObjectProperty<AppConstant.Role> role = new SimpleObjectProperty<>();
@@ -30,6 +29,7 @@ public class User {
         return id;
     }
 
+    @Column(name = "username", unique = true)
     public String getUsername() {
         return username.get();
     }

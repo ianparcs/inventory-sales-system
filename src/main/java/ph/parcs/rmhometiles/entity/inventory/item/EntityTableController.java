@@ -44,7 +44,7 @@ public abstract class EntityTableController<T extends BaseEntity> extends Pagina
         spMain.sceneProperty().addListener((observableValue, scene, newScene) -> {
             if (newScene != null) {
                 updateItems();
-                hideUIBasedOnUserRole();
+              //  hideUIBasedOnUserRole();
             }
         });
     }

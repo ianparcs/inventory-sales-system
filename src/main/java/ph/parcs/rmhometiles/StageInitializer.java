@@ -57,10 +57,8 @@ public class StageInitializer implements ApplicationListener<JavaFxApplication.S
         stage.setScene(scene);
         stage.setResizable(true);
         stage.setTitle(appTitle);
-        stage.setX(screen.getMinX());
-        stage.setY(screen.getMinY());
-        stage.setWidth(screen.getWidth());
-        stage.setHeight(screen.getHeight());
+        stage.setWidth(appWidth);
+        stage.setHeight(appHeight);
         stage.initStyle(StageStyle.TRANSPARENT);
         return stage;
     }

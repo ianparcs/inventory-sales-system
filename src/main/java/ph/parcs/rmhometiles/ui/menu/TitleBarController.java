@@ -15,9 +15,9 @@ import ph.parcs.rmhometiles.util.WindowHelper;
 public class TitleBarController {
 
     @FXML
-    private Parent apTitleBar;
-    @FXML
     private JFXHamburger hbgNavigation;
+    @FXML
+    private Parent apTitleBar;
 
     private DrawerController drawerController;
 
