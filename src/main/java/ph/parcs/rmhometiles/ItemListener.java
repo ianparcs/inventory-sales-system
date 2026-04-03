@@ -4,5 +4,5 @@ public interface ItemListener<T> {
 
     void onSavedSuccess(T entity);
 
-    void onSaveFailed(T savedItem);
+    void onSaveFailed(Exception e);
 }

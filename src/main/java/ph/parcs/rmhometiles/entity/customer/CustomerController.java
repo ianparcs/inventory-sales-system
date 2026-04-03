@@ -92,7 +92,6 @@ public class CustomerController {
     @FXML
     private void showAddCustomer() {
         customerEditController.onEditItem(new ItemListener<>() {
-
             @Override
             public void onSavedSuccess(Customer customer) {
                 if (customer != null) {
@@ -101,14 +100,13 @@ public class CustomerController {
                     lblAddress.setText(StringUtils.isEmpty(customer.getAddress()) ? "n/a" : customer.getAddress());
                     lblContact.setText(StringUtils.isEmpty(customer.getContact()) ? "n/a" : customer.getContact());
                 }
-
                 SweetAlert successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
                 successAlert.setContentMessage(AppConstant.Message.SAVED).show(spMain);
                 cbCustomer.hide();
             }
 
             @Override
-            public void onSaveFailed(Customer savedItem) {
+            public void onSaveFailed(Exception e) {
 
             }
         }, new Customer());

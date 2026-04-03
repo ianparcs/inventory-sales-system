@@ -7,6 +7,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.ItemListener;
 import ph.parcs.rmhometiles.exception.ItemLockedException;
@@ -16,6 +17,7 @@ import ph.parcs.rmhometiles.util.AppConstant;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
 import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
 
+@Slf4j
 @Controller
 public abstract class EntityTableController<T extends BaseEntity> extends PaginationController<T> implements EntityActions<BaseEntity> {
 
@@ -40,11 +42,19 @@ public abstract class EntityTableController<T extends BaseEntity> extends Pagina
         errorAlert = SweetAlertFactory.create(SweetAlert.Type.DANGER);
 
         spMain.sceneProperty().addListener((observableValue, scene, newScene) -> {
-            if (newScene != null) updateItems();
+            if (newScene != null) {
+                updateItems();
+                hideUIBasedOnUserRole();
+            }
         });
     }
 
+    protected void hideUIBasedOnUserRole() {
+        tcAction.setCellFactory(ActionTableCell.forActions(this::onEditActionClick, this::onDeleteActionClick));
+    }
+
     @SneakyThrows
+    @Override
     public BaseEntity onDeleteActionClick(BaseEntity item) {
         StackPane root = (StackPane) tvItem.getScene().getRoot();
         deleteAlert.setHeaderMessage("Delete " + item.getClass().getSimpleName());
@@ -64,6 +74,7 @@ public abstract class EntityTableController<T extends BaseEntity> extends Pagina
         return item;
     }
 
+    @Override
     public BaseEntity onEditActionClick(BaseEntity entity) {
         StackPane root = (StackPane) tvItem.getScene().getRoot();
 
@@ -76,10 +87,17 @@ public abstract class EntityTableController<T extends BaseEntity> extends Pagina
             }
 
             @Override
-            public void onSaveFailed(BaseEntity entity) {
-
+            public void onSaveFailed(Exception e) {
+                errorAlert.setContentMessage(e.getMessage());
+                errorAlert.show(root);
             }
+
         }, (T) entity);
+        return entity;
+    }
+
+    @Override
+    public BaseEntity onViewActionClick(BaseEntity entity) {
         return entity;
     }
 
@@ -88,5 +106,4 @@ public abstract class EntityTableController<T extends BaseEntity> extends Pagina
         searchValue = tfSearchItem.getText();
         updateItems();
     }
-
 }

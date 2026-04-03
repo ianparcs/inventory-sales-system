@@ -62,6 +62,8 @@ public class NavigationController {
 
                 if (userRole.equals(AppConstant.Role.USER)) {
                     vbContainer.getChildren().remove(btnDashboard);
+                    vbContainer.getChildren().remove(btnSales);
+                    vbContainer.getChildren().remove(btnLog);
                 }
             }
         });

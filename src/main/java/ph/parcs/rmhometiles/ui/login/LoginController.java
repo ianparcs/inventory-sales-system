@@ -98,7 +98,7 @@ public class LoginController {
         User admin = new User();
         admin.setUsername("admin");
         admin.setPassword("admin");
-        admin.setRole(AppConstant.Role.ADMIN);
+        admin.setRole(AppConstant.Role.USER);
         return admin;
     }
 
