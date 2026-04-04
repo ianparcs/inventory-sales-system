@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class FileUtils {
 
-    private static final String BASE_PATH = "data/image/";
+    private static final String BASE_PATH = "rmhome-tiles-data/image/";
 
     public static FileChooser getImageChooser() {
         FileChooser fileChooser = new FileChooser();

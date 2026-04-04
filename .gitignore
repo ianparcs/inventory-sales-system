@@ -1,7 +1,6 @@
 /target/
 /.mvn/
 /.idea/
-data
-
 rmhometiles.iml
+rmhome-tiles-data
 .mvn
