@@ -50,6 +50,7 @@ public class UserService implements UserDetailsService {
             }
         }
     }
+
     private boolean isPasswordMatch(String plainPass, String encodedPass) {
         return bCryptPasswordEncoder.matches(plainPass, encodedPass);
     }

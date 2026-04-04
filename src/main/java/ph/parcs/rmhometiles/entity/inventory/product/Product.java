@@ -26,12 +26,10 @@ public class Product extends BaseEntity {
     private final ObjectProperty<Stock> stock = new SimpleObjectProperty<>();
     private final ObjectProperty<Money> price = new SimpleObjectProperty<>();
     private final ObjectProperty<Money> cost = new SimpleObjectProperty<>();
-    private ImageProduct imageProduct;
-
-    private List<OrderItem> orderItems;
-
     private final StringProperty description = new SimpleStringProperty();
     private final StringProperty code = new SimpleStringProperty();
+    private ImageProduct imageProduct;
+    private List<OrderItem> orderItems;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
     public List<OrderItem> getOrderItems() {

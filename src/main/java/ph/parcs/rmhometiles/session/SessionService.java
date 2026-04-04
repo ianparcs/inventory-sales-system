@@ -2,7 +2,6 @@ package ph.parcs.rmhometiles.session;
 
 import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
 import ph.parcs.rmhometiles.entity.user.User;
 
 @Data

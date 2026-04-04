@@ -36,6 +36,7 @@ public class LoginController {
     private FontAwesomeIconView icoUser;
     @FXML
     private FontAwesomeIconView icoKey;
+
     @FXML
     private StackPane spLoginAccount;
     @FXML
@@ -43,9 +44,10 @@ public class LoginController {
     @FXML
     private JFXButton btnLogin;
     @FXML
-    private Parent vbRegister;
-    @FXML
     private StackPane spRoot;
+
+    @FXML
+    private Parent vbRegister;
     @FXML
     private Parent vbLogin;
 

@@ -42,13 +42,12 @@
                                       GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
                     <HBox GridPane.columnIndex="1" GridPane.rowIndex="3" spacing="10">
-                        <JFXButton fx:id="btnLogin" buttonType="FLAT" onAction="#onLoginButtonClicked"
-                                   text="Log in"
-                                   GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-
                         <JFXButton fx:id="btnRegister" buttonType="FLAT" onAction="#onRegisterButtonClicked"
                                    text="Register"
                                    GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+                        <JFXButton fx:id="btnLogin" buttonType="FLAT" onAction="#onLoginButtonClicked"
+                                   text="Log in"
+                                   GridPane.columnIndex="1" GridPane.rowIndex="3"/>
                     </HBox>
 
                     <rowConstraints>

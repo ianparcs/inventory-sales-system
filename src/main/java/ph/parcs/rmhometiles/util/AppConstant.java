@@ -12,6 +12,7 @@ public interface AppConstant {
     enum ActionType {
         EDIT, VIEW, DELETE
     }
+
     enum Role {
         ADMIN, USER
     }

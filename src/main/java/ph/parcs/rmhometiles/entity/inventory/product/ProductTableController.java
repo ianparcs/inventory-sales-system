@@ -17,7 +17,6 @@ import ph.parcs.rmhometiles.entity.inventory.category.Category;
 import ph.parcs.rmhometiles.entity.inventory.item.EditItemController;
 import ph.parcs.rmhometiles.entity.inventory.item.EntityTableController;
 import ph.parcs.rmhometiles.entity.inventory.stock.Stock;
-import ph.parcs.rmhometiles.entity.invoice.Invoice;
 import ph.parcs.rmhometiles.entity.supplier.Supplier;
 import ph.parcs.rmhometiles.file.FileService;
 import ph.parcs.rmhometiles.file.ImageProduct;

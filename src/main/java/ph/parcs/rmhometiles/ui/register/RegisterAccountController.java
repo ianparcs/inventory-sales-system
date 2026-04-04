@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import ph.parcs.rmhometiles.entity.user.UserService;
 import ph.parcs.rmhometiles.ui.login.LoginController;
 
 
@@ -33,6 +34,8 @@ public class RegisterAccountController {
     @FXML
     private JFXTextField tfUserName;
 
+    private UserService userService;
+
     @FXML
     private void initialize() {
         setUserFieldStyle(icoKeyConfirmPassword, pfConfirmUserPassword);
@@ -50,6 +53,7 @@ public class RegisterAccountController {
             }
         });
     }
+
     @FXML
     public void onRegisterSubmitButtonClicked() {
     }
@@ -62,5 +66,11 @@ public class RegisterAccountController {
     @Autowired
     public void setLoginController(LoginController loginController) {
         this.loginController = loginController;
+    }
+
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 }

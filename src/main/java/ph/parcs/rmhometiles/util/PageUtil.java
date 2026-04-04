@@ -23,7 +23,7 @@ public class PageUtil {
     }
 
     public static PageRequest requestPage(int page, int itemPerPage) {
-        return PageRequest.of(page, itemPerPage,Sort.by("createdAt").descending());
+        return PageRequest.of(page, itemPerPage, Sort.by("createdAt").descending());
     }
 
 }
