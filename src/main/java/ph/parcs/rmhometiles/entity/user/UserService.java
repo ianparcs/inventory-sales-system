@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -53,6 +54,17 @@ public class UserService implements UserDetailsService {
 
     private boolean isPasswordMatch(String plainPass, String encodedPass) {
         return bCryptPasswordEncoder.matches(plainPass, encodedPass);
+    }
+
+    public void createUser(UserData userData) {
+        User user = new User();
+        user.setUsername(userData.getUsername());
+        user.setPassword(userData.getPassword());
+        user.setCreatedAt(LocalDateTime.now());
+        user.setName(userData.getFullName());
+        user.setRole(userData.getRole());
+
+        userRepository.save(user);
     }
 
     public boolean isAuthenticated() {

@@ -2,32 +2,18 @@ package ph.parcs.rmhometiles.entity.user;
 
 import jakarta.persistence.*;
 import javafx.beans.property.*;
+import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.util.AppConstant;
 
 
 @Entity
 @Table(name = "users")
 @Access(AccessType.PROPERTY)
-public class User {
+public class User extends BaseEntity {
 
-    private final IntegerProperty id = new SimpleIntegerProperty();
     private final StringProperty username = new SimpleStringProperty();
     private final StringProperty password = new SimpleStringProperty();
     private final ObjectProperty<AppConstant.Role> role = new SimpleObjectProperty<>();
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int getId() {
-        return id.get();
-    }
-
-    public void setId(int id) {
-        this.id.set(id);
-    }
-
-    public IntegerProperty idProperty() {
-        return id;
-    }
 
     @Column(name = "username", unique = true)
     public String getUsername() {

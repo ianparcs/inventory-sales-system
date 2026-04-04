@@ -5,16 +5,21 @@ import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import ph.parcs.rmhometiles.entity.user.UserData;
 import ph.parcs.rmhometiles.entity.user.UserService;
+import ph.parcs.rmhometiles.exception.AppException;
+import ph.parcs.rmhometiles.exception.ExceptionType;
 import ph.parcs.rmhometiles.ui.login.LoginController;
+import ph.parcs.rmhometiles.util.AppConstant;
+import ph.parcs.rmhometiles.util.alert.SweetAlert;
+import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
 
 
 @Controller
 public class RegisterAccountController {
-
-    private LoginController loginController;
 
     @FXML
     private FontAwesomeIconView icoKeyConfirmPassword;
@@ -33,7 +38,10 @@ public class RegisterAccountController {
     private JFXTextField tfFullName;
     @FXML
     private JFXTextField tfUserName;
+    @FXML
+    private StackPane spRegisterForm;
 
+    private LoginController loginController;
     private UserService userService;
 
     @FXML
@@ -56,6 +64,27 @@ public class RegisterAccountController {
 
     @FXML
     public void onRegisterSubmitButtonClicked() {
+        String password = pfUserPassword.getText();
+        String confirmPassword = pfConfirmUserPassword.getText();
+
+        try {
+            if (password.equals(confirmPassword)) {
+                userService.createUser(retrieveUserInput());
+            } else {
+                throw new AppException(ExceptionType.PASSWORD_NOT_MATCH);
+            }
+        } catch (Exception e) {
+            SweetAlertFactory.show(spRegisterForm, SweetAlert.Type.DANGER, "Password do not match");
+        }
+    }
+
+    private UserData retrieveUserInput() {
+        return UserData.builder()
+                .role(AppConstant.Role.USER)
+                .fullName(tfFullName.getText())
+                .password(pfUserPassword.getText())
+                .username(tfUserName.getText())
+                .build();
     }
 
     @FXML

@@ -1,23 +1,18 @@
 package ph.parcs.rmhometiles.util.alert;
 
 
+import javafx.scene.layout.StackPane;
 import ph.parcs.rmhometiles.util.AppConstant;
 
 public class SweetAlertFactory {
 
     public static SweetAlert create(SweetAlert.Type type, String msg) {
-        switch (type) {
-            case SUCCESS:
-                return successDialog(msg);
-            case WARNING:
-                return deleteDialog(msg);
-            case DANGER:
-                return dangerDialog(msg);
-            case INFO:
-                return infoDialog(msg);
-
-        }
-        return defaultDialog("Unspecified Dialog");
+        return switch (type) {
+            case SUCCESS -> successDialog(msg);
+            case WARNING -> deleteDialog(msg);
+            case DANGER -> dangerDialog(msg);
+            case INFO -> infoDialog(msg);
+        };
     }
 
     public static SweetAlert create(SweetAlert.Type type) {
@@ -61,12 +56,7 @@ public class SweetAlertFactory {
                 .setCancelButton("Close");
     }
 
-    private static SweetAlert defaultDialog(String unspecified_dialog) {
-        return new SweetAlert()
-                .setHeaderMessage(unspecified_dialog)
-                .setContentMessage(unspecified_dialog)
-                .setType(SweetAlert.Type.INFO)
-                .setCancelButton("Close");
+    public static void show(StackPane stackPane, SweetAlert.Type type, String message) {
+        create(type, message).show(stackPane);
     }
-
 }

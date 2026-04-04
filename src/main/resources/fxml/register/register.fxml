@@ -3,10 +3,10 @@
 <?import com.jfoenix.controls.*?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.layout.*?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" styleClass="background"
+<StackPane xmlns:fx="http://javafx.com/fxml/1" styleClass="background"
       stylesheets="@../../css/login.css"
+      fx:id="spRegisterForm"
       xmlns="http://javafx.com/javafx/10.0.2-internal"
-      alignment="CENTER"
       fx:controller="ph.parcs.rmhometiles.ui.register.RegisterAccountController">
 
     <GridPane>
@@ -58,4 +58,4 @@
         </rowConstraints>
     </GridPane>
 
-</VBox>
+</StackPane>
