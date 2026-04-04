@@ -8,13 +8,13 @@
     avocado: #4cbd9b;
     water: #2a96a5;
     primary: #4e73df;
+    gas: #5a5c69;
 }
 
 GridPane {
-    -fx-alignment: top-center;
-    -fx-padding: 15px;
-    -fx-hgap: 8px;
-    -fx-vgap: 15px;
+    -fx-alignment: center;
+    -fx-hgap: 16px;
+    -fx-vgap: 24px;
 }
 
 .background {
@@ -23,8 +23,9 @@ GridPane {
 }
 
 GridPane > .glyph-icon {
-    -glyph-size: 20px;
+    -glyph-size: 22px;
     -fx-text-fill: primary;
+    -fx-fill: gas;
 }
 
 .image {
@@ -62,4 +63,15 @@ GridPane > .glyph-icon {
 
 .split-pane *.split-pane-divider {
     -fx-padding: 0;
+}
+
+
+.button-register-back {
+    -fx-background-color: white;
+    -fx-text-fill: gas;
+    -fx-focus-traversable: false;
+    -fx-border-color: greysquash;
+    -fx-border-width: 1px;
+
+
 }

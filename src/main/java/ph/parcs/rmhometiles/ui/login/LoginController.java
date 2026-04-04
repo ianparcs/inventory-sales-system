@@ -6,12 +6,14 @@ import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.State;
-import ph.parcs.rmhometiles.entity.customer.CustomerService;
 import ph.parcs.rmhometiles.entity.user.User;
 import ph.parcs.rmhometiles.entity.user.UserRepository;
 import ph.parcs.rmhometiles.entity.user.UserService;
@@ -21,22 +23,31 @@ import ph.parcs.rmhometiles.util.AppConstant;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
 import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
 
+import java.util.ArrayList;
 
+
+@Slf4j
 @Controller
 public class LoginController {
 
     @FXML
     private JFXPasswordField pfUserPassword;
     @FXML
+    private FontAwesomeIconView icoUser;
+    @FXML
     private FontAwesomeIconView icoKey;
     @FXML
-    private FontAwesomeIconView icoUser;
+    private StackPane spLoginAccount;
     @FXML
     private JFXTextField tfUserName;
     @FXML
     private JFXButton btnLogin;
     @FXML
+    private Parent vbRegister;
+    @FXML
     private StackPane spRoot;
+    @FXML
+    private Parent vbLogin;
 
     private UserService userService;
     private SceneManager sceneManager;
@@ -45,23 +56,23 @@ public class LoginController {
 
     @FXML
     private void initialize() {
-        setUserFieldStyle(pfUserPassword, icoKey);
-        setUserFieldStyle(tfUserName, icoUser);
- //       btnLogin.fire();
+        setUserFieldStyle(icoKey, pfUserPassword);
+        setUserFieldStyle(icoUser, tfUserName);
+        //       btnLogin.fire();
     }
 
-    private void setUserFieldStyle(TextField textField, FontAwesomeIconView icon) {
+    private void setUserFieldStyle(FontAwesomeIconView icon, TextField textField) {
         textField.focusedProperty().addListener((observableValue, oldValue, newValue) -> {
             if (newValue) {
-                icon.setGlyphStyle("-fx-fill: primary; -glyph-size: 20px;");
+                icon.setGlyphStyle("-fx-fill: primary; -glyph-size: 22px;");
             } else {
-                icon.setGlyphStyle("-fx-fill: #5a5c69; -glyph-size: 20px;");
+                icon.setGlyphStyle("-fx-fill: #5a5c69; -glyph-size: 22px;");
             }
         });
     }
 
     @FXML
-    public void login() {
+    public void onLoginButtonClicked() {
         final String username = tfUserName.getText();
         final String password = pfUserPassword.getText();
 
@@ -75,7 +86,7 @@ public class LoginController {
                 sceneManager.load();
                 if (userService.isAuthenticated()) {
                     SessionService.getInstance().setLoggedInUser(user);
-                    gotoHomeScene();
+                    showHomeScene();
                 } else {
                     showErrorDialog();
                 }
@@ -83,7 +94,29 @@ public class LoginController {
         }).start();
     }
 
-    private void gotoHomeScene() {
+    @FXML
+    public void onRegisterButtonClicked() {
+        showRegisterAccountScene();
+    }
+
+    public void showLoginScene() {
+        switchTo(vbLogin);
+    }
+
+    public void showRegisterAccountScene() {
+        switchTo(vbRegister);
+    }
+
+    private void switchTo(Node target) {
+        for (Node node : new ArrayList<>(spLoginAccount.getChildren())) {
+            node.setVisible(node == target);
+            if (node == target) {
+                node.toFront();
+            }
+        }
+    }
+
+    private void showHomeScene() {
         sceneManager.changeScene(State.HOME);
     }
 

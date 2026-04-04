@@ -15,40 +15,51 @@
 
         <Pane styleClass="image"/>
 
-        <VBox alignment="CENTER">
-            <GridPane>
-                <Pane styleClass="logo" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+        <StackPane fx:id="spLoginAccount">
+            <VBox fx:id="vbLogin" alignment="CENTER">
+                <GridPane>
+                    <Pane styleClass="logo" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
 
-                <FontAwesomeIconView fx:id="icoUser" glyphName="USER" GridPane.columnIndex="0" GridPane.rowIndex="1">
-                    <GridPane.margin>
-                        <Insets bottom="10"/>
-                    </GridPane.margin>
-                </FontAwesomeIconView>
+                    <FontAwesomeIconView fx:id="icoUser" glyphName="USER" GridPane.columnIndex="0"
+                                         GridPane.rowIndex="1">
+                        <GridPane.margin>
+                            <Insets bottom="10"/>
+                        </GridPane.margin>
+                    </FontAwesomeIconView>
 
-                <JFXTextField fx:id="tfUserName" labelFloat="true" promptText="Username" text="admin"
-                              GridPane.columnIndex="1"
-                              GridPane.rowIndex="1">
-                    <GridPane.margin>
-                        <Insets bottom="10"/>
-                    </GridPane.margin>
-                </JFXTextField>
+                    <JFXTextField fx:id="tfUserName" labelFloat="true" promptText="Username" text="admin"
+                                  GridPane.columnIndex="1"
+                                  GridPane.rowIndex="1">
+                        <GridPane.margin>
+                            <Insets bottom="10"/>
+                        </GridPane.margin>
+                    </JFXTextField>
 
-                <FontAwesomeIconView fx:id="icoKey" glyphName="KEY" size="1.5em" GridPane.columnIndex="0"
-                                     GridPane.rowIndex="2"/>
+                    <FontAwesomeIconView fx:id="icoKey" glyphName="LOCK" size="1.5em" GridPane.columnIndex="0"
+                                         GridPane.rowIndex="2"/>
 
-                <JFXPasswordField fx:id="pfUserPassword" labelFloat="true" promptText="Password" text="admin"
-                                  GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    <JFXPasswordField fx:id="pfUserPassword" labelFloat="true" promptText="Password" text="admin"
+                                      GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
-                <JFXButton fx:id="btnLogin" buttonType="FLAT" maxWidth="1.7976931348623157E308" onAction="#login"
-                           text="SIGN IN"
-                           GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-                <rowConstraints>
-                    <RowConstraints valignment="BOTTOM"/>
-                    <RowConstraints valignment="BOTTOM"/>
-                    <RowConstraints valignment="BOTTOM"/>
-                    <RowConstraints valignment="BOTTOM"/>
-                </rowConstraints>
-            </GridPane>
-        </VBox>
+                    <HBox GridPane.columnIndex="1" GridPane.rowIndex="3" spacing="10">
+                        <JFXButton fx:id="btnLogin" buttonType="FLAT" onAction="#onLoginButtonClicked"
+                                   text="Log in"
+                                   GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                        <JFXButton fx:id="btnRegister" buttonType="FLAT" onAction="#onRegisterButtonClicked"
+                                   text="Register"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+                    </HBox>
+
+                    <rowConstraints>
+                        <RowConstraints valignment="BOTTOM"/>
+                        <RowConstraints valignment="BOTTOM"/>
+                        <RowConstraints valignment="BOTTOM"/>
+                        <RowConstraints valignment="BOTTOM"/>
+                    </rowConstraints>
+                </GridPane>
+            </VBox>
+            <fx:include source="../register/register.fxml" fx:id="vbRegister" visible="false"/>
+        </StackPane>
     </SplitPane>
 </StackPane>

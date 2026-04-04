@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" styleClass="background"
+      stylesheets="@../../css/login.css"
+      xmlns="http://javafx.com/javafx/10.0.2-internal"
+      alignment="CENTER"
+      fx:controller="ph.parcs.rmhometiles.ui.register.RegisterAccountController">
+
+    <GridPane>
+        <Pane styleClass="logo" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+
+        <FontAwesomeIconView fx:id="icoFullName" glyphName="PENCIL" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+
+        <JFXTextField fx:id="tfFullName" labelFloat="true" promptText="Full name" text="Ian Jasper Parcon"
+                      GridPane.columnIndex="1"
+                      GridPane.rowIndex="1"/>
+
+        <FontAwesomeIconView fx:id="icoUser" glyphName="USER" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+
+        <JFXTextField fx:id="tfUserName" labelFloat="true" promptText="Username" text="user-ian"
+                      GridPane.columnIndex="1"
+                      GridPane.rowIndex="2"/>
+
+        <FontAwesomeIconView fx:id="icoKeyPassword" glyphName="UNLOCK_ALT" size="1.5em" GridPane.columnIndex="0"
+                             GridPane.rowIndex="3"/>
+
+        <JFXPasswordField fx:id="pfUserPassword" labelFloat="true" promptText="Password" text="admin"
+                          GridPane.columnIndex="1"
+                          GridPane.rowIndex="3"/>
+
+        <FontAwesomeIconView fx:id="icoKeyConfirmPassword" glyphName="UNLOCK_ALT" size="1.5em" GridPane.columnIndex="0"
+                             GridPane.rowIndex="4"/>
+
+        <JFXPasswordField fx:id="pfConfirmUserPassword" labelFloat="true" promptText="Confirm Password" text="admin"
+                          GridPane.columnIndex="1"
+                          GridPane.rowIndex="4"/>
+
+        <HBox GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5" spacing="10" alignment="CENTER"
+              maxWidth="Infinity">
+            <JFXButton buttonType="FLAT" onAction="#onRegisterBackButtonClicked"
+                       styleClass="button-register-back"
+                       text="Back"/>
+
+            <JFXButton buttonType="FLAT" onAction="#onRegisterSubmitButtonClicked"
+                       text="Submit"/>
+        </HBox>
+
+        <rowConstraints>
+            <RowConstraints valignment="BOTTOM"/>
+            <RowConstraints valignment="BOTTOM"/>
+            <RowConstraints valignment="BOTTOM"/>
+            <RowConstraints valignment="BOTTOM"/>
+            <RowConstraints valignment="BOTTOM"/>
+
+        </rowConstraints>
+    </GridPane>
+
+</VBox>
