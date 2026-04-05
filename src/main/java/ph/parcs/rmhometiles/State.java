@@ -4,7 +4,7 @@ public enum State {
     LOGIN("/fxml/login/login.fxml"),
     HOME("/fxml/main/home.fxml"),
     INVENTORY("/fxml/inventory/inventory.fxml"),
-    SALE_REPORT("/fxml/report/report.fxml"),
+    SALE_REPORT("/fxml/report/sales-report.fxml"),
     DASHBOARD("/fxml/dashboard/dashboard.fxml"),
     SUPPLIER("/fxml/supplier/supplier.fxml"),
     INVOICE("/fxml/invoice/invoice-tab.fxml"),

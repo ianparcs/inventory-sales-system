@@ -49,7 +49,7 @@
                     </FXCollections>
                 </items>
                 <value>
-                    <String fx:value="5"/>
+                    <String fx:value="10"/>
                 </value>
             </JFXComboBox>
 
@@ -62,6 +62,12 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
             </columnResizePolicy>
             <columns>
+
+                <TableColumn fx:id="tcCreatedAt" reorderable="false" text="Created Date">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="createdAt"/>
+                    </cellValueFactory>
+                </TableColumn>
 
                 <TableColumn reorderable="false" text="Name">
                     <cellValueFactory>

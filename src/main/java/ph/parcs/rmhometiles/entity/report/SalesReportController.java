@@ -4,18 +4,17 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
-import javafx.event.ActionEvent;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.entity.money.MoneyService;
 import ph.parcs.rmhometiles.ui.pagination.PaginationController;
 import ph.parcs.rmhometiles.util.AppConstant;
-import ph.parcs.rmhometiles.util.DateUtil;
+import ph.parcs.rmhometiles.util.date.DateRangeType;
+import ph.parcs.rmhometiles.util.date.DateUtil;
 import ph.parcs.rmhometiles.util.ThreadUtil;
 
 import java.time.LocalDateTime;
@@ -25,13 +24,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Controller
-@Scope("singleton")
-public class SalesReportController extends PaginationController {
+public class SalesReportController extends PaginationController<SalesReport> {
 
     @FXML
     private TableColumn<SalesReport, String> tcSalesDate;
-    @FXML
-    private TableView<SalesReport> tvSalesReports;
     @FXML
     private JFXComboBox<String> cbDateRange;
     @FXML
@@ -53,10 +49,7 @@ public class SalesReportController extends PaginationController {
     @FXML
     protected void initialize() {
         super.initialize();
-
-        DateUtil.initialize();
         displaySalesReport();
-
         tcSalesDate.setCellValueFactory(cellData -> {
             LocalDateTime createdAt = cellData.getValue().getCreatedAt();
             return Bindings.createObjectBinding(() -> {
@@ -64,11 +57,6 @@ public class SalesReportController extends PaginationController {
                 return "";
             });
         });
-    }
-
-    @Override
-    public void updateItems() {
-
     }
 
     @FXML
@@ -87,25 +75,31 @@ public class SalesReportController extends PaginationController {
         dpEndDate.setVisible(false);
     }
 
-    private void displaySalesReport() {
-        String dateSelect = cbDateRange.getValue();
-        if (dateSelect == null || dateSelect.equalsIgnoreCase("Custom Date Range")) return;
-
+    @Override
+    public void updateItems() {
         ExecutorService executorService = Executors.newCachedThreadPool();
         executorService.submit(() -> {
-            List<SalesReport> salesReportsToday = salesReportService.findReports(cbDateRange.getValue());
-            Map<AppConstant.Sales, String> moneyMap = moneyService.computeAllMoney(salesReportsToday);
+
+            DateRangeType dateRangeType = DateRangeType.fromValue(cbDateRange.getValue());
+            List<SalesReport> salesReports = salesReportService.findReports(dateRangeType);
+            Map<AppConstant.Sales, String> moneyMap = moneyService.computeAllMoney(salesReports);
             Platform.runLater(() -> {
                 lblTax.setText(moneyMap.get(AppConstant.Sales.TAX));
                 lblCost.setText(moneyMap.get(AppConstant.Sales.COST));
                 lblTotal.setText(moneyMap.get(AppConstant.Sales.TOTAL));
                 lblProfit.setText(moneyMap.get(AppConstant.Sales.PROFIT));
 
-                tvSalesReports.getItems().setAll(salesReportsToday);
-                tvSalesReports.refresh();
+                tvItem.setItems(FXCollections.observableArrayList(salesReports));
+                tvItem.refresh();
             });
         });
         ThreadUtil.shutdownAndAwaitTermination(executorService);
+    }
+
+    private void displaySalesReport() {
+        String dateSelect = cbDateRange.getValue();
+        if (dateSelect == null || dateSelect.equalsIgnoreCase("Custom Date Range")) return;
+        updateItems();
     }
 
     @Autowired
@@ -118,7 +112,4 @@ public class SalesReportController extends PaginationController {
         this.moneyService = moneyService;
     }
 
-    public void onPageRowChanged(ActionEvent actionEvent) {
-
-    }
 }

@@ -62,6 +62,7 @@ public class LoginController {
         setUserFieldStyle(icoUser, tfUserName);
 
         new Thread(() -> userService.createAdminUser()).start();
+        btnLogin.fire();
     }
 
     private void setUserFieldStyle(FontAwesomeIconView icon, TextField textField) {

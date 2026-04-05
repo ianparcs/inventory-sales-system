@@ -3,24 +3,32 @@ package ph.parcs.rmhometiles.entity.inventory.item;
 import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.util.Callback;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.ItemListener;
+import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.exception.AppException;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.ui.pagination.PaginationController;
 import ph.parcs.rmhometiles.util.AppConstant;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
 import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
+import ph.parcs.rmhometiles.util.date.DateUtil;
+
+import java.time.LocalDateTime;
 
 @Slf4j
 @Controller
 public abstract class EntityTableController<T extends BaseEntity> extends PaginationController<T> implements EntityActions<BaseEntity> {
 
+    @FXML
+    protected TableColumn<Product, LocalDateTime> tcCreatedAt;
     @FXML
     protected TableColumn<BaseEntity, HBox> tcAction;
     @FXML
@@ -40,6 +48,20 @@ public abstract class EntityTableController<T extends BaseEntity> extends Pagina
         successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
         deleteAlert = SweetAlertFactory.create(SweetAlert.Type.WARNING);
         errorAlert = SweetAlertFactory.create(SweetAlert.Type.DANGER);
+
+        tcCreatedAt.setCellFactory(new Callback<>() {
+            @Override
+            public TableCell<Product, LocalDateTime> call(TableColumn<Product, LocalDateTime> param) {
+                return new TableCell<>() {
+                    protected void updateItem(LocalDateTime item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item != null) {
+                            setText(item.format(DateUtil.FORMAT));
+                        }
+                    }
+                };
+            }
+        });
 
         spMain.sceneProperty().addListener((observableValue, scene, newScene) -> {
             if (newScene != null) {

@@ -62,6 +62,11 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
             </columnResizePolicy>
             <columns>
+                <TableColumn fx:id="tcCreatedAt" reorderable="false" text="Created Date">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="createdAt"/>
+                    </cellValueFactory>
+                </TableColumn>
 
                 <TableColumn reorderable="false" text="Name">
                     <cellValueFactory>

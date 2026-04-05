@@ -69,7 +69,7 @@
                     </cellValueFactory>
                 </TableColumn>
 
-                <TableColumn fx:id="tcDateAdded" reorderable="false" text="Date Added">
+                <TableColumn fx:id="tcCreatedAt" reorderable="false" text="Created Date">
                     <cellValueFactory>
                         <PropertyValueFactory property="createdAt"/>
                     </cellValueFactory>

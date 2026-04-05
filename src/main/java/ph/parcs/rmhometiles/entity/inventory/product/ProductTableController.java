@@ -23,7 +23,7 @@ import ph.parcs.rmhometiles.file.ImageProduct;
 import ph.parcs.rmhometiles.file.writer.ProductExcelWriter;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.util.AppConstant;
-import ph.parcs.rmhometiles.util.DateUtil;
+import ph.parcs.rmhometiles.util.date.DateUtil;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
 import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
 
@@ -37,8 +37,6 @@ import java.util.concurrent.Executors;
 @Controller
 public class ProductTableController extends EntityTableController<Product> {
 
-    @FXML
-    private TableColumn<Product, LocalDateTime> tcDateAdded;
     @FXML
     private TableColumn<Product, String> tcDescription;
     @FXML
@@ -88,7 +86,7 @@ public class ProductTableController extends EntityTableController<Product> {
     }
 
     private void initTableColumnSize() {
-        tcDateAdded.setMaxWidth(1f * Integer.MAX_VALUE * 11);
+        tcCreatedAt.setMaxWidth(1f * Integer.MAX_VALUE * 11);
         tcDescription.setMaxWidth(1f * Integer.MAX_VALUE * 10);
         tcCode.setMaxWidth(1f * Integer.MAX_VALUE * 10);
         tcName.setMaxWidth(1f * Integer.MAX_VALUE * 10);
@@ -106,19 +104,6 @@ public class ProductTableController extends EntityTableController<Product> {
         tcSupplier.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().supplierProperty(), "name"));
         tcCategory.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().categoryProperty(), "name"));
         tcUnitSold.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().stockProperty(), "unitSold"));
-        tcDateAdded.setCellFactory(new Callback<>() {
-            @Override
-            public TableCell<Product, LocalDateTime> call(TableColumn<Product, LocalDateTime> param) {
-                return new TableCell<>() {
-                    protected void updateItem(LocalDateTime item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (item != null) {
-                            setText(item.format(DateUtil.FORMAT));
-                        }
-                    }
-                };
-            }
-        });
 
         initStockColumnProperty();
         initImageColumnProperty();

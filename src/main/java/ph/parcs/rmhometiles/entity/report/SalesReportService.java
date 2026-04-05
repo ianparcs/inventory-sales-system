@@ -8,7 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ph.parcs.rmhometiles.entity.invoice.Invoice;
 import ph.parcs.rmhometiles.entity.invoice.InvoiceService;
 import ph.parcs.rmhometiles.entity.money.MoneyService;
-import ph.parcs.rmhometiles.util.DateUtil;
+import ph.parcs.rmhometiles.util.date.DateRangeType;
+import ph.parcs.rmhometiles.util.date.DateUtil;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -24,12 +25,12 @@ public class SalesReportService {
     private InvoiceService invoiceService;
     private MoneyService moneyService;
 
-    public List<SalesReport> findReports(String dateRangeText) {
-        if (dateRangeText.equalsIgnoreCase("All Time")) {
+    public List<SalesReport> findReports(DateRangeType dateRangeType) {
+        if (dateRangeType.equals(DateRangeType.ALL_TIME)) {
             return createSalesReport(invoiceService.findAllInvoice());
         }
 
-        LocalDateTime[] dateTimeRange = DateUtil.findDate(dateRangeText);
+        LocalDateTime[] dateTimeRange = DateUtil.find(dateRangeType);
         List<Invoice> invoices = invoiceService.findAllInvoiceByDate(dateTimeRange);
 
         return createSalesReport(invoices);

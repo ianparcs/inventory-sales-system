@@ -23,7 +23,8 @@ import ph.parcs.rmhometiles.session.SessionService;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.ui.scene.SceneManager;
 import ph.parcs.rmhometiles.util.AppConstant;
-import ph.parcs.rmhometiles.util.DateUtil;
+import ph.parcs.rmhometiles.util.date.DateRangeType;
+import ph.parcs.rmhometiles.util.date.DateUtil;
 import ph.parcs.rmhometiles.util.ThreadUtil;
 
 import java.time.LocalDateTime;
@@ -35,8 +36,6 @@ import java.util.concurrent.Executors;
 @Controller
 public class ManageInvoiceTableController extends EntityTableController<Invoice> {
 
-    @FXML
-    private TableColumn<Invoice, String> tcInvoiceDate;
     @FXML
     private TableColumn<Invoice, Customer> tcCustomer;
     @FXML
@@ -67,16 +66,6 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
                     }
                 };
             }
-        });
-
-        tcInvoiceDate.setCellValueFactory(cellData -> {
-            LocalDateTime createdAt = cellData.getValue().getCreatedAt();
-            return Bindings.createObjectBinding(() -> {
-                if (createdAt != null) {
-                    return createdAt.format(DateUtil.FORMAT);
-                }
-                return "";
-            });
         });
     }
 
@@ -111,7 +100,8 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
     public void onDateRangeSelect() {
         ExecutorService executorService = Executors.newCachedThreadPool();
         executorService.submit(() -> {
-            LocalDateTime[] dateTimeRange = DateUtil.findDate(cbDateRange.getValue());
+            DateRangeType dateRangeType = DateRangeType.fromValue(cbDateRange.getValue());
+            LocalDateTime[] dateTimeRange = DateUtil.find(dateRangeType);
             List<Invoice> invoices = invoiceService.findAllInvoiceByDate(dateTimeRange);
             Platform.runLater(() -> {
                 tvItem.getItems().setAll(invoices);
