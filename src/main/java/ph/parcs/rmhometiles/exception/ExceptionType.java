@@ -2,8 +2,10 @@ package ph.parcs.rmhometiles.exception;
 
 public enum ExceptionType {
     PASSWORD_NOT_MATCH("Password do not match"),
-    ITEM_LOCKED("Unable to delete. Item is used from order items"),
+    PASSWORD_INCORRECT("The password is incorrect"),
 
+    ITEM_LOCKED("Unable to delete. Item is used from order items"),
+    USER_NOT_EXIST("User doesn't exist"),
     USER_EXIST("User already exist");
     private final String typeValue;
 

@@ -12,6 +12,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ph.parcs.rmhometiles.exception.AppException;
+import ph.parcs.rmhometiles.exception.ExceptionType;
+import ph.parcs.rmhometiles.util.AppConstant;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -26,7 +29,6 @@ public class UserService implements UserDetailsService {
     private UserRepository userRepository;
 
     @Override
-    @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) {
         User currentUser = userRepository.findByUsername(username);
 
@@ -39,21 +41,17 @@ public class UserService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(currentUser.getUsername(), currentUser.getPassword(), grantedAuthorities);
     }
 
-    public void authenticate(String username, String password) {
+    public void authenticate(String username, String password) throws AppException {
         UserDetails userDetails = loadUserByUsername(username);
-        if (userDetails != null) {
-            if (isPasswordMatch(password, userDetails.getPassword())) {
-                authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
-                authenticationManager.authenticate(authenticationToken);
-                if (authenticationToken.isAuthenticated()) {
-                    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-                }
-            }
-        }
-    }
+        if (userDetails == null) throw new AppException(ExceptionType.USER_NOT_EXIST);
+        if (!bCryptPasswordEncoder.matches(password, userDetails.getPassword()))
+            throw new AppException(ExceptionType.PASSWORD_INCORRECT);
 
-    private boolean isPasswordMatch(String plainPass, String encodedPass) {
-        return bCryptPasswordEncoder.matches(plainPass, encodedPass);
+        authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
+        authenticationManager.authenticate(authenticationToken);
+        if (authenticationToken.isAuthenticated()) {
+            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+        }
     }
 
     @Transactional
@@ -66,6 +64,18 @@ public class UserService implements UserDetailsService {
         user.setRole(userData.getRole());
 
         userRepository.save(user);
+    }
+
+    @Transactional
+    public void createAdminUser() {
+        User adminUser = userRepository.findUserByRole(AppConstant.Role.ADMIN);
+        if (adminUser == null) {
+            User admin = new User();
+            admin.setUsername("admin");
+            admin.setPassword(bCryptPasswordEncoder.encode("admin"));
+            admin.setRole(AppConstant.Role.ADMIN);
+            userRepository.save(admin);
+        }
     }
 
     public boolean isAuthenticated() {

@@ -21,12 +21,12 @@
     -fx-alignment: center;
     -fx-font-weight: BOLD;
     -fx-padding: 24 24 20 24;
-    -fx-font-size: 25;
+    -fx-font-size: 20px;
     -fx-wrap-text: true;
 }
 
 .jfx-dialog-layout > .jfx-layout-body .label {
-    -fx-font-size: 15;
+    -fx-font-size: 14px;
     -fx-wrap-text: true;
     -fx-alignment: center;
     -fx-text-alignment: center;

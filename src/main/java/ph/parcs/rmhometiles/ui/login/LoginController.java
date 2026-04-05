@@ -17,9 +17,9 @@ import ph.parcs.rmhometiles.State;
 import ph.parcs.rmhometiles.entity.user.User;
 import ph.parcs.rmhometiles.entity.user.UserRepository;
 import ph.parcs.rmhometiles.entity.user.UserService;
+import ph.parcs.rmhometiles.exception.AppException;
 import ph.parcs.rmhometiles.session.SessionService;
 import ph.parcs.rmhometiles.ui.scene.SceneManager;
-import ph.parcs.rmhometiles.util.AppConstant;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
 import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
 
@@ -60,7 +60,8 @@ public class LoginController {
     private void initialize() {
         setUserFieldStyle(icoKey, pfUserPassword);
         setUserFieldStyle(icoUser, tfUserName);
-        //       btnLogin.fire();
+
+        new Thread(() -> userService.createAdminUser()).start();
     }
 
     private void setUserFieldStyle(FontAwesomeIconView icon, TextField textField) {
@@ -80,12 +81,11 @@ public class LoginController {
 
         new Thread(() -> {
             User user = userRepository.findByUsername(tfUserName.getText());
-            userService.authenticate(username, password);
-
-            if (userService.isAuthenticated()) {
-                login(user);
-            } else {
-                showLoginErrorDialog();
+            try {
+                userService.authenticate(username, password);
+                if (userService.isAuthenticated()) login(user);
+            } catch (AppException e) {
+                showLoginErrorDialog(e.getMessage());
             }
         }).start();
     }
@@ -120,24 +120,15 @@ public class LoginController {
         }
     }
 
-
-    private void showLoginErrorDialog() {
+    private void showLoginErrorDialog(String message) {
         String errorMessage = """
                 The account '%s' does not exist, or the password is incorrect
                 """.formatted(tfUserName.getText());
 
         SweetAlert errorLogin = SweetAlertFactory.create(SweetAlert.Type.DANGER);
         errorLogin.setHeaderMessage("Bad Credentials!");
-        errorLogin.setContentMessage(errorMessage);
+        errorLogin.setContentMessage(message);
         errorLogin.show(spRoot);
-    }
-
-    private User createUser() {
-        User admin = new User();
-        admin.setUsername("admin");
-        admin.setPassword("admin");
-        admin.setRole(AppConstant.Role.USER);
-        return admin;
     }
 
     @Autowired
