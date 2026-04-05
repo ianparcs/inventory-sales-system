@@ -56,10 +56,11 @@ public class UserService implements UserDetailsService {
         return bCryptPasswordEncoder.matches(plainPass, encodedPass);
     }
 
+    @Transactional
     public void createUser(UserData userData) {
         User user = new User();
         user.setUsername(userData.getUsername());
-        user.setPassword(userData.getPassword());
+        user.setPassword(bCryptPasswordEncoder.encode(userData.getPassword()));
         user.setCreatedAt(LocalDateTime.now());
         user.setName(userData.getFullName());
         user.setRole(userData.getRole());
@@ -69,12 +70,6 @@ public class UserService implements UserDetailsService {
 
     public boolean isAuthenticated() {
         return authenticationToken != null && authenticationToken.isAuthenticated();
-    }
-
-    @Transactional
-    public void saveUser(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
     }
 
     @Autowired

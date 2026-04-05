@@ -80,25 +80,27 @@ public class LoginController {
 
         new Thread(() -> {
             User user = userRepository.findByUsername(tfUserName.getText());
-            if (user == null) {
-                userService.saveUser(createUser());
-            }
             userService.authenticate(username, password);
-            Platform.runLater(() -> {
-                sceneManager.load();
-                if (userService.isAuthenticated()) {
-                    SessionService.getInstance().setLoggedInUser(user);
-                    showHomeScene();
-                } else {
-                    showErrorDialog();
-                }
-            });
+
+            if (userService.isAuthenticated()) {
+                login(user);
+            } else {
+                showLoginErrorDialog();
+            }
         }).start();
     }
 
     @FXML
     public void onRegisterButtonClicked() {
         showRegisterAccountScene();
+    }
+
+    private void login(User user) {
+        SessionService.getInstance().setLoggedInUser(user);
+        Platform.runLater(() -> {
+            sceneManager.load();
+            sceneManager.changeScene(State.HOME);
+        });
     }
 
     public void showLoginScene() {
@@ -118,14 +120,15 @@ public class LoginController {
         }
     }
 
-    private void showHomeScene() {
-        sceneManager.changeScene(State.HOME);
-    }
 
-    private void showErrorDialog() {
+    private void showLoginErrorDialog() {
+        String errorMessage = """
+                The account '%s' does not exist, or the password is incorrect
+                """.formatted(tfUserName.getText());
+
         SweetAlert errorLogin = SweetAlertFactory.create(SweetAlert.Type.DANGER);
         errorLogin.setHeaderMessage("Bad Credentials!");
-        errorLogin.setContentMessage("Account " + tfUserName.getText() + " doesn't exist. Password or username doesn't match");
+        errorLogin.setContentMessage(errorMessage);
         errorLogin.show(spRoot);
     }
 

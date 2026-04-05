@@ -34,7 +34,7 @@ public interface AppConstant {
     }
 
     interface Message {
-        String ADD = "Item successfully added!";
+        String USER_REGISTERED = "You have successfully registered. Welcome aboard!";
         String SAVED = "Item has been successfully saved";
         String DELETE = "Item successfully removed";
         String ASK = "Are you sure?";

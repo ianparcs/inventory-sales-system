@@ -1,6 +1,7 @@
 .button-confirm {
     -fx-background-color: water;
     -fx-text-fill: WHITE;
+    -fx-padding: 10px;
 }
 
 .button-cancel {

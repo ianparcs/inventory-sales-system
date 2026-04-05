@@ -12,7 +12,8 @@ import ph.parcs.rmhometiles.entity.inventory.stock.Stock;
 import ph.parcs.rmhometiles.entity.inventory.stock.StockService;
 import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.entity.order.OrderItemService;
-import ph.parcs.rmhometiles.exception.ItemLockedException;
+import ph.parcs.rmhometiles.exception.AppException;
+import ph.parcs.rmhometiles.exception.ExceptionType;
 import ph.parcs.rmhometiles.file.FileService;
 import ph.parcs.rmhometiles.file.ImageProduct;
 import ph.parcs.rmhometiles.util.PageUtil;
@@ -38,14 +39,14 @@ public class ProductService extends BaseService<Product> {
     }
 
     @Override
-    public boolean deleteEntity(Product product) throws ItemLockedException {
+    public boolean deleteEntity(Product product) throws AppException {
         ImageProduct imageProduct = product.getImageProduct();
         if (imageProduct != null && !StringUtils.isEmpty(imageProduct.getPath())) {
             fileService.deleteFile(imageProduct.getName());
         }
 
         if (orderItemService.isItemsExists(product.getOrderItems())) {
-            throw new ItemLockedException("Unable to delete. Item is used from order items");
+            throw new AppException(ExceptionType.ITEM_LOCKED);
         }
 
         productRepository.delete(product);

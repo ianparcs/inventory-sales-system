@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import de.jensd.fx.glyphs.GlyphsStack;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -51,7 +52,7 @@ public class SweetAlert {
     }
 
     public SweetAlert show(StackPane root) {
-        dialog.show(root);
+        Platform.runLater(() -> dialog.show(root));
         return this;
     }
 

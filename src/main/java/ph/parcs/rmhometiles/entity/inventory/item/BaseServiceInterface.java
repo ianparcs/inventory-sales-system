@@ -2,7 +2,7 @@ package ph.parcs.rmhometiles.entity.inventory.item;
 
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-import ph.parcs.rmhometiles.exception.ItemLockedException;
+import ph.parcs.rmhometiles.exception.AppException;
 
 import java.util.List;
 
@@ -23,5 +23,5 @@ public interface BaseServiceInterface<T, ID> {
 
     boolean isExist(Integer id);
 
-    boolean deleteEntity(T item) throws ItemLockedException;
+    boolean deleteEntity(T item) throws AppException;
 }

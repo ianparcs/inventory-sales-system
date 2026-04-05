@@ -3,7 +3,7 @@ package ph.parcs.rmhometiles.entity.inventory.item;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import ph.parcs.rmhometiles.exception.ItemLockedException;
+import ph.parcs.rmhometiles.exception.AppException;
 import ph.parcs.rmhometiles.util.PageUtil;
 
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ public abstract class BaseService<T extends BaseEntity> implements BaseServiceIn
     }
 
     @Override
-    public boolean deleteEntity(T entity) throws ItemLockedException {
+    public boolean deleteEntity(T entity) throws AppException {
         entityRepository.delete(entity);
         return !isExist(entity.getId());
     }

@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.entity.user.UserData;
 import ph.parcs.rmhometiles.entity.user.UserService;
@@ -64,18 +65,25 @@ public class RegisterAccountController {
 
     @FXML
     public void onRegisterSubmitButtonClicked() {
-        String password = pfUserPassword.getText();
-        String confirmPassword = pfConfirmUserPassword.getText();
+        new Thread(() -> {
+            try {
+                String password = pfUserPassword.getText();
+                String confirmPassword = pfConfirmUserPassword.getText();
 
-        try {
-            if (password.equals(confirmPassword)) {
+                if (!password.equals(confirmPassword)) throw new AppException(ExceptionType.PASSWORD_NOT_MATCH);
+
                 userService.createUser(retrieveUserInput());
-            } else {
-                throw new AppException(ExceptionType.PASSWORD_NOT_MATCH);
+                SweetAlertFactory.create(SweetAlert.Type.SUCCESS)
+                        .setConfirmListener(() -> loginController.showLoginScene())
+                        .setContentMessage(AppConstant.Message.USER_REGISTERED)
+                        .show(spRegisterForm);
+
+            } catch (AppException e) {
+                SweetAlertFactory.create(SweetAlert.Type.DANGER, e.getMessage()).show(spRegisterForm);
+            } catch (DataIntegrityViolationException e) {
+                SweetAlertFactory.create(SweetAlert.Type.DANGER, ExceptionType.USER_EXIST.getTypeValue()).show(spRegisterForm);
             }
-        } catch (Exception e) {
-            SweetAlertFactory.show(spRegisterForm, SweetAlert.Type.DANGER, "Password do not match");
-        }
+        }).start();
     }
 
     private UserData retrieveUserInput() {

@@ -56,7 +56,4 @@ public class SweetAlertFactory {
                 .setCancelButton("Close");
     }
 
-    public static void show(StackPane stackPane, SweetAlert.Type type, String message) {
-        create(type, message).show(stackPane);
-    }
 }

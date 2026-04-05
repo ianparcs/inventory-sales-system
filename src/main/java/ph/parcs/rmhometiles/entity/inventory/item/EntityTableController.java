@@ -10,7 +10,7 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.ItemListener;
-import ph.parcs.rmhometiles.exception.ItemLockedException;
+import ph.parcs.rmhometiles.exception.AppException;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.ui.pagination.PaginationController;
 import ph.parcs.rmhometiles.util.AppConstant;
@@ -65,7 +65,7 @@ public abstract class EntityTableController<T extends BaseEntity> extends Pagina
                     successAlert.setContentMessage(AppConstant.Message.DELETE).show(root);
                     updateItems();
                 }
-            } catch (ItemLockedException itemLockedException) {
+            } catch (AppException itemLockedException) {
                 errorAlert.setContentMessage(itemLockedException.getMessage()).show(root);
             }
 
