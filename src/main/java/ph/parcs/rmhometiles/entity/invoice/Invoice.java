@@ -164,11 +164,6 @@ public class Invoice extends BaseEntity {
     }
 
     @Transient
-    public LocalDate getCreatedLocalDate() {
-        return getCreatedAt().toLocalDate();
-    }
-
-    @Transient
     public ObjectProperty<Money> taxAmountProperty() {
         return taxAmount;
     }

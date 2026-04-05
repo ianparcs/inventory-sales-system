@@ -135,7 +135,7 @@ public class ProductTableController extends EntityTableController<Product> {
                 if (productImage == null) return;
                 Image picture = new Image("file:" + productImage.getPath(), true);
                 ImageView imageView = createImageView(picture, 600, 400);
-                showAlert(imageView, productImage.getName());
+                previewProductImage(imageView, productImage.getName());
             });
             return cell;
         });
@@ -156,7 +156,7 @@ public class ProductTableController extends EntityTableController<Product> {
         });
     }
 
-    private void showAlert(ImageView imageView, String name) {
+    private void previewProductImage(ImageView imageView, String name) {
         SweetAlert sweetAlert = SweetAlertFactory.create(SweetAlert.Type.INFO);
         sweetAlert.setHeaderMessage(name);
         sweetAlert.setBody(imageView);

@@ -41,8 +41,8 @@ public class SalesReportService {
 
         if (invoices == null) return new ArrayList<>();
 
-        Map<LocalDate, List<Invoice>> groupedByDate = invoices.stream()
-                .collect(Collectors.groupingBy(Invoice::getCreatedLocalDate));
+        Map<LocalDateTime, List<Invoice>> groupedByDate = invoices.stream()
+                .collect(Collectors.groupingBy(Invoice::getCreatedAt));
 
 
         for (var entry : groupedByDate.entrySet()) {

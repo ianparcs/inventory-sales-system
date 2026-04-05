@@ -89,7 +89,7 @@ public class SalesReportController extends PaginationController<SalesReport> {
                 lblTotal.setText(moneyMap.get(AppConstant.Sales.TOTAL));
                 lblProfit.setText(moneyMap.get(AppConstant.Sales.PROFIT));
 
-                tvItem.setItems(FXCollections.observableArrayList(salesReports));
+                tvItem.getItems().setAll(salesReports);
                 tvItem.refresh();
             });
         });
