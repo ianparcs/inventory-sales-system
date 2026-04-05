@@ -42,9 +42,9 @@
             </columnResizePolicy>
             <columns>
 
-                <TableColumn reorderable="false" text="Timestamp">
+                <TableColumn reorderable="false" text="Log Date">
                     <cellValueFactory>
-                        <PropertyValueFactory property="timestamp"/>
+                        <PropertyValueFactory property="createdAt"/>
                     </cellValueFactory>
                 </TableColumn>
 
