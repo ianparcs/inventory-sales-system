@@ -14,7 +14,7 @@ public final class DateUtil {
 
 
     public static final DateTimeFormatter FORMAT = new DateTimeFormatterBuilder()
-            .appendPattern("MMMM d, yyyy h:mm ")
+            .appendPattern("MMM d, yyyy h:mm ")
             .appendText(java.time.temporal.ChronoField.AMPM_OF_DAY, TextStyle.SHORT)
             .toFormatter(Locale.US);
     private static final Map<DateRangeType, LocalDateTime[]> DATE_RANGES =

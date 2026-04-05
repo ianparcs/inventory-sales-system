@@ -14,10 +14,6 @@ import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseService;
 import ph.parcs.rmhometiles.entity.inventory.item.ItemPageEntry;
 import ph.parcs.rmhometiles.util.PageUtil;
-import ph.parcs.rmhometiles.util.ThreadUtil;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 
 @Scope("prototype")
@@ -53,16 +49,14 @@ public abstract class PaginationController<T extends BaseEntity> {
     }
 
     public void updateItems() {
-        ExecutorService executorService = Executors.newCachedThreadPool();
-        executorService.submit(() -> {
+        new Thread(() -> {
             Page<T> items = baseService.findPages(getCurrentPage(), getRowsPerPage(), searchValue);
             Platform.runLater(() -> {
-                tvItem.setItems(FXCollections.observableArrayList(items.toList()));
+                tvItem.getItems().setAll(items.toList());
                 tvItem.refresh();
                 updatePageEntries((Page<BaseEntity>) items);
             });
-        });
-        ThreadUtil.shutdownAndAwaitTermination(executorService);
+        }).start();
     }
 
     private int getCurrentPage() {

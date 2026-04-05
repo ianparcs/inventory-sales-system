@@ -123,7 +123,7 @@
                         <PropertyValueFactory property="price"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="tcImage" reorderable="false" resizable="false" sortable="false"
+                <TableColumn fx:id="tcImage" reorderable="false" sortable="false"
                              styleClass="action-column" text="Image">
                     <cellValueFactory>
                         <PropertyValueFactory property="imageProduct"/>

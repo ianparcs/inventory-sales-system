@@ -8,6 +8,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import ph.parcs.rmhometiles.entity.inventory.item.EditItemController;
 import ph.parcs.rmhometiles.entity.inventory.item.EntityTableController;
 import ph.parcs.rmhometiles.entity.inventory.stock.Stock;
 import ph.parcs.rmhometiles.entity.supplier.Supplier;
+import ph.parcs.rmhometiles.entity.user.User;
 import ph.parcs.rmhometiles.file.FileService;
 import ph.parcs.rmhometiles.file.ImageProduct;
 import ph.parcs.rmhometiles.file.writer.ProductExcelWriter;
@@ -68,20 +70,24 @@ public class ProductTableController extends EntityTableController<Product> {
                 this::onEditActionClick, this::onDeleteActionClick));
     }
 
+    @Override
+    protected void hideUIBasedOnUserRole(User user) {
+
+    }
 
     private void initTableColumnSize() {
-        tcCreatedAt.setMaxWidth(1f * Integer.MAX_VALUE * 11);
-        tcCreatedBy.setMaxWidth(1f * Integer.MAX_VALUE * 10);
-        tcDescription.setMaxWidth(1f * Integer.MAX_VALUE * 10);
-        tcName.setMaxWidth(1f * Integer.MAX_VALUE * 9);
-        tcSupplier.setMaxWidth(1f * Integer.MAX_VALUE * 8);
-        tcUnitSold.setMaxWidth(1f * Integer.MAX_VALUE * 7);
-        tcCategory.setMaxWidth(1f * Integer.MAX_VALUE * 6);
+        tcCreatedAt.setMaxWidth(1f * Integer.MAX_VALUE * 10);
+        tcDescription.setMaxWidth(1f * Integer.MAX_VALUE * 8);
+        tcName.setMaxWidth(1f * Integer.MAX_VALUE * 8);
+        tcCreatedBy.setMaxWidth(1f * Integer.MAX_VALUE * 7);
+        tcSupplier.setMaxWidth(1f * Integer.MAX_VALUE * 7);
+        tcCategory.setMaxWidth(1f * Integer.MAX_VALUE * 7);
         tcPrice.setMaxWidth(1f * Integer.MAX_VALUE * 6);
         tcCost.setMaxWidth(1f * Integer.MAX_VALUE * 6);
+        tcUnitSold.setMaxWidth(1f * Integer.MAX_VALUE * 5);
         tcStock.setMaxWidth(1f * Integer.MAX_VALUE * 5);
         tcImage.setMaxWidth(1f * Integer.MAX_VALUE * 5);
-        tcAction.setMaxWidth(1f * Integer.MAX_VALUE * 5);
+        tcAction.setMaxWidth(1f * Integer.MAX_VALUE * 4);
         tcCode.setMaxWidth(1f * Integer.MAX_VALUE * 4);
     }
 

@@ -3,7 +3,7 @@ package ph.parcs.rmhometiles;
 public enum State {
     LOGIN("/fxml/login/login.fxml"),
     HOME("/fxml/main/home.fxml"),
-    INVENTORY("/fxml/inventory/inventory.fxml"),
+    INVENTORY("/fxml/inventory/inventory-tab.fxml"),
     SALE_REPORT("/fxml/report/sales-report.fxml"),
     DASHBOARD("/fxml/dashboard/dashboard.fxml"),
     SUPPLIER("/fxml/supplier/supplier.fxml"),

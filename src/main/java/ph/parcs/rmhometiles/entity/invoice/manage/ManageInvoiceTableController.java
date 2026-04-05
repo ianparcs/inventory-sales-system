@@ -19,17 +19,16 @@ import ph.parcs.rmhometiles.entity.inventory.item.EntityTableController;
 import ph.parcs.rmhometiles.entity.invoice.Invoice;
 import ph.parcs.rmhometiles.entity.invoice.InvoiceService;
 import ph.parcs.rmhometiles.entity.invoice.ViewInvoiceController;
-import ph.parcs.rmhometiles.session.SessionService;
+import ph.parcs.rmhometiles.entity.user.User;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.ui.scene.SceneManager;
 import ph.parcs.rmhometiles.util.AppConstant;
+import ph.parcs.rmhometiles.util.ThreadUtil;
 import ph.parcs.rmhometiles.util.date.DateRangeType;
 import ph.parcs.rmhometiles.util.date.DateUtil;
-import ph.parcs.rmhometiles.util.ThreadUtil;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -49,6 +48,7 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
     @FXML
     public void initialize() {
         super.initialize();
+        super.updateItems();
 
         tcCustomer.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().getCustomer(), "name"));
 
@@ -70,18 +70,13 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
     }
 
     @Override
-    protected void hideUIBasedOnUserRole() {
-        var currentUser = Optional.of(SessionService.getInstance().getLoggedInUser());
-        currentUser.ifPresent(user -> {
-            if (tcAction.getCellFactory() != null) {
-                switch (user.getRole()) {
-                    case ADMIN ->
-                            tcAction.setCellFactory(ActionTableCell.forActions(this::onViewActionClick, this::onEditActionClick, this::onDeleteActionClick));
-                    case USER ->
-                            tcAction.setCellFactory(ActionTableCell.forActions(this::onViewActionClick, AppConstant.ActionType.VIEW));
-                }
-            }
-        });
+    protected void hideUIBasedOnUserRole(User user) {
+        switch (user.getRole()) {
+            case ADMIN ->
+                    tcAction.setCellFactory(ActionTableCell.forActions(this::onViewActionClick, this::onEditActionClick, this::onDeleteActionClick));
+            case USER ->
+                    tcAction.setCellFactory(ActionTableCell.forActions(this::onViewActionClick, AppConstant.ActionType.VIEW));
+        }
     }
 
     @SneakyThrows

@@ -49,7 +49,7 @@
                     </FXCollections>
                 </items>
                 <value>
-                    <String fx:value="5"/>
+                    <String fx:value="15"/>
                 </value>
             </JFXComboBox>
 

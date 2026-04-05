@@ -10,7 +10,7 @@ import ph.parcs.rmhometiles.entity.inventory.product.ProductTableController;
 import ph.parcs.rmhometiles.entity.inventory.stock.unit.StockUnitTableController;
 
 @Controller
-public class InventoryController {
+public class InventoryTabController {
 
     @FXML
     private Tab tabStockUnit;
@@ -27,12 +27,12 @@ public class InventoryController {
 
     @FXML
     private void initialize() {
-        tpRoot.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) -> {
-            if (newTab.equals(tabStockUnit)) stockUnitTableController.updateItems();
-            else if (newTab.equals(tabCategory)) categoryTableController.updateItems();
-            else if (newTab.equals(tabProduct)) productTableController.updateItems();
-        });
         tpRoot.setDisableAnimation(true);
+        tpRoot.visibleProperty().addListener((ov, oldTab, newTab) -> {
+            if (tpRoot.getSelectionModel().getSelectedItem().equals(tabStockUnit)) stockUnitTableController.updateItems();
+            else if (tpRoot.getSelectionModel().getSelectedItem().equals(tabCategory)) categoryTableController.updateItems();
+            else if (tpRoot.getSelectionModel().getSelectedItem().equals(tabProduct)) productTableController.updateItems();
+        });
     }
 
     @Autowired

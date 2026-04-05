@@ -2,7 +2,6 @@ package ph.parcs.rmhometiles.entity.inventory.item;
 
 import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.ItemListener;
 import ph.parcs.rmhometiles.entity.user.User;
 import ph.parcs.rmhometiles.exception.AppException;
-import ph.parcs.rmhometiles.ui.ActionTableCell;
+import ph.parcs.rmhometiles.session.SessionService;
 import ph.parcs.rmhometiles.ui.pagination.PaginationController;
 import ph.parcs.rmhometiles.util.AppConstant;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
@@ -79,18 +78,9 @@ public abstract class EntityTableController<T extends BaseEntity> extends Pagina
                 };
             }
         });
-
-        spMain.sceneProperty().addListener((observableValue, scene, newScene) -> {
-            if (newScene != null) {
-                updateItems();
-                //  hideUIBasedOnUserRole();
-            }
-        });
     }
 
-    protected void hideUIBasedOnUserRole() {
-        tcAction.setCellFactory(ActionTableCell.forActions(this::onEditActionClick, this::onDeleteActionClick));
-    }
+    protected abstract void hideUIBasedOnUserRole(User user);
 
     @SneakyThrows
     @Override
