@@ -81,8 +81,9 @@ public class SalesReportController extends PaginationController<SalesReport> {
         executorService.submit(() -> {
 
             DateRangeType dateRangeType = DateRangeType.fromValue(cbDateRange.getValue());
-            List<SalesReport> salesReports = salesReportService.findReports(dateRangeType);
+            List<SalesReport> salesReports = salesReportService.createSalesReports(dateRangeType);
             Map<AppConstant.Sales, String> moneyMap = moneyService.computeAllMoney(salesReports);
+
             Platform.runLater(() -> {
                 lblTax.setText(moneyMap.get(AppConstant.Sales.TAX));
                 lblCost.setText(moneyMap.get(AppConstant.Sales.COST));

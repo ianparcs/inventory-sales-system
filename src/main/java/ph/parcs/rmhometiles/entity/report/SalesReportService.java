@@ -25,18 +25,18 @@ public class SalesReportService {
     private InvoiceService invoiceService;
     private MoneyService moneyService;
 
-    public List<SalesReport> findReports(DateRangeType dateRangeType) {
+    public List<SalesReport> createSalesReports(DateRangeType dateRangeType) {
         if (dateRangeType.equals(DateRangeType.ALL_TIME)) {
-            return createSalesReport(invoiceService.findAllInvoice());
+            return extractInvoice(invoiceService.findAllInvoice());
         }
 
         LocalDateTime[] dateTimeRange = DateUtil.find(dateRangeType);
         List<Invoice> invoices = invoiceService.findAllInvoiceByDate(dateTimeRange);
 
-        return createSalesReport(invoices);
+        return extractInvoice(invoices);
     }
 
-    private List<SalesReport> createSalesReport(List<Invoice> invoices) {
+    private List<SalesReport> extractInvoice(List<Invoice> invoices) {
         List<SalesReport> salesReports = new ArrayList<>();
 
         if (invoices == null) return new ArrayList<>();
