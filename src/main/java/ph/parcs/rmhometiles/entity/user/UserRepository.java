@@ -1,6 +1,5 @@
 package ph.parcs.rmhometiles.entity.user;
 
-import javafx.beans.property.ObjectProperty;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import ph.parcs.rmhometiles.util.AppConstant;

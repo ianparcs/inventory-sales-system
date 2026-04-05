@@ -1,7 +1,10 @@
 package ph.parcs.rmhometiles.entity.user;
 
 import jakarta.persistence.*;
-import javafx.beans.property.*;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.util.AppConstant;
 

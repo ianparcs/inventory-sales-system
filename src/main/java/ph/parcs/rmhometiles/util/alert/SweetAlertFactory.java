@@ -1,7 +1,6 @@
 package ph.parcs.rmhometiles.util.alert;
 
 
-import javafx.scene.layout.StackPane;
 import ph.parcs.rmhometiles.util.AppConstant;
 
 public class SweetAlertFactory {

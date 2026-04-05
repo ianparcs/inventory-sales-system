@@ -4,10 +4,10 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.layout.*?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" styleClass="background"
-      stylesheets="@../../css/login.css"
-      fx:id="spRegisterForm"
-      xmlns="http://javafx.com/javafx/10.0.2-internal"
-      fx:controller="ph.parcs.rmhometiles.ui.register.RegisterAccountController">
+           stylesheets="@../../css/login.css"
+           fx:id="spRegisterForm"
+           xmlns="http://javafx.com/javafx/10.0.2-internal"
+           fx:controller="ph.parcs.rmhometiles.ui.register.RegisterAccountController">
 
     <GridPane>
         <Pane styleClass="logo" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
