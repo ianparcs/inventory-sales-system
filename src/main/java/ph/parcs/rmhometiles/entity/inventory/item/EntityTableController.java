@@ -47,6 +47,8 @@ public abstract class EntityTableController<T extends BaseEntity> extends Pagina
     @FXML
     protected void initialize() {
         super.initialize();
+        super.updateItems();
+
         successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
         deleteAlert = SweetAlertFactory.create(SweetAlert.Type.WARNING);
         errorAlert = SweetAlertFactory.create(SweetAlert.Type.DANGER);

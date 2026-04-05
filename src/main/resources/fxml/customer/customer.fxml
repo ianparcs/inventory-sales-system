@@ -105,7 +105,7 @@
                 <Label fx:id="lblPageEntries" BorderPane.alignment="CENTER"/>
             </left>
             <right>
-                <Pagination fx:id="pagination" maxPageIndicatorCount="5" BorderPane.alignment="CENTER"/>
+                <Pagination fx:id="pagination" maxPageIndicatorCount="3" BorderPane.alignment="CENTER"/>
             </right>
             <padding>
                 <Insets left="15.0" right="15.0"/>
