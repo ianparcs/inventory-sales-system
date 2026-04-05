@@ -27,9 +27,6 @@ public class User extends BaseEntity {
         this.username.set(username);
     }
 
-    public StringProperty usernameProperty() {
-        return username;
-    }
 
     public String getPassword() {
         return password.get();
@@ -37,10 +34,6 @@ public class User extends BaseEntity {
 
     public void setPassword(String password) {
         this.password.set(password);
-    }
-
-    public StringProperty passwordProperty() {
-        return password;
     }
 
     @Enumerated(EnumType.STRING)
@@ -52,9 +45,6 @@ public class User extends BaseEntity {
         this.role.set(role);
     }
 
-    public ObjectProperty<AppConstant.Role> roleProperty() {
-        return role;
-    }
 
 
 }

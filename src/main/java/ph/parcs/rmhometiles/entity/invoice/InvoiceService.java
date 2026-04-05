@@ -47,7 +47,7 @@ public class InvoiceService extends BaseService<Invoice> {
 
     @Override
     public Invoice saveEntity(Invoice invoice) {
-        return invoiceRepository.save(invoice);
+        return invoiceRepository.save(saveCreatedBy(invoice));
     }
 
     public void updateLineItems(ObservableList<OrderItem> items) {

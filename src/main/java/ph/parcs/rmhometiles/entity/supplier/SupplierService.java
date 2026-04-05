@@ -62,7 +62,7 @@ public class SupplierService extends BaseService<Supplier> {
 
     @Override
     public Supplier saveEntity(Supplier item) {
-        return supplierRepository.save(item);
+        return supplierRepository.save(saveCreatedBy(item));
     }
 
     @Override

@@ -1,4 +1,4 @@
-package ph.parcs.rmhometiles.security;
+package ph.parcs.rmhometiles.entity.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

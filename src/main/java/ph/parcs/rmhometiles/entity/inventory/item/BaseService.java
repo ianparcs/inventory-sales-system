@@ -3,7 +3,9 @@ package ph.parcs.rmhometiles.entity.inventory.item;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import ph.parcs.rmhometiles.entity.user.User;
 import ph.parcs.rmhometiles.exception.AppException;
+import ph.parcs.rmhometiles.session.SessionService;
 import ph.parcs.rmhometiles.util.PageUtil;
 
 import java.util.ArrayList;
@@ -49,7 +51,13 @@ public abstract class BaseService<T extends BaseEntity> implements BaseServiceIn
 
     @Override
     public T saveEntity(T entity) {
-        return entityRepository.save(entity);
+        return entityRepository.save(saveCreatedBy(entity));
+    }
+
+    protected T saveCreatedBy(T entity) {
+        User createdBy = SessionService.getInstance().getLoggedInUser();
+        entity.setCreatedBy(createdBy);
+        return entity;
     }
 
     @Override

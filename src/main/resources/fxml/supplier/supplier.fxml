@@ -69,6 +69,12 @@
                     </cellValueFactory>
                 </TableColumn>
 
+                <TableColumn fx:id="tcCreatedBy" reorderable="false" text="Created By">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="createdBy"/>
+                    </cellValueFactory>
+                </TableColumn>
+
                 <TableColumn reorderable="false" text="Name">
                     <cellValueFactory>
                         <PropertyValueFactory property="name"/>

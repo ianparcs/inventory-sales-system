@@ -39,11 +39,11 @@ public class NavigationController {
 
     @FXML
     private void initialize() {
-        configureUIVisibilityByUserRole();
+        configureNavigationVisibilityByRole();
         configureNavigationButtonAction();
     }
 
-    private void configureUIVisibilityByUserRole() {
+    private void configureNavigationVisibilityByRole() {
         Platform.runLater(() -> {
             User currentUser = SessionService.getInstance().getLoggedInUser();
             if (currentUser != null) {

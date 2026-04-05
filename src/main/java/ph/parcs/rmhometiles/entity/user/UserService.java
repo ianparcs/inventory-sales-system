@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ph.parcs.rmhometiles.exception.AppException;
 import ph.parcs.rmhometiles.exception.ExceptionType;
+import ph.parcs.rmhometiles.session.SessionService;
 import ph.parcs.rmhometiles.util.AppConstant;
 
 import java.time.LocalDateTime;
@@ -72,10 +73,13 @@ public class UserService implements UserDetailsService {
         if (adminUser == null) {
             User admin = new User();
             admin.setUsername("admin");
+            admin.setName("Ianparcs");
             admin.setPassword(bCryptPasswordEncoder.encode("admin"));
             admin.setRole(AppConstant.Role.ADMIN);
-            userRepository.save(admin);
+            User user = userRepository.save(admin);
+            SessionService.getInstance().setLoggedInUser(user);
         }
+
     }
 
     public boolean isAuthenticated() {

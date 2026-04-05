@@ -83,7 +83,7 @@ public class ProductService extends BaseService<Product> {
         if (imageProduct != null && !StringUtils.isEmpty(imageProduct.getPath())) {
             fileService.saveImage(imageProduct);
         }
-        return productRepository.save(product);
+        return productRepository.save(saveCreatedBy(product));
     }
 
     @Override

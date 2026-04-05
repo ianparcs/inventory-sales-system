@@ -14,7 +14,7 @@
 
         <FontAwesomeIconView fx:id="icoFullName" glyphName="PENCIL" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
 
-        <JFXTextField fx:id="tfFullName" labelFloat="true" promptText="Full name" text="Ian Jasper Parcon"
+        <JFXTextField fx:id="tfFullName" labelFloat="true" promptText="Name" text="Ian Jasper Parcon"
                       GridPane.columnIndex="1"
                       GridPane.rowIndex="1"/>
 

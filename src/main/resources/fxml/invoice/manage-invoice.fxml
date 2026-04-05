@@ -111,6 +111,12 @@
                     </cellValueFactory>
                 </TableColumn>
 
+                <TableColumn fx:id="tcCreatedBy" reorderable="false" text="Sales Person">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="createdBy"/>
+                    </cellValueFactory>
+                </TableColumn>
+
                 <TableColumn reorderable="false" text="Total">
                     <cellValueFactory>
                         <PropertyValueFactory property="totalAmount"/>

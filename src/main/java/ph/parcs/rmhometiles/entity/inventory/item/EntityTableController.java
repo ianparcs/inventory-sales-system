@@ -2,6 +2,7 @@ package ph.parcs.rmhometiles.entity.inventory.item;
 
 import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -12,7 +13,7 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.ItemListener;
-import ph.parcs.rmhometiles.entity.inventory.product.Product;
+import ph.parcs.rmhometiles.entity.user.User;
 import ph.parcs.rmhometiles.exception.AppException;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.ui.pagination.PaginationController;
@@ -28,7 +29,9 @@ import java.time.LocalDateTime;
 public abstract class EntityTableController<T extends BaseEntity> extends PaginationController<T> implements EntityActions<BaseEntity> {
 
     @FXML
-    protected TableColumn<Product, LocalDateTime> tcCreatedAt;
+    protected TableColumn<BaseEntity, LocalDateTime> tcCreatedAt;
+    @FXML
+    protected TableColumn<BaseEntity, User> tcCreatedBy;
     @FXML
     protected TableColumn<BaseEntity, HBox> tcAction;
     @FXML
@@ -51,12 +54,26 @@ public abstract class EntityTableController<T extends BaseEntity> extends Pagina
 
         tcCreatedAt.setCellFactory(new Callback<>() {
             @Override
-            public TableCell<Product, LocalDateTime> call(TableColumn<Product, LocalDateTime> param) {
+            public TableCell<BaseEntity, LocalDateTime> call(TableColumn<BaseEntity, LocalDateTime> param) {
                 return new TableCell<>() {
                     protected void updateItem(LocalDateTime item, boolean empty) {
                         super.updateItem(item, empty);
                         if (item != null) {
                             setText(item.format(DateUtil.FORMAT));
+                        }
+                    }
+                };
+            }
+        });
+
+        tcCreatedBy.setCellFactory(new Callback<>() {
+            @Override
+            public TableCell<BaseEntity, User> call(TableColumn<BaseEntity, User> param) {
+                return new TableCell<>() {
+                    protected void updateItem(User user, boolean empty) {
+                        super.updateItem(user, empty);
+                        if (user != null) {
+                            setText(user.getName());
                         }
                     }
                 };

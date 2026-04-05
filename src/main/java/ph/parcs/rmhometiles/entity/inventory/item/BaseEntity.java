@@ -2,6 +2,7 @@ package ph.parcs.rmhometiles.entity.inventory.item;
 
 import jakarta.persistence.*;
 import javafx.beans.property.*;
+import ph.parcs.rmhometiles.entity.user.User;
 
 import java.time.LocalDateTime;
 
@@ -10,9 +11,13 @@ import java.time.LocalDateTime;
 public abstract class BaseEntity {
 
     protected IntegerProperty id = new SimpleIntegerProperty();
+
     protected StringProperty name = new SimpleStringProperty();
+    protected ObjectProperty<User> createdBy = new SimpleObjectProperty<>();
+
     protected ObjectProperty<LocalDateTime> createdAt = new SimpleObjectProperty<>();
     protected ObjectProperty<LocalDateTime> updatedAt = new SimpleObjectProperty<>();
+
 
     @Column(name = "name")
     public String getName() {
@@ -51,7 +56,13 @@ public abstract class BaseEntity {
         this.updatedAt.set(updatedAt);
     }
 
-    public ObjectProperty<LocalDateTime> updatedAtProperty() {
-        return updatedAt;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "created_by_id")
+    public User getCreatedBy() {
+        return createdBy.get();
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy.set(createdBy);
     }
 }
