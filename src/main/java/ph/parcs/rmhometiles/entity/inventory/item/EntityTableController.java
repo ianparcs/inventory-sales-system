@@ -15,6 +15,7 @@ import ph.parcs.rmhometiles.ItemListener;
 import ph.parcs.rmhometiles.entity.user.User;
 import ph.parcs.rmhometiles.exception.AppException;
 import ph.parcs.rmhometiles.session.SessionService;
+import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.ui.pagination.PaginationController;
 import ph.parcs.rmhometiles.util.AppConstant;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
@@ -80,9 +81,18 @@ public abstract class EntityTableController<T extends BaseEntity> extends Pagina
                 };
             }
         });
+
+        var loggedInUser = SessionService.getInstance().getLoggedInUser();
+        hideUIBasedOnUserRole(loggedInUser);
     }
 
-    protected abstract void hideUIBasedOnUserRole(User user);
+    protected void hideUIBasedOnUserRole(User user) {
+        switch (user.getRole()) {
+            case ADMIN ->
+                    tcAction.setCellFactory(ActionTableCell.forActions(this::onEditActionClick, this::onDeleteActionClick));
+            case USER -> tcAction.setVisible(true);
+        }
+    }
 
     @SneakyThrows
     @Override

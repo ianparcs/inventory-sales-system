@@ -72,7 +72,11 @@ public class ProductTableController extends EntityTableController<Product> {
 
     @Override
     protected void hideUIBasedOnUserRole(User user) {
-
+        switch (user.getRole()) {
+            case ADMIN ->
+                    tcAction.setCellFactory(ActionTableCell.forActions(this::onViewActionClick, this::onEditActionClick, this::onDeleteActionClick));
+            case USER -> tcAction.setVisible(false);
+        }
     }
 
     private void initTableColumnSize() {

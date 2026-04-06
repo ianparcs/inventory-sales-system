@@ -77,7 +77,8 @@ public class ActionTableCell<S> extends TableCell<S, HBox> {
         btnView.setPadding(new Insets(5));
         btnView.setOnAction((ActionEvent e) -> viewFunction.apply(getCurrentItem()));
         hBox.getChildren().add(btnView);
-        hBox.getChildren().get(1).toFront();
+        int index = hBox.getChildren().indexOf(btnView);
+        hBox.getChildren().get(index).toBack();
     }
 
     public static <S> Callback<TableColumn<S, HBox>, TableCell<S, HBox>> forActions(Function<S, S> viewFunction, Function<S, S> editFunction, Function<S, S> delFunction) {

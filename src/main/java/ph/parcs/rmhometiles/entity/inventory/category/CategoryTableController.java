@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.entity.inventory.item.EditItemController;
 import ph.parcs.rmhometiles.entity.inventory.item.EntityTableController;
-import ph.parcs.rmhometiles.entity.user.User;
 
 @Controller
 public class CategoryTableController extends EntityTableController<Category> {
@@ -25,10 +24,5 @@ public class CategoryTableController extends EntityTableController<Category> {
     @Autowired
     public void setEditItemController(EditItemController<Category> editItemController) {
         this.editItemController = editItemController;
-    }
-
-    @Override
-    protected void hideUIBasedOnUserRole(User user) {
-
     }
 }
