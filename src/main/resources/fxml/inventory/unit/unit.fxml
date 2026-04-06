@@ -24,7 +24,7 @@
             <Label alignment="CENTER" styleClass="big-title" text="Manage Stock Unit"/>
         </HBox>
 
-        <HBox spacing="10.0" styleClass="tile-default" GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <HBox fx:id="hbSearchContainer" spacing="10.0" styleClass="tile-default" GridPane.columnIndex="0" GridPane.rowIndex="1">
             <JFXButton onAction="#showEditItemDialog" styleClass="primary-button" text="New Unit">
                 <graphic>
                     <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="18"/>

@@ -1,5 +1,6 @@
 package ph.parcs.rmhometiles.entity.customer;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,12 @@ import java.util.EnumSet;
 @Controller
 public class CustomerTableController extends EntityTableController<Customer> {
 
+
     @FXML
     private void showEditItemDialog() {
         onEditActionClick(new Customer());
         editItemController.showDialog((StackPane) tvItem.getScene().getRoot());
     }
-
     @Override
     protected void hideUIBasedOnUserRole(User user) {
         if (EnumSet.of(AppConstant.Role.USER, AppConstant.Role.ADMIN).contains(user.getRole())) {

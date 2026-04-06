@@ -1,6 +1,7 @@
 package ph.parcs.rmhometiles.entity.inventory.stock.unit;
 
 import javafx.fxml.FXML;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

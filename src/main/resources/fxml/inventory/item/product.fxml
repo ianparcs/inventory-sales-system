@@ -20,7 +20,7 @@
             <ColumnConstraints hgrow="ALWAYS"/>
         </columnConstraints>
 
-        <HBox spacing="10.0" styleClass="tile-default" GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <HBox fx:id="hbSearchContainer" spacing="10.0" styleClass="tile-default" GridPane.columnIndex="0" GridPane.rowIndex="1">
             <JFXButton onAction="#showEditItemDialog" styleClass="primary-button" text="New Item">
                 <graphic>
                     <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="18"/>

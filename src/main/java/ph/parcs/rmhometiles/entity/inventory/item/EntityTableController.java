@@ -37,6 +37,9 @@ public abstract class EntityTableController<T extends BaseEntity> extends Pagina
     @FXML
     protected JFXTextField tfSearchItem;
     @FXML
+    public HBox hbSearchContainer;
+
+    @FXML
     protected StackPane spMain;
 
     protected EditItemController<T> editItemController;
@@ -90,7 +93,10 @@ public abstract class EntityTableController<T extends BaseEntity> extends Pagina
         switch (user.getRole()) {
             case ADMIN ->
                     tcAction.setCellFactory(ActionTableCell.forActions(this::onEditActionClick, this::onDeleteActionClick));
-            case USER -> tcAction.setVisible(true);
+            case USER -> {
+                hbSearchContainer.getChildren().remove(0);
+                tcAction.setVisible(false);
+            }
         }
     }
 
