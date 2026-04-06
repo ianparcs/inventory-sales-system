@@ -13,7 +13,7 @@ To compile and build the project
 mvn clean install
 ```
 ## Run Jar
-After build, the generated file is in `target` folder
+After build, the generated file is in `target` folder. Make sure the machine is running Java 17 version
 ```bash
 java -jar target/rm-hometileles.jar
 ```
