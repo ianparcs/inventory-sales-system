@@ -5,7 +5,6 @@ This application uses an embedded H2 database, making it suitable for desktop us
 
 ## Requirements
 - Java 17
-- Maven 3+
 
 ## Build
 To compile and build the project
