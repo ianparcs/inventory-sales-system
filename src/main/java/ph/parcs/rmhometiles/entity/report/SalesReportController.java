@@ -4,24 +4,22 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.entity.money.MoneyService;
 import ph.parcs.rmhometiles.ui.pagination.PaginationController;
-import ph.parcs.rmhometiles.ui.scene.SceneManager;
 import ph.parcs.rmhometiles.util.AppConstant;
 import ph.parcs.rmhometiles.util.ThreadUtil;
 import ph.parcs.rmhometiles.util.date.DateRangeType;
 import ph.parcs.rmhometiles.util.date.DateUtil;
 
+import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -87,13 +85,15 @@ public class SalesReportController extends PaginationController<SalesReport> {
 
             DateRangeType dateRangeType = DateRangeType.fromValue(cbDateRange.getValue());
             List<SalesReport> salesReports = salesReportService.createSalesReports(dateRangeType);
-            Map<AppConstant.Sales, String> moneyMap = moneyService.computeAllMoney(salesReports);
+            Map<AppConstant.Sales, Double> moneyMap = moneyService.computeAllMoney(salesReports);
 
             Platform.runLater(() -> {
-                lblTax.setText(moneyMap.get(AppConstant.Sales.TAX));
-                lblCost.setText(moneyMap.get(AppConstant.Sales.COST));
-                lblTotal.setText(moneyMap.get(AppConstant.Sales.TOTAL));
-                lblProfit.setText(moneyMap.get(AppConstant.Sales.PROFIT));
+
+                NumberFormat peso = NumberFormat.getCurrencyInstance(new Locale("en", "PH"));
+                lblTax.setText(peso.format(moneyMap.get(AppConstant.Sales.TAX)));
+                lblCost.setText(peso.format(moneyMap.get(AppConstant.Sales.COST)));
+                lblTotal.setText(peso.format(moneyMap.get(AppConstant.Sales.TOTAL)));
+                lblProfit.setText(peso.format(moneyMap.get(AppConstant.Sales.PROFIT)));
 
                 tvItem.getItems().setAll(salesReports);
                 tvItem.refresh();
