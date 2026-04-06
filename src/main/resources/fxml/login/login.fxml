@@ -45,7 +45,7 @@
                         <JFXButton fx:id="btnRegister" buttonType="FLAT" onAction="#onRegisterButtonClicked"
                                    text="Register"
                                    GridPane.columnIndex="2" GridPane.rowIndex="3"/>
-                        <JFXButton fx:id="btnLogin" buttonType="FLAT" onAction="#onLoginButtonClicked"
+                        <JFXButton fx:id="btnLogin" buttonType="RAISED" onAction="#onLoginButtonClicked"
                                    text="Log in"
                                    GridPane.columnIndex="1" GridPane.rowIndex="3"/>
                     </HBox>

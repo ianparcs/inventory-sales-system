@@ -40,11 +40,11 @@
 
         <HBox GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5" spacing="10" alignment="CENTER"
               maxWidth="Infinity">
-            <JFXButton buttonType="FLAT" onAction="#onRegisterBackButtonClicked"
+            <JFXButton buttonType="RAISED" onAction="#onRegisterBackButtonClicked"
                        styleClass="button-register-back"
                        text="Back"/>
 
-            <JFXButton buttonType="FLAT" onAction="#onRegisterSubmitButtonClicked"
+            <JFXButton buttonType="RAISED" onAction="#onRegisterSubmitButtonClicked"
                        text="Submit"/>
         </HBox>
 

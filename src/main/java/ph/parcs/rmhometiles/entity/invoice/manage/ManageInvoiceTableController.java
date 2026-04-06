@@ -41,6 +41,8 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
     private TableColumn<Invoice, String> tcStatus;
     @FXML
     private JFXComboBox<String> cbDateRange;
+    @FXML
+    public JFXComboBox<String> cbInvoices;
 
     private InvoiceService invoiceService;
     private SceneManager sceneManager;
@@ -77,6 +79,17 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
             case USER ->
                     tcAction.setCellFactory(ActionTableCell.forActions(this::onViewActionClick, AppConstant.ActionType.VIEW));
         }
+    }
+
+    @FXML
+    public void onStatusFilterClicked() {
+        new Thread(() -> {
+            var filterInvoice = invoiceService.filterByStatus(cbInvoices.getValue().toUpperCase());
+            Platform.runLater(() -> {
+                tvItem.getItems().setAll(filterInvoice);
+                tvItem.refresh();
+            });
+        }).start();
     }
 
     @SneakyThrows

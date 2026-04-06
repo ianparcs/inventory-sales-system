@@ -87,7 +87,14 @@ public class InvoiceService extends BaseService<Invoice> {
     public List<Invoice> findAllInvoiceByDate(LocalDateTime[] dateTimeRange) {
         LocalDateTime startTime = dateTimeRange[0];
         LocalDateTime endTime = dateTimeRange[1];
+
+        if (startTime == null) return invoiceRepository.findAll();
         return invoiceRepository.findAllByCreatedAtBetween(startTime, endTime);
+    }
+
+    public List<Invoice> filterByStatus(String status) {
+        if (status.equalsIgnoreCase("All")) return findAllInvoice();
+        return invoiceRepository.findAllByStatus(status);
     }
 
     public Invoice createDefault() {

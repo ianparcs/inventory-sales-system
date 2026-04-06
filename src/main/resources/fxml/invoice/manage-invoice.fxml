@@ -45,7 +45,7 @@
                     <String fx:value="Today"/>
                 </value>
             </JFXComboBox>
-            <JFXComboBox fx:id="cbInvoices" labelFloat="false" promptText="Status"
+            <JFXComboBox fx:id="cbInvoices" labelFloat="false" promptText="Status"  onAction="#onStatusFilterClicked"
                          GridPane.columnIndex="0" GridPane.rowIndex="3">
                 <items>
                     <FXCollections fx:factory="observableArrayList">

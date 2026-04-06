@@ -1,5 +1,6 @@
 package ph.parcs.rmhometiles.entity.invoice;
 
+import javafx.beans.property.StringProperty;
 import org.springframework.stereotype.Repository;
 import ph.parcs.rmhometiles.entity.inventory.item.EntityRepository;
 
@@ -12,4 +13,8 @@ public interface InvoiceRepository extends EntityRepository<Invoice, Integer> {
     List<Invoice> findInvoiceByNameContains(String query);
 
     List<Invoice> findAllByCreatedAtBetween(LocalDateTime createdAt, LocalDateTime endDate);
+
+    List<Invoice> findAllByStatus(String status);
+
+
 }

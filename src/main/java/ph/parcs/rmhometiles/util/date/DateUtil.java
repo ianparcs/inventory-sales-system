@@ -35,12 +35,10 @@ public final class DateUtil {
     private DateUtil() {
     }
 
-    // Public API
     public static LocalDateTime[] find(DateRangeType type) {
         return DATE_RANGES.getOrDefault(type, today());
     }
 
-    // Utilities
     private static LocalDateTime[] range(LocalDateTime start, LocalDateTime end) {
         return new LocalDateTime[]{start, end};
     }
@@ -53,7 +51,6 @@ public final class DateUtil {
         return LocalDateTime.now().with(LocalTime.MAX);
     }
 
-    // Ranges
     private static LocalDateTime[] today() {
         return range(nowStart(), nowEnd());
     }
