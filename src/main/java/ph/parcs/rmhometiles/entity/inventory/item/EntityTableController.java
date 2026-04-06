@@ -2,6 +2,8 @@ package ph.parcs.rmhometiles.entity.inventory.item;
 
 import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -12,6 +14,7 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.ItemListener;
+import ph.parcs.rmhometiles.entity.report.SalesReportController;
 import ph.parcs.rmhometiles.entity.user.User;
 import ph.parcs.rmhometiles.exception.AppException;
 import ph.parcs.rmhometiles.session.SessionService;
@@ -38,9 +41,6 @@ public abstract class EntityTableController<T extends BaseEntity> extends Pagina
     protected JFXTextField tfSearchItem;
     @FXML
     public HBox hbSearchContainer;
-
-    @FXML
-    protected StackPane spMain;
 
     protected EditItemController<T> editItemController;
 

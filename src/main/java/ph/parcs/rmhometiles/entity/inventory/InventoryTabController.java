@@ -29,9 +29,14 @@ public class InventoryTabController {
     private void initialize() {
         tpRoot.setDisableAnimation(true);
         tpRoot.visibleProperty().addListener((ov, oldTab, newTab) -> {
-            if (tpRoot.getSelectionModel().getSelectedItem().equals(tabStockUnit)) stockUnitTableController.updateItems();
-            else if (tpRoot.getSelectionModel().getSelectedItem().equals(tabCategory)) categoryTableController.updateItems();
-            else if (tpRoot.getSelectionModel().getSelectedItem().equals(tabProduct)) productTableController.updateItems();
+            if (newTab) {
+                if (tpRoot.getSelectionModel().getSelectedItem().equals(tabStockUnit))
+                    stockUnitTableController.updateItems();
+                else if (tpRoot.getSelectionModel().getSelectedItem().equals(tabCategory))
+                    categoryTableController.updateItems();
+                else if (tpRoot.getSelectionModel().getSelectedItem().equals(tabProduct))
+                    productTableController.updateItems();
+            }
         });
     }
 

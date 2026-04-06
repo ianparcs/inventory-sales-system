@@ -4,18 +4,21 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
-import javafx.collections.FXCollections;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.entity.money.MoneyService;
 import ph.parcs.rmhometiles.ui.pagination.PaginationController;
+import ph.parcs.rmhometiles.ui.scene.SceneManager;
 import ph.parcs.rmhometiles.util.AppConstant;
+import ph.parcs.rmhometiles.util.ThreadUtil;
 import ph.parcs.rmhometiles.util.date.DateRangeType;
 import ph.parcs.rmhometiles.util.date.DateUtil;
-import ph.parcs.rmhometiles.util.ThreadUtil;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -57,6 +60,8 @@ public class SalesReportController extends PaginationController<SalesReport> {
                 return "";
             });
         });
+
+
     }
 
     @FXML

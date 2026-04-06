@@ -21,7 +21,7 @@ public class InvoiceTabController {
     private void initialize() {
         tpRoot.setDisableAnimation(true);
         tpRoot.visibleProperty().addListener((ov, oldTab, newTab) -> {
-            if (tpRoot.getSelectionModel().getSelectedItem().equals(tabManageInvoice))
+            if (newTab && tpRoot.getSelectionModel().getSelectedItem().equals(tabManageInvoice))
                 manageInvoiceTableController.updateItems();
         });
     }

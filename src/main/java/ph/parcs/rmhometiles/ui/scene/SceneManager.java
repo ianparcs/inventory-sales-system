@@ -36,7 +36,9 @@ public class SceneManager {
     public Parent loadUI(State view) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(view.getPath()));
         loader.setControllerFactory(aClass -> stageInitializer.getApplicationContext().getBean(aClass));
-        return loader.load();
+        Parent root = loader.load();
+        root.setUserData(loader.getController());
+        return root;
     }
 
     public FXMLLoader create(String path) {

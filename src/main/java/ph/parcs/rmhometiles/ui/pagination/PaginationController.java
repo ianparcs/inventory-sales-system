@@ -1,12 +1,12 @@
 package ph.parcs.rmhometiles.ui.pagination;
 
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.StackPane;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -28,6 +28,8 @@ public abstract class PaginationController<T extends BaseEntity> {
     protected Label lblPageEntries;
     @FXML
     protected TableView<T> tvItem;
+    @FXML
+    protected StackPane spMain;
 
     protected BaseService<T> baseService;
     protected String searchValue = "";
@@ -35,6 +37,12 @@ public abstract class PaginationController<T extends BaseEntity> {
     @FXML
     protected void initialize() {
         pagination.currentPageIndexProperty().addListener((observable) -> updateItems());
+
+        spMain.visibleProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                updateItems();
+            }
+        });
     }
 
     @FXML
