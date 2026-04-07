@@ -6,7 +6,8 @@ public enum ExceptionType {
 
     ITEM_LOCKED("Unable to delete. Item is used from order items"),
     USER_NOT_EXIST("User doesn't exist"),
-    USER_EXIST("User already exist");
+    USER_EXIST("User already exist"),
+    INVOICE_QUANTITY_EXCEEDED("Quantity must not exceed stocks");
     private final String typeValue;
 
     ExceptionType(String typeValue) {

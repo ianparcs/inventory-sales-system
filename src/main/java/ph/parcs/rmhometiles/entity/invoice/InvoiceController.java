@@ -18,9 +18,12 @@ import ph.parcs.rmhometiles.entity.customer.Customer;
 import ph.parcs.rmhometiles.entity.customer.CustomerController;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.inventory.product.ProductService;
+import ph.parcs.rmhometiles.entity.inventory.stock.StockService;
 import ph.parcs.rmhometiles.entity.money.MoneyService;
 import ph.parcs.rmhometiles.entity.order.OrderItem;
+import ph.parcs.rmhometiles.entity.order.OrderItemService;
 import ph.parcs.rmhometiles.entity.payment.Payment;
+import ph.parcs.rmhometiles.exception.ExceptionType;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.util.AppConstant;
 import ph.parcs.rmhometiles.util.MoneyUtil;
@@ -108,6 +111,8 @@ public class InvoiceController {
     private Invoice invoice;
 
     private SweetAlert askSaveAlert;
+    private OrderItemService orderItemService;
+    private StockService stockService;
 
     @FXML
     public void initialize() {
@@ -150,7 +155,10 @@ public class InvoiceController {
     private void initInvoiceProperties() {
         tvOrders.getItems().forEach(item -> {
             item.amountProperty().addListener((obs, oldVal, newVal) -> {
-                updateInvoiceDiscount();
+                if (newVal != null) updateInvoiceDiscount();
+            });
+            item.discountProperty().addListener((obs, oldVal, newVal) -> {
+                if (newVal != null) updateInvoiceDiscount();
             });
         });
 
@@ -159,9 +167,11 @@ public class InvoiceController {
                 if (change.wasAdded()) {
                     for (OrderItem item : change.getAddedSubList()) {
                         item.amountProperty().addListener((obs, oldVal, newVal) -> {
-                            updateInvoiceDiscount();
+                            if (newVal != null) updateInvoiceDiscount();
                         });
-
+                        item.discountProperty().addListener((obs, oldVal, newVal) -> {
+                            if (newVal != null) updateInvoiceDiscount();
+                        });
                     }
                 }
                 if (change.wasRemoved()) {
@@ -281,7 +291,7 @@ public class InvoiceController {
 
         for (OrderItem item : tvOrders.getItems()) {
             if (item.getProduct().getCode().equalsIgnoreCase(product.getCode())) {
-                showError("Cannot have duplicate item");
+                showInvoiceError("Cannot have duplicate item");
                 return;
             }
         }
@@ -301,7 +311,7 @@ public class InvoiceController {
     private void onCheckout() {
         String validateMsg = validateCheckout();
         if (!validateMsg.isEmpty()) {
-            showError(validateMsg);
+            showInvoiceError(validateMsg);
             return;
         }
 
@@ -363,21 +373,19 @@ public class InvoiceController {
 
     @FXML
     public void onEditInvoiceQuantity(TableColumn.CellEditEvent<OrderItem, Integer> event) {
-        OrderItem lineItem = event.getRowValue();
-        int stocks = lineItem.getProduct().getStock().getStocks();
-        int quantity = event.getNewValue();
-        if (quantity > stocks) {
-            showError(AppConstant.Message.QUANTITY_EXCEED);
-            lineItem.setQuantity(event.getOldValue());
+        OrderItem item = event.getRowValue();
+        int newQty = event.getNewValue();
+        int oldQty = event.getOldValue();
+
+        boolean outOfStock = !stockService.hasStock(item.getProduct(), newQty);
+
+        if (outOfStock) {
+            item.setQuantity(oldQty);
+            showInvoiceError(AppConstant.Message.QUANTITY_EXCEED);
         } else {
-            lineItem.setQuantity(event.getNewValue());
+            item.setQuantity(newQty);
         }
-        Platform.runLater(() -> {
-            int index = tvOrders.getItems().indexOf(lineItem);
-            tvOrders.getItems().remove(index);
-            tvOrders.getItems().add(index, lineItem);
-            tvOrders.refresh();
-        });
+        Platform.runLater(tvOrders::refresh);
     }
 
     @FXML
@@ -414,7 +422,7 @@ public class InvoiceController {
         return item;
     }
 
-    private void showError(String message) {
+    private void showInvoiceError(String message) {
         SweetAlert sweetAlert = SweetAlertFactory.create(SweetAlert.Type.DANGER, message);
         sweetAlert.show(spMain);
     }
@@ -461,4 +469,13 @@ public class InvoiceController {
         this.customerController = customerController;
     }
 
+    @Autowired
+    public void setOrderItemService(OrderItemService orderItemService) {
+        this.orderItemService = orderItemService;
+    }
+
+    @Autowired
+    public void setStockService(StockService stockService) {
+        this.stockService = stockService;
+    }
 }
