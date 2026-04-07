@@ -34,9 +34,9 @@
                 <JFXComboBox fx:id="cbProducts" editable="true" labelFloat="true" maxWidth="1.7976931348623157E308"
                              onAction="#onProductItemClick" promptText="Add Order" styleClass="search-field"
                              HBox.hgrow="ALWAYS"/>
-                <JFXDatePicker fx:id="dpDate" promptText="Invoice Date" minWidth="100"
+                <JFXDatePicker fx:id="dpDate" promptText="Invoice Date" minWidth="100" mouseTransparent="true" focusTraversable="false"
                                maxWidth="1.7976931348623157E308"/>
-                <JFXButton onAction="#clearAllInvoice" styleClass="primary-button">
+                <JFXButton fx:id="btnClearInvoice" onAction="#clearAllInvoice" styleClass="primary-button">
                     <graphic>
                         <FontAwesomeIconView styleClass="clear-icon"/>
                     </graphic>
@@ -64,7 +64,7 @@
                             <PropertyValueFactory property="discountPercent"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn fx:id="tcOrderDiscountAmount" reorderable="false" text="Discount">
+                    <TableColumn fx:id="tcOrderDiscountAmount" styleClass="action-column" reorderable="false" text="Discount">
                         <cellValueFactory>
                             <PropertyValueFactory property="discount"/>
                         </cellValueFactory>
@@ -91,24 +91,24 @@
                    GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1"/>
 
             <Label text="Amount:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-            <Label fx:id="lblAmount" alignment="CENTER" maxWidth="1.7976931348623157E308" text="PHP 0.00"
+            <Label fx:id="lblAmount" alignment="CENTER" maxWidth="1.7976931348623157E308" text="₱0.00"
                    GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
             <Label text="Discount amount:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-            <Label fx:id="lblDiscountAmount" alignment="CENTER" maxWidth="1.7976931348623157E308" text="PHP 0.00"
+            <Label fx:id="lblDiscountAmount" alignment="CENTER" maxWidth="1.7976931348623157E308" text="₱0.00"
                    GridPane.columnIndex="1" GridPane.rowIndex="3"/>
 
             <Label text="Total before tax:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-            <Label fx:id="lblTotalBeforeTax" alignment="CENTER" maxWidth="1.7976931348623157E308" text="PHP 0.00"
+            <Label fx:id="lblTotalBeforeTax" alignment="CENTER" maxWidth="1.7976931348623157E308" text="₱0.00"
                    GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 
             <Label text="Tax amount 3%:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-            <Label fx:id="lblTax" alignment="CENTER" maxWidth="1.7976931348623157E308" text="PHP 0.00"
+            <Label fx:id="lblTax" alignment="CENTER" maxWidth="1.7976931348623157E308" text="₱0.00"
                    GridPane.columnIndex="1" GridPane.rowIndex="5"/>
 
             <Label text="Delivery Rate:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
-            <JFXTextField fx:id="tfDeliveryAmount" alignment="CENTER" promptText="PHP 0.00"
-                          styleClass="non-search-field" text="PHP 0.00" GridPane.columnIndex="1" GridPane.rowIndex="6">
+            <JFXTextField fx:id="tfDeliveryAmount" alignment="CENTER" promptText="₱0.00"
+                          styleClass="non-search-field"  GridPane.columnIndex="1" GridPane.rowIndex="6">
                 <cursor>
                     <Cursor fx:constant="HAND"/>
                 </cursor>
@@ -118,14 +118,14 @@
             </JFXTextField>
 
             <VBox styleClass="amount-container" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7">
-                <Label fx:id="lblAmountDueBalance" text="Amount Due" style="-fx-font-weight: BOLD"/>
+                <Label fx:id="lblBalanceText" text="Amount Due" style="-fx-font-weight: BOLD"/>
                 <Label fx:id="lblAmountDue" alignment="CENTER" prefWidth="150"
-                       styleClass="label-amount" text="PHP 0.00"/>
+                       styleClass="label-amount" text="₱0.00"/>
             </VBox>
             <VBox styleClass="amount-container" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7">
                 <Label text="TOTAL" style="-fx-font-weight: BOLD"/>
                 <Label fx:id="lblTotalAmount" alignment="CENTER" maxWidth="1.7976931348623157E308"
-                       styleClass="label-total" text="PHP 0.00"/>
+                       styleClass="label-total" text="₱0.00"/>
             </VBox>
 
             <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Payment Type"

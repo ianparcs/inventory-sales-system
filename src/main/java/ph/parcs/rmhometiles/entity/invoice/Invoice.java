@@ -12,7 +12,6 @@ import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.entity.payment.Payment;
 import ph.parcs.rmhometiles.util.converter.MoneyConverter;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,15 +21,13 @@ import java.util.Set;
 @AttributeOverride(name = "id", column = @Column(name = "invoice_id"))
 public class Invoice extends BaseEntity {
 
-    private final ObjectProperty<Customer> customer = new SimpleObjectProperty<>();
-    private final ObjectProperty<Money> totalAmount = new SimpleObjectProperty<>();
-    private final ObjectProperty<Money> taxAmount = new SimpleObjectProperty<>();
+    private final ObjectProperty<Money> subTotalAmount = new SimpleObjectProperty<>();
     private final ObjectProperty<Money> discountAmount = new SimpleObjectProperty<>();
-    private final ObjectProperty<Money> discountPercent = new SimpleObjectProperty<>();
-
+    private final ObjectProperty<Money> totalAmount = new SimpleObjectProperty<>();
+    private final ObjectProperty<Customer> customer = new SimpleObjectProperty<>();
+    private final ObjectProperty<Money> taxAmount = new SimpleObjectProperty<>();
+    private final ObjectProperty<Money> changeDue = new SimpleObjectProperty<>();
     private final ObjectProperty<Money> balance = new SimpleObjectProperty<>();
-    private final ObjectProperty<Money> change = new SimpleObjectProperty<>();
-    private final ObjectProperty<Money> amount = new SimpleObjectProperty<>();
     private final StringProperty remarks = new SimpleStringProperty();
     private final StringProperty status = new SimpleStringProperty();
 
@@ -69,12 +66,12 @@ public class Invoice extends BaseEntity {
 
     @Column(name = "amount", precision = 8, scale = 2)
     @Convert(converter = MoneyConverter.class)
-    public Money getAmount() {
-        return amount.get();
+    public Money getSubTotalAmount() {
+        return subTotalAmount.get();
     }
 
-    public void setAmount(Money amount) {
-        this.amount.set(amount);
+    public void setSubTotalAmount(Money subTotalAmount) {
+        this.subTotalAmount.set(subTotalAmount);
     }
 
     @Column(name = "balance", precision = 8, scale = 2)
@@ -137,12 +134,12 @@ public class Invoice extends BaseEntity {
 
     @Column(name = "change", precision = 8, scale = 2)
     @Convert(converter = MoneyConverter.class)
-    public Money getChange() {
-        return change.get();
+    public Money getChangeDue() {
+        return changeDue.get();
     }
 
-    public void setChange(Money change) {
-        this.change.set(change);
+    public void setChangeDue(Money changeDue) {
+        this.changeDue.set(changeDue);
     }
 
     public void addPayments(Payment payment) {
@@ -176,8 +173,8 @@ public class Invoice extends BaseEntity {
     }
 
     @Transient
-    public ObjectProperty<Money> amountProperty() {
-        return amount;
+    public ObjectProperty<Money> subTotalAmountProperty() {
+        return subTotalAmount;
     }
 
     @Transient
@@ -196,8 +193,11 @@ public class Invoice extends BaseEntity {
     }
 
     @Transient
-    public ObjectProperty<Money> changeProperty() {
-        return change;
+    public ObjectProperty<Money> changeDueProperty() {
+        return changeDue;
     }
 
+    public void clear() {
+
+    }
 }

@@ -1,6 +1,7 @@
 package ph.parcs.rmhometiles.entity.invoice;
 
 import javafx.collections.ObservableList;
+import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -97,10 +98,11 @@ public class InvoiceService extends BaseService<Invoice> {
         return invoiceRepository.findAllByStatus(status);
     }
 
+    @Override
     public Invoice createDefault() {
         Invoice invoice = new Invoice();
-        invoice.setName("");
-        invoice.setId(0);
+        invoice.setSubTotalAmount(Money.of(CurrencyUnit.of("PHP"), 0.00));
+        invoice.setDiscountAmount(Money.of(CurrencyUnit.of("PHP"), 0.00));
         return invoice;
     }
 

@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import ph.parcs.rmhometiles.util.converter.CustomerConverter;
 
 import java.util.List;
 
+@Data
 @Controller
 public class CustomerController {
 
@@ -80,8 +82,6 @@ public class CustomerController {
     public void clearCustomerDetails() {
         this.customer = null;
         cbCustomer.getSelectionModel().clearSelection();
-        //  cbCustomer.hide();
-
         btnClearCustomer.setVisible(false);
         btnAddUser.setVisible(true);
         lblContact.setText("");
@@ -111,18 +111,6 @@ public class CustomerController {
             }
         }, new Customer());
         customerEditController.showDialog(spMain);
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public void setSpMain(StackPane spMain) {
-        this.spMain = spMain;
     }
 
     @Autowired

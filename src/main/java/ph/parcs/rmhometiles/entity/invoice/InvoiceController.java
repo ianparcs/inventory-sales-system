@@ -21,9 +21,7 @@ import ph.parcs.rmhometiles.entity.inventory.product.ProductService;
 import ph.parcs.rmhometiles.entity.inventory.stock.StockService;
 import ph.parcs.rmhometiles.entity.money.MoneyService;
 import ph.parcs.rmhometiles.entity.order.OrderItem;
-import ph.parcs.rmhometiles.entity.order.OrderItemService;
 import ph.parcs.rmhometiles.entity.payment.Payment;
-import ph.parcs.rmhometiles.exception.ExceptionType;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.util.AppConstant;
 import ph.parcs.rmhometiles.util.MoneyUtil;
@@ -42,7 +40,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -89,7 +86,7 @@ public class InvoiceController {
     @FXML
     private Label lblAmount;
     @FXML
-    private Label lblAmountDueBalance;
+    private Label lblBalanceText;
     @FXML
     private Label lblTotalBeforeTax;
     @FXML
@@ -111,12 +108,11 @@ public class InvoiceController {
     private Invoice invoice;
 
     private SweetAlert askSaveAlert;
-    private OrderItemService orderItemService;
     private StockService stockService;
 
     @FXML
     public void initialize() {
-        invoice = new Invoice();
+        invoice = invoiceService.createDefault();
         invoice.setOrderItems(new HashSet<>(tvOrders.getItems()));
 
         askSaveAlert = SweetAlertFactory.create(SweetAlert.Type.INFO);
@@ -124,14 +120,17 @@ public class InvoiceController {
         askSaveAlert.setHeaderMessage("Checkout");
         askSaveAlert.setConfirmButton("Yes");
 
-        initNumberInputFormatter(tfDeliveryAmount);
-        initNumberInputFormatter(tfCashPay);
-        initColumnCellValueFactory();
-        initInvoiceLabelProperties();
+        initMoneyColumn(tcOrderDiscountAmount);
         initMoneyColumn(tcAmount);
         initMoneyColumn(tcPrice);
-        initInvoiceProperties();
+
+        initNumberInputFormatter(tfDeliveryAmount);
+        initNumberInputFormatter(tfCashPay);
+
+        initColumnCellValueFactory();
+        bindInvoiceLabelProperties();
         initProductSearchBox();
+        initTableViewOrder();
         initDate();
 
         refreshItems();
@@ -152,13 +151,13 @@ public class InvoiceController {
         });
     }
 
-    private void initInvoiceProperties() {
+    private void initTableViewOrder() {
         tvOrders.getItems().forEach(item -> {
             item.amountProperty().addListener((obs, oldVal, newVal) -> {
-                if (newVal != null) updateInvoiceDiscount();
+                if (newVal != null) updateInvoiceBillingInfo();
             });
             item.discountProperty().addListener((obs, oldVal, newVal) -> {
-                if (newVal != null) updateInvoiceDiscount();
+                if (newVal != null) updateInvoiceBillingInfo();
             });
         });
 
@@ -167,35 +166,38 @@ public class InvoiceController {
                 if (change.wasAdded()) {
                     for (OrderItem item : change.getAddedSubList()) {
                         item.amountProperty().addListener((obs, oldVal, newVal) -> {
-                            if (newVal != null) updateInvoiceDiscount();
+                            if (newVal != null) updateInvoiceBillingInfo();
                         });
                         item.discountProperty().addListener((obs, oldVal, newVal) -> {
-                            if (newVal != null) updateInvoiceDiscount();
+                            if (newVal != null) updateInvoiceBillingInfo();
                         });
                     }
                 }
                 if (change.wasRemoved()) {
-                    updateInvoiceDiscount();
+                    updateInvoiceBillingInfo();
                 }
             }
         });
     }
 
-    private void updateInvoiceDiscount() {
-        var totalOrderDiscountStream = tvOrders.getItems()
-                .stream()
-                .map(item -> item.getDiscount() != null ? item.getDiscount() : Money.parse("PHP 0.00"));
+    private void updateInvoiceBillingInfo() {
+        var totalOrderDiscountStream = tvOrders.getItems().stream().map(item -> item.getDiscount() != null ? item.getDiscount() : Money.parse("PHP 0.00"));
 
-        var totalOrderAmountStream = tvOrders.getItems().stream()
-                .map(item -> item.getAmount() != null ? item.getAmount() : Money.parse("PHP 0.00"));
+        var totalOrderAmountStream = tvOrders.getItems().stream().map(item -> item.getAmount() != null ? item.getAmount() : Money.parse("PHP 0.00"));
 
         var totalOrderDiscountAmount = moneyService.computeTotalMoney(totalOrderDiscountStream);
         var totalOrderAmount = moneyService.computeTotalMoney(totalOrderAmountStream);
 
-        invoice.setDiscountAmount(totalOrderDiscountAmount);
-        invoice.setAmount(totalOrderAmount);
-    }
+        var taxAmount = moneyService.computeTax(totalOrderAmount);
+        var changeDue = moneyService.computeMoneyChange(totalOrderAmount, Money.parse("PHP " + tfCashPay.getText()));
+        var balance = moneyService.computeBalance(totalOrderAmount);
 
+        invoice.setDiscountAmount(totalOrderDiscountAmount);
+        invoice.setSubTotalAmount(totalOrderAmount);
+        invoice.setTaxAmount(taxAmount);
+        invoice.setChangeDue(changeDue);
+        invoice.setBalance(balance);
+    }
 
     private void initNumberInputFormatter(JFXTextField textField) {
         textField.setTextFormatter(new TextFormatter<String>((TextFormatter.Change change) -> {
@@ -225,26 +227,32 @@ public class InvoiceController {
         tcStock.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().productProperty(), "stock", "stocks"));
     }
 
-    private void initInvoiceLabelProperties() {
-        btnSales.textProperty().bind(Bindings.createObjectBinding(this::changeCashPayTextButton, tfCashPay.textProperty()));
+    private void bindInvoiceLabelProperties() {
+        lblTotalBeforeTax.textProperty().bind(Bindings.createObjectBinding(() -> {
+            Money totalAmount = invoice.getSubTotalAmount() != null ? invoice.getSubTotalAmount() : Money.parse("PHP 0.00");
+            Money totalDiscount = invoice.getDiscountAmount() != null ? invoice.getDiscountAmount() : Money.parse("PHP 0.00");
+            Money totalBeforeTax = totalAmount.plus(totalDiscount);
+            return MoneyUtil.print(totalBeforeTax);
+        }, invoice.subTotalAmountProperty(), invoice.discountAmountProperty()));
 
-        lblTax.textProperty().bind(invoice.taxAmountProperty().asString());
-        lblAmount.textProperty().bind(invoice.amountProperty().asString());
+        lblAmountDue.textProperty().bind(invoice.changeDueProperty().asString());
         lblTotalAmount.textProperty().bind(invoice.totalAmountProperty().asString());
-        lblDiscountAmount.textProperty().bind(invoice.discountAmountProperty().asString());
-        lblAmountDue.textProperty().bind(invoice.changeProperty().asString());
-        lblAmountDueBalance.textProperty().bind(Bindings.createObjectBinding(this::changeAmountDueLabel, lblAmountDue.textProperty()));
-        lblTotalBeforeTax.textProperty().bind(Bindings.createObjectBinding(new Callable<String>() {
-            @Override
-            public String call() throws Exception {
+        btnSales.textProperty().bind(Bindings.createObjectBinding(this::changeCashPayTextButton, tfCashPay.textProperty()));
+        lblBalanceText.textProperty().bind(Bindings.createObjectBinding(this::changeAmountDueLabel, lblAmountDue.textProperty()));
+        lblTax.textProperty().bind(Bindings.createStringBinding(() -> MoneyUtil.print(invoice.getTaxAmount()), invoice.taxAmountProperty()));
+        lblAmount.textProperty().bind(Bindings.createStringBinding(() -> MoneyUtil.print(invoice.getSubTotalAmount()), invoice.subTotalAmountProperty()));
+        lblDiscountAmount.textProperty().bind(Bindings.createStringBinding(() -> MoneyUtil.print(invoice.getDiscountAmount()), invoice.discountAmountProperty()));
+    }
 
-                Money totalAmount = invoice.getTotalAmount() != null ? invoice.getTotalAmount() : Money.parse("PHP 0.00");
-                Money totalDiscount = invoice.getDiscountAmount() != null ? invoice.getDiscountAmount() : Money.parse("PHP 0.00");
-                Money totalBeforeTax = totalAmount.plus(totalDiscount);
-
-                return MoneyUtil.print(totalBeforeTax);
-            }
-        }, invoice.amountProperty(), invoice.discountAmountProperty()));
+    private void unBindInvoiceLabelProperties() {
+        lblTotalBeforeTax.textProperty().unbind();
+        lblDiscountAmount.textProperty().unbind();
+        lblBalanceText.textProperty().unbind();
+        lblTotalAmount.textProperty().unbind();
+        lblAmountDue.textProperty().unbind();
+        lblAmount.textProperty().unbind();
+        btnSales.textProperty().unbind();
+        lblTax.textProperty().unbind();
     }
 
     private String changeCashPayTextButton() {
@@ -257,8 +265,8 @@ public class InvoiceController {
     }
 
     private String changeAmountDueLabel() {
-        if (invoice.changeProperty().get() != null) {
-            if (invoice.changeProperty().get().isPositive()) {
+        if (invoice.changeDueProperty().get() != null) {
+            if (invoice.changeDueProperty().get().isPositive()) {
                 return "CHANGE";
             }
         }
@@ -427,19 +435,20 @@ public class InvoiceController {
         sweetAlert.show(spMain);
     }
 
+    @FXML
     public void clearAllInvoice() {
+        clearInvoiceBillingDetails();
         clearCustomer();
-        clearInvoiceSummary();
-
         initDate();
 
-        invoice = new Invoice();
-        tvOrders.getItems().clear();
+        unBindInvoiceLabelProperties();
+        invoice = invoiceService.createDefault();
+        bindInvoiceLabelProperties();
 
-        initInvoiceProperties();
+        tvOrders.getItems().clear();
     }
 
-    private void clearInvoiceSummary() {
+    private void clearInvoiceBillingDetails() {
         tfDeliveryAmount.clear();
         tfCashPay.clear();
     }
@@ -467,11 +476,6 @@ public class InvoiceController {
     @Autowired
     public void setCustomerController(CustomerController customerController) {
         this.customerController = customerController;
-    }
-
-    @Autowired
-    public void setOrderItemService(OrderItemService orderItemService) {
-        this.orderItemService = orderItemService;
     }
 
     @Autowired

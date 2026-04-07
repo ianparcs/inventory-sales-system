@@ -3,7 +3,7 @@ package ph.parcs.rmhometiles.util;
 public interface AppConstant {
 
     String STRING_EMPTY = "";
-    String TAX = "3%";
+    double TAX = 3d / 100d;
 
     enum Sales {
         TAX, PROFIT, TOTAL, COST
@@ -24,8 +24,7 @@ public interface AppConstant {
     }
 
     interface Regex {
-        String DECIMAL_PERCENT = "^$|\\d+(\\.\\d*)[%]|\\d+[%]|\\d+(\\.\\d*)?|(\\.\\d+)|^$";
-        String DECIMAL = "\\d+(\\.\\d*)?|(\\.\\d+)|^$";
+        String DECIMAL = "\\d+(\\.\\d{1,2})?";
     }
 
     interface Css {

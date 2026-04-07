@@ -13,6 +13,7 @@ public class MoneyUtil {
                     .toFormatter();
 
     public static String print(Money money) {
+        if (money == null) return MONEY_FMT.print(Money.parse("PHP 0.00"));
         return MONEY_FMT.print(money);
     }
 }

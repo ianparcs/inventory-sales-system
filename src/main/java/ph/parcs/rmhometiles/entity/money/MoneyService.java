@@ -1,13 +1,12 @@
 package ph.parcs.rmhometiles.entity.money;
 
-import lombok.SneakyThrows;
 import org.joda.money.Money;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import ph.parcs.rmhometiles.entity.report.SalesReport;
 import ph.parcs.rmhometiles.util.AppConstant;
 
-import java.text.DecimalFormat;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,20 +14,11 @@ import java.util.stream.Stream;
 
 @Service
 public class MoneyService {
-
-
-    public void test(Stream<Money> moneyStream) {
+    public Money computeTax(Money amount) {
+        return amount.multipliedBy(AppConstant.TAX, RoundingMode.UNNECESSARY);
     }
 
-    @SneakyThrows
-    private Number getDiscountPercent(String discountPercent) {
-        if (!discountPercent.matches(".*\\d.*")) discountPercent = "0.00%";
-        if (!discountPercent.endsWith("%")) discountPercent += "%";
-        return new DecimalFormat("0.0#%").parse(discountPercent);
-    }
-
-    public Money computeMoneyChange(Money balance, String cashPaidText) {
-        Money cashPaid = parseMoney(cashPaidText);
+    public Money computeMoneyChange(Money balance, Money cashPaid) {
         if (balance == null || cashPaid == null) return parseMoney("0.00");
         if (balance.isGreaterThan(cashPaid)) {
             return cashPaid.minus(balance);
@@ -81,11 +71,9 @@ public class MoneyService {
         return Money.parse("PHP 0.00");
     }
 
-    public Money computeDeliveryRate(String text) {
-        return Money.parse(text.isEmpty() ? "PHP 0.00" : text);
-    }
-
     public Money computeTotalMoney(Stream<Money> totalMoney) {
         return totalMoney.reduce(Money.parse("PHP 0.00"), Money::plus);
     }
+
+
 }
