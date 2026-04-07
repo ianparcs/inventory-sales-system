@@ -7,23 +7,17 @@ import org.springframework.util.StringUtils;
 import ph.parcs.rmhometiles.entity.report.SalesReport;
 import ph.parcs.rmhometiles.util.AppConstant;
 
-import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 @Service
 public class MoneyService {
 
-    public Money computeDiscount(Money amount, String discountPercent) {
-        Number discountNumber = getDiscountPercent(discountPercent);
 
-        Money discountAmount = parseMoney("0.00");
-        if (amount != null && !amount.isNegativeOrZero()) {
-            discountAmount = amount.multipliedBy(discountNumber.doubleValue(), RoundingMode.HALF_EVEN);
-        }
-        return discountAmount;
+    public void test(Stream<Money> moneyStream) {
     }
 
     @SneakyThrows
@@ -49,12 +43,6 @@ public class MoneyService {
             return parseMoney("0.00");
         }
         return paid.minus(balance);
-    }
-
-    public Money computeTotalAmount(Money currentTotal, Money taxAmount, Money deliveryRate) {
-        Money totalAmount = currentTotal.plus(taxAmount);
-        totalAmount = totalAmount.plus(deliveryRate);
-        return totalAmount;
     }
 
     public Map<AppConstant.Sales, Double> computeAllMoney(List<SalesReport> salesReportsToday) {
@@ -95,5 +83,9 @@ public class MoneyService {
 
     public Money computeDeliveryRate(String text) {
         return Money.parse(text.isEmpty() ? "PHP 0.00" : text);
+    }
+
+    public Money computeTotalMoney(Stream<Money> totalMoney) {
+        return totalMoney.reduce(Money.parse("PHP 0.00"), Money::plus);
     }
 }

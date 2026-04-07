@@ -21,8 +21,10 @@ import ph.parcs.rmhometiles.StageInitializer;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.money.MoneyService;
 import ph.parcs.rmhometiles.entity.order.OrderItem;
+import ph.parcs.rmhometiles.entity.order.OrderItemService;
 import ph.parcs.rmhometiles.entity.payment.Payment;
 import ph.parcs.rmhometiles.entity.payment.PaymentService;
+import ph.parcs.rmhometiles.util.TableColumnUtil;
 import ph.parcs.rmhometiles.util.date.DateUtil;
 
 import java.io.IOException;
@@ -31,11 +33,12 @@ import java.time.LocalDateTime;
 @Controller
 public class ViewInvoiceController {
 
-
     @FXML
     private TableColumn<Payment, String> tcPaymentPaidDate;
     @FXML
-    private TableColumn<OrderItem, Money> tcItemPrice;
+    private TableColumn<Payment, Money> tcPaymentAmount;
+    @FXML
+    private TableColumn<OrderItem, Money> tcOrderAmount;
     @FXML
     private TableColumn<OrderItem, String> tcItemName;
     @FXML
@@ -72,17 +75,14 @@ public class ViewInvoiceController {
 
     private StageInitializer stageInitializer;
 
+    private OrderItemService orderItemService;
+
 
     private void displayDetails() {
         if (invoice != null) {
             tcItemName.setCellValueFactory(cellData -> {
                 Product orderProduct = cellData.getValue().getProduct();
                 return Bindings.createObjectBinding(orderProduct::getCode);
-            });
-
-            tcItemPrice.setCellValueFactory(cellData -> {
-                Product orderProduct = cellData.getValue().getProduct();
-                return Bindings.createObjectBinding(orderProduct::getPrice);
             });
 
             tcPaymentPaidDate.setCellValueFactory(cellData -> {
@@ -98,6 +98,9 @@ public class ViewInvoiceController {
 
             tvPayments.setItems(FXCollections.observableArrayList(invoice.getPayments()));
             tvOrderItems.setItems(FXCollections.observableArrayList(invoice.getOrderItems()));
+
+            TableColumnUtil.configureMoneyColumn(tcOrderAmount);
+            TableColumnUtil.configureMoneyColumn(tcPaymentAmount);
         }
     }
 
@@ -106,7 +109,7 @@ public class ViewInvoiceController {
             gpPaymentControl.getChildren().remove(hbPaymentSelectContainer);
             gpPaymentControl.getChildren().remove(hbPaymentSubmitContainer);
         }
-        return invoice.getBalance().toString();
+        return invoice.getBalance().toString().replace("PHP ", "₱");
     }
 
     public void initData(Invoice invoice) {
@@ -150,6 +153,10 @@ public class ViewInvoiceController {
                 tvPayments.refresh();
             });
         }).start();
+    }
+
+    public void setOrderItemService(OrderItemService orderItemService) {
+        this.orderItemService = orderItemService;
     }
 
     @Autowired

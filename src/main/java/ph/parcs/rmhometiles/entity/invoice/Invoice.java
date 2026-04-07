@@ -25,7 +25,9 @@ public class Invoice extends BaseEntity {
     private final ObjectProperty<Customer> customer = new SimpleObjectProperty<>();
     private final ObjectProperty<Money> totalAmount = new SimpleObjectProperty<>();
     private final ObjectProperty<Money> taxAmount = new SimpleObjectProperty<>();
-    private final ObjectProperty<Money> discount = new SimpleObjectProperty<>();
+    private final ObjectProperty<Money> discountAmount = new SimpleObjectProperty<>();
+    private final ObjectProperty<Money> discountPercent = new SimpleObjectProperty<>();
+
     private final ObjectProperty<Money> balance = new SimpleObjectProperty<>();
     private final ObjectProperty<Money> change = new SimpleObjectProperty<>();
     private final ObjectProperty<Money> amount = new SimpleObjectProperty<>();
@@ -97,12 +99,12 @@ public class Invoice extends BaseEntity {
 
     @Column(name = "discount_amount", precision = 8, scale = 2)
     @Convert(converter = MoneyConverter.class)
-    public Money getDiscount() {
-        return discount.get();
+    public Money getDiscountAmount() {
+        return discountAmount.get();
     }
 
-    public void setDiscount(Money discount) {
-        this.discount.set(discount);
+    public void setDiscountAmount(Money discountAmount) {
+        this.discountAmount.set(discountAmount);
     }
 
     @Column(name = "tax_amount", precision = 8, scale = 2)
@@ -169,8 +171,8 @@ public class Invoice extends BaseEntity {
     }
 
     @Transient
-    public ObjectProperty<Money> discountProperty() {
-        return discount;
+    public ObjectProperty<Money> discountAmountProperty() {
+        return discountAmount;
     }
 
     @Transient

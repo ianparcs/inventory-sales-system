@@ -4,6 +4,7 @@ import com.jfoenix.controls.*;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -13,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import ph.parcs.rmhometiles.entity.customer.Customer;
 import ph.parcs.rmhometiles.entity.customer.CustomerController;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
@@ -23,6 +23,7 @@ import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.entity.payment.Payment;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.util.AppConstant;
+import ph.parcs.rmhometiles.util.MoneyUtil;
 import ph.parcs.rmhometiles.util.ThreadUtil;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
 import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
@@ -31,11 +32,14 @@ import ph.parcs.rmhometiles.util.converter.FloatConverter;
 import ph.parcs.rmhometiles.util.converter.NumberConverter;
 import ph.parcs.rmhometiles.util.converter.ProductConverter;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -44,6 +48,8 @@ import java.util.concurrent.Executors;
 public class InvoiceController {
 
     @FXML
+    private TableColumn<OrderItem, Money> tcOrderDiscountAmount;
+    @FXML
     private TableColumn<OrderItem, Float> tcDiscountPercent;
     @FXML
     private TableColumn<OrderItem, Integer> tcStock;
@@ -51,6 +57,8 @@ public class InvoiceController {
     private TableColumn<OrderItem, HBox> tcAction;
     @FXML
     private TableColumn<OrderItem, Integer> tcQty;
+    @FXML
+    private TableColumn<OrderItem, Money> tcAmount;
     @FXML
     private TableColumn<OrderItem, String> tcCode;
     @FXML
@@ -61,8 +69,6 @@ public class InvoiceController {
     private JFXComboBox<Product> cbProducts;
     @FXML
     private TableView<OrderItem> tvOrders;
-    @FXML
-    private JFXTextField tfDiscountPercent;
     @FXML
     private JFXTextField tfDeliveryAmount;
     @FXML
@@ -115,11 +121,12 @@ public class InvoiceController {
 
         initNumberInputFormatter(tfDeliveryAmount);
         initNumberInputFormatter(tfCashPay);
-        initDiscountNumberFormatter();
         initColumnCellValueFactory();
         initInvoiceLabelProperties();
-        initProductSearchBox();
+        initMoneyColumn(tcAmount);
+        initMoneyColumn(tcPrice);
         initInvoiceProperties();
+        initProductSearchBox();
         initDate();
 
         refreshItems();
@@ -129,26 +136,56 @@ public class InvoiceController {
         tfCashPay.clear();
     }
 
-    private void initInvoiceProperties() {
-        invoice.statusProperty().bind(Bindings.createStringBinding(() -> invoiceService.setInvoiceStatus(invoice.balanceProperty().get()), invoice.balanceProperty().asString()));
-        invoice.amountProperty().bind(Bindings.createObjectBinding(this::showItemLineAmounts, tvOrders.getItems()));
-        invoice.discountProperty().bind(Bindings.createObjectBinding(this::showDiscountAmount, tfDiscountPercent.textProperty()));
-        invoice.taxAmountProperty().bind(Bindings.createObjectBinding(this::showTaxAmount, invoice.amountProperty()));
-        invoice.balanceProperty().bind(Bindings.createObjectBinding(() -> moneyService.computeBalance(invoice.getTotalAmount(), tfCashPay.getText()), invoice.totalAmountProperty(), tfCashPay.textProperty()));
-        invoice.changeProperty().bind(Bindings.createObjectBinding(this::showMoneyChange, invoice.totalAmountProperty(), tfCashPay.textProperty()));
-        invoice.totalAmountProperty().bind(Bindings.createObjectBinding(this::showTotalAmount, invoice.amountProperty(), tfDeliveryAmount.textProperty(), tfDiscountPercent.textProperty()));
+    protected void initMoneyColumn(TableColumn<OrderItem, Money> tableCell) {
+        tableCell.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(Money item, boolean empty) {
+                if (!empty) {
+                    setText(MoneyUtil.print(item));
+                }
+            }
+        });
     }
 
-    private void initDiscountNumberFormatter() {
-        tfDiscountPercent.setTextFormatter(new TextFormatter<String>((TextFormatter.Change change) -> {
-            String newText = change.getControlNewText();
-            if (newText.matches(AppConstant.Regex.DECIMAL_PERCENT)) {
-                return change;
+    private void initInvoiceProperties() {
+        tvOrders.getItems().forEach(item -> {
+            item.amountProperty().addListener((obs, oldVal, newVal) -> {
+                updateInvoiceDiscount();
+            });
+        });
+
+        tvOrders.getItems().addListener((ListChangeListener<OrderItem>) change -> {
+            while (change.next()) {
+                if (change.wasAdded()) {
+                    for (OrderItem item : change.getAddedSubList()) {
+                        item.amountProperty().addListener((obs, oldVal, newVal) -> {
+                            updateInvoiceDiscount();
+                        });
+
+                    }
+                }
+                if (change.wasRemoved()) {
+                    updateInvoiceDiscount();
+                }
             }
-            return null;
-        }));
-        setDiscountPercentTextBehavior();
+        });
     }
+
+    private void updateInvoiceDiscount() {
+        var totalOrderDiscountStream = tvOrders.getItems()
+                .stream()
+                .map(item -> item.getDiscount() != null ? item.getDiscount() : Money.parse("PHP 0.00"));
+
+        var totalOrderAmountStream = tvOrders.getItems().stream()
+                .map(item -> item.getAmount() != null ? item.getAmount() : Money.parse("PHP 0.00"));
+
+        var totalOrderDiscountAmount = moneyService.computeTotalMoney(totalOrderDiscountStream);
+        var totalOrderAmount = moneyService.computeTotalMoney(totalOrderAmountStream);
+
+        invoice.setDiscountAmount(totalOrderDiscountAmount);
+        invoice.setAmount(totalOrderAmount);
+    }
+
 
     private void initNumberInputFormatter(JFXTextField textField) {
         textField.setTextFormatter(new TextFormatter<String>((TextFormatter.Change change) -> {
@@ -160,56 +197,11 @@ public class InvoiceController {
         }));
     }
 
-    private void setDiscountPercentTextBehavior() {
-        tfDiscountPercent.focusedProperty().addListener((observableValue, outOfFocus, focus) -> {
-            if (outOfFocus) {
-                String discountText = tfDiscountPercent.getText();
-                if (!discountText.endsWith(AppConstant.Unit.PERCENT)) {
-                    tfDiscountPercent.setText(discountText + AppConstant.Unit.PERCENT);
-                }
-            }
-        });
-    }
-
-    private Money showItemLineAmounts() {
-        return tvOrders.getItems().stream()
-                .map(OrderItem::getAmount)
-                .reduce(Money.parse("PHP 0.00"), Money::plus);
-    }
-
-    private Money showDiscountAmount() {
-        Money amount = invoice.getAmount();
-        if (StringUtils.isEmpty(tfDiscountPercent.getText())) return Money.parse("PHP 0.00");
-        return moneyService.computeDiscount(amount, tfDiscountPercent.getText());
-    }
-
-    private Money showTotalBeforeTax() {
-        if (invoice.getAmount() == null) return Money.parse("PHP 0.00");
-        return invoice.getAmount().minus(showDiscountAmount());
-    }
-
-    private Money showTaxAmount() {
-        Money totalBeforeTax = showTotalBeforeTax();
-        return moneyService.computeDiscount(totalBeforeTax, AppConstant.TAX);
-    }
-
-    private Money showTotalAmount() {
-        Money currentTotal = showTotalBeforeTax();
-        Money taxAmount = moneyService.computeDiscount(currentTotal, AppConstant.TAX);
-        Money deliveryRate = moneyService.computeDeliveryRate(tfDeliveryAmount.getText());
-        return moneyService.computeTotalAmount(currentTotal, taxAmount, deliveryRate);
-    }
-
-    private Money showMoneyChange() {
-        String cashPayText = tfCashPay.getText();
-        return moneyService.computeMoneyChange(invoice.getTotalAmount(), cashPayText);
-    }
-
     private void refreshItems() {
         spMain.sceneProperty().addListener((observableValue, scene, newScene) -> {
             if (newScene != null) {
                 invoiceService.updateLineItems(tvOrders.getItems());
-                tvOrders.refresh();
+                Platform.runLater(() -> tvOrders.refresh());
             }
         });
     }
@@ -229,10 +221,20 @@ public class InvoiceController {
         lblTax.textProperty().bind(invoice.taxAmountProperty().asString());
         lblAmount.textProperty().bind(invoice.amountProperty().asString());
         lblTotalAmount.textProperty().bind(invoice.totalAmountProperty().asString());
-        lblDiscountAmount.textProperty().bind(invoice.discountProperty().asString());
+        lblDiscountAmount.textProperty().bind(invoice.discountAmountProperty().asString());
         lblAmountDue.textProperty().bind(invoice.changeProperty().asString());
         lblAmountDueBalance.textProperty().bind(Bindings.createObjectBinding(this::changeAmountDueLabel, lblAmountDue.textProperty()));
-        lblTotalBeforeTax.textProperty().bind(Bindings.createObjectBinding(this::showTotalBeforeTax, invoice.amountProperty(), tfDiscountPercent.textProperty()).asString());
+        lblTotalBeforeTax.textProperty().bind(Bindings.createObjectBinding(new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+
+                Money totalAmount = invoice.getTotalAmount() != null ? invoice.getTotalAmount() : Money.parse("PHP 0.00");
+                Money totalDiscount = invoice.getDiscountAmount() != null ? invoice.getDiscountAmount() : Money.parse("PHP 0.00");
+                Money totalBeforeTax = totalAmount.plus(totalDiscount);
+
+                return MoneyUtil.print(totalBeforeTax);
+            }
+        }, invoice.amountProperty(), invoice.discountAmountProperty()));
     }
 
     private String changeCashPayTextButton() {
@@ -380,10 +382,16 @@ public class InvoiceController {
 
     @FXML
     public void onDiscountPercentEditCommit(TableColumn.CellEditEvent<OrderItem, Float> event) {
-        float discount = event.getNewValue();
         OrderItem lineItem = event.getRowValue();
         if (lineItem != null) {
-            lineItem.setDiscountPercent(discount);
+            BigDecimal discPercent = new BigDecimal(event.getNewValue());
+            BigDecimal multiplier = discPercent.divide(BigDecimal.valueOf(100));
+
+            Money totalAmount = lineItem.getProduct().getPrice().multipliedBy(lineItem.getQuantity());
+            Money discountAmount = totalAmount.multipliedBy(multiplier, RoundingMode.UNNECESSARY);
+
+            lineItem.setDiscount(discountAmount);
+            lineItem.setDiscountPercent(event.getNewValue());
         }
     }
 
@@ -424,7 +432,6 @@ public class InvoiceController {
     }
 
     private void clearInvoiceSummary() {
-        tfDiscountPercent.clear();
         tfDeliveryAmount.clear();
         tfCashPay.clear();
     }

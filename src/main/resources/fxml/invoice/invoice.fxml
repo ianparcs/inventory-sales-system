@@ -64,12 +64,12 @@
                             <PropertyValueFactory property="discountPercent"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn reorderable="false" text="Discount">
+                    <TableColumn fx:id="tcOrderDiscountAmount" reorderable="false" text="Discount">
                         <cellValueFactory>
                             <PropertyValueFactory property="discount"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn reorderable="false" styleClass="action-column" text="Amount">
+                    <TableColumn fx:id="tcAmount" reorderable="false" styleClass="action-column" text="Amount">
                         <cellValueFactory>
                             <PropertyValueFactory property="amount"/>
                         </cellValueFactory>
@@ -86,38 +86,29 @@
         <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="tile-info" vgap="8"
                   GridPane.columnIndex="1" GridPane.rowIndex="3">
             <Label text="Sales person:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-            <Label text="Amount:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-            <Label text="Discount All:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-            <Label text="Discount amount:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-            <Label text="Total before tax:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-            <Label text="Tax amount 3%:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
-            <Label text="Tax amount 3%:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
-            <Label text="Delivery Rate:" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
 
             <Label fx:id="lblSalesPerson" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Test"
                    GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1"/>
+
+            <Label text="Amount:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
             <Label fx:id="lblAmount" alignment="CENTER" maxWidth="1.7976931348623157E308" text="PHP 0.00"
                    GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
-            <JFXTextField fx:id="tfDiscountPercent" alignment="CENTER" promptText="Enter Discount %"
-                          styleClass="non-search-field" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                <cursor>
-                    <Cursor fx:constant="HAND"/>
-                </cursor>
-            </JFXTextField>
-
-
+            <Label text="Discount amount:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
             <Label fx:id="lblDiscountAmount" alignment="CENTER" maxWidth="1.7976931348623157E308" text="PHP 0.00"
+                   GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+            <Label text="Total before tax:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+            <Label fx:id="lblTotalBeforeTax" alignment="CENTER" maxWidth="1.7976931348623157E308" text="PHP 0.00"
                    GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 
-            <Label fx:id="lblTotalBeforeTax" alignment="CENTER" maxWidth="1.7976931348623157E308" text="PHP 0.00"
+            <Label text="Tax amount 3%:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+            <Label fx:id="lblTax" alignment="CENTER" maxWidth="1.7976931348623157E308" text="PHP 0.00"
                    GridPane.columnIndex="1" GridPane.rowIndex="5"/>
 
-            <Label fx:id="lblTax" alignment="CENTER" maxWidth="1.7976931348623157E308" text="PHP 0.00"
-                   GridPane.columnIndex="1" GridPane.rowIndex="6"/>
-
+            <Label text="Delivery Rate:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
             <JFXTextField fx:id="tfDeliveryAmount" alignment="CENTER" promptText="PHP 0.00"
-                          styleClass="non-search-field" text="PHP 0.00" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                          styleClass="non-search-field" text="PHP 0.00" GridPane.columnIndex="1" GridPane.rowIndex="6">
                 <cursor>
                     <Cursor fx:constant="HAND"/>
                 </cursor>
@@ -126,22 +117,22 @@
                 </validators>
             </JFXTextField>
 
-            <VBox styleClass="amount-container" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8">
+            <VBox styleClass="amount-container" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7">
                 <Label fx:id="lblAmountDueBalance" text="Amount Due" style="-fx-font-weight: BOLD"/>
                 <Label fx:id="lblAmountDue" alignment="CENTER" prefWidth="150"
                        styleClass="label-amount" text="PHP 0.00"/>
             </VBox>
-            <VBox styleClass="amount-container" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8">
+            <VBox styleClass="amount-container" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7">
                 <Label text="TOTAL" style="-fx-font-weight: BOLD"/>
                 <Label fx:id="lblTotalAmount" alignment="CENTER" maxWidth="1.7976931348623157E308"
                        styleClass="label-total" text="PHP 0.00"/>
             </VBox>
 
             <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Payment Type"
-                   GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="9"/>
+                   GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="8"/>
 
             <HBox maxWidth="1.7976931348623157E308" GridPane.columnIndex="0" GridPane.columnSpan="2"
-                  GridPane.rowIndex="10">
+                  GridPane.rowIndex="9">
                 <JFXRadioButton fx:id="rbCashType" selected="true" onAction="#onCashTypeClicked" alignment="CENTER"
                                 maxWidth="1.7976931348623157E308" text="Cash" HBox.hgrow="ALWAYS"/>
                 <JFXRadioButton fx:id="rbGCashType" onAction="#onGCashTypeClicked" alignment="CENTER"

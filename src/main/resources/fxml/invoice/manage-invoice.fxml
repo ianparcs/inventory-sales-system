@@ -117,14 +117,14 @@
                     </cellValueFactory>
                 </TableColumn>
 
-                <TableColumn reorderable="false" text="Total">
+                <TableColumn fx:id="tcTotalAmount" reorderable="false" text="Total">
                     <cellValueFactory>
                         <PropertyValueFactory property="totalAmount"/>
                     </cellValueFactory>
                 </TableColumn>
 
 
-                <TableColumn reorderable="false" text="Balance">
+                <TableColumn fx:id="tcBalance" reorderable="false" text="Balance">
                     <cellValueFactory>
                         <PropertyValueFactory property="balance"/>
                     </cellValueFactory>

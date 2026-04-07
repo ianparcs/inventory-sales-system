@@ -24,6 +24,7 @@ import ph.parcs.rmhometiles.file.ImageProduct;
 import ph.parcs.rmhometiles.file.writer.ProductExcelWriter;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.util.AppConstant;
+import ph.parcs.rmhometiles.util.TableColumnUtil;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
 import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
 
@@ -65,6 +66,9 @@ public class ProductTableController extends EntityTableController<Product> {
         initTableColumnValue();
         initTableColumnSize();
         initTableColumnSort();
+
+        TableColumnUtil.configureMoneyColumn(tcCost);
+        TableColumnUtil.configureMoneyColumn(tcPrice);
 
         tcAction.setCellFactory(ActionTableCell.forActions(
                 this::onEditActionClick, this::onDeleteActionClick));

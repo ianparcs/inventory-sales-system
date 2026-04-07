@@ -10,6 +10,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
 import lombok.SneakyThrows;
+import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.entity.customer.Customer;
@@ -23,6 +24,7 @@ import ph.parcs.rmhometiles.entity.user.User;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.ui.scene.SceneManager;
 import ph.parcs.rmhometiles.util.AppConstant;
+import ph.parcs.rmhometiles.util.TableColumnUtil;
 import ph.parcs.rmhometiles.util.ThreadUtil;
 import ph.parcs.rmhometiles.util.date.DateRangeType;
 import ph.parcs.rmhometiles.util.date.DateUtil;
@@ -37,6 +39,10 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
 
     @FXML
     private TableColumn<Invoice, Customer> tcCustomer;
+    @FXML
+    private TableColumn<Invoice, Money> tcTotalAmount;
+    @FXML
+    private TableColumn<Invoice, Money> tcBalance;
     @FXML
     private TableColumn<Invoice, String> tcStatus;
     @FXML
@@ -69,6 +75,9 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
                 };
             }
         });
+
+        TableColumnUtil.configureMoneyColumn(tcBalance);
+        TableColumnUtil.configureMoneyColumn(tcTotalAmount);
     }
 
     @Override

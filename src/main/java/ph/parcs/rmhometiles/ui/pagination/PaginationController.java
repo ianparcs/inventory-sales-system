@@ -2,17 +2,16 @@ package ph.parcs.rmhometiles.ui.pagination;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Pagination;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
+import org.joda.money.Money;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseService;
 import ph.parcs.rmhometiles.entity.inventory.item.ItemPageEntry;
+import ph.parcs.rmhometiles.util.MoneyUtil;
 import ph.parcs.rmhometiles.util.PageUtil;
 
 

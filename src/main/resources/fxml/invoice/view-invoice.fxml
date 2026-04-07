@@ -114,7 +114,7 @@
                                 <PropertyValueFactory property="paymentType"/>
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn reorderable="false" text="Payment Amount">
+                        <TableColumn fx:id="tcPaymentAmount" reorderable="false" text="Payment Amount">
                             <cellValueFactory>
                                 <PropertyValueFactory property="paymentAmount"/>
                             </cellValueFactory>
@@ -130,13 +130,22 @@
                     </columnResizePolicy>
                     <columns>
                         <TableColumn fx:id="tcItemName" reorderable="false" text="Item Name"/>
-                        <TableColumn fx:id="tcItemPrice" reorderable="false" text="Price"/>
                         <TableColumn reorderable="false" text="Quantity">
                             <cellValueFactory>
                                 <PropertyValueFactory property="quantity"/>
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn reorderable="false" text="Amount">
+                        <TableColumn  reorderable="false" text="Discount">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="discount"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn reorderable="false" text="Disc. %">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="discountPercent"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="tcOrderAmount" reorderable="false" text="Amount">
                             <cellValueFactory>
                                 <PropertyValueFactory property="amount"/>
                             </cellValueFactory>

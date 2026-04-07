@@ -19,6 +19,7 @@
         <springboot.version>3.2.12</springboot.version>
         <javafx.version>17.0.18</javafx.version>
         <apache.poi.version>5.5.1</apache.poi.version>
+        <joda.version>1.0.7</joda.version>
     </properties>
 
     <dependencies>
@@ -74,7 +75,7 @@
         <dependency>
             <groupId>org.joda</groupId>
             <artifactId>joda-money</artifactId>
-            <version>1.0.1</version>
+            <version>${joda.version}</version>
         </dependency>
 
         <dependency>
