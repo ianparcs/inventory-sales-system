@@ -39,7 +39,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -157,9 +156,9 @@ public class InvoiceController {
 
     private void initProductSearchBox() {
         cbProducts.setConverter(new ProductConverter(cbProducts.getValue()));
-        cbProducts.getEditor().textProperty().addListener((observable, oldVal, keyTyped) -> showProduct(keyTyped));
+        cbProducts.getEditor().textProperty().addListener((observable, oldVal, keyTyped) -> showProducts(keyTyped));
         cbProducts.focusedProperty().addListener((observableValue, outOfFocus, focus) -> {
-            if (focus) showProduct(AppConstant.STRING_EMPTY);
+            if (focus) showProducts(AppConstant.STRING_EMPTY);
         });
     }
 
@@ -273,10 +272,12 @@ public class InvoiceController {
         return "BALANCE";
     }
 
-    private void showProduct(String query) {
+    private void showProducts(String query) {
         List<Product> products = productService.findEntities(query);
-        cbProducts.show();
-        Platform.runLater(() -> cbProducts.getItems().setAll(FXCollections.observableArrayList(products)));
+        Platform.runLater(() -> {
+            cbProducts.show();
+            cbProducts.getItems().setAll(FXCollections.observableArrayList(products));
+        });
     }
 
     @FXML

@@ -75,9 +75,6 @@ public class ViewInvoiceController {
 
     private StageInitializer stageInitializer;
 
-    private OrderItemService orderItemService;
-
-
     private void displayDetails() {
         if (invoice != null) {
             tcItemName.setCellValueFactory(cellData -> {
@@ -153,10 +150,6 @@ public class ViewInvoiceController {
                 tvPayments.refresh();
             });
         }).start();
-    }
-
-    public void setOrderItemService(OrderItemService orderItemService) {
-        this.orderItemService = orderItemService;
     }
 
     @Autowired
