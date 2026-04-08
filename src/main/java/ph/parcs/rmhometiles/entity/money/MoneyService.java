@@ -69,8 +69,8 @@ public class MoneyService {
     public Money computeTotalAmount(Money subTotal, Money tax, Money discount, Money deliveryRate) {
         return subTotal
                 .plus(tax)
-                .plus(discount)
-                .plus(deliveryRate);
+                .plus(deliveryRate)
+                .minus(discount);
     }
 
 }

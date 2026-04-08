@@ -34,7 +34,8 @@
                 <JFXComboBox fx:id="cbProducts" editable="true" labelFloat="true" maxWidth="1.7976931348623157E308"
                              onAction="#onProductItemClicked" promptText="Add Order" styleClass="search-field"
                              HBox.hgrow="ALWAYS"/>
-                <JFXDatePicker fx:id="dpDate" promptText="Invoice Date" minWidth="100" mouseTransparent="true" focusTraversable="false"
+                <JFXDatePicker fx:id="dpDate" promptText="Invoice Date" minWidth="100" mouseTransparent="true"
+                               focusTraversable="false"
                                maxWidth="1.7976931348623157E308"/>
                 <JFXButton fx:id="btnClearInvoice" onAction="#clearAllInvoice" styleClass="primary-button">
                     <graphic>
@@ -64,7 +65,8 @@
                             <PropertyValueFactory property="discountPercent"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn fx:id="tcOrderDiscountAmount" styleClass="action-column" reorderable="false" text="Discount">
+                    <TableColumn fx:id="tcOrderDiscountAmount" styleClass="action-column" reorderable="false"
+                                 text="Discount">
                         <cellValueFactory>
                             <PropertyValueFactory property="discount"/>
                         </cellValueFactory>
@@ -83,76 +85,81 @@
 
         <fx:include source="../customer/search-customer.fxml" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
-        <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="tile-info" vgap="8"
+        <GridPane styleClass="tile-info" vgap="10"
                   GridPane.columnIndex="1" GridPane.rowIndex="3">
             <Label text="Sales person:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
 
-            <Label fx:id="lblSalesPerson" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Test"
+            <Label fx:id="lblSalesPerson" text="Test"
                    GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1"/>
 
-            <Label text="Amount:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-            <Label fx:id="lblSubTotal" alignment="CENTER" maxWidth="1.7976931348623157E308" text="₱0.00"
+            <Label text="Subtotal:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <Label fx:id="lblSubTotal" text="₱0.00"
                    GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
-            <Label text="Discount amount:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-            <Label fx:id="lblDiscountAmount" alignment="CENTER" maxWidth="1.7976931348623157E308" text="₱0.00"
+            <Label text="Discount:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+            <Label fx:id="lblDiscountAmount" text="₱0.00"
                    GridPane.columnIndex="1" GridPane.rowIndex="3"/>
 
             <Label text="Total before tax:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-            <Label fx:id="lblTotalBeforeTax" alignment="CENTER" maxWidth="1.7976931348623157E308" text="₱0.00"
+            <Label fx:id="lblTotalBeforeTax" text="₱0.00"
                    GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 
-            <Label text="Tax amount 3%:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-            <Label fx:id="lblTax" alignment="CENTER" maxWidth="1.7976931348623157E308" text="₱0.00"
+            <Label text="Tax 3%:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+            <Label fx:id="lblTax" text="₱0.00"
                    GridPane.columnIndex="1" GridPane.rowIndex="5"/>
 
             <Label text="Delivery Rate:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
-            <JFXTextField fx:id="tfDeliveryAmount" alignment="CENTER" promptText="₱0.00"
-                          styleClass="non-search-field"  GridPane.columnIndex="1" GridPane.rowIndex="6">
+            <JFXTextField fx:id="tfDeliveryAmount" promptText="₱0.00"
+                          styleClass="non-search-field" GridPane.columnIndex="1" GridPane.rowIndex="6">
                 <cursor>
                     <Cursor fx:constant="HAND"/>
                 </cursor>
+                <validators>
+                    <RequiredFieldValidator/>
+                    <NumberValidator/>
+                    <RegexValidator regexPattern="^[0-9]*\.[0-9]{2}$"/>
+                </validators>
             </JFXTextField>
 
-            <VBox styleClass="amount-container" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7">
-                <Label fx:id="lblBalanceText" text="Amount Due" style="-fx-font-weight: BOLD"/>
+            <VBox styleClass="amount-container" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7"
+                  maxWidth="Infinity">
+                <Label fx:id="lblBalanceText" text="Amount Due" style="-fx-font-weight: BOLD" alignment="CENTER"/>
                 <Label fx:id="lblBalance" alignment="CENTER" prefWidth="150"
                        styleClass="label-amount" text="₱0.00"/>
             </VBox>
-            <VBox styleClass="amount-container" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7">
-                <Label text="TOTAL" style="-fx-font-weight: BOLD"/>
+            <VBox styleClass="amount-container" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7"
+                  maxWidth="Infinity">
+                <Label text="TOTAL" style="-fx-font-weight: BOLD" alignment="CENTER"/>
                 <Label fx:id="lblTotalAmount" alignment="CENTER" prefWidth="150"
                        styleClass="label-total" text="₱0.00"/>
             </VBox>
 
-            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Payment Type"
-                   GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="8"/>
+            <Label text="Payment Type" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="8"/>
 
-            <HBox maxWidth="1.7976931348623157E308" GridPane.columnIndex="0" GridPane.columnSpan="2"
+            <HBox GridPane.columnIndex="0" GridPane.columnSpan="2"
                   GridPane.rowIndex="9">
                 <JFXRadioButton fx:id="rbCashType" selected="true" onAction="#onCashTypeClicked" alignment="CENTER"
                                 maxWidth="1.7976931348623157E308" text="Cash" HBox.hgrow="ALWAYS"/>
                 <JFXRadioButton fx:id="rbGCashType" onAction="#onGCashTypeClicked" alignment="CENTER"
                                 maxWidth="1.7976931348623157E308" text="GCash" HBox.hgrow="ALWAYS"/>
             </HBox>
+
             <columnConstraints>
                 <ColumnConstraints/>
-                <ColumnConstraints/>
+                <ColumnConstraints halignment="CENTER"/>
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints/>
-                <RowConstraints/>
-                <RowConstraints/>
-                <RowConstraints/>
-                <RowConstraints/>
-                <RowConstraints/>
-                <RowConstraints/>
-                <RowConstraints/>
-                <RowConstraints/>
-                <RowConstraints/>
-                <RowConstraints/>
+                <RowConstraints valignment="CENTER"/>
+                <RowConstraints valignment="CENTER"/>
+                <RowConstraints valignment="CENTER"/>
+                <RowConstraints valignment="CENTER"/>
+                <RowConstraints valignment="CENTER"/>
+                <RowConstraints valignment="CENTER"/>
+                <RowConstraints valignment="CENTER"/>
+                <RowConstraints valignment="CENTER"/>
+                <RowConstraints valignment="CENTER"/>
+                <RowConstraints valignment="CENTER"/>
             </rowConstraints>
-
         </GridPane>
 
         <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="8"

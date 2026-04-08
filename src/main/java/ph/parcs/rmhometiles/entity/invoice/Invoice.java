@@ -64,7 +64,7 @@ public class Invoice extends BaseEntity {
         this.orderItems = orderItems;
     }
 
-    @Column(name = "amount", precision = 8, scale = 2)
+    @Column(name = "sub_total_amount", precision = 8, scale = 2)
     @Convert(converter = MoneyConverter.class)
     public Money getSubTotalAmount() {
         return subTotalAmount.get();

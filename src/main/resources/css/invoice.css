@@ -107,6 +107,7 @@
     -fx-background-color: transparent;
     -fx-text-fill: blueberries;
     -fx-prompt-text-fill: blueberries;
+    -fx-alignment: center;
 }
 
 .non-search-field > .input-line {

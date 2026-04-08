@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import ph.parcs.rmhometiles.entity.customer.Customer;
 import ph.parcs.rmhometiles.entity.customer.CustomerController;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.inventory.product.ProductService;
@@ -24,6 +25,7 @@ import ph.parcs.rmhometiles.entity.order.OrderItemService;
 import ph.parcs.rmhometiles.entity.payment.PaymentService;
 import ph.parcs.rmhometiles.exception.AppException;
 import ph.parcs.rmhometiles.exception.ErrorCode;
+import ph.parcs.rmhometiles.session.SessionService;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.util.AppConstant;
 import ph.parcs.rmhometiles.util.MoneyUtil;
@@ -87,6 +89,8 @@ public class InvoiceController {
     @FXML
     private Label lblBalanceText;
     @FXML
+    private Label lblSalesPerson;
+    @FXML
     private Label lblTotalBeforeTax;
     @FXML
     private Label lblDiscountAmount;
@@ -109,17 +113,14 @@ public class InvoiceController {
     private StockService stockService;
     private Invoice invoice;
 
-    private SweetAlert checkoutAlert;
+    private final SweetAlert checkoutAlert = SweetAlertFactory.create(SweetAlert.Type.INFO)
+            .setContentMessage("Checkout new order?")
+            .setHeaderMessage("Checkout")
+            .setConfirmButton("Yes");
 
     @FXML
     public void initialize() {
         invoice = invoiceService.createDefault();
-        invoice.setOrderItems(new HashSet<>(tvOrders.getItems()));
-
-        checkoutAlert = SweetAlertFactory.create(SweetAlert.Type.INFO);
-        checkoutAlert.setContentMessage("Checkout new order?");
-        checkoutAlert.setHeaderMessage("Checkout");
-        checkoutAlert.setConfirmButton("Yes");
 
         initMoneyColumn(tcOrderDiscountAmount);
         initMoneyColumn(tcAmount);
@@ -131,9 +132,8 @@ public class InvoiceController {
         initTableViewOrder();
         initDateUI();
 
-        customerController.setCustomer(null);
+        lblSalesPerson.setText(SessionService.getInstance().getLoggedInUser().getName());
         customerController.setSpMain(spMain);
-        tfCashPay.clear();
     }
 
     private void initMoneyColumn(TableColumn<OrderItem, Money> tableCell) {
@@ -154,9 +154,17 @@ public class InvoiceController {
 
     private void initProductSearchBox() {
         cbProducts.setConverter(new ProductConverter(cbProducts.getValue()));
-        cbProducts.getEditor().textProperty().addListener((observable, oldVal, keyTyped) -> showProducts(keyTyped));
+        cbProducts.getEditor().textProperty().addListener((observable, oldVal, keyTyped) -> {
+            if (cbProducts.isFocused() && !cbProducts.isShowing()) {
+                showProducts(keyTyped);
+            }
+        });
         cbProducts.focusedProperty().addListener((observableValue, outOfFocus, focus) -> {
-            if (focus) showProducts(AppConstant.STRING_EMPTY);
+            if (outOfFocus) {
+                cbProducts.hide();
+                return;
+            }
+            showProducts(AppConstant.STRING_EMPTY);
         });
     }
 
@@ -182,16 +190,19 @@ public class InvoiceController {
                         });
                     }
                 }
-                if (change.wasRemoved()) {
-                    computeInvoiceTotals();
-                }
+                if (change.wasRemoved()) computeInvoiceTotals();
             }
         });
 
         tfCashPay.textProperty().addListener((observable, oldValue, newValue) -> {
-            computeInvoiceTotals();
+            if (newValue != null && !newValue.isEmpty()) computeInvoiceTotals();
         });
 
+        tfDeliveryAmount.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null && !newValue.isEmpty()) computeInvoiceTotals();
+        });
+
+        tfDeliveryAmount.setTextFormatter(new TextFormatter<>(c -> c.getControlNewText().matches("\\d*") ? c : null));
         tfCashPay.setTextFormatter(new TextFormatter<>(c -> c.getControlNewText().matches("\\d*") ? c : null));
 
     }
@@ -209,17 +220,17 @@ public class InvoiceController {
         lblTotalBeforeTax.textProperty().bind(Bindings.createObjectBinding(() -> {
             Money totalAmount = invoice.getSubTotalAmount() != null ? invoice.getSubTotalAmount() : Money.parse("PHP 0.00");
             Money totalDiscount = invoice.getDiscountAmount() != null ? invoice.getDiscountAmount() : Money.parse("PHP 0.00");
-            Money totalBeforeTax = totalAmount.plus(totalDiscount);
+            Money totalBeforeTax = totalAmount.minus(totalDiscount);
             return MoneyUtil.print(totalBeforeTax);
         }, invoice.subTotalAmountProperty(), invoice.discountAmountProperty()));
 
-        lblTotalAmount.textProperty().bind(invoice.totalAmountProperty().asString());
         btnSales.textProperty().bind(Bindings.createObjectBinding(this::changeCashPayTextButton, tfCashPay.textProperty()));
         lblTax.textProperty().bind(Bindings.createStringBinding(() -> MoneyUtil.print(invoice.getTaxAmount()), invoice.taxAmountProperty()));
         lblBalanceText.textProperty().bind(Bindings.createStringBinding(this::changeBalanceLabel, invoice.balanceProperty(), tfCashPay.textProperty()));
         lblSubTotal.textProperty().bind(Bindings.createStringBinding(() -> MoneyUtil.print(invoice.getSubTotalAmount()), invoice.subTotalAmountProperty()));
         lblDiscountAmount.textProperty().bind(Bindings.createStringBinding(() -> MoneyUtil.print(invoice.getDiscountAmount()), invoice.discountAmountProperty()));
         lblBalance.textProperty().bind(Bindings.createStringBinding(() -> MoneyUtil.print(invoice.getBalance()), invoice.balanceProperty(), tfCashPay.textProperty()));
+        lblTotalAmount.textProperty().bind(Bindings.createStringBinding(() -> MoneyUtil.print(invoice.getTotalAmount()), invoice.totalAmountProperty(), tfDeliveryAmount.textProperty()));
     }
 
     private void unBindInvoiceLabelProperties() {
@@ -273,7 +284,7 @@ public class InvoiceController {
     private void showProducts(String query) {
         List<Product> products = productService.findEntities(query);
         Platform.runLater(() -> {
-            cbProducts.show();
+            if (!cbProducts.isShowing()) cbProducts.show();
             cbProducts.getItems().setAll(FXCollections.observableArrayList(products));
         });
     }
@@ -282,19 +293,10 @@ public class InvoiceController {
     private void onProductItemClicked() {
         Product product = cbProducts.getValue();
         if (product == null) return;
-
         try {
             var isOrderDuplicate = orderItemService.isOrderDuplicate(tvOrders.getItems(), product.getCode());
             if (isOrderDuplicate) throw new AppException(ErrorCode.ORDER_DUPLICATE);
-
-            tvOrders.getItems().add(new OrderItem(product));
-            Platform.runLater(() -> {
-                cbProducts.valueProperty().set(null);
-                cbProducts.hide();
-                spMain.requestFocus();
-                tvOrders.refresh();
-            });
-
+            Platform.runLater(this::hideProductSuggestions);
         } catch (AppException e) {
             showInvoiceError(e.getMessage());
         }
@@ -409,6 +411,15 @@ public class InvoiceController {
         bindInvoiceLabelProperties();
 
         tvOrders.getItems().clear();
+    }
+
+    private void hideProductSuggestions() {
+        tvOrders.getItems().add(new OrderItem(cbProducts.getValue()));
+        tvOrders.refresh();
+
+        spMain.requestFocus();
+        cbProducts.valueProperty().set(null);
+        cbProducts.hide();
     }
 
     private void showInvoiceError(String message) {
