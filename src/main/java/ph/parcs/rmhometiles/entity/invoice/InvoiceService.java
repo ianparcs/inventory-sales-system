@@ -51,13 +51,7 @@ public class InvoiceService extends BaseService<Invoice> {
         return invoiceRepository.save(saveCreatedBy(invoice));
     }
 
-    public void saveOrderItem(Invoice invoice, ObservableList<OrderItem> items) {
-        for (OrderItem item : items) {
-            item.setInvoice(invoice);
-        }
-    }
-
-    public String setInvoiceStatus(Money money) {
+    public String updateInvoicePaymentStatus(Money money) {
         if (money != null && money.isPositiveOrZero()) {
             return Payment.Status.PAID.name();
         }

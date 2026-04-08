@@ -20,6 +20,7 @@ import ph.parcs.rmhometiles.util.PageUtil;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ProductService extends BaseService<Product> {
@@ -55,12 +56,12 @@ public class ProductService extends BaseService<Product> {
         return productOptional.isEmpty();
     }
 
-    public void saveInvoiceProduct(ObservableList<OrderItem> items) {
+    public void updateProductStocks(Set<OrderItem> items) {
         for (OrderItem item : items) {
             Stock stock = stockService.computeStocks(item.getProduct(), item.getQuantity());
-            Product invoiceProduct = item.getProduct();
-            invoiceProduct.setStock(stock);
-            saveEntity(invoiceProduct);
+            Product product = item.getProduct();
+            product.setStock(stock);
+            saveEntity(product);
         }
     }
 

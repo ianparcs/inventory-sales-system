@@ -27,7 +27,6 @@ import ph.parcs.rmhometiles.exception.ErrorCode;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.util.AppConstant;
 import ph.parcs.rmhometiles.util.MoneyUtil;
-import ph.parcs.rmhometiles.util.ThreadUtil;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
 import ph.parcs.rmhometiles.util.alert.SweetAlertFactory;
 import ph.parcs.rmhometiles.util.converter.DateConverter;
@@ -41,8 +40,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -312,18 +310,20 @@ public class InvoiceController {
         }
 
         checkoutAlert.setConfirmListener(() -> {
-            ExecutorService executorService = Executors.newCachedThreadPool();
-            executorService.submit(() -> {
-                productService.saveInvoiceProduct(tvOrders.getItems());
-                invoiceService.saveOrderItem(invoice, tvOrders.getItems());
+            new Thread(() -> {
+                var orderItems = tvOrders.getItems()
+                        .stream()
+                        .peek(orderItem -> orderItem.setInvoice(invoice))
+                        .collect(Collectors.toSet());
 
+                productService.updateProductStocks(orderItems);
                 var payment = paymentService.createPayment(rbCashType.isSelected(), invoice);
 
-                invoice.setCreatedAt(LocalDateTime.now());
-                invoice.setOrderItems(new HashSet<>(tvOrders.getItems()));
                 invoice.setName("INV-" + dpDate.getValue() + "-ID" + 1);
                 invoice.setCustomer(customerController.getCustomer());
                 invoice.setRemarks(txaRemarks.getText());
+                invoice.setCreatedAt(LocalDateTime.now());
+                invoice.setOrderItems(orderItems);
                 invoice.addPayments(payment);
 
                 Invoice savedInvoice = invoiceService.saveEntity(invoice);
@@ -334,8 +334,7 @@ public class InvoiceController {
                         clearAllInvoice();
                     }
                 });
-            });
-            ThreadUtil.shutdownAndAwaitTermination(executorService);
+            }).start();
         }).show(spMain);
     }
 
