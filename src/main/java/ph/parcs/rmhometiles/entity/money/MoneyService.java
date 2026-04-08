@@ -18,20 +18,12 @@ public class MoneyService {
         return amount.multipliedBy(AppConstant.TAX, RoundingMode.UNNECESSARY);
     }
 
-    public Money computeMoneyChange(Money balance, Money cashPaid) {
+    public Money computeBalance(Money balance, Money cashPaid) {
         if (balance == null || cashPaid == null) return parseMoney("0.00");
         if (balance.isGreaterThan(cashPaid)) {
             return cashPaid.minus(balance);
         }
         return balance.minus(cashPaid).abs();
-    }
-
-    public Money computeBalance(Money balance, Money cashPay) {
-        if (balance == null || cashPay == null) return parseMoney("0.00");
-        if (cashPay.isGreaterThan(balance)) {
-            return parseMoney("0.00");
-        }
-        return cashPay.minus(balance);
     }
 
     public Map<AppConstant.Sales, Double> computeAllMoney(List<SalesReport> salesReportsToday) {

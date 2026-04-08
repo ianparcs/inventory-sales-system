@@ -51,16 +51,6 @@ public class InvoiceService extends BaseService<Invoice> {
         return invoiceRepository.save(saveCreatedBy(invoice));
     }
 
-    public void updateLineItems(ObservableList<OrderItem> items) {
-        for (OrderItem item : items) {
-            if (item.getProduct() != null) {
-                Product result = productRepository.findById(item.getProduct().getId()).orElse(null);
-                item.setProduct(result);
-            }
-        }
-        items.removeIf(lineItem -> lineItem.getProduct() == null);
-    }
-
     public void saveOrderItem(Invoice invoice, ObservableList<OrderItem> items) {
         for (OrderItem item : items) {
             item.setInvoice(invoice);

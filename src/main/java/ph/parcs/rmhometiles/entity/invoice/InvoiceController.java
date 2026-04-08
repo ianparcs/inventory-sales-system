@@ -96,7 +96,7 @@ public class InvoiceController {
     @FXML
     private Label lblTotalAmount;
     @FXML
-    private Label lblChangeDue;
+    private Label lblBalance;
     @FXML
     private Label lblTax;
     @FXML
@@ -135,7 +135,7 @@ public class InvoiceController {
         tfCashPay.clear();
     }
 
-    protected void initMoneyColumn(TableColumn<OrderItem, Money> tableCell) {
+    private void initMoneyColumn(TableColumn<OrderItem, Money> tableCell) {
         tableCell.setCellFactory(column -> new TableCell<>() {
             @Override
             protected void updateItem(Money item, boolean empty) {
@@ -143,6 +143,19 @@ public class InvoiceController {
                     setText(MoneyUtil.print(item));
                 }
             }
+        });
+    }
+
+    private void initDateUI() {
+        dpDate.setValue(LocalDate.now());
+        dpDate.setConverter(new DateConverter());
+    }
+
+    private void initProductSearchBox() {
+        cbProducts.setConverter(new ProductConverter(cbProducts.getValue()));
+        cbProducts.getEditor().textProperty().addListener((observable, oldVal, keyTyped) -> showProduct(keyTyped));
+        cbProducts.focusedProperty().addListener((observableValue, outOfFocus, focus) -> {
+            if (focus) showProduct(AppConstant.STRING_EMPTY);
         });
     }
 
@@ -174,31 +187,12 @@ public class InvoiceController {
             }
         });
 
-        tfCashPay.textProperty().addListener((observable, oldValue, newValue) -> computeInvoiceTotals());
-    }
+        tfCashPay.textProperty().addListener((observable, oldValue, newValue) -> {
+            computeInvoiceTotals();
+        });
 
-    private void computeInvoiceTotals() {
-        var totalOrderDiscountStream = tvOrders.getItems().stream().map(item -> item.getDiscount() != null ? item.getDiscount() : Money.parse("PHP 0.00"));
-        var totalOrderAmountStream = tvOrders.getItems().stream().map(item -> item.getAmount() != null ? item.getAmount() : Money.parse("PHP 0.00"));
+        tfCashPay.setTextFormatter(new TextFormatter<>(c -> c.getControlNewText().matches("\\d*") ? c : null));
 
-        var cashPaid = moneyService.parseMoney(tfCashPay.getText());
-        var deliveryRate = moneyService.parseMoney(tfDeliveryAmount.getText());
-
-        var subTotal = moneyService.computeTotalMoney(totalOrderAmountStream);
-        var discount = moneyService.computeTotalMoney(totalOrderDiscountStream);
-
-        var tax = moneyService.computeTax(subTotal);
-        var total = moneyService.computeTotalAmount(subTotal, tax, discount, deliveryRate);
-
-        var changeDue = moneyService.computeMoneyChange(total, cashPaid);
-        var balance = moneyService.computeBalance(total, cashPaid);
-
-        invoice.setDiscountAmount(discount);
-        invoice.setSubTotalAmount(subTotal);
-        invoice.setTotalAmount(total);
-        invoice.setTaxAmount(tax);
-        invoice.setChangeDue(changeDue);
-        invoice.setBalance(balance);
     }
 
     private void initColumnCellValueFactory() {
@@ -218,14 +212,13 @@ public class InvoiceController {
             return MoneyUtil.print(totalBeforeTax);
         }, invoice.subTotalAmountProperty(), invoice.discountAmountProperty()));
 
-
         lblTotalAmount.textProperty().bind(invoice.totalAmountProperty().asString());
         btnSales.textProperty().bind(Bindings.createObjectBinding(this::changeCashPayTextButton, tfCashPay.textProperty()));
-        lblBalanceText.textProperty().bind(Bindings.createStringBinding(this::changeBalanceLabel, tfCashPay.textProperty()));
         lblTax.textProperty().bind(Bindings.createStringBinding(() -> MoneyUtil.print(invoice.getTaxAmount()), invoice.taxAmountProperty()));
-        lblChangeDue.textProperty().bind(Bindings.createStringBinding(() -> MoneyUtil.print(invoice.getChangeDue()), tfCashPay.textProperty()));
+        lblBalanceText.textProperty().bind(Bindings.createStringBinding(this::changeBalanceLabel, invoice.balanceProperty(), tfCashPay.textProperty()));
         lblSubTotal.textProperty().bind(Bindings.createStringBinding(() -> MoneyUtil.print(invoice.getSubTotalAmount()), invoice.subTotalAmountProperty()));
         lblDiscountAmount.textProperty().bind(Bindings.createStringBinding(() -> MoneyUtil.print(invoice.getDiscountAmount()), invoice.discountAmountProperty()));
+        lblBalance.textProperty().bind(Bindings.createStringBinding(() -> MoneyUtil.print(invoice.getBalance()), invoice.balanceProperty(), tfCashPay.textProperty()));
     }
 
     private void unBindInvoiceLabelProperties() {
@@ -233,10 +226,32 @@ public class InvoiceController {
         lblDiscountAmount.textProperty().unbind();
         lblBalanceText.textProperty().unbind();
         lblTotalAmount.textProperty().unbind();
-        lblChangeDue.textProperty().unbind();
+        lblBalance.textProperty().unbind();
         lblSubTotal.textProperty().unbind();
         btnSales.textProperty().unbind();
         lblTax.textProperty().unbind();
+    }
+
+    private void computeInvoiceTotals() {
+        var totalOrderDiscountStream = tvOrders.getItems().stream().map(item -> item.getDiscount() != null ? item.getDiscount() : Money.parse("PHP 0.00"));
+        var totalOrderAmountStream = tvOrders.getItems().stream().map(item -> item.getAmount() != null ? item.getAmount() : Money.parse("PHP 0.00"));
+
+        var cashPaid = moneyService.parseMoney(tfCashPay.getText());
+        var deliveryRate = moneyService.parseMoney(tfDeliveryAmount.getText());
+
+        var subTotal = moneyService.computeTotalMoney(totalOrderAmountStream);
+        var discount = moneyService.computeTotalMoney(totalOrderDiscountStream);
+
+        var tax = moneyService.computeTax(subTotal);
+        var total = moneyService.computeTotalAmount(subTotal, tax, discount, deliveryRate);
+
+        var balance = moneyService.computeBalance(total, cashPaid);
+
+        invoice.setDiscountAmount(discount);
+        invoice.setSubTotalAmount(subTotal);
+        invoice.setTotalAmount(total);
+        invoice.setBalance(balance);
+        invoice.setTaxAmount(tax);
     }
 
     private String changeCashPayTextButton() {
@@ -249,22 +264,9 @@ public class InvoiceController {
     }
 
     private String changeBalanceLabel() {
-        var changeDue = invoice.getChangeDue();
-        if (changeDue != null && changeDue.isPositive()) return "CHANGE";
+        var balance = invoice.getBalance();
+        if (balance != null && balance.isPositive()) return "CHANGE";
         return "BALANCE";
-    }
-
-    private void initDateUI() {
-        dpDate.setValue(LocalDate.now());
-        dpDate.setConverter(new DateConverter());
-    }
-
-    private void initProductSearchBox() {
-        cbProducts.setConverter(new ProductConverter(cbProducts.getValue()));
-        cbProducts.getEditor().textProperty().addListener((observable, oldVal, keyTyped) -> showProduct(keyTyped));
-        cbProducts.focusedProperty().addListener((observableValue, outOfFocus, focus) -> {
-            if (focus) showProduct(AppConstant.STRING_EMPTY);
-        });
     }
 
     private void showProduct(String query) {

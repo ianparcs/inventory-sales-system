@@ -116,7 +116,7 @@
 
             <VBox styleClass="amount-container" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7">
                 <Label fx:id="lblBalanceText" text="Amount Due" style="-fx-font-weight: BOLD"/>
-                <Label fx:id="lblChangeDue" alignment="CENTER" prefWidth="150"
+                <Label fx:id="lblBalance" alignment="CENTER" prefWidth="150"
                        styleClass="label-amount" text="₱0.00"/>
             </VBox>
             <VBox styleClass="amount-container" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7">

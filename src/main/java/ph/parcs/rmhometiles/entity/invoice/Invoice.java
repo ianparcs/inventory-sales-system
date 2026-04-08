@@ -132,16 +132,6 @@ public class Invoice extends BaseEntity {
         this.status.set(status);
     }
 
-    @Column(name = "change", precision = 8, scale = 2)
-    @Convert(converter = MoneyConverter.class)
-    public Money getChangeDue() {
-        return changeDue.get();
-    }
-
-    public void setChangeDue(Money changeDue) {
-        this.changeDue.set(changeDue);
-    }
-
     public void addPayments(Payment payment) {
         if (payment != null && payments != null) {
             payments.add(payment);
