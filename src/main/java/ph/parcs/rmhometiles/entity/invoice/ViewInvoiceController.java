@@ -133,12 +133,12 @@ public class ViewInvoiceController {
 
     @FXML
     public void onClickedAddPayment() {
-        String amount = tfCashPay.getText();
+        var cashPay = moneyService.parseMoney(tfCashPay.getText());
         String paymentType = cbPaymentType.getValue().toUpperCase();
 
         new Thread(() -> {
-            Money balance = moneyService.computeBalance(invoice.getBalance().abs(), amount);
-            Payment payment = paymentService.createPayment(amount, paymentType);
+            Money balance = moneyService.computeBalance(invoice.getBalance().abs(), cashPay);
+            Payment payment = paymentService.createPayment(cashPay, paymentType);
 
             payment.setInvoice(invoice);
 

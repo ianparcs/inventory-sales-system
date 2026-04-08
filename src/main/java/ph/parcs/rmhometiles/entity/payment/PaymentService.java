@@ -11,20 +11,13 @@ import java.time.LocalDateTime;
 public class PaymentService {
 
     private PaymentRepository paymentRepository;
-    private MoneyService moneyService;
 
-    public Payment createPayment(String amount, String paymentType) {
-        Money paymentAmount = moneyService.parseMoney(amount);
+    public Payment createPayment(Money cashPay, String paymentType) {
         Payment payment = new Payment();
         payment.setPaymentType(paymentType);
-        payment.setPaymentAmount(paymentAmount);
+        payment.setPaymentAmount(cashPay);
         payment.setCreatedAt(LocalDateTime.now());
         return payment;
-    }
-
-    @Autowired
-    public void setMoneyService(MoneyService moneyService) {
-        this.moneyService = moneyService;
     }
 
     @Autowired

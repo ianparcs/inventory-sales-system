@@ -26,13 +26,12 @@ public class MoneyService {
         return balance.minus(cashPaid).abs();
     }
 
-    public Money computeBalance(Money balance, String paidText) {
-        Money paid = parseMoney(paidText);
-        if (balance == null || paid == null) return parseMoney("0.00");
-        if (paid.isGreaterThan(balance)) {
+    public Money computeBalance(Money balance, Money cashPay) {
+        if (balance == null || cashPay == null) return parseMoney("0.00");
+        if (cashPay.isGreaterThan(balance)) {
             return parseMoney("0.00");
         }
-        return paid.minus(balance);
+        return cashPay.minus(balance);
     }
 
     public Map<AppConstant.Sales, Double> computeAllMoney(List<SalesReport> salesReportsToday) {
@@ -58,7 +57,7 @@ public class MoneyService {
     }
 
     public Money parseMoney(String text) {
-        if (!StringUtils.isEmpty(text)) {
+        if (StringUtils.hasText(text)) {
             if (text.contains(".") && text.lastIndexOf(".") + 1 != text.length()) {
                 String[] split = text.split("\\.");
                 String decimal = split[1];
@@ -75,5 +74,11 @@ public class MoneyService {
         return totalMoney.reduce(Money.parse("PHP 0.00"), Money::plus);
     }
 
+    public Money computeTotalAmount(Money subTotal, Money tax, Money discount, Money deliveryRate) {
+        return subTotal
+                .plus(tax)
+                .plus(discount)
+                .plus(deliveryRate);
+    }
 
 }

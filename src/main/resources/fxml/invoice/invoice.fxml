@@ -91,7 +91,7 @@
                    GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1"/>
 
             <Label text="Amount:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-            <Label fx:id="lblAmount" alignment="CENTER" maxWidth="1.7976931348623157E308" text="₱0.00"
+            <Label fx:id="lblSubTotal" alignment="CENTER" maxWidth="1.7976931348623157E308" text="₱0.00"
                    GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
             <Label text="Discount amount:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
@@ -112,19 +112,16 @@
                 <cursor>
                     <Cursor fx:constant="HAND"/>
                 </cursor>
-                <validators>
-                    <RegexValidator regexPattern="^[1-9]\d*(\.\d{1,2})?$"/>
-                </validators>
             </JFXTextField>
 
             <VBox styleClass="amount-container" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7">
                 <Label fx:id="lblBalanceText" text="Amount Due" style="-fx-font-weight: BOLD"/>
-                <Label fx:id="lblAmountDue" alignment="CENTER" prefWidth="150"
+                <Label fx:id="lblChangeDue" alignment="CENTER" prefWidth="150"
                        styleClass="label-amount" text="₱0.00"/>
             </VBox>
             <VBox styleClass="amount-container" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7">
                 <Label text="TOTAL" style="-fx-font-weight: BOLD"/>
-                <Label fx:id="lblTotalAmount" alignment="CENTER" maxWidth="1.7976931348623157E308"
+                <Label fx:id="lblTotalAmount" alignment="CENTER" prefWidth="150"
                        styleClass="label-total" text="₱0.00"/>
             </VBox>
 
@@ -159,7 +156,7 @@
         </GridPane>
 
         <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="8"
-              style="         -fx-background-color: white;-fx-border-radius: 2pt;-fx-background-radius: 2pt; -fx-padding: 15px"
+              style="-fx-background-color: white;-fx-border-radius: 2pt;-fx-background-radius: 2pt; -fx-padding: 15px"
               GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
             <HBox>
                 <JFXTextField fx:id="tfCashPay" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
