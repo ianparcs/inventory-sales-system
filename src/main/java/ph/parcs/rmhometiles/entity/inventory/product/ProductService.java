@@ -13,7 +13,7 @@ import ph.parcs.rmhometiles.entity.inventory.stock.StockService;
 import ph.parcs.rmhometiles.entity.order.OrderItem;
 import ph.parcs.rmhometiles.entity.order.OrderItemService;
 import ph.parcs.rmhometiles.exception.AppException;
-import ph.parcs.rmhometiles.exception.ExceptionType;
+import ph.parcs.rmhometiles.exception.ErrorCode;
 import ph.parcs.rmhometiles.file.FileService;
 import ph.parcs.rmhometiles.file.ImageProduct;
 import ph.parcs.rmhometiles.util.PageUtil;
@@ -46,25 +46,13 @@ public class ProductService extends BaseService<Product> {
         }
 
         if (orderItemService.isItemsExists(product.getOrderItems())) {
-            throw new AppException(ExceptionType.ITEM_LOCKED);
+            throw new AppException(ErrorCode.ITEM_LOCKED);
         }
 
         productRepository.delete(product);
 
         Optional<Product> productOptional = productRepository.findById(product.getId());
         return productOptional.isEmpty();
-    }
-
-    public OrderItem checkQuantity(ObservableList<OrderItem> items) {
-        OrderItem temp = null;
-        for (OrderItem item : items) {
-            temp = item;
-            if (temp != null) {
-                int quantity = temp.getQuantity();
-                if (quantity <= 0) return item;
-            }
-        }
-        return null;
     }
 
     public void saveInvoiceProduct(ObservableList<OrderItem> items) {

@@ -3,7 +3,6 @@ package ph.parcs.rmhometiles.entity.payment;
 import jakarta.persistence.*;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import org.joda.money.Money;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseEntity;
 import ph.parcs.rmhometiles.entity.invoice.Invoice;
@@ -17,7 +16,7 @@ public class Payment extends BaseEntity {
 
     private final ObjectProperty<Money> paymentAmount = new SimpleObjectProperty<>();
     private final ObjectProperty<Invoice> invoice = new SimpleObjectProperty<>();
-    private final SimpleStringProperty paymentType = new SimpleStringProperty();
+    private final ObjectProperty<Payment.Method> paymentType = new SimpleObjectProperty<>();
 
     @ManyToOne
     @JoinTable(name = "invoice_payment",
@@ -40,19 +39,20 @@ public class Payment extends BaseEntity {
         this.paymentAmount.set(paymentAmount);
     }
 
-    @Column(name = "payment_type")
-    public String getPaymentType() {
-        return paymentType.get();
-    }
-
-    public void setPaymentType(String paymentType) {
-        this.paymentType.set(paymentType);
-    }
 
     public enum Method {
         GCASH,
         CASH,
         UNKNOWN
+    }
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "payment_type")
+    public Method getPaymentType() {
+        return paymentType.get();
+    }
+    public void setPaymentType(Method paymentAmount) {
+        this.paymentType.set(paymentAmount);
     }
 
     public enum Status {

@@ -14,14 +14,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import ph.parcs.rmhometiles.entity.customer.Customer;
 import ph.parcs.rmhometiles.entity.customer.CustomerController;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.inventory.product.ProductService;
 import ph.parcs.rmhometiles.entity.inventory.stock.StockService;
 import ph.parcs.rmhometiles.entity.money.MoneyService;
 import ph.parcs.rmhometiles.entity.order.OrderItem;
-import ph.parcs.rmhometiles.entity.payment.Payment;
+import ph.parcs.rmhometiles.entity.order.OrderItemService;
+import ph.parcs.rmhometiles.entity.payment.PaymentService;
+import ph.parcs.rmhometiles.exception.AppException;
+import ph.parcs.rmhometiles.exception.ErrorCode;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.util.AppConstant;
 import ph.parcs.rmhometiles.util.MoneyUtil;
@@ -102,23 +104,25 @@ public class InvoiceController {
     @FXML
     private CustomerController customerController;
 
+    private OrderItemService orderItemService;
     private ProductService productService;
+    private PaymentService paymentService;
     private InvoiceService invoiceService;
     private MoneyService moneyService;
     private StockService stockService;
     private Invoice invoice;
 
-    private SweetAlert askSaveAlert;
+    private SweetAlert checkoutAlert;
 
     @FXML
     public void initialize() {
         invoice = invoiceService.createDefault();
         invoice.setOrderItems(new HashSet<>(tvOrders.getItems()));
 
-        askSaveAlert = SweetAlertFactory.create(SweetAlert.Type.INFO);
-        askSaveAlert.setContentMessage("Checkout new order?");
-        askSaveAlert.setHeaderMessage("Checkout");
-        askSaveAlert.setConfirmButton("Yes");
+        checkoutAlert = SweetAlertFactory.create(SweetAlert.Type.INFO);
+        checkoutAlert.setContentMessage("Checkout new order?");
+        checkoutAlert.setHeaderMessage("Checkout");
+        checkoutAlert.setConfirmButton("Yes");
 
         initMoneyColumn(tcOrderDiscountAmount);
         initMoneyColumn(tcAmount);
@@ -276,52 +280,45 @@ public class InvoiceController {
     }
 
     @FXML
-    private void onProductItemClick() {
+    private void onProductItemClicked() {
         Product product = cbProducts.getValue();
         if (product == null) return;
 
-        for (OrderItem item : tvOrders.getItems()) {
-            if (item.getProduct().getCode().equalsIgnoreCase(product.getCode())) {
-                showInvoiceError("Cannot have duplicate item");
-                return;
-            }
+        try {
+            var isOrderDuplicate = orderItemService.isOrderDuplicate(tvOrders.getItems(), product.getCode());
+            if (isOrderDuplicate) throw new AppException(ErrorCode.ORDER_DUPLICATE);
+
+            tvOrders.getItems().add(new OrderItem(product));
+            Platform.runLater(() -> {
+                cbProducts.valueProperty().set(null);
+                cbProducts.hide();
+                spMain.requestFocus();
+                tvOrders.refresh();
+            });
+
+        } catch (AppException e) {
+            showInvoiceError(e.getMessage());
         }
-
-        OrderItem orderItem = new OrderItem(product);
-
-        tvOrders.getItems().add(orderItem);
-        Platform.runLater(() -> {
-            cbProducts.valueProperty().set(null);
-            cbProducts.hide();
-            spMain.requestFocus();
-            tvOrders.refresh();
-        });
     }
 
     @FXML
     private void onCheckout() {
-        String validateMsg = validateCheckout();
-        if (!validateMsg.isEmpty()) {
-            showInvoiceError(validateMsg);
+        try {
+            validateInvoiceCheckout();
+        } catch (AppException e) {
+            showInvoiceError(e.getMessage());
             return;
         }
 
-        askSaveAlert.setConfirmListener(() -> {
-
+        checkoutAlert.setConfirmListener(() -> {
             ExecutorService executorService = Executors.newCachedThreadPool();
             executorService.submit(() -> {
                 productService.saveInvoiceProduct(tvOrders.getItems());
                 invoiceService.saveOrderItem(invoice, tvOrders.getItems());
 
-                String paymentType = invoiceService.getPaymentType(rbCashType.isSelected(), rbGCashType.isSelected());
-                LocalDateTime createdAt = dpDate.getValue().atTime(LocalTime.now());
-                Payment payment = new Payment();
-                payment.setInvoice(invoice);
-                payment.setCreatedAt(createdAt);
-                payment.setPaymentType(paymentType);
-                payment.setPaymentAmount(moneyService.parseMoney(tfCashPay.getText()));
+                var payment = paymentService.createPayment(rbCashType.isSelected(), invoice);
 
-                invoice.setCreatedAt(createdAt);
+                invoice.setCreatedAt(LocalDateTime.now());
                 invoice.setOrderItems(new HashSet<>(tvOrders.getItems()));
                 invoice.setName("INV-" + dpDate.getValue() + "-ID" + 1);
                 invoice.setCustomer(customerController.getCustomer());
@@ -329,7 +326,6 @@ public class InvoiceController {
                 invoice.addPayments(payment);
 
                 Invoice savedInvoice = invoiceService.saveEntity(invoice);
-
                 Platform.runLater(() -> {
                     if (savedInvoice != null) {
                         SweetAlert successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
@@ -339,27 +335,16 @@ public class InvoiceController {
                 });
             });
             ThreadUtil.shutdownAndAwaitTermination(executorService);
-
         }).show(spMain);
     }
 
-    private String validateCheckout() {
-        if (tfCashPay.getText().isEmpty()) {
-            return "Please enter an amount";
-        }
+    private void validateInvoiceCheckout() throws AppException {
+        if (tfCashPay.getText().isEmpty()) throw new AppException(ErrorCode.AMOUNT_IS_REQUIRED);
+        if (customerController.getCustomer() == null) throw new AppException(ErrorCode.CUSTOMER_IS_REQUIRED);
 
-        Customer customer = customerController.getCustomer();
-
-        if (customer == null) {
-            return AppConstant.Message.ENTER_CUSTOMER;
-        }
-
-        OrderItem item = productService.checkQuantity(tvOrders.getItems());
-
-        if (item != null) return "Please enter quantity for item " + item.getProduct().getCode();
-        if (tvOrders.getItems().isEmpty()) return "Please put an order(s)";
-
-        return "";
+        var isOrderQuantityValid = orderItemService.isOrderQuantityValid(tvOrders.getItems());
+        if (tvOrders.getItems().isEmpty()) throw new AppException(ErrorCode.ORDER_IS_REQUIRED);
+        if (!isOrderQuantityValid) throw new AppException(ErrorCode.ORDER_QUANTITY_IS_REQUIRED);
     }
 
     @FXML
@@ -466,4 +451,13 @@ public class InvoiceController {
         this.stockService = stockService;
     }
 
+    @Autowired
+    public void setOrderItemService(OrderItemService orderItemService) {
+        this.orderItemService = orderItemService;
+    }
+
+    @Autowired
+    public void setPaymentService(PaymentService paymentService) {
+        this.paymentService = paymentService;
+    }
 }

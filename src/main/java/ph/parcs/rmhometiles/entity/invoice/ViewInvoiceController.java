@@ -138,7 +138,7 @@ public class ViewInvoiceController {
 
         new Thread(() -> {
             Money balance = moneyService.computeBalance(invoice.getBalance().abs(), cashPay);
-            Payment payment = paymentService.createPayment(cashPay, paymentType);
+            Payment payment = paymentService.createPayment(true, invoice);
 
             payment.setInvoice(invoice);
 

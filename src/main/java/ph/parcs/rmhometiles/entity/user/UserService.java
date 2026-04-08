@@ -13,7 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ph.parcs.rmhometiles.exception.AppException;
-import ph.parcs.rmhometiles.exception.ExceptionType;
+import ph.parcs.rmhometiles.exception.ErrorCode;
 import ph.parcs.rmhometiles.session.SessionService;
 import ph.parcs.rmhometiles.util.AppConstant;
 
@@ -44,9 +44,9 @@ public class UserService implements UserDetailsService {
 
     public void authenticate(String username, String password) throws AppException {
         UserDetails userDetails = loadUserByUsername(username);
-        if (userDetails == null) throw new AppException(ExceptionType.USER_NOT_EXIST);
+        if (userDetails == null) throw new AppException(ErrorCode.USER_NOT_EXIST);
         if (!bCryptPasswordEncoder.matches(password, userDetails.getPassword()))
-            throw new AppException(ExceptionType.PASSWORD_INCORRECT);
+            throw new AppException(ErrorCode.PASSWORD_INCORRECT);
 
         authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
         authenticationManager.authenticate(authenticationToken);

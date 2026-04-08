@@ -29,7 +29,7 @@ public class StockService extends BaseService<StockUnit> {
     }
 
     public boolean hasStock(Product product, int quantity) {
-        return product.getStock().getStocks() > quantity;
+        return product.getStock().getStocks() >= quantity;
     }
 }
 

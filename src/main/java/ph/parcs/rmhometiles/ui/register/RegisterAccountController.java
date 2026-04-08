@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.entity.user.UserData;
 import ph.parcs.rmhometiles.entity.user.UserService;
 import ph.parcs.rmhometiles.exception.AppException;
-import ph.parcs.rmhometiles.exception.ExceptionType;
+import ph.parcs.rmhometiles.exception.ErrorCode;
 import ph.parcs.rmhometiles.ui.login.LoginController;
 import ph.parcs.rmhometiles.util.AppConstant;
 import ph.parcs.rmhometiles.util.alert.SweetAlert;
@@ -70,7 +70,7 @@ public class RegisterAccountController {
                 String password = pfUserPassword.getText();
                 String confirmPassword = pfConfirmUserPassword.getText();
 
-                if (!password.equals(confirmPassword)) throw new AppException(ExceptionType.PASSWORD_NOT_MATCH);
+                if (!password.equals(confirmPassword)) throw new AppException(ErrorCode.PASSWORD_NOT_MATCH);
 
                 userService.createUser(retrieveUserInput());
                 SweetAlertFactory.create(SweetAlert.Type.SUCCESS)
@@ -81,7 +81,7 @@ public class RegisterAccountController {
             } catch (AppException e) {
                 SweetAlertFactory.create(SweetAlert.Type.DANGER, e.getMessage()).show(spRegisterForm);
             } catch (DataIntegrityViolationException e) {
-                SweetAlertFactory.create(SweetAlert.Type.DANGER, ExceptionType.USER_EXIST.getTypeValue()).show(spRegisterForm);
+                SweetAlertFactory.create(SweetAlert.Type.DANGER, ErrorCode.USER_EXIST.getTypeValue()).show(spRegisterForm);
             }
         }).start();
     }
