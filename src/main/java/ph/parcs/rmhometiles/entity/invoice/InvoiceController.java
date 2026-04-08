@@ -14,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import ph.parcs.rmhometiles.entity.customer.Customer;
 import ph.parcs.rmhometiles.entity.customer.CustomerController;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.inventory.product.ProductService;
@@ -40,7 +39,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -114,9 +112,9 @@ public class InvoiceController {
     private Invoice invoice;
 
     private final SweetAlert checkoutAlert = SweetAlertFactory.create(SweetAlert.Type.INFO)
-            .setContentMessage("Checkout new order?")
-            .setHeaderMessage("Checkout")
-            .setConfirmButton("Yes");
+            .setContentMessage("Complete checkout and generate the receipt?")
+            .setHeaderMessage("Checkout Order")
+            .setConfirmButton("Confirm");
 
     @FXML
     public void initialize() {
@@ -256,7 +254,6 @@ public class InvoiceController {
 
         var tax = moneyService.computeTax(subTotal);
         var total = moneyService.computeTotalAmount(subTotal, tax, discount, deliveryRate);
-
         var balance = moneyService.computeBalance(total, cashPaid);
 
         invoice.setDiscountAmount(discount);
@@ -272,7 +269,7 @@ public class InvoiceController {
         if (invoice.getTotalAmount() != null && cashPay.isLessThan(invoice.getTotalAmount())) {
             return "Add Payment";
         }
-        return "Complete Sales";
+        return "Checkout";
     }
 
     private String changeBalanceLabel() {
@@ -303,7 +300,7 @@ public class InvoiceController {
     }
 
     @FXML
-    private void onCheckout() {
+    private void onCheckoutClicked() {
         try {
             validateInvoiceCheckout();
         } catch (AppException e) {

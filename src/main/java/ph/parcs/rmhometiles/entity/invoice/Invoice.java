@@ -26,7 +26,6 @@ public class Invoice extends BaseEntity {
     private final ObjectProperty<Money> totalAmount = new SimpleObjectProperty<>();
     private final ObjectProperty<Customer> customer = new SimpleObjectProperty<>();
     private final ObjectProperty<Money> taxAmount = new SimpleObjectProperty<>();
-    private final ObjectProperty<Money> changeDue = new SimpleObjectProperty<>();
     private final ObjectProperty<Money> balance = new SimpleObjectProperty<>();
     private final StringProperty remarks = new SimpleStringProperty();
     private final StringProperty status = new SimpleStringProperty();
@@ -182,12 +181,4 @@ public class Invoice extends BaseEntity {
         return totalAmount;
     }
 
-    @Transient
-    public ObjectProperty<Money> changeDueProperty() {
-        return changeDue;
-    }
-
-    public void clear() {
-
-    }
 }

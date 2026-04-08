@@ -1,14 +1,16 @@
 * {
-    -fx-text-fill: #5a5c69;
-    -fx-font-size: 1.3em;
+    -fx-text-fill: Black;
+    -fx-font-size: 1.25em;
+    -fx-font-family: SansSerif Black;
     blueberries: #00AAFF;
-    greysquash: #dddd;
+    greysquash: #ddd;
     strawberry: #e74a3b;
     banana: #f6c23e;
     avocado: #4cbd9b;
     water: #2a96a5;
     primary: #4e73df;
-    gas: #5a5c69;
+    gray-light: #e9ebee;
+    primary-dark: #2b333d
 }
 
 GridPane {

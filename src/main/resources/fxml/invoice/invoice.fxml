@@ -166,7 +166,7 @@
               style="-fx-background-color: white;-fx-border-radius: 2pt;-fx-background-radius: 2pt; -fx-padding: 15px"
               GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
             <HBox>
-                <JFXTextField fx:id="tfCashPay" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                <JFXTextField fx:id="tfCashPay"
                               promptText="Enter Cash Amount" styleClass="text-field-amount">
                     <validators>
                         <RequiredFieldValidator/>
@@ -174,9 +174,11 @@
                         <RegexValidator regexPattern="^[0-9]*\.[0-9]{2}$"/>
                     </validators>
                 </JFXTextField>
-                <JFXButton fx:id="btnSales" alignment="CENTER" maxHeight="1.7976931348623157E308"
-                           maxWidth="1.7976931348623157E308" onMouseClicked="#onCheckout" styleClass="button-amount"
-                           text="Complete Sales" HBox.hgrow="ALWAYS"/>
+                <JFXButton fx:id="btnSales" alignment="CENTER"
+                           HBox.hgrow="ALWAYS"
+                           maxWidth="Infinity"
+                           onMouseClicked="#onCheckoutClicked" styleClass="button-amount"
+                           text="Checkout"/>
             </HBox>
 
             <TextArea fx:id="txaRemarks" prefColumnCount="2" prefRowCount="3" promptText="Remarks"/>
