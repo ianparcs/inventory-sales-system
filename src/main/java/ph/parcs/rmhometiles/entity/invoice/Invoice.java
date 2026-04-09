@@ -21,6 +21,7 @@ import java.util.Set;
 @AttributeOverride(name = "id", column = @Column(name = "invoice_id"))
 public class Invoice extends BaseEntity {
 
+    private final ObjectProperty<Payment.Status> status = new SimpleObjectProperty<>();
     private final ObjectProperty<Money> subTotalAmount = new SimpleObjectProperty<>();
     private final ObjectProperty<Money> discountAmount = new SimpleObjectProperty<>();
     private final ObjectProperty<Money> totalAmount = new SimpleObjectProperty<>();
@@ -28,7 +29,6 @@ public class Invoice extends BaseEntity {
     private final ObjectProperty<Money> taxAmount = new SimpleObjectProperty<>();
     private final ObjectProperty<Money> balance = new SimpleObjectProperty<>();
     private final StringProperty remarks = new SimpleStringProperty();
-    private final StringProperty status = new SimpleStringProperty();
 
     private Set<OrderItem> orderItems = new HashSet<>();
     private Set<Payment> payments = new HashSet<>();
@@ -122,13 +122,13 @@ public class Invoice extends BaseEntity {
         this.remarks.set(remarks);
     }
 
-    @Column(name = "status")
-    public String getStatus() {
+    @Enumerated(EnumType.STRING)
+    public Payment.Status getStatus() {
         return status.get();
     }
 
-    public void setStatus(String status) {
-        this.status.set(status);
+    public void setStatus(Payment.Status paymentStatus) {
+        this.status.set(paymentStatus);
     }
 
     public void addPayments(Payment payment) {
@@ -167,7 +167,7 @@ public class Invoice extends BaseEntity {
     }
 
     @Transient
-    public StringProperty statusProperty() {
+    public ObjectProperty<Payment.Status> paymentStatusProperty() {
         return status;
     }
 

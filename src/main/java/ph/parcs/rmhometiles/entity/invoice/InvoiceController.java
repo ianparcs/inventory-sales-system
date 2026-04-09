@@ -255,11 +255,13 @@ public class InvoiceController {
         var tax = moneyService.computeTax(subTotal);
         var total = moneyService.computeTotalAmount(subTotal, tax, discount, deliveryRate);
         var balance = moneyService.computeBalance(total, cashPaid);
+        var status = paymentService.processPaymentStatus(balance);
 
         invoice.setDiscountAmount(discount);
         invoice.setSubTotalAmount(subTotal);
         invoice.setTotalAmount(total);
         invoice.setBalance(balance);
+        invoice.setStatus(status);
         invoice.setTaxAmount(tax);
     }
 

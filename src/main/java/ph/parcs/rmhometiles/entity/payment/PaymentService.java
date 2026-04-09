@@ -1,5 +1,6 @@
 package ph.parcs.rmhometiles.entity.payment;
 
+import org.joda.money.Money;
 import org.springframework.stereotype.Service;
 import ph.parcs.rmhometiles.entity.inventory.item.BaseService;
 import ph.parcs.rmhometiles.entity.invoice.Invoice;
@@ -29,4 +30,8 @@ public class PaymentService extends BaseService<Payment> {
         return Payment.Method.GCASH;
     }
 
+    public Payment.Status processPaymentStatus(Money balance) {
+        if (balance.isNegativeOrZero()) return Payment.Status.PAID;
+        return Payment.Status.UNPAID;
+    }
 }

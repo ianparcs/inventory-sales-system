@@ -39,20 +39,20 @@ public class Payment extends BaseEntity {
         this.paymentAmount.set(paymentAmount);
     }
 
-
-    public enum Method {
-        GCASH,
-        CASH,
-        UNKNOWN
-    }
-
     @Enumerated(EnumType.STRING)
     @Column(name = "payment_type")
     public Method getPaymentType() {
         return paymentType.get();
     }
+
     public void setPaymentType(Method paymentAmount) {
         this.paymentType.set(paymentAmount);
+    }
+
+    public enum Method {
+        GCASH,
+        CASH,
+        UNKNOWN
     }
 
     public enum Status {

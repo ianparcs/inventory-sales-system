@@ -2,8 +2,6 @@ package ph.parcs.rmhometiles.entity.inventory.item;
 
 import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -14,7 +12,6 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import ph.parcs.rmhometiles.ItemListener;
-import ph.parcs.rmhometiles.entity.report.SalesReportController;
 import ph.parcs.rmhometiles.entity.user.User;
 import ph.parcs.rmhometiles.exception.AppException;
 import ph.parcs.rmhometiles.session.SessionService;
@@ -42,20 +39,14 @@ public abstract class EntityTableController<T extends BaseEntity> extends Pagina
     @FXML
     public HBox hbSearchContainer;
 
+    private final SweetAlert successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
+    private final SweetAlert deleteAlert = SweetAlertFactory.create(SweetAlert.Type.WARNING);
+    private final SweetAlert errorAlert = SweetAlertFactory.create(SweetAlert.Type.DANGER);
     protected EditItemController<T> editItemController;
-
-    private SweetAlert deleteAlert;
-    private SweetAlert successAlert;
-    private SweetAlert errorAlert;
 
     @FXML
     protected void initialize() {
         super.initialize();
-        super.updateItems();
-
-        successAlert = SweetAlertFactory.create(SweetAlert.Type.SUCCESS);
-        deleteAlert = SweetAlertFactory.create(SweetAlert.Type.WARNING);
-        errorAlert = SweetAlertFactory.create(SweetAlert.Type.DANGER);
 
         tcCreatedAt.setCellFactory(new Callback<>() {
             @Override
@@ -85,8 +76,7 @@ public abstract class EntityTableController<T extends BaseEntity> extends Pagina
             }
         });
 
-        var loggedInUser = SessionService.getInstance().getLoggedInUser();
-        hideUIBasedOnUserRole(loggedInUser);
+        hideUIBasedOnUserRole(SessionService.getInstance().getLoggedInUser());
     }
 
     protected void hideUIBasedOnUserRole(User user) {

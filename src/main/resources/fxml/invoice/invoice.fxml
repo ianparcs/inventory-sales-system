@@ -166,7 +166,8 @@
               style="-fx-background-color: white;-fx-border-radius: 2pt;-fx-background-radius: 2pt; -fx-padding: 15px"
               GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
             <HBox>
-                <JFXTextField fx:id="tfCashPay"
+                <JFXTextField fx:id="tfCashPay" maxHeight="Infinity"
+                              HBox.hgrow="ALWAYS"
                               promptText="Enter Cash Amount" styleClass="text-field-amount">
                     <validators>
                         <RequiredFieldValidator/>

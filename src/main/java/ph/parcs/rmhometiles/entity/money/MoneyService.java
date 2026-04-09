@@ -19,11 +19,11 @@ public class MoneyService {
     }
 
     public Money computeBalance(Money balance, Money cashPaid) {
-        if (balance == null || cashPaid == null) return parseMoney("0.00");
-        if (balance.isGreaterThan(cashPaid)) {
-            return cashPaid.minus(balance);
+        if (balance == null || cashPaid == null) {
+            return parseMoney("0.00");
         }
-        return balance.minus(cashPaid).abs();
+        Money result = balance.minus(cashPaid);
+        return result.isNegative() ? parseMoney("0.00") : result;
     }
 
     public Map<AppConstant.Sales, Double> computeAllMoney(List<SalesReport> salesReportsToday) {

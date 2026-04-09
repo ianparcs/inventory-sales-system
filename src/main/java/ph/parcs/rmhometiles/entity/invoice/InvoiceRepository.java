@@ -1,6 +1,5 @@
 package ph.parcs.rmhometiles.entity.invoice;
 
-import javafx.beans.property.StringProperty;
 import org.springframework.stereotype.Repository;
 import ph.parcs.rmhometiles.entity.inventory.item.EntityRepository;
 

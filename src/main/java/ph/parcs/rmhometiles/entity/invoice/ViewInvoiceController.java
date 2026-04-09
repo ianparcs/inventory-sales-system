@@ -21,7 +21,6 @@ import ph.parcs.rmhometiles.StageInitializer;
 import ph.parcs.rmhometiles.entity.inventory.product.Product;
 import ph.parcs.rmhometiles.entity.money.MoneyService;
 import ph.parcs.rmhometiles.entity.order.OrderItem;
-import ph.parcs.rmhometiles.entity.order.OrderItemService;
 import ph.parcs.rmhometiles.entity.payment.Payment;
 import ph.parcs.rmhometiles.entity.payment.PaymentService;
 import ph.parcs.rmhometiles.util.TableColumnUtil;
@@ -142,7 +141,7 @@ public class ViewInvoiceController {
             Platform.runLater(() -> {
                 invoice.addPayments(payment);
                 invoice.setBalance(balance);
-                if (balance.isZero()) invoice.setStatus(Payment.Status.PAID.name());
+                if (balance.isZero()) invoice.setStatus(Payment.Status.PAID);
 
                 invoiceService.saveEntity(invoice);
 

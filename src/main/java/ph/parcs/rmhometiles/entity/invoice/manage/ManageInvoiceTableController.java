@@ -20,6 +20,7 @@ import ph.parcs.rmhometiles.entity.inventory.item.EntityTableController;
 import ph.parcs.rmhometiles.entity.invoice.Invoice;
 import ph.parcs.rmhometiles.entity.invoice.InvoiceService;
 import ph.parcs.rmhometiles.entity.invoice.ViewInvoiceController;
+import ph.parcs.rmhometiles.entity.payment.Payment;
 import ph.parcs.rmhometiles.entity.user.User;
 import ph.parcs.rmhometiles.ui.ActionTableCell;
 import ph.parcs.rmhometiles.ui.scene.SceneManager;
@@ -38,13 +39,13 @@ import java.util.concurrent.Executors;
 public class ManageInvoiceTableController extends EntityTableController<Invoice> {
 
     @FXML
+    private TableColumn<Invoice, Payment.Status> tcPaymentStatus;
+    @FXML
     private TableColumn<Invoice, Customer> tcCustomer;
     @FXML
     private TableColumn<Invoice, Money> tcTotalAmount;
     @FXML
     private TableColumn<Invoice, Money> tcBalance;
-    @FXML
-    private TableColumn<Invoice, String> tcStatus;
     @FXML
     private JFXComboBox<String> cbDateRange;
     @FXML
@@ -56,28 +57,27 @@ public class ManageInvoiceTableController extends EntityTableController<Invoice>
     @FXML
     public void initialize() {
         super.initialize();
-        super.updateItems();
+
+        TableColumnUtil.configureMoneyColumn(tcBalance);
+        TableColumnUtil.configureMoneyColumn(tcTotalAmount);
 
         tcCustomer.setCellValueFactory(cellData -> Bindings.select(cellData.getValue().getCustomer(), "name"));
-
-        tcStatus.setCellFactory(new Callback<>() {
+        tcPaymentStatus.setCellFactory(new Callback<>() {
             @Override
-            public TableCell<Invoice, String> call(TableColumn<Invoice, String> param) {
+            public TableCell<Invoice, Payment.Status> call(TableColumn<Invoice, Payment.Status> param) {
                 return new TableCell<>() {
                     @Override
-                    protected void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (item != null) {
-                            setText(item);
-                            this.getStyleClass().add(item.equalsIgnoreCase("PAID") ? "item-paid" : "item-unpaid");
+                    protected void updateItem(Payment.Status status, boolean empty) {
+                        super.updateItem(status, empty);
+                        if (status != null) {
+                            setText(status.name());
+                            this.getStyleClass().add(status.name().equalsIgnoreCase("PAID") ? "item-paid" : "item-unpaid");
                         }
                     }
                 };
             }
         });
 
-        TableColumnUtil.configureMoneyColumn(tcBalance);
-        TableColumnUtil.configureMoneyColumn(tcTotalAmount);
     }
 
     @Override

@@ -1,10 +1,7 @@
 package ph.parcs.rmhometiles.entity.invoice;
 
 import com.jfoenix.controls.JFXTabPane;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

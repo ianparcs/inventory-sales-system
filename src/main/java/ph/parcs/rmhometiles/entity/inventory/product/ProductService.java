@@ -1,6 +1,5 @@
 package ph.parcs.rmhometiles.entity.inventory.product;
 
-import javafx.collections.ObservableList;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

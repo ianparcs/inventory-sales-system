@@ -130,7 +130,7 @@
                     </cellValueFactory>
                 </TableColumn>
 
-                <TableColumn fx:id="tcStatus" styleClass="status-column" reorderable="false" text="Status">
+                <TableColumn fx:id="tcPaymentStatus" styleClass="status-column" reorderable="false" text="Status">
                     <cellValueFactory>
                         <PropertyValueFactory property="status"/>
                     </cellValueFactory>
