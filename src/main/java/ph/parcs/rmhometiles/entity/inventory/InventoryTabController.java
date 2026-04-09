@@ -1,7 +1,10 @@
 package ph.parcs.rmhometiles.entity.inventory;
 
 import com.jfoenix.controls.JFXTabPane;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,15 +31,14 @@ public class InventoryTabController {
     @FXML
     private void initialize() {
         tpRoot.setDisableAnimation(true);
-        tpRoot.visibleProperty().addListener((ov, oldTab, newTab) -> {
-            if (newTab) {
-                if (tpRoot.getSelectionModel().getSelectedItem().equals(tabStockUnit))
-                    stockUnitTableController.updateItems();
-                else if (tpRoot.getSelectionModel().getSelectedItem().equals(tabCategory))
-                    categoryTableController.updateItems();
-                else if (tpRoot.getSelectionModel().getSelectedItem().equals(tabProduct))
-                    productTableController.updateItems();
-            }
+        tabProduct.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) productTableController.updateItems();
+        });
+        tabCategory.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) categoryTableController.updateItems();
+        });
+        tabStockUnit.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) stockUnitTableController.updateItems();
         });
     }
 

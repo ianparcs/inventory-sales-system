@@ -20,9 +20,9 @@ public class OrderItemService extends BaseService<OrderItem> {
 
     public boolean isOrderQuantityValid(ObservableList<OrderItem> items) {
         for (OrderItem item : items) {
-            if (item != null && item.getQuantity() > 0) return true;
+            if (item != null && item.getQuantity() <= 0) return false;
         }
-        return false;
+        return true;
     }
 
     public boolean isOrderDuplicate(ObservableList<OrderItem> items, String code) {

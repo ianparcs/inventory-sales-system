@@ -1,7 +1,10 @@
 package ph.parcs.rmhometiles.entity.invoice;
 
 import com.jfoenix.controls.JFXTabPane;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,9 +23,8 @@ public class InvoiceTabController {
     @FXML
     private void initialize() {
         tpRoot.setDisableAnimation(true);
-        tpRoot.visibleProperty().addListener((ov, oldTab, newTab) -> {
-            if (newTab && tpRoot.getSelectionModel().getSelectedItem().equals(tabManageInvoice))
-                manageInvoiceTableController.updateItems();
+        tabManageInvoice.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) manageInvoiceTableController.updateItems();
         });
     }
 

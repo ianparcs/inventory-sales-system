@@ -338,12 +338,11 @@ public class InvoiceController {
     }
 
     private void validateInvoiceCheckout() throws AppException {
+        var isOrderQuantityValid = orderItemService.isOrderQuantityValid(tvOrders.getItems());
+        if (!isOrderQuantityValid) throw new AppException(ErrorCode.ORDER_QUANTITY_IS_REQUIRED);
         if (tfCashPay.getText().isEmpty()) throw new AppException(ErrorCode.AMOUNT_IS_REQUIRED);
         if (customerController.getCustomer() == null) throw new AppException(ErrorCode.CUSTOMER_IS_REQUIRED);
-
-        var isOrderQuantityValid = orderItemService.isOrderQuantityValid(tvOrders.getItems());
         if (tvOrders.getItems().isEmpty()) throw new AppException(ErrorCode.ORDER_IS_REQUIRED);
-        if (!isOrderQuantityValid) throw new AppException(ErrorCode.ORDER_QUANTITY_IS_REQUIRED);
     }
 
     @FXML

@@ -80,7 +80,7 @@ public class CustomerController {
 
     @FXML
     public void clearCustomerDetails() {
-        this.customer = new Customer();
+        this.customer = null;
         cbCustomer.getSelectionModel().clearSelection();
         btnClearCustomer.setVisible(false);
         btnAddUser.setVisible(true);

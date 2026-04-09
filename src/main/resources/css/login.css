@@ -10,7 +10,9 @@
     water: #2a96a5;
     primary: #4e73df;
     gray-light: #e9ebee;
-    primary-dark: #2b333d
+    primary-dark: #2b333d;
+    gas: #5a5c69;
+
 }
 
 GridPane {
